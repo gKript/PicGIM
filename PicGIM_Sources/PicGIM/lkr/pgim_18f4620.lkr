@@ -1,0 +1,74 @@
+//
+// pgim_18f4620.lkr
+//
+// PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
+// Version 0.5-x
+// AsYntote - SkyMatrix
+//
+/*#############################################################################
+
+	Copyright (C) 2002 - 2014 
+	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
+
+	This file is part of PicGim library.
+
+	PicGim is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	PicGim is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with picGim; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+#############################################################################*/
+
+/*!		\file			pgim_18f4620.lkr
+		\version		0.5-0
+		\date			2002 - 2014
+		\brief			
+		\details		
+		\author			Danilo Zannoni (AsYntote)
+		\author			Corrado Tumiati (SkyMatrix)
+		\copyright		Released under the terms of the GNU General Public License v2<BR>
+						[ http://gkript.org/gk_gpl_v2.php ]
+*/
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//		pgim_18f4620.lkr
+//
+//		Large memory allocation
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+// $Id: 18f4620.lkr,v 1.3 2004/08/23 18:08:22 curtiss Exp $
+// File: 18f4620.lkr
+//
+
+LIBPATH .
+
+FILES c018i_e.o
+FILES clib_e.lib
+FILES p18f4620_e.lib
+
+CODEPAGE		NAME=vectors		START=0x0			END=0x29		PROTECTED
+CODEPAGE		NAME=page			START=0x2A			END=0xFFFF
+CODEPAGE		NAME=idlocs			START=0x200000		END=0x200007	PROTECTED
+CODEPAGE		NAME=config			START=0x300000		END=0x30000D	PROTECTED
+CODEPAGE		NAME=devid			START=0x3FFFFE		END=0x3FFFFF	PROTECTED
+CODEPAGE		NAME=eedata			START=0xF00000		END=0xF003FF	PROTECTED
+
+ACCESSBANK		NAME=accessram		START=0x0			END=0x7F
+DATABANK		NAME=gpr			START=0x80			END=0xDFF
+DATABANK		NAME=gprs			START=0xE00			END=0xF7F
+ACCESSBANK		NAME=accesssfr		START=0xF80			END=0xFFF		PROTECTED
+
+SECTION			NAME=CONFIG			ROM=config
+
+STACK SIZE=0x17F RAM=gprs

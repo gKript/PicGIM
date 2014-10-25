@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="62">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="f1" displayName="Documentation" projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <logicalFolder name="f1" displayName="PicGIM" projectFiles="true">
+        <logicalFolder name="f2" displayName="_Supported_Processor" projectFiles="true">
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2320.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2550.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2553.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4520.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4550.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4553.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4620.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f97j60.h</itemPath>
+        </logicalFolder>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_adc.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_buzzer.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_caldelay.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_custom_type.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_defines.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_doxygen.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ee.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_encoder.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ezfuse.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_hardware_setup.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_int_osc.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_interrupt_callbacks.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_interrupt_setup.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_module_setup.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_spi.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_timer.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_version.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/picgim.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_pwm.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/picgim_main.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_environment.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_constants.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_error.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_lcd_hd44780.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_a.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ftoa.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
+        <logicalFolder name="f1" displayName="_Supported_Processor" projectFiles="true">
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2320_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2550_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2553_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4520_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4550_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4553_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4620_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f97j60_public.h</itemPath>
+        </logicalFolder>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_hardware_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_interrupt_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_module_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_project_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_timer_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_pwm_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_public.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="LinkerScript"
+                   displayName="Linker Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="f2"
+                   displayName="Linker files available"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="f1" displayName="PicGIM" projectFiles="true">
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_adc.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_buzzer.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_caldelay.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_ee.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_encoder.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_init.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_int_osc.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_interrupt.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_spi.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_timer.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_version.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_pwm.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_serial.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_environment.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_external_memory.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_error.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_lcd_hd44780.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_board_setup_a.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_ftoa.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_interrupt_callbacks.c</itemPath>
+      </logicalFolder>
+      <itemPath>../PicGIM_Sources/main.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>picgim/src</Elem>
+    <Elem>picgim/include</Elem>
+    <Elem>Documentation</Elem>
+    <Elem>picgim/lkr</Elem>
+    <Elem>../PicGIM_Sources</Elem>
+    <Elem>../PicGIM_Documentation</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="default" type="2">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <targetDevice>PIC18F4620</targetDevice>
+        <targetHeader></targetHeader>
+        <targetPluginBoard></targetPluginBoard>
+        <platformTool>ICD3PlatformTool</platformTool>
+        <languageToolchain>C18</languageToolchain>
+        <languageToolchainVersion>3.34</languageToolchainVersion>
+        <platform>3</platform>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+        <loading>
+          <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <alternateLoadableFile></alternateLoadableFile>
+        </loading>
+      </compileType>
+      <makeCustomizationType>
+        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
+        <makeCustomizationPostStep>..\PicGIM_Documentation\Make_documentation_X.bat</makeCustomizationPostStep>
+        <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
+        <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
+        <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
+      </makeCustomizationType>
+      <C18>
+        <property key="code-model" value="ms"/>
+        <property key="data-model" value="oa-"/>
+        <property key="default-char-unsigned" value="false"/>
+        <property key="enable-all-optimizations" value="false"/>
+        <property key="enable-int-promotion" value="false"/>
+        <property key="enable-multi-bank-stack-model" value="false"/>
+        <property key="enable-ob" value="true"/>
+        <property key="enable-od" value="true"/>
+        <property key="enable-om" value="true"/>
+        <property key="enable-on" value="true"/>
+        <property key="enable-op" value="true"/>
+        <property key="enable-opa" value="true"/>
+        <property key="enable-or" value="true"/>
+        <property key="enable-os" value="true"/>
+        <property key="enable-ot" value="true"/>
+        <property key="enable-ou" value="true"/>
+        <property key="enable-ow" value="true"/>
+        <property key="extra-include-directories"
+                  value="..\PicGIM_Sources\PicGIM\include;..\PicGIM_Sources\PicGIM\include\pgim_mcu"/>
+        <property key="optimization-master" value="Enable all"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="procedural-abstraction-passes" value="4"/>
+        <property key="storage-class" value="sca"/>
+        <property key="verbose" value="false"/>
+        <property key="warning-level" value="2"/>
+      </C18>
+      <C18-AS>
+        <property key="cross.reference.file" value=""/>
+        <property key="default.radix" value="HEX"/>
+        <property key="enable.case.sensitivity" value="true"/>
+        <property key="hex.output.format" value="INHX32"/>
+        <property key="preprocessor.macros" value=""/>
+        <property key="warning.level" value="0"/>
+      </C18-AS>
+      <C18-LD>
+        <property key="cod-file" value="false"/>
+        <property key="extra-lib-directories" value=""/>
+        <property key="hex-output-format" value="INHX32"/>
+        <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
+      </C18-LD>
+      <C18LanguageToolchain>
+        <property key="extended-mode" value="false"/>
+        <property key="extended-mode-mcc18" value="false"/>
+        <property key="extended-mode-mpasm" value="false"/>
+        <property key="extended-mode-mplink" value="false"/>
+        <property key="stack-analysis" value="false"/>
+        <property key="stack-analysis-mcc18" value="false"/>
+        <property key="stack-analysis-mplink" value="false"/>
+      </C18LanguageToolchain>
+      <ICD3PlatformTool>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="Freeze Peripherals" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="false"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.end" value="0xffff"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange.end" value="0xffff"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VPPFirst"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="5.0"/>
+      </ICD3PlatformTool>
+    </conf>
+  </confs>
+</configurationDescriptor>
