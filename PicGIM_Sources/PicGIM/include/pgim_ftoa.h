@@ -31,9 +31,8 @@
 /*!		\file			pgim_ftoa.h
 		\version		0.5-0
 		\date			2002 - 2014
-		\brief			Converts 32-bit float to string. It is lightweight.
-		\details	
-		\author			DarioG(Dario Greggio), Ren and 1and0 from the forum of Microchip(R) (original version)		
+		\brief			Converts a float to string.
+		\details
 		\author			Danilo Zannoni (AsYntote)
 		\author			Corrado Tumiati (SkyMatrix)
 		\copyright		Released under the terms of the GNU General Public License v2<BR>
@@ -44,17 +43,35 @@
 	#define	_PGIM_FTOA_H
 	#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_SERIAL == PG_ENABLE ) || ( PGIM_SPI == PG_ENABLE ) )
 
+		//---[ Decimal Digits ]---
+		#define PG_FTOA_DECIMAL_DIGITS_1			10					//!< One decimal digit after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_2			100					//!< Two decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_3			1000				//!< Three decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_4			10000				//!< Four decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_5			100000				//!< Five decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_6			1000000				//!< Six decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_7			10000000			//!< Seven decimal digits after decimal point.
+		
+		#define PG_FTOA_MAX_DIGITS					8					//!< Maximum manageable total digit number with high accuracy.
+		//---[ END Decimal Digits ]---
+		
 		/*!
-			\brief			Converts 32-bit float to string; lightweight and high precision.
-			\return			Nothing.
+			\brief			Converts a float to string.
+			
+			\return			???
 
-			\param			pg_ftoa_value			The 32-bit float value to convert to string. \n
-			\param			pg_ftoa_buffer			The pointer to buffer where store the string. \n
-
-			\attention		\b It should only be used in case it is not necessary a great accuracy.
-
+			\param			pg_ftoa_value					The 32-bit float value to convert to string. \n
+			\param			pg_ftoa_trunc_decimal_digits	Number of digits after the decimal point at which to truncate. \n
+			\param			pg_ftoa_buffer					The pointer to buffer where store the string.
+										
+							\b PG_FTOA_CONVERSION_ACCURATE
+							??? The function performs the conversion only if the total number of required digits (number of digits of the integer part plus the number of truncated decimal part) is less than or equal to PG_FTOA_MAX_DIGITS. In this case the accuracy is high and the correspondence between the digits and the characters is exact (without rounding), otherwise it returns null and sets an error.
+							??? The function performs the conversion regardless of the total number of required digits (number of digits of the integer part plus the number of truncated decimal part). If the total number of digits is less or equal to PG_FTOA_MAX_DIGITS, the precision is high and the correspondence between the digits and the characters is exact (without rounding). If the total number of digits is greater, the accuracy decreases more and more and has rounding, then the result of the conversion is not defined and a warning is generated.
+							
+							Here a link to the file : \ref pgim_module_setup_public.h where ??? \n
 		*/			
-		void		pg_ftoa							( _pg_float pg_ftoa_value, char * pg_ftoa_buffer );
+		char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer );
+
 	#endif
 #endif	/* _PGIM_FTOA_H */
 
@@ -65,7 +82,9 @@
 		\image html	ftoa.png
 		
 		This function converts a float value to 32-bit in a character string. \n
-
+		e.g.: \n
+		\code pg_ftoa( 1234.567890, PG_FLOAT_DECIMAL_DIGITS_2, null ); //Return a pointer to string: "1234.56"
+		
 		\htmlonly
 			<br><br><br><br>
 		\endhtmlonly
@@ -73,12 +92,6 @@
 					\b PGIM_LCD_HD44780 \n
 					\b PGIM_SERIAL \n
 					\b PGIM_SPI \n
-					
-	\note	This function was originally taken from the forum of Microchip site. \n
-			It was written by DarioG (Dario Greggio) and modified by Ren and 1and0. \n
-			The thread can be reached at the address: \n
-			http://www.microchip.com/forums/m295647.aspx#295739 \n
-			It has been modified to suit the PicGIM's environment. \n
 				
 	\attention	Here a link to the file : \ref pgim_float.h \n
 				This is not a file defined as public and therefore would not be edited. \n 

@@ -43,12 +43,17 @@
 #include "picgim_main.h"
 
 void main( void ) {
-	_pg_Uint8 buf[ 32 ];
+	char buf[ 32 ];
 	pg_initialize();
 	pg_serial_open();
-	pg_ftoa( 123457.815, buf );
+	
+	pg_ftoa( 123456.7890, PG_FTOA_DECIMAL_DIGITS_4, buf );
 	putsUSART( buf );
 	putrsUSART( "\n" );
+	
+	putsUSART( pg_ftoa( 123456.7890, PG_FTOA_DECIMAL_DIGITS_4, NULL ) );
+	putrsUSART( "\n" );
+	
 	pg_serial_close();
 	PG_INFINITE_LOOP;
 }
