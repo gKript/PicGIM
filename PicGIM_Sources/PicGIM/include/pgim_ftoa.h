@@ -55,6 +55,11 @@
 		#define PG_FTOA_MAX_DIGITS					8					//!< Maximum manageable total digit number with high accuracy.
 		//---[ END Decimal Digits ]---
 		
+		//---[ Error ]---
+		#define PG_FTOA_ERROR_OVER_8_ACCURACY		201					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy required.
+		#define PG_FTOA_ERROR_OVER_8_ACCURACY_NO	202					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy is not required.
+		//---[ END Error ]---
+
 		/*!
 			\brief			Converts a float to string.
 			
@@ -75,26 +80,29 @@
 	#endif
 #endif	/* _PGIM_FTOA_H */
 
-/*!	\page 		SWG_float			Float to Ascii
+/*!	
+	\page 		SWG_float			Float to Ascii
 		
 		\tableofcontents
 
 		\image html	ftoa.png
 		
 		This function converts a float value to 32-bit in a character string. \n
-		e.g.: \n
-		\code pg_ftoa( 1234.567890, PG_FLOAT_DECIMAL_DIGITS_2, null ); //Return a pointer to string: "1234.56"
+		
+		\code pg_ftoa( 1.2345678, PG_FLOAT_DECIMAL_DIGITS_3, null ); //Returns a pointer to string: "1.234" \endcode
 		
 		\htmlonly
 			<br><br><br><br>
 		\endhtmlonly
-	\note	This feature is automatically included by enabling the following modules: \n
+		
+		\note	This feature is automatically included by enabling the following modules: \n
 					\b PGIM_LCD_HD44780 \n
 					\b PGIM_SERIAL \n
 					\b PGIM_SPI \n
 				
-	\attention	Here a link to the file : \ref pgim_float.h \n
+		\attention	Here a link to the file : \ref pgim_ftoa.h \n
 				This is not a file defined as public and therefore would not be edited. \n 
 				We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
+
 

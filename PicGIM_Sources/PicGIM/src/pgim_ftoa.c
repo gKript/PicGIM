@@ -48,7 +48,7 @@
 	#endif
 
 	char		pg_ftoa_internal_buffer[ 32 ];
-		
+	
 	//---[ Ftoa ]---	// Float numer with maximum 8 digit
 	char *pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer ) {
 		//--------------------------------------------------
@@ -70,10 +70,14 @@
 
 		if (  pg_ftoa_eight_buffer_lenght > PG_FTOA_MAX_DIGITS ) {
 			if ( PG_FTOA_CONVERSION_ACCURATE == PG_YES ) {
-				//Set a WARNING for accuracy loss
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OVER_8_ACCURACY , PG_ERROR_WARNING );		//Set a WARNING for accuracy loss
+				#endif
 			}
 			if ( PG_FTOA_CONVERSION_ACCURATE == PG_NO ) {
-				//Set a WARNING for accuracy loss
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OVER_8_ACCURACY_NO , PG_ERROR_CRITICAL );		//Set a CRITICAL for accuracy loss
+				#endif
 			}
 		}		
 		// Find the integer part of the float number

@@ -44,7 +44,7 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CONSTANTS						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	

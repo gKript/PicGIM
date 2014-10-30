@@ -161,10 +161,12 @@
 				}
 			}
 			PG_ERROR_LED_TRIS = TRIS_state;
-			if ( GIE_state )
-				pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
-			if ( PIE_state )
-				pg_interrupt_enable_set( PG_INTERRUPT_EVENT_PERIPHERAL , PG_ENABLE );
+			#if ( PGIM_INTERRUPTS == PG_ENABLE )
+				if ( GIE_state )
+					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
+				if ( PIE_state )
+					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_PERIPHERAL , PG_ENABLE );
+			#endif
 		}
 	#endif
 

@@ -47,11 +47,11 @@ void main( void ) {
 	pg_initialize();
 	pg_serial_open();
 	
-	pg_ftoa( 123456.7890, PG_FTOA_DECIMAL_DIGITS_4, buf );
+	pg_ftoa( 1234.5678, PG_FTOA_DECIMAL_DIGITS_2, buf );
 	putsUSART( buf );
 	putrsUSART( "\n" );
 	
-	putsUSART( pg_ftoa( 123456.7890, PG_FTOA_DECIMAL_DIGITS_4, NULL ) );
+	putsUSART( pg_ftoa( 1234.5678, PG_FTOA_DECIMAL_DIGITS_2, NULL ) );
 	putrsUSART( "\n" );
 	
 	pg_serial_close();
