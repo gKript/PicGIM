@@ -63,8 +63,8 @@
 		// Truncation number, leaving the required decimal digits
 		pg_ftoa_truncated = (_pg_Uint32)( pg_ftoa_value * pg_ftoa_trunc_decimal_digits );
 
-		// Check of the maximum manageable 8 digit value for high accuracy
-		// ( Exact correspondence between the number and character )
+		// Checking for digits number: for high accuracy, the maximum manageable number of digits is 8.
+		// In this case, number and character corresponding.
 		ultoa ( pg_ftoa_truncated, pg_ftoa_eight_buffer );
 		pg_ftoa_eight_buffer_lenght = strlen ( pg_ftoa_eight_buffer );
 

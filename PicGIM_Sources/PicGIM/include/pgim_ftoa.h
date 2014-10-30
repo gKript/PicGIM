@@ -62,18 +62,6 @@
 
 		/*!
 			\brief			Converts a float to string.
-			
-			\return			???
-
-			\param			pg_ftoa_value					The 32-bit float value to convert to string. \n
-			\param			pg_ftoa_trunc_decimal_digits	Number of digits after the decimal point at which to truncate. \n
-			\param			pg_ftoa_buffer					The pointer to buffer where store the string.
-										
-							\b PG_FTOA_CONVERSION_ACCURATE
-							??? The function performs the conversion only if the total number of required digits (number of digits of the integer part plus the number of truncated decimal part) is less than or equal to PG_FTOA_MAX_DIGITS. In this case the accuracy is high and the correspondence between the digits and the characters is exact (without rounding), otherwise it returns null and sets an error.
-							??? The function performs the conversion regardless of the total number of required digits (number of digits of the integer part plus the number of truncated decimal part). If the total number of digits is less or equal to PG_FTOA_MAX_DIGITS, the precision is high and the correspondence between the digits and the characters is exact (without rounding). If the total number of digits is greater, the accuracy decreases more and more and has rounding, then the result of the conversion is not defined and a warning is generated.
-							
-							Here a link to the file : \ref pgim_module_setup_public.h where ??? \n
 		*/			
 		char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer );
 
@@ -87,18 +75,36 @@
 
 		\image html	ftoa.png
 		
-		This function converts a float value to 32-bit in a character string. \n
+		This function converts a float in a character string. \n
 		
-		\code pg_ftoa( 1.2345678, PG_FLOAT_DECIMAL_DIGITS_3, null ); //Returns a pointer to string: "1.234" \endcode
+		\code
+			pg_ftoa( 1.2345678, PG_FLOAT_DECIMAL_DIGITS_3, null ); //Returns a pointer to string: "1.234"
+		\endcode
 		
+		The function performs always the conversion, but: \n
+		\arg  if the number of digits of the integer part plus the number of truncated (specified by pg_ftoa_trunc_decimal_digits parameter)
+		decimal part, is less than or equal to \ref PG_FTOA_MAX_DIGITS, it corresponds exactly to the digits of the value to be converted; \n \n
+		\arg  if more, the precision fells correspondingly and goes out of control. \n
+		In this case if the \ref PG_FTOA_CONVERSION_ACCURATE define in \ref pgim_module_setup_public.h file, is set to \ref PG_YES (high accuracy),
+		the function performs the conversion and sets a CRITICAL message, otherwise if it is set to \ref PG_NO,
+		the function performs the conversion and sets only a WARNING message. \n
+		See \ref PGIM_ERROR documentation.
+		
+		\return			If the character pointer \ref pg_ftoa_buffer is specified, it writes the string in it and returns NULL. \n
+						If to the character pointer \ref pg_ftoa_buffer, NULL is passed, it returns a pointer to an internal buffer containing the string.
+
+		\param			pg_ftoa_value					The 32-bit float value to convert to string. \n
+		\param			pg_ftoa_trunc_decimal_digits	Number of digits after the decimal point at which to truncate. \n
+		\param			pg_ftoa_buffer					The pointer to buffer where store the string (optional).
+			
 		\htmlonly
 			<br><br><br><br>
 		\endhtmlonly
 		
 		\note	This feature is automatically included by enabling the following modules: \n
-					\b PGIM_LCD_HD44780 \n
-					\b PGIM_SERIAL \n
-					\b PGIM_SPI \n
+					\arg \b PGIM_LCD_HD44780 \n
+					\arg \b PGIM_SERIAL \n
+					\arg \b PGIM_SPI \n
 				
 		\attention	Here a link to the file : \ref pgim_ftoa.h \n
 				This is not a file defined as public and therefore would not be edited. \n 
