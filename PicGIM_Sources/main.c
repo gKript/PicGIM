@@ -55,6 +55,14 @@ void main( void ) {
 	putrsUSART( "\n" );
 	
 	pg_serial_close();
+	
+	T_D0 = PG_WRITE;
+	
+	pg_timer_set_period( PG_TIMER_0 , 10 , PG_MSEC );
+	pg_timer_set_period( PG_TIMER_1 , 5 , PG_MSEC );
+	pg_timer_start( PG_TIMER_0 );
+	pg_timer_start( PG_TIMER_1 );
+	
 	PG_INFINITE_LOOP;
 }
 

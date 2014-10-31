@@ -48,7 +48,7 @@
 
 //	-------- External Interrupts ----------------------------------------------------------------
 
-	#define PG_INTERRUPT_INT0			PG_ENABLE			// PG_ENABLE	PG_DISABLE
+	#define PG_INTERRUPT_INT0			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_INTERRUPT_INT1			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_INTERRUPT_INT2			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_INTERRUPT_RB0			PG_DISABLE			// PG_ENABLE	PG_DISABLE

@@ -99,7 +99,31 @@
 
 		 	\warning		This function must be called when the timer is stopped.
 		*/			
-		_pg_Uint8	pg_timer_set					( _pg_Uint8 timer_id , _pg_float timer_time , _pg_Uint8 unit_measure );
+		_pg_Uint8	pg_timer_set_period				( _pg_Uint8 timer_id , _pg_float timer_time , _pg_Uint8 unit_measure );
+		
+		/*!
+			\brief			Converts the specified frequency in period and performs a call to \ref pg_timer_set_period function.
+			\return			\b PG_OK : if the configuration was successful. \n
+							\b PG_NOK : if the configuration was not successful. \n For details about the error, it is possible to check the environment variables of this module : \ref SWG_error
+			\param			timer_id				The identification number of the timer. \n
+								Use \b PG_TIMER_0 to select \a Timer 0 \n
+								Use \b PG_TIMER_1 to select \a Timer 1
+			\param			timer_freq				The required frequency value.
+			\param			unit_measure			The unit of measure of the timer value. \n
+								Use \b PG_HZ if timer_time is expressed in Hertz [Hz]. \n
+								Use \b PG_KHZ if timer_time is expressed in kilo-Hertz [KHz].
+
+		 	\test	 		\b PG_OK : if the configuration was successful. \n
+							\b PG_TIMER_ERROR_ID : if the timer_id parameter is wrong. \n
+							\b PG_TIMER_IS_RUNNING : if it was not possible to configure the timer because active. \n
+							\b PG_TIMER_ERROR_TIME_TOO_SHORT : if it was not possible to configure the timer because the frequency required is too high. \n
+							\b PG_TIMER_ERROR_TIME_TOO_LONG : if it was not possible to configure the timer because the frequency required is too low.
+
+			\attention		\b PG_TIMER_ERROR_TIME_TOO_SHORT and \b PG_TIMER_ERROR_TIME_TOO_LONG generate \b FATAL errors. Refer to the error module : \ref SWG_error
+
+		 	\warning		This function must be called when the timer is stopped.
+		*/		
+		_pg_Uint8	pg_timer_set_freq				( _pg_Uint8 timer_id , _pg_float timer_freq , _pg_Uint8 unit_measure );	// PG_HZ || PG_KHZ
 		
 		/*!
 			\brief			Allows to start the timer selected by \a timer_id parameter.
@@ -216,10 +240,10 @@
 
 		\image	html	timer.png
 		
-		The \b TIMER module provides a set of functions to easily configure and manage timers in different units of time (seconds or milliseconds). \n \n
+		The \b TIMER module provides a set of functions to easily configure and manage timers in different units of time (seconds or milliseconds). \n 
 		The module can be configured in order to obtain a continuous timer or a timer that spins just once.
 			
-		In the public configuration file \ref pgim_timer_setup_public.h are specified clearly the possible values for the various parameters. \n \n
+		In the public configuration file \ref pgim_timer_setup_public.h are specified clearly the possible values for the various parameters. \n
 		For software reference please read the documentation in \ref pgim_timer.h
 		
 		\attention		The device managed by this module has interrupt signals. \n
@@ -322,7 +346,8 @@
 			\subsection	timerpubfunc	Public functions
 				\endcode
 
-				\arg \b pg_timer_set() : Allows to configure the timer selected by timer_id parameter and calculates the limit values.
+				\arg \b pg_timer_set_period() : Allows to configure, through period, the timer selected by timer_id parameter and calculates the limit values.
+				\arg \b pg_timer_set_freq() : Allows to configure, through frequency, the timer selected by timer_id parameter and calculates the limit values.
 				\arg \b pg_timer_start() : Allows to start the timer selected by timer_id parameter.
 				\arg \b pg_timer_stop() : Allows to stop the timer selected by timer_id parameter.
 				\arg \b pg_timer_reg_current_value() : Converts the value of the timer contained in the two 8-bit registers (TMRxH and TMRxL) in a 16-bit value. 
@@ -341,8 +366,8 @@
 		\code
 			...
 
-			pg_timer_set( PG_TIMER_0 , 1 , PG_SEC );
-			pg_timer_set( PG_TIMER_1 , 50 , PG_MSEC );
+			pg_timer_set_period( PG_TIMER_0 , 1 , PG_SEC );
+			pg_timer_set_period( PG_TIMER_1 , 50 , PG_MSEC );
 			pg_timer_start( PG_TIMER_0 );
 			pg_timer_start( PG_TIMER_1 );
 

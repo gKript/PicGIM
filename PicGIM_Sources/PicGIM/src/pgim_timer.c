@@ -48,59 +48,49 @@
 	#endif
 
 	#if ( PGIM_TIMER_0 != PG_DISABLE )
+		_pg_float		pg_timer_0_period;
+		_pg_float		pg_timer_0_count_min;
+		_pg_float		pg_timer_0_count_max;
+		_pg_float		pg_timer_0_nanosec;
+		_pg_float		pg_timer_0_nanosec_min;
+		_pg_float		pg_timer_0_nanosec_max;
 
-	_pg_float		pg_timer_0_period;
-	_pg_float		pg_timer_0_count_min;
-	_pg_float		pg_timer_0_count_max;
-	_pg_float		pg_timer_0_nanosec;
-	_pg_float		pg_timer_0_nanosec_min;
-	_pg_float		pg_timer_0_nanosec_max;
+		_pg_Uint16		pg_timer_0_prescaler;
+		_pg_Uint8		pg_timer_0_prescaler_mask;
+		_pg_Uint16		pg_timer_0_timer_counter;
+		_pg_Uint16_VAL	pg_timer_0_tmr_reg_set_value;
+		_pg_Uint16_VAL	pg_timer_0_tmr_reg_current_value;
+		_pg_float		pg_timer_0_period_with_prescaler;
 
-	_pg_Uint16		pg_timer_0_prescaler;
-	_pg_Uint8		pg_timer_0_prescaler_mask;
-	_pg_Uint16		pg_timer_0_timer_counter;
-	_pg_Uint16_VAL	pg_timer_0_tmr_reg_set_value;
-	_pg_Uint16_VAL	pg_timer_0_tmr_reg_current_value;
-	_pg_float		pg_timer_0_period_with_prescaler;
-
-	_pg_Uint16_VAL	pg_timer_0_tmr_reg_set_save;
-
+		_pg_Uint16_VAL	pg_timer_0_tmr_reg_set_save;
 	#endif
 
 	#if ( PGIM_TIMER_1 != PG_DISABLE )
+		_pg_float		pg_timer_1_period;
+		_pg_float		pg_timer_1_count_min;
+		_pg_float		pg_timer_1_count_max;
+		_pg_float		pg_timer_1_nanosec;
+		_pg_float		pg_timer_1_nanosec_min;
+		_pg_float		pg_timer_1_nanosec_max;
 
-	_pg_float		pg_timer_1_period;
-	_pg_float		pg_timer_1_count_min;
-	_pg_float		pg_timer_1_count_max;
-	_pg_float		pg_timer_1_nanosec;
-	_pg_float		pg_timer_1_nanosec_min;
-	_pg_float		pg_timer_1_nanosec_max;
+		_pg_Uint16		pg_timer_1_prescaler;
+		_pg_Uint8		pg_timer_1_prescaler_mask;
+		_pg_Uint16		pg_timer_1_timer_counter;
+		_pg_Uint16_VAL	pg_timer_1_tmr_reg_set_value;
+		_pg_Uint16_VAL	pg_timer_1_tmr_reg_current_value;
+		_pg_float		pg_timer_1_period_with_prescaler;
 
-	_pg_Uint16		pg_timer_1_prescaler;
-	_pg_Uint8		pg_timer_1_prescaler_mask;
-	_pg_Uint16		pg_timer_1_timer_counter;
-	_pg_Uint16_VAL	pg_timer_1_tmr_reg_set_value;
-	_pg_Uint16_VAL	pg_timer_1_tmr_reg_current_value;
-	_pg_float		pg_timer_1_period_with_prescaler;
-
-	_pg_Uint16_VAL	pg_timer_1_tmr_reg_set_save;
-
+		_pg_Uint16_VAL	pg_timer_1_tmr_reg_set_save;
 	#endif
 
-//	#if ( PGIM_TIMER_2 != PG_DISABLE )
-//	#endif
-//
-//	#if ( PGIM_TIMER_3 != PG_DISABLE )
-//	#endif
 
-	//---[ Timer Set ]---
-
-
-	_pg_Uint8	pg_timer_set( _pg_Uint8 timer_id , _pg_float timer_time , _pg_Uint8 unit_measure ) {
+	//---[ Timer Set Period]---
+	_pg_Uint8	pg_timer_set_period( _pg_Uint8 timer_id , _pg_float timer_time , _pg_Uint8 unit_measure ) {	// PG_SEC || PG_MSEC
+		//--------------------------------------------------
 		if ( unit_measure == PG_SEC )
 			timer_time *= 1000;
 		if ( ( unit_measure == PG_MSEC ) || ( unit_measure == PG_SEC ) )
-			timer_time *= 1000;
+			timer_time *= 1000;								// Then found micro-seconds.
 		switch( timer_id ) {
 			//--------------------------------------------------
 			#if ( PGIM_TIMER_0 != PG_DISABLE )
@@ -252,10 +242,24 @@
 			}
 		}
 	}
-	//---[ END Timer Set ]---
+	//---[ END Timer Set Period]---
+
+	//---[ Timer Set Frequency]---
+	_pg_Uint8	pg_timer_set_freq( _pg_Uint8 timer_id , _pg_float timer_freq , _pg_Uint8 unit_measure ) {	// PG_HZ || PG_KHZ
+		//--------------------------------------------------
+		_pg_float	pg_timer_freq_to_period;
+		
+		if ( unit_measure == PG_HZ )
+			timer_freq /= 1000;								// Then found kilo-hertz.
+		pg_timer_freq_to_period = 1.0 / timer_freq;			// Then found milli-seconds.
+		pg_timer_set_period( timer_id , pg_timer_freq_to_period , PG_MSEC );
+	}
+	//---[ END Timer Set Frequency]---
+
 
 	//---[ Timer Start  ]---
 	_pg_Uint8	pg_timer_start( _pg_Uint8 timer_id ) {
+		//--------------------------------------------------
 		switch( timer_id ) {
 			//--------------------------------------------------
 			#if ( PGIM_TIMER_0 != PG_DISABLE )
@@ -289,6 +293,7 @@
 
 	//---[ Timer Stop  ]---
 	_pg_Uint8	pg_timer_stop( _pg_Uint8 timer_id ) {
+		//--------------------------------------------------
 		switch( timer_id ) {
 			//--------------------------------------------------
 			#if ( PGIM_TIMER_0 != PG_DISABLE )
@@ -326,6 +331,7 @@
 
 	//---[ Timer Value ]---
 	_pg_Uint16	pg_timer_reg_current_value( _pg_Uint8 timer_id ) {
+		//--------------------------------------------------
 		switch( timer_id ) {
 			//--------------------------------------------------
 			#if ( PGIM_TIMER_0 != PG_DISABLE )
@@ -357,14 +363,12 @@
 	void	pg_timer_init( void ) {
 		//--------------------------------------------------
 		#if ( PGIM_TIMER_0 != PG_DISABLE )
+			pg_timer_0_period		= ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK );		// One step timer, without prescaler, by tens of nano-second [10 ns];
+			pg_timer_0_count_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK ) * PG_TIMER_0_TMR_REG_MAX );	// Max time with full tmr register, without prescaler, by tens of nano-second [10 ns];
+			pg_timer_0_nanosec_min	= ( ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_0_TMR_REG_MIN ) * PG_TIMER_0_PRESCALER_MIN ) + PG_TIMER_0_OFFSET_GUARD );
+			pg_timer_0_nanosec_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_0_TMR_REG_MAX ) * PG_TIMER_0_PRESCALER_MAX );	// Max time with full tmr register, with max prescaler, by tens of nano-second [10 ns];
 
-		pg_timer_0_period		= ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK );		// One step timer, without prescaler, by tens of nano-second [10 ns];
-		pg_timer_0_count_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK ) * PG_TIMER_0_TMR_REG_MAX );	// Max time with full tmr register, without prescaler, by tens of nano-second [10 ns];
-		pg_timer_0_nanosec_min	= ( ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_0_TMR_REG_MIN ) * PG_TIMER_0_PRESCALER_MIN ) + PG_TIMER_0_OFFSET_GUARD );
-		pg_timer_0_nanosec_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_0_TMR_REG_MAX ) * PG_TIMER_0_PRESCALER_MAX );	// Max time with full tmr register, with max prescaler, by tens of nano-second [10 ns];
-
-		T0CON = 0b00001000;										// Stops Timer; 16-bit; Internal clock fron oscillator; No prescaler.
-
+			T0CON = 0b00001000;										// Stops Timer; 16-bit; Internal clock fron oscillator; No prescaler.
 		#endif
 		/*
 				T0CON:
@@ -401,14 +405,12 @@
 		 */
 		//--------------------------------------------------
 		#if ( PGIM_TIMER_1 != PG_DISABLE )
+			pg_timer_1_period		= ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK );		// One step timer, without prescaler, by tens of nano-second [10 ns];
+			pg_timer_1_count_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK ) * PG_TIMER_1_TMR_REG_MAX );	// Max time with full tmr register, without prescaler, by tens of nano-second [10 ns];
+			pg_timer_1_nanosec_min	= ( ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_1_TMR_REG_MIN ) * PG_TIMER_1_PRESCALER_MIN ) + PG_TIMER_1_OFFSET_GUARD );
+			pg_timer_1_nanosec_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_1_TMR_REG_MAX ) * PG_TIMER_1_PRESCALER_MAX );	// Max time with full tmr register, with max prescaler, by tens of nano-second [10 ns];
 
-		pg_timer_1_period		= ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK );		// One step timer, without prescaler, by tens of nano-second [10 ns];
-		pg_timer_1_count_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER ) / PG_CLOCK ) * PG_TIMER_1_TMR_REG_MAX );	// Max time with full tmr register, without prescaler, by tens of nano-second [10 ns];
-		pg_timer_1_nanosec_min	= ( ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_1_TMR_REG_MIN ) * PG_TIMER_1_PRESCALER_MIN ) + PG_TIMER_1_OFFSET_GUARD );
-		pg_timer_1_nanosec_max	= ( ( ( 100.000 * PG_TIMER_FOSC_DIVIDER / PG_CLOCK ) * PG_TIMER_1_TMR_REG_MAX ) * PG_TIMER_1_PRESCALER_MAX );	// Max time with full tmr register, with max prescaler, by tens of nano-second [10 ns];
-
-		T1CON = 0b10000100;										// 16-bit; No prescaler; No sync; Internal clock fron oscillator; Stops Timer;
-
+			T1CON = 0b10000100;										// 16-bit; No prescaler; No sync; Internal clock fron oscillator; Stops Timer;
 		#endif
 		/*
 				T1CON:
