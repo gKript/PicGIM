@@ -253,6 +253,11 @@
 			timer_freq /= 1000;								// Then found kilo-hertz.
 		pg_timer_freq_to_period = 1.0 / timer_freq;			// Then found milli-seconds.
 		pg_timer_set_period( timer_id , pg_timer_freq_to_period , PG_MSEC );
+		
+		// If timer_id = 0, force TIMER_0 in loop mode. Remember to restore!!!
+		;
+		// If timer_id = 1, force TIMER_1 in loop mode. Remember to restore!!!
+		;
 	}
 	//---[ END Timer Set Frequency]---
 

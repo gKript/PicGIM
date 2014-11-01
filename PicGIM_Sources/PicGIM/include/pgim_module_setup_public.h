@@ -184,6 +184,7 @@
 	//
 	////////////////////////////////////////////////////////////////////////////////
 
+	#define	PG_FTOA_BUFFER_INTERNAL				PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PG_FTOA_CONVERSION_ACCURATE			PG_YES					//!< Must be : PG_YES || PG_NO
 //	#define	PG_FTOA_ROUNDING					PG_NO					//!< Must be : PG_YES || PG_NO
 

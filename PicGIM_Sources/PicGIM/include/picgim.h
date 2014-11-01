@@ -651,7 +651,7 @@
 	#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_SERIAL == PG_ENABLE ) || ( PGIM_SPI == PG_ENABLE ) )
 		#include "pgim_ftoa.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PG_HS_PG PG_HF_FTOA Computed
+			#warning	PG_HS_PG PG_HF_FTOA Included
 		#endif
 	#endif
 	//---[ END Ftoa Function ]---

@@ -43,25 +43,29 @@
 #include "picgim_main.h"
 
 void main( void ) {
+
 	char buf[ 32 ];
 	pg_initialize();
 	pg_serial_open();
 	
+	putrsUSART( "Using user's buffer   : " );
 	pg_ftoa( 1234.5678, PG_FTOA_DECIMAL_DIGITS_2, buf );
 	putsUSART( buf );
 	putrsUSART( "\n" );
 	
+	putrsUSART( "Using internal buffer : " );
 	putsUSART( pg_ftoa( 1234.5678, PG_FTOA_DECIMAL_DIGITS_2, NULL ) );
 	putrsUSART( "\n" );
-	
+	putrsUSART( "---------------------\n" );
 	pg_serial_close();
 	
-	T_D0 = PG_WRITE;
+	T_D0 = PG_OUT;
 	
-	pg_timer_set_period( PG_TIMER_0 , 10 , PG_MSEC );
-	pg_timer_set_period( PG_TIMER_1 , 5 , PG_MSEC );
+	pg_interrupt_enable_set( PG_INTERRUPT_EVENTS , PG_ENABLE );
+	pg_interrupt_enable_set( PG_INTERRUPT_EVENT_TMR0 , PG_ENABLE );
+	
+	pg_timer_set_freq( PG_TIMER_0 , 1 , PG_KHZ );
 	pg_timer_start( PG_TIMER_0 );
-	pg_timer_start( PG_TIMER_1 );
 	
 	PG_INFINITE_LOOP;
 }

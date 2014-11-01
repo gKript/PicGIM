@@ -56,8 +56,11 @@
 		//---[ END Decimal Digits ]---
 		
 		//---[ Error ]---
-		#define PG_FTOA_ERROR_OVER_8_ACCURACY		201					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy required.
-		#define PG_FTOA_ERROR_OVER_8_ACCURACY_NO	202					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy is not required.
+		#define PG_FTOA_ERROR_OK					201					//!< No errors.
+		#define PG_FTOA_ERROR_OVER_8_ACCURACY		202					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy required.
+		#define PG_FTOA_ERROR_OVER_8_ACCURACY_NO	203					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy is not required.
+		#define PG_FTOA_ERROR_BUFFER_DISABLED		204					//!< Trying to use the internal buffer, but that is disabled
+		#define PG_FTOA_ERROR_WRONG_CONFIG_BUFFER	205					//!< Wrong configuration of the buffer in "pgim_module_setup_public.h"
 		//---[ END Error ]---
 
 		/*!
