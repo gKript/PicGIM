@@ -46,7 +46,7 @@
 	#if ( PG_USE_INTERNAL_OSC == PG_ENABLE )
 		#include "pgim_int_osc.h"
 		#ifdef _GIM_H_
-			#pragma	config FOSC = INTIO2					//!< Internal oscillator, OSC1 as RA7, OSC2 as RA6  		
+			#pragma	config OSC = INTIO2					//!< Internal oscillator, OSC1 as RA7, OSC2 as RA6  		
 		#endif
 		#undef	PG_CLOCK
 		#define	PG_CLOCK 8.000								// Re-define new oscillator frequency
@@ -166,7 +166,7 @@
 			\code
 				#pragma	config PLLDIV	= 5
 				#pragma	config CPUDIV	= OSC1_PLL2
-				#pragma	config FOSC		= ECPLLIO_EC
+				#pragma	config OSC		= ECPLLIO_EC
 				#pragma	config USBDIV	= 1
 				#pragma	config FCMEN	= OFF
 				#pragma	config IESO		= OFF

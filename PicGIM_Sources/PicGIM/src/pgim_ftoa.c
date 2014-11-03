@@ -107,7 +107,7 @@
 			//--------------------------------------------------
 			#if ( PG_FTOA_BUFFER_INTERNAL == PG_ENABLE )
 				// Build the string in internal buffer
-				sprintf( pg_ftoa_internal_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
+//				sprintf( pg_ftoa_internal_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
 				#if PG_ERROR_IS_ENABLE
 					//No error
 					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OK , PG_ERROR_OK );
@@ -139,7 +139,7 @@
 			// --------------------
 			
 			// Build the string in user's buffer
-			sprintf( pg_ftoa_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
+//			sprintf( pg_ftoa_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
 			return ( NULL );
 		}
 	}

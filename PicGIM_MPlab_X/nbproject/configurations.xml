@@ -38,7 +38,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_pwm.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/picgim_main.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_environment.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_constants.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_error.h</itemPath>
@@ -93,7 +92,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_version.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_pwm.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_serial.c</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_environment.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_external_memory.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_error.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_lcd_hd44780.c</itemPath>
@@ -124,7 +122,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC18F4620</targetDevice>
+        <targetDevice>PIC18F2320</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
@@ -137,8 +135,11 @@
           <linkerLibItems>
           </linkerLibItems>
         </linkerTool>
+        <archiverTool>
+        </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
       </compileType>
