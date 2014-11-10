@@ -134,10 +134,10 @@
 		#define		PG_INTERRUPT_EVENT_BCL				19			//!< This is the internal definition of the interrupt BCL
 		#define		PG_INTERRUPT_EVENT_HLVD				20			//!< This is the internal definition of the interrupt HLVD
 		
-		#define		PG_INTERRUPT_EVENT_GLOBAL			100			//!< This is the internal definition of the GLOBAL interrupt
-		#define		PG_INTERRUPT_EVENT_PERIPHERAL		101			//!< This is the internal definition of the PERIPHERAL interrupt
+		#define		PG_INTERRUPT_EVENT_GLOBAL			21			//!< This is the internal definition of the GLOBAL interrupt
+		#define		PG_INTERRUPT_EVENT_PERIPHERAL		22			//!< This is the internal definition of the PERIPHERAL interrupt
 		
-		#define		PG_INTERRUPT_EVENTS					200			//!< This is the internal definition of the ANY interrupt events
+		#define		PG_INTERRUPT_EVENTS					23			//!< This is the internal definition of the ANY interrupt events
 		
 		#define		PG_INTERRUPT_INT0_FLAG				INTCONbits.INT0IF			//!< This is the internal definition of the interrupt flag bit INT0
 		#define		PG_INTERRUPT_INT0_ENABLE			INTCONbits.INT0IE			//!< This is the internal definition of the enable interrupt bit INT0

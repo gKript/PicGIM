@@ -60,13 +60,8 @@ void main( void ) {
 //	pg_serial_close();
 //
 //	T_D0 = PG_OUT;
-//
-//	pg_interrupt_enable_set( PG_INTERRUPT_EVENTS , PG_ENABLE );
-//	pg_interrupt_enable_set( PG_INTERRUPT_EVENT_TMR0 , PG_ENABLE );
-//
 //	pg_timer_set_freq( PG_TIMER_0 , 1 , PG_KHZ );
 //	pg_timer_start( PG_TIMER_0 );
-	
-	PG_INFINITE_LOOP;
+//	PG_INFINITE_LOOP;
 }
 

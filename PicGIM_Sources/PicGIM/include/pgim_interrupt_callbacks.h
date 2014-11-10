@@ -60,109 +60,109 @@
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_INT0 . 
 			*/
-			void pg_interrupts_event_int0( void );
+			void (*pg_interrupts_event_int0)( void );
 		#endif
 		#if ( PG_INTERRUPT_INT1 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_INT1 . 
 			*/
-			void pg_interrupts_event_int1( void );
+			void (*pg_interrupts_event_int1)( void );
 		#endif
 		#if ( PG_INTERRUPT_INT2 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_INT2 . 
 			*/
-			void pg_interrupts_event_int2( void );
+			void (*pg_interrupts_event_int2)( void );
 		#endif
 		#if ( PG_INTERRUPT_TMR0 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_TMR0 . 
 			*/
-			void pg_interrupts_event_tmr0( void );
+			void (*pg_interrupts_event_tmr0)( void );
 		#endif
 		#if ( PG_INTERRUPT_TMR1 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_TMR1 . 
 			*/
-			void pg_interrupts_event_tmr1( void );
+			void (*pg_interrupts_event_tmr1)( void );
 		#endif		
 		#if ( PG_INTERRUPT_TMR2 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_TMR2 . 
 			*/
-			void pg_interrupts_event_tmr2( void );
+			void (*pg_interrupts_event_tmr2)( void );
 		#endif		
 		#if ( PG_INTERRUPT_RB0 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_RB0 . 
 			*/
-			void pg_interrupts_event_rbo( void );
+			void (*pg_interrupts_event_rbo)( void );
 		#endif
 		#if ( PG_INTERRUPT_AD == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_AD . 
 			*/
-			void pg_interrupts_event_ad( void );
+			void (*pg_interrupts_event_ad)( void );
 		#endif
 		#if ( PG_INTERRUPT_USARTRC == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_USARTRC . 
 			*/
-			void pg_interrupts_event_usartrc( void );
+			void (*pg_interrupts_event_usartrc)( void );
 		#endif
 		#if ( PG_INTERRUPT_USARTTX == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_USARTTX . 
 			*/
-			void pg_interrupts_event_usarttx( void );
+			void (*pg_interrupts_event_usarttx)( void );
 		#endif
 		#if ( PG_INTERRUPT_SSP == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_SSP . 
 			*/
-			void pg_interrupts_event_ssp( void );
+			void (*pg_interrupts_event_ssp)( void );
 		#endif
 		#if ( PG_INTERRUPT_CCP1 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_CCP1 . 
 			*/
-			void pg_interrupts_event_ccp1( void );
+			void (*pg_interrupts_event_ccp1)( void );
 		#endif
 		#if ( PG_INTERRUPT_CCP2 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_CCP2 . 
 			*/
-			void pg_interrupts_event_ccp2( void );
+			void (*pg_interrupts_event_ccp2)( void );
 		#endif
 		#if ( PG_INTERRUPT_OSCF == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_OSCF . 
 			*/
-			void pg_interrupts_event_oscf( void );
+			void (*pg_interrupts_event_oscf)( void );
 		#endif
 		#if ( PG_INTERRUPT_CM == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_CM . 
 			*/
-			void pg_interrupts_event_cm( void );
+			void (*pg_interrupts_event_cm)( void );
 		#endif
 		#if ( PG_INTERRUPT_EE == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_EE . 
 			*/
-			void pg_interrupts_event_ee( void );
+			void (*pg_interrupts_event_ee)( void );
 		#endif
 		#if ( PG_INTERRUPT_BCL == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_BCL . 
 			*/
-			void pg_interrupts_event_bcl( void );
+			void (*pg_interrupts_event_bcl)( void );
 		#endif
 		#if ( PG_INTERRUPT_HLVD == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_HLVD . 
 			*/
-			void pg_interrupts_event_hlvd( void );
+			void (*pg_interrupts_event_hlvd)( void );
 		#endif
 		
 	#endif /* _PGIM_INTERRUPTS_CALLBACKS_H_ */

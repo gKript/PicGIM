@@ -352,7 +352,7 @@
 					#if	( PG_INTERRUPT_INT0 == PG_ENABLE )
 				case PG_INTERRUPT_EVENT_INT0:
 				{
-					pg_interrupts_event_int0( );
+					pg_interrupts_event_int0();
 					PG_INTERRUPT_INT0_FLAG = PG_CLEAR;
 					break;
 				}
@@ -517,6 +517,10 @@
 		}
 		return pg_event_name;
 	}
+
+
+	void	pg_event_attach( _pg_Uint8 event , void pfunc(void) );
+
 
 	#endif
 #endif

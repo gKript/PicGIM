@@ -47,9 +47,12 @@
 	//      P I C G I M
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	PG_INFINITE_LOOP		while(1)
-	#define	PG_HALT					while(1)
+	#define	PG_LOOP( a )			while( a )
+	#define	PG_INFINITE_LOOP		while( 1 )
+	#define	PG_HALT					while( 1 )
 
+	#define	PG_FOREVER				1
+	
 	#define	PG_OK					1
 	#define	PG_NOK					0
 
@@ -119,7 +122,7 @@
 	#define PG_AUTOMATIC			2
 
 	#define	PG_DEBUG_LCD_CHAR		1
-	#define PG_DEBUG_LCD_PCD8544	2
+//	#define PG_DEBUG_LCD_PCD8544	2
 	
 	#define PG_COMMAND				0
 	#define PG_DATA					1
@@ -190,10 +193,10 @@
 
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//      P O R T
+	//      P O R T S
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	P_A0				PORTAbits.RA0
+	#define	P_A1				PORTAbits.RA1
 	#define	P_A1				PORTAbits.RA1
 	#define	P_A2				PORTAbits.RA2
 	#define	P_A3				PORTAbits.RA3
@@ -271,7 +274,7 @@
 	//      L A T
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	L_A0				LATAbits.LATA0	
+	#define	L_A1				LATAbits.LATA1	
 	#define	L_A1				LATAbits.LATA1	
 	#define	L_A2				LATAbits.LATA2	
 	#define	L_A3				LATAbits.LATA3
@@ -349,7 +352,7 @@
 	//      T R I S
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	T_A0				TRISAbits.TRISA0	
+	#define	T_A1				TRISAbits.TRISA1	
 	#define	T_A1				TRISAbits.TRISA1	
 	#define	T_A2				TRISAbits.TRISA2	
 	#define	T_A3				TRISAbits.TRISA3
@@ -422,5 +425,144 @@
 	#define	T_H7				TRISHbits.TRISH7	
 
 #endif /* _PGIM_DEFINES_H_ */
+
+
+/*!
+
+	\page	PG_language		The language of PicGIM
+
+		\tableofcontents
+	
+		\n
+		\image html language.png
+		\n \n 
+			
+		\b PicGIM also introduces changes to the classic references of the \b Microchip \b environment. \n
+		These changes affect different components such as the \b types \b of \b variables and the \b PIN \b names. \n
+		These changes were made with the purpose to simplify the code writing. \n \n
+	
+		
+		\section	langtype	Variable Type name reference
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+			<p>
+				The variable types have been reorganized to size and signed and unsigned.
+				\htmlonly
+				<br>
+				<table class="cl_table" width="60%" border="0" >
+					<thead>
+						<tr>
+							<th width="25%" align="left" >PicGIM type</th>
+							<th width="25%" align="left" >STD type</th>
+							<th width="50%" align="left" >Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_int8 \htmlonly</b></td><td>char</td><td>Signed integer 8 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_Uint8 \htmlonly</b></td><td>unsigned char</td><td>Unsigned integer 8 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_int16 \htmlonly</b></td><td>int</td><td>Signed integer 16 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_Uint16 \htmlonly</b></td><td>unsigned int</td><td>Unsigned integer 16 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_int24 \htmlonly</b></td><td>short long</td><td>Signed integer 24 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_Uint24 \htmlonly</b></td><td>unsigned short long</td><td>Unsigned integer 24 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_int32 \htmlonly</b></td><td>long</td><td>Signed integer 32 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_Uint32 \htmlonly</b></td><td>unsigned long</td><td>Unsigned integer 32 bit size</td>
+						</tr>
+						<tr>
+							<td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_buffer \htmlonly</b></td><td>char *</td><td>A pointer to a signed integer 8 bit size</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_Ubuffer \htmlonly</b></td><td>unsigned char *</td><td>A pointer to a unsigned integer 8 bit size</td>
+						</tr>
+						<tr>
+							<td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td ><b>\endhtmlonly \ref _pg_bool \htmlonly</b></td><td>BOOL</td><td>A boolean flag</td>
+						</tr>
+					</tbody>
+				</table>
+				<br> 
+				\endhtmlonly
+				
+				A practical code example.
+				\code
+					...
+					void main( void ) {
+						_pg_int8	small_counter , reg_a = 0;
+						_pg_Uint32	big_counter;
+						_pg_Uint16	values[32];
+						_pg_bool	test = false;
+					...
+				\endcode
+			</p>
+			\n 
+
+		\section	langpins	Pins name reference
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+			<p>
+				They were also reorganized the names of the pins to the context ( TRIS, PORT, LAT ). \n
+				Here is a reference table for each port. \n
+				\htmlonly
+				<br>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name</th>
+							<th width="30%" align="center" >LAT name</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>A1</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA1</td><td width="15%" align="center" ><b>T_A1</b></td>
+							<td width="15%" align="center" >PORTAbits.RA1</td><td width="15%" align="center" ><b>P_A1</b></td>
+							<td width="15%" align="center" >LATAbits.LATA1</td><td width="15%" align="center" ><b>L_A1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A1</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA1</td><td width="15%" align="center" ><b>T_A1</b></td>
+							<td width="15%" align="center" >PORTAbits.RA1</td><td width="15%" align="center" ><b>P_A1</b></td>
+							<td width="15%" align="center" >LATAbits.LATA1</td><td width="15%" align="center" ><b>L_A1</b></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				\endhtmlonly
+		</p>
+*/
+
 
 
