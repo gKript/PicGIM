@@ -60,31 +60,31 @@
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_INT0 . 
 			*/
-			void (*pg_interrupts_event_int0)( void );
+//			void (*pg_interrupts_event_int0)( void );
 		#endif
 		#if ( PG_INTERRUPT_INT1 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_INT1 . 
 			*/
-			void (*pg_interrupts_event_int1)( void );
+//			void (*pg_interrupts_event_int1)( void );
 		#endif
 		#if ( PG_INTERRUPT_INT2 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_INT2 . 
 			*/
-			void (*pg_interrupts_event_int2)( void );
+//			void (*pg_interrupts_event_int2)( void );
 		#endif
 		#if ( PG_INTERRUPT_TMR0 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_TMR0 . 
 			*/
-			void (*pg_interrupts_event_tmr0)( void );
+//			void (*pg_interrupts_event_tmr0)( void );
 		#endif
 		#if ( PG_INTERRUPT_TMR1 == PG_ENABLE )
 			/*!	
 				\brief	This is the callback for the event \ref PG_INTERRUPT_TMR1 . 
 			*/
-			void (*pg_interrupts_event_tmr1)( void );
+//			void (*pg_interrupts_event_tmr1)( void );
 		#endif		
 		#if ( PG_INTERRUPT_TMR2 == PG_ENABLE )
 			/*!	
