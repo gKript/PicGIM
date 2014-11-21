@@ -483,18 +483,22 @@
 						<tr>
 							<td ><b>\endhtmlonly \ref _pg_Uint32 \htmlonly</b></td><td>unsigned long</td><td>Unsigned integer 32 bit size</td>
 						</tr>
-						<tr>
-							<td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<table class="cl_table" width="60%" border="0" >
+					<tbody>
 						<tr>
 							<td ><b>\endhtmlonly \ref _pg_buffer \htmlonly</b></td><td>char *</td><td>A pointer to a signed integer 8 bit size</td>
 						</tr>
 						<tr>
 							<td ><b>\endhtmlonly \ref _pg_Ubuffer \htmlonly</b></td><td>unsigned char *</td><td>A pointer to a unsigned integer 8 bit size</td>
 						</tr>
-						<tr>
-							<td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<table class="cl_table" width="60%" border="0" >
+					<tbody>
 						<tr>
 							<td ><b>\endhtmlonly \ref _pg_bool \htmlonly</b></td><td>BOOL</td><td>A boolean flag</td>
 						</tr>

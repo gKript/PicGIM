@@ -49,6 +49,13 @@
 
 	volatile char pg_event_name;
 
+	pg_int0_cb_pointer	pg_int0_callback;
+	pg_int1_cb_pointer	pg_int1_callback;
+	pg_int2_cb_pointer	pg_int2_callback;
+	pg_tmr0_cb_pointer	pg_tmr0_callback;
+	pg_tmr1_cb_pointer	pg_tmr1_callback;
+	pg_tmr2_cb_pointer	pg_tmr2_callback;
+
 
 	void	pg_interrupt_init( void ) {
 		#if defined( __18CXX )
@@ -352,7 +359,8 @@
 					#if	( PG_INTERRUPT_INT0 == PG_ENABLE )
 				case PG_INTERRUPT_EVENT_INT0:
 				{
-					pg_interrupts_event_int0();
+					//pg_interrupts_event_int0( );
+					pg_int0_callback();
 					PG_INTERRUPT_INT0_FLAG = PG_CLEAR;
 					break;
 				}
@@ -360,24 +368,22 @@
 					#if	( PG_INTERRUPT_INT1 == PG_ENABLE )
 				case PG_INTERRUPT_EVENT_INT1:
 				{
-					INTCON2bits.RBPU = 0;
-					INTCON2bits.RBIP = 1;
-					if ( PG_INTERRUPT_INT1_FLAG ) {
-						pg_interrupts_event_int1( );
-						PG_INTERRUPT_INT1_FLAG = PG_CLEAR;
-					}
+//					INTCON2bits.RBPU = 0;
+//					INTCON2bits.RBIP = 1;
+//					pg_interrupts_event_int1( );
+					pg_int1_callback();
+					PG_INTERRUPT_INT1_FLAG = PG_CLEAR;
 					break;
 				}
 					#endif
 					#if	( PG_INTERRUPT_INT2 == PG_ENABLE )
 				case PG_INTERRUPT_EVENT_INT2:
 				{
-					INTCON2bits.RBPU = 0;
-					INTCON2bits.RBIP = 1;
-					if ( PG_INTERRUPT_INT2_FLAG ) {
-						pg_interrupts_event_int2( );
-						PG_INTERRUPT_INT2_FLAG = PG_CLEAR;
-					}
+//					INTCON2bits.RBPU = 0;
+//					INTCON2bits.RBIP = 1;
+//					pg_interrupts_event_int2( );
+					pg_int2_callback();
+					PG_INTERRUPT_INT2_FLAG = PG_CLEAR;
 					break;
 				}
 					#endif
@@ -389,7 +395,8 @@
 						T0CONbits.TMR0ON = 0;
 					TMR0L = pg_timer_0_tmr_reg_set_save.byte.LB;		//!< Restore Timer Set value
 					TMR0H = pg_timer_0_tmr_reg_set_save.byte.HB;		//!< Restore Timer Set value
-					pg_interrupts_event_tmr0( );
+//					pg_interrupts_event_tmr0( );
+					pg_tmr0_callback();
 					//							}
 					break;
 				}
@@ -402,7 +409,8 @@
 						T1CONbits.TMR1ON = 0;
 					TMR1L = pg_timer_1_tmr_reg_set_save.byte.LB;
 					TMR1H = pg_timer_1_tmr_reg_set_save.byte.HB;
-					pg_interrupts_event_tmr1( );
+//					pg_interrupts_event_tmr1( );
+					pg_tmr1_callback();
 					//							}
 					break;
 				}
@@ -517,10 +525,6 @@
 		}
 		return pg_event_name;
 	}
-
-
-	void	pg_event_attach( _pg_Uint8 event , void pfunc(void) );
-
 
 	#endif
 #endif

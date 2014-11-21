@@ -53,7 +53,7 @@
 	#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_TIMER							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
@@ -170,23 +170,7 @@
 ////		#define PG_LCD_9340_
 ////		#define PG_LCD_9340_
 //	#endif
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-	////////////////////////////////////////////////////////////////////////////////
-	//
-	//		F U N C T I O N   C O N F I G   |   P G _ F T O A ( )
-	//
-	////////////////////////////////////////////////////////////////////////////////
-
-	#define	PG_FTOA_BUFFER_INTERNAL				PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PG_FTOA_CONVERSION_ACCURATE			PG_YES					//!< Must be : PG_YES || PG_NO
-//	#define	PG_FTOA_ROUNDING					PG_NO					//!< Must be : PG_YES || PG_NO
+//	
 
 /*!
 	

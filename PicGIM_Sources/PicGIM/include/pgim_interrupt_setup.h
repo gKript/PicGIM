@@ -134,10 +134,10 @@
 		#define		PG_INTERRUPT_EVENT_BCL				19			//!< This is the internal definition of the interrupt BCL
 		#define		PG_INTERRUPT_EVENT_HLVD				20			//!< This is the internal definition of the interrupt HLVD
 		
-		#define		PG_INTERRUPT_EVENT_GLOBAL			21			//!< This is the internal definition of the GLOBAL interrupt
-		#define		PG_INTERRUPT_EVENT_PERIPHERAL		22			//!< This is the internal definition of the PERIPHERAL interrupt
+		#define		PG_INTERRUPT_EVENT_GLOBAL			100			//!< This is the internal definition of the GLOBAL interrupt
+		#define		PG_INTERRUPT_EVENT_PERIPHERAL		101			//!< This is the internal definition of the PERIPHERAL interrupt
 		
-		#define		PG_INTERRUPT_EVENTS					23			//!< This is the internal definition of the ANY interrupt events
+		#define		PG_INTERRUPT_EVENTS					200			//!< This is the internal definition of the ANY interrupt events
 		
 		#define		PG_INTERRUPT_INT0_FLAG				INTCONbits.INT0IF			//!< This is the internal definition of the interrupt flag bit INT0
 		#define		PG_INTERRUPT_INT0_ENABLE			INTCONbits.INT0IE			//!< This is the internal definition of the enable interrupt bit INT0
@@ -180,6 +180,20 @@
 
 		#define		PG_INTERRUPT_GLOBAL_ENABLE			INTCONbits.GIE			//!< This is the internal definition of the GLOBAL enable interrupt bit
 		#define		PG_INTERRUPT_PERIPHERAL_ENABLE  	INTCONbits.PEIE			//!< This is the internal definition of the PERIPHERAL enable interrupt bit
+
+		typedef		void (* pg_int0_cb_pointer)(void);
+		typedef		void (* pg_int1_cb_pointer)(void);
+		typedef		void (* pg_int2_cb_pointer)(void);
+		typedef		void (* pg_tmr0_cb_pointer)(void);
+		typedef		void (* pg_tmr1_cb_pointer)(void);
+		typedef		void (* pg_tmr2_cb_pointer)(void);
+
+		extern		pg_int0_cb_pointer pg_int0_callback;
+		extern		pg_int1_cb_pointer pg_int1_callback;
+		extern		pg_int2_cb_pointer pg_int2_callback;
+		extern		pg_tmr0_cb_pointer pg_tmr0_callback;
+		extern		pg_tmr1_cb_pointer pg_tmr1_callback;
+		extern		pg_tmr2_cb_pointer pg_tmr2_callback;
 	
 	#endif
 #endif /* _PGIM_INTERRUPT_PROTO_H_ */
