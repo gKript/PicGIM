@@ -42,10 +42,17 @@
 
 #include "picgim_main.h"
 
+
+void	led_blink( void ) {
+	T_D0 = PG_OUT;
+	L_D0 ^= 1;
+}
+
+
 void main( void ) {
 
 //	char buf[ 32 ];
-//	pg_initialize();
+	pg_initialize();
 //	pg_serial_open();
 //
 //	putrsUSART( "Using user's buffer   : " );
@@ -60,8 +67,13 @@ void main( void ) {
 //	pg_serial_close();
 //
 //	T_D0 = PG_OUT;
-//	pg_timer_set_freq( PG_TIMER_0 , 1 , PG_KHZ );
-//	pg_timer_start( PG_TIMER_0 );
-//	PG_INFINITE_LOOP;
+	pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
+	pg_interrupt_enable_set( PG_INTERRUPT_EVENT_TMR0  , PG_ENABLE );
+	pg_event_attach( PG_EVENT_TMR0 , led_blink );
+
+	pg_timer_set_freq( PG_TIMER_0 , 5 , PG_SEC );
+	pg_timer_start( PG_TIMER_0 );
+
+	PG_INFINITE_LOOP;
 }
 

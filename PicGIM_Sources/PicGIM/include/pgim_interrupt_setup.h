@@ -89,7 +89,7 @@
 			/*!
 				\brief			This is the call for the user interrupt handler. \n The code for this function must be placed in the relative function in this file : pgim_interrupt_callbacks.c
 			 	\attention		Internal use only !
-			 	\deprecated	Do not call directly. \n
+			 	\deprecated		Do not call directly. \n
 				\return	
 			 */
 		    char pg_interrupt_user_event_handler	    ( void );
@@ -111,7 +111,38 @@
 			\attention		Internal use only !
 			\deprecated	Do not call directly. \n
 		 */
-		void pgim_interrupt_event							( void );
+		void pgim_interrupt_event	( void );
+
+
+		/*!
+		 *	\brief		This is the function to attach a callback to a specific event.
+		 *	\param		event	The Define of the event you want to attach. \n
+		 *						example : \ref PG_EVENT_TMR0
+		 *  \param		void (*pg_event_callback)(void)		The callback pointer to attach to an event.
+			\return		Nothing.
+		 */
+		void	pg_event_attach( int event , void (*pg_event_callback)(void) );
+
+		
+		#define		PG_EVENT_INT0						1			//!< This is the internal definition of the interrupt INT0
+		#define		PG_EVENT_INT1						2			//!< This is the internal definition of the interrupt INT1
+		#define		PG_EVENT_INT2						3			//!< This is the internal definition of the interrupt INT2
+		#define		PG_EVENT_TMR0						4			//!< This is the internal definition of the interrupt TMR0
+		#define		PG_EVENT_TMR1						5			//!< This is the internal definition of the interrupt TMR1
+		#define		PG_EVENT_TMR2						6			//!< This is the internal definition of the interrupt TMR2
+		#define		PG_EVENT_RB0						8			//!< This is the internal definition of the interrupt RB0
+		#define		PG_EVENT_PSP						9			//!< This is the internal definition of the interrupt PSP
+		#define		PG_EVENT_AD							10			//!< This is the internal definition of the interrupt AD
+		#define		PG_EVENT_USARTRC					11			//!< This is the internal definition of the interrupt USARTRC
+		#define		PG_EVENT_USARTTX					12			//!< This is the internal definition of the interrupt USARTTX
+		#define		PG_EVENT_SSP						13			//!< This is the internal definition of the interrupt SSP
+		#define		PG_EVENT_CCP1						14			//!< This is the internal definition of the interrupt CCP1
+		#define		PG_EVENT_CCP2						15			//!< This is the internal definition of the interrupt CCP2
+		#define		PG_EVENT_OSCF						16			//!< This is the internal definition of the interrupt OSCF
+		#define		PG_EVENT_CM							17			//!< This is the internal definition of the interrupt CM
+		#define		PG_EVENT_EE							18			//!< This is the internal definition of the interrupt EE
+		#define		PG_EVENT_BCL						19			//!< This is the internal definition of the interrupt BCL
+		#define		PG_EVENT_HLVD						20			//!< This is the internal definition of the interrupt HLVD
 		
 		#define		PG_INTERRUPT_EVENT_CLEAR			0			//!< This is the internal definition of the CLEAR interrupt flag
 		#define		PG_INTERRUPT_EVENT_INT0				1			//!< This is the internal definition of the interrupt INT0
@@ -133,7 +164,7 @@
 		#define		PG_INTERRUPT_EVENT_EE				18			//!< This is the internal definition of the interrupt EE
 		#define		PG_INTERRUPT_EVENT_BCL				19			//!< This is the internal definition of the interrupt BCL
 		#define		PG_INTERRUPT_EVENT_HLVD				20			//!< This is the internal definition of the interrupt HLVD
-		
+
 		#define		PG_INTERRUPT_EVENT_GLOBAL			100			//!< This is the internal definition of the GLOBAL interrupt
 		#define		PG_INTERRUPT_EVENT_PERIPHERAL		101			//!< This is the internal definition of the PERIPHERAL interrupt
 		
