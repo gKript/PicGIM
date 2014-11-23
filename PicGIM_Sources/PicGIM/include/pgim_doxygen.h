@@ -229,7 +229,7 @@
 						<td>Through this file you set the hardware pinout for your project.<BR>Each module, when enabled, will follow the settings declared in this file.</td>
 					</tr>
 					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_interrupt_setup_public.h \htmlonly </td>
+						<td width="20%"> \endhtmlonly pgim_event_setup_public.h \htmlonly </td>
 						<td>With this file you can enable the global management of interruptions.<br>PicGIM automatically will include all the setting for interrupt vector.<br>
 						PicGIM implements management of interrupts without priority levels for maximum compatibility between the various MCU supported.<br>
 						With this file you can also enable or disable each event handled by the Microchip<small>&#8482;</small> MCU.</td>

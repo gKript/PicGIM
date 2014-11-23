@@ -132,10 +132,10 @@
 			_pg_Uint8 GIE_state , PIE_state , TRIS_state;
 			TRIS_state = PG_ERROR_LED_TRIS;
 			PG_ERROR_LED_TRIS = PG_OUT;
-			#if	( PGIM_INTERRUPTS == PG_ENABLE )
+			#if	( PGIM_EVENTS == PG_ENABLE )
 				GIE_state = PG_INTERRUPT_GLOBAL_ENABLE;
 				PIE_state = PG_INTERRUPT_PERIPHERAL_ENABLE;
-				pg_interrupt_enable_set( PG_INTERRUPT_EVENTS , PG_DISABLE );
+				pg_event_set( PG_EVENT_ANY , PG_DISABLE );
 			#endif
 			switch ( PG_ERROR_SEVERITY ) {
 				case PG_ERROR_CRITICAL : {
@@ -161,11 +161,11 @@
 				}
 			}
 			PG_ERROR_LED_TRIS = TRIS_state;
-			#if ( PGIM_INTERRUPTS == PG_ENABLE )
+			#if ( PGIM_EVENTS == PG_ENABLE )
 				if ( GIE_state )
-					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
+					pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 				if ( PIE_state )
-					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_PERIPHERAL , PG_ENABLE );
+					pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
 			#endif
 		}
 	#endif

@@ -65,8 +65,8 @@ void pg_initialize( void ) {
 		pg_timer_init( );
 	#endif
 
-	#if	( PGIM_INTERRUPTS == PG_ENABLE )
-		pg_interrupt_init( );
+	#if	( PGIM_EVENTS == PG_ENABLE )
+		pg_event_init( );
 	#endif
 
 	#if ( PGIM_CAL_DELAY == PG_ENABLE ) && defined( __18CXX )

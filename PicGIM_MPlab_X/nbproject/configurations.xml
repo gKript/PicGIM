@@ -28,8 +28,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ezfuse.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_hardware_setup.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_int_osc.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_interrupt_callbacks.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_interrupt_setup.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_module_setup.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_spi.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_timer.h</itemPath>
@@ -44,6 +42,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_lcd_hd44780.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_a.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ftoa.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_event.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f1" displayName="_Supported_Processor" projectFiles="true">
@@ -57,14 +56,13 @@
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f97j60_public.h</itemPath>
         </logicalFolder>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_hardware_setup_public.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_interrupt_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_module_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_project_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_timer_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_pwm_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_public.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_event_setup_public.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -86,7 +84,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_encoder.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_init.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_int_osc.c</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_interrupt.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_spi.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_timer.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_version.c</itemPath>
@@ -97,6 +94,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_lcd_hd44780.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_board_setup_a.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_ftoa.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_event.c</itemPath>
       </logicalFolder>
       <itemPath>../PicGIM_Sources/main.c</itemPath>
     </logicalFolder>
@@ -219,7 +217,7 @@
         <property key="oscillator.rcfrequencyunit" value="Kilo"/>
         <property key="performancedata.show" value="false"/>
         <property key="periphADC1.altscl" value="false"/>
-        <property key="periphADC1.minTacq" value=""/>
+        <property key="periphADC1.minTacq" value="5"/>
         <property key="periphADC1.tacqunits" value="microseconds"/>
         <property key="periphADC2.altscl" value="false"/>
         <property key="periphADC2.minTacq" value=""/>

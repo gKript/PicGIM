@@ -1,5 +1,5 @@
 //
-// pgim_interrupt_setup.h
+// pgim_event.h
 //
 // PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
 // Version 0.5-x
@@ -28,7 +28,7 @@
 
 #############################################################################*/
 
-/*!		\file			pgim_interrupt_setup.h
+/*!		\file			pgim_event.h
 		\version		0.5-0
 		\date			2002 - 2014
 		\brief			
@@ -40,42 +40,42 @@
 		\attention		This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
-#ifndef _PGIM_INTERRUPT_PROTO_H_
-	#define _PGIM_INTERRUPT_PROTO_H_
+#ifndef _PGIM_EVENT_H_
+	#define _PGIM_EVENT_H_
 
 	/*!
 	 *	\brief	This is the initialization function of interrups handler module.
 	 *	\warning		Internal use only.
 	 *	\deprecated		Do not call directly. Already called in pg_initialize()
 	 */
-	void pg_interrupt_init( void );
+	void pg_event_init( void );
 			
-	#if ( PGIM_INTERRUPTS == PG_ENABLE )
+	#if ( PGIM_EVENTS == PG_ENABLE )
 
 		/*!
-		 *	\brief	Inside this variable resides in the name of the event detected by the automatically interrupt handler. \n Default is \ref PG_INTERRUPT_EVENT_CLEAR
+		 *	\brief	Inside this variable resides in the name of the event detected by the automatically interrupt handler. \n Default is \ref PG_EVENT_CLEAR
 		 */
 		extern volatile char pg_event_name;
 
 		/*!
 		 * \brief	With this function you can clean the bit of the corresponding interrupt event.
 		 * \param	int_event	The Define of the event you want to clean the bit. \n
-		 *						example : \ref PG_INTERRUPT_EVENT_TMR0
+		 *						example : \ref PG_EVENT_TMR0
 			\return	Nothing.
 		 */
-		void pg_interrupt_clear_bit						( char int_event );
+		void pg_event_clear_bit						( char int_event );
 
 		/*!
 		 *	\brief		This is the function to enable or disable the interrupt events. 
 		 *	\param		int_event	The Define of the event you want to clean the bit. \n
-		 *						example : \ref PG_INTERRUPT_EVENT_TMR0
+		 *						example : \ref PG_EVENT_TMR0
 		 *  \param	int_state	The state of the interrupt. \n Only \ref PG_ENABLE or \ref PG_DISABLE
 			\return		Nothing.
-		 *	\warning	Only those listed as enabled in the public file : pgim_interrupt_setup_public.h
+		 *	\warning	Only those listed as enabled in the public file : pgim_event_setup_public.h
 		 */
-		void pg_interrupt_enable_set					( char int_event , char int_state );
+		void pg_event_set					( char int_event , char int_state );
 		
-		#if ( PG_INTERRUPT_AUTO_HANDLER == PG_ENABLE )
+		#if ( PG_EVENT_AUTO_HANDLER == PG_ENABLE )
 
 			/*!
 			 *	\brief			This is the call for the Automatic Interrupt Handler.
@@ -83,7 +83,7 @@
 			 	\attention		Internal use only !
 			 	\deprecated	Do not call directly. \n
 			 */
-		    char pg_interrupt_auto_event_handler	    ( void );
+		    char pg_event_auto_handler	    ( void );
 		#else
 
 			/*!
@@ -92,7 +92,7 @@
 			 	\deprecated		Do not call directly. \n
 				\return	
 			 */
-		    char pg_interrupt_user_event_handler	    ( void );
+		    char pg_event_user_handler	    ( void );
 		#endif
 		
 		/*!
@@ -106,12 +106,12 @@
 
 		
 		/*!
-			\brief			This is the first and only one function called by my_isr(). Depending on the configuration, it calls pg_interrupt_auto_event_handler()  or  pg_interrupt_user_event_handler().
+			\brief			This is the first and only one function called by my_isr(). Depending on the configuration, it calls pg_event_auto_handler()  or  pg_event_user_handler().
 			\return			Nothing.
 			\attention		Internal use only !
 			\deprecated	Do not call directly. \n
 		 */
-		void pgim_interrupt_event	( void );
+		void pg_event_occurred	( void );
 
 
 		/*!
@@ -123,7 +123,7 @@
 		 */
 		void	pg_event_attach( int event , void (*pg_event_callback)(void) );
 
-		
+		#define		PG_EVENT_CLEAR						0			//!< This is the internal definition of the CLEAR interrupt flag
 		#define		PG_EVENT_INT0						1			//!< This is the internal definition of the interrupt INT0
 		#define		PG_EVENT_INT1						2			//!< This is the internal definition of the interrupt INT1
 		#define		PG_EVENT_INT2						3			//!< This is the internal definition of the interrupt INT2
@@ -143,32 +143,11 @@
 		#define		PG_EVENT_EE							18			//!< This is the internal definition of the interrupt EE
 		#define		PG_EVENT_BCL						19			//!< This is the internal definition of the interrupt BCL
 		#define		PG_EVENT_HLVD						20			//!< This is the internal definition of the interrupt HLVD
-		
-		#define		PG_INTERRUPT_EVENT_CLEAR			0			//!< This is the internal definition of the CLEAR interrupt flag
-		#define		PG_INTERRUPT_EVENT_INT0				1			//!< This is the internal definition of the interrupt INT0
-		#define		PG_INTERRUPT_EVENT_INT1				2			//!< This is the internal definition of the interrupt INT1
-		#define		PG_INTERRUPT_EVENT_INT2				3			//!< This is the internal definition of the interrupt INT2
-		#define		PG_INTERRUPT_EVENT_TMR0				4			//!< This is the internal definition of the interrupt TMR0
-		#define		PG_INTERRUPT_EVENT_TMR1				5			//!< This is the internal definition of the interrupt TMR1
-		#define		PG_INTERRUPT_EVENT_TMR2				6			//!< This is the internal definition of the interrupt TMR2
-		#define		PG_INTERRUPT_EVENT_RB0				8			//!< This is the internal definition of the interrupt RB0
-		#define		PG_INTERRUPT_EVENT_PSP				9			//!< This is the internal definition of the interrupt PSP
-		#define		PG_INTERRUPT_EVENT_AD				10			//!< This is the internal definition of the interrupt AD
-		#define		PG_INTERRUPT_EVENT_USARTRC			11			//!< This is the internal definition of the interrupt USARTRC
-		#define		PG_INTERRUPT_EVENT_USARTTX			12			//!< This is the internal definition of the interrupt USARTTX
-		#define		PG_INTERRUPT_EVENT_SSP				13			//!< This is the internal definition of the interrupt SSP
-		#define		PG_INTERRUPT_EVENT_CCP1				14			//!< This is the internal definition of the interrupt CCP1
-		#define		PG_INTERRUPT_EVENT_CCP2				15			//!< This is the internal definition of the interrupt CCP2
-		#define		PG_INTERRUPT_EVENT_OSCF				16			//!< This is the internal definition of the interrupt OSCF
-		#define		PG_INTERRUPT_EVENT_CM				17			//!< This is the internal definition of the interrupt CM
-		#define		PG_INTERRUPT_EVENT_EE				18			//!< This is the internal definition of the interrupt EE
-		#define		PG_INTERRUPT_EVENT_BCL				19			//!< This is the internal definition of the interrupt BCL
-		#define		PG_INTERRUPT_EVENT_HLVD				20			//!< This is the internal definition of the interrupt HLVD
 
-		#define		PG_INTERRUPT_EVENT_GLOBAL			100			//!< This is the internal definition of the GLOBAL interrupt
-		#define		PG_INTERRUPT_EVENT_PERIPHERAL		101			//!< This is the internal definition of the PERIPHERAL interrupt
+		#define		PG_EVENT_GLOBAL						100			//!< This is the internal definition of the GLOBAL interrupt
+		#define		PG_EVENT_PERIPHERAL					101			//!< This is the internal definition of the PERIPHERAL interrupt
 		
-		#define		PG_INTERRUPT_EVENTS					200			//!< This is the internal definition of the ANY interrupt events
+		#define		PG_EVENT_ANY						200			//!< This is the internal definition of the ANY interrupt events
 		
 		#define		PG_INTERRUPT_INT0_FLAG				INTCONbits.INT0IF			//!< This is the internal definition of the interrupt flag bit INT0
 		#define		PG_INTERRUPT_INT0_ENABLE			INTCONbits.INT0IE			//!< This is the internal definition of the enable interrupt bit INT0
@@ -227,7 +206,7 @@
 		extern		pg_tmr2_cb_pointer pg_tmr2_callback;
 	
 	#endif
-#endif /* _PGIM_INTERRUPT_PROTO_H_ */
+#endif /* _PGIM_EVENT_H_ */
 
 /*!
 
@@ -239,7 +218,7 @@
 
  		\b PicGIM is able to handle interrupts of \b PIC18F easily and fully automatically \n
 		We have chosen for this \e milestone, the first, to support interrupts without the management of priority. \n
-		To do this pg_interrupt_init() sets to 0 \e IPEN bit of the \e RCON register. <i> IPEN: Interrupt Priority Enable </i>
+		To do this pg_event_init() sets to 0 \e IPEN bit of the \e RCON register. <i> IPEN: Interrupt Priority Enable </i>
 		
 		\warning	If you choose to use the built-in manager \b YOU \b MUST \b NOT modify any register directly related to the hardware interrupt management.
 		
@@ -259,7 +238,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp; \ref interruptconfen  \n
 					\n \n \n
 
-				\arg \b pgim_interrupt_setup_public.h : This is the main file to edit the parameters of this module. \n In this file there are these configurations  : \n \n
+				\arg \b pgim_event_setup_public.h : This is the main file to edit the parameters of this module. \n In this file there are these configurations  : \n \n
 					&nbsp;&nbsp;&nbsp;&nbsp; \ref interdefinesauto  \n
 					&nbsp;&nbsp;&nbsp;&nbsp; \ref interdefinesintern  \n
 					&nbsp;&nbsp;&nbsp;&nbsp; \ref interdefinesextern  \n
@@ -272,7 +251,7 @@
 
 					\n  &nbsp;&nbsp;&nbsp;&nbsp;
 				
-			\attention	For software reference, please read the documentation about \b pgim_interrupt_setup.h . \n
+			\attention	For software reference, please read the documentation about \b pgim_event.h . \n
 						This is \b not a file defined as \b public and therefore it would not be edited. \n
 						We suggest that you edit this file only if necessary and only if you know what you are doing.
 			</p>
@@ -281,7 +260,7 @@
 			\subsection	interruptconfen	Module enabling
 				\htmlonly <hr> \endhtmlonly
 				\code
-					#define PGIM_INTERRUPTS					PG_DISABLE
+					#define PGIM_EVENTS					PG_DISABLE
 				\endcode
 					This define enables or disables the module.<br>
 				\htmlonly
@@ -293,12 +272,12 @@
 					
 				\subsubsection	intmodenref		References
 					\li \e File : pgim_module_setup_public.h \n
-					\li \e Reference : \ref PGIM_INTERRUPTS \n
+					\li \e Reference : \ref PGIM_EVENTS \n
 					
 			\subsection		interdefinesauto		Automatic Interrupts Handler
 				\htmlonly <hr> \endhtmlonly
 				\code
-					#define PG_INTERRUPT_AUTO_HANDLER   	PG_ENABLE
+					#define PG_EVENT_AUTO_HANDLER   	PG_ENABLE
 				\endcode
 				\htmlonly
 					These defines enable or disable the Automatic Interrupts Handler.<br>
@@ -311,11 +290,11 @@
 				
 				\subsubsection	intmodautoref	References
 					\li \e File : pgim_interrupt_callbacks.c 
-					\li \e Reference : \ref PG_INTERRUPT_AUTO_HANDLER 
+					\li \e Reference : \ref PG_EVENT_AUTO_HANDLER 
 					
-				\note If you disable the automatic handler the interrupts will no longer be managed by PicGIM until you create your own manager in pg_interrupt_user_event_handler() .
+				\note If you disable the automatic handler the interrupts will no longer be managed by PicGIM until you create your own manager in pg_event_user_handler() .
 				
-				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pgim_interrupt_event() that deals of calling the correct handler and to clean the bit of the event. \n You can see in the picture below &nbsp;&darr; \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \n \b See \b also \n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \ref interruptconfen \n \image html callgraph_user_interrupt.png   	
+				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pg_event_occurred() that deals of calling the correct handler and to clean the bit of the event. \n You can see in the picture below &nbsp;&darr; \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \n \b See \b also \n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \ref interruptconfen \n \image html callgraph_user_interrupt.png   	
 				
 
 				
@@ -324,10 +303,10 @@
 			\subsection		interdefinesextern	External interupts
 				\htmlonly <hr> \endhtmlonly
 				\code
-					#define PG_INTERRUPT_INT0				PG_DISABLE
-					#define PG_INTERRUPT_INT1				PG_DISABLE
-					#define PG_INTERRUPT_INT2				PG_DISABLE
-					#define PG_INTERRUPT_RB0				PG_DISABLE
+					#define PG_EVENT_SET_INT0				PG_DISABLE
+					#define PG_EVENT_SET_INT1				PG_DISABLE
+					#define PG_EVENT_SET_INT2				PG_DISABLE
+					#define PG_EVENT_SET_RB0				PG_DISABLE
 				\endcode
 				\htmlonly
 					These defines enable or disable each external interrupts event.<br>
@@ -337,28 +316,28 @@
 					\arg \b PG_DISABLE : enhanced mode disabled.
 				
 				\subsubsection	intmodextref	References
-					\li \e File : pgim_interrupt_setup_public.h \n
-					\li \e Reference : \ref PG_INTERRUPT_INT0 \n
-					\li \e Reference : \ref PG_INTERRUPT_INT1 \n
-					\li \e Reference : \ref PG_INTERRUPT_INT2 \n
-					\li \e Reference : \ref PG_INTERRUPT_RB0 \n
+					\li \e File : pgim_event_setup_public.h \n
+					\li \e Reference : \ref PG_EVENT_SET_INT0 \n
+					\li \e Reference : \ref PG_EVENT_SET_INT1 \n
+					\li \e Reference : \ref PG_EVENT_SET_INT2 \n
+					\li \e Reference : \ref PG_EVENT_SET_RB0 \n
 
 			\subsection		interdefinesintern		Internal Interrupts
 				\htmlonly <hr> \endhtmlonly
 				\code
-					#define PG_INTERRUPT_TMR0				PG_DISABLE
-					#define PG_INTERRUPT_TMR1				PG_DISABLE
-					#define PG_INTERRUPT_TMR2				PG_DISABLE
-					#define PG_INTERRUPT_AD					PG_DISABLE
-					#define PG_INTERRUPT_USARTRC			PG_DISABLE
-					#define PG_INTERRUPT_USARTTX			PG_DISABLE
-					#define PG_INTERRUPT_SSP				PG_DISABLE
-					#define PG_INTERRUPT_CCP1				PG_DISABLE
-					#define PG_INTERRUPT_CCP2				PG_DISABLE
-					#define PG_INTERRUPT_OSCF				PG_DISABLE
-					#define PG_INTERRUPT_CM					PG_DISABLE
-					#define PG_INTERRUPT_EE					PG_DISABLE
-					#define PG_INTERRUPT_BCL				PG_DISABLE
+					#define PG_EVENT_SET_TMR0				PG_DISABLE
+					#define PG_EVENT_SET_TMR1				PG_DISABLE
+					#define PG_EVENT_SET_TMR2				PG_DISABLE
+					#define PG_EVENT_SET_AD					PG_DISABLE
+					#define PG_EVENT_SET_USARTRC			PG_DISABLE
+					#define PG_EVENT_SET_USARTTX			PG_DISABLE
+					#define PG_EVENT_SET_SSP				PG_DISABLE
+					#define PG_EVENT_SET_CCP1				PG_DISABLE
+					#define PG_EVENT_SET_CCP2				PG_DISABLE
+					#define PG_EVENT_SET_OSCF				PG_DISABLE
+					#define PG_EVENT_SET_CM					PG_DISABLE
+					#define PG_EVENT_SET_EE					PG_DISABLE
+					#define PG_EVENT_SET_BCL				PG_DISABLE
 				\endcode
 				\htmlonly
 					These defines enable or disable each internal interrupts event.<br>
@@ -368,20 +347,20 @@
 					\arg \b PG_DISABLE : enhanced mode disabled.
 					
 				\subsubsection	intmodintref	References
-					\li \e File : pgim_interrupt_setup_public.h \n
-					\li \e Reference : \ref PG_INTERRUPT_TMR0 \n
-					\li \e Reference : \ref PG_INTERRUPT_TMR1 \n
-					\li \e Reference : \ref PG_INTERRUPT_TMR2 \n
-					\li \e Reference : \ref PG_INTERRUPT_AD \n
-					\li \e Reference : \ref PG_INTERRUPT_USARTRC \n
-					\li \e Reference : \ref PG_INTERRUPT_USARTTX \n
-					\li \e Reference : \ref PG_INTERRUPT_SSP \n
-					\li \e Reference : \ref PG_INTERRUPT_CCP1 \n
-					\li \e Reference : \ref PG_INTERRUPT_CCP2 \n
-					\li \e Reference : \ref PG_INTERRUPT_OSCF \n
-					\li \e Reference : \ref PG_INTERRUPT_CM \n
-					\li \e Reference : \ref PG_INTERRUPT_EE \n
-					\li \e Reference : \ref PG_INTERRUPT_BCL \n
+					\li \e File : pgim_event_setup_public.h \n
+					\li \e Reference : \ref PG_EVENT_SET_TMR0 \n
+					\li \e Reference : \ref PG_EVENT_SET_TMR1 \n
+					\li \e Reference : \ref PG_EVENT_SET_TMR2 \n
+					\li \e Reference : \ref PG_EVENT_SET_AD \n
+					\li \e Reference : \ref PG_EVENT_SET_USARTRC \n
+					\li \e Reference : \ref PG_EVENT_SET_USARTTX \n
+					\li \e Reference : \ref PG_EVENT_SET_SSP \n
+					\li \e Reference : \ref PG_EVENT_SET_CCP1 \n
+					\li \e Reference : \ref PG_EVENT_SET_CCP2 \n
+					\li \e Reference : \ref PG_EVENT_SET_OSCF \n
+					\li \e Reference : \ref PG_EVENT_SET_CM \n
+					\li \e Reference : \ref PG_EVENT_SET_EE \n
+					\li \e Reference : \ref PG_EVENT_SET_BCL \n
 							
 		\section	iterruptcsdwun		Functions
 			\htmlonly <hr> \endhtmlonly
@@ -392,27 +371,27 @@
 			\subsection	interruptprivfunc	Private functions
 				\note With \b "private" we mean a function that should not be used by the user in its code. \n In this documentation the private functions are marked as \e Deprecate. \n \b PicGIM internally uses these functions to properly manage the module. \n Of course you are always free to use them if you think they are useful.
 
-				\arg \b pg_interrupt_init() : This is the initialization function of interrups handler module.
+				\arg \b pg_event_init() : This is the initialization function of interrups handler module.
 				\arg \b my_isr() : Interrupt Service Routine : The callback service.
-				\arg \b pgim_interrupt_event() : This is the first and only one function called by my_isr(). Depending on the configuration, it calls pg_interrupt_auto_event_handler()  or  pg_interrupt_user_event_handler().
-				\arg \b pg_interrupt_clear_bit() : With this function you can clean the bit of the corresponding interrupt.
-				\arg \b pg_interrupt_auto_event_handler() : This is the call for the automatic interrupts handler. 
+				\arg \b pg_event_occurred() : This is the first and only one function called by my_isr(). Depending on the configuration, it calls pg_event_auto_handler()  or  pg_event_user_handler().
+				\arg \b pg_event_clear_bit() : With this function you can clean the bit of the corresponding interrupt.
+				\arg \b pg_event_auto_handler() : This is the call for the automatic interrupts handler. 
 					
-				\note	If you choose the user interrupts handler the private function pg_interrupt_clear_bit() will be considered public.
+				\note	If you choose the user interrupts handler the private function pg_event_clear_bit() will be considered public.
 				
 				\htmlonly <br><br> \endhtmlonly
 				
 			\subsection	interruptpubfunc	Public functions
 				\endcode
 				
-				\arg \b pg_interrupt_enable_set() : This is the function to enable or disable one single interrupt events. 
-				\arg \b pg_interrupt_user_event_handler() : This is the call for the user interrupts handler. The code for this function must be placed in the relative function in pgim_interrupt_callbacks.c  
+				\arg \b pg_event_set() : This is the function to enable or disable one single interrupt events. 
+				\arg \b pg_event_user_handler() : This is the call for the user interrupts handler. The code for this function must be placed in the relative function in pgim_interrupt_callbacks.c  
 				
 				\endcode
 				
-				\note The pg_interrupt_user_event_handler() function is necessary only if you do \b not \b want to use the automatic handler.
+				\note The pg_event_user_handler() function is necessary only if you do \b not \b want to use the automatic handler.
 				
-				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pgim_interrupt_event() that deals of calling the correct handler and to clean the bit of the event. \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \image html callgraph_user_interrupt.png   	
+				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pg_event_occurred() that deals of calling the correct handler and to clean the bit of the event. \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \image html callgraph_user_interrupt.png   	
 				\see \ref interruptconfen
 
 			\htmlonly <br><br> \endhtmlonly
@@ -466,23 +445,23 @@
 				\subsubsection	inthowcbref	References
 					\endhtmlonly
 					References : 
-					\arg \b pg_interrupts_event_int0() : This is the callback for the event \ref PG_INTERRUPT_INT0 . 
-					\arg \b pg_interrupts_event_int1() : This is the callback for the event \ref PG_INTERRUPT_INT1 . 
-					\arg \b pg_interrupts_event_int2() : This is the callback for the event \ref PG_INTERRUPT_INT2 . 
-					\arg \b pg_interrupts_event_rb0() : This is the callback for the event \ref PG_INTERRUPT_RB0 . 
-					\arg \b pg_interrupts_event_tmr0() : This is the callback for the event \ref PG_INTERRUPT_TMR0 . 
-					\arg \b pg_interrupts_event_tmr1() : This is the callback for the event \ref PG_INTERRUPT_TMR1 . 
-					\arg \b pg_interrupts_event_tmr2() : This is the callback for the event \ref PG_INTERRUPT_TMR2 . 
-					\arg \b pg_interrupts_event_ad() : This is the callback for the event \ref PG_INTERRUPT_AD . 
-					\arg \b pg_interrupts_event_usartrc() : This is the callback for the event \ref PG_INTERRUPT_USARTRC . 
-					\arg \b pg_interrupts_event_usarttx() : This is the callback for the event \ref PG_INTERRUPT_USARTTX . 
-					\arg \b pg_interrupts_event_ssp() : This is the callback for the event \ref PG_INTERRUPT_SSP . 
-					\arg \b pg_interrupts_event_ccp1() : This is the callback for the event \ref PG_INTERRUPT_CCP1 . 
-					\arg \b pg_interrupts_event_ccp2() : This is the callback for the event \ref PG_INTERRUPT_CCP2 . 
-					\arg \b pg_interrupts_event_oscf() : This is the callback for the event \ref PG_INTERRUPT_OSCF . 
-					\arg \b pg_interrupts_event_cm() : This is the callback for the event \ref PG_INTERRUPT_CM . 
-					\arg \b pg_interrupts_event_ee() : This is the callback for the event \ref PG_INTERRUPT_CM . 
-					\arg \b pg_interrupts_event_bcl() : This is the callback for the event \ref PG_INTERRUPT_BCL . 
+					\arg \b pg_interrupts_event_int0() : This is the callback for the event \ref PG_EVENT_SET_INT0 . 
+					\arg \b pg_interrupts_event_int1() : This is the callback for the event \ref PG_EVENT_SET_INT1 . 
+					\arg \b pg_interrupts_event_int2() : This is the callback for the event \ref PG_EVENT_SET_INT2 . 
+					\arg \b pg_interrupts_event_rb0() : This is the callback for the event \ref PG_EVENT_SET_RB0 . 
+					\arg \b pg_interrupts_event_tmr0() : This is the callback for the event \ref PG_EVENT_SET_TMR0 . 
+					\arg \b pg_interrupts_event_tmr1() : This is the callback for the event \ref PG_EVENT_SET_TMR1 . 
+					\arg \b pg_interrupts_event_tmr2() : This is the callback for the event \ref PG_EVENT_SET_TMR2 . 
+					\arg \b pg_interrupts_event_ad() : This is the callback for the event \ref PG_EVENT_SET_AD . 
+					\arg \b pg_interrupts_event_usartrc() : This is the callback for the event \ref PG_EVENT_SET_USARTRC . 
+					\arg \b pg_interrupts_event_usarttx() : This is the callback for the event \ref PG_EVENT_SET_USARTTX . 
+					\arg \b pg_interrupts_event_ssp() : This is the callback for the event \ref PG_EVENT_SET_SSP . 
+					\arg \b pg_interrupts_event_ccp1() : This is the callback for the event \ref PG_EVENT_SET_CCP1 . 
+					\arg \b pg_interrupts_event_ccp2() : This is the callback for the event \ref PG_EVENT_SET_CCP2 . 
+					\arg \b pg_interrupts_event_oscf() : This is the callback for the event \ref PG_EVENT_SET_OSCF . 
+					\arg \b pg_interrupts_event_cm() : This is the callback for the event \ref PG_EVENT_SET_CM . 
+					\arg \b pg_interrupts_event_ee() : This is the callback for the event \ref PG_EVENT_SET_CM . 
+					\arg \b pg_interrupts_event_bcl() : This is the callback for the event \ref PG_EVENT_SET_BCL . 
 
 			
 		\section	intexampleuse	A code example
@@ -499,8 +478,8 @@
 		\code
 			...
 
-			pg_interrupt_enable_set( PG_INTERRUPT_EVENTS , PG_ENABLE );
-			pg_interrupt_enable_set( PG_INTERRUPT_EVENT_TMR0 , PG_ENABLE );
+			pg_event_set( PG_EVENT_ANY , PG_ENABLE );
+			pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
 
 			...
 		\endcode

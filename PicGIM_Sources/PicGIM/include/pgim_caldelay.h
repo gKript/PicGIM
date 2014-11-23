@@ -130,7 +130,7 @@
 			*/
 			void	pg_delay	( _pg_Uint16 req_delay , _pg_Uint8 unit );
 
-			  #if ( PGIM_INTERRUPTS == PG_ENABLE )
+			  #if ( PGIM_EVENTS == PG_ENABLE )
 				/*!
 					\brief		To do a delay in various units of time. This function is uninterruptable.
 					\param		req_delay	The delay you want to do, \n

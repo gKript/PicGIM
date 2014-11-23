@@ -317,7 +317,7 @@
 				\endcode
 				\htmlonly
 					These definitions are the result of an empirical test on the execution time of an interruption on its timer. <br>
-					The time is expressed in uSec and refers to the delta between the first instruction in the function pgim_interrupt_event() callback to the first instruction in the related Timer. <br>
+					The time is expressed in uSec and refers to the delta between the first instruction in the function pg_event_occurred() callback to the first instruction in the related Timer. <br>
 				\endhtmlonly
 
 				\subsubsection	timerenhenref		References
@@ -379,8 +379,8 @@
 	\section	timerinterrupthowto	Using this module with interrupts
 		\endhtmlonly
 
-		If the interrupt handling is enable is possible, through the interrupt signal \ref PG_INTERRUPT_TMR0 or \ref PG_INTERRUPT_TMR1, have an interrupt at every end of counting. \n
-		If using the \b Automatic \b Interrupts \b Handler pg_interrupt_auto_event_handler() will call the associated callback: pg_interrupts_event_tmr0() or pg_interrupts_event_tmr1() \n
+		If the interrupt handling is enable is possible, through the interrupt signal \ref PG_EVENT_SET_TMR0 or \ref PG_EVENT_SET_TMR1, have an interrupt at every end of counting. \n
+		If using the \b Automatic \b Interrupts \b Handler pg_event_auto_handler() will call the associated callback: pg_interrupts_event_tmr0() or pg_interrupts_event_tmr1() \n
 		So once entered the code inside the callback it will be executed at every end of counting. \n
 
 		References :
@@ -388,7 +388,7 @@
 			Internal interrupts configuration : \ref interdefinesintern \n
 			Callback configuration : \ref interruptcallbackhowto \n 
 
-		\warning 	To use the \b User \b Interrupt \b Handler is necessary to read carefully the entire documentation related : pg_interrupt_user_event_handler() \n
+		\warning 	To use the \b User \b Interrupt \b Handler is necessary to read carefully the entire documentation related : pg_event_user_handler() \n
 
 
 

@@ -61,7 +61,7 @@
 		#if ( PG_INTERRUPTS == PG_ENABLE )
 			GIE_state = PG_INTERRUPT_GLOBAL_ENABLE;
 			if ( PG_INTERRUPT_GLOBAL_ENABLE )
-				pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_DISABLE );
+				pg_event_set( PG_EVENT_GLOBAL , PG_DISABLE );
 		#endif
 		
 		EEADR = ee_addy;
@@ -74,7 +74,7 @@
 		
 		#if ( PG_INTERRUPTS == PG_ENABLE )
 			if ( GIE_state )
-				pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
+				pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 		#endif
 			
 		EECON1bits.WREN = 0;

@@ -50,30 +50,13 @@ void	led_blink( void ) {
 
 
 void main( void ) {
-
-//	char buf[ 32 ];
 	pg_initialize();
-//	pg_serial_open();
-//
-//	putrsUSART( "Using user's buffer   : " );
-//	pg_ftoa( 1234.5678, PG_FTOA_DECIMAL_DIGITS_2, buf );
-//	putsUSART( buf );
-//	putrsUSART( "\n" );
-//
-//	putrsUSART( "Using internal buffer : " );
-//	putsUSART( pg_ftoa( 1234.5678, PG_FTOA_DECIMAL_DIGITS_2, NULL ) );
-//	putrsUSART( "\n" );
-//	putrsUSART( "---------------------\n" );
-//	pg_serial_close();
-//
-//	T_D0 = PG_OUT;
-	pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
-	pg_interrupt_enable_set( PG_INTERRUPT_EVENT_TMR0  , PG_ENABLE );
+	pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
+	pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
+	pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
 	pg_event_attach( PG_EVENT_TMR0 , led_blink );
-
-	pg_timer_set_freq( PG_TIMER_0 , 5 , PG_SEC );
+	pg_timer_set_period( PG_TIMER_0 , 500 , PG_MSEC );
 	pg_timer_start( PG_TIMER_0 );
-
 	PG_INFINITE_LOOP;
 }
 

@@ -78,7 +78,7 @@
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //	#include "pgim_font_setup_public.h"
-	#include "pgim_interrupt_setup_public.h"
+	#include "pgim_event_setup_public.h"
 	#include "pgim_timer_setup_public.h"
 	#include "pgim_pwm_setup_public.h"
 	#include "pgim_serial_setup_public.h"
@@ -293,7 +293,7 @@
 					#define PGIM_CONSTANTS						PG_DISABLE
 					
 					//		H A R D W A R E   I N T E R N A L
-					#define PGIM_INTERRUPTS						PG_DISABLE
+					#define PGIM_EVENTS						PG_DISABLE
 					#define PGIM_AD_CONVERTER					PG_DISABLE
 					#define PGIM_SPI							PG_DISABLE
 					#define PGIM_EE								PG_DISABLE

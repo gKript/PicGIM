@@ -99,15 +99,15 @@
 		}
 
 		
-		#if	( PGIM_INTERRUPTS == PG_ENABLE )
+		#if	( PGIM_EVENTS == PG_ENABLE )
 			void pg_delay_high_priority( _pg_Uint16 req_delay , _pg_Uint8 unit ) {
 				_pg_Uint8 GIE_state , PIE_state;
 				GIE_state = PG_INTERRUPT_GLOBAL_ENABLE;
 				PIE_state = PG_INTERRUPT_PERIPHERAL_ENABLE;
 				if ( GIE_state )
-					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_DISABLE );
+					pg_event_set( PG_EVENT_GLOBAL , PG_DISABLE );
 				if ( PIE_state )
-					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_PERIPHERAL , PG_DISABLE );
+					pg_event_set( PG_EVENT_PERIPHERAL , PG_DISABLE );
 				if ( unit == PG_SEC )
 					pg_delay_sec( req_delay );
 				if ( unit == PG_MSEC )
@@ -115,9 +115,9 @@
 				if ( unit == PG_USEC )
 					pg_delay_usec( req_delay );
 				if ( GIE_state )
-					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_GLOBAL , PG_ENABLE );
+					pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 				if ( PIE_state )
-					pg_interrupt_enable_set( PG_INTERRUPT_EVENT_PERIPHERAL , PG_ENABLE );
+					pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
 			}
 		#endif
 	#endif

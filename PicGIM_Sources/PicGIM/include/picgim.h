@@ -187,55 +187,55 @@
 	//---[ Interrupts ]---
 	#if defined( PG_DOXYGEN )
 	
-		#undef		PGIM_INTERRUPTS
-		#undef		PG_INTERRUPT_INT0	
-		#undef		PG_INTERRUPT_INT1	
-		#undef		PG_INTERRUPT_INT2	
-		#undef		PG_INTERRUPT_TMR0	
-		#undef		PG_INTERRUPT_TMR1	
-		#undef		PG_INTERRUPT_TMR2	
-		#undef		PG_INTERRUPT_RB0	
-		#undef		PG_INTERRUPT_AD		
-		#undef		PG_INTERRUPT_USARTRC      
-		#undef		PG_INTERRUPT_USARTTX      
-		#undef		PG_INTERRUPT_SSP	
-		#undef		PG_INTERRUPT_CCP1	
-		#undef		PG_INTERRUPT_CCP2	
-		#undef		PG_INTERRUPT_OSCF	
-		#undef		PG_INTERRUPT_CM		
-		#undef		PG_INTERRUPT_EE		
-		#undef		PG_INTERRUPT_BCL	
+		#undef		PGIM_EVENTS
+		#undef		PG_EVENT_SET_INT0	
+		#undef		PG_EVENT_SET_INT1	
+		#undef		PG_EVENT_SET_INT2	
+		#undef		PG_EVENT_SET_TMR0	
+		#undef		PG_EVENT_SET_TMR1	
+		#undef		PG_EVENT_SET_TMR2	
+		#undef		PG_EVENT_SET_RB0	
+		#undef		PG_EVENT_SET_AD		
+		#undef		PG_EVENT_SET_USARTRC      
+		#undef		PG_EVENT_SET_USARTTX      
+		#undef		PG_EVENT_SET_SSP	
+		#undef		PG_EVENT_SET_CCP1	
+		#undef		PG_EVENT_SET_CCP2	
+		#undef		PG_EVENT_SET_OSCF	
+		#undef		PG_EVENT_SET_CM		
+		#undef		PG_EVENT_SET_EE		
+		#undef		PG_EVENT_SET_BCL	
 
-		#define		PGIM_INTERRUPTS			PG_ENABLE
-		#define		PG_INTERRUPT_INT0			PG_ENABLE
-		#define		PG_INTERRUPT_INT1			PG_ENABLE
-		#define		PG_INTERRUPT_INT2			PG_ENABLE
-		#define		PG_INTERRUPT_TMR0		PG_ENABLE
-		#define		PG_INTERRUPT_TMR1		PG_ENABLE
-		#define		PG_INTERRUPT_TMR2		PG_ENABLE
-		#define		PG_INTERRUPT_RB0			PG_ENABLE
-		#define		PG_INTERRUPT_AD			PG_ENABLE
-		#define		PG_INTERRUPT_USARTRC	PG_ENABLE
-		#define		PG_INTERRUPT_USARTTX	PG_ENABLE
-		#define		PG_INTERRUPT_SSP			PG_ENABLE
-		#define		PG_INTERRUPT_CCP1		PG_ENABLE
-		#define		PG_INTERRUPT_CCP2		PG_ENABLE
-		#define		PG_INTERRUPT_OSCF		PG_ENABLE
-		#define		PG_INTERRUPT_CM			PG_ENABLE
-		#define		PG_INTERRUPT_EE			PG_ENABLE
-		#define		PG_INTERRUPT_BCL			PG_ENABLE
+		#define		PGIM_EVENTS			PG_ENABLE
+		#define		PG_EVENT_SET_INT0			PG_ENABLE
+		#define		PG_EVENT_SET_INT1			PG_ENABLE
+		#define		PG_EVENT_SET_INT2			PG_ENABLE
+		#define		PG_EVENT_SET_TMR0		PG_ENABLE
+		#define		PG_EVENT_SET_TMR1		PG_ENABLE
+		#define		PG_EVENT_SET_TMR2		PG_ENABLE
+		#define		PG_EVENT_SET_RB0			PG_ENABLE
+		#define		PG_EVENT_SET_AD			PG_ENABLE
+		#define		PG_EVENT_SET_USARTRC	PG_ENABLE
+		#define		PG_EVENT_SET_USARTTX	PG_ENABLE
+		#define		PG_EVENT_SET_SSP			PG_ENABLE
+		#define		PG_EVENT_SET_CCP1		PG_ENABLE
+		#define		PG_EVENT_SET_CCP2		PG_ENABLE
+		#define		PG_EVENT_SET_OSCF		PG_ENABLE
+		#define		PG_EVENT_SET_CM			PG_ENABLE
+		#define		PG_EVENT_SET_EE			PG_ENABLE
+		#define		PG_EVENT_SET_BCL			PG_ENABLE
 	
 	
 	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
-		#undef		PGIM_INTERRUPTS
-		#define		PGIM_INTERRUPTS		PG_DISABLE
+		#undef		PGIM_EVENTS
+		#define		PGIM_EVENTS		PG_DISABLE
 	#endif
 	
 	//--------------------------------------------------
-	#if ( PGIM_INTERRUPTS == PG_ENABLE )
+	#if ( PGIM_EVENTS == PG_ENABLE )
 	
-		#include "pgim_interrupt_setup.h"
-		#include "pgim_interrupt_callbacks.h"
+		#include "pgim_event.h"
+//		#include "pgim_interrupt_callbacks.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_IRQ INTERRUPTS handle module loaded
 			#if	( PG_SUGGESTION == PG_ENABLE )
@@ -334,7 +334,7 @@
 				#warning	PG_HS_PG PG_HM_TIMER1 Loaded
 			#endif
 		#endif
-		#if ( PGIM_INTERRUPTS == PG_DISABLE )
+		#if ( PGIM_EVENTS == PG_DISABLE )
 			#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE ) && ( PG_SUGGESTION == PG_ENABLE )
 				#warning	PG_HS_PG PG_HM_TIMER PG_HS_SUGG Enabled without interrupt. Keep in mind PicGIM is able to handle interrupts very easily.
 			#endif

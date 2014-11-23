@@ -52,25 +52,25 @@
 	*/
 	void pg_initialize( void );
 
-	#if	( PGIM_INTERRUPTS == PG_ENABLE )
+	#if	( PGIM_EVENTS == PG_ENABLE )
 		#pragma code my_isr = 0x08
 
 		void my_isr( void ) {
 			_asm
-			GOTO pgim_interrupt_event
+			GOTO pg_event_occurred
 			_endasm
 		}
 		
 		#pragma code
-		#pragma interrupt pgim_interrupt_event
+		#pragma interrupt pg_event_occurred
 
-		void pgim_interrupt_event( void ) {
-		#if PG_INTERRUPT_AUTO_HANDLER == PG_ENABLE
-			pg_interrupt_auto_event_handler();
+		void pg_event_occurred( void ) {
+		#if PG_EVENT_AUTO_HANDLER == PG_ENABLE
+			pg_event_auto_handler();
 		#else
-			pg_interrupt_user_event_handler();
+			pg_event_user_handler();
 		#endif
-			pg_interrupt_clear_bit(pg_event_name);
+			pg_event_clear_bit(pg_event_name);
 		}
 	#endif
 

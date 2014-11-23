@@ -205,7 +205,7 @@
 			pg_adc_set( PG_TAD_PARAM , PG_TAD_16 );
 		\endcode
 		The user can freely set them later. \n
-		\note	This module is associated to an interrupt signal : \ref PG_INTERRUPT_AD \n It is possible to find out how to use it in this section : \ref adcinterrupthowto \n 
+		\note	This module is associated to an interrupt signal : \ref PG_EVENT_SET_AD \n It is possible to find out how to use it in this section : \ref adcinterrupthowto \n 
 		
 		\n \n
 
@@ -296,8 +296,8 @@
 	\section	adcinterrupthowto	Using this module with interrupts
 		\endhtmlonly
 	
-		If the interrupt handling is enable is possible, through the interrupt signal \ref PG_INTERRUPT_AD, have an interrupt at every end of conversion. \n 
-		If using the \b Automatic \b Interrupts \b Handler pg_interrupt_auto_event_handler() will call the associated callback: pg_interrupts_event_ad() \n
+		If the interrupt handling is enable is possible, through the interrupt signal \ref PG_EVENT_SET_AD, have an interrupt at every end of conversion. \n 
+		If using the \b Automatic \b Interrupts \b Handler pg_event_auto_handler() will call the associated callback: pg_interrupts_event_ad() \n
 		So once entered the code inside the callback it will be executed at every end of conversion. \n 
 		
 		References : 
@@ -305,7 +305,7 @@
 			Internal interrupts configuration : \ref interdefinesintern \n 
 			Callback configuration : \ref interruptcallbackhowto \n 
 			
-		\warning 	To use the \b User \b Interrupt \b Handler is necessary to read carefully the entire documentation related : pg_interrupt_user_event_handler() \n 
+		\warning 	To use the \b User \b Interrupt \b Handler is necessary to read carefully the entire documentation related : pg_event_user_handler() \n 
 			
 			
 
