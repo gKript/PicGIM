@@ -82,7 +82,7 @@
 
 
 	const char *	pg_error_code_to_module( _pg_Uint8 module ) {
-		const char res[16];
+		static const char res[16];
 		switch( module ) {
 			case PG_ERROR_SPI : {
 				strcpypgm2ram( res , "SPI" );
@@ -152,7 +152,7 @@
 					#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) && ( PGIM_ERROR_LCD_PRESENT == PG_HD44780 ) )	/* HD44780 LCD */
 						pg_lcd_hd44780_clear( PG_CONTROLLER_0 );
 						pg_lcd_hd44780_write( PG_CONTROLLER_0 , 0 , 0 , "Error on %s" , pg_error_code_to_module( PG_ERROR_MODULE ) );
-						pg_lcd_hd44780_write( PG_CONTROLLER_0 , 1 , 0 , "Code : %d" , pg_error_code_to_module( PG_ERROR_CODE ) );
+						pg_lcd_hd44780_write( PG_CONTROLLER_0 , 1 , 0 , "Code : %d" , (unsigned int)PG_ERROR_CODE );
 					#endif
 					PG_INFINITE_LOOP {
 						pg_error_led_sequence();

@@ -73,18 +73,18 @@
 		ultoa ( pg_ftoa_truncated, pg_ftoa_eight_buffer );
 		pg_ftoa_eight_buffer_lenght = strlen ( pg_ftoa_eight_buffer );
 
-		if (  pg_ftoa_eight_buffer_lenght > PG_FTOA_MAX_DIGITS ) {
-			if ( PG_FTOA_CONVERSION_ACCURATE == PG_YES ) {
-				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OVER_8_ACCURACY , PG_ERROR_WARNING );		//Set a WARNING for accuracy loss
-				#endif
-			}
-			if ( PG_FTOA_CONVERSION_ACCURATE == PG_NO ) {
-				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OVER_8_ACCURACY_NO , PG_ERROR_CRITICAL );	//Set a CRITICAL for accuracy loss
-				#endif
-			}
-		}
+//		if (  pg_ftoa_eight_buffer_lenght > PG_FTOA_MAX_DIGITS ) {
+//			if ( PG_FTOA_CONVERSION_ACCURATE == PG_YES ) {
+//				#if PG_ERROR_IS_ENABLE
+//					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OVER_8_ACCURACY , PG_ERROR_WARNING );		//Set a WARNING for accuracy loss
+//				#endif
+//			}
+//			if ( PG_FTOA_CONVERSION_ACCURATE == PG_NO ) {
+//				#if PG_ERROR_IS_ENABLE
+//					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OVER_8_ACCURACY_NO , PG_ERROR_CRITICAL );	//Set a CRITICAL for accuracy loss
+//				#endif
+//			}
+//		}
 		// Find the integer part of the float number
 		pg_ftoa_part_integer = (_pg_Uint32)pg_ftoa_value;
 		

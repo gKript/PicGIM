@@ -43,20 +43,28 @@
 #include "picgim_main.h"
 
 
-void	led_blink( void ) {
-	T_D0 = PG_OUT;
-	L_D0 ^= 1;
+void	led_blink_b2( void ) {
+	T_B2 = PG_OUT;
+	L_B2 ^= 1;
 }
 
+void	led_blink_b1( void ) {
+	T_B1 = PG_OUT;
+	L_B1 ^= 1;
+}
 
 void main( void ) {
 	pg_initialize();
 	pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 	pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
+	pg_timer_set_freq( PG_TIMER_0 , 3 , PG_HZ );
+	pg_timer_set_period( PG_TIMER_1 , 50 , PG_MSEC );
+	pg_event_attach( PG_EVENT_TMR0 , led_blink_b2 );
+	pg_event_attach( PG_EVENT_TMR1 , led_blink_b1 );
 	pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
-	pg_event_attach( PG_EVENT_TMR0 , led_blink );
-	pg_timer_set_period( PG_TIMER_0 , 500 , PG_MSEC );
+	pg_event_set( PG_EVENT_TMR1 , PG_ENABLE );
 	pg_timer_start( PG_TIMER_0 );
+	pg_timer_start( PG_TIMER_1 );
 	PG_INFINITE_LOOP;
 }
 

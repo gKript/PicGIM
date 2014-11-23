@@ -44,7 +44,7 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CONSTANTS						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
@@ -58,7 +58,7 @@
 	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
-	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EXTERNAL_MEMORY				PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
@@ -75,7 +75,7 @@
 
 	#if ( PGIM_ERROR == PG_ENABLE )
 		#define	PGIM_ERROR_LED_PRESENT			PG_YES					//!< Must be: PG_YES || PG_NO
-		#define	PGIM_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
+		#define	PGIM_ERROR_LCD_PRESENT			PG_HD44780				//!< Must be: PG_NO  || PG_HD44780
 	#endif
 
 	////////////////////////////////////////////////////////////////////////////////
