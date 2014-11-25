@@ -82,7 +82,7 @@
 	#include "pgim_timer_setup_public.h"
 	#include "pgim_pwm_setup_public.h"
 	#include "pgim_serial_setup_public.h"
-	#include "pgim_external_memory_setup_public.h"
+//	#include "pgim_external_memory_setup_public.h"
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 

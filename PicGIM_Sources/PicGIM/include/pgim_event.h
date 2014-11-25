@@ -92,9 +92,9 @@
 			 	\deprecated		Do not call directly. \n
 				\return	
 			 */
-		    char pg_event_user_handler	    ( void );
+//		    char pg_event_user_handler	    ( void );
 		#endif
-		
+
 		/*!
 			\brief	 		Interrupt Service Routine : The callback service
 			\return			Nothing.
