@@ -1,5 +1,5 @@
 //
-// pgim_interrupt_setup_public.h
+// pgim_event_setup_public.h
 //
 // PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
 // Version 0.5-x
@@ -28,7 +28,7 @@
 
 #############################################################################*/
 
-/*!		\file			pgim_interrupt_setup_public.h
+/*!		\file			pgim_event_setup_public.h
 		\version		0.5-0
 		\date			2002 - 2014
 		\brief			
@@ -39,12 +39,12 @@
 						[ http://gkript.org/gk_gpl_v2.php ]
 */
 
-#ifndef _PGIM_INTERRUPTS_SETUP_PUBLIC_H_
-	#define	_PGIM_INTERRUPTS_SETUP_PUBLIC_H_
+#ifndef _PGIM_EVENTS_SETUP_PUBLIC_H_
+	#define	_PGIM_EVENTS_SETUP_PUBLIC_H_
 
 //	-------- Auto Interrupts Handler -----------------------------------------------------------
 	
-	#define PG_EVENT_AUTO_HANDLER		PG_ENABLE			// PG_ENABLE	PG_DISABLE
+	#define PG_EVENT_AUTO_HANDLER   PG_ENABLE			// PG_ENABLE	PG_DISABLE
 
 //	-------- External Interrupts ----------------------------------------------------------------
 
@@ -56,7 +56,7 @@
 //	-------- Internal Interrupts ----------------------------------------------------------------
 	
 	#define PG_EVENT_SET_TMR0			PG_ENABLE			// PG_ENABLE	PG_DISABLE
-	#define PG_EVENT_SET_TMR1			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+	#define PG_EVENT_SET_TMR1			PG_ENABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_TMR2			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_AD				PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_USARTRC        PG_DISABLE			// PG_ENABLE	PG_DISABLE
@@ -69,6 +69,6 @@
 	#define PG_EVENT_SET_EE				PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_BCL			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 
-#endif /* _PGIM_INTERRUPTS_SETUP_PUBLIC_H_ */
+#endif /* _PGIM_EVENTS_SETUP_PUBLIC_H_ */
 
 

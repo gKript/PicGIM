@@ -58,7 +58,7 @@
 	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
-	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EXTERNAL_MEMORY				PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
@@ -86,14 +86,14 @@
 
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
 		#define	PG_LCD_HD44780_COLUMNS			16						//!< Number of columns of the display
-		#define	PG_LCD_HD44780_LINES			1						//!< Number of lines of the display
+		#define	PG_LCD_HD44780_LINES			2						//!< Number of lines of the display
 		#define PG_LCD_HD44780_BUSY_FLAG		PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_LCD_HD44780_LINE_0_ADDRESS	0x00					//!< Address (default 0x00) for the line number 1. Must be : PG_MISSING if there is not.
-		#define PG_LCD_HD44780_LINE_1_ADDRESS	PG_MISSING					//!< Address (default 0x40) for the line number 2. Must be : PG_MISSING if there is not.
+		#define PG_LCD_HD44780_LINE_1_ADDRESS	0X40					//!< Address (default 0x40) for the line number 2. Must be : PG_MISSING if there is not.
 		#define PG_LCD_HD44780_LINE_2_ADDRESS	PG_MISSING				//!< Address (default 0x00) for the line number 3. Must be : PG_MISSING if there is not.
 		#define PG_LCD_HD44780_LINE_3_ADDRESS	PG_MISSING				//!< Address (default 0x40) for the line number 4. Must be : PG_MISSING if there is not.
 		#define PG_LCD_HD44780_SPLASH_ENABLE	PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_SPLASH_TIME		2						//!< Show time of splash in seconds [s] || 0 = do not clear
+		#define PG_LCD_HD44780_SPLASH_TIME		1						//!< Show time of splash in seconds [s] || 0 = do not clear
 	#endif
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -114,10 +114,10 @@
 	//
 	////////////////////////////////////////////////////////////////////////////////
 
-	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
-//		#define	PG_EXTERNAL_MEMORY_
-//		#define	PG_EXTERNAL_MEMORY_
-	#endif
+//	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
+////		#define	PG_EXTERNAL_MEMORY_
+////		#define	PG_EXTERNAL_MEMORY_
+//	#endif
 
 
 	////////////////////////////////////////////////////////////////////////////////

@@ -145,13 +145,18 @@
 			for ( r = 0  ; r < PG_LCD_HD44780_LINES ; r++ ) {
 				for ( c = 0  ; c < PG_LCD_HD44780_COLUMNS ; c++ ) {
 					pg_lcd_hd44780_write_p_char( ControllerNumber , r , c , "%c" , 0xff );
+					pg_delay_msec( 100 );
+					if ( c >= 1 )
+						pg_lcd_hd44780_write_p_char( ControllerNumber , r , c - 1 , "%c" , 0x20 );
 				}
+				pg_lcd_hd44780_write_p_char( ControllerNumber , r , c , "%c" , 0x20 );
 			}
-			#if ( PG_LCD_HD44780_SPLASH_TIME != 0 )
-				pg_delay_sec( PG_LCD_HD44780_SPLASH_TIME );
+//			#if ( PG_LCD_HD44780_SPLASH_TIME != 0 )
+//				pg_delay_sec( PG_LCD_HD44780_SPLASH_TIME );
 				pg_lcd_hd44780_clear( ControllerNumber );
 				pg_lcd_hd44780_goto( ControllerNumber , 0 , 0 );
-			#endif
+//			#endif
+			pg_delay_msec( 500 );
 		#endif
 		}
 

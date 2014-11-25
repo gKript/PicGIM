@@ -60,39 +60,39 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		#define PG_LCD_HD44780_RW					L_C1
-		#define PG_LCD_HD44780_RS					L_B5
+		#define PG_LCD_HD44780_RW					L_D5
+		#define PG_LCD_HD44780_RS					L_D4
 		#define PG_LCD_HD44780_EN_0_PRESENT			PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_EN_0					L_B4
+		#define PG_LCD_HD44780_EN_0					L_D6
 		#define PG_LCD_HD44780_EN_1_PRESENT			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_LCD_HD44780_EN_1				
 		#define PG_LCD_HD44780_EN_2_PRESENT			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_LCD_HD44780_EN_2				
 		#define PG_LCD_HD44780_EN_3_PRESENT			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_LCD_HD44780_EN_3				
-		#define PG_LCD_HD44780_DATA_0				L_B3
-		#define PG_LCD_HD44780_DATA_1				L_B2
-		#define PG_LCD_HD44780_DATA_2				L_B1
-		#define PG_LCD_HD44780_DATA_3				L_B0
+		#define PG_LCD_HD44780_DATA_0				L_D0
+		#define PG_LCD_HD44780_DATA_1				L_D1
+		#define PG_LCD_HD44780_DATA_2				L_D2
+		#define PG_LCD_HD44780_DATA_3				L_D3
 		#define PG_LCD_HD44780_BL_PRESENT			PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_BL					L_B7
+		#define PG_LCD_HD44780_BL					L_D7
 
-		#define PG_LCD_HD44780_RW_TRIS				T_C1
-		#define PG_LCD_HD44780_RS_TRIS				T_B5
-		#define PG_LCD_HD44780_EN_0_TRIS			T_B4
+		#define PG_LCD_HD44780_RW_TRIS				T_D5
+		#define PG_LCD_HD44780_RS_TRIS				T_D4
+		#define PG_LCD_HD44780_EN_0_TRIS			T_D6
 		#define PG_LCD_HD44780_EN_1_TRIS			
 		#define PG_LCD_HD44780_EN_2_TRIS			
 		#define PG_LCD_HD44780_EN_3_TRIS			
-		#define PG_LCD_HD44780_DATA_0_TRIS			T_B3
-		#define PG_LCD_HD44780_DATA_1_TRIS			T_B2
-		#define PG_LCD_HD44780_DATA_2_TRIS			T_B1
-		#define PG_LCD_HD44780_DATA_3_TRIS			T_B0
-		#define PG_LCD_HD44780_BL_TRIS				T_B7
+		#define PG_LCD_HD44780_DATA_0_TRIS			T_D0
+		#define PG_LCD_HD44780_DATA_1_TRIS			T_D1
+		#define PG_LCD_HD44780_DATA_2_TRIS			T_D2
+		#define PG_LCD_HD44780_DATA_3_TRIS			T_D3
+		#define PG_LCD_HD44780_BL_TRIS				T_D7
 		
-		#define PG_LCD_HD44780_DATA_0_PORT			P_B3
-		#define PG_LCD_HD44780_DATA_1_PORT			P_B2
-		#define PG_LCD_HD44780_DATA_2_PORT			P_B1
-		#define PG_LCD_HD44780_DATA_3_PORT			P_B0
+		#define PG_LCD_HD44780_DATA_0_PORT			P_D0
+		#define PG_LCD_HD44780_DATA_1_PORT			P_D1
+		#define PG_LCD_HD44780_DATA_2_PORT			P_D2
+		#define PG_LCD_HD44780_DATA_3_PORT			P_D3
 	#endif
 
 	
