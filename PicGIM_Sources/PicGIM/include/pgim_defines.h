@@ -191,7 +191,21 @@
 	#define PG_HB_A				Board A >
 	#define PG_HB_EXPERIENCE	Experience Board >
 
-	
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//      P I N   M A C R O
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//	#define	TRIS_PIN ( a )			T_ ## a
+//	#define	LAT_PIN( a )			L_ ## a
+//	#define	PORT_PIN( a )			P_ ## a
+//	#define	STATE_PIN( a )			PG_ ## a
+
+	#define	pinMode( a , b )		a = b
+	#define	digitalWrite( a , b )	a = b
+	#define	digitalRead( a )		a
+	#define	pinToggle( a )			a ^= 1
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//      P O R T S
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -434,7 +448,7 @@
 		\tableofcontents
 	
 		\n
-		\image html language.png
+		\image html Language.png
 		\n \n 
 			
 		\b PicGIM also introduces changes to the classic references of the \b Microchip \b environment. \n

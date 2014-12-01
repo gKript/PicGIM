@@ -43,19 +43,20 @@
 #include "picgim_main.h"
 
 void	led_blink_a( void ) {
-	T_B3 = PG_OUT;
-	L_B3 ^= 1;
+	pinToggle( L_B3 );
 }
 
 void	led_blink_b( void ) {
-	T_B2 = PG_OUT;
-	L_B2 ^= 1;
-	T_B0 = PG_OUT;
-	L_B0 = P_B3 & P_B2 & P_B1;
+	pinToggle( L_B2 );
+	digitalWrite( L_B0 , digitalRead( P_B3 ) & digitalRead( P_B2 ) & digitalRead( P_B1 ) );
 }
 
 void main( void ) {
 	pg_initialize();
+	pinMode( T_B0 , PG_OUT );
+	pinMode( T_B1 , PG_OUT );
+	pinMode( T_B2 , PG_OUT );
+	pinMode( T_B3 , PG_OUT );
 	pg_lcd_hd44780_write( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "gKript.org  test"  );
 	pg_lcd_hd44780_write( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "Timers  & Events"  );
 	pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
@@ -72,8 +73,7 @@ void main( void ) {
 	pg_delay_sec( 5 );
 	while( 1 ) {
 		pg_delay_msec( 1333 );
-		T_B1 = PG_OUT;
-		L_B1 ^= 1;
+		pinToggle( L_B1 );
 	}
 }
 

@@ -553,6 +553,30 @@
 				pg_tmr2_callback = pg_event_callback;
 				break;
 			}
+//			case PG_EVENT_INT0 : {
+//				pg_int0_callback = pg_event_callback;
+//				break;
+//			}
+//			case PG_EVENT_INT1 : {
+//				pg_int1_callback = pg_event_callback;
+//				break;
+//			}
+//			case PG_EVENT_INT2 : {
+//				pg_int2_callback = pg_event_callback;
+//				break;
+//			}
+//			case PG_EVENT_TMR0 : {
+//				pg_tmr0_callback = pg_event_callback;
+//				break;
+//			}
+//			case PG_EVENT_TMR1 : {
+//				pg_tmr1_callback = pg_event_callback;
+//				break;
+//			}
+//			case PG_EVENT_TMR2 : {
+//				pg_tmr2_callback = pg_event_callback;
+//				break;
+//			}
 		}
 	}
 

@@ -197,13 +197,39 @@
 		typedef		void (* pg_tmr0_cb_pointer)(void);
 		typedef		void (* pg_tmr1_cb_pointer)(void);
 		typedef		void (* pg_tmr2_cb_pointer)(void);
+		typedef		void (* pg_rb0_cb_pointer)(void);
+		typedef		void (* pg_psp_cb_pointer)(void);
+		typedef		void (* pg_ad_cb_pointer)(void);
+		typedef		void (* pg_usartrc_cb_pointer)(void);
+		typedef		void (* pg_usarttx_cb_pointer)(void);
+		typedef		void (* pg_ssp_cb_pointer)(void);
+		typedef		void (* pg_ccp1_cb_pointer)(void);
+		typedef		void (* pg_ccp2_cb_pointer)(void);
+		typedef		void (* pg_oscf_cb_pointer)(void);
+		typedef		void (* pg_cm_cb_pointer)(void);
+		typedef		void (* pg_ee_cb_pointer)(void);
+		typedef		void (* pg_bcl_cb_pointer)(void);
+		typedef		void (* pg_hlvd_cb_pointer)(void);
 
-		extern		pg_int0_cb_pointer pg_int0_callback;
-		extern		pg_int1_cb_pointer pg_int1_callback;
-		extern		pg_int2_cb_pointer pg_int2_callback;
-		extern		pg_tmr0_cb_pointer pg_tmr0_callback;
-		extern		pg_tmr1_cb_pointer pg_tmr1_callback;
-		extern		pg_tmr2_cb_pointer pg_tmr2_callback;
+		extern		pg_int0_cb_pointer		pg_int0_callback;
+		extern		pg_int1_cb_pointer		pg_int1_callback;
+		extern		pg_int2_cb_pointer		pg_int2_callback;
+		extern		pg_tmr0_cb_pointer		pg_tmr0_callback;
+		extern		pg_tmr1_cb_pointer		pg_tmr1_callback;
+		extern		pg_tmr2_cb_pointer		pg_tmr2_callback;
+		extern		pg_rb0_cb_pointer		pg_rb0_callback;
+		extern		pg_psp_cb_pointer		pg_psp_callback;
+		extern		pg_ad_cb_pointer		pg_ad_callback;
+		extern		pg_usartrc_cb_pointer	pg_usartrc_callback;
+		extern		pg_usarttx_cb_pointer	pg_usarttx_callback;
+		extern		pg_ssp_cb_pointer		pg_ssp_callback;
+		extern		pg_ccp1_cb_pointer		pg_ccp1_callback;
+		extern		pg_ccp2_cb_pointer		pg_ccp2_callback;
+		extern		pg_oscf_cb_pointer		pg_oscf_callback;
+		extern		pg_cm_cb_pointer		pg_cm_callback;
+		extern		pg_ee_cb_pointer		pg_ee_callback;
+		extern		pg_bcl_cb_pointer		pg_bcl_callback;
+		extern		pg_hlvd_cb_pointer		pg_hlvd_callback;
 	
 	#endif
 #endif /* _PGIM_EVENT_H_ */
