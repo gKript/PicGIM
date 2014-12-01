@@ -56,7 +56,7 @@
 //	-------- Internal Interrupts ----------------------------------------------------------------
 	
 	#define PG_EVENT_SET_TMR0			PG_ENABLE			// PG_ENABLE	PG_DISABLE
-	#define PG_EVENT_SET_TMR1			PG_ENABLE			// PG_ENABLE	PG_DISABLE
+	#define PG_EVENT_SET_TMR1			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_TMR2			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_AD				PG_DISABLE			// PG_ENABLE	PG_DISABLE
 	#define PG_EVENT_SET_USARTRC        PG_DISABLE			// PG_ENABLE	PG_DISABLE

@@ -231,17 +231,17 @@
 
 /*!
 
-	\page	HWI_interrupt		Interrupts
+	\page	HWI_interrupt		Events ( Interrupts )
 
 		\tableofcontents
 	
 		\image html Interrupts.png
 
- 		\b PicGIM is able to handle interrupts of \b PIC18F easily and fully automatically \n
+ 		\b PicGIM is able to handle events of \b PIC18F easily and fully automatically \n
 		We have chosen for this \e milestone, the first, to support interrupts without the management of priority. \n
 		To do this pg_event_init() sets to 0 \e IPEN bit of the \e RCON register. <i> IPEN: Interrupt Priority Enable </i>
 		
-		\warning	If you choose to use the built-in manager \b YOU \b MUST \b NOT modify any register directly related to the hardware interrupt management.
+		\warning	If you choose to use the automatic handler \b YOU \b MUST \b NOT modify any register directly related to the hardware interrupt management.
 		
 		\todo 	In the next milestone [1.0] the interrupts module will support high and low priority.
  
@@ -315,7 +315,7 @@
 					
 				\note If you disable the automatic handler the interrupts will no longer be managed by PicGIM until you create your own manager in pg_event_user_handler() .
 				
-				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pg_event_occurred() that deals of calling the correct handler and to clean the bit of the event. \n You can see in the picture below &nbsp;&darr; \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \n \b See \b also \n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \ref interruptconfen \n \image html callgraph_user_interrupt.png   	
+				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pg_event_occurred() that deals of calling the correct handler and to clean the bit of the event. \n You can see in the picture below &nbsp;&darr; \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \n \b See \b also \n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \ref interruptconfen \n
 				
 
 				
@@ -412,7 +412,7 @@
 				
 				\note The pg_event_user_handler() function is necessary only if you do \b not \b want to use the automatic handler.
 				
-				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pg_event_occurred() that deals of calling the correct handler and to clean the bit of the event. \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \image html callgraph_user_interrupt.png   	
+				\attention	Please note that in any case \b PicGIM will put my_isr() function in the interrupt vector. \n So upon receipt of an interrupt will be call my_isr() which will call the pg_event_occurred() that deals of calling the correct handler and to clean the bit of the event. \n If you want to completely manage the interrupts in autonomy is necessary to disable completely the module. \n
 				\see \ref interruptconfen
 
 			\htmlonly <br><br> \endhtmlonly
@@ -421,70 +421,25 @@
 			\htmlonly <hr> \endhtmlonly
 		
 			\subsection	interruptcallbackintro	Introduction
-				After set the interrupts you need to write the code to do what you wish for every single interrupt. \n
-				The public file to be edited is pgim_interrupt_callbacks.c . \n
-				You must identify the callback for the desired event. \n 
-				For example if we want to use the Timer_0 interrupt the callback would be pg_interrupts_event_tmr0 () . \n
-				We've highlighted the area where you enter the code with two lines of comment : \n \n
-				\code 
-					//------  T M R 0    -    P U T   Y O U R   C O D E   H E R E -----------------------------------
+				After set the events you need to write the code to do what you wish for every single event. \n
+				If, for example, it was necessary to use timer 0 to blink one LED through the events will be necessary to attack the event given by the timer 0 to our callback function. \n
+				It is done in this way. \n
+				\code
 
-
-					//------------------------------------------------------------------------------------------
-				\endcode
-				
-				\n For example, here is a code that will be executed every time there is an interrupt from \b Timer_0 device. \n \n
-				
-				\code 
-					void	pg_interrupts_event_tmr0( void ) {
-					//------  T M R 0    -    P U T   Y O U R   C O D E   H E R E -----------------------------------
-
-
-						LED ^= 1;
-
-
-					//------------------------------------------------------------------------------------------
+					void	led_blink( void ) {
+						...
 					}
+
+					void main( void ) {
+						...
+						pg_event_attach( PG_EVENT_TMR0 , led_blink );
+						...
+					}
+
 				\endcode
 				
 				\n 
 
-				\htmlonly
-					A led will blink. &nbsp;&nbsp; <image src="led.gif" border="0">
-					<br>
-					<br> 
-					<hr> 
-				\endhtmlonly
-			
-			\subsection	interruptcallbackreference		Callback references
-				Here are the references for the interrupt callbacks. \n
-				\b PicGIM compile only the callbacks of the events previously enabled. \n
-				
-				\see	\ref	interdefinesintern
-				\see	\ref	interdefinesextern
-			
-				\subsubsection	inthowcbref	References
-					\endhtmlonly
-					References : 
-					\arg \b pg_interrupts_event_int0() : This is the callback for the event \ref PG_EVENT_SET_INT0 . 
-					\arg \b pg_interrupts_event_int1() : This is the callback for the event \ref PG_EVENT_SET_INT1 . 
-					\arg \b pg_interrupts_event_int2() : This is the callback for the event \ref PG_EVENT_SET_INT2 . 
-					\arg \b pg_interrupts_event_rb0() : This is the callback for the event \ref PG_EVENT_SET_RB0 . 
-					\arg \b pg_interrupts_event_tmr0() : This is the callback for the event \ref PG_EVENT_SET_TMR0 . 
-					\arg \b pg_interrupts_event_tmr1() : This is the callback for the event \ref PG_EVENT_SET_TMR1 . 
-					\arg \b pg_interrupts_event_tmr2() : This is the callback for the event \ref PG_EVENT_SET_TMR2 . 
-					\arg \b pg_interrupts_event_ad() : This is the callback for the event \ref PG_EVENT_SET_AD . 
-					\arg \b pg_interrupts_event_usartrc() : This is the callback for the event \ref PG_EVENT_SET_USARTRC . 
-					\arg \b pg_interrupts_event_usarttx() : This is the callback for the event \ref PG_EVENT_SET_USARTTX . 
-					\arg \b pg_interrupts_event_ssp() : This is the callback for the event \ref PG_EVENT_SET_SSP . 
-					\arg \b pg_interrupts_event_ccp1() : This is the callback for the event \ref PG_EVENT_SET_CCP1 . 
-					\arg \b pg_interrupts_event_ccp2() : This is the callback for the event \ref PG_EVENT_SET_CCP2 . 
-					\arg \b pg_interrupts_event_oscf() : This is the callback for the event \ref PG_EVENT_SET_OSCF . 
-					\arg \b pg_interrupts_event_cm() : This is the callback for the event \ref PG_EVENT_SET_CM . 
-					\arg \b pg_interrupts_event_ee() : This is the callback for the event \ref PG_EVENT_SET_CM . 
-					\arg \b pg_interrupts_event_bcl() : This is the callback for the event \ref PG_EVENT_SET_BCL . 
-
-			
 		\section	intexampleuse	A code example
 
 		\htmlonly
@@ -493,35 +448,37 @@
 
 		\warning	In order to compile this example, the module must be enabled and properly configured.
 
-		This example is developed on two files: \b main.c and pgim_interrupt_callbacks.c \n
-
 		This is the code for main.c :
 		\code
-			...
+			#include "picgim_main.h"
 
-			pg_event_set( PG_EVENT_ANY , PG_ENABLE );
-			pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
+			#define	MY_LED			L_B3
+			#define MY_LED_TRIS		T_B3
 
-			...
-		\endcode
-
-		and this is the code for the relative callback for the event tmr0 :
-		\code
-			...
-			void	pg_interrupts_event_tmr0( void ) {
-			//------  T M R 0    -    P U T   Y O U R   C O D E   H E R E -----------------------------------
-
-
-				T_B1 ^= 1;
-
-
-			//------------------------------------------------------------------------------------------
+			void	led_blink( void ) {
+				pg_pin_toggle( MY_LED );
 			}
-			...
-		\endcode
 
-		In this example the state for the RB0 pin will be toggled.
- 
+			void main( void ) {
+				pg_initialize();
+				pg_pin_mode( MY_LED_TRIS , PG_OUT );
+				pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
+				pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
+				pg_timer_set_freq( PG_TIMER_0 , 1 , PG_HZ );
+				pg_event_attach( PG_EVENT_TMR0 , led_blink );
+				pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
+				pg_timer_start( PG_TIMER_0 );
+				PG_INFINITE_LOOP;
+			}
+ 		\endcode
+
+		\htmlonly
+			...and one LED will blink. &nbsp;&nbsp; <image src="led.gif" border="0">
+			<br>
+			<br>
+			<hr>
+		\endhtmlonly
+
 		\htmlonly <br><br> \endhtmlonly
 
 */

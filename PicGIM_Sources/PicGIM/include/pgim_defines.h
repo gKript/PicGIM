@@ -198,12 +198,19 @@
 
 	// PORT (P_) to read, LAT (L_) to write, TRIS (T_) to set the mode.
 
-	#define	pinMode( a , b )		T_ ## a = PG_ ## b
-	#define	pinSet( a )				L_ ## a = PG_SET
-	#define	pinClear( a )			L_ ## a = PG_CLEAR
-	#define	digitalWrite( a , b )	L_ ## a = b
-	#define	digitalRead( a )		P_ ## a
-	#define	pinToggle( a )			L_ ## a ^= 1
+//	#define	pinMode( a , b )		T_ ## a = PG_ ## b
+//	#define	pinSet( a )				L_ ## a = PG_SET
+//	#define	pinClear( a )			L_ ## a = PG_CLEAR
+//	#define	digitalWrite( a , b )	L_ ## a = b
+//	#define	digitalRead( a )		P_ ## a
+//	#define	pinToggle( a )			L_ ## a ^= 1
+
+	#define	pg_pin_mode( a , b )		a = b
+	#define	pg_pin_set( a )				a = PG_SET
+	#define	pg_pin_clear( a )			a = PG_CLEAR
+	#define	pg_digital_write( a , b )	a = b
+	#define	pg_digital_read( a )		a
+	#define	pg_pin_toggle( a )			a ^= 1
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////

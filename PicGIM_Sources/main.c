@@ -42,19 +42,22 @@
 
 #include "picgim_main.h"
 
-void	led_blink( void ) {
-	pinToggle( B3 );
-}
+//#define	MY_LED			L_B3
+//#define MY_LED_TRIS		T_B3
+
+//void	led_blink( void ) {
+//	pg_pin_toggle( MY_LED );
+//}
 
 void main( void ) {
-	pg_initialize();
-	pinMode( B3 , OUT );
-	pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
-	pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
-	pg_timer_set_freq( PG_TIMER_0 , 1 , PG_HZ );
-	pg_event_attach( PG_EVENT_TMR0 , led_blink );
-	pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
-	pg_timer_start( PG_TIMER_0 );
+//	pg_initialize();
+//	pg_pin_mode( MY_LED_TRIS , PG_OUT );
+//	pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
+//	pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
+//	pg_timer_set_freq( PG_TIMER_0 , 1 , PG_HZ );
+//	pg_event_attach( PG_EVENT_TMR0 , led_blink );
+//	pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
+//	pg_timer_start( PG_TIMER_0 );
 	PG_INFINITE_LOOP;
 }
 
