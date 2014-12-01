@@ -193,18 +193,18 @@
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//      P I N   M A C R O
+	//      P I N   M A C R O   -   A r d u i n o   l i k e
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//	#define	TRIS_PIN ( a )			T_ ## a
-//	#define	LAT_PIN( a )			L_ ## a
-//	#define	PORT_PIN( a )			P_ ## a
-//	#define	STATE_PIN( a )			PG_ ## a
+	// PORT (P_) to read, LAT (L_) to write, TRIS (T_) to set the mode.
 
-	#define	pinMode( a , b )		a = b
-	#define	digitalWrite( a , b )	a = b
-	#define	digitalRead( a )		a
-	#define	pinToggle( a )			a ^= 1
+	#define	pinMode( a , b )		T_ ## a = PG_ ## b
+	#define	pinSet( a )				L_ ## a = PG_SET
+	#define	pinClear( a )			L_ ## a = PG_CLEAR
+	#define	digitalWrite( a , b )	L_ ## a = b
+	#define	digitalRead( a )		P_ ## a
+	#define	pinToggle( a )			L_ ## a ^= 1
+
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//      P O R T S

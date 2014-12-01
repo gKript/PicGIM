@@ -43,15 +43,15 @@
 #ifndef _PGIM_EVENT_H_
 	#define _PGIM_EVENT_H_
 
-	/*!
-	 *	\brief	This is the initialization function of interrups handler module.
-	 *	\warning		Internal use only.
-	 *	\deprecated		Do not call directly. Already called in pg_initialize()
-	 */
-	void pg_event_init( void );
-			
 	#if ( PGIM_EVENTS == PG_ENABLE )
 
+		/*!
+		 *	\brief	This is the initialization function of interrups handler module.
+		 *	\warning		Internal use only.
+		 *	\deprecated		Do not call directly. Already called in pg_initialize()
+		 */
+		void pg_event_init( void );
+			
 		/*!
 		 *	\brief	Inside this variable resides in the name of the event detected by the automatically interrupt handler. \n Default is \ref PG_EVENT_CLEAR
 		 */
@@ -121,7 +121,7 @@
 		 *  \param		void (*pg_event_callback)(void)		The callback pointer to attach to an event.
 			\return		Nothing.
 		 */
-		void	pg_event_attach( int event , void (*pg_event_callback)(void) );
+		void pg_event_attach( int event , void (*pg_event_callback)(void) );
 
 		#define		PG_EVENT_CLEAR						0			//!< This is the internal definition of the CLEAR interrupt flag
 		#define		PG_EVENT_INT0						1			//!< This is the internal definition of the interrupt INT0
@@ -131,7 +131,6 @@
 		#define		PG_EVENT_TMR1						5			//!< This is the internal definition of the interrupt TMR1
 		#define		PG_EVENT_TMR2						6			//!< This is the internal definition of the interrupt TMR2
 		#define		PG_EVENT_RB0						8			//!< This is the internal definition of the interrupt RB0
-		#define		PG_EVENT_PSP						9			//!< This is the internal definition of the interrupt PSP
 		#define		PG_EVENT_AD							10			//!< This is the internal definition of the interrupt AD
 		#define		PG_EVENT_USARTRC					11			//!< This is the internal definition of the interrupt USARTRC
 		#define		PG_EVENT_USARTTX					12			//!< This is the internal definition of the interrupt USARTTX
@@ -142,7 +141,6 @@
 		#define		PG_EVENT_CM							17			//!< This is the internal definition of the interrupt CM
 		#define		PG_EVENT_EE							18			//!< This is the internal definition of the interrupt EE
 		#define		PG_EVENT_BCL						19			//!< This is the internal definition of the interrupt BCL
-		#define		PG_EVENT_HLVD						20			//!< This is the internal definition of the interrupt HLVD
 
 		#define		PG_EVENT_GLOBAL						100			//!< This is the internal definition of the GLOBAL interrupt
 		#define		PG_EVENT_PERIPHERAL					101			//!< This is the internal definition of the PERIPHERAL interrupt
@@ -163,8 +161,6 @@
 		#define		PG_INTERRUPT_TMR2_ENABLE			PIE1bits.TMR2IE			//!< This is the internal definition of the enable interrupt bit TMR2
 		#define		PG_INTERRUPT_RB0_FLAG				INTCONbits.RBIF				//!< This is the internal definition of the interrupt flag bit RB
 		#define		PG_INTERRUPT_RB0_ENABLE				INTCONbits.RBIE			//!< This is the internal definition of the enable interrupt bit RB
-		#define		PG_INTERRUPT_PSP_FLAG				PIR1bits.PSPIF				//!< This is the internal definition of the interrupt flag bit PSP
-		#define		PG_INTERRUPT_PSP_ENABLE				PIE1bits.PSPIE			//!< This is the internal definition of the enable interrupt bit PSP
 		#define		PG_INTERRUPT_AD_FLAG				PIR1bits.ADIF				//!< This is the internal definition of the interrupt flag bit AD
 		#define		PG_INTERRUPT_AD_ENABLE				PIE1bits.ADIE			//!< This is the internal definition of the enable interrupt bit AD
 		#define		PG_INTERRUPT_USARTRC_FLAG			PIR1bits.RCIF				//!< This is the internal definition of the interrupt flag bit RC
@@ -185,8 +181,6 @@
 		#define		PG_INTERRUPT_EE_ENABLE				PIE2bits.EEIE			//!< This is the internal definition of the enable interrupt bit EE
 		#define		PG_INTERRUPT_BCL_FLAG				PIR2bits.BCLIF				//!< This is the internal definition of the interrupt flag bit BCL
 		#define		PG_INTERRUPT_BCL_ENABLE				PIE2bits.BCLIE			//!< This is the internal definition of the enable interrupt bit BCL
-		#define		PG_INTERRUPT_HLVD_FLAG				PIR2bits.HLVDIF				//!< This is the internal definition of the interrupt flag bit HLDV
-		#define		PG_INTERRUPT_HLVD_ENABLE			PIE2bits.HLVDIE			//!< This is the internal definition of the enable interrupt bit HLDV
 
 		#define		PG_INTERRUPT_GLOBAL_ENABLE			INTCONbits.GIE			//!< This is the internal definition of the GLOBAL enable interrupt bit
 		#define		PG_INTERRUPT_PERIPHERAL_ENABLE  	INTCONbits.PEIE			//!< This is the internal definition of the PERIPHERAL enable interrupt bit
@@ -198,7 +192,6 @@
 		typedef		void (* pg_tmr1_cb_pointer)(void);
 		typedef		void (* pg_tmr2_cb_pointer)(void);
 		typedef		void (* pg_rb0_cb_pointer)(void);
-		typedef		void (* pg_psp_cb_pointer)(void);
 		typedef		void (* pg_ad_cb_pointer)(void);
 		typedef		void (* pg_usartrc_cb_pointer)(void);
 		typedef		void (* pg_usarttx_cb_pointer)(void);
@@ -209,7 +202,8 @@
 		typedef		void (* pg_cm_cb_pointer)(void);
 		typedef		void (* pg_ee_cb_pointer)(void);
 		typedef		void (* pg_bcl_cb_pointer)(void);
-		typedef		void (* pg_hlvd_cb_pointer)(void);
+
+		typedef		void (* pg_event_user_handler)(void);
 
 		extern		pg_int0_cb_pointer		pg_int0_callback;
 		extern		pg_int1_cb_pointer		pg_int1_callback;
@@ -218,7 +212,6 @@
 		extern		pg_tmr1_cb_pointer		pg_tmr1_callback;
 		extern		pg_tmr2_cb_pointer		pg_tmr2_callback;
 		extern		pg_rb0_cb_pointer		pg_rb0_callback;
-		extern		pg_psp_cb_pointer		pg_psp_callback;
 		extern		pg_ad_cb_pointer		pg_ad_callback;
 		extern		pg_usartrc_cb_pointer	pg_usartrc_callback;
 		extern		pg_usarttx_cb_pointer	pg_usarttx_callback;
@@ -229,7 +222,9 @@
 		extern		pg_cm_cb_pointer		pg_cm_callback;
 		extern		pg_ee_cb_pointer		pg_ee_callback;
 		extern		pg_bcl_cb_pointer		pg_bcl_callback;
-		extern		pg_hlvd_cb_pointer		pg_hlvd_callback;
+
+		extern		pg_event_user_handler	pg_user_handler_callback;
+
 	
 	#endif
 #endif /* _PGIM_EVENT_H_ */

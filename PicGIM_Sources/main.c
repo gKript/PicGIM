@@ -42,38 +42,19 @@
 
 #include "picgim_main.h"
 
-void	led_blink_a( void ) {
-	pinToggle( L_B3 );
-}
-
-void	led_blink_b( void ) {
-	pinToggle( L_B2 );
-	digitalWrite( L_B0 , digitalRead( P_B3 ) & digitalRead( P_B2 ) & digitalRead( P_B1 ) );
+void	led_blink( void ) {
+	pinToggle( B3 );
 }
 
 void main( void ) {
 	pg_initialize();
-	pinMode( T_B0 , PG_OUT );
-	pinMode( T_B1 , PG_OUT );
-	pinMode( T_B2 , PG_OUT );
-	pinMode( T_B3 , PG_OUT );
-	pg_lcd_hd44780_write( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "gKript.org  test"  );
-	pg_lcd_hd44780_write( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "Timers  & Events"  );
+	pinMode( B3 , OUT );
 	pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 	pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
 	pg_timer_set_freq( PG_TIMER_0 , 1 , PG_HZ );
-	pg_timer_set_period( PG_TIMER_1 , 50 , PG_MSEC );
-	pg_event_attach( PG_EVENT_TMR0 , led_blink_a );
-	pg_event_attach( PG_EVENT_TMR1 , led_blink_b );
+	pg_event_attach( PG_EVENT_TMR0 , led_blink );
 	pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
 	pg_timer_start( PG_TIMER_0 );
-	pg_delay_sec( 5 );
-	pg_event_set( PG_EVENT_TMR1 , PG_ENABLE );
-	pg_timer_start( PG_TIMER_1 );
-	pg_delay_sec( 5 );
-	while( 1 ) {
-		pg_delay_msec( 1333 );
-		pinToggle( L_B1 );
-	}
+	PG_INFINITE_LOOP;
 }
 

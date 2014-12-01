@@ -65,14 +65,15 @@
 		#pragma interrupt pg_event_occurred
 
 		void pg_event_occurred( void ) {
-		#if PG_EVENT_AUTO_HANDLER == PG_ENABLE
-			pg_event_auto_handler();
-		#else
-			pg_event_user_handler();
-		#endif
-			pg_event_clear_bit(pg_event_name);
+			#if PG_EVENT_AUTO_HANDLER == PG_ENABLE
+				pg_event_auto_handler();
+			#else
+				if ( pg_user_handler_callback != NULL )
+					pg_user_handler_callback();
+			#endif
+				pg_event_clear_bit( pg_event_name );
 		}
-	#endif
 
+	#endif
 #endif 
 
