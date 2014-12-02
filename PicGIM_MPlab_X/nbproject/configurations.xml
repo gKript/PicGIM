@@ -146,7 +146,7 @@
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
       <C18>
-        <property key="code-model" value="ms"/>
+        <property key="code-model" value="ml"/>
         <property key="data-model" value="oa-"/>
         <property key="default-char-unsigned" value="false"/>
         <property key="enable-all-optimizations" value="false"/>
@@ -157,7 +157,7 @@
         <property key="enable-om" value="true"/>
         <property key="enable-on" value="true"/>
         <property key="enable-op" value="true"/>
-        <property key="enable-opa" value="true"/>
+        <property key="enable-opa" value="false"/>
         <property key="enable-or" value="true"/>
         <property key="enable-os" value="true"/>
         <property key="enable-ot" value="true"/>
@@ -169,7 +169,7 @@
         <property key="preprocessor-macros" value=""/>
         <property key="procedural-abstraction-passes" value="4"/>
         <property key="storage-class" value="sca"/>
-        <property key="verbose" value="false"/>
+        <property key="verbose" value="true"/>
         <property key="warning-level" value="2"/>
       </C18>
       <C18-AS>

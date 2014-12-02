@@ -56,7 +56,7 @@
 	
 	//	P I C G I M   B E H A V I O U R
 	#define PG_VERBOSE							PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
-	#define PG_SUGGESTION						PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
+	#define PG_SUGGESTION						PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
 	#define PG_PROJECT_INFO_SHOW				PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
 
 #endif 

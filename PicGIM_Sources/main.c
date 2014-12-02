@@ -58,6 +58,6 @@ void main( void ) {
 //	pg_event_attach( PG_EVENT_TMR0 , led_blink );
 //	pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
 //	pg_timer_start( PG_TIMER_0 );
-	PG_INFINITE_LOOP;
+//	PG_INFINITE_LOOP;
 }
 

@@ -152,53 +152,40 @@
 	void	pg_spi_close( _pg_Uint8 portnumber ) {
 		switch( portnumber ) {
 			#ifndef	PGIM_P18F97J60
-			case PG_SPI_0:
-			{
+			case PG_SPI_0: {
 				if ( SSPCON1bits.SSPEN ) {
-                                    CloseSPI( );
-                                    #if PG_ERROR_IS_ENABLE
-                                        pg_error_set( PG_ERROR_SPI , PG_OK , PG_ERROR_OK );
-                                    #endif
+					CloseSPI( );
+					#if PG_ERROR_IS_ENABLE
+					    pg_error_set( PG_ERROR_SPI , PG_OK , PG_ERROR_OK );
+					#endif
 				} else {
-                                    Nop();
-                                    #if PG_ERROR_IS_ENABLE
-                                        pg_error_set( PG_ERROR_SPI , PG_SPI_ALREADY_CLOSE , PG_ERROR_WARNING );
-                                    #endif
-                                }
+					Nop();
+					#if PG_ERROR_IS_ENABLE
+					    pg_error_set( PG_ERROR_SPI , PG_SPI_ALREADY_CLOSE , PG_ERROR_WARNING );
+					#endif
+				}
 			}
 			#else	
-			case PG_SPI_0:
-			{
+			case PG_SPI_0: {
 				if ( SSP1CON1bits.SSPEN ) {
 					CloseSPI( );
 					return PG_OK;
 				} else
 					return PG_SPI_ALREADY_CLOSE;
 			}
-			case PG_SPI_1:
-			{
+			case PG_SPI_1: {
 				if ( SSP2CON1bits.SSPEN ) {
 					CloseSPI1( );
 					return PG_OK;
 				} else
 					return PG_SPI_ALREADY_CLOSE;
 			}
-				/*				case PG_SPI_2 : {
-									if ( SSP3CON1bits.SSPEN ){
-										CloseSPI2();
-										return PG_OK;
-									}
-									else
-										return PG_SPI_ALREADY_CLOSE;
-								}
-				 */
 			#endif
-			default:
-			{
-                            Nop();
-                            #if PG_ERROR_IS_ENABLE
-                                pg_error_set( PG_ERROR_SPI , PG_SPI_ERROR , PG_ERROR_ERROR );
-                            #endif
+			default: {
+				Nop();
+				#if PG_ERROR_IS_ENABLE
+				    pg_error_set( PG_ERROR_SPI , PG_SPI_ERROR , PG_ERROR_ERROR );
+				#endif
 			}
 		}
 	}

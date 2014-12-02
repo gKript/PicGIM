@@ -492,9 +492,20 @@
 		\image html planning.png
 		\n \n 
 			
-		 To plan a new project with PicGIM you need to consider in detail what modules will need to enable.
- */
+		 To plan a new project with PicGIM you need to consider in detail what modules will need to enable. \n
+		 And with even more attention to which microcontroller to use. \n
+		 Keep in mind that PicGIM, in the next milestone will be even more careful in the use of the Program Memory and RAM and even more configurable. \n
+		 Here is a table that summarizes chromatically the attention to be placed in the choice of the microcontroller. \n
+		 
+		 \attention		In this table are ONLY microcontrollers currently supported by PicGIM. \n The microcontrollers supported are constantly increasing, and in case of a specific request, please write to info@gkript.org. \n 
 
+		 \n \n 
+
+		 \image	html	tabella-mcu-colori.png
+ 	
+		 \n \n 
+		
+*/
 
 /*!
 	\page	PG_language		The language of PicGIM
@@ -596,7 +607,7 @@
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 			<p>
-				They were also reorganized the names of the pins to the context ( TRIS, PORT, LAT ). \n
+				In addition PicGIM reorganizes the names of pins to different contexts ( TRIS, PORT, LAT ). \n
 				Here is a reference table for each port. \n \n
 
 			\attention	The amount, the arrangement and the names of available pins is related to the model of microcontroller used.
