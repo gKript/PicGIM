@@ -157,6 +157,8 @@
 	\brief		This is an example of an application made using Gim. It is the code of the Gkdp utility.
 */
 
+
+
 /*!
 	\page	htgstarted		How to get started
 
@@ -274,6 +276,8 @@
 
 
  */
+
+
 
 /*!
 	\page	NM_nextmilestone		Current milestone
@@ -1291,7 +1295,7 @@
 
 			<p>You may add a section Entitled "Endorsements", provided it contains
 			nothing but endorsements of your Modified Version by various
-			parties—for example, statements of peer review or that the text has
+			partiesï¿½for example, statements of peer review or that the text has
 			been approved by an organization as the authoritative definition of a
 			standard.</p>
 
@@ -1479,7 +1483,7 @@
 			</pre>
 
 			<p>If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
-			replace the "with … Texts." line with this:</p>
+			replace the "with ï¿½ Texts." line with this:</p>
 
 			<pre>    with the Invariant Sections being LIST THEIR TITLES, with the
 							Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
@@ -1829,7 +1833,7 @@
 					</tr>
 					<tr>
 						<td align="center" >#40</td>
-						<td>chiamata unica alla Delay passando l'unità di misura</td>
+						<td>chiamata unica alla Delay passando l'unitï¿½ di misura</td>
 						<td>asyntote</td>
 						<td>Improvement</td>
 					</tr>

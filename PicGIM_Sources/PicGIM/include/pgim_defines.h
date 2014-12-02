@@ -205,12 +205,49 @@
 //	#define	digitalRead( a )		P_ ## a
 //	#define	pinToggle( a )			L_ ## a ^= 1
 
-	#define	pg_pin_mode( a , b )		a = b
-	#define	pg_pin_set( a )				a = PG_SET
-	#define	pg_pin_clear( a )			a = PG_CLEAR
-	#define	pg_digital_write( a , b )	a = b
-	#define	pg_digital_read( a )		a
-	#define	pg_pin_toggle( a )			a ^= 1
+	/*!
+	 * \brief			This macro is useful to set a specific bit as INPUT or OUTPUT.
+	 * \param	pin		The pin to set [ E.g. T_B1 ]
+	 * \param	mode	The logical expression that gives the value to be set.
+	 * \return			Nothing.
+	 */
+	#define	pg_pin_mode( pin , mode )			pin = mode
+
+	/*!
+	 * \brief	This macro is useful to set a specific bit to logic level ONE.
+	 * \param	pin		The pin to set [ E.g. L_B1 ]
+	 * \return			Nothing.
+	 */
+	#define	pg_pin_set( pin )					pin = PG_SET
+
+	/*!
+	 * \brief	This macro is useful to set a specific bit to logic level ZERO.
+	 * \param	pin		The pin to set [ E.g. L_B1 ]
+	 * \return			Nothing.
+	 */
+	#define	pg_pin_clear( pin )					pin = PG_CLEAR
+
+	/*!
+	 * \brief	This macro is useful to set a specific bit to a specific value.
+	 * \param	pin		The pin to set [ E.g. L_B1 ]
+	 * \param	value	The logical expression that gives the value to be set.
+	 * \return			Nothing.
+	 */
+	#define	pg_pin_write( pin , value )		pin = value
+
+	/*!
+	 * \brief	This macro is useful to read the logical level of a specific bit.
+	 * \param	pin		The pin to set [ E.g. L_B1 ]
+	 * \return			The value of the requested pin.
+	 */
+	#define	pg_pin_read( pin )				pin
+
+	/*!
+	 * \brief	With this function you can reverse the logic value present. \n If the value is 1 after the call will be 0, and vice versa.
+	 * \param	pin		The pin to toggle [ E.g. L_B1 ]
+	 * \return			Nothing.
+	 */
+	#define	pg_pin_toggle( pin )				( pin ^= 1 )
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -443,13 +480,23 @@
 	#define	T_H4				TRISHbits.TRISH4	
 	#define	T_H5				TRISHbits.TRISH5	
 	#define	T_H6				TRISHbits.TRISH6	
-	#define	T_H7				TRISHbits.TRISH7	
+	#define	T_H7				TRISHbits.TRISH7
 
 #endif /* _PGIM_DEFINES_H_ */
 
+/*!
+	\page	PG_consideraproj		Planning a new project with PicGIM
+		\tableofcontents
+	
+		\n
+		\image html planning.png
+		\n \n 
+			
+		 To plan a new project with PicGIM you need to consider in detail what modules will need to enable.
+ */
+
 
 /*!
-
 	\page	PG_language		The language of PicGIM
 
 		\tableofcontents
@@ -461,6 +508,8 @@
 		\b PicGIM also introduces changes to the classic references of the \b Microchip \b environment. \n
 		These changes affect different components such as the \b types \b of \b variables and the \b PIN \b names. \n
 		These changes were made with the purpose to simplify the code writing. \n \n
+
+		\note	The types of variables and pin names proposed by PicGIM do not override standards introduced by the C18 compiler.
 	
 		
 		\section	langtype	Variable Type name reference
@@ -474,54 +523,55 @@
 				<table class="cl_table" width="60%" border="0" >
 					<thead>
 						<tr>
+							<th width="10%" align="left" >Real size</th>
 							<th width="25%" align="left" >PicGIM type</th>
 							<th width="25%" align="left" >STD type</th>
-							<th width="50%" align="left" >Description</th>
+							<th width="40%" align="left" >Description</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_int8 \htmlonly</b></td><td>char</td><td>Signed integer 8 bit size</td>
+							<td >1 byte</td><td ><b>\endhtmlonly \ref _pg_int8 \htmlonly</b></td><td>char</td><td>Signed integer 8 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_Uint8 \htmlonly</b></td><td>unsigned char</td><td>Unsigned integer 8 bit size</td>
+							<td >1 byte</td><td ><b>\endhtmlonly \ref _pg_Uint8 \htmlonly</b></td><td>unsigned char</td><td>Unsigned integer 8 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_int16 \htmlonly</b></td><td>int</td><td>Signed integer 16 bit size</td>
+							<td >2 byte</td><td ><b>\endhtmlonly \ref _pg_int16 \htmlonly</b></td><td>int</td><td>Signed integer 16 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_Uint16 \htmlonly</b></td><td>unsigned int</td><td>Unsigned integer 16 bit size</td>
+							<td >2 byte</td><td ><b>\endhtmlonly \ref _pg_Uint16 \htmlonly</b></td><td>unsigned int</td><td>Unsigned integer 16 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_int24 \htmlonly</b></td><td>short long</td><td>Signed integer 24 bit size</td>
+							<td >3 byte</td><td ><b>\endhtmlonly \ref _pg_int24 \htmlonly</b></td><td>short long</td><td>Signed integer 24 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_Uint24 \htmlonly</b></td><td>unsigned short long</td><td>Unsigned integer 24 bit size</td>
+							<td >3 byte</td><td ><b>\endhtmlonly \ref _pg_Uint24 \htmlonly</b></td><td>unsigned short long</td><td>Unsigned integer 24 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_int32 \htmlonly</b></td><td>long</td><td>Signed integer 32 bit size</td>
+							<td >4 byte</td><td ><b>\endhtmlonly \ref _pg_int32 \htmlonly</b></td><td>long</td><td>Signed integer 32 bit size</td>
 						</tr>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_Uint32 \htmlonly</b></td><td>unsigned long</td><td>Unsigned integer 32 bit size</td>
-						</tr>
-					</tbody>
-				</table>
-				<hr>
-				<table class="cl_table" width="60%" border="0" >
-					<tbody>
-						<tr>
-							<td ><b>\endhtmlonly \ref _pg_buffer \htmlonly</b></td><td>char *</td><td>A pointer to a signed integer 8 bit size</td>
-						</tr>
-						<tr>
-							<td ><b>\endhtmlonly \ref _pg_Ubuffer \htmlonly</b></td><td>unsigned char *</td><td>A pointer to a unsigned integer 8 bit size</td>
+							<td >4 byte</td><td ><b>\endhtmlonly \ref _pg_Uint32 \htmlonly</b></td><td>unsigned long</td><td>Unsigned integer 32 bit size</td>
 						</tr>
 					</tbody>
 				</table>
-				<hr>
+				
 				<table class="cl_table" width="60%" border="0" >
 					<tbody>
 						<tr>
-							<td ><b>\endhtmlonly \ref _pg_bool \htmlonly</b></td><td>BOOL</td><td>A boolean flag</td>
+							<td width="10%" align="left" >4 byte</td><td width="25%" align="left" ><b>\endhtmlonly \ref _pg_buffer \htmlonly</b></td><td width="25%" align="left" >char *</td><td width="40%" align="left" >A pointer to a signed integer 8 bit size</td>
+						</tr>
+						<tr>
+							<td width="10%" align="left" >4 byte</td><td ><b>\endhtmlonly \ref _pg_Ubuffer \htmlonly</b></td><td>unsigned char *</td><td>A pointer to a unsigned integer 8 bit size</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="cl_table" width="60%" border="0" >
+					<tbody>
+						<tr>
+							<td width="10%" align="left" >4 byte</td><td width="25%" align="left" ><b>\endhtmlonly \ref _pg_bool \htmlonly</b></td><td width="25%" align="left" >BOOL</td><td width="40%" align="left" >A boolean flag</td>
 						</tr>
 					</tbody>
 				</table>
@@ -547,16 +597,22 @@
 			\endcode
 			<p>
 				They were also reorganized the names of the pins to the context ( TRIS, PORT, LAT ). \n
-				Here is a reference table for each port. \n
+				Here is a reference table for each port. \n \n
+
+			\attention	The amount, the arrangement and the names of available pins is related to the model of microcontroller used.
+
+			\n
+
+ 			\subsection	langporta	Port A
+
 				\htmlonly
-				<br>
-				<table class="cl_table" width="100%" border="0" >
+ 				<table class="cl_table" width="100%" border="0" >
 					<thead>
 						<tr>
 							<th width="10%" align="center" >PIN</th>
 							<th width="30%" align="center" >TRIS name</th>
-							<th width="30%" align="center" >PORT name</th>
-							<th width="30%" align="center" >LAT name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
 						</tr>
 					</thead>
 				</table>
@@ -571,10 +627,10 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td width="10%" align="center" ><b>A1</b></td>
-							<td width="15%" align="center" >TRISAbits.TRISA1</td><td width="15%" align="center" ><b>T_A1</b></td>
-							<td width="15%" align="center" >PORTAbits.RA1</td><td width="15%" align="center" ><b>P_A1</b></td>
-							<td width="15%" align="center" >LATAbits.LATA1</td><td width="15%" align="center" ><b>L_A1</b></td>
+							<td width="10%" align="center" ><b>A0</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA0</td><td width="15%" align="center" ><b>T_A0</b></td>
+							<td width="15%" align="center" >PORTAbits.RA0</td><td width="15%" align="center" ><b>P_A0</b></td>
+							<td width="15%" align="center" >LATAbits.LATA0</td><td width="15%" align="center" ><b>L_A0</b></td>
 						</tr>
 						<tr>
 							<td width="10%" align="center" ><b>A1</b></td>
@@ -582,11 +638,604 @@
 							<td width="15%" align="center" >PORTAbits.RA1</td><td width="15%" align="center" ><b>P_A1</b></td>
 							<td width="15%" align="center" >LATAbits.LATA1</td><td width="15%" align="center" ><b>L_A1</b></td>
 						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A2</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA2</td><td width="15%" align="center" ><b>T_A2</b></td>
+							<td width="15%" align="center" >PORTAbits.RA2</td><td width="15%" align="center" ><b>P_A2</b></td>
+							<td width="15%" align="center" >LATAbits.LATA2</td><td width="15%" align="center" ><b>L_A2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A3</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA3</td><td width="15%" align="center" ><b>T_A3</b></td>
+							<td width="15%" align="center" >PORTAbits.RA3</td><td width="15%" align="center" ><b>P_A3</b></td>
+							<td width="15%" align="center" >LATAbits.LATA3</td><td width="15%" align="center" ><b>L_A3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A4</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA4</td><td width="15%" align="center" ><b>T_A4</b></td>
+							<td width="15%" align="center" >PORTAbits.RA4</td><td width="15%" align="center" ><b>P_A4</b></td>
+							<td width="15%" align="center" >LATAbits.LATA4</td><td width="15%" align="center" ><b>L_A4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A5</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA5</td><td width="15%" align="center" ><b>T_A5</b></td>
+							<td width="15%" align="center" >PORTAbits.RA5</td><td width="15%" align="center" ><b>P_A5</b></td>
+							<td width="15%" align="center" >LATAbits.LATA5</td><td width="15%" align="center" ><b>L_A5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A6</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA6</td><td width="15%" align="center" ><b>T_A6</b></td>
+							<td width="15%" align="center" >PORTAbits.RA6</td><td width="15%" align="center" ><b>P_A6</b></td>
+							<td width="15%" align="center" >LATAbits.LATA6</td><td width="15%" align="center" ><b>L_A6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>A7</b></td>
+							<td width="15%" align="center" >TRISAbits.TRISA7</td><td width="15%" align="center" ><b>T_A7</b></td>
+							<td width="15%" align="center" >PORTAbits.RA7</td><td width="15%" align="center" ><b>P_A7</b></td>
+							<td width="15%" align="center" >LATAbits.LATA7</td><td width="15%" align="center" ><b>L_A7</b></td>
+						</tr>
 					</tbody>
 				</table>
-				
+				<BR>
+				\endhtmlonly
+
+
+			\subsection langportb	Port B
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>B0</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB0</td><td width="15%" align="center" ><b>T_B0</b></td>
+							<td width="15%" align="center" >PORTBbits.RB0</td><td width="15%" align="center" ><b>P_B0</b></td>
+							<td width="15%" align="center" >LATBbits.LATB0</td><td width="15%" align="center" ><b>L_B0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B1</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB1</td><td width="15%" align="center" ><b>T_B1</b></td>
+							<td width="15%" align="center" >PORTBbits.RB1</td><td width="15%" align="center" ><b>P_B1</b></td>
+							<td width="15%" align="center" >LATBbits.LATB1</td><td width="15%" align="center" ><b>L_B1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B2</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB2</td><td width="15%" align="center" ><b>T_B2</b></td>
+							<td width="15%" align="center" >PORTBbits.RB2</td><td width="15%" align="center" ><b>P_B2</b></td>
+							<td width="15%" align="center" >LATBbits.LATB2</td><td width="15%" align="center" ><b>L_B2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B3</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB3</td><td width="15%" align="center" ><b>T_B3</b></td>
+							<td width="15%" align="center" >PORTBbits.RB3</td><td width="15%" align="center" ><b>P_B3</b></td>
+							<td width="15%" align="center" >LATBbits.LATB3</td><td width="15%" align="center" ><b>L_B3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B4</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB4</td><td width="15%" align="center" ><b>T_B4</b></td>
+							<td width="15%" align="center" >PORTBbits.RB4</td><td width="15%" align="center" ><b>P_B4</b></td>
+							<td width="15%" align="center" >LATBbits.LATB4</td><td width="15%" align="center" ><b>L_B4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B5</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB5</td><td width="15%" align="center" ><b>T_B5</b></td>
+							<td width="15%" align="center" >PORTBbits.RB5</td><td width="15%" align="center" ><b>P_B5</b></td>
+							<td width="15%" align="center" >LATBbits.LATB5</td><td width="15%" align="center" ><b>L_B5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B6</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB6</td><td width="15%" align="center" ><b>T_B6</b></td>
+							<td width="15%" align="center" >PORTBbits.RB6</td><td width="15%" align="center" ><b>P_B6</b></td>
+							<td width="15%" align="center" >LATBbits.LATB6</td><td width="15%" align="center" ><b>L_B6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>B7</b></td>
+							<td width="15%" align="center" >TRISBbits.TRISB7</td><td width="15%" align="center" ><b>T_B7</b></td>
+							<td width="15%" align="center" >PORTBbits.RB7</td><td width="15%" align="center" ><b>P_B7</b></td>
+							<td width="15%" align="center" >LATBbits.LATB7</td><td width="15%" align="center" ><b>L_B7</b></td>
+						</tr>
+					</tbody>
+				</table>
+				\endhtmlonly
+
+ 			\subsection langportc	Port C
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>C0</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC0</td><td width="15%" align="center" ><b>T_C0</b></td>
+							<td width="15%" align="center" >PORTCbits.RC0</td><td width="15%" align="center" ><b>P_C0</b></td>
+							<td width="15%" align="center" >LATCbits.LATC0</td><td width="15%" align="center" ><b>L_C0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C1</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC1</td><td width="15%" align="center" ><b>T_C1</b></td>
+							<td width="15%" align="center" >PORTCbits.RC1</td><td width="15%" align="center" ><b>P_C1</b></td>
+							<td width="15%" align="center" >LATCbits.LATC1</td><td width="15%" align="center" ><b>L_C1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C2</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC2</td><td width="15%" align="center" ><b>T_C2</b></td>
+							<td width="15%" align="center" >PORTCbits.RC2</td><td width="15%" align="center" ><b>P_C2</b></td>
+							<td width="15%" align="center" >LATCbits.LATC2</td><td width="15%" align="center" ><b>L_C2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C3</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC3</td><td width="15%" align="center" ><b>T_C3</b></td>
+							<td width="15%" align="center" >PORTCbits.RC3</td><td width="15%" align="center" ><b>P_C3</b></td>
+							<td width="15%" align="center" >LATCbits.LATC3</td><td width="15%" align="center" ><b>L_C3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C4</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC4</td><td width="15%" align="center" ><b>T_C4</b></td>
+							<td width="15%" align="center" >PORTCbits.RC4</td><td width="15%" align="center" ><b>P_C4</b></td>
+							<td width="15%" align="center" >LATCbits.LATC4</td><td width="15%" align="center" ><b>L_C4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C5</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC5</td><td width="15%" align="center" ><b>T_C5</b></td>
+							<td width="15%" align="center" >PORTCbits.RC5</td><td width="15%" align="center" ><b>P_C5</b></td>
+							<td width="15%" align="center" >LATCbits.LATC5</td><td width="15%" align="center" ><b>L_C5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C6</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC6</td><td width="15%" align="center" ><b>T_C6</b></td>
+							<td width="15%" align="center" >PORTCbits.RC6</td><td width="15%" align="center" ><b>P_C6</b></td>
+							<td width="15%" align="center" >LATCbits.LATC6</td><td width="15%" align="center" ><b>L_C6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>C7</b></td>
+							<td width="15%" align="center" >TRISCbits.TRISC7</td><td width="15%" align="center" ><b>T_C7</b></td>
+							<td width="15%" align="center" >PORTCbits.RC7</td><td width="15%" align="center" ><b>P_C7</b></td>
+							<td width="15%" align="center" >LATCbits.LATC7</td><td width="15%" align="center" ><b>L_C7</b></td>
+						</tr>
+					</tbody>
+				</table>
+				\endhtmlonly
+			\subsection langportd	Port D
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>D0</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD0</td><td width="15%" align="center" ><b>T_D0</b></td>
+							<td width="15%" align="center" >PORTDbits.RD0</td><td width="15%" align="center" ><b>P_D0</b></td>
+							<td width="15%" align="center" >LATDbits.LATD0</td><td width="15%" align="center" ><b>L_D0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D1</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD1</td><td width="15%" align="center" ><b>T_D1</b></td>
+							<td width="15%" align="center" >PORTDbits.RD1</td><td width="15%" align="center" ><b>P_D1</b></td>
+							<td width="15%" align="center" >LATDbits.LATD1</td><td width="15%" align="center" ><b>L_D1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D2</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD2</td><td width="15%" align="center" ><b>T_D2</b></td>
+							<td width="15%" align="center" >PORTDbits.RD2</td><td width="15%" align="center" ><b>P_D2</b></td>
+							<td width="15%" align="center" >LATDbits.LATD2</td><td width="15%" align="center" ><b>L_D2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D3</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD3</td><td width="15%" align="center" ><b>T_D3</b></td>
+							<td width="15%" align="center" >PORTDbits.RD3</td><td width="15%" align="center" ><b>P_D3</b></td>
+							<td width="15%" align="center" >LATDbits.LATD3</td><td width="15%" align="center" ><b>L_D3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D4</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD4</td><td width="15%" align="center" ><b>T_D4</b></td>
+							<td width="15%" align="center" >PORTDbits.RD4</td><td width="15%" align="center" ><b>P_D4</b></td>
+							<td width="15%" align="center" >LATDbits.LATD4</td><td width="15%" align="center" ><b>L_D4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D5</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD5</td><td width="15%" align="center" ><b>T_D5</b></td>
+							<td width="15%" align="center" >PORTDbits.RD5</td><td width="15%" align="center" ><b>P_D5</b></td>
+							<td width="15%" align="center" >LATDbits.LATD5</td><td width="15%" align="center" ><b>L_D5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D6</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD6</td><td width="15%" align="center" ><b>T_D6</b></td>
+							<td width="15%" align="center" >PORTDbits.RD6</td><td width="15%" align="center" ><b>P_D6</b></td>
+							<td width="15%" align="center" >LATDbits.LATD6</td><td width="15%" align="center" ><b>L_D6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>D7</b></td>
+							<td width="15%" align="center" >TRISDbits.TRISD7</td><td width="15%" align="center" ><b>T_D7</b></td>
+							<td width="15%" align="center" >PORTDbits.RD7</td><td width="15%" align="center" ><b>P_D7</b></td>
+							<td width="15%" align="center" >LATDbits.LATD7</td><td width="15%" align="center" ><b>L_D7</b></td>
+						</tr>
+					</tbody>
+				</table>
+				\endhtmlonly
+			\subsection langporte	Port E
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>E0</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE0</td><td width="15%" align="center" ><b>T_E0</b></td>
+							<td width="15%" align="center" >PORTEbits.RE0</td><td width="15%" align="center" ><b>P_E0</b></td>
+							<td width="15%" align="center" >LATEbits.LATE0</td><td width="15%" align="center" ><b>L_E0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E1</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE1</td><td width="15%" align="center" ><b>T_E1</b></td>
+							<td width="15%" align="center" >PORTEbits.RE1</td><td width="15%" align="center" ><b>P_E1</b></td>
+							<td width="15%" align="center" >LATEbits.LATE1</td><td width="15%" align="center" ><b>L_E1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E2</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE2</td><td width="15%" align="center" ><b>T_E2</b></td>
+							<td width="15%" align="center" >PORTEbits.RE2</td><td width="15%" align="center" ><b>P_E2</b></td>
+							<td width="15%" align="center" >LATEbits.LATE2</td><td width="15%" align="center" ><b>L_E2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E3</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE3</td><td width="15%" align="center" ><b>T_E3</b></td>
+							<td width="15%" align="center" >PORTEbits.RE3</td><td width="15%" align="center" ><b>P_E3</b></td>
+							<td width="15%" align="center" >LATEbits.LATE3</td><td width="15%" align="center" ><b>L_E3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E4</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE4</td><td width="15%" align="center" ><b>T_E4</b></td>
+							<td width="15%" align="center" >PORTEbits.RE4</td><td width="15%" align="center" ><b>P_E4</b></td>
+							<td width="15%" align="center" >LATEbits.LATE4</td><td width="15%" align="center" ><b>L_E4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E5</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE5</td><td width="15%" align="center" ><b>T_E5</b></td>
+							<td width="15%" align="center" >PORTEbits.RE5</td><td width="15%" align="center" ><b>P_E5</b></td>
+							<td width="15%" align="center" >LATEbits.LATE5</td><td width="15%" align="center" ><b>L_E5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E6</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE6</td><td width="15%" align="center" ><b>T_E6</b></td>
+							<td width="15%" align="center" >PORTEbits.RE6</td><td width="15%" align="center" ><b>P_E6</b></td>
+							<td width="15%" align="center" >LATEbits.LATE6</td><td width="15%" align="center" ><b>L_E6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>E7</b></td>
+							<td width="15%" align="center" >TRISEbits.TRISE7</td><td width="15%" align="center" ><b>T_E7</b></td>
+							<td width="15%" align="center" >PORTEbits.RE7</td><td width="15%" align="center" ><b>P_E7</b></td>
+							<td width="15%" align="center" >LATEbits.LATE7</td><td width="15%" align="center" ><b>L_E7</b></td>
+						</tr>
+					</tbody>
+				</table>
+				\endhtmlonly
+			\subsection langportf	Port F
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>F0</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF0</td><td width="15%" align="center" ><b>T_F0</b></td>
+							<td width="15%" align="center" >PORTFbits.RF0</td><td width="15%" align="center" ><b>P_F0</b></td>
+							<td width="15%" align="center" >LATFbits.LATF0</td><td width="15%" align="center" ><b>L_F0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F1</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF1</td><td width="15%" align="center" ><b>T_F1</b></td>
+							<td width="15%" align="center" >PORTFbits.RF1</td><td width="15%" align="center" ><b>P_F1</b></td>
+							<td width="15%" align="center" >LATFbits.LATF1</td><td width="15%" align="center" ><b>L_F1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F2</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF2</td><td width="15%" align="center" ><b>T_F2</b></td>
+							<td width="15%" align="center" >PORTFbits.RF2</td><td width="15%" align="center" ><b>P_F2</b></td>
+							<td width="15%" align="center" >LATFbits.LATF2</td><td width="15%" align="center" ><b>L_F2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F3</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF3</td><td width="15%" align="center" ><b>T_F3</b></td>
+							<td width="15%" align="center" >PORTFbits.RF3</td><td width="15%" align="center" ><b>P_F3</b></td>
+							<td width="15%" align="center" >LATFbits.LATF3</td><td width="15%" align="center" ><b>L_F3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F4</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF4</td><td width="15%" align="center" ><b>T_F4</b></td>
+							<td width="15%" align="center" >PORTFbits.RF4</td><td width="15%" align="center" ><b>P_F4</b></td>
+							<td width="15%" align="center" >LATFbits.LATF4</td><td width="15%" align="center" ><b>L_F4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F5</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF5</td><td width="15%" align="center" ><b>T_F5</b></td>
+							<td width="15%" align="center" >PORTFbits.RF5</td><td width="15%" align="center" ><b>P_F5</b></td>
+							<td width="15%" align="center" >LATFbits.LATF5</td><td width="15%" align="center" ><b>L_F5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F6</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF6</td><td width="15%" align="center" ><b>T_F6</b></td>
+							<td width="15%" align="center" >PORTFbits.RF6</td><td width="15%" align="center" ><b>P_F6</b></td>
+							<td width="15%" align="center" >LATFbits.LATF6</td><td width="15%" align="center" ><b>L_F6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>F7</b></td>
+							<td width="15%" align="center" >TRISFbits.TRISF7</td><td width="15%" align="center" ><b>T_F7</b></td>
+							<td width="15%" align="center" >PORTFbits.RF7</td><td width="15%" align="center" ><b>P_F7</b></td>
+							<td width="15%" align="center" >LATFbits.LATF7</td><td width="15%" align="center" ><b>L_F7</b></td>
+						</tr>
+					</tbody>
+				</table>
+				\endhtmlonly
+			\subsection langportg	Port G
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>G0</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG0</td><td width="15%" align="center" ><b>T_G0</b></td>
+							<td width="15%" align="center" >PORTGbits.RG0</td><td width="15%" align="center" ><b>P_G0</b></td>
+							<td width="15%" align="center" >LATGbits.LATG0</td><td width="15%" align="center" ><b>L_G0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G1</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG1</td><td width="15%" align="center" ><b>T_G1</b></td>
+							<td width="15%" align="center" >PORTGbits.RG1</td><td width="15%" align="center" ><b>P_G1</b></td>
+							<td width="15%" align="center" >LATGbits.LATG1</td><td width="15%" align="center" ><b>L_G1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G2</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG2</td><td width="15%" align="center" ><b>T_G2</b></td>
+							<td width="15%" align="center" >PORTGbits.RG2</td><td width="15%" align="center" ><b>P_G2</b></td>
+							<td width="15%" align="center" >LATGbits.LATG2</td><td width="15%" align="center" ><b>L_G2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G3</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG3</td><td width="15%" align="center" ><b>T_G3</b></td>
+							<td width="15%" align="center" >PORTGbits.RG3</td><td width="15%" align="center" ><b>P_G3</b></td>
+							<td width="15%" align="center" >LATGbits.LATG3</td><td width="15%" align="center" ><b>L_G3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G4</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG4</td><td width="15%" align="center" ><b>T_G4</b></td>
+							<td width="15%" align="center" >PORTGbits.RG4</td><td width="15%" align="center" ><b>P_G4</b></td>
+							<td width="15%" align="center" >LATGbits.LATG4</td><td width="15%" align="center" ><b>L_G4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G5</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG5</td><td width="15%" align="center" ><b>T_G5</b></td>
+							<td width="15%" align="center" >PORTGbits.RG5</td><td width="15%" align="center" ><b>P_G5</b></td>
+							<td width="15%" align="center" >LATGbits.LATG5</td><td width="15%" align="center" ><b>L_G5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G6</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG6</td><td width="15%" align="center" ><b>T_G6</b></td>
+							<td width="15%" align="center" >PORTGbits.RG6</td><td width="15%" align="center" ><b>P_G6</b></td>
+							<td width="15%" align="center" >LATGbits.LATG6</td><td width="15%" align="center" ><b>L_G6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>G7</b></td>
+							<td width="15%" align="center" >TRISGbits.TRISG7</td><td width="15%" align="center" ><b>T_G7</b></td>
+							<td width="15%" align="center" >PORTGbits.RG7</td><td width="15%" align="center" ><b>P_G7</b></td>
+							<td width="15%" align="center" >LATGbits.LATG7</td><td width="15%" align="center" ><b>L_G7</b></td>
+						</tr>
+					</tbody>
+				</table>
+				\endhtmlonly
+			\subsection langporth	Port H
+				\htmlonly
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" >PIN</th>
+							<th width="30%" align="center" >TRIS name</th>
+							<th width="30%" align="center" >PORT name ( for READ )</th>
+							<th width="30%" align="center" >LAT name ( for WRITE )</th>
+						</tr>
+					</thead>
+				</table>
+				<table class="cl_table" width="100%" border="0" >
+					<thead>
+						<tr>
+							<th width="10%" align="center" ><b>&nbsp;</b></th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+							<th width="15%" align="center" >STD</th><th width="15%" align="center" >PicGIM</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td width="10%" align="center" ><b>H0</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH0</td><td width="15%" align="center" ><b>T_H0</b></td>
+							<td width="15%" align="center" >PORTHbits.RH0</td><td width="15%" align="center" ><b>P_H0</b></td>
+							<td width="15%" align="center" >LATHbits.LATH0</td><td width="15%" align="center" ><b>L_H0</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H1</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH1</td><td width="15%" align="center" ><b>T_H1</b></td>
+							<td width="15%" align="center" >PORTHbits.RH1</td><td width="15%" align="center" ><b>P_H1</b></td>
+							<td width="15%" align="center" >LATHbits.LATH1</td><td width="15%" align="center" ><b>L_H1</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H2</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH2</td><td width="15%" align="center" ><b>T_H2</b></td>
+							<td width="15%" align="center" >PORTHbits.RH2</td><td width="15%" align="center" ><b>P_H2</b></td>
+							<td width="15%" align="center" >LATHbits.LATH2</td><td width="15%" align="center" ><b>L_H2</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H3</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH3</td><td width="15%" align="center" ><b>T_H3</b></td>
+							<td width="15%" align="center" >PORTHbits.RH3</td><td width="15%" align="center" ><b>P_H3</b></td>
+							<td width="15%" align="center" >LATHbits.LATH3</td><td width="15%" align="center" ><b>L_H3</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H4</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH4</td><td width="15%" align="center" ><b>T_H4</b></td>
+							<td width="15%" align="center" >PORTHbits.RH4</td><td width="15%" align="center" ><b>P_H4</b></td>
+							<td width="15%" align="center" >LATHbits.LATH4</td><td width="15%" align="center" ><b>L_H4</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H5</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH5</td><td width="15%" align="center" ><b>T_H5</b></td>
+							<td width="15%" align="center" >PORTHbits.RH5</td><td width="15%" align="center" ><b>P_H5</b></td>
+							<td width="15%" align="center" >LATHbits.LATH5</td><td width="15%" align="center" ><b>L_H5</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H6</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH6</td><td width="15%" align="center" ><b>T_H6</b></td>
+							<td width="15%" align="center" >PORTHbits.RH6</td><td width="15%" align="center" ><b>P_H6</b></td>
+							<td width="15%" align="center" >LATHbits.LATH6</td><td width="15%" align="center" ><b>L_H6</b></td>
+						</tr>
+						<tr>
+							<td width="10%" align="center" ><b>H7</b></td>
+							<td width="15%" align="center" >TRISHbits.TRISH7</td><td width="15%" align="center" ><b>T_H7</b></td>
+							<td width="15%" align="center" >PORTHbits.RH7</td><td width="15%" align="center" ><b>P_H7</b></td>
+							<td width="15%" align="center" >LATHbits.LATH7</td><td width="15%" align="center" ><b>L_H7</b></td>
+						</tr>
+					</tbody>
+				</table>
 				\endhtmlonly
 		</p>
+			\htmlonly <br><br> \endhtmlonly
+
+	\section	langpinmacro	The MACRO for handling PINS
+			\htmlonly <hr> \endhtmlonly
+			This is a list of macros defined for handling PINs. \n
+
+			\htmlonly <br><br> \endhtmlonly
+			\endcode
+
+			\arg \b pg_pin_mode() : This macro is useful to set a specific bit as INPUT or OUTPUT.
+			\arg \b pg_pin_set() : This macro is useful to set a specific bit to logic level ONE.
+			\arg \b pg_pin_clear() : This macro is useful to set a specific bit to logic level ZERO.
+			\arg \b pg_pin_write() : This macro is useful to set a specific bit to a specific value.
+			\arg \b pg_pin_read() : This macro is useful to read the logical level of a specific bit.
+			\arg \b pg_pin_toggle() : With this function you can reverse the logic value present. If the value is 1 after the call will be 0, and vice versa.
+			\htmlonly <br><br> \endhtmlonly
+
+		\subsection	langpinmacroexample		A code example
+ 		\htmlonly
+			Here is a simple example of how to use the pin macro in your code. <br>
+		\endhtmlonly
+
+		\code
+			...
+			pg_pin_mode( T_D0 , PG_OUT );
+			pg_pin_mode( T_D1 , PG_IN );
+			pg_pin_mode( T_D2 , PG_IN );
+			pg_pin_mode( T_D3 , PG_IN );
+			pg_pin_mode( T_D4 , PG_OUT );
+
+			pg_pin_clear( L_D0 );
+			pg_pin_set( L_D0 );
+			pg_pin_write( L_D0 , pg_pin_read( P_D1 ) & pg_pin_read( P_D2 ) & pg_pin_read( P_D3 ) );
+
+			PG_LOOP( PG_FOREVER ) {
+				pg_pin_toggle( L_D4 );
+			}
+ 
+ 		\endcode
+
+		\htmlonly <br><br> \endhtmlonly
+
+
 */
 
 
