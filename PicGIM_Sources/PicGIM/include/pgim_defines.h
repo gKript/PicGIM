@@ -47,107 +47,107 @@
 	//      P I C G I M
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	PG_LOOP( a )			while( a )
-	#define	PG_INFINITE_LOOP		while( 1 )
-	#define	PG_HALT					while( 1 )
+	#define	PG_LOOP( a )			while( a )		/*!	A Loop with argument	*/
+	#define	PG_INFINITE_LOOP		while( 1 )		/*!	A forever loop	*/
+	#define	PG_HALT					while( 1 )		/*!	A forever loop	*/
 
-	#define	PG_FOREVER				1
+	#define	PG_FOREVER				1				/*!	An argument for \ref PG_LOOP()	*/
 	
-	#define	PG_OK					1
-	#define	PG_NOK					0
+	#define	PG_OK					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_NOK					0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_DONE					1
-	#define	PG_NOT_DONE				0
+	#define	PG_DONE					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_NOT_DONE				0				/*!	An alternative way to say "logic value 0"	*/
 	
-	#define	PG_YES					1
-	#define	PG_NO					0
+	#define	PG_YES					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_NO					0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_ON					1
-	#define	PG_OFF					0
+	#define	PG_ON					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_OFF					0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_IN					1
-	#define	PG_OUT					0
+	#define	PG_IN					1				/*!	To program a PIN in INPUT	*/
+	#define	PG_OUT					0				/*!	To program a PIN in OUTPUT	*/
 
-	#define	PG_8BIT_IN				0xFF
-	#define	PG_8BIT_OUT				0x00
+	#define	PG_8BIT_IN				0xFF			/*!	To program an entire PORT in INPUT	*/
+	#define	PG_8BIT_OUT				0x00			/*!	To program an entire PORT in OUTPUT	*/
 
-	#define	PG_LOW					0
-	#define	PG_HIGH					1
-	#define	PG_TRISTATE				2
+	#define	PG_LOW					0				/*!	An alternative way to say "logic value 0"	*/
+	#define	PG_HIGH					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_TRISTATE				2				/*!	Tristate when available	*/
 	
-	#define	PG_SET					1
-	#define	PG_CLEAR				0
+	#define	PG_SET					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_CLEAR				0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_START				1
-	#define	PG_STOP					0
+	#define	PG_START				1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_STOP					0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_ENABLE				1
-	#define	PG_DISABLE				0
+	#define	PG_ENABLE				1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_DISABLE				0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define PG_ENABLE_1_S			2
-	#define PG_ENABLE_LOO			3
+	#define PG_ENABLE_1_S			2				/*!	To program the TIMER to do just only one count 	*/
+	#define PG_ENABLE_LOOP			3				/*!	To program the TIMER to do a continuos counting	*/
 
-	#define	PG_INCLUDE				1
-	#define	PG_NOT_INCLUD			0
+	#define	PG_INCLUDE				1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_NOT_INCLUDE			0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_MASTER				1
-	#define	PG_SLAVE				2
+	#define	PG_MASTER				1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_SLAVE				2				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_BUSY					1
-	#define	PG_READY				0
+	#define	PG_BUSY					1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_READY				0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define PG_TRUE					1
-	#define PG_FALSE				0
+	#define PG_TRUE					1				/*!	An alternative way to say "logic value 1"	*/
+	#define PG_FALSE				0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define PG_READ					1
-	#define PG_WRITE				0
+	#define PG_READ					1				/*!	An alternative way to say "logic value 1"	*/
+	#define PG_WRITE				0				/*!	An alternative way to say "logic value 0"	*/
 
-	#define	PG_SEC					1
-	#define	PG_MSEC					2
-	#define	PG_USEC					3
+	#define	PG_SEC					1				/*!	A time unit : Second	*/
+	#define	PG_MSEC					2				/*!	A time unit : Millisecond	*/
+	#define	PG_USEC					3				/*!	A time unit : Microsecond	*/
 
-	#define	PG_HZ					4
-	#define	PG_KHZ					5
-	#define	PG_MHZ					6
+	#define	PG_HZ					4				/*!	A frequency unit : Hertz	*/
+	#define	PG_KHZ					5				/*!	A frequency unit : Kilohertz	*/
+	#define	PG_MHZ					6				/*!	A frequency unit : Megahertz	*/
 
-	#define PG_RELEASE				0
-	#define PG_DEBUG				1
+	#define PG_RELEASE				0				/*!	The state of a project : Debug	*/
+	#define PG_DEBUG				1				/*!	The state of a project : release	*/
 	
-	#define PG_NONE					0
-	#define PG_STANDARD				1
-	#define PG_ENHANCED				2
+	#define PG_NONE					0				/*!	An alternative way to say "logic value 0"	*/
+	#define PG_STANDARD				1				/*!	A module state : Standard	*/
+	#define PG_ENHANCED				2				/*!	A module state : Enhanced	*/
 	
-	#define PG_MANUAL				0
-	#define PG_SEMI_AUTOMATIC		1
-	#define PG_AUTOMATIC			2
+	#define PG_MANUAL				0				/*!	A Serial module mode : Manual	*/
+	#define PG_SEMI_AUTOMATIC		1				/*!	A Serial module mode : SemiAutomatic	*/
+	#define PG_AUTOMATIC			2				/*!	A Serial module mode : Automatic	*/
 
-	#define	PG_DEBUG_LCD_CHAR		1
+	#define	PG_DEBUG_LCD_CHAR		1				/*! To use the LCD CHAR as debug output */
 //	#define PG_DEBUG_LCD_PCD8544	2
 	
-	#define PG_COMMAND				0
-	#define PG_DATA					1
+	#define PG_COMMAND				0				/*! The byte is a Command */
+	#define PG_DATA					1				/*! The byte is a Data */
 	
-	#define PG_MISSING				-1
+	#define PG_MISSING				-1				/*!	An error state : Missing */
 	
-	#define PG_CONTROLLER_0			0
-	#define PG_CONTROLLER_1			1
-	#define PG_CONTROLLER_2			2
-	#define PG_CONTROLLER_3			3
+	#define PG_CONTROLLER_0			0				/*!	This is the controller 0 */
+	#define PG_CONTROLLER_1			1				/*!	This is the controller 1 */
+	#define PG_CONTROLLER_2			2				/*!	This is the controller 2 */
+	#define PG_CONTROLLER_3			3				/*!	This is the controller 3 */
 	
-	#define	PG_LINE_0				0
-	#define	PG_LINE_1				1
-	#define	PG_LINE_2				2
-	#define	PG_LINE_3				3
+	#define	PG_LINE_0				0				/*!	This is the line 0 */
+	#define	PG_LINE_1				1				/*!	This is the line 1 */
+	#define	PG_LINE_2				2				/*!	This is the line 2 */
+	#define	PG_LINE_3				3				/*!	This is the line 3 */
 
-	#define	PG_HD44780				1
+	#define	PG_HD44780				1				/*!	The name of the controller HD44780 */
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//      B O A R D   D E F I N E S
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	PG_BOARD_USER_DEFINED	0
-	#define	PG_BOARD_A				1
-	#define	PG_BOARD_EXPERIENCE		2
+	#define	PG_BOARD_USER_DEFINED	0				/*!	PicGIM will run on a user define board */
+	#define	PG_BOARD_A				1				/*!	PicGIM will run on a BOARD A */
+	#define	PG_BOARD_EXPERIENCE		2				/*!	PicGIM will run on a BOARD EXPERIENCE */
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//      H E A D E R   M E S S A G E S
@@ -490,21 +490,174 @@
 	
 		\n
 		\image html planning.png
-		\n \n 
+		\n 
 			
-		 To plan a new project with PicGIM you need to consider in detail what modules will need to enable. \n
-		 And with even more attention to which microcontroller to use. \n
-		 Keep in mind that PicGIM, in the next milestone will be even more careful in the use of the Program Memory and RAM and even more configurable. \n
-		 Here is a table that summarizes chromatically the attention to be placed in the choice of the microcontroller. \n
-		 
-		 \attention		In this table are ONLY microcontrollers currently supported by PicGIM. \n The microcontrollers supported are constantly increasing, and in case of a specific request, please write to info@gkript.org. \n 
+		To plan a new project with PicGIM you need to consider in detail what modules will need to enable. \n
+		And with even more attention to which microcontroller to use. \n
+		Keep in mind that PicGIM, in the next milestone will be even more careful in the use of the Program Memory and RAM and even more configurable. \n
 
-		 \n \n 
+ 		\htmlonly <br><br> \endhtmlonly
 
-		 \image	html	tabella-mcu-colori.png
- 	
-		 \n \n 
+	\section	planmicrochoose		Choose the proper Microcontroller
+
+		\htmlonly <hr> \endhtmlonly
+		\endcode
 		
+		Here is a table that summarizes chromatically the attention to be placed in the choice of the microcontroller. \n
+
+		\endcode
+
+		\n
+
+		\image	html	tabella-mcu-colori.png
+ 	
+		\n
+
+		<p>
+			As you can see the 18F2320 is colored orange which means critical. \n
+			This does NOT mean that there are no applications that PicGIM can play with this MCU. \n
+			Simply will need a good project planning for configuring PicGIM always keeping in mind the amount of Program Memory required for main algorithm. \n
+ 			In the next section are shown, in detail, the amount of Program Memory and Static RAM necessary for the inclusion of each module.
+		</p> \n
+
+		\attention		In this table are ONLY microcontrollers currently supported by PicGIM. \n The microcontrollers supported are constantly increasing, and in case of a specific request, please write to info@gkript.org. 
+
+ 		\htmlonly <br> \endhtmlonly
+
+	\section	planmicrodetails		In detail : Program Memory and Static RAM
+
+		\htmlonly <hr> \endhtmlonly
+		\endcode
+
+		The calculations were performed in conditions of "FROZEN CODE". \n
+		The calculation methods were as follows : \n \n
+
+		\htmlonly
+
+				<table class="cl_table" width="50%" border="0" >
+					<thead>
+						<tr align="center">
+							<th width="30%">Instruction set</th>
+							<th width="40%">Optimization</th>
+							<th width="30%">Error module</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr align="center"> <td>Traditional</td><td>NO optimization [-O]</td><td>DISABLE</td> </tr>
+						<tr align="center"> <td>Traditional</td><td>STD optimization [-Opa]</td><td>DISABLE</td> </tr>
+						<tr align="center"> <td>Traditional</td><td>FULL optimization</td><td>DISABLE</td> </tr>
+						<tr align="center"> <td>Extended</td><td>NO optimization [-O]</td><td>DISABLE</td> </tr>
+						<tr align="center"> <td>Extended</td><td>STD optimization [-Opa]</td><td>DISABLE</td> </tr>
+						<tr align="center"> <td>Extended</td><td>FULL optimization</td><td>DISABLE</td> </tr>
+						<tr align="center"> <td>Traditional</td><td>NO optimization [-O]</td><td>ENABLE</td> </tr>
+						<tr align="center"> <td>Traditional</td><td>STD optimization [-Opa]</td><td>ENABLE</td> </tr>
+						<tr align="center"> <td>Traditional</td><td>FULL optimization</td><td>ENABLE</td> </tr>
+						<tr align="center"> <td>Extended</td><td>NO optimization [-O]</td><td>ENABLE</td> </tr>
+						<tr align="center"> <td>Extended</td><td>STD optimization [-Opa]</td><td>ENABLE</td> </tr>
+						<tr align="center"> <td>Extended</td><td>FULL optimization</td><td>ENABLE</td> </tr>
+					</tbody>
+				</table>
+			\endhtmlonly
+ 	\htmlonly <br><br> \endhtmlonly
+
+		\subsection		planmicrodetailscore	The PicGIM core structure
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The amount of resources required by the internal structure of PicGIM is calculated by disabling all its features. \n
+			Here is the table: 
+
+			\image	html	picgim-structure-table.png
+
+			\n 
+
+			And here's the chart: \n 
+
+			\image	html	no-module.png
+
+			\n\n
+
+		\subsection		planmicrodetaildelay		The Delay module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The DELAY module has no dependencies, but has only an additional feature that is compiled only if the EVENTS module is enabled and occupies approximately 15 bytes of Program Memory and 0 bytes of Static RAM. \n
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure. \n
+
+ 			Here is the table:
+
+			\image	html	delay-table.png
+
+			\n
+
+			And here's the chart: \n
+
+			\image	html	delay-module.png
+
+			\n\n
+
+		\subsection		planmicrodetailevent		The Events module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The EVENTS module has no dependencies. \n
+			The event module is composed by the structure for its proper operation and the contribution of each individual event. \n
+ 			The table will then be divided into two sections: the structure and a single event. \n
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure. \n
+
+ 			Here is the table:
+
+			\image	html	events-table.png
+
+			\n
+
+			And here's the chart for the EVENTS structure: \n
+
+			\image	html	event-module.png
+
+			\n
+
+			And here's the chart for each Event: \n
+
+			\image	html	each-event.png
+
+			\n\n
+
+		\subsection		planmicrodetaillcdhd		The LCD HD44780 module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The LCD module HD44780 has as a dependency the DELAY module. \n
+			The module supports the HD44780 LCD module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure. \n
+
+ 			Here is the table:
+
+			\image	html	lcd-hd44780-table.png
+
+			\n
+
+			Here's the chart for the LCD HD44780 with ERRORS disabled: \n
+
+			\image	html	lcd-hd44780.png
+
+			\n
+
+			Here's the chart for the LCD HD44780 with ERRORS enabled: \n
+
+			\image	html	lcd-hd44780-error.png
+
+			\n\n
+
+
 */
 
 /*!
