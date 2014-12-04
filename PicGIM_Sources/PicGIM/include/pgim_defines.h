@@ -192,6 +192,42 @@
 	#define PG_HB_EXPERIENCE	Experience Board >
 
 
+	#include <math.h>
+
+	////////////////////////////////////////////////////////////////////////////////
+	//
+	//		M A T H E M A T I C A L   C O N S T A N T S
+	//
+	////////////////////////////////////////////////////////////////////////////////
+
+	#define	PG_CONSTANTS_PI							3.1415926535897						//!< Pi-Greek
+	#define	PG_CONSTANTS_EULER						2.7182818284590						//!< Euler's number. Base of the natural logarithm
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//
+	//		P H Y S I C A L   C O N S T A N T S
+	//
+	////////////////////////////////////////////////////////////////////////////////
+
+	#define	PG_CONSTANTS_LIGHT_VELOCITY				299792458							//!< Speed of light. Unit of measure: [m/s]
+	#define	PG_CONSTANTS_BOLTZMANN					( 1.3806488 * pow( 10 , -23 ) )		//!< Boltzmann's constant. Unit of measure: [J/K]
+	#define	PG_CONSTANTS_PLANK_JS					( 6.62606957 * pow( 10 , -34 ) )					//!< Planck's constant. Unit of measure: [J*s]
+	#define	PG_CONSTANTS_PLANK_EV					( 4.13562852 * pow( 10 , -15 ) )	//!< Planck's constant. Unit of measure: [eV*s]
+	#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565 * pow( 10 , -19 ) 	//!< Elementary charge. Unit of measure: [C]
+	#define	PG_CONSTANTS_GRAVITY_ACCELERATION		9.80665								//!< Gravitational acceleration. Unit of measure: [m/(s^2)]
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	//
+	//		C H E M I S T R Y   C O N S T A N T S
+	//
+	////////////////////////////////////////////////////////////////////////////////
+
+	#define	PG_CONSTANTS_AVOGADRO					( 6.02214129 * pow( 10 , 23 ) )		//!< Avogadro's number
+
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//      P I N   M A C R O   -   A r d u i n o   l i k e
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -513,18 +549,21 @@
  	
 		\n
 
+		\attention		In this table are ONLY microcontrollers currently supported by PicGIM. \n The microcontrollers supported are constantly increasing, and in case of a specific request, please write to info@gkript.org.
+
 		<p>
 			As you can see the 18F2320 is colored orange which means critical. \n
-			This does NOT mean that there are no applications that PicGIM can play with this MCU. \n
+			This does NOT mean that there are no applications that PicGIM can do on this MCU. \n
 			Simply will need a good project planning for configuring PicGIM always keeping in mind the amount of Program Memory required for main algorithm. \n
  			In the next section are shown, in detail, the amount of Program Memory and Static RAM necessary for the inclusion of each module.
-		</p> \n
+		</p> 
 
-		\attention		In this table are ONLY microcontrollers currently supported by PicGIM. \n The microcontrollers supported are constantly increasing, and in case of a specific request, please write to info@gkript.org. 
+		\attention	The next milestone (1.0) PicGIM can work generically with all MCU 18F. \n
+					The module EasyFuse today is compulsory but from next milestone it can be disabled as the others.
 
- 		\htmlonly <br> \endhtmlonly
+  		\htmlonly <br> \endhtmlonly
 
-	\section	planmicrodetails		In detail : Program Memory and Static RAM
+	\section	planmicrodetails		Program Memory and Static RAM in detail
 
 		\htmlonly <hr> \endhtmlonly
 		\endcode
@@ -565,8 +604,9 @@
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 
-			The amount of resources required by the internal structure of PicGIM is calculated by disabling all its features. \n
-			Here is the table: 
+			The amount of resources required by the internal structure of PicGIM is calculated by disabling all its features. \n \n
+
+ 			Here is the table:
 
 			\image	html	picgim-structure-table.png
 
@@ -583,13 +623,13 @@
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 
-			The DELAY module has no dependencies, but has only an additional feature that is compiled only if the EVENTS module is enabled and occupies approximately 15 bytes of Program Memory and 0 bytes of Static RAM. \n
-
-			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure. \n
+			The DELAY module has no dependencies, but has only an additional feature that is compiled only if the EVENTS module is enabled and occupies approximately 15 bytes of Program Memory and 0 bytes of Static RAM. \n \n
 
  			Here is the table:
 
 			\image	html	delay-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
 
 			\n
 
@@ -606,13 +646,13 @@
 
 			The EVENTS module has no dependencies. \n
 			The event module is composed by the structure for its proper operation and the contribution of each individual event. \n
- 			The table will then be divided into two sections: the structure and a single event. \n
-
-			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure. \n
+ 			The table will then be divided into two sections: the structure and a single event. \n \n
 
  			Here is the table:
 
 			\image	html	events-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
 
 			\n
 
@@ -634,14 +674,16 @@
 			\endcode
 
 			The LCD module HD44780 has as a dependency the DELAY module. \n
-			The module supports the HD44780 LCD module ERRORS. \n
+			The LCD HD44780 module supports the module ERRORS. \n
 			The table and graphs show the data in every possible configuration. \n
 
-			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure. \n
-
+			\note	The table below shows on a red background the module dependencies.
+ 
  			Here is the table:
 
 			\image	html	lcd-hd44780-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
 
 			\n
 
@@ -658,7 +700,71 @@
 			\n\n
 
 
+		\subsection		planmicrodetailadconv		The AD Converter module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The AD Converter module has no dependencies. \n
+			The AD Converter module supports the module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+ 			Here is the table:
+
+			\image	html	adconv-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			Here's the chart for the AD Converter with ERRORS disabled: \n
+
+			\image	html	ad-converter.png
+
+			\n
+
+			Here's the chart for the AD Converter with ERRORS enabled: \n
+
+			\image	html	ad-converter-error.png
+
+			\n\n
+
+		\subsection		planmicrodetailspi		The SPI module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The SPI Converter module has no dependencies. \n
+			The SPI module supports the module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+ 			Here is the table:
+
+			\image	html	spi-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			Here's the chart for the SPI with ERRORS disabled: \n
+
+			\image	html	spi-module.png
+
+			\n
+
+			Here's the chart for the SPI with ERRORS enabled: \n
+
+			\image	html	spi-module-error.png
+
+			\n\n
+
 */
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /*!
 	\page	PG_language		The language of PicGIM

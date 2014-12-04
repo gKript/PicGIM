@@ -79,7 +79,7 @@
 	//-------------------------------------------------------------------------------
 
 
-	//---[ Constants ]---
+	//---[ Board A ]---
 	#if ( PGIM_BOARD != PG_BOARD_USER_DEFINED )
 		#if ( PGIM_BOARD == PG_BOARD_A )
 			#include "pgim_board_setup_a.h"
@@ -94,17 +94,17 @@
 			#endif
 		#endif
 	#endif
-	//---[ END Constants ]---
+	//---[ END Board A ]---
 
 	
-	//---[ Constants ]---
-	#if ( PGIM_CONSTANTS == PG_ENABLE )
-		#include "pgim_constants.h"
-		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PG_HS_PG PG_HM_UNIV_CONST Defined
-		#endif
-	#endif
-	//---[ END Constants ]---
+//	//---[ Constants ]---
+//	#if ( PGIM_CONSTANTS == PG_ENABLE )
+//		#include "pgim_constants.h"
+//		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+//			#warning	PG_HS_PG PG_HM_UNIV_CONST Defined
+//		#endif
+//	#endif
+//	//---[ END Constants ]---
 
 
 	//---[ Error ]---
@@ -661,7 +661,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	#if defined( PG_EXIT_ON_ERROR ) 
-		#error	PG_HS_PG PG_HS_ERR PG_HS_CORE PicGIM has stopped compiling due to errors in the configuration
+		#error	PG_HS_PG PG_HS_ERR PG_HS_CORE PicGIM has stopped compiling due to errors in configuration
 	#endif 
 	
 #endif 

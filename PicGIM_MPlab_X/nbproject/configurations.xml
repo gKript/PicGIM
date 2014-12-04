@@ -36,7 +36,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_pwm.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/picgim_main.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_constants.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_error.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_lcd_hd44780.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_a.h</itemPath>
@@ -169,7 +168,7 @@
         <property key="preprocessor-macros" value=""/>
         <property key="procedural-abstraction-passes" value="4"/>
         <property key="storage-class" value="sca"/>
-        <property key="verbose" value="true"/>
+        <property key="verbose" value="false"/>
         <property key="warning-level" value="2"/>
       </C18>
       <C18-AS>
