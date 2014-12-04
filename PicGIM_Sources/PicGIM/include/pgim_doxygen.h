@@ -162,122 +162,214 @@
 /*!
 	\page	htgstarted		How to get started
 
-		\tableofcontents
+	 	\tableofcontents
+
+		\n
+		\image html getting-started.png
+		\n
 
 		<p>
-			In this section you can find all the details in easy steps for starting to use PicGIM.
+			In this section you can find all the details in easy steps for starting to use PicGIM. \n
+			PicGIM is compatible with the two standard environments MicroChip: MPLAB 8 and MPLAB X. \n \n
+
+			\htmlonly
+			&nbsp;&nbsp;&nbsp;&nbsp;<img src="ides.png" alt="ides.png">
+			\endhtmlonly
+
+			There are substantial differences between the two environments that we can not create a single common guideline. \n
+			So you need to follow the guide of the environment used. \n
 		</p>
 
-		\section	Howto 		How to create a project step by step
-			\htmlonly
-				<b>Download</b> the latest version of PicGim and uncompress it.<BR>
-				<b>Rename</b> with the name of your project:<BR>
-				&nbsp;&nbsp;- The directory created;<BR>
-				&nbsp;&nbsp;- The file "picgim.mcp";<BR>
-				&nbsp;&nbsp;- The file "main.c" (optional - We recommend you to not change the name of the main file ).<BR>
-				<b>Open</b> the project with MPLAB<small>&reg;</small> and update the file names not found.<BR>
-				<b>Select</b> the type of micro-controller used (see: \endhtmlonly \ref SWC_EzFuse \htmlonly ).<BR>
-				<b>Select</b> the correct tool-compiler suite (see: <A href=""></A>).<BR>
-				<b>Set</b> the desired options in the "Option-Build", such as the "Extended Instructions Set"<BR>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PicGim automatically detects it), and the various compiler optimizations (see: <A href=""></A>).<BR>
-				<b>Edit</b> in the MPLAB<small>&reg;</small> project:<BR>
-				&nbsp;&nbsp;- The public file .h of the micro-controller in use and modify the "#pragma config";<BR>
-				&nbsp;&nbsp;- The public file "module-setup.h";<BR>
-				&nbsp;&nbsp;- The public file "hardware-setup.h".<BR>
+		\section	getstartmp8 		PicGIM with MPLAB 8
 
-				<b>Add</b> to project yours .c and .h files and <b>compile</b>.<BR>
-					<h1><a class="anchor" id="documentation"></a>
-			\endhtmlonly
+			\subsection	getstartmp8howto 		How to create a project step by step
+				\htmlonly
+					<b>Download</b> the latest version of PicGim : <A target="_blank" href="http://gkript.org/index.php/projects/3-picgim#download">PicGIM download</A> <BR>
+					<b>Select</b> the type of micro-controller used (see: \endhtmlonly \ref SWC_EzFuse \htmlonly ).<BR>
+					<b>Select</b> the correct tool-compiler suite (see: <A href=""></A>).<BR>
+					<b>Set</b> the desired options in the "Option-Build", such as the "Extended Instructions Set"<BR>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PicGim automatically detects it), and the various compiler optimizations (see: <A href=""></A>).<BR>
+					<b>Edit</b> in the MPLAB<small>&reg;</small> project:<BR>
+					&nbsp;&nbsp;- The public file .h of the micro-controller in use and modify the "#pragma config";<BR>
+					&nbsp;&nbsp;- The public file "module-setup.h";<BR>
+					&nbsp;&nbsp;- The public file "hardware-setup.h".<BR>
 
-		\section	FullControl 	How to have the full control easily
-			\htmlonly
-				To get easily the complete control of your project you need to know which files are editable by user.<br>
-				So here is a list of the public files PicGIM's<br><br>
-				<table width="80%" border="0" >
-					<tr align="left" valign="center" >
-						<td width="20%"> \endhtmlonly pgim_18f2320_public.h \htmlonly </td>
-						<td>The public file for the 18F2320 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f2550_public.h \htmlonly </td>
-						<td>The public file for the 18F2550 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f2553_public.h \htmlonly</td>
-						<td>The public file for the 18F2553 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4520_public.h \htmlonly</td>
-						<td>The public file for the 18F4520 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4550_public.h \htmlonly</td>
-						<td>The public file for the 18F4550 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4553_public.h \htmlonly</td>
-						<td>The public file for the 18F4553 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4620_public.h \htmlonly</td>
-						<td>The public file for the 18F4620 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f97j60_public.h \htmlonly</td>
-						<td>The public file for the 18F97j60 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_hardware_setup_public.h \htmlonly </td>
-						<td>Through this file you set the hardware pinout for your project.<BR>Each module, when enabled, will follow the settings declared in this file.</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_event_setup_public.h \htmlonly </td>
-						<td>With this file you can enable the global management of interruptions.<br>PicGIM automatically will include all the setting for interrupt vector.<br>
-						PicGIM implements management of interrupts without priority levels for maximum compatibility between the various MCU supported.<br>
-						With this file you can also enable or disable each event handled by the Microchip<small>&#8482;</small> MCU.</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_module_setup_public.h \htmlonly </td>
-						<td>This public file makes it easy to to include in your project all the code needed for different hardware supported by PicGIM.<br>For more details see: <A href="./a00013.html"><strong>PicGIM modules</strong></A></td>
-					</tr>
-					<tr align="left" >
-						<td width="20%"> \endhtmlonly pgim_project_setup_public.h \htmlonly </td>
-						<td>With this file you can include or not different fonts managed by PicGIM.<BR><strong>PG_INCLUDE</strong> or <strong>PG_NOT_INCLUDE</strong></td>
-					</tr>					</table>
-				Every public file can be edited to adjust easily PicGIM to your project.<br><br>
-				<strong>If you disable all modules PicGIM weighs only 250 bytes of compiled.</strong><br><br>
-			\endhtmlonly
+					<b>Add</b> to project yours .c and .h files and <b>compile</b>.<BR>
+						<h1><a class="anchor" id="documentation"></a>
+				\endhtmlonly
+
+			\subsection		getstartmp8fullcontrol	 	How to have the full control easily
+				\htmlonly
+					To get easily the complete control of your project you need to know which files are editable by user.<br>
+					So here is a list of the public files PicGIM's<br><br>
+					<table width="80%" border="0" >
+						<tr align="left" valign="center" >
+							<td width="20%"> \endhtmlonly pgim_18f2320_public.h \htmlonly </td>
+							<td>The public file for the 18F2320 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f2550_public.h \htmlonly </td>
+							<td>The public file for the 18F2550 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f2553_public.h \htmlonly</td>
+							<td>The public file for the 18F2553 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4520_public.h \htmlonly</td>
+							<td>The public file for the 18F4520 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4550_public.h \htmlonly</td>
+							<td>The public file for the 18F4550 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4553_public.h \htmlonly</td>
+							<td>The public file for the 18F4553 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4620_public.h \htmlonly</td>
+							<td>The public file for the 18F4620 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f97j60_public.h \htmlonly</td>
+							<td>The public file for the 18F97j60 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_hardware_setup_public.h \htmlonly </td>
+							<td>Through this file you set the hardware pinout for your project.<BR>Each module, when enabled, will follow the settings declared in this file.</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_event_setup_public.h \htmlonly </td>
+							<td>With this file you can enable the global management of interruptions.<br>PicGIM automatically will include all the setting for interrupt vector.<br>
+							PicGIM implements management of interrupts without priority levels for maximum compatibility between the various MCU supported.<br>
+							With this file you can also enable or disable each event handled by the Microchip<small>&#8482;</small> MCU.</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_module_setup_public.h \htmlonly </td>
+							<td>This public file makes it easy to to include in your project all the code needed for different hardware supported by PicGIM.<br>For more details see: <A href="./a00013.html"><strong>PicGIM modules</strong></A></td>
+						</tr>
+						<tr align="left" >
+							<td width="20%"> \endhtmlonly pgim_project_setup_public.h \htmlonly </td>
+							<td>With this file you can include or not different fonts managed by PicGIM.<BR><strong>PG_INCLUDE</strong> or <strong>PG_NOT_INCLUDE</strong></td>
+						</tr>					</table>
+					Every public file can be edited to adjust easily PicGIM to your project.<br><br>
+					<strong>If you disable all modules PicGIM weighs only 250 bytes of compiled.</strong><br><br>
+				\endhtmlonly
 
 
-		\section	Example A simple example use PicGIM
-			\code
-				#include "picgim_main.h"
+		\section	getstartmpx 		PicGIM with MPLAB X
 
-				void main( void ) {
-					// main initialization of PicGIM : this is compulsory !!!
-					pg_initialize();
-					
-					//	Provided by PGIM_BUZZER module
-					pg_beep( PG_BEEP_LOW , PG_BEEP_SHORT );
-					pg_beep( PG_BEEP_MID , PG_BEEP_SHORT );
-					pg_beep( PG_BEEP_HIGH , PG_BEEP_LONG );
+			\subsection	getstartmpxhowto 		How to create a project step by step
+				\htmlonly
+					<b>Download</b> the latest version of PicGim and uncompress it.<BR>
+					<b>Rename</b> with the name of your project:<BR>
+					&nbsp;&nbsp;- The directory created;<BR>
+					&nbsp;&nbsp;- The file "picgim.mcp";<BR>
+					&nbsp;&nbsp;- The file "main.c" (optional - We recommend you to not change the name of the main file ).<BR>
+					<b>Open</b> the project with MPLAB<small>&reg;</small> and update the file names not found.<BR>
+					<b>Select</b> the type of micro-controller used (see: \endhtmlonly \ref SWC_EzFuse \htmlonly ).<BR>
+					<b>Select</b> the correct tool-compiler suite (see: <A href=""></A>).<BR>
+					<b>Set</b> the desired options in the "Option-Build", such as the "Extended Instructions Set"<BR>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PicGim automatically detects it), and the various compiler optimizations (see: <A href=""></A>).<BR>
+					<b>Edit</b> in the MPLAB<small>&reg;</small> project:<BR>
+					&nbsp;&nbsp;- The public file .h of the micro-controller in use and modify the "#pragma config";<BR>
+					&nbsp;&nbsp;- The public file "module-setup.h";<BR>
+					&nbsp;&nbsp;- The public file "hardware-setup.h".<BR>
 
-					//	Provided by PGIM_DELAY module
-					pg_delay( 2 , PG_SEC );
+					<b>Add</b> to project yours .c and .h files and <b>compile</b>.<BR>
+						<h1><a class="anchor" id="documentation"></a>
+				\endhtmlonly
 
-					//	Provided by PGIM_LCD_HD44780 module
-					pg_lcd_hd44780_write_p_string_rom ( PG_CONTROLLER_0 , 0 , 3, "gKript.org" );
-					pg_lcd_hd44780_write_p_char( PG_CONTROLLER_0 , 1 , 1 , "PicGIM  %s" , PG_VERSION );
-					
-					PG_HALT;
-				}
+			\subsection		getstartmpxfullcontrol	 	How to have the full control easily
+				\htmlonly
+					To get easily the complete control of your project you need to know which files are editable by user.<br>
+					So here is a list of the public files PicGIM's<br><br>
+					<table width="80%" border="0" >
+						<tr align="left" valign="center" >
+							<td width="20%"> \endhtmlonly pgim_18f2320_public.h \htmlonly </td>
+							<td>The public file for the 18F2320 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f2550_public.h \htmlonly </td>
+							<td>The public file for the 18F2550 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f2553_public.h \htmlonly</td>
+							<td>The public file for the 18F2553 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4520_public.h \htmlonly</td>
+							<td>The public file for the 18F4520 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4550_public.h \htmlonly</td>
+							<td>The public file for the 18F4550 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4553_public.h \htmlonly</td>
+							<td>The public file for the 18F4553 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f4620_public.h \htmlonly</td>
+							<td>The public file for the 18F4620 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_18f97j60_public.h \htmlonly</td>
+							<td>The public file for the 18F97j60 MCU</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_hardware_setup_public.h \htmlonly </td>
+							<td>Through this file you set the hardware pinout for your project.<BR>Each module, when enabled, will follow the settings declared in this file.</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_event_setup_public.h \htmlonly </td>
+							<td>With this file you can enable the global management of interruptions.<br>PicGIM automatically will include all the setting for interrupt vector.<br>
+							PicGIM implements management of interrupts without priority levels for maximum compatibility between the various MCU supported.<br>
+							With this file you can also enable or disable each event handled by the Microchip<small>&#8482;</small> MCU.</td>
+						</tr>
+						<tr align="left">
+							<td width="20%"> \endhtmlonly pgim_module_setup_public.h \htmlonly </td>
+							<td>This public file makes it easy to to include in your project all the code needed for different hardware supported by PicGIM.<br>For more details see: <A href="./a00013.html"><strong>PicGIM modules</strong></A></td>
+						</tr>
+						<tr align="left" >
+							<td width="20%"> \endhtmlonly pgim_project_setup_public.h \htmlonly </td>
+							<td>With this file you can include or not different fonts managed by PicGIM.<BR><strong>PG_INCLUDE</strong> or <strong>PG_NOT_INCLUDE</strong></td>
+						</tr>					</table>
+					Every public file can be edited to adjust easily PicGIM to your project.<br><br>
+					<strong>If you disable all modules PicGIM weighs only 250 bytes of compiled.</strong><br><br>
+				\endhtmlonly
 
-			\endcode
+
+
 
 
  */
 
-
+//		\section	Example A simple example use PicGIM
+//			\code
+//				#include "picgim_main.h"
+//
+//				void main( void ) {
+//					// main initialization of PicGIM : this is compulsory !!!
+//					pg_initialize();
+//
+//					//	Provided by PGIM_BUZZER module
+//					pg_beep( PG_BEEP_LOW , PG_BEEP_SHORT );
+//					pg_beep( PG_BEEP_MID , PG_BEEP_SHORT );
+//					pg_beep( PG_BEEP_HIGH , PG_BEEP_LONG );
+//
+//					//	Provided by PGIM_DELAY module
+//					pg_delay( 2 , PG_SEC );
+//
+//					//	Provided by PGIM_LCD_HD44780 module
+//					pg_lcd_hd44780_write_p_string_rom ( PG_CONTROLLER_0 , 0 , 3, "gKript.org" );
+//					pg_lcd_hd44780_write_p_char( PG_CONTROLLER_0 , 1 , 1 , "PicGIM  %s" , PG_VERSION );
+//
+//					PG_HALT;
+//				}
+//
+//			\endcode
 
 /*!
 	\page	NM_nextmilestone		Current milestone

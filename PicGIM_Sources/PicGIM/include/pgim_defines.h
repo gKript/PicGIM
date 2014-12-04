@@ -539,7 +539,7 @@
 		\htmlonly <hr> \endhtmlonly
 		\endcode
 		
-		Here is a table that summarizes chromatically the attention to be placed in the choice of the microcontroller. \n
+		Here is a table that summarizes chromatically the attention to be placed in the choice of the microcontroller to use in a PicGIM project. \n
 
 		\endcode
 
@@ -571,6 +571,10 @@
 		The calculations were performed in conditions of "FROZEN CODE". \n
 		The calculation methods were as follows : \n \n
 
+		\warning	If is used MplabX you must keep in mind that is not supported directly the Extended Instruction Set modality in compilation. \n It will be necessary to set this mode manually by following the guide HERE. 
+
+		\n
+ 
 		\htmlonly
 
 				<table class="cl_table" width="50%" border="0" >
