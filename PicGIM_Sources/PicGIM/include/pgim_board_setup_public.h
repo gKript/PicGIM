@@ -42,7 +42,11 @@
 #ifndef PGIM_BOARD_SETUP_PUBLIC_H
 #define	PGIM_BOARD_SETUP_PUBLIC_H
 
-
+	/*!
+	 *	\todo			This define is for the next PicGIM Milestone 1.0
+	 *	\warning		Internal use only.
+	 *	\deprecated		Do not edit
+	 */
 	#define PGIM_BOARD			PG_BAORD_USER_DEFINED			//	PG_BAORD_USER_DEFINED		PG_BOARD_A		PG_BOARD_EXPERIENCE
 
 
