@@ -38,7 +38,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_error.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_lcd_hd44780.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_a.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ftoa.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_event.h</itemPath>
       </logicalFolder>
@@ -84,12 +83,10 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_int_osc.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_spi.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_timer.c</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_version.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_pwm.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_serial.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_error.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_lcd_hd44780.c</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_board_setup_a.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_ftoa.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_event.c</itemPath>
       </logicalFolder>

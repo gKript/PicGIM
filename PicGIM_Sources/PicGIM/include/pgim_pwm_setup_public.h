@@ -50,7 +50,7 @@
 
 		
 		//		E N H A N C E D   M O D E
-		#define PG_PWM_1_ENHANCED					PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PG_PWM_1_ENHANCED					PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_PWM_2_ENHANCED					PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 
 		

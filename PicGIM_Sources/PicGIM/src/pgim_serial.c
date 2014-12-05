@@ -247,7 +247,7 @@
 		//--------------------------------------------------
 		//	Debug output to LCD-HD44780				( OK )
 		#if ( PGIM_SERIAL_DEBUG_TO_LCD_HD44780 == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL )
-			pg_lcd_hd44780_write_p_int( 0 , 0 , "Baudrate: %d" , pg_serial_baudrate_value_wanted );
+			pg_lcd_hd44780_write_p_int( 0 , 0 , 0 , "Baudrate: %d" , pg_serial_baudrate_value_wanted );
 		#endif
 	}
 	//---[ END Debug Ok]---
