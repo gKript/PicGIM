@@ -76,12 +76,16 @@
 	#ifdef _GIM_H_
 		#if defined( __EXTENDED18__ )
 			#pragma	config XINST = ON
-			#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set successful activated
+			#if	( PG_VERBOSE == PG_ENABLE )
+				#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set successful activated
+			#endif
 		#else
 			#pragma	config XINST = OFF
-			#warning	PG_HS_PG PG_HS_CORE TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
+			#if	( PG_VERBOSE == PG_ENABLE ) && ( PG_SUGGESTION == PG_ENABLE )
+				#warning	PG_HS_PG PG_HS_CORE PG_HS_SUGG TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
+			#endif
 		#endif
-	#endif	
+	#endif
 	//---[ END Extended Instructions Set ]---
 		
 	//---[ Hardware Resources ]---
@@ -135,7 +139,7 @@
 			<BR>
 		\endhtmlonly
 
-		\section	datasheet	MicroChip official datasheet
+		\section	datasheet97J60	MicroChip official datasheet
 
 			\htmlonly
 				We think that if you are reading this documentation you will certainly already decided the hardware part of your project.<br>
@@ -145,51 +149,71 @@
 				<br><br><br><br>
 			\endhtmlonly
 
-		\section	Constant	Various constants
+		\section	Constant97J60	Various constants
 
-			\subsection		TCYCLEPERI		PG_TCYCLEPERI
+			\subsection		TCYCLEPERI97J60		PG_TCYCLEPERI
 				Is the number of cycles required for a single instruction for the family PIC18. This is  a constant.
 				\code
 					#define		PG_TCYCLEPERI		4
 				\endcode
 
-			\subsection		MAX_OSC_FREQ		PG_MAX_OSC_FREQ
+			\subsection		MAX_OSC_FREQ97J60		PG_MAX_OSC_FREQ
 				Is the maximum working frequency for this specific MCU. This is  a constant.
 				\code
 					#define		PG_MAX_OSC_FREQ		41.667
 				\endcode
 
-			\subsection		MAX_RAM		PG_MAX_RAM
+			\subsection		MAX_RAM97J60		PG_MAX_RAM
 				Is the maximum amount of RAM for this specific MCU. This is  a constant.
 				\code
 					#define		PG_MAX_RAM			3808
 				\endcode
 
-			\subsection		PSUPPLY		PG_MCU_SUPPLY
+			\subsection		PSUPPLY97J60		PG_MCU_SUPPLY
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
 					#define		PG_MCU_SUPPLY			3.3
 				\endcode
 
-		\section	SXINST			Extended Instruction Code
-			\htmlonly
-				<b>This MCU can support this feature.</b><br>
-				You can simply enable it under MPLAB settigs following this figure :
-				<br><br>
-				<IMG src="xinst.jpg" align="center" border="0" >
-				<br><br>
-				<b>PicGIM</b> will automatically choose the correct FUSE intercepting the flag in MPLAB.
+		\section	SXINST97J60			Extended Instruction Code
 			\endhtmlonly
+			\endcode
+			<b>This MCU can support this feature.</b> \n
+			Under MPLAB 8 it is simply to enable it just following this figure : \n
+			\n \n
+			\image	html	xinst.jpg
+			\n \n
+			<b>PicGIM</b> will automatically choose the correct FUSE intercepting the flag from C18. \n \n
+
+			In MPLAB X is not so simple but they are only need three steps.
+			Follow this step by step guide:	\ref getstartmpxhowtoxinst \n
+
+			\attention		Even if it is properly flagged check for Extended instruction code, MPLAB X will ignore it. \n
+						It will be necessary, as well as to flag, the extended instruction code, manually force the definition of "__EXTENDED18__" in Compiler and Linker. \n
+						Here is the guide : \ref getstartmpxhowtoxins
+
+			\n
+
 			\code
-				#if defined( __EXTENDED18__ )
-					#pragma	config XINST		= ON
-				#else
-					#pragma	config XINST		= OFF
+				//---[ Extended Instructions Set ]--- SUPPORTED
+				#ifdef _GIM_H_
+					#if defined( __EXTENDED18__ )
+						#pragma	config XINST = ON
+						#if	( PG_VERBOSE == PG_ENABLE )
+							#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set successful activated
+						#endif
+					#else
+						#pragma	config XINST = OFF
+						#if	( PG_VERBOSE == PG_ENABLE ) && ( PG_SUGGESTION == PG_ENABLE )
+							#warning	PG_HS_PG PG_HS_CORE PG_HS_SUGG TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
+						#endif
+					#endif
 				#endif
+				//---[ END Extended Instructions Set ]---
 			\endcode
 
-		\section	Default		Default FUSE configuration
+		\section	Default97J60		Default FUSE configuration
 
 			\code
 				#pragma	config PLLDIV		= 1
@@ -233,7 +257,7 @@
 				#pragma	config EBTRB			= OFF
 			\endcode
 
-		\section	Fuse	Specific FUSE settings
+		\section	Fuse97J60	Specific FUSE settings
 
 			\subsection		Oscillator 		Oscillator Selection
 				\code
@@ -249,25 +273,25 @@
 					OSC = INTIO7			INTRC-OSC2 as Clock Out, OSC1 as RA7
 				\endcode
 
-			\subsection		Fail				Fail-Safe Clock Monitor
+			\subsection		Fail97J60				Fail-Safe Clock Monitor
 				\code
 					FCMEN = OFF		Disabled
 					FCMEN = ON		Enabled
 				\endcode
 
-			\subsection		Internal 		Internal External Osc. Switch Over
+			\subsection		Internal97J60 		Internal External Osc. Switch Over
 				\code
 					IESO = OFF		Disabled
 					IESO = ON		Enabled
 				\endcode
 
-			\subsection		Power		Power-up Timer
+			\subsection		Power97J60		Power-up Timer
 				\code
 					PWRT = ON		Enabled
 					PWRT = OFF		Disabled
 				\endcode
 
-			\subsection		Brown			Brown-out Reset:
+			\subsection		Brown97J60			Brown-out Reset:
 				\code
 					BOREN = OFF			SBOREN Disabled
 					BOREN = ON				SBOREN Enabled
@@ -275,20 +299,20 @@
 					BOREN = SBORDIS	Enabled, SBOREN Disabled
 				\endcode
 
-			\subsection		Brown			Brown-out Voltage
+			\subsection		Browns97J60			Brown-out Voltage
 				\code
 					BORV = 0		Maximum setting
 					BORV = 1
 					BORV = 2
 					BORV = 3		Minimum setting
 
-			\subsection		Watchdog 			Watchdog Timer
+			\subsection		Watchdog97J60 			Watchdog Timer
 				\code
 					WDT = OFF		Disabled
 					WDT = ON		Enabled
 			\endcode
 
-			\subsection		Watchdog 		Watchdog Postscaler
+			\subsection		Watchdogss97J60		Watchdog Postscaler
 				\code
 					WDTPS = 1				1:1
 					WDTPS = 2				1:2
@@ -308,157 +332,157 @@
 					WDTPS = 32768		1:32768
 			\endcode
 
-			\subsection		MCLR 			MCLR Enable
+			\subsection		MCLR97J60 			MCLR Enable
 				\code
 					MCLRE = OFF	Disabled
 					MCLRE = ON		Enabled
 			\endcode
 
-			\subsection		T1 			T1 Oscillator Enable
+			\subsection		T197J60 			T1 Oscillator Enable
 				\code
 					LPT1OSC = OFF	Disabled
 					LPT1OSC = ON		Enabled
 			\endcode
 
-			\subsection		PORTB 			PORTB A/D Enable
+			\subsection		PORTB97J60 			PORTB A/D Enable
 				\code
 					PBADEN = OFF		PORTB<4:0> digital on Reset
 					PBADEN = ON		PORTB<4:0> analog on Reset
 			\endcode
 
-			\subsection		CCP2 			CCP2 MUX
+			\subsection		CCP297J60 			CCP2 MUX
 				\code
 					CCP2MX = PORTBE	Multiplexed with RB3
 					CCP2MX = PORTC		Multiplexed with RC1
 			\endcode
 
-			\subsection		Stack 			Stack Overflow Reset
+			\subsection		Stack97J60 			Stack Overflow Reset
 				\code
 					STVREN = OFF		Disabled
 					STVREN = ON		Enabled
 			\endcode
 
-			\subsection		Low 			Low Voltage ICSP
+			\subsection		Low97J60 			Low Voltage ICSP
 				\code
 					LVP = OFF		Disabled
 					LVP = ON			Enabled
 			\endcode
 
-			\subsection		XINST 			XINST Enable
+			\subsection		XINSTs97J60 			XINST Enable
 				\code
 					XINST = OFF		Disabled
 					XINST = ON		Enabled
 			\endcode
 
-			\subsection		Background 			Background Debugger Enable
+			\subsection		Background97J60 			Background Debugger Enable
 				\code
 					DEBUG = ON		Enabled
 					DEBUG = OFF		Disabled
 			\endcode
 
-			\subsection	Code		Code Protection bit Block 0
+			\subsection	Code97J60		Code Protection bit Block 0
 			\code
 				CP0 = ON			Block 0 (000800-001FFFh) code-protected
 				CP0 = OFF		Block 0 (000800-001FFFh) not code-protected
 			\endcode
 
-			\subsection	Code1		Code Protection bit Block 1
+			\subsection	Code197J60		Code Protection bit Block 1
 			\code
 				CP1 = ON			Block 1 (002000-003FFFh) code-protected
 				CP1 = OFF		Block 1 (002000-003FFFh) not code-protected
 			\endcode
 
-			\subsection	Code2		Code Protection bit Block 2
+			\subsection	Code297J60		Code Protection bit Block 2
 			\code
 				CP2 = ON			Block 2 (004000-005FFFh) code-protected
 				CP2 = OFF		Block 2 (004000-005FFFh) not code-protected
 			\endcode
 
-			\subsection	Code3		Code Protection bit Block 3
+			\subsection	Code397J60		Code Protection bit Block 3
 			\code
 				CP3 = ON			Block 3 (006000-007FFFh) code-protected
 				CP3 = OFF		Block 3 (006000-007FFFh) not code-protected
 			\endcode
 
-			\subsection	Boot		Boot Block Code Protection bit
+			\subsection	Boot97J60		Boot Block Code Protection bit
 			\code
 				CPB = ON			Boot block (000000-0007FFh) code-protected
 				CPB = OFF		Boot block (000000-0007FFh) not code-protected
 			\endcode
 
-			\subsection	Data		Data EEPROM Code Protection bit
+			\subsection	Data97J60		Data EEPROM Code Protection bit
 			\code
 				CPD = ON			Data EEPROM code-protected
 				CPD = OFF		Data EEPROM not code-protected
 			\endcode
 
-			\subsection	Write		Write Protection bit Block 0
+			\subsection	Write97J60		Write Protection bit Block 0
 			\code
 				WRT0 = ON		Block 0 (000800-001FFFh) write-protected
 				WRT0 = OFF		Block 0 (000800-001FFFh) not write-protected
 			\endcode
 
-			\subsection	Write1		Write Protection bit Block 1
+			\subsection	Write197J60		Write Protection bit Block 1
 			\code
 				WRT1 = ON		Block 1 (002000-003FFFh) write-protected
 				WRT1 = OFF		Block 1 (002000-003FFFh) not write-protected
 			\endcode
 
-			\subsection	Write2		Write Protection bit Block 2
+			\subsection	Write297J60		Write Protection bit Block 2
 			\code
 				WRT2 = ON		Block 2 (004000-005FFFh) write-protected
 				WRT2 = OFF		Block 2 (004000-005FFFh) not write-protected
 			\endcode
 
-			\subsection	Write3		Write Protection bit Block 3
+			\subsection	Write397J60		Write Protection bit Block 3
 			\code
 				WRT3 = ON		Block 3 (006000-007FFFh) write-protected
 				WRT3 = OFF		Block 3 (006000-007FFFh) not write-protected
 			\endcode
 
-			\subsection	Boot1		Boot Block Write Protection bit
+			\subsection	Boot197J60		Boot Block Write Protection bit
 			\code
 				WRTB = ON		Boot block (000000-0007FFh) write-protected
 				WRTB = OFF		Boot block (000000-0007FFh) not write-protected
 			\endcode
 
-			\subsection	Configuration		Configuration Register Write Protection bit
+			\subsection	Configuration97J60		Configuration Register Write Protection bit
 			\code
 				WRTC = ON		Configuration registers (300000-3000FFh) write-protected
 				WRTC = OFF		Configuration registers (300000-3000FFh) not write-protected
 			\endcode
 
-			\subsection	Data1	Data EEPROM Write Protection bit
+			\subsection	Data197J60	Data EEPROM Write Protection bit
 			\code
 				WRTD = ON		Data EEPROM write-protected
 				WRTD = OFF		Data EEPROM not write-protected
 			\endcode
 
-			\subsection	Table		Table Read Protection bit Block 0
+			\subsection	Table97J60		Table Read Protection bit Block 0
 			\code
 				EBTR0 = ON		Block 0 (000800-001FFFh) protected from table reads executed in other blocks
 				EBTR0 = OFF	Block 0 (000800-001FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Table1		Table Read Protection bit Block 1
+			\subsection	Table197J60		Table Read Protection bit Block 1
 			\code
 				EBTR1 = ON		Block 1 (002000-003FFFh) protected from table reads executed in other blocks
 				EBTR1 = OFF	Block 1 (002000-003FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Table2		Table Read Protection bit Block 2
+			\subsection	Table297J60		Table Read Protection bit Block 2
 			\code
 				EBTR2 = ON		Block 2 (004000-005FFFh) protected from table reads executed in other blocks
 				EBTR2 = OFF	Block 2 (004000-005FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Table3		Table Read Protection bit Block 3
+			\subsection	Table397J60		Table Read Protection bit Block 3
 			\code
 				EBTR3 = ON		Block 3 (006000-007FFFh) protected from table reads executed in other blocks
 				EBTR3 = OFF	Block 3 (006000-007FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Boot2		Boot Block Table Read Protection
+			\subsection	Boot297J60		Boot Block Table Read Protection
 			\code
 				EBTRB = ON		Boot block (000000-0007FFh) protected from table reads executed in other blocks
 				EBTRB = OFF	Boot block (000000-0007FFh) not protected from table reads executed in other blocks

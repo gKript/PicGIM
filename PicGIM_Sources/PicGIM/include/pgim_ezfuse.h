@@ -196,19 +196,21 @@
 		These are the MCU currently supported by PicGIM. As already mentioned, the list is constantly updated. \n \n
 		Check on http://www.gkript.org PicGIM that is always the latest version. \n
 		As mentioned above, you can create your own support for one another MCU or request support PicGIM developers. \n \n
+
+		\attention	Here a link to the file : \ref pgim_ezfuse.h \n
+					This is not a file defined as public and therefore would not be edited. \n
+					We suggest that you edit this file only if necessary and only if you know what you are doing.
 			
-		\ref	MCU_PIC18F97J60	\n
-		\ref	MCU_PIC18F4620	\n
-		\ref	MCU_PIC18F4553	\n
-		\ref	MCU_PIC18F4550	\n
-		\ref	MCU_PIC18F4520	\n
-		\ref	MCU_PIC18F2553	\n
-		\ref	MCU_PIC18F2550	\n
-		\ref	MCU_PIC18F2320	\n \n
+			\subpage	MCU_PIC18F97J60	\n
+			\subpage	MCU_PIC18F4620	\n
+			\subpage	MCU_PIC18F4553	\n
+			\subpage	MCU_PIC18F4550	\n
+			\subpage	MCU_PIC18F4520	\n
+			\subpage	MCU_PIC18F2553	\n
+			\subpage	MCU_PIC18F2550	\n
+			\subpage	MCU_PIC18F2320	\n \n \n
 
-	\attention	Here a link to the file : \ref pgim_ezfuse.h \n This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
-
-  */
+ */
 
 
  

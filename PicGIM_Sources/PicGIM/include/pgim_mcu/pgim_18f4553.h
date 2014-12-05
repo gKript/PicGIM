@@ -130,7 +130,7 @@
 			<BR>
 		\endhtmlonly
 
-		\section	datasheet	MicroChip official datasheet
+		\section	datasheet4553	MicroChip official datasheet
 
 			\htmlonly
 				We think that if you are reading this documentation you will certainly already decided the hardware part of your project.<br>
@@ -140,51 +140,71 @@
 				<br><br><br><br>
 			\endhtmlonly
 
-		\section	Constant	Various constants
+		\section	Constant4553	Various constants
 
-			\subsection		TCYCLEPERI		PG_TCYCLEPERI
+			\subsection		TCYCLEPERI4553		PG_TCYCLEPERI
 			Is the number of cycles required for a single instruction for the family PIC18. This is  a constant.
 			\code
-				#define		PG_TCYCLEPERI		4
+				#define		PG_TCYCLEPERI4553		4
 			\endcode
 
-			\subsection		MAX_OSC_FREQ		PG_MAX_OSC_FREQ
+			\subsection		MAX_OSC_FREQ4553		PG_MAX_OSC_FREQ
 			Is the maximum working frequency for this specific MCU. This is  a constant.
 			\code
-				#define		PG_MAX_OSC_FREQ		48.000
+				#define		PG_MAX_OSC_FREQ4553		48.000
 			\endcode
 
 			\subsection		MAX_RAM		PG_MAX_RAM
 			Is the maximum amount of RAM for this specific MCU. This is  a constant.
 			\code
-				#define		PG_MAX_RAM			2048
+				#define		PG_MAX_RAM4553			2048
 			\endcode
 
-			\subsection		PSUPPLY		PG_MCU_SUPPLY
+			\subsection		PSUPPLY4553		PG_MCU_SUPPLY
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
 					#define		PG_MCU_SUPPLY			5.0
 				\endcode
 
-		\section	SXINST	Extended Instruction Code
-			\htmlonly
-				<b>This MCU can support this feature.</b><br>
-				You can enable it directly under MPLAB settigs following this figure :
-				<br><br>
-				<IMG src="xinst.jpg" align="center" border="0" >
-				<br><br>
-				<b>PicGIM</b> will automatically choose the correct FUSE intercepting the flag in MPLAB.
+		\section	SXINST4553	Extended Instruction Code
 			\endhtmlonly
+			\endcode
+			<b>This MCU can support this feature.</b> \n
+			Under MPLAB 8 it is simply to enable it just following this figure : \n
+			\n \n
+			\image	html	xinst.jpg
+			\n \n
+			<b>PicGIM</b> will automatically choose the correct FUSE intercepting the flag from C18. \n \n
+
+			In MPLAB X is not so simple but they are only need three steps.
+			Follow this step by step guide:	\ref getstartmpxhowtoxinst \n
+
+			\attention		Even if it is properly flagged check for Extended instruction code, MPLAB X will ignore it. \n
+						It will be necessary, as well as to flag, the extended instruction code, manually force the definition of "__EXTENDED18__" in Compiler and Linker. \n
+						Here is the guide : \ref getstartmpxhowtoxins
+
+			\n
+
 			\code
-				#if defined( __EXTENDED18__ )
-					#pragma	config XINST		= ON
-				#else
-					#pragma	config XINST		= OFF
+				//---[ Extended Instructions Set ]--- SUPPORTED
+				#ifdef _GIM_H_
+					#if defined( __EXTENDED18__ )
+						#pragma	config XINST = ON
+						#if	( PG_VERBOSE == PG_ENABLE )
+							#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set successful activated
+						#endif
+					#else
+						#pragma	config XINST = OFF
+						#if	( PG_VERBOSE == PG_ENABLE ) && ( PG_SUGGESTION == PG_ENABLE )
+							#warning	PG_HS_PG PG_HS_CORE PG_HS_SUGG TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
+						#endif
+					#endif
 				#endif
+				//---[ END Extended Instructions Set ]---
 			\endcode
 
-		\section	Default		Default FUSE configuration
+		\section	Default4553		Default FUSE configuration
 
 			\code
 				#pragma	config PLLDIV		= 1
@@ -228,9 +248,9 @@
 				#pragma	config EBTRB			= OFF
 			\endcode
 
-		\section	Fuse	Specific FUSE settings
+		\section	Fuse4553	Specific FUSE settings
 
-			\subsection	PLL	PLL Prescaler Selection bits
+			\subsection	PLL4553			PLL Prescaler Selection bits
 			\code
 				PLLDIV = 1		No prescale (4 MHz oscillator input drives PLL directly)
 				PLLDIV = 2		Divide by 2 (8 MHz oscillator input)
@@ -242,7 +262,7 @@
 				PLLDIV = 12		Divide by 12 (48 MHz oscillator input)
 			\endcode
 
-			\subsection	CPU 		CPU System Clock Postscaler
+			\subsection	CPU4553 		CPU System Clock Postscaler
 			\code
 				CPUDIV = OSC1_PLL2		[OSC1/OSC2 Src: /1][96 MHz PLL Src: /2]
 				CPUDIV = OSC2_PLL3		[OSC1/OSC2 Src: /2][96 MHz PLL Src: /3]
@@ -250,13 +270,13 @@
 				CPUDIV = OSC4_PLL6		[OSC1/OSC2 Src: /4][96 MHz PLL Src: /6]
 			\endcode
 
-			\subsection	USB 		USB Clock Selection bit (used in Full Speed USB mode only; UCFG:FSEN = 1):
+			\subsection	USB4553 		USB Clock Selection bit (used in Full Speed USB mode only; UCFG:FSEN = 1):
 			\code
 				USBDIV = 1		USB clock source comes directly from the primary oscillator block with no postscale
 				USBDIV = 2		USB clock source comes from the 96 MHz PLL divided by 2
 			\endcode
 
-			\subsection	Oscillator 		Oscillator Selection bits:
+			\subsection	Oscillator4553 		Oscillator Selection bits:
 			\code
 				FOSC = XT_XT				XT oscillator, XT used by USB
 				FOSC = XTPLL_XT			XT oscillator, PLL enabled, XT used by USB
@@ -272,25 +292,25 @@
 				FOSC = HSPLL_HS		HS oscillator, PLL enabled, HS used by USB
 			\endcode
 
-			\subsection	Fail-Safe	Fail-Safe Clock Monitor Enable bit
+			\subsection	Fail-Safe4553	Fail-Safe Clock Monitor Enable bit
 			\code
 				FCMEN = OFF	Fail-Safe Clock Monitor disabled
 				FCMEN = ON	Fail-Safe Clock Monitor enabled
 			\endcode
 
-			\subsection	Internal		Internal/External Oscillator Switchover bit
+			\subsection	Internal4553		Internal/External Oscillator Switchover bit
 			\code
 				IESO = OFF		Oscillator Switchover mode disabled
 				IESO = ON		Oscillator Switchover mode enabled
 			\endcode
 
-			\subsection	Power		Power-up Timer Enable bit
+			\subsection	Power4553		Power-up Timer Enable bit
 			\code
 				PWRT = ON		PWRT enabled
 				PWRT = OFF		PWRT disabled
 			\endcode
 
-			\subsection		Brown		Brown-out Reset Enable bits
+			\subsection		Brown4553		Brown-out Reset Enable bits
 			\code
 				BOR = OFF				Brown-out Reset disabled in hardware and software
 				BOR = SOFT				Brown-out Reset enabled and controlled by software (SBOREN is enabled)
@@ -298,7 +318,7 @@
 				BOR = ON					Brown-out Reset enabled in hardware only (SBOREN is disabled)
 			\endcode
 
-			\subsection		Brownv		Brown-out Voltage bits
+			\subsection		Brownv4553		Brown-out Voltage bits
 			\code
 				BORV = 0		Maximum setting
 				BORV = 1
@@ -306,19 +326,19 @@
 				BORV = 3		Minimum setting
 			\endcode
 
-			\subsection	USBV		USB Voltage Regulator Enable bit
+			\subsection	USBV4553		USB Voltage Regulator Enable bit
 			\code
 				VREGEN = OFF		USB voltage regulator disabled
 				VREGEN = ON		USB voltage regulator enabled
 			\endcode
 
-			\subsection	Watchdog		Watchdog Timer Enable bit
+			\subsection	Watchdog4553		Watchdog Timer Enable bit
 			\code
 				WDT = OFF			HW Disabled - SW Controlled
 				WDT = ON			HW Enabled - SW Disabled
 			\endcode
 
-			\subsection	WatchdogT		Watchdog Timer Postscale Select bits
+			\subsection	WatchdogT4553		Watchdog Timer Postscale Select bits
 			\code
 				WDTPS = 1			1:1
 				WDTPS = 2			1:2
@@ -338,163 +358,163 @@
 				WDTPS = 32768	1:32768
 			\endcode
 
-			\subsection	MCLR		MCLR Pin Enable bit
+			\subsection	MCLR4553		MCLR Pin Enable bit
 			\code
 				MCLRE = OFF		RE3 input pin enabled; MCLR disabled
 				MCLRE = ON			MCLR pin enabled; RE3 input pin disabled
 			\endcode
 
-			\subsection		LowP	Low-Power Timer 1 Oscillator Enable bit
+			\subsection		LowP4553	Low-Power Timer 1 Oscillator Enable bit
 			\code
 				LPT1OSC = OFF		Timer1 configured for higher power operation
 				LPT1OSC = ON			Timer1 configured for low-power operation
 			\endcode
 
-			\subsection	PORTB		PORTB A/D Enable bit
+			\subsection	PORTB4553		PORTB A/D Enable bit
 			\code
 				PBADEN = OFF		PORTB<4:0> pins are configured as digital I/O on Reset
 				PBADEN = ON		PORTB<4:0> pins are configured as analog input channels on Reset
 			\endcode
 
-			\subsection	CCP2		CCP2 MUX bit
+			\subsection	CCP24553		CCP2 MUX bit
 			\code
 				CCP2MX = OFF		CCP2 input/output is multiplexed with RB3
 				CCP2MX = ON		CCP2 input/output is multiplexed with RC1
 			\endcode
 
-			\subsection	Stack		Stack Full/Underflow Reset Enable bit
+			\subsection	Stack4553		Stack Full/Underflow Reset Enable bit
 			\code
 				STVREN = OFF		Stack full/underflow will not cause Reset
 				STVREN = ON		Stack full/underflow will cause Reset
 			\endcode
 
-			\subsection		SingleSingle-Supply ICSP Enable bit
+			\subsection		SingleSingle-Supply4553		 ICSP Enable bit
 			\code
 				LVP = OFF		Single-Supply ICSP disabled
 				LVP = ON			Single-Supply ICSP enabled
 			\endcode
 
-			\subsection	Dedicated		Dedicated In-Circuit Debug/Programming Port (ICPORT) Enable bit
+			\subsection	Dedicated4553		Dedicated In-Circuit Debug/Programming Port (ICPORT) Enable bit
 			\code
 				ICPRT = OFF		ICPORT disabled
 				ICPRT = ON		ICPORT enabled
 			\endcode
 
-			\subsection	Extended		Extended Instruction Set Enable bit
+			\subsection	Extended4553		Extended Instruction Set Enable bit
 			\code
 				XINST = OFF		Instruction set extension and Indexed Addressing mode disabled (Legacy mode)
 				XINST = ON		Instruction set extension and Indexed Addressing mode enabled
 			\endcode
 
-			\subsection	Background		Background Debugger Enable bit
+			\subsection	Background4553		Background Debugger Enable bit
 			\code
 				DEBUG = ON	Background debugger enabled, RB6 and RB7 are dedicated to In-Circuit Debug
 				DEBUG = OFF	Background debugger disabled, RB6 and RB7 configured as general purpose I/O pins
 			\endcode
 
-			\subsection	Code		Code Protection bit Block 0
+			\subsection	Code4553		Code Protection bit Block 0
 			\code
 				CP0 = ON			Block 0 (000800-001FFFh) code-protected
 				CP0 = OFF		Block 0 (000800-001FFFh) not code-protected
 			\endcode
 
-			\subsection	Code1		Code Protection bit Block 1
+			\subsection	Code14553		Code Protection bit Block 1
 			\code
 				CP1 = ON			Block 1 (002000-003FFFh) code-protected
 				CP1 = OFF		Block 1 (002000-003FFFh) not code-protected
 			\endcode
 
-			\subsection	Code2		Code Protection bit Block 2
+			\subsection	Code24553		Code Protection bit Block 2
 			\code
 				CP2 = ON			Block 2 (004000-005FFFh) code-protected
 				CP2 = OFF		Block 2 (004000-005FFFh) not code-protected
 			\endcode
 
-			\subsection	Code3		Code Protection bit Block 3
+			\subsection	Code34553		Code Protection bit Block 3
 			\code
 				CP3 = ON			Block 3 (006000-007FFFh) code-protected
 				CP3 = OFF		Block 3 (006000-007FFFh) not code-protected
 			\endcode
 
-			\subsection	Boot		Boot Block Code Protection bit
+			\subsection	Boot4553		Boot Block Code Protection bit
 			\code
 				CPB = ON			Boot block (000000-0007FFh) code-protected
 				CPB = OFF		Boot block (000000-0007FFh) not code-protected
 			\endcode
 
-			\subsection	Data		Data EEPROM Code Protection bit
+			\subsection	Data4553		Data EEPROM Code Protection bit
 			\code
 				CPD = ON			Data EEPROM code-protected
 				CPD = OFF		Data EEPROM not code-protected
 			\endcode
 
-			\subsection	Write		Write Protection bit Block 0
+			\subsection	Write4553		Write Protection bit Block 0
 			\code
 				WRT0 = ON		Block 0 (000800-001FFFh) write-protected
 				WRT0 = OFF		Block 0 (000800-001FFFh) not write-protected
 			\endcode
 
-			\subsection	Write1		Write Protection bit Block 1
+			\subsection	Write14553		Write Protection bit Block 1
 			\code
 				WRT1 = ON		Block 1 (002000-003FFFh) write-protected
 				WRT1 = OFF		Block 1 (002000-003FFFh) not write-protected
 			\endcode
 
-			\subsection	Write2		Write Protection bit Block 2
+			\subsection	Write24553		Write Protection bit Block 2
 			\code
 				WRT2 = ON		Block 2 (004000-005FFFh) write-protected
 				WRT2 = OFF		Block 2 (004000-005FFFh) not write-protected
 			\endcode
 
-			\subsection	Write3		Write Protection bit Block 3
+			\subsection	Write34553		Write Protection bit Block 3
 			\code
 				WRT3 = ON		Block 3 (006000-007FFFh) write-protected
 				WRT3 = OFF		Block 3 (006000-007FFFh) not write-protected
 			\endcode
 
-			\subsection	Boot1		Boot Block Write Protection bit
+			\subsection	Boot14553		Boot Block Write Protection bit
 			\code
 				WRTB = ON		Boot block (000000-0007FFh) write-protected
 				WRTB = OFF		Boot block (000000-0007FFh) not write-protected
 			\endcode
 
-			\subsection	Configuration		Configuration Register Write Protection bit
+			\subsection	Configurationvs4553		Configuration Register Write Protection bit
 			\code
 				WRTC = ON		Configuration registers (300000-3000FFh) write-protected
 				WRTC = OFF		Configuration registers (300000-3000FFh) not write-protected
 			\endcode
 
-			\subsection	Data1	Data EEPROM Write Protection bit
+			\subsection	Data14553	Data EEPROM Write Protection bit
 			\code
 				WRTD = ON		Data EEPROM write-protected
 				WRTD = OFF		Data EEPROM not write-protected
 			\endcode
 
-			\subsection	Table		Table Read Protection bit Block 0
+			\subsection	Table4553		Table Read Protection bit Block 0
 			\code
 				EBTR0 = ON		Block 0 (000800-001FFFh) protected from table reads executed in other blocks
 				EBTR0 = OFF	Block 0 (000800-001FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Table1		Table Read Protection bit Block 1
+			\subsection	Table14553		Table Read Protection bit Block 1
 			\code
 				EBTR1 = ON		Block 1 (002000-003FFFh) protected from table reads executed in other blocks
 				EBTR1 = OFF	Block 1 (002000-003FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Table2		Table Read Protection bit Block 2
+			\subsection	Table24553		Table Read Protection bit Block 2
 			\code
 				EBTR2 = ON		Block 2 (004000-005FFFh) protected from table reads executed in other blocks
 				EBTR2 = OFF	Block 2 (004000-005FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Table3		Table Read Protection bit Block 3
+			\subsection	Table34553		Table Read Protection bit Block 3
 			\code
 				EBTR3 = ON		Block 3 (006000-007FFFh) protected from table reads executed in other blocks
 				EBTR3 = OFF	Block 3 (006000-007FFFh) not protected from table reads executed in other blocks
 			\endcode
 
-			\subsection	Boot2		Boot Block Table Read Protection
+			\subsection	Boot24553		Boot Block Table Read Protection
 			\code
 				EBTRB = ON		Boot block (000000-0007FFh) protected from table reads executed in other blocks
 				EBTRB = OFF	Boot block (000000-0007FFh) not protected from table reads executed in other blocks

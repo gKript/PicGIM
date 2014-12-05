@@ -168,20 +168,40 @@
 				\endcode
 
 		\section	SXINST2553	Extended Instruction Code
-			\htmlonly
-				<b>This MCU can support this feature.</b><br>
-				You can enable it directly under MPLAB settigs following this figure :
-				<br><br>
-				<IMG src="xinst.jpg" align="center" border="0" >
-				<br><br>
-				<b>PicGIM</b> will automatically choose the correct FUSE intercepting the flag in MPLAB.
 			\endhtmlonly
+			\endcode
+			<b>This MCU can support this feature.</b> \n
+			Under MPLAB 8 it is simply to enable it just following this figure : \n
+			\n \n
+			\image	html	xinst.jpg
+			\n \n
+			<b>PicGIM</b> will automatically choose the correct FUSE intercepting the flag from C18. \n \n
+
+			In MPLAB X is not so simple but they are only need three steps.
+			Follow this step by step guide:	\ref getstartmpxhowtoxinst \n
+
+			\attention		Even if it is properly flagged check for Extended instruction code, MPLAB X will ignore it. \n
+						It will be necessary, as well as to flag, the extended instruction code, manually force the definition of "__EXTENDED18__" in Compiler and Linker. \n
+						Here is the guide : \ref getstartmpxhowtoxins
+
+			\n
+
 			\code
-				#if defined( __EXTENDED18__ )
-					#pragma	config XINST		= ON
-				#else
-					#pragma	config XINST		= OFF
+				//---[ Extended Instructions Set ]--- SUPPORTED
+				#ifdef _GIM_H_
+					#if defined( __EXTENDED18__ )
+						#pragma	config XINST = ON
+						#if	( PG_VERBOSE == PG_ENABLE )
+							#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set successful activated
+						#endif
+					#else
+						#pragma	config XINST = OFF
+						#if	( PG_VERBOSE == PG_ENABLE ) && ( PG_SUGGESTION == PG_ENABLE )
+							#warning	PG_HS_PG PG_HS_CORE PG_HS_SUGG TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
+						#endif
+					#endif
 				#endif
+				//---[ END Extended Instructions Set ]---
 			\endcode
 
 		\section	Default2553		Default FUSE configuration
