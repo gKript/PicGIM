@@ -58,7 +58,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_timer_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_pwm_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_board_setup_public.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_event_setup_public.h</itemPath>
       </logicalFolder>
     </logicalFolder>

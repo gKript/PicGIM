@@ -46,7 +46,7 @@
 	#include "pgim_defines.h"
 	#include "pgim_project_setup_public.h"
 
-	#define PG_VERSION_STATE				"rel"       //!< \b "rel" for release or \b "dev" for devel
+	#define PG_VERSION_STATE				"dev"       //!< \b "rel" for release or \b "dev" for devel
 
 	#define	PG_MAJOR						0			//!<	The major version of PicGIM
 	#define	PG_MINOR						4			//!<	The minor version of PicGIM

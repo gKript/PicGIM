@@ -83,7 +83,7 @@
 	#endif
 #endif /* _PGIM_EXTERNAL_MEMORY_H_ */
 
-/*!	
+/*
 	\page 		HWE_ext_mem			Serial memory
 
 

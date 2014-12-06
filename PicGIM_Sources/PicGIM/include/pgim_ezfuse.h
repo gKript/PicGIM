@@ -139,7 +139,7 @@
 		\endcode
 
 		<b>EzFuse</b> is an easy way to configure the fuse and the basic parameters to start a project in a very short time. \n
-		If you still do not know the modules of \a PicGIM then read this section specifies : \ref module
+		If you still do not know the modules of \a PicGIM then read this section specifies : \ref WPC_module
 
 		\attention	This is  the only one COMPULSORY module so you can not disable it. \n
 					But it will be possible to do it from the first release of the next MileStone 1.0 .
