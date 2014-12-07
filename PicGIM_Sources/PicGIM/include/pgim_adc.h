@@ -300,13 +300,10 @@
 		If using the \b Automatic \b Interrupts \b Handler pg_event_auto_handler() will call the associated callback: pg_interrupts_event_ad() \n
 		So once entered the code inside the callback it will be executed at every end of conversion. \n 
 		
-		References : 
+		\b References : \n
 			Interrups configuration :\ref iterruptconf \n
 			Internal interrupts configuration : \ref interdefinesintern \n 
 			Callback configuration : \ref interruptcallbackhowto \n 
-			
-		\warning 	To use the \b User \b Interrupt \b Handler is necessary to read carefully the entire documentation related : pg_event_user_handler() \n 
-			
 			
 
 		\htmlonly <br><br> \endhtmlonly

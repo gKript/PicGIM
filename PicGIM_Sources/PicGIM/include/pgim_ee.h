@@ -95,6 +95,7 @@
 
 		\tableofcontents
 
+
 		This module makes use of the \b PIC \b internal \b eeprom really simple. \n
 		Sometimes it can be useful to be able to save the state of some bits or special configurations then resume on the next boot.
 
@@ -112,8 +113,8 @@
 					&nbsp; \n \n \n
 
 				\attention	Here a link to the file : \ref pgim_ee.h \n
-								This is not a file defined as public and therefore would not be edited. \n 
-								We suggest to edit the file only if absolutely necessary. \n
+							This is not a file defined as public and therefore would not be edited. \n 
+							We suggest to edit the file only if absolutely necessary.
 			</p>
 			\n \n \n
 

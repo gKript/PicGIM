@@ -49,15 +49,21 @@
 
     #if ( PGIM_BUZZER == PG_ENABLE )
 	
-		#define PG_BEEP_LONG        100
-		#define	PG_BEEP_SHORT       40
-		#define	PG_BEEP_PRESS_L     90
-		#define	PG_BEEP_PRESS_S     30
-		#define	PG_BEEP_HIGH		1
-		#define	PG_BEEP_MID         3
-		#define	PG_BEEP_LOW         7
+		#define PG_BEEP_LONG        100			/*!	Defines the long duration of the beep		*/
+		#define	PG_BEEP_SHORT       40			/*!	Defines the short duration of the beep	*/
+//		#define	PG_BEEP_PRESS_L     90
+//		#define	PG_BEEP_PRESS_S     30
+		#define	PG_BEEP_HIGH		1			/*!	Defines the high tone of the beep		*/
+		#define	PG_BEEP_MID         3			/*!	Defines the mean tone of the beep		*/
+		#define	PG_BEEP_LOW         7			/*!	Defines the low tone of the beep		*/
 
-		void    pg_beep( _pg_Uint8 tone , _pg_Uint16 len );
+		/*!
+		 *  \brief		This function generates a beep length and varying tones by a buzzer.
+		 *  \param		[tone]	The tone which is to be generated beep.
+		 *  \param		[len]	The duration of which must be generated a beep.
+		 *  \return		Nothing.
+		 */
+		void    pg_buzzer_beep( _pg_Uint8 tone , _pg_Uint16 len );
 
 	#endif
 #endif /* _PGIM_BUZZER_H_ */
@@ -66,7 +72,64 @@
 /*!
 	\page	HWE_buzzer		Buzzer
 
+		\tableofcontents
+ 
+		\image	html	buzzer.png
 
-	\attention	Here a link to the file : \ref pgim_buzzer.h \n This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
+		This small module has the function to simplify to generate small acoustic signals. \n
+		\n \n
+
+		\section	buzconf		Module configuration
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+			<p>
+			In order to use this module, it must be enabled in: \n
+				\arg \b pgim_module_setup_public.h : the main management file for the modules that must be edited to enable only the required modules for your project. \n In this file there are these configurations  : \n \n
+					&nbsp;&nbsp;&nbsp;&nbsp; \ref ieeerruptconfen  \n
+
+					&nbsp; \n \n \n
+
+			\attention	Here a link to the file : \ref pgim_buzzer.h \n
+						This is not a file defined as public and therefore would not be edited. \n
+						We suggest to edit the file only if absolutely necessary.
+
+			</p>
+			\n \n \n
+
+			\subsection	buzconfen		Module enabling
+				\htmlonly <hr> \endhtmlonly
+				\code
+				 	#define PGIM_BUZZER					PG_DISABLE
+				\endcode
+					This define enables or disables the module.<br>
+				\htmlonly
+					It must be:<br>
+				\endhtmlonly
+					\arg \b PG_ENABLE : Interrupts module enabled.
+					\arg \b PG_DISABLE : Interrupts module disabled.
+					\endcode
+
+				\subsubsection	ieemodenref		References
+					\li \e File : pgim_module_setup_public.h \n
+					\li \e Reference : \ref PGIM_BUZZER \n
+
+		 			\htmlonly <br><br> \endhtmlonly
+
+		\section	buzcfunct		Functions
+			\htmlonly <hr> \endhtmlonly
+			After it has been enabled and configured the module you can refer to this set of functions to use it. \n \n
+
+ 			\subsection	buzpubfunc	Public functions
+				\endcode
+
+				\arg \b pg_buzzer_beep() : This function generates a beep length and varying tones by a buzzer.
+
+				\endcode
+
+			\htmlonly <br><br> \endhtmlonly
+
+
+
  */
 

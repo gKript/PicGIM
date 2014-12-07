@@ -47,7 +47,7 @@
 		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
 	#endif
 
-	void	pg_beep( _pg_Uint8 tone , _pg_Uint16 len ) {
+	void	pg_buzzer_beep( _pg_Uint8 tone , _pg_Uint16 len ) {
 		_pg_int16 i;
 		PG_BUZZER_PIN_TRIS = PG_OUT;
 		if ( tone == PG_BEEP_MID ) len /= 2;
