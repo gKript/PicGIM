@@ -64,24 +64,6 @@
 		//( CONGIF ALWAYS )
 		#define PGIM_SERIAL_RX_MODE						USART_CONT_RX		//!< Must be: USART_SINGLE_RX || USART_CONT_RX		
 		
-
-		//		B A U D R A T E   D E B U G   O U T P U T   T O   P I N
-		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
-		#define PGIM_SERIAL_DEBUG_TO_PIN				PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PGIM_SERIAL_DEBUG_PIN					L_B3				//!< Output pin for debugging
-		#define PGIM_SERIAL_DEBUG_PIN_TRIS				T_B3				//!< Debugging output pin tris
-		
-		
-		//		B A U D R A T E   D E B U G   O U T P U T   T O   B U Z Z E R
-		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
-		#define PGIM_SERIAL_DEBUG_TO_BUZZER				PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		
-		//		B A U D R A T E   D E B U G   O U T P U T   T O   L C D
-		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
-		//#define PGIM_SERIAL_DEBUG_TO_LCD_PCD8544		PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE. It is not yet supported.
-		#define PGIM_SERIAL_DEBUG_TO_LCD_HD44780		PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		
 		
 //	#endif
 #endif /* _PGIM_SERIAL_SETUP_PUBLIC_H_ */

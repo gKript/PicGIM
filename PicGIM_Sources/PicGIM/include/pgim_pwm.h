@@ -293,7 +293,7 @@
 			</p>
 			\n \n \n 
 
-			\subsection	confenm	Module enabling
+			\subsection	pwmconfenm	Module enabling
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define PGIM_PWM							PG_ENABLE

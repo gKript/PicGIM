@@ -123,12 +123,37 @@
 
 /*!	\page 		HWI_serial			Serial [EUSART]
 
-		\htmlonly
-			<IMG src="serial.png" align="center" border="0" ><br><br>
-		\endhtmlonly
+		\tableofcontents
+
+		\image html	serial.png
 		
 		The \b SERIAL module provides a set of functions to easily configure and manage asynchronous serial device (EUSART). \n \n
 		The only configurable mode is 8N1: 8 bits, no parity, 1 stop bit. \n \n
+
+			\n \n
+
+		\section	confserial	Module configuration
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+			<p>
+			In order to use this module, it must be enabled and configured in: \n
+				\arg	\b pgim_module_setup_public.h : the main management file for the modules. \n
+						In this file there are these configurations  : \n \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref confenserial  \n
+						\n \n \n
+				\arg	\b pgim_serial_setup_public.h : where are collected all the features of the module. \n
+						Here are specified the possible values for the various parameters
+						and when they have to be set depending on the chosen mode of operation of the module. \n In this file there are these configurations  : \n \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref dwjp2cnbpchen \n
+						\n \n \n &nbsp;&nbsp;&nbsp;&nbsp;
+
+			\attention	For software reference, please read the documentation about \b pgim_pwm.h. \n
+						This is \b not a file defined as \b public and therefore it would not be edited. \n
+						We suggest that you edit this file only if necessary and only if you know what you are doing.
+			</p>
+			\n \n \n
+
 		The serial device can be configured in three ways: \n
 			\arg \b MANUAL : Directly specify the values of the registers. Only set the necessary parameters.
 			\arg \b SEMI-AUTOMATIC : The value of the baud rate is set as explicitly required. Only set the necessary parameters.
@@ -144,6 +169,122 @@
 		The module can be configured by editing the file \ref pgim_serial_setup_public.h \n \n
 		For software reference, please read the documentation in \ref pgim_serial.h
 
+			\subsection	serialconfenm	Module enabling
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define PGIM_SERIAL						PG_ENABLE
+				\endcode
+					This define enables or disables the module.<br>
+				\htmlonly
+					It must be:<br>
+				\endhtmlonly
+					\arg \b PG_ENABLE : pwm module enabled.
+					\arg \b PG_DISABLE : pwm module disabled.
+					\endcode
+
+				\subsubsection	serialmodenref		References
+					\li \e File : pgim_module_setup_public.h \n
+					\li \e Reference : \ref PGIM_SERIAL \n
+
+			\subsection	configserialmanual		Manual mode
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define PGIM_SERIAL_BAUDRATE_MODE			PG_MANUAL
+			 		#define PGIM_SERIAL_BAUDRATE_SPEED			USART_BRGH_LOW		//!< Must be: USART_BRGH_LOW || USART_BRGH_HIGH \n Refer to the datasheet for the micro-controller chosen.
+					#define PGIM_SERIAL_BAUDRATE_REGISTER		25					//!< Set the registry value of the baud-rate. \n Refer to the datasheet for the micro-controller chosen.
+
+				\endcode
+					This define enable the manual mode for the SERIAL module. \n
+					They must be: \n
+					\arg \b PG_MANUAL : Manual mode enabled.
+
+				\code
+			 		#define PGIM_SERIAL_BAUDRATE_SPEED			USART_BRGH_LOW
+
+				\endcode
+					Refer to the datasheet for the micro-controller chosen. \n
+					They must be: \n
+					\arg \b USART_BRGH_LOW : Low baud rate.
+					\arg \b USART_BRGH_HIGH : High baud rate.
+
+				\code
+					#define PGIM_SERIAL_BAUDRATE_REGISTER		25					//!<
+
+				\endcode
+					Set the registry value of the baud-rate. \n Refer to the datasheet for the micro-controller chosen. \n
+
+				\subsubsection	pwmchenref		References
+					\li \e File : pgim_serial_setup_public.h \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_MODE \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_SPEED \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_REGISTER \n
+
+			\subsection	configserialsemiauto		Semi-Automatic mode
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define PGIM_SERIAL_BAUDRATE_MODE		PG_SEMI_AUTOMATIC
+
+				\endcode
+					This define enable the manual mode for the SERIAL module. \n
+					They must be: \n
+					\arg \b PG_SEMI_AUTOMATIC : Semi-Automatic mode enabled.
+
+				\code
+					#define PGIM_SERIAL_BAUDRATE				2400
+
+				\endcode
+					The baudtrate of the serial. \n
+					They must be: \n
+					\arg \b 300
+					\arg \b 1200
+					\arg \b 2400
+					\arg \b 4800
+					\arg \b 9600
+					\arg \b 19200
+					\arg \b 38400
+					\arg \b 57600
+					\arg \b 115200
+
+ 				\code
+					#define PGIM_SERIAL_BAUDRATE_ACCURACY		1.00
+
+				\endcode
+					Percentage baudrate error value. \n It is the reference for the calculation of the automatic configuration. \n
+
+				\subsubsection	configserialsemiautoref		References
+					\li \e File : pgim_serial_setup_public.h \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_MODE \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_ACCURACY \n
+
+
+
+			\subsection	configserialauto		Automatic mode
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define PGIM_SERIAL_BAUDRATE_MODE			PG_AUTOMATIC
+
+				\endcode
+					This define enable the manual mode for the SERIAL module. \n
+					They must be: \n
+					\arg \b PG_MANUAL : Manual mode enabled.
+
+ 				\code
+					#define PGIM_SERIAL_BAUDRATE_ACCURACY		1.00
+
+				\endcode
+					Percentage baudrate error value. \n It is the reference for the calculation of the automatic configuration. \n
+
+				\subsubsection	configserialautoref		References
+					\li \e File : pgim_serial_setup_public.h \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_MODE \n
+					\li \e Reference : \ref PGIM_SERIAL_BAUDRATE_ACCURACY \n
+
+
+
+
+
+
 		\htmlonly
 			<br><br><br><br>
 		\endhtmlonly
@@ -154,3 +295,46 @@
 */
 
 
+
+
+
+
+
+/*
+		\page 		HWI_pwm			PWM
+
+			\tableofcontents
+
+			\image html	pwm.png
+
+			This module can drive pwm device in \b NORMAL or \b ENHANCED mode. \n
+			In enhanced mode, four \b Configurations and four \b Mode are supported. \n
+			Is available the use of the \b Shut-Down in automatic and manual mode. \n
+			In \b HALF-Bridge mode, the \b Dead-Time is set with the desired duration. \n
+
+			\n \n
+
+		\section	confpwm	Module configuration
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+			<p>
+			In order to use this module, it must be enabled and configured in: \n
+				\arg \b pgim_module_setup_public.h : the main management file for the modules that must be included in the project. \n In this file there are these configurations  : \n \n
+					&nbsp;&nbsp;&nbsp;&nbsp; \ref serialconfenm  \n
+					\n \n \n
+				\arg \b pgim_pwm_setup_public.h : where are collected all the features of the module. \n
+						Here are specified the possible values for the various parameters
+						and when they have to be set depending on the chosen mode of operation of the module. \n In this file there are these configurations  : \n \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref configserialmanual \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref configserialsemiauto \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref configserialauto \n
+						\n \n \n &nbsp;&nbsp;&nbsp;&nbsp;
+
+			\attention	For software reference, please read the documentation about \b pgim_pwm.h. \n
+						This is \b not a file defined as \b public and therefore it would not be edited. \n
+						We suggest that you edit this file only if necessary and only if you know what you are doing.
+			</p>
+			\n \n \n
+
+ */

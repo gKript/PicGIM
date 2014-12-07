@@ -586,6 +586,22 @@
 	#if ( PGIM_SERIAL == PG_ENABLE )
 		#include <usart.h>
 		#include "pgim_serial.h"
+
+		//		B A U D R A T E   D E B U G   O U T P U T   T O   P I N
+		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
+		#define PGIM_SERIAL_DEBUG_TO_PIN				PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_SERIAL_DEBUG_PIN					L_B3				//!< Output pin for debugging
+		#define PGIM_SERIAL_DEBUG_PIN_TRIS				T_B3				//!< Debugging output pin tris
+
+		//		B A U D R A T E   D E B U G   O U T P U T   T O   B U Z Z E R
+		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
+		#define PGIM_SERIAL_DEBUG_TO_BUZZER				PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+
+		//		B A U D R A T E   D E B U G   O U T P U T   T O   L C D
+		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
+		//#define PGIM_SERIAL_DEBUG_TO_LCD_PCD8544		PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE. It is not yet supported.
+		#define PGIM_SERIAL_DEBUG_TO_LCD_HD44780		PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_SERIAL Loaded
 			#if ( ( PG_SUGGESTION == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE == PG_AUTOMATIC ) )

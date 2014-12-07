@@ -62,10 +62,10 @@
 					</tr>
 				</table>
 				<br>
-				<h1 align="center">PicGIM - Generic Information Manager</h1>
-				<h2 align="center">for Microchip<small>&#8482;</small> PIC18<small>&reg;</small> microcontrollers</h2>
+				<h2 align="center">PicGIM - Generic Information Manager</h2>
+				<h3 align="center">for Microchip<small>&#8482;</small> PIC18<small>&reg;</small> microcontrollers</h3>
 				<br>
-				<h1 align="center">PicGIM is a part of <a href="http://www.gkript.org/index.php/news/12-wepic" target="_blank"><IMG src="WePIC_documentation_small.png"  border="0" width="105" height="28"></a> project</h1>
+				<h2 align="center">PicGIM is a part of <a href="http://www.gkript.org/index.php/news/12-wepic" target="_blank"><IMG src="WePIC_documentation_small.png"  border="0" width="105" height="28"></a> project</h2>
 				<br>
 			\endhtmlonly
 

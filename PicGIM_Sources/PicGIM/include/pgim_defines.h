@@ -532,11 +532,42 @@
 		And with even more attention to which microcontroller to use. \n
 		Keep in mind that PicGIM, in the next milestone will be even more careful in the use of the Program Memory and RAM and even more configurable. \n
 
- 		\htmlonly <br><br> \endhtmlonly
+		\htmlonly <br><br> \endhtmlonly
+
+	\section	planmicrouseht		How to use this data
+
+ 		\htmlonly <hr> \endhtmlonly
+		\endcode
+
+		In this page there are a large amount of data that we consider useful. \n
+		The less experienced may find it difficult to interpret them in the correct way. \n
+		What we would like is to give some advice for the correct reading. \n \n
+		Configurations vary on three basic parameters : \n
+		<i>
+		&nbsp;&nbsp;&nbsp;&nbsp;The type of Set Instruction chosen. \n
+		&nbsp;&nbsp;&nbsp;&nbsp;The type of optimization used. \n
+		&nbsp;&nbsp;&nbsp;&nbsp;Enabling or not the Error module for debugging. \n \n
+		</i>
+		Regarding the Set Instruction is necessary to keep in mind that NOT all microcontrollers support them. \n \n
+		For the collection of all these data are heading choices three levels of optimization. \n
+		<i>
+		&nbsp;&nbsp;&nbsp;&nbsp;The first level is NOT optimized. \n
+		&nbsp;&nbsp;&nbsp;&nbsp;The second level is the maximum that allows the C18 in the free version. In this version the C18 NOT allow Procedural Abstraction. \n
+		&nbsp;&nbsp;&nbsp;&nbsp;The third level is the commercial version of the C18 which includes the Procedural Abstraction. \n \n
+		</i>
+		During the development of a project the debugging is very important. \n
+		PicGIM provides the Error module to have, immediately run time, the feedback if the parameters passed to the other modules are correct or not. \n
+		If you choose a microcontroller with a narrow program memory may NOT be able to enable it. \n \n
+		To do the calculations PicGIM has been virtually separated into two elements. \n
+		Its structure and each individual module. \n \n
+ 		So, to get an accurate measure of the resources taken up by PicGIM you need to collect the data of the MODULES that interest and summing them. \n
+		To the sum of MODULES will add the space taken up by the STRUCTURE of PicGIM always in the same configuration chosen previously. \n
+
+  		\htmlonly <br> \endhtmlonly
 
 	\section	planmicrochoose		Choose the proper Microcontroller
 
-		\htmlonly <hr> \endhtmlonly
+ 		\htmlonly <hr> \endhtmlonly
 		\endcode
 		
 		Here is a table that summarizes chromatically the attention to be placed in the choice of the microcontroller to use in a PicGIM project. \n
@@ -610,13 +641,15 @@
 
 			The amount of resources required by the internal structure of PicGIM is calculated by disabling all its features. \n \n
 
- 			Here is the table:
+			\subsubsection	planmicrodetailscoretable		Table
+			\endcode
 
 			\image	html	picgim-structure-table.png
 
 			\n 
 
-			And here's the chart: \n 
+			\subsubsection	planmicrodetailscorechart		Chart
+			\endcode
 
 			\image	html	no-module.png
 
@@ -629,15 +662,16 @@
 
 			The DELAY module has no dependencies, but has only an additional feature that is compiled only if the EVENTS module is enabled and occupies approximately 15 bytes of Program Memory and 0 bytes of Static RAM. \n \n
 
- 			Here is the table:
+			\subsubsection	planmicrodetailsdelaytable		Table
+			\endcode
 
 			\image	html	delay-table.png
 
 			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
 
 			\n
-
-			And here's the chart: \n
+			\subsubsection	planmicrodetailsdelaychart		Chart
+			\endcode
 
 			\image	html	delay-module.png
 
@@ -652,7 +686,8 @@
 			The event module is composed by the structure for its proper operation and the contribution of each individual event. \n
  			The table will then be divided into two sections: the structure and a single event. \n \n
 
- 			Here is the table:
+			\subsubsection	planmicrodetailseventtable		Table
+			\endcode
 
 			\image	html	events-table.png
 
@@ -660,13 +695,14 @@
 
 			\n
 
-			And here's the chart for the EVENTS structure: \n
+			\subsubsection	planmicrodetailseventchart		Charts
+			\endcode
 
 			\image	html	event-module.png
 
 			\n
 
-			And here's the chart for each Event: \n
+			Chart for each Event: \n
 
 			\image	html	each-event.png
 
@@ -682,8 +718,9 @@
 			The table and graphs show the data in every possible configuration. \n
 
 			\note	The table below shows on a red background the module dependencies.
- 
- 			Here is the table:
+
+			\subsubsection	planmicrodetailslcdhd44780table		Table
+			\endcode
 
 			\image	html	lcd-hd44780-table.png
 
@@ -691,13 +728,14 @@
 
 			\n
 
-			Here's the chart for the LCD HD44780 with ERRORS disabled: \n
+			\subsubsection	planmicrodetailslcdhd44780chart		Charts
+			\endcode
 
 			\image	html	lcd-hd44780.png
 
 			\n
 
-			Here's the chart for the LCD HD44780 with ERRORS enabled: \n
+			Chart for the LCD HD44780 with ERRORS enabled: \n
 
 			\image	html	lcd-hd44780-error.png
 
@@ -713,7 +751,8 @@
 			The AD Converter module supports the module ERRORS. \n
 			The table and graphs show the data in every possible configuration. \n \n
 
- 			Here is the table:
+			\subsubsection	planmicrodetailsadctable		Table
+			\endcode
 
 			\image	html	adconv-table.png
 
@@ -721,13 +760,14 @@
 
 			\n
 
-			Here's the chart for the AD Converter with ERRORS disabled: \n
+			\subsubsection	planmicrodetailsadcchart		Charts
+			\endcode
 
 			\image	html	ad-converter.png
 
 			\n
 
-			Here's the chart for the AD Converter with ERRORS enabled: \n
+			Chart for the AD Converter with ERRORS enabled: \n
 
 			\image	html	ad-converter-error.png
 
@@ -742,7 +782,8 @@
 			The SPI module supports the module ERRORS. \n
 			The table and graphs show the data in every possible configuration. \n \n
 
- 			Here is the table:
+			\subsubsection	planmicrodetailsspitable		Table
+			\endcode
 
 			\image	html	spi-table.png
 
@@ -750,13 +791,14 @@
 
 			\n
 
-			Here's the chart for the SPI with ERRORS disabled: \n
+			\subsubsection	planmicrodetailsspichart		Charts
+			\endcode
 
 			\image	html	spi-module.png
 
 			\n
 
-			Here's the chart for the SPI with ERRORS enabled: \n
+			Chart for the SPI with ERRORS enabled: \n
 
 			\image	html	spi-module-error.png
 

@@ -10,6 +10,19 @@ h1.groupheader {
 	font-size: 150%;
 }
 
+h1 {
+	font-size: 210%;
+	background-color: rgb(237, 242, 250);
+}
+
+h2 {
+	font-size: 180%;
+}
+
+h3 {
+	font-size: 130%;
+}
+
 .cl_table  {
 	background-color: #ddd;	
 }
@@ -22,6 +35,7 @@ th {
 
 
 .title {
+	font: 400 14px/28px Roboto,sans-serif;
 	font-size: 250%;
 	font-weight: bold;
 	margin: 10px 2px;
