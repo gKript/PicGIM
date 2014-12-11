@@ -72,8 +72,7 @@
 	#endif
 
 	#include "pgim_ezfuse.h"
-//	#include "pgim_board_setup_public.h"
-	#define PGIM_BOARD			PG_BAORD_USER_DEFINED
+	#define PGIM_BOARD			PG_BOARD_USER_DEFINED
 	#include "pgim_module_setup_public.h"
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -49,8 +49,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 	#if ( PGIM_ERROR == PG_ENABLE ) && ( PGIM_ERROR_LED_PRESENT == PG_YES )
-		#define	PG_ERROR_LED						L_B0
-		#define	PG_ERROR_LED_TRIS					T_B0
+		#define	PG_ERROR_LED						L_B3
+		#define	PG_ERROR_LED_TRIS					T_B3
 	#endif
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -149,8 +149,8 @@
 	////////////////////////////////////////////////////////////////////////////////
 
 	#if ( PGIM_BUZZER == PG_ENABLE )
-		#define	PG_BUZZER_PIN						L_D2
-		#define	PG_BUZZER_PIN_TRIS					T_D2
+		#define	PG_BUZZER_PIN						L_C2
+		#define	PG_BUZZER_PIN_TRIS					T_C2
 	#endif
 	
 
