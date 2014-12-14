@@ -42,7 +42,7 @@
 #include "picgim.h"
 
 #if PG_PROJECT_STATE == PG_DEBUG
-	#warning	PG_HS_PG PG_HS_MSG This file is always compiling.
+	#warning	PG_HS_PG PG_HS_MSG This file is always compiled.
 #endif
 
 void pg_initialize( void ) {

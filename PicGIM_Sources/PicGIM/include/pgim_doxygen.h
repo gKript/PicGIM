@@ -1253,7 +1253,7 @@
 					//		H A R D W A R E   E X T E R N A L
 					#define PGIM_LCD_HD44780					PG_DISABLE
 					#define PGIM_BUZZER							PG_DISABLE
-					#define PGIM_EXTERNAL_MEMORY				PG_DISABLE
+					#define PGIM_SENSOR							PG_DISABLE
 
 					//		H A R D W A R E   G K R I P T
 					#define PGIM_ENCODER						PG_DISABLE
@@ -1318,8 +1318,7 @@
 			-	\subpage	HWE_ext_mem
 			-	\subpage	HWE_buzzer
 			-	\subpage	HWE_lcd_HD44780
-
-
+			-	\subpage	HWE_sensor
 
 	\page	HW_gkr		HARDWARE::GKRIPT Modules
 

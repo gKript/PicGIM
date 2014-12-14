@@ -8,7 +8,7 @@ dir_src=
 dir_bin=
 dir_tmp=
 dir_sin=
-dir_inc=C:\Users\asyntote\We.PIC\PicGIM\trunk\PicGIM_Sources\PicGIM\include\pgim_mcu;C:\Users\asyntote\We.PIC\PicGIM\trunk\PicGIM_Sources\PicGIM\include;C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\PicGIM_05\trunk\PicGIM_Sources\PicGIM\include\pgim_mcu;C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\PicGIM_05\trunk\PicGIM_Sources\PicGIM\include
+dir_inc=D:\GH_SVN_PicGIM\trunk\PicGIM_Sources\PicGIM\include
 dir_lib=C:\MCC18\lib
 dir_lkr=
 [CAT_FILTERS]

@@ -97,9 +97,10 @@
 	#define		PG_MAX_RAM					3808				//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				0					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory. The 18F97J60 does NOT have eeprom.
 	
-	#define		PG_MCU_SUPPLY				3.30				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_MAX			3.30				//!<	The maximum power supply voltage
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
+	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.
 	
 	#define		PG_PWM_1_MODE				PG_ENHANCED			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_ENHANCED			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
@@ -169,11 +170,11 @@
 					#define		PG_MAX_RAM			3808
 				\endcode
 
-			\subsection		PSUPPLY97J60		PG_MCU_SUPPLY
+			\subsection		PSUPPLY97J60		PG_MCU_SUPPLY_MAX
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
-					#define		PG_MCU_SUPPLY			3.3
+					#define		PG_MCU_SUPPLY_MAX			3.3
 				\endcode
 
 		\section	SXINST97J60			Extended Instruction Code

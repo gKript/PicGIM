@@ -59,7 +59,8 @@
                     PG_ERROR_SPI = 10,
 					PG_ERROR_ADC,
 					PG_ERROR_TIMER,
-					PG_ERROR_FTOA
+					PG_ERROR_FTOA,
+					PG_ERROR_SENSOR
                 };
 
 		extern _pg_Uint32_VAL			pg_error_state;					//!<	The ERROR registry

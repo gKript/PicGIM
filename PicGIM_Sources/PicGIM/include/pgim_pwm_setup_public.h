@@ -46,7 +46,7 @@
 	
 		//		C H A N N E L S   E N A B L I N G
 		#define PGIM_PWM_1							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PGIM_PWM_2							PG_EPG_DISABLENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_PWM_2							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 
 		
 		//		E N H A N C E D   M O D E

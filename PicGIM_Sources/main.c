@@ -42,6 +42,12 @@
 
 #include "picgim_main.h"
 
+void main( void ) {
+	pg_initialize();
+	PG_LOOP( PG_FOREVER ) {;}
+}
+
+/*
 #define	MY_STRIP			L_D0
 #define MY_STRIP_TRIS		T_D0
 
@@ -136,3 +142,4 @@ void main( void ) {
 	}
 }
 
+*/

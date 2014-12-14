@@ -88,9 +88,10 @@
 	#define		PG_MAX_RAM					2048				//!<	The maximum amount of RAM for this specific processor
 	#define		PG_MAX_EEPROM				256					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory
 	
-	#define		PG_MCU_SUPPLY				5.00				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_MAX			5.00				//!<	The maximum power supply voltage
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
+	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.
 	
 	#define		PG_PWM_1_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED

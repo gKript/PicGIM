@@ -140,7 +140,13 @@
 	#define	PG_LINE_3				3				/*!	This is the line 3 */
 
 	#define	PG_HD44780				1				/*!	The name of the controller HD44780 */
-
+	
+	#define	PG_SENSOR_METHOD_BETA	1				/*!	Beta calculation method for ntc sensors */
+	#define	PG_SENSOR_METHOD_COEF	2				/*!	Coefficients calculation method for ntc sensors */
+	
+	#define	PG_DEGREES_CELSIUS		1				/*! Indicates the use of Celsius scale */
+	#define	PG_DEGREES_FAHRENHEIT	2				/*! Indicates the use of Fahrenheit scale */
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//      B O A R D   D E F I N E S
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,6 +192,8 @@
 	#define PG_HM_BUZZER		BUZZER module >	
 	#define PG_HM_ENCODER		ENCODER module >	
 	#define PG_HM_UNIV_CONST	UNIVERSAL CONSTANTS >
+	#define PG_HM_SENSOR		SENSOR module >
+	
 	#define PG_HF_FTOA			FtoA function >
 	
 	#define PG_HB_A				Board A >
@@ -211,12 +219,12 @@
 	////////////////////////////////////////////////////////////////////////////////
 
 	#define	PG_CONSTANTS_LIGHT_VELOCITY				299792458							//!< Speed of light. Unit of measure: [m/s]
-	#define	PG_CONSTANTS_BOLTZMANN					( 1.3806488 * pow( 10 , -23 ) )		//!< Boltzmann's constant. Unit of measure: [J/K]
-	#define	PG_CONSTANTS_PLANK_JS					( 6.62606957 * pow( 10 , -34 ) )					//!< Planck's constant. Unit of measure: [J*s]
-	#define	PG_CONSTANTS_PLANK_EV					( 4.13562852 * pow( 10 , -15 ) )	//!< Planck's constant. Unit of measure: [eV*s]
-	#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565 * pow( 10 , -19 ) 	//!< Elementary charge. Unit of measure: [C]
+	#define	PG_CONSTANTS_BOLTZMANN					( 1.3806488E-23 )					//!< Boltzmann's constant. Unit of measure: [J/K]
+	#define	PG_CONSTANTS_PLANK_JS					( 6.62606957E-34 )					//!< Planck's constant. Unit of measure: [J*s]
+	#define	PG_CONSTANTS_PLANK_EV					( 4.13562852E-15 )					//!< Planck's constant. Unit of measure: [eV*s]
+	#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565E-19 ) 				//!< Elementary charge. Unit of measure: [C]
 	#define	PG_CONSTANTS_GRAVITY_ACCELERATION		9.80665								//!< Gravitational acceleration. Unit of measure: [m/(s^2)]
-
+	#define	PG_CONSTANTS_KELVIN_CONST				273.15								//!< Absolute value of the absolute zero temperature (0°K) in degrees Celsius
 
 	////////////////////////////////////////////////////////////////////////////////
 	//
@@ -224,7 +232,7 @@
 	//
 	////////////////////////////////////////////////////////////////////////////////
 
-	#define	PG_CONSTANTS_AVOGADRO					( 6.02214129 * pow( 10 , 23 ) )		//!< Avogadro's number
+	#define	PG_CONSTANTS_AVOGADRO					( 6.02214129E+23 )					//!< Avogadro's number
 
 
 

@@ -96,6 +96,10 @@
 				strcpypgm2ram( res , "TIMER" );
 				break;
 			}
+			case PG_ERROR_SENSOR : {
+				strcpypgm2ram( res , "SENSOR" );
+				break;
+			}
 		}
 		return res;
 	}

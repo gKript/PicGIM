@@ -71,18 +71,18 @@
 
 #if defined( __18CXX )
 	//-------------------------------------------------
-	#if ( PG_USER_SUPPLY > PG_MCU_SUPPLY )
+	#if ( PG_USER_SUPPLY > PG_MCU_SUPPLY_MAX )
 	
-		#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE The MCU power supply ( PG_USER_SUPPLY Volt ) is greater than its maximum specification ( PG_MCU_SUPPLY Volt ).
+		#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE The MCU power supply ( PG_USER_SUPPLY Volt ) is greater than its maximum specification ( PG_MCU_SUPPLY_MAX Volt ).
 		#ifndef		PG_EXIT_ON_ERROR
 			#define		PG_EXIT_ON_ERROR
 		#endif
 	#else
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			//-------------------------------------------------
-			#if ( PG_USER_SUPPLY < PG_MCU_SUPPLY )
+			#if ( PG_USER_SUPPLY < PG_MCU_SUPPLY_MAX )
 			
-				#warning PG_HS_PG PG_HS_CORE The requested MCU power supply ( PG_USER_SUPPLY Volt ) is lower than the correct specification ( PG_MCU_SUPPLY Volt ).
+				#warning PG_HS_PG PG_HS_CORE The requested MCU power supply ( PG_USER_SUPPLY Volt ) is lower than the correct specification ( PG_MCU_SUPPLY_MAX Volt ).
 			#else
 				#warning PG_HS_PG PG_HS_CORE Set MCU POWER SUPPLY to PG_USER_SUPPLY VOLT
 			#endif

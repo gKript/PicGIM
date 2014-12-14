@@ -92,9 +92,10 @@
 	#define		PG_MAX_RAM					2048				//!<	The maximum amount of RAM for this specific processor
 	#define		PG_MAX_EEPROM				256					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory
 	
-	#define		PG_MCU_SUPPLY				5.00				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_MAX			5.00				//!<	The maximum power supply voltage
 	
 	#define		PG_ADC_RES_BITS				12					//!<	ADC resolution bits
+	#define		PG_ADC_RES_STEPS			4096				//!<	ADC resolution steps.
 	
 	#define		PG_PWM_1_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
@@ -160,11 +161,11 @@
 				#define		PG_MAX_RAM			2048
 			\endcode
 
-			\subsection		PSUPPLY2553		PG_MCU_SUPPLY
+			\subsection		PSUPPLY2553		PG_MCU_SUPPLY_MAX
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
-					#define		PG_MCU_SUPPLY			5.0
+					#define		PG_MCU_SUPPLY_MAX			5.0
 				\endcode
 
 		\section	SXINST2553	Extended Instruction Code

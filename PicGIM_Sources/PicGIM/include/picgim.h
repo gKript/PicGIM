@@ -262,10 +262,10 @@
 	#endif
 	
 	//--------------------------------------------------
-	#if ( PGIM_AD_CONVERTER == PG_ENABLE )
+	#if ( ( PGIM_AD_CONVERTER == PG_ENABLE ) && ( PGIM_SENSOR == PG_DISABLE ) )
 		#include "pgim_adc.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PG_HS_PG PG_HM_ADC Loaded
+			#warning	PG_HS_PG PG_HM_ADC Loaded ( User is free to configure and use the module )
 		#endif
 	#endif
 	//---[ END AD-Converter ]---
@@ -661,7 +661,7 @@
 //			#warning	PG_HS_PG PG_HM_SERVO Loaded
 //		#endif
 //	#endif
-//	//---[ END External Memory ]---
+//	//---[ END Servo ]---
 
 	//---[ Ftoa Function]---
 	#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_SERIAL == PG_ENABLE ) || ( PGIM_SPI == PG_ENABLE ) )
@@ -671,6 +671,31 @@
 		#endif
 	#endif
 	//---[ END Ftoa Function ]---
+
+	//---[ Sensor ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_SENSOR
+		#define		PGIM_SENSOR		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_SENSOR
+		#define		PGIM_SENSOR		PG_DISABLE
+	#endif
+	
+	//--------------------------------------------------
+	#if ( PGIM_SENSOR == PG_ENABLE )
+		#include "pgim_sensor.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PG_HS_PG PG_HM_SENSOR Loaded
+		#endif
+		#undef		PGIM_AD_CONVERTER
+		#define		PGIM_AD_CONVERTER		PG_ENABLE
+		#include "pgim_adc.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PG_HS_PG PG_HM_ADC Loaded ( Auto-configured and dedicated to the SENSOR module )
+		#endif
+	#endif
+	//---[ END Sensor ]---
+
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	E R R O R   M A N A G E M A N T
