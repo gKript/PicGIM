@@ -157,7 +157,7 @@
 			\return		The value of the last samplingin a user secified range.
 			\test		This function does not change the error status.
 		*/
-		_pg_int16	pg_adc_get_user_scale( void );
+		_pg_int16	pg_adc_get_user_scale		( void );
 
 		/*!
 			\brief		This function acquires with [n] averages.

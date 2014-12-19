@@ -92,14 +92,16 @@
 			//Working in Celsius. If in Fahrenheit, must convert! (next release con modulo pg_conversion)
 			//Fahrenheit -> Celsius 	°C = (°F - 32) / 1,8
 			//Celsius -> Fahrenheit 	°F = °C × 1,8 + 32
-		
+			
+			//sost. measure in measurement
+			
 			_pg_float	Ntc_Res, Ntc_Volt;
 			_pg_Uint32	Ad_Measure_Accumulator = 0;
 			_pg_Uint8	Ad_Measure_Avg_Index;
 
 			//Acquisition and calculating average
 			for ( Ad_Measure_Avg_Index = 0; Ad_Measure_Avg_Index < PGIM_SENSOR_NTC_AD_AVERAGE; Ad_Measure_Avg_Index++ ) {
-				pg_adc_start( ad_Channel );	//Chiamare ogni volta prima di pg_adc_get( )
+				pg_adc_start( ad_channel );	//Chiamare ogni volta prima di pg_adc_get( ) per aggiornare la lettura
 				
 				//Acquired value control for condition sensor check
 				if( pg_adc_get( ) >= ( PG_ADC_RES_STEPS - PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX ) ) {
@@ -122,7 +124,7 @@
 			Ad_Measure_Accumulator /= PGIM_SENSOR_NTC_AD_AVERAGE;
 			
 			//Calculation of ntc voltage
-			Ntc_Volt = ( PG_USER_SUPPLY * Ad_Measure_Accumulator / ADC_RESOLUTION );
+			Ntc_Volt = ( PG_USER_SUPPLY * Ad_Measure_Accumulator / PG_ADC_RES_STEPS );
 			
 			//Calculating ntc resistance value
 			Ntc_Res = ( ( Ntc_Volt * PGIM_SENSOR_NTC_PULLUP_RESISTOR ) / ( PG_USER_SUPPLY - Ntc_Volt ) );
@@ -132,22 +134,20 @@
 			#endif
 			
 			#if ( PGIM_SENSOR_NTC_CALCULATION_METHOD == PG_SENSOR_METHOD_BETA )
-				//Returns with BETA
+				//Using BETA
 				// 1/T = (1/T0) + (1/B)*ln(R/R0)  =>  T = 1 / ( (1/T0) + ( (1/B)*ln(R/R0) ) )	//ln = logaritmo NATURALE (log() in C)!
 				//return( (_pg_int16)( ( 1.0 / ( ( 1.0 / NTC_T_ZERO ) + ( ( 1.0 / Ntc_Beta ) * log( Ntc_Res / NTC_R_ZERO ) ) ) ) - NTC_KELVIN_CONST ) );
 				return( ( ( 1.0 / ( ( 1.0 / PGIM_SENSOR_NTC_TEMP_REF + PG_CONSTANTS_KELVIN_CONST ) + ( ( 1.0 / PGIM_SENSOR_NTC_BETA ) * log( Ntc_Res / PGIM_SENSOR_NTC_RES_REF ) ) ) ) - PG_CONSTANTS_KELVIN_CONST ) );	// Returns in degrees Celsius
 			#endif
 			
 			#if ( PGIM_SENSOR_NTC_CALCULATION_METHOD == PG_SENSOR_METHOD_COEF )
-				//Returns with coefficients A, B, C
+				//Using "A", "B", "C" coefficients
 				//(_pg_int16)( ( 1.0 / ( a + ( b * ( log R ) ) + ( c * log ( R ) * log ( R ) * log ( R ) ) ) ) - 273.15 )
 				return ( ( 1.0 / ( PGIM_SENSOR_NTC_COEF_A + ( PGIM_SENSOR_NTC_COEF_B * ( log ( Ntc_Res ) ) ) + ( PGIM_SENSOR_NTC_COEF_C * log ( Ntc_Res ) * log ( Ntc_Res ) * log ( Ntc_Res ) ) ) ) - PG_CONSTANTS_KELVIN_CONST );	// Returns in degrees Celsius
 			#endif
 		}
 	#endif
 	//---[ END Sensor Ntc ]---		
-	
-	
 #endif
 
 /*
@@ -165,8 +165,8 @@ _pg_int16	Read_Ntc_Temperature( _pg_Uint8 ADChannel , _pg_int16 Ntc_Beta ) {				
 	}
 	Adc_Get_Accumulator /= ADC_GET_AVERAGE;
 	
-	//Ntc_Volt = ( PWR_SUPPLY_VDD * pg_adc_get( ) / ADC_RESOLUTION );
-	Ntc_Volt = ( PWR_SUPPLY_VDD * Adc_Get_Accumulator / ADC_RESOLUTION );
+	//Ntc_Volt = ( PWR_SUPPLY_VDD * pg_adc_get( ) / PG_ADC_RES_STEPS );
+	Ntc_Volt = ( PWR_SUPPLY_VDD * Adc_Get_Accumulator / PG_ADC_RES_STEPS );
 	Ntc_Res = ( ( Ntc_Volt * PULLUP_NTC_R1 ) / ( PWR_SUPPLY_VDD - Ntc_Volt ) );
 	
 	//Return with BETA

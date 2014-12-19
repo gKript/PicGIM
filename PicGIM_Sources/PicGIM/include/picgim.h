@@ -134,7 +134,9 @@
 			PG_PWM,
 			PG_SERIAL,
 			PG_SPI,
-			PG_TIMER
+			PG_TIMER,
+			PG_FTOA,
+			PG_SENSOR
 		};
 
 		#include "pgim_error.h"
@@ -260,12 +262,11 @@
 		#undef		PGIM_AD_CONVERTER
 		#define		PGIM_AD_CONVERTER		PG_DISABLE
 	#endif
-	
 	//--------------------------------------------------
-	#if ( ( PGIM_AD_CONVERTER == PG_ENABLE ) && ( PGIM_SENSOR == PG_DISABLE ) )
+	#if ( PGIM_AD_CONVERTER == PG_ENABLE )
 		#include "pgim_adc.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PG_HS_PG PG_HM_ADC Loaded ( User is free to configure and use the module )
+			#warning	PG_HS_PG PG_HM_ADC Loaded
 		#endif
 	#endif
 	//---[ END AD-Converter ]---
@@ -279,6 +280,7 @@
 		#undef		PGIM_SPI
 		#define		PGIM_SPI		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_SPI == PG_ENABLE )
 		#include <spi.h>
 		#include "pgim_spi.h"
@@ -297,6 +299,7 @@
 		#undef		PGIM_EE
 		#define		PGIM_EE		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_EE == PG_ENABLE )
 		#include "pgim_ee.h"
 		#if defined( __18F97J60 )
@@ -321,6 +324,7 @@
 		#undef		PGIM_TIMER
 		#define		PGIM_TIMER		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_TIMER == PG_ENABLE )
 		#include <timers.h>
 		#include "pgim_timer.h"
@@ -351,6 +355,7 @@
 		#undef		PGIM_PWM
 		#define		PGIM_PWM		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_PWM == PG_ENABLE )
 		#include <pwm.h>
 		#include "pgim_pwm.h"
@@ -363,14 +368,15 @@
 				#endif
 			#endif
 		#endif
+		//--------------------------------------------------
 		#if defined( PG_DOXYGEN )
-		
 			#undef		PGIM_PWM_1
 			#define		PGIM_PWM_1		PG_ENABLE
 		#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
 			#undef		PGIM_PWM_1
 			#define		PGIM_PWM_1		PG_DISABLE
 		#endif
+		//--------------------------------------------------
 		#if ( PGIM_PWM_1 == PG_ENABLE )
 		
 			#if defined( _GIM_H_ ) && ( PG_PWM_1_MODE == PG_NONE )
@@ -408,14 +414,15 @@
 				#endif
 			#endif
 		#endif
+		//--------------------------------------------------
 		#if defined( PG_DOXYGEN )
-		
 			#undef		PGIM_PWM_2
 			#define		PGIM_PWM_2		PG_ENABLE
 		#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
 			#undef		PGIM_PWM_2
 			#define		PGIM_PWM_2		PG_DISABLE
 		#endif
+		//--------------------------------------------------
 		#if ( PGIM_PWM_2 == PG_ENABLE )
 		
 			#if defined( _GIM_H_ ) && ( PG_PWM_2_MODE == PG_NONE )
@@ -482,6 +489,7 @@
 		#undef		PGIM_LCD_HD44780
 		#define		PGIM_LCD_HD44780		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
 		#if ( PG_LCD_HD44780_EN_0_PRESENT  ==  PG_DISABLE )
 			#undef	PG_LCD_HD44780_EN_0
@@ -523,6 +531,7 @@
 //		#undef		PGIM_LCD_PCD8544
 //		#define		PGIM_LCD_PCD8544		PG_DISABLE
 //	#endif
+//	//--------------------------------------------------
 //	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
 //		#include "pgim_font_setup.h"
 //		#include "pgim_lcd_pcd8544.h"
@@ -544,6 +553,7 @@
 //		#undef		PGIM_LCD_9340
 //		#define		PGIM_LCD_9340		PG_DISABLE
 //	#endif
+//	//--------------------------------------------------
 //	#if ( PGIM_LCD_9340 == PG_ENABLE )
 //		#include "pgim_font_setup.h"
 //		#include "pgim_lcd_9340.h"
@@ -565,8 +575,8 @@
 		#undef		PGIM_ENCODER
 		#define		PGIM_ENCODER		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_ENCODER == PG_ENABLE )
-	
 		#include "pgim_encoder.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_ENCODER Loaded
@@ -583,6 +593,7 @@
 		#undef		PGIM_SERIAL
 		#define		PGIM_SERIAL		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_SERIAL == PG_ENABLE )
 		#include <usart.h>
 		#include "pgim_serial.h"
@@ -638,6 +649,7 @@
 		#undef		PGIM_EXTERNAL_MEMORY
 		#define		PGIM_EXTERNAL_MEMORY		PG_DISABLE
 	#endif
+	//--------------------------------------------------
 	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
 		#include "pgim_external_memory.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
@@ -646,7 +658,7 @@
 	#endif
 	//---[ END External Memory ]---
 
-
+	
 //	//---[ Servo ]---
 //	#if defined( PG_DOXYGEN )
 //		#undef		PGIM_SERVO
@@ -655,6 +667,7 @@
 //		#undef		PGIM_SERVO
 //		#define		PGIM_SERVO			PG_DISABLE
 //	#endif
+//	//--------------------------------------------------
 //	#if ( PGIM_SERVO == PG_ENABLE )
 //		#include "pgim_servo.h"
 //		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
@@ -662,6 +675,7 @@
 //		#endif
 //	#endif
 //	//---[ END Servo ]---
+
 
 	//---[ Ftoa Function]---
 	#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_SERIAL == PG_ENABLE ) || ( PGIM_SPI == PG_ENABLE ) )
@@ -672,6 +686,7 @@
 	#endif
 	//---[ END Ftoa Function ]---
 
+	
 	//---[ Sensor ]---
 	#if defined( PG_DOXYGEN )
 		#undef		PGIM_SENSOR
@@ -680,18 +695,14 @@
 		#undef		PGIM_SENSOR
 		#define		PGIM_SENSOR		PG_DISABLE
 	#endif
-	
 	//--------------------------------------------------
 	#if ( PGIM_SENSOR == PG_ENABLE )
 		#include "pgim_sensor.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_SENSOR Loaded
-		#endif
-		#undef		PGIM_AD_CONVERTER
-		#define		PGIM_AD_CONVERTER		PG_ENABLE
-		#include "pgim_adc.h"
-		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PG_HS_PG PG_HM_ADC Loaded ( Auto-configured and dedicated to the SENSOR module )
+			#if( PGIM_AD_CONVERTER == PG_DISABLE )
+				#error	PG_HS_PG PG_HM_SENSOR In order to use this module, also the AD_CONVERTER module must be enabled and configured
+			#endif
 		#endif
 	#endif
 	//---[ END Sensor ]---

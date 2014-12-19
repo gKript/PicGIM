@@ -69,18 +69,8 @@
 
 		#if ( PGIM_SENSOR_NTC == PG_ENABLE )
 		
-			//		C H A N N E L S  -  S E L E C T I O N
-			#define	PGIM_SENSOR_NTC_S1					PG_CH_1					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S2					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S3					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S4					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S5					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S6					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S7					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			#define	PGIM_SENSOR_NTC_S8					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
-			
 			//		T E M P E R A T U R E  -  S C A L E							(Common for all ntc)
-			//#define	PGIM_SENSOR_NTC_SCALE				PG_DEGREES_CELSIUS		//!<  Must be: PG_DEGREES_CELSIUS || PG_DEGREES_FAHRENHEIT 
+			//#define	PGIM_SENSOR_NTC_SCALE			PG_DEGREES_CELSIUS		//!<  Must be: PG_DEGREES_CELSIUS || PG_DEGREES_FAHRENHEIT
 			
 			//		N T C  -  P A R A M E T E R S									(Common value for all ntc)
 			#define	PGIM_SENSOR_NTC_RES_REF				10000.0					//!< The reference resistance for the reference temperature [Ohm]
@@ -98,11 +88,20 @@
 			
 			//		A C Q U I S I T I O N  -  P A R A M E T E R S				(Common value for all ntc)
 			#define	PGIM_SENSOR_NTC_AD_AVERAGE			10						//!< Averages number of measurement
-			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN	5						//!< Guard limit on the minimum acquired row value (shorted sensor)
-			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX	50						//!< Guard limit on the maximum acquired row value (unplugged sensor)
+			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN	5						//!< Guard limit on the minimum acquired row value (shorted sensor detection)
+			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX	50						//!< Guard limit on the maximum acquired row value (unplugged sensor detection)
 			
 		#endif
 	#endif
 #endif /* _PGIM_SENSOR_SETUP_PUBLIC_H_ */
 
-TEMPERATURE
+/*			//		C H A N N E L S  -  S E L E C T I O N
+			#define	PGIM_SENSOR_NTC_S1					PG_CH_1					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S2					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S3					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S4					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S5					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S6					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S7					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_S8					PG_MISSING				//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+*/			

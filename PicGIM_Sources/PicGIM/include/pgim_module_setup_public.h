@@ -50,7 +50,7 @@
 	
 	//		H A R D W A R E   I N T E R N A L
 	#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_AD_CONVERTER					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE

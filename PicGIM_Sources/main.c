@@ -43,8 +43,12 @@
 #include "picgim_main.h"
 
 void main( void ) {
+	float flo;
 	pg_initialize();
-	PG_LOOP( PG_FOREVER ) {;}
+	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
+	pg_adc_set( PG_ADC_MODULE , PG_ON );
+	flo = pg_sensor_ntc( PG_CH_0 );
+	PG_INFINITE_LOOP;
 }
 
 /*
