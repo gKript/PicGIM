@@ -51,7 +51,7 @@
 
 	//---[ Sensor Adc Ref ]---
 	#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-		_pg_float	pg_sensor_volt_adc_ref( _pg_float volt_stable_ref ) {
+		_pg_float	pg_sensor_adc_ref( _pg_float volt_stable_ref ) {
 			//--------------------------------------------------------------------
 			//Connect the analog input selected in pgim_sensor_setup_public.h to a stable voltage reference "volt_ref".
 			//Such as for example 2.5V by a TL431 powered between VDD and GND.
@@ -127,7 +127,7 @@
 			Ntc_Volt = ( PG_USER_SUPPLY * Ad_Measure_Accumulator / PG_ADC_RES_STEPS );
 			
 			//Calculating ntc resistance value
-			Ntc_Res = ( ( Ntc_Volt * PGIM_SENSOR_NTC_PULLUP_RESISTOR ) / ( PG_USER_SUPPLY - Ntc_Volt ) );
+			Ntc_Res = ( ( Ntc_Volt * PGIM_SENSOR_NTC_HIGH_RESISTOR ) / ( PG_USER_SUPPLY - Ntc_Volt ) );
 			
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_OK , PG_ERROR_OK );

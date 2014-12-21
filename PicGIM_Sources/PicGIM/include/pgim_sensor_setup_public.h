@@ -45,8 +45,8 @@
 	#if ( PGIM_SENSOR == PG_ENABLE )
 	
 		//		S E N S O R S   E N A B L I N G
-		#define PGIM_SENSOR_ADC_REF						PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PGIM_SENSOR_NTC							PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_SENSOR_ADC_REF						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_SENSOR_NTC							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 		//
 		
@@ -57,7 +57,7 @@
 		////////////////////////////////////////////////////////////////////////////////		
 
 		#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-			#define	PGIM_SENSOR_ADC_REF_CH				PG_CH_0					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... , or PG_MISSING (See ADC-Module documentation )
+			#define	PGIM_SENSOR_ADC_REF_CH				PG_CH_0					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
 			
 		#endif
 
@@ -72,7 +72,7 @@
 			//		T E M P E R A T U R E  -  S C A L E							(Common for all ntc)
 			//#define	PGIM_SENSOR_NTC_SCALE			PG_DEGREES_CELSIUS		//!<  Must be: PG_DEGREES_CELSIUS || PG_DEGREES_FAHRENHEIT
 			
-			//		N T C  -  P A R A M E T E R S									(Common value for all ntc)
+			//		N T C  -  P A R A M E T E R S								(Common value for all ntc)
 			#define	PGIM_SENSOR_NTC_RES_REF				10000.0					//!< The reference resistance for the reference temperature [Ohm]
 			#define	PGIM_SENSOR_NTC_TEMP_REF			25.0					//!< The reference temperature for the reference resistance
 			#define	PGIM_SENSOR_NTC_BETA 				3988					//!< Ntc BETA constant
@@ -84,7 +84,7 @@
 			#define	PGIM_SENSOR_NTC_CALCULATION_METHOD	PG_SENSOR_METHOD_BETA	//!< Must be: PG_SENSOR_METHOD_BETA || PG_SENSOR_METHOD_COEF
 
 			//		C I R C U I T  -  C O M P O N E N T S						(Common value for all ntc)
-			#define PGIM_SENSOR_NTC_PULLUP_RESISTOR		10002.0					//!< Pullup resitor exact value [Ohm]
+			#define PGIM_SENSOR_NTC_HIGH_RESISTOR		10002.0					//!< High side resitor exact value [Ohm]
 			
 			//		A C Q U I S I T I O N  -  P A R A M E T E R S				(Common value for all ntc)
 			#define	PGIM_SENSOR_NTC_AD_AVERAGE			10						//!< Averages number of measurement

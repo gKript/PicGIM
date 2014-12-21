@@ -278,38 +278,15 @@
 		\endhtmlonly
 		
 		\section	CLCDconf	Module configuration
+			\htmlonly <hr> \endhtmlonly
 			In order to use the module, it must enabled and software configured in: \n
-				\arg \b pgim_module_setup_public.h : the main management file for the modules that must be included in the project.
+			\arg \b pgim_module_setup_public.h : the main management file for the modules that must be included in the project.
 				
 			and must be assigned to it the related control pins in: \n
-				\arg \b pgim_hardware_setup_public.h : where there are all hardware configuration of all modules.
-				
-		\section	CLCDfun		Functions
-		There are many functions available for a quick display printing: \n
-			\arg \b pg_lcd_hd44780_wait_busy() : Wait for the display is ready to receive next comand or data.
-			\arg \b pg_lcd_hd44780_init() : Properly initializes all present controllers. 
-			\arg \b pg_lcd_hd44780_init_routine() : Initializes the present controller.
-			\arg \b pg_lcd_hd44780_clear() : Delete all characters from the display.
-			\arg \b pg_lcd_hd44780_goto() : Places the cursor, in a specific position.
-			\arg \b pg_lcd_hd44780_put_char() : Print a character, at the current position.
-			\arg \b pg_lcd_hd44780_put_p_char() : Print a character, in a specific position.
-			\arg \b pg_lcd_hd44780_put_byte() : Print a byte, at the current position.
-			\arg \b pg_lcd_hd44780_put_p_byte() : Print a byte, in a specific position.
-			\arg \b pg_lcd_hd44780_char_generator() : Print a character from display CGRAM at the current position.
-			\arg \b pg_lcd_hd44780_char_generator_from_EE() : Print a character from micro-controller internal EEPROM at the current position.
-			\arg \b pg_ldc_hd44780_write_nibble() : Write a nibble on the display data bus.
-			\arg \b pg_lcd_hd44780_write_byte() : Write a byte on the display data bus.
-			\arg \b pg_lcd_hd44780_en_select() : Enables selected controller.
-			\arg \b pg_lcd_hd44780_write() : Print with the <i>PRINTF FORMAT</i>, at the current position.
-			\arg \b pg_lcd_hd44780_write_string() : Print a string by a pointer, at the current position.
-			\arg \b pg_lcd_hd44780_write_string_rom() : Print a constant string by a pointer, at the current position.
-			\arg \b pg_lcd_hd44780_write_p_string() : Print a string by a pointer, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_string_rom() : Print a constant string by a pointer, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_int() : Print an integer, specifying the format, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_float() : Print a float, specifying the format, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_char() : Print a char, specifying the format, in a specific position.
+			\arg \b pgim_hardware_setup_public.h : where there are all hardware configuration of all modules.
+			\n \n \n	
 		
-		\section	CLCDdim		Display dimensions
+		\subsection	CLCDdim		Display dimensions
 			\htmlonly
 				These defines set the dimensions of the display in the number of columns and rows.<br>
 			\endhtmlonly
@@ -318,7 +295,7 @@
 				#define	PG_LCD_HD44780_LINE					2
 			\endcode
 
-		\section	CLCDbusy	Busy Time mode
+		\subsection	CLCDbusy	Busy Time mode
 			\htmlonly
 				With this define you change the way you manage the <i>busy time</i> of the display.<br>
 				It can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
@@ -329,7 +306,7 @@
 				#define PG_LCD_HD44780_BUSY_FLAG			PG_ENABLE
 			\endcode
 
-		\section	CLCDlina	Line addresses
+		\subsection	CLCDlina	Line addresses
 			\htmlonly
 				These defines set the addresses of the <i>first</i> character of each line.<br>
 				Four lines are available.<br>
@@ -341,7 +318,7 @@
 				#define PG_LCD_HD44780_LINE_3_ADDRESS		0x40
 			\endcode	
 
-		\section	CLCDspl		Splash screen
+		\subsection	CLCDspl		Splash screen
 			\htmlonly
 				A print of a splash screen is possible enabling this define.<br>
 				It can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
@@ -358,7 +335,7 @@
 				#define PG_LCD_HD44780_SPLASH_TIME			2
 			\endcode	
 			
-		\section	CLCDpinrw	Pin: RW
+		\subsection	CLCDpinrw	Pin: RW
 			\htmlonly
 				This pin controls the reading or writing.<br>
 			\endhtmlonly
@@ -366,7 +343,7 @@
 				#define PG_LCD_HD44780_RW					L_B3
 			\endcode
 			
-		\section	CLCDpinrs	Pin: RS
+		\subsection	CLCDpinrs	Pin: RS
 			\htmlonly
 				This pin controls whether the display must receive a command or a data.<br>
 			\endhtmlonly
@@ -374,7 +351,7 @@
 				#define PG_LCD_HD44780_RS					L_B4
 			\endcode
 			
-	\section	CLCDpinen	Pin: EN
+		\subsection	CLCDpinen	Pin: EN
 			\htmlonly
 				These defines declares the availability of enables.<br>
 				They can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
@@ -397,7 +374,7 @@
 				#define PG_LCD_HD44780_EN_3	
 			\endcode
 			
-		\section	CLCDpindat	Pin: DATA<0-3>
+		\subsection	CLCDpindat	Pin: DATA<0-3>
 			\htmlonly
 				Here are defined the four pins for data.<br>
 				Refer to the datasheet of the display to know what are the pin relative to which to connect in four-bit mode.<br>
@@ -409,7 +386,7 @@
 				#define PG_LCD_HD44780_DATA_3				L_D4
 			\endcode			
 			
-		\section	CLCDpinbl	Pin: BL
+		\subsection	CLCDpinbl	Pin: BL
 			\htmlonly
 				This define declares the availability of the BACKLIGHT pin control.<br>
 				They can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
@@ -425,7 +402,7 @@
 				#define PG_LCD_HD44780_BL					L_D3
 			\endcode	
 
-		\section	CLCDpintr	Tris
+		\subsection	CLCDpintr	Tris
 			\htmlonly
 				These define concern all tris pins that were configured previously.<br>
 				The name matching ensures easy association.<br>
@@ -445,7 +422,7 @@
 				#define PG_LCD_HD44780_BL_TRIS				T_D3
 			\endcode	
 
-		\section	CLCDpinpo	Port
+		\subsection	CLCDpinpo	Port
 			\htmlonly
 				When using the BUSY-FLAG, it is necessary to be able to read from the display.<br>
 				So, it is important to specify its corresponding port pin previously declared.<br>
@@ -456,7 +433,34 @@
 				#define PG_LCD_HD44780_DATA_1_PORT			P_D6
 				#define PG_LCD_HD44780_DATA_2_PORT			P_D5
 				#define PG_LCD_HD44780_DATA_3_PORT			P_D4
-			\endcode	
+			\endcode
+			\n \n \n 
+			
+		\section	CLCDfun		Functions
+			\htmlonly <hr> \endhtmlonly
+			There are many functions available for a quick display printing: \n
+			\arg \b pg_lcd_hd44780_wait_busy() : Wait for the display is ready to receive next comand or data.
+			\arg \b pg_lcd_hd44780_init() : Properly initializes all present controllers. 
+			\arg \b pg_lcd_hd44780_init_routine() : Initializes the present controller.
+			\arg \b pg_lcd_hd44780_clear() : Delete all characters from the display.
+			\arg \b pg_lcd_hd44780_goto() : Places the cursor, in a specific position.
+			\arg \b pg_lcd_hd44780_put_char() : Print a character, at the current position.
+			\arg \b pg_lcd_hd44780_put_p_char() : Print a character, in a specific position.
+			\arg \b pg_lcd_hd44780_put_byte() : Print a byte, at the current position.
+			\arg \b pg_lcd_hd44780_put_p_byte() : Print a byte, in a specific position.
+			\arg \b pg_lcd_hd44780_char_generator() : Print a character from display CGRAM at the current position.
+			\arg \b pg_lcd_hd44780_char_generator_from_EE() : Print a character from micro-controller internal EEPROM at the current position.
+			\arg \b pg_ldc_hd44780_write_nibble() : Write a nibble on the display data bus.
+			\arg \b pg_lcd_hd44780_write_byte() : Write a byte on the display data bus.
+			\arg \b pg_lcd_hd44780_en_select() : Enables selected controller.
+			\arg \b pg_lcd_hd44780_write() : Print with the <i>PRINTF FORMAT</i>, at the current position.
+			\arg \b pg_lcd_hd44780_write_string() : Print a string by a pointer, at the current position.
+			\arg \b pg_lcd_hd44780_write_string_rom() : Print a constant string by a pointer, at the current position.
+			\arg \b pg_lcd_hd44780_write_p_string() : Print a string by a pointer, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_string_rom() : Print a constant string by a pointer, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_int() : Print an integer, specifying the format, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_float() : Print a float, specifying the format, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_char() : Print a char, specifying the format, in a specific position.
 
 			\htmlonly
 				<br><br><br><br>
