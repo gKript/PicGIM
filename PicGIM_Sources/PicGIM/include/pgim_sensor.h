@@ -64,11 +64,13 @@
 		//---[ END Errors ]---
 		
 		//---[ Prototypes ]---
-
+		extern	_pg_float	pg_sensor_adc_ref_measured;							//!< Variable containing the result of the function that measures the ADC-Ref sensor
+		extern	_pg_float	pg_sensor_ntc_measured;								//!< Variable containing the result of the function that measures the NTC sensor
+		
 		/*!
 			\brief			This function measures the value of the reference voltage of the AD converter.
 			\param			\b volt_stable_ref : a stable voltage reference to measure by ADC MODULE. \n
-			\return			The value of the reference voltage of the AD converter.\n
+			\return			A pointer to the value of the reference voltage of the AD converter.\n
 							It also sets the following values in the ERROR MODULE(if enabled): \n
 							\b PG_OK : if all value are right. \n
 							\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH : if the reference voltage value is too big. \n
@@ -77,21 +79,21 @@
 							It is useful with battery powered device. \n
 							It is able to perform his job because the AD-Module uses ALWAYS the Vdd as superior reference. \n
 		*/
-		_pg_float	pg_sensor_adc_ref			( _pg_float volt_stable_ref );
+		_pg_float *			pg_sensor_adc_ref			( _pg_float volt_stable_ref );
 
 		/*!
 			\brief			This function measures the temperature value of an NTC sensor.
 			\param			\b ad_channel : channel where is connected the ntc to measure on AD input. \n
 							Must be specified in ad_converter style, like as PG_CH_0, PG_CH_1, PG_CH_2... \n
 							This module will only execute the calls pg_adc_start() and pg_adc_get(). \n
-			\return			The value of temperature in Celsius degrees or Fahrenheit degrees\n
+			\return			A pointer to the value of temperature in Celsius degrees. \n
 							It also sets the following values in the ERROR MODULE(if enabled): \n
 							\b PG_OK : if all value are right. \n
 							\b PG_SENSOR_NTC_ERROR_UNPLUGGED : if the sensor is unplugged. \n
 							\b PG_SENSOR_NTC_ERROR_SHORTED : if the sensor is shorted. \n
 							
 		*/		
-		_pg_float	pg_sensor_ntc				( _pg_Uint8 ad_channel );
+		_pg_float *			pg_sensor_ntc				( _pg_Uint8 ad_channel );
 
 		//---[ END Prototypes ]---
 	#endif	
@@ -190,7 +192,7 @@
 						pg_initialize();
 						pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 						pg_adc_set( PG_ADC_MODULE , PG_ON );
-						real_pic_vdd = pg_sensor_adc_ref( 2.5 );
+						real_pic_vdd = * pg_sensor_adc_ref( 2.5 );
 						PG_INFINITE_LOOP;
 					}
 				\endcode
@@ -200,20 +202,7 @@
 			\htmlonly <hr> \endhtmlonly
 			This sensor allows to measure the temperature via a resistor NTC connected as shown in the schematic. \n
 			The values of the circuit components must be declared in the configuration files \ref pgim_sensor_setup_public.h \n \n
-			
-			\subsection	CSENSNTCscale	Ntc - Scale
-				\htmlonly
-					This define declares the measure unit.<br>
-				\endhtmlonly
-				\code
-					#define	PGIM_SENSOR_NTC_SCALE			PG_DEGREES_CELSIUS
-				\endcode
-				\htmlonly
-					It must be:<br>
-				\endhtmlonly
-				\arg \b PG_DEGREES_CELSIUS : All values, entered and returned, are expressed with Celsius scale.
-				\arg \b PG_DEGREES_FAHRENHEIT : All values, entered and returned, are expressed with Fahrenheit scale. NOT YET IMPLEMENTED!
-				
+							
 			\subsection	CSENSNTCresref		Ntc - Resistance 
 				\htmlonly
 					This define specifies the nominal value of the NTC resistance at the reference temperature.<br>
@@ -233,7 +222,7 @@
 					#define	PGIM_SENSOR_NTC_TEMP_REF			25.0
 				\endcode
 				\htmlonly
-					It must be measured in Celsius or Fahrenheit degrees.<br>
+					It must be measured in Celsius degrees.<br>
 				\endhtmlonly 
 
 			\subsection	CSENSNTCbeta	Ntc - BETA constant
@@ -335,7 +324,7 @@
 						pg_initialize();
 						pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 						pg_adc_set( PG_ADC_MODULE , PG_ON );
-						temperature = pg_sensor_ntc( PG_CH_0 );
+						temperature = * pg_sensor_ntc( PG_CH_0 );
 						PG_INFINITE_LOOP;
 					}
 				\endcode

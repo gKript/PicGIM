@@ -44,10 +44,17 @@
 
 void main( void ) {
 	float flo;
+	char buff[16];
 	pg_initialize();
 	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 	pg_adc_set( PG_ADC_MODULE , PG_ON );
-	flo = pg_sensor_ntc( PG_CH_0 );
+	while(1) {
+		flo = * pg_sensor_ntc( PG_CH_0 );
+		//char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer );
+		pg_ftoa( flo, PG_FTOA_DECIMAL_DIGITS_2, buff );
+		//putsUSART(  char *data );
+		putrsUSART( buff );
+	}
 	PG_INFINITE_LOOP;
 }
 

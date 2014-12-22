@@ -55,7 +55,7 @@
 	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
 	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
