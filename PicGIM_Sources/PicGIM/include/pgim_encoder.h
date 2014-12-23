@@ -48,32 +48,32 @@
 	#endif
 
 	#if ( PGIM_ENCODER == PG_ENABLE )
-	
-		#define	DELAY_AR            5
-		#define	DELAY_OUT           40
-		#define	ITERATION           7000
 
-		#define	ENC_UNK             -1
-		#define	ENC_CW              0
-		#define	ENC_CCW             1
+		#define PG_ENCODER_GKPD
 
-		#define	ENCODER_A           ( ! PG_ENCODER_A )
-		#define	ENCODER_B           ( ! PG_ENCODER_B )
-		#define	ENCODER_PULSE       ( PG_ENCODER_A )
+		#define	DELAY_AR				5
+		#define	DELAY_OUT				40
+		#define	ITERATION				7000
 
-		#define	ENCODER_SW          ( ! PG_ENCODER_SW )
-		#define	ENCODER             ( ENCODER_A  || ENCODER_B || ENCODER_SW )
+		#define	ENC_UNK					-1
+		#define	ENC_CW					0
+		#define	ENC_CCW					1
 
-		#define	ENC_DELAY_1         1
-		#define	ENC_DELAY_2         3
-		#define	ENC_DELAY_3         5
-		#define	ENC_DELAY_4         7
-		
-		extern	_pg_int8            pg_encoder_direction;
+		#define	ENCODER_SW				( ! PG_ENCODER_SW )
+		#define	ENCODER					( ENCODER_STEP  || ENCODER_DIR || ENCODER_SW )
 
-		_pg_int8    encoder_cw                      ( void );
-		_pg_int8    encoder_ccw                     ( void );
-		_pg_Uint8   enc_start_end_pulse_non_block   ( void );
+		#define	ENC_DELAY_1				1
+		#define	ENC_DELAY_2				3
+		#define	ENC_DELAY_3				5
+		#define	ENC_DELAY_4				7
+
+
+		extern	_pg_int8				pg_encoder_direction;
+
+
+		void		pg_encoder_start_end_pulse_block		( void );
+		_pg_Uint8	pg_encoder_start_end_pulse_non_block	( void );
+		_pg_int8	pg_encoder_pulse						( void );
 
 	#endif	
 #endif /* _PGIM_ENCODER_H_ */

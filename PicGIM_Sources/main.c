@@ -74,57 +74,52 @@ void main( void ) {
 
 _pg_Uint24_VAL	my_rgb;
 
+rom _pg_Uint24	array_mask[] = { 0b100000000000000000000000 , 0b010000000000000000000000 , 0b001000000000000000000000 , 0b000100000000000000000000 , 0b000010000000000000000000 , 0b000001000000000000000000 , 0b000000100000000000000000 , 0b000000010000000000000000 , 0b000000001000000000000000 , 0b000000000100000000000000 , 0b000000000010000000000000 , 0b000000000001000000000000 , 0b000000000000100000000000 , 0b000000000000010000000000 , 0b000000000000001000000000 , 0b000000000000000100000000 , 0b000000000000000010000000 , 0b000000000000000001000000 , 0b000000000000000000100000 , 0b000000000000000000010000 , 0b000000000000000000001000 , 0b000000000000000000000100 , 0b000000000000000000000010 , 0b000000000000000000000001 };
+
+
+
 void	my_flush_3bytes( void  ) {
 	_pg_Uint8	b , l;
-	_pg_Uint24	mask;
 	for( l = 0 ; l < ( MY_STRIP_LED_A_METER * MY_STRIP_LENGTH ) ; l++ ) {
-		mask = 0x800000;
 		for( b = 0 ; b < 24 ; b++ ) {
-			if ( my_rgb.Val & mask ) {
-				putsSPI( WS2811_1 );
-//					MY_STRIP = PG_HIGH;
+			if ( my_rgb.Val & array_mask[b] ) {
+//				putsSPI( WS2811_1 );
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
 //					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					MY_STRIP = PG_LOW;
-//					Nop();
-//					Nop();
-//					Nop();
-////					Nop();
 			}
 			else {
-				putsSPI( WS2811_0 );
-//					MY_STRIP = PG_HIGH;
+//				putsSPI( WS2811_0 );
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_HIGH;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
+					MY_STRIP = PG_LOW;
 //					Nop();
-//					Nop();
-//					MY_STRIP = PG_LOW;
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-//					Nop();
-////					Nop();
 			}
-			mask >>= 1;
 		}
-		for( b = 0 ; b < 51 ; b++ ) {
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-						Nop();
-		}
+//		for( b = 0 ; b < 51 ; b++ ) {
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//						Nop();
+//		}
 	}
 }
 
@@ -135,21 +130,25 @@ void	PushButton( void ) {
 
 void main( void ) {
 	pg_pin_mode( MY_STRIP_TRIS , PG_OUT );
+	pg_pin_mode( T_C3 , PG_OUT );
+	pg_pin_mode( T_C5 , PG_OUT );
+	pg_pin_mode( T_B3 , PG_OUT );
 	pg_initialize();
-	pg_spi_open( PG_SPI_0 , PG_SPI_MASTER_FOSC_64 , MODE_00 , SMPEND );
+	pg_spi_open( PG_SPI_0 , PG_SPI_MASTER_FOSC_4 , MODE_00 , SMPEND );
 	MYRED = 0xff;
 	MYGREEN = 0x00;
 	MYBLUE = 0x00;
 	PG_LOOP( PG_FOREVER ) {
-		my_rgb.Val = 0xff0000;
+		my_rgb.Val = 0x555555;
 		my_flush_3bytes();
-		pg_delay_sec( 1 );
-		my_rgb.Val = 0x00ff00;
-		my_flush_3bytes();
-		pg_delay_sec( 1 );
-		my_rgb.Val = 0x0000ff;
-		my_flush_3bytes();
-		pg_delay_sec( 1 );
+		pg_delay_msec( 30 );
+		pg_pin_toggle( L_B3 );
+//		my_rgb.Val = 0x00ff00;
+//		my_flush_3bytes();
+//		pg_delay_msec( 10 );
+//		my_rgb.Val = 0x0000ff;
+//		my_flush_3bytes();
+//		pg_delay_msec( 10 );
 	}
 }
 

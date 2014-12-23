@@ -267,15 +267,18 @@
 
 /*!	\page	HWE_lcd_HD44780		LCD Character [Hitachi HD44780]
 
-		\htmlonly
-			<IMG src="lcd_char.png" align="center" border="0" ><br><br>
+		\tableofcontents
+
+		\image	html	lcd_char.png
+
+		<p>
 			This module manages the <b>Characters LCD Display</b> with <b>HD44780</b> controller.<br>
 			It is able to support up to a maximum of four controllers.<br>
 			For each controller, four lines are available.<br>
 			For example it is possible use two 4x40 (which have 2 controllers each), or four 4x20 (which have only a controller each).<br>
 			The management of the data bus, at present, is implemented only in four bit mode.<br>
 			The configuration also allows to choose whether to use the <b>Busy-Flag</b>, or a software delay.<br>
-		\endhtmlonly
+		</p>
 		
 		\section	CLCDconf	Module configuration
 			\htmlonly <hr> \endhtmlonly

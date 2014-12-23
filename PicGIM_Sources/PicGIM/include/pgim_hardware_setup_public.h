@@ -161,27 +161,14 @@
 	////////////////////////////////////////////////////////////////////////////////
 
 	#if ( PGIM_ENCODER == PG_ENABLE )
-//		#define PG_ENCODER_ABP										//	Quadrature encoder signal A - signal B - Pulse ( should NOT be bouncy )
-		#define PG_ENCODER_GKPD										//	GKript encoder (Pulse - Direction)
 
-//		#define	PG_ENCODER_NO_INTENSITY								//	Intensity OFF
-		#define	PG_ENCODER_INTENSITY								//	Intensity ON
-
-		#define	PG_ENCODER_A						L_B5
-		#define	PG_ENCODER_B						L_B4
+		#define	PG_ENCODER_STEP						L_B5
+		#define	PG_ENCODER_DIR						L_B4
 		#define	PG_ENCODER_SW						L_B6
 
-		#define	PG_ENCODER_A_TRIS					T_B5
-		#define	PG_ENCODER_B_TRIS					T_B4
+		#define	PG_ENCODER_STEP_TRIS				T_B5
+		#define	PG_ENCODER_DIR_TRIS					T_B4
 		#define	PG_ENCODER_SW_TRIS					T_B6
-
-		//		do not touch
-		#define	PG_ENCODER_STEP						PG_ENCODER_A
-		#define	PG_ENCODER_STEP_TRIS				PG_ENCODER_A_TRIS
-		
-		#define	PG_ENCODER_DIR						PG_ENCODER_B
-		#define	PG_ENCODER_DIR_TRIS					PG_ENCODER_B_TRIS
-		//		do not touch
 
 	#endif
 

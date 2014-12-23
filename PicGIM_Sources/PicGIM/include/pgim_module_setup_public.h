@@ -44,6 +44,8 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
+	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	//#define	PGIM_CONVERSION					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -105,6 +107,11 @@
 	#if ( PGIM_BUZZER == PG_ENABLE )
 //		#define	PG_BUZZER_
 //		#define	PG_BUZZER_
+		#define PG_BEEP_LONG					100						/*!	Defines the long duration of the beep	*/
+		#define	PG_BEEP_SHORT					40						/*!	Defines the short duration of the beep	*/
+		#define	PG_BEEP_HIGH					1						/*!	Defines the high tone of the beep		*/
+		#define	PG_BEEP_MID						3						/*!	Defines the mean tone of the beep		*/
+		#define	PG_BEEP_LOW						7						/*!	Defines the low tone of the beep		*/
 	#endif
 	
 

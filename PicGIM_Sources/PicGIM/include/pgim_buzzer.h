@@ -49,14 +49,6 @@
 
     #if ( PGIM_BUZZER == PG_ENABLE )
 	
-		#define PG_BEEP_LONG        100			/*!	Defines the long duration of the beep		*/
-		#define	PG_BEEP_SHORT       40			/*!	Defines the short duration of the beep	*/
-//		#define	PG_BEEP_PRESS_L     90
-//		#define	PG_BEEP_PRESS_S     30
-		#define	PG_BEEP_HIGH		1			/*!	Defines the high tone of the beep		*/
-		#define	PG_BEEP_MID         3			/*!	Defines the mean tone of the beep		*/
-		#define	PG_BEEP_LOW         7			/*!	Defines the low tone of the beep		*/
-
 		/*!
 		 *  \brief		This function generates a beep length and varying tones by a buzzer.
 		 *  \param		[tone]	The tone which is to be generated beep.
