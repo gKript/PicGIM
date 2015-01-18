@@ -135,22 +135,22 @@
 		void 	pg_lcd_hd44780_put_p_byte			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint8 Val );
 		
 		/*!
-			\brief			OOOOOO a character from display CGRAM at the current position. 
+			\brief			Print a character from display CGRAM at the current position. 
 			\return			Nothing.
 			\param			ControllerNumber		The number of the controller.
 			\param			location				The storage location in the CGRAM.
-			\param			new_char				The number of the controller.
+			\param			new_char				The new char.
 		*/	
 		void	pg_lcd_hd44780_char_generator		( _pg_Uint8 ControllerNumber , char location , char * new_char );
 
 	#if	( PGIM_EE == PG_ENABLE )
 	
 		/*!
-			\brief			OOOOOO a character from micro-controller internal EEPROM at the current position.
+			\brief			Print a character from micro-controller internal EEPROM at the current position.
 			\return			Nothing.
 			\param			ControllerNumber		The number of the controller.
 			\param			location				The storage location in the EEPROM.
-			\param			ee_addy					The address OOOOOO
+			\param			ee_addy					The char address in the microcontroller eeprom.
 		*/	
 		void	pg_lcd_hd44780_char_generator_from_EE( _pg_Uint8 ControllerNumber ,char location , _pg_Uint16 ee_addy );
 		
@@ -279,6 +279,7 @@
 			The management of the data bus, at present, is implemented only in four bit mode.<br>
 			The configuration also allows to choose whether to use the <b>Busy-Flag</b>, or a software delay.<br>
 		</p>
+		\n \n \n 
 		
 		\section	CLCDconf	Module configuration
 			\htmlonly <hr> \endhtmlonly
@@ -290,127 +291,149 @@
 			\n \n \n	
 		
 		\subsection	CLCDdim		Display dimensions
-			\htmlonly
-				These defines set the dimensions of the display in the number of columns and rows.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define	PG_LCD_HD44780_COLUMN				16
 				#define	PG_LCD_HD44780_LINE					2
 			\endcode
-
-		\subsection	CLCDbusy	Busy Time mode
 			\htmlonly
-				With this define you change the way you manage the <i>busy time</i> of the display.<br>
-				It can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
-				With <b>PG_LCD_HD44780_BUSY_FLAG</b> <i>enabled</i> PicGIM uses the <b>busy flag</b> of the LCD.<br>
-				If <i>disabled</i> PicGIM calls a delay; this is an easier method but with a light loss of performance.<br>
+				These defines set the dimensions of the display in the number of columns and rows.<br>
 			\endhtmlonly
+			
+		\subsection	CLCDbusy	Busy Time mode
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_BUSY_FLAG			PG_ENABLE
 			\endcode
-
-		\subsection	CLCDlina	Line addresses
 			\htmlonly
-				These defines set the addresses of the <i>first</i> character of each line.<br>
-				Four lines are available.<br>
+				With this define you change the way you manage the <i>busy time</i> of the display.<br>
+				It must be:<br>
 			\endhtmlonly
+				\arg \b PG_ENABLE : busy flag enabled.
+				\arg \b PG_DISABLE : busy flag disabled.
+				\endcode
+				
+			\htmlonly
+				With <b>PG_LCD_HD44780_BUSY_FLAG</b> <i>enabled</i> PicGIM uses the <b>busy flag</b> of the LCD.<br>
+				If <i>disabled</i> PicGIM calls a delay; this is an easier method but with a light loss of performance.<br>
+			\endhtmlonly
+			
+		\subsection	CLCDlina	Line addresses
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_LINE_0_ADDRESS		0x00
 				#define PG_LCD_HD44780_LINE_1_ADDRESS		0x40
 				#define PG_LCD_HD44780_LINE_2_ADDRESS		0x00
 				#define PG_LCD_HD44780_LINE_3_ADDRESS		0x40
 			\endcode	
+			\htmlonly
+				These defines set the addresses of the <i>first</i> character of each line.<br>
+				Four lines are available.<br>
+			\endhtmlonly
 
 		\subsection	CLCDspl		Splash screen
-			\htmlonly
-				A print of a splash screen is possible enabling this define.<br>
-				It can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_SPLASH_ENABLE		PG_ENABLE
 			\endcode	
 			\htmlonly
-				This one below to choose how long view it.<br>
-				Time is expressed in seconds [s].<br>
-				It is a quick way to verify the correct initialization of the display.<br>
+				A print of a splash screen is possible enabling this define.<br>
+				It must be:<br>
 			\endhtmlonly
+				\arg \b PG_ENABLE : splash screen enabled.
+				\arg \b PG_DISABLE : splash screen disabled.
+				\endcode
+
 			\code
 				#define PG_LCD_HD44780_SPLASH_TIME			2
 			\endcode	
+			\htmlonly
+				This one is to choose how long view it.<br>
+				Time is expressed in seconds [s].<br>
+				It is a quick way to verify the correct initialization of the display.<br>
+			\endhtmlonly
 			
 		\subsection	CLCDpinrw	Pin: RW
-			\htmlonly
-				This pin controls the reading or writing.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_RW					L_B3
 			\endcode
+			\htmlonly
+				This pin controls the reading or writing.<br>
+			\endhtmlonly
 			
 		\subsection	CLCDpinrs	Pin: RS
-			\htmlonly
-				This pin controls whether the display must receive a command or a data.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_RS					L_B4
 			\endcode
+			\htmlonly
+				This pin controls whether the display must receive a command or a data.<br>
+			\endhtmlonly
 			
 		\subsection	CLCDpinen	Pin: EN
-			\htmlonly
-				These defines declares the availability of enables.<br>
-				They can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_EN_0_PRESENT			PG_ENABLE
 				#define PG_LCD_HD44780_EN_1_PRESENT			PG_DISABLE			
 				#define PG_LCD_HD44780_EN_2_PRESENT			PG_DISABLE		
 				#define PG_LCD_HD44780_EN_3_PRESENT			PG_DISABLE
 			\endcode
-			
 			\htmlonly
-				These defines assign the pin to enable that was declared present.<br>
-				If an enable not exist, you can leave this field blank.<br>
+				These defines declares the availability of enables.<br>
+				It must be:<br>
 			\endhtmlonly
+				\arg \b PG_ENABLE : lcd enable pin present.
+				\arg \b PG_DISABLE : lcd enable pin not present.
+				\endcode
+				
 			\code
 				#define PG_LCD_HD44780_EN_0					L_B2
 				#define PG_LCD_HD44780_EN_1				
 				#define PG_LCD_HD44780_EN_2				
 				#define PG_LCD_HD44780_EN_3	
 			\endcode
+			\htmlonly
+				These defines assign the pin to enable that was declared present.<br>
+				If an enable not exist, you can leave this field blank.<br>
+			\endhtmlonly
 			
 		\subsection	CLCDpindat	Pin: DATA<0-3>
-			\htmlonly
-				Here are defined the four pins for data.<br>
-				Refer to the datasheet of the display to know what are the pin relative to which to connect in four-bit mode.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_DATA_0				L_D7
 				#define PG_LCD_HD44780_DATA_1				L_D6
 				#define PG_LCD_HD44780_DATA_2				L_D5
 				#define PG_LCD_HD44780_DATA_3				L_D4
 			\endcode			
+			\htmlonly
+				Here are defined the four pins for data.<br>
+				Refer to the datasheet of the display to know what are the pin relative to which to connect in four-bit mode.<br>
+			\endhtmlonly
 			
 		\subsection	CLCDpinbl	Pin: BL
-			\htmlonly
-				This define declares the availability of the BACKLIGHT pin control.<br>
-				They can be <i>PG_ENABLE</i> or <i>PG_DISABLE</i>.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_BL_PRESENT			PG_ENABLE
+			\endcode	
+			\htmlonly
+				This define declares the availability of the BACKLIGHT pin control.<br>
+				It must be:<br>
+			\endhtmlonly
+				\arg \b PG_ENABLE : backlight pin is present.
+				\arg \b PG_DISABLE : backlight pin is not present.
+				\endcode
+				
+			\code
+				#define PG_LCD_HD44780_BL					L_D3
 			\endcode	
 			\htmlonly
 				This define assign the pin to control the backlight that was declared present.<br>
 				If a backlight pin do not exist, you can leave this field blank.<br>
 			\endhtmlonly
-			\code
-				#define PG_LCD_HD44780_BL					L_D3
-			\endcode	
 
 		\subsection	CLCDpintr	Tris
-			\htmlonly
-				These define concern all tris pins that were configured previously.<br>
-				The name matching ensures easy association.<br>
-				It is possible leave blank the enable tris the backlight tris if they are not present.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_RW_TRIS				T_B3
 				#define PG_LCD_HD44780_RS_TRIS				T_B4
@@ -424,22 +447,28 @@
 				#define PG_LCD_HD44780_DATA_3_TRIS			T_D4
 				#define PG_LCD_HD44780_BL_TRIS				T_D3
 			\endcode	
+			\htmlonly
+				These define concern all tris pins that were configured previously.<br>
+				The name matching ensures easy association.<br>
+				It is possible leave blank the enable tris the backlight tris if they are not present.<br>
+			\endhtmlonly
 
 		\subsection	CLCDpinpo	Port
-			\htmlonly
-				When using the BUSY-FLAG, it is necessary to be able to read from the display.<br>
-				So, it is important to specify its corresponding port pin previously declared.<br>
-				The name matching ensures easy association.<br>
-			\endhtmlonly
+			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_LCD_HD44780_DATA_0_PORT			P_D7
 				#define PG_LCD_HD44780_DATA_1_PORT			P_D6
 				#define PG_LCD_HD44780_DATA_2_PORT			P_D5
 				#define PG_LCD_HD44780_DATA_3_PORT			P_D4
 			\endcode
+			\htmlonly
+				When using the BUSY-FLAG, it is necessary to be able to read from the display.<br>
+				So, it is important to specify its corresponding port pin previously declared.<br>
+				The name matching ensures easy association.<br>
+			\endhtmlonly
 			\n \n \n 
 			
-		\section	CLCDfun		Functions
+		\section	CLCDfun		Public functions
 			\htmlonly <hr> \endhtmlonly
 			There are many functions available for a quick display printing: \n
 			\arg \b pg_lcd_hd44780_wait_busy() : Wait for the display is ready to receive next comand or data.
