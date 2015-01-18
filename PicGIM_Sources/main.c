@@ -43,6 +43,7 @@
 #include "picgim_main.h"
 
 void main( void ) {
+/*
 	float flo;
 	char buff[16];
 	pg_initialize();
@@ -55,6 +56,7 @@ void main( void ) {
 		//putsUSART(  char *data );
 		putrsUSART( buff );
 	}
+*/
 	PG_INFINITE_LOOP;
 }
 

@@ -62,38 +62,39 @@
 			#endif
 			//---[ End Errors Ntc ]---
 		//---[ END Errors ]---
-		
-		//---[ Prototypes ]---
-		extern	_pg_float	pg_sensor_adc_ref_measured;							//!< Variable containing the result of the function that measures the ADC-Ref sensor
-		extern	_pg_float	pg_sensor_ntc_measured;								//!< Variable containing the result of the function that measures the NTC sensor
-		
+				
 		/*!
 			\brief			This function measures the value of the reference voltage of the AD converter.
-			\param			\b volt_stable_ref : a stable voltage reference to measure by ADC MODULE. \n
-			\return			A pointer to the value of the reference voltage of the AD converter.\n
+			
+			\param			volt_stable_ref : a stable voltage reference to measure by ADC MODULE. \n
+			
+			\return			A float value of the reference voltage of the AD converter.\n
 							It also sets the following values in the ERROR MODULE(if enabled): \n
 							\b PG_OK : if all value are right. \n
 							\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH : if the reference voltage value is too big. \n
 							\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW : if the reference voltage value is negative or zero. \n
+							
 			\note			This function can measure the supply voltage of the micro-controller. \n
 							It is useful with battery powered device. \n
 							It is able to perform his job because the AD-Module uses ALWAYS the Vdd as superior reference. \n
 		*/
-		_pg_float *			pg_sensor_adc_ref			( _pg_float volt_stable_ref );
+		_pg_float			pg_sensor_adc_ref			( _pg_float volt_stable_ref );
 
 		/*!
 			\brief			This function measures the temperature value of an NTC sensor.
-			\param			\b ad_channel : channel where is connected the ntc to measure on AD input. \n
+			
+			\param			ad_channel : channel where is connected the ntc to measure on AD input. \n
 							Must be specified in ad_converter style, like as PG_CH_0, PG_CH_1, PG_CH_2... \n
 							This module will only execute the calls pg_adc_start() and pg_adc_get(). \n
-			\return			A pointer to the value of temperature in Celsius degrees. \n
+							
+			\return			A foat value of temperature in Celsius degrees. \n
 							It also sets the following values in the ERROR MODULE(if enabled): \n
 							\b PG_OK : if all value are right. \n
 							\b PG_SENSOR_NTC_ERROR_UNPLUGGED : if the sensor is unplugged. \n
 							\b PG_SENSOR_NTC_ERROR_SHORTED : if the sensor is shorted. \n
 							
 		*/		
-		_pg_float *			pg_sensor_ntc				( _pg_Uint8 ad_channel );
+		_pg_float			pg_sensor_ntc				( _pg_Uint8 ad_channel );
 
 		//---[ END Prototypes ]---
 	#endif	
@@ -107,7 +108,7 @@
 
 		\image html	sensor.png
 
-		This module is able to handle a multitude of sensors or similar equipment. \n
+		The SENSOR module is able to handle a multitude of sensors or similar equipment. \n
 		It can be expanded to be able to control new devices. \n \n
 
 		This module depends on the module AD_CONVERTER which must then be configured in function \n
@@ -117,38 +118,70 @@
 		The name of the channel to be passed to functions must be in AD_CONVERTER style, \n
 		like as \ref PG_CH_0 , \ref PG_CH_1 , \ref PG_CH_2 ... \n \n
 			
-		\section	SENSORmodconf	Module configuration
-
-			\htmlonly <hr> \endhtmlonly
-			\htmlonly
-			In order to use this module, it must be enabled and configured in: \n
-			\endhtmlonly
-			\arg \b pgim_module_setup_public.h : the main management file for the modules inclusion in the project. \n
-			\code
-				#define PGIM_SENSOR					PG_ENABLE
-			\endcode
-			\htmlonly
-			This define enables or disables the module.<br><br>
-			It must be:<br>
-			\endhtmlonly
-			\arg \b PG_ENABLE : Sensor module enabled.
-			\arg \b PG_DISABLE : Sensor module disabled.
+		\endcode
 			\n \n \n
-			\arg \b pgim_sensor_setup_public.h : the management file for the sensor module configuration. \n
-			\code
-				#define PGIM_SENSOR_ADC_REF			PG_ENABLE
+		
+		\section	sensor_mod_conf	Module configuration
+			\htmlonly <hr> \endhtmlonly
 			\endcode
-			\htmlonly
-			This define enables or disables the sensor Volt AD Ref.<br><br>
-			It must be:<br>
-			\endhtmlonly
-			\arg \b PG_ENABLE : Sensor enabled.
-			\arg \b PG_DISABLE : Sensor disabled.
-			\n \n
-			In the same way are enabled and disabled all other sensors.
-			\n \n \n 
+			<p>
+			In order to use this module, it must be enabled and configured in: \n
+				\arg \b pgim_module_setup_public.h : the main management file for the modules that must be included in the project. \n In this file there are these configurations  : \n \n
+					&nbsp;&nbsp;&nbsp;&nbsp; \ref sensor_moden  \n
+					\n \n \n
+				\arg \b pgim_sensor_setup_public.h : where are collected all the features of the module. \n
+						Here are specified the possible values for the various parameters and when they have to be set depending on the chosen mode of operation of the module. \n \n
+						After the enabling of module, each sensor must be enabled: \n \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref sensor_sensor_en \n \n
+						and configured: \n \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref sensor_sensconf_adcref \n
+						&nbsp;&nbsp;&nbsp;&nbsp; \ref sensor_sensconf_ntc \n
+						\n \n \n &nbsp;&nbsp;&nbsp;&nbsp;
 
-		\section	SENSADREF		ADC Ref   (VDD measurement)
+			\attention	For software reference, please read the documentation about \b pgim_sensor.h . \n
+						This is \b not a file defined as \b public and therefore it would not be edited. \n
+						We suggest that you edit this file only if necessary and only if you know what you are doing.
+			</p>
+			
+  			\n \n \n
+			\subsection	sensor_mod_en		Module enabling
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define PGIM_SENSOR							PG_ENABLE
+				\endcode
+					This define enables or disables the module.<br>
+				\htmlonly
+					It must be:<br>
+				\endhtmlonly
+					\arg \b PG_ENABLE : Sensor module enabled.
+					\arg \b PG_DISABLE : Sensor module disabled.
+					\endcode
+
+				\subsubsection	s_sensor_mod_en_ref		References
+					\li \e File : pgim_module_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR \n
+			
+			\subsection	sensor_sens_en		Sensor enabling
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define PGIM_SENSOR_ADC_REF				PG_ENABLE
+					#define PGIM_SENSOR_NTC					PG_DISABLE
+				\endcode
+					This define enables or disables the sensors.<br>
+				\htmlonly
+					They must be:<br>
+				\endhtmlonly
+					\arg \b PG_ENABLE : Sensor enabled.
+					\arg \b PG_DISABLE : Sensor disabled.
+					\endcode
+
+				\subsubsection	s_sensor_sens_en_ref		References
+					\li \e File : pgim_module_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_ADC_REF \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC \n
+				\n \n \n
+				
+		\section	sensor_adcref_conf		ADC-Ref sensor configuration	
 			\htmlonly <hr> \endhtmlonly
 			This is not really a sensor. It simply acquires the value of a stable voltage via input of an AD converter. \n
 			The acquired value, since it is stable, and then fixed, does not carry directly any information, \n
@@ -156,168 +189,174 @@
 			For the module AD_CONVERTER, the Vref reference is the power supply voltage of the microcontroller, or VDD. \n
 			It is therefore possible to measure the supply voltage of the pic, very useful in case of battery powered devices. \n \n
 			
-		\subsection	CSENSADREFch	ADC-Ref Channel
-			\htmlonly
-				The channel where to measure the reference voltage.<br>
-			\endhtmlonly
-			\code
-				#define	PGIM_SENSOR_ADC_REF_CH				PG_CH_0	
-			\endcode
-			\htmlonly
-			It must be the name of the channel used in the AD_CONVERTER module:<br>
-			\endhtmlonly
-			\arg \b PG_CH_0 : For the first AD channel
-			\arg \b PG_CH_1 : For the second AD channel
-			\arg \b PG_CH_2 : and so on...
-					
-			\subsection	CSENSADREF	ADC-Ref  Schematic
-					\htmlonly
-						An example of circuit schematic.<br>
-					\endhtmlonly
-					\image html	sensor_voltadref.png
-					\htmlonly
-					In this circuit schematic, for example, a 2.5V reference voltage is used. \n
-					Of course, nothing prevents from using other values. \n
-					It is important that the \b exact \b value of voltage generated is measured and written in the relative configuration file \n
-					specified in the initial section of this module documentation. \n \n
-					\endhtmlonly
+			\subsection	sensor_adcref_ch		(ADC-Ref) - Channel selection
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define	PGIM_SENSOR_ADC_REF_CH					PG_CH_0
+				\endcode	
+					This define selects the analog input by which to measure the reference voltage. \n
+					It must use the same define created for the ADC module.
+					See ADC-Module documentation.
+				\htmlonly
+					<br><br>It must be:
+				\endhtmlonly
+					\arg \b PG_CH_0 : The first ADC-Module analog input channel.
+					\arg \b PG_CH_1 : The second ADC-Module analog input channel.
+					\arg \b PG_CH_2 : The third ADC-Module analog input channel.
+				
+				\htmlonly
+					&nbsp;&nbsp;&nbsp;&nbsp;... and so on, for all available channels.<br>
+				\endhtmlonly
 			
-			\subsection	CSENSADREFfunc	ADC-Ref Function
+				\subsubsection	s_sensor_adcref_ch		References
+					\li \e File : pgim_module_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_CH \n
+					\li \e Reference : \ref PG_CH_0 \n
+					
+			\subsection	sensor_adcref_sch	(ADC-Ref) - Schematic
+				\htmlonly <hr> \endhtmlonly
+				\htmlonly
+				In this circuit schematic, for example, a 2.5V reference voltage is used. \n
+				Of course, nothing prevents from using other values. \n
+				It is important that the \b exact \b value of voltage generated is measured and written in the relative configuration file \n
+				specified in the initial section of this module documentation. \n \n
+				An example of circuit schematic.<br>
+				\endhtmlonly
+				\image html	sensor_voltadref.png
+			
+			\subsection	sensor_adcref_func	(ADC-Ref) - Public function
+				\htmlonly <hr> \endhtmlonly
 				\arg \b pg_sensor_adc_ref() : This function measures the value of the reference voltage of the AD converter. \n \n 
 			
-			\subsection	CSENSADREFcode1	AD-Ref Example code
+			\subsection	sensor_adcref_code		(ADC-Ref) - Example code
+				\htmlonly <hr> \endhtmlonly
 				\code
 					void main( void ) {
 						float real_pic_vdd;
 						pg_initialize();
 						pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 						pg_adc_set( PG_ADC_MODULE , PG_ON );
-						real_pic_vdd = * pg_sensor_adc_ref( 2.5 );
+						real_pic_vdd = pg_sensor_adc_ref( 2.5 );
 						PG_INFINITE_LOOP;
 					}
 				\endcode
 				\n \n \n
 			
-		\section	SENSNTC		NTC 
+		\section	sensor_ntc_conf			NTC sensor configuration
 			\htmlonly <hr> \endhtmlonly
-			This sensor allows to measure the temperature via a resistor NTC connected as shown in the schematic. \n
-			The values of the circuit components must be declared in the configuration files \ref pgim_sensor_setup_public.h \n \n
+				This sensor allows to measure the temperature via a resistor NTC connected as shown in the schematic. \n
+				The values of the circuit components must be declared in the configuration files \ref pgim_sensor_setup_public.h \n \n
 							
-			\subsection	CSENSNTCresref		Ntc - Resistance 
-				\htmlonly
-					This define specifies the nominal value of the NTC resistance at the reference temperature.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_res		(Ntc) - Resistance
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_RES_REF				10000.0
 				\endcode
 				\htmlonly
+					This define specifies the nominal value of the NTC resistance at the reference temperature.<br>
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
-			\subsection	CSENSNTCtempref		Ntc - Temp ref
-				\htmlonly
-					This define specifies the reference temperature for the nominal value of NTC resistance.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_tempref		(Ntc) - Temp ref
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_TEMP_REF			25.0
 				\endcode
 				\htmlonly
+					This define specifies the reference temperature for the nominal value of NTC resistance.<br>
 					It must be measured in Celsius degrees.<br>
 				\endhtmlonly 
 
-			\subsection	CSENSNTCbeta	Ntc - BETA constant
-				\htmlonly
-					This define specifies the ntc "BETA" constant.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_beta			(Ntc) - BETA constant
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_BETA 				3988
 				\endcode
 				\htmlonly
+					This define specifies the ntc "BETA" constant.<br>
 					The value is specified by the device manufacturer.<br>
 				\endhtmlonly
 
-			\subsection	CSENSNTCabc		Ntc - A B C coefficients
-				\htmlonly
-					These define specify the three coefficients that characterize the NTC.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_abc		(Ntc) - A B C coefficients
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define PGIM_SENSOR_NTC_COEF_A				1.028444E-3
 					#define PGIM_SENSOR_NTC_COEF_B				2.392435E-4
 					#define PGIM_SENSOR_NTC_COEF_C				1.562216E-7
 				\endcode
 				\htmlonly
+					These define specify the three coefficients that characterize the NTC.<br>
 					The value is specified by the device manufacturer.<br>
 				\endhtmlonly
 
-			\subsection	CSENSNTCmethod		Ntc - Calculation method
-				\htmlonly
-					The temperature of the NTC can be calculated in two ways:
-					through the constant BETA (calculation simpler, but less accurate)
-					or by the three coefficients "A", "B", "C" (calculation slightly more complicated, but more precise ).<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_method		(Ntc) - Calculation method
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_CALCULATION_METHOD	PG_SENSOR_METHOD_BETA
 				\endcode
 				\htmlonly
+					The temperature of the NTC can be calculated in two ways:
+					through the constant BETA (calculation simpler, but less accurate)
+					or by the three coefficients "A", "B", "C" (calculation slightly more complicated, but more precise ).<br>
 					It must be:<br>
 				\endhtmlonly
 				\arg \b	PG_SENSOR_METHOD_BETA : Calculations performed using the BETA constant.
 				\arg \b PG_SENSOR_METHOD_COEF : Calculations performed using "A", "B", "C" coefficients.
 				
-			\subsection	CSENSNTChighr	Ntc - High resistor
-				\htmlonly
-					This define specifies he high side resitor exact value.<br>
-					In the reference schematic, it is marked by R1 label.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_hires	(Ntc) - High resistor
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define PGIM_SENSOR_NTC_HIGH_RESISTOR		10002.0
 				\endcode
 				\htmlonly
+					This define specifies he high side resitor exact value.<br>
+					In the reference schematic, it is marked by R1 label.<br>
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
-			\subsection	CSENSNTCavg		Ntc - average
-				\htmlonly
-					This define specifies the averages number of measurement.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_avg		(Ntc) - Average
+				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_AD_AVERAGE			10
 				\endcode
 				\htmlonly
+					This define specifies the averages number of measurement.<br>
 					The number of measurements indicated is executed and then the average is calculated.<br>
 				\endhtmlonly
 
-			\subsection	CSENSNTCguardmin	Ntc - Guard row min
-				\htmlonly
-					This define specifies the guard limit on the minimum acquired row value.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_guard_min	(Ntc) - Guard raw min
+				\htmlonly <hr> \endhtmlonly
 				\code
-					#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN	5
+					#define	PGIM_SENSOR_NTC_AD_RAW_GUARD_MIN	5
 				\endcode
 				\htmlonly
+					This define specifies the guard limit on the minimum acquired raw value.<br>
 					It is very useful to detect if the sensor is short-circuited.<br>
 					Set a value not too high, so do not compromise the measurement.<br>
 				\endhtmlonly
 		
-			\subsection	CSENSNTCguardmax	Ntc - Guard row max
-				\htmlonly
-					This define specifies the guard limit on the maximum acquired row value.<br>
-				\endhtmlonly
+			\subsection	sensor_ntc_guard_max	(Ntc) - Guard raw max
+				\htmlonly <hr> \endhtmlonly
 				\code
-					#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX	50
+					#define	PGIM_SENSOR_NTC_AD_RAW_GUARD_MAX	50
 				\endcode
 				\htmlonly
+					This define specifies the guard limit on the maximum acquired raw value.<br>
 					It is very useful to detect if the sensor is an open-circuit.<br>
 					Set a value not too low, so do not compromise the measurement.<br>
 				\endhtmlonly
 				
-			\subsection	CSENSNTCschem		Ntc - Schematic	
+			\subsection	sensor_ntc_sch		(Ntc) - Schematic	
+				\htmlonly <hr> \endhtmlonly
 				Typology circuit to be used: \n
 				\image html	sensor_ntc.png
 		
-			\subsection	CSENSNTCfunc	Ntc - Function
+			\subsection	sensor_ntc_pubfunc	(Ntc) - Public function
+				\htmlonly <hr> \endhtmlonly
 				\arg \b pg_sensor_ntc() : This function measures the temperature value of an NTC sensor. \n \n 
-			\subsection CSENSNTCcode1	Ntc - Example code
+				
+			\subsection sensor_ntc_code		(Ntc) - Example code
+				\htmlonly <hr> \endhtmlonly
 				\code
 					void main( void ) {
 						float temperature;
