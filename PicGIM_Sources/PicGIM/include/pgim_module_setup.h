@@ -124,6 +124,19 @@
 		#endif
 	#endif
 
+
+	//	D e p e n d e n c y   o n   A D   C O N V E R T E R
+	//  -------------------------------------
+	#if ( PGIM_SENSOR == PG_ENABLE )
+
+		#if ( PGIM_AD_CONVERTER == PG_DISABLE )
+			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the AD CONVERTER module required by other modules
+			#ifndef		PG_EXIT_ON_ERROR
+				#define		PG_EXIT_ON_ERROR
+			#endif
+		#endif
+	#endif
+
 	//	D e p e n d e n c y   o n   S P I
 	//  ---------------------------------
 	//	|| ( PGIM_TIMER == PG_ENABLE )

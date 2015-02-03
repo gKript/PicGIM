@@ -45,7 +45,7 @@
 	#if ( PGIM_SENSOR == PG_ENABLE )
 	
 		//		S E N S O R S   E N A B L I N G
-		#define PGIM_SENSOR_ADC_REF							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_SENSOR_ADC_REF							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PGIM_SENSOR_NTC								PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 		

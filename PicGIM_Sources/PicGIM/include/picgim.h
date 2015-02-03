@@ -700,9 +700,6 @@
 		#include "pgim_sensor.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_SENSOR Loaded
-			#if( PGIM_AD_CONVERTER == PG_DISABLE )
-				#error	PG_HS_PG PG_HM_SENSOR In order to use this module, also the AD_CONVERTER module must be enabled and configured
-			#endif
 		#endif
 	#endif
 	//---[ END Sensor ]---

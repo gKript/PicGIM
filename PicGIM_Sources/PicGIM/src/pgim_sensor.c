@@ -107,14 +107,14 @@
 				pg_adc_start( ad_channel );	//Chiamare ogni volta prima di pg_adc_get( ) per aggiornare la lettura
 				
 				//Acquired value control for condition sensor check
-				if( pg_adc_get( ) >= ( PG_ADC_RES_STEPS - PGIM_SENSOR_NTC_AD_RAW_GUARD_MAX ) ) {
+				if( pg_adc_get( ) >= ( PG_ADC_RES_STEPS - PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX ) ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_UNPLUGGED , PG_ERROR_CRITICAL );
 						//stampare su std_err "Sensore sul canale ad_channel scollegato" (come identifico il sensore?)
 					#endif
 					//return PG_NOK;
 				}
-				if( ( pg_adc_get( ) <= PGIM_SENSOR_NTC_AD_RAW_GUARD_MIN) ) {
+				if( ( pg_adc_get( ) <= PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN) ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_SHORTED , PG_ERROR_CRITICAL );
 						//stampare su std_err "Sensore sul canale ad_channel in corto" (come identifico il sensore?)
@@ -141,7 +141,7 @@
 				// 1/T = (1/T0) + (1/B)*ln(R/R0)  =>  T = 1 / ( (1/T0) + ( (1/B)*ln(R/R0) ) )	//ln = logaritmo NATURALE (log() in C)!
 				//return( (_pg_int16)( ( 1.0 / ( ( 1.0 / NTC_T_ZERO ) + ( ( 1.0 / Ntc_Beta ) * log( Ntc_Res / NTC_R_ZERO ) ) ) ) - NTC_KELVIN_CONST ) ); 
 				pg_sensor_ntc_measured = ( ( ( 1.0 / ( ( 1.0 / PGIM_SENSOR_NTC_TEMP_REF + PG_CONSTANTS_KELVIN_CONST ) + ( ( 1.0 / PGIM_SENSOR_NTC_BETA ) * log( Ntc_Res / PGIM_SENSOR_NTC_RES_REF ) ) ) ) - PG_CONSTANTS_KELVIN_CONST ) );	// Returns in degrees Celsius
-				return( &pg_sensor_ntc_measured);
+				return( pg_sensor_ntc_measured);
 			#endif
 			
 			#if ( PGIM_SENSOR_NTC_CALCULATION_METHOD == PG_SENSOR_METHOD_COEF )
