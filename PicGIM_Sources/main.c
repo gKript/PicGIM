@@ -45,22 +45,21 @@
 void main( void ) {
 	float	flo;
 	_pg_int32	out;
-	char	str[16];
+	char	str[32];
 	pg_pin_mode( T_B3 , PG_OUT );
 	pg_initialize();
-	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
+	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_2_CHANNELS );
 	pg_adc_set( PG_ADC_MODULE , PG_ON );
-	while(1) {
-		flo = pg_sensor_ntc( PG_CH_0 );
+	pg_loop {
+		flo = pg_sensor_ntc( PG_CH_1 );
 		pg_delay_msec( 500 );
-		pg_pin_set( L_B3 );
+		pg_pin_toggle( L_B3 );
 		pg_ftoa( flo , PG_FTOA_DECIMAL_DIGITS_1 , str );
 		pg_lcd_hd44780_write_p_string( PG_CONTROLLER_0 , PG_LINE_0 , 0 , str );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "%d" , out );
 		pg_delay_msec( 500 );
 		pg_pin_toggle( L_B3 );
 	}
-	PG_INFINITE_LOOP;
 }
 
 

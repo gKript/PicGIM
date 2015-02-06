@@ -47,9 +47,10 @@
 	//      P I C G I M
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	#define	PG_LOOP( a )					while( a )		/*!	A Loop with argument	*/
+	#define	PG_LOOP( a )					while( a )		/*!	A conditional Loop */
 	#define	PG_INFINITE_LOOP				while( 1 )		/*!	A forever loop	*/
 	#define	PG_HALT							while( 1 )		/*!	A forever loop	*/
+	#define pg_loop							while( 1 )		/*!	A forever loop	*/
 
 	#define	PG_FOREVER						1				/*!	An argument for \ref PG_LOOP()	*/
 	
@@ -224,7 +225,7 @@
 	#define	PG_CONSTANTS_PLANK_EV					( 4.13562852E-15 )					//!< Planck's constant. Unit of measure: [eV*s]
 	#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565E-19 ) 				//!< Elementary charge. Unit of measure: [C]
 	#define	PG_CONSTANTS_GRAVITY_ACCELERATION		9.80665								//!< Gravitational acceleration. Unit of measure: [m/(s^2)]
-	#define	PG_CONSTANTS_KELVIN_CONST				273.15								//!< Absolute value of the absolute zero temperature (0°K) in degrees Celsius
+	#define	PG_CONSTANTS_KELVIN_CONST				273.15								//!< Absolute value of the absolute zero temperature (0ï¿½K) in degrees Celsius
 
 	////////////////////////////////////////////////////////////////////////////////
 	//
