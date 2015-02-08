@@ -78,6 +78,16 @@
 		#define	PGIM_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
 	#endif
 
+	
+	////////////////////////////////////////////////////////////////////////////////
+	//
+	//		S O F T W A R E   C O N F I G   |   F T O A
+	//
+	////////////////////////////////////////////////////////////////////////////////
+	
+	#define	PG_FTOA_BUFFER_INTERNAL				PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	
+	
 	////////////////////////////////////////////////////////////////////////////////
 	//
 	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
@@ -96,6 +106,7 @@
 		#define PG_LCD_HD44780_SPLASH_TIME		1						//!< Show time of splash in seconds [s] || 0 = do not clear
 	#endif
 
+	
 	////////////////////////////////////////////////////////////////////////////////
 	//
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R

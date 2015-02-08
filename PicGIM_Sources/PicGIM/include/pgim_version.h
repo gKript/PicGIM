@@ -453,7 +453,7 @@
 				protocols for communication across the network.</p>
 
 				<p>Corresponding Source conveyed, and Installation Information provided,
-				in accord with this section must be in a format that is publicly
+				in accord with this section must be in a Format that is publicly
 				documented (and with an implementation available to the public in
 				source code form), and must require no special password or key for
 				unpacking, reading or copying.</p>
@@ -824,20 +824,20 @@
 			be at most 5 words, and a Back-Cover Text may be at most 25 words.</p>
 
 			<p>A "Transparent" copy of the Document means a machine-readable copy,
-			represented in a format whose specification is available to the
+			represented in a Format whose specification is available to the
 			general public, that is suitable for revising the document
 			straightforwardly with generic text editors or (for images composed of
 			pixels) generic paint programs or (for drawings) some widely available
 			drawing editor, and that is suitable for input to text formatters or
 			for automatic translation to a variety of formats suitable for input
 			to text formatters.  A copy made in an otherwise Transparent file
-			format whose markup, or absence of markup, has been arranged to thwart
+			Format whose markup, or absence of markup, has been arranged to thwart
 			or discourage subsequent modification by readers is not Transparent.
-			An image format is not Transparent if used for any substantial amount
+			An image Format is not Transparent if used for any substantial amount
 			of text.  A copy that is not "Transparent" is called "Opaque".</p>
 
 			<p>Examples of suitable formats for Transparent copies include plain
-			ASCII without markup, Texinfo input format, LaTeX input format, SGML
+			ASCII without markup, Texinfo input Format, LaTeX input Format, SGML
 			or XML using a publicly available DTD, and standard-conforming simple
 			HTML, PostScript or PDF designed for human modification.  Examples of
 			transparent image formats include PNG, XCF and JPG.  Opaque formats

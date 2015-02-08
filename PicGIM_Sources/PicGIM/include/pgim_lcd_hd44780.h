@@ -190,9 +190,9 @@
 			\param			ControllerNumber		The number of the controller.
 			\param			Ln						It specifies the line.
 			\param			Pos						It specifies the column.
-			\param			format					The format to use.
+			\param			Format					The Format to use.
 		*/	
-		void	pg_lcd_hd44780_write				( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * format , ... );
+		void	pg_lcd_hd44780_write				( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... );
 		
 		/*!
 			\brief			Print a string by a pointer, at the current position. 
@@ -231,36 +231,38 @@
 		void	pg_lcd_hd44780_write_p_string_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str );
 		
 		/*!
-			\brief			Print an integer, specifying the format, in a specific position. 
+			\brief			Print an integer, specifying the Format, in a specific position. 
 			\return			Nothing.
 			\param			ControllerNumber		The number of the controller.
 			\param			Ln						It specifies the line.
 			\param			Pos						It specifies the column.
-			\param			format					The format to use.
+			\param			Format					The Format to use.
 		*/	
-		void	pg_lcd_hd44780_write_p_int			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * format , _pg_int16 val );
+		void	pg_lcd_hd44780_write_p_int			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , _pg_int16 Val );
 		
 		/*!
-			\brief			Print a float, specifying the format, in a specific position. 
+			\brief			Print a float, specifying the Format, in a specific position. 
 			\return			Nothing.
 			\param			ControllerNumber		The number of the controller.
 			\param			Ln						It specifies the line.
 			\param			Pos						It specifies the column.
-			\param			format					The format to use.
+			\param			Format					The Format to use.
 		*/	
-		void	pg_lcd_hd44780_write_p_float		( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * format , float flt );
+//		void	pg_lcd_hd44780_write_p_float		( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , float Flt );
+		void	pg_lcd_hd44780_write_p_float		( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint24 Decimal_Digits , float Flt );
 		
 		/*!
-			\brief			Print a char, specifying the format, in a specific position. 
+			\brief			Print a char, specifying the Format, in a specific position. 
 			\return			Nothing.
 			\param			ControllerNumber		The number of the controller.
 			\param			Ln						It specifies the line.
 			\param			Pos						It specifies the column.
-			\param			format					The format to use.
+			\param			Decimal_Digits			Number of digits of truncation, after the decimal point of the float value.
+			\param			Flt						Float value to be printed.
 		*/	
-		void	pg_lcd_hd44780_write_p_char			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * format , _pg_int8 chr );
+		void	pg_lcd_hd44780_write_p_char			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , _pg_int8 chr );
 		
-//		void	pg_lcd_hd44780_write_pchar_rom		( _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *format , const rom far _pg_int8 chr );
+//		void	pg_lcd_hd44780_write_pchar_rom		( _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , const rom far _pg_int8 chr );
 		
 	#endif
 #endif /* _PGIM_LCD_HD44780_H_ */
@@ -490,9 +492,9 @@
 			\arg \b pg_lcd_hd44780_write_string_rom() : Print a constant string by a pointer, at the current position.
 			\arg \b pg_lcd_hd44780_write_p_string() : Print a string by a pointer, in a specific position.
 			\arg \b pg_lcd_hd44780_write_p_string_rom() : Print a constant string by a pointer, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_int() : Print an integer, specifying the format, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_float() : Print a float, specifying the format, in a specific position.
-			\arg \b pg_lcd_hd44780_write_p_char() : Print a char, specifying the format, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_int() : Print an integer, specifying the Format, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_float() : Print a float, specifying the Format, in a specific position.
+			\arg \b pg_lcd_hd44780_write_p_char() : Print a char, specifying the Format, in a specific position.
 
 			\htmlonly
 				<br><br><br><br>
@@ -547,7 +549,7 @@
 
 //da vedere con zanna
 /*
-		/*!	\fn		void	pg_lcd_hd44780_write( _pg_Uint8 Pos , _pg_Uint8 Ln , const rom far _pg_int8 * format , ... )
+		/*!	\fn		void	pg_lcd_hd44780_write( _pg_Uint8 Pos , _pg_Uint8 Ln , const rom far _pg_int8 * Format , ... )
 			\brief	With this method you can set an error in Gim style from your program.\n
 					\a Type is per dafault \a GIM_ERROR_MESSAGE and value is per default \a 0
 			\param	function	It is the name of the function generate the error.

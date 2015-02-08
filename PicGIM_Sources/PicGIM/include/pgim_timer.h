@@ -149,7 +149,7 @@
 		
 		/*!
 			\brief			Converts the value of the timer contained in the two 8-bit registers (TMRxH and TMRxL) in a 16-bit value.
-			\return			The current value of the timer registers in 16-bit format.
+			\return			The current value of the timer registers in 16-bit Format.
 			\param			timer_id				The identification number of the timer. \n
 								Use \b PG_TIMER_0 to select Timer 0 \n
 								Use \b PG_TIMER_1 to select Timer 1

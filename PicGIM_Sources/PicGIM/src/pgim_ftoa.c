@@ -47,8 +47,6 @@
 		#warning	PG_HS_PG PG_HF_FTOA PG_HS_MSG This file is compiling.
 	#endif
 	
-	#define	PG_FTOA_BUFFER_INTERNAL PG_ENABLE
-
 	#if ( PG_FTOA_BUFFER_INTERNAL == PG_ENABLE )
 		char	pg_ftoa_internal_buffer[ 32 ];
 		#if ( PG_PROJECT_STATE == PG_DEBUG )
@@ -57,7 +55,7 @@
 	#endif
 	
 	//---[ Ftoa ]---	// Float numer with maximum 8 digit
-	char *pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer ) {
+	char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer ) {
 		//--------------------------------------------------
 		
 		_pg_Uint32	pg_ftoa_part_integer = 0;

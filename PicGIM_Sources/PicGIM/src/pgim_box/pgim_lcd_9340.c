@@ -102,7 +102,7 @@
 		//pg_lcd_9340_WR_Data_8( 0xC8 );                //valore di altro sorgente      DALL'ALTO VERSO IL BASSO
 		//---------------------------------------------------------
 		pg_lcd_9340_WR_command_8( 0x3A );
-		pg_lcd_9340_WR_data_8( 0x55 );                  //16bit format
+		pg_lcd_9340_WR_data_8( 0x55 );                  //16bit Format
 		pg_lcd_9340_WR_command_8( 0xB1 );
 		pg_lcd_9340_WR_data_8( 0x00 );
 		pg_lcd_9340_WR_data_8( 0x18 );

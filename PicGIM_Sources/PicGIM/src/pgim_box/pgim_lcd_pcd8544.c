@@ -150,28 +150,28 @@
 
 		
 //----------------------------------------------------------------------------
-		void pg_lcd_pcd8544_write_pint( _pg_Uint8 x , _pg_Uint8 y , const rom far _pg_int8  * format , _pg_int16 val ) {
-			_pg_int8 str[ 16 ];
+		void pg_lcd_pcd8544_write_pint( _pg_Uint8 x , _pg_Uint8 y , const rom far _pg_int8  * Format , _pg_int16 Val ) {
+			_pg_int8 Str[ 16 ];
 			pg_lcd_pcd8544_set_pos( x , y );
-			sprintf( str , format , val );
-			pg_lcd_pcd8544_send_string( str );
+			sprintf( Str , Format , Val );
+			pg_lcd_pcd8544_send_string( Str );
 		}
 
 		
 //----------------------------------------------------------------------------
-		void pg_lcd_pcd8544_write_pfloat( _pg_Uint8 x , _pg_Uint8 y , const rom far _pg_int8  *format , float flt ) {
-			_pg_int8 str[ 16 ];
+		void pg_lcd_pcd8544_write_pfloat( _pg_Uint8 x , _pg_Uint8 y , const rom far _pg_int8  *Format , float Flt ) {
+			_pg_int8 Str[ 16 ];
 			pg_lcd_pcd8544_set_pos( x , y );
-			sprintf( str , format , flt );
-			pg_lcd_pcd8544_send_string( str );
+			sprintf( Str , Format , Flt );
+			pg_lcd_pcd8544_send_string( Str );
 		}
 
 
-		void pg_lcd_pcd8544_write_pchar( _pg_Uint8 x , _pg_Uint8 y , const rom far _pg_int8  * format , _pg_int8 chr ) {
-			_pg_int8 str[ 16 ];
+		void pg_lcd_pcd8544_write_pchar( _pg_Uint8 x , _pg_Uint8 y , const rom far _pg_int8  * Format , _pg_int8 chr ) {
+			_pg_int8 Str[ 16 ];
 			pg_lcd_pcd8544_set_pos( x , y );
-			sprintf( str , format , chr );
-			pg_lcd_pcd8544_send_string( str );
+			sprintf( Str , Format , chr );
+			pg_lcd_pcd8544_send_string( Str );
 		}
 
 
