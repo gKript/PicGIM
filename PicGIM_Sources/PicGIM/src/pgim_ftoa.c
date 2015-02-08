@@ -47,6 +47,8 @@
 		#warning	PG_HS_PG PG_HF_FTOA PG_HS_MSG This file is compiling.
 	#endif
 	
+	#define	PG_FTOA_BUFFER_INTERNAL PG_ENABLE
+
 	#if ( PG_FTOA_BUFFER_INTERNAL == PG_ENABLE )
 		char	pg_ftoa_internal_buffer[ 32 ];
 		#if ( PG_PROJECT_STATE == PG_DEBUG )
@@ -107,12 +109,12 @@
 			//--------------------------------------------------
 			#if ( PG_FTOA_BUFFER_INTERNAL == PG_ENABLE )
 				// Build the string in internal buffer
-//				sprintf( pg_ftoa_internal_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
+				sprintf( pg_ftoa_internal_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
 				#if PG_ERROR_IS_ENABLE
 					//No error
 					pg_error_set( PG_ERROR_FTOA , PG_FTOA_ERROR_OK , PG_ERROR_OK );
 				#endif
-				return ( &pg_ftoa_internal_buffer );
+				return ( pg_ftoa_internal_buffer );
 
 			// Buffer disabled
 			//--------------------------------------------------
@@ -139,7 +141,7 @@
 			// --------------------
 			
 			// Build the string in user's buffer
-//			sprintf( pg_ftoa_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
+			sprintf( pg_ftoa_buffer, ( const far rom char * ) "%lu.%lu", pg_ftoa_part_integer, pg_ftoa_part_decimal );
 			return ( NULL );
 		}
 	}

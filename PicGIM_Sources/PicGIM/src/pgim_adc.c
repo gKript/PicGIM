@@ -169,7 +169,7 @@
 		_pg_Uint16_VAL	value_get;
 		_pg_Uint32 somma;
 		_pg_int16 res;
-		if ( average <= PG_MAX_AVERAGE ) {
+		if ( average >= PG_MAX_AVERAGE ) {
 			res = -1;
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_TOO_AVERAGE , PG_ERROR_CRITICAL );

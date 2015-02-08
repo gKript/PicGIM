@@ -77,7 +77,7 @@
 			#define PGIM_SENSOR_NTC_COEF_C					1.562216E-7				//!< Ntc "C" coefficient
 
 			//		C A L C U L A T I O N  -  M E T H O D							(Common for all ntc)
-			#define	PGIM_SENSOR_NTC_CALCULATION_METHOD		PG_SENSOR_METHOD_BETA	//!< Must be: PG_SENSOR_METHOD_BETA || PG_SENSOR_METHOD_COEF
+			#define	PGIM_SENSOR_NTC_CALCULATION_METHOD		PG_SENSOR_METHOD_COEF	//!< Must be: PG_SENSOR_METHOD_BETA || PG_SENSOR_METHOD_COEF
 
 			//		C I R C U I T  -  C O M P O N E N T S							(Common value for all ntc)
 			#define PGIM_SENSOR_NTC_HIGH_RESISTOR			10002.0					//!< High side resitor exact value [Ohm]
