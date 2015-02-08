@@ -374,14 +374,6 @@ LCD 4x16 (tipo WH1604A)
 		pg_lcd_hd44780_write_string( ControllerNumber , Str );
 	}
 
-
-//	void	pg_lcd_hd44780_write_p_float( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , float Flt ) {
-//		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
-//		pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );
-//		sprintf( Str , Format , Flt );
-//		pg_lcd_hd44780_write_string( ControllerNumber , Str );
-//	}
-
 	void	pg_lcd_hd44780_write_p_float( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint24 Decimal_Digits , float Flt ) {
 		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
 		pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );

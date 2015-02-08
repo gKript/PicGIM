@@ -126,8 +126,8 @@
 //			}
 //			Ad_Measure_Accumulator /= PGIM_SENSOR_NTC_AD_AVERAGE;
 
-//			Ad_Measure_Accumulator = pg_adc_acq_with_average( ad_channel , 3 /*PGIM_SENSOR_NTC_AD_AVERAGE*/ );
-			Ad_Measure_Accumulator = pg_adc_start( ad_channel );
+			Ad_Measure_Accumulator = pg_adc_acq_with_average( ad_channel , 3 /*PGIM_SENSOR_NTC_AD_AVERAGE*/ );
+//			Ad_Measure_Accumulator = pg_adc_start( ad_channel );
 			#if PG_ERROR_IS_ENABLE
 				if( pg_adc_get( ) >= ( PG_ADC_RES_STEPS - PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX ) ) {
 						pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_UNPLUGGED , PG_ERROR_CRITICAL );

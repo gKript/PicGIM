@@ -164,7 +164,7 @@
 	}
 
 
-	_pg_int16 pg_adc_acq_with_average( _pg_Uint8 channel , _pg_Uint8 average ) {
+	_pg_Uint16 pg_adc_acq_with_average( _pg_Uint8 channel , _pg_Uint8 average ) {
 		_pg_Uint8 cont;
 		_pg_Uint16_VAL	value_get;
 		_pg_Uint32 somma;
@@ -183,9 +183,9 @@
 				while( ADCON0bits.GO ) ;
 				value_get.byte.HB = ADRESH;
 				value_get.byte.LB = ADRESL;
-				somma += value_get.Val;
+				somma += (_pg_Uint32)value_get.Val & 0x00ff ;
 			}
-			res = somma / average;
+			res = (_pg_Uint32)(somma / average);
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
 			#endif

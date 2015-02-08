@@ -176,7 +176,7 @@
 						\b PG_OK : Everything is ok. \n
 						\b PG_ADC_ERROR_TOO_AVERAGE : This error indicates that averages required are more than the maximum allowed. \n
 		*/
-		_pg_int16	pg_adc_acq_with_average		( _pg_Uint8 channel , _pg_Uint8 average );
+		_pg_Uint16	pg_adc_acq_with_average		( _pg_Uint8 channel , _pg_Uint8 average );
 		
 		/*!
 			\brief		This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made.
