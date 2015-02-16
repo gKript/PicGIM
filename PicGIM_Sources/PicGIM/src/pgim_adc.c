@@ -141,33 +141,9 @@
 	}
 
 
-	_pg_Uint16	pg_adc_get( void ) {
-		_pg_Uint16_VAL	value_get;
-		value_get.byte.HB = ADRESH;
-		value_get.byte.LB = ADRESL;
-		return value_get.Val;
-	}
-
-
-	_pg_int16	pg_adc_get_user_scale( void ) {
-		long a , b , c , d;
-		a = pg_adc_user_scale_max - pg_adc_user_scale_min;
-		b = pg_adc_get() * a;
-		c = b / ( pow( 2 , PG_ADC_RES_BITS ) - 1 );
-		d = c + pg_adc_user_scale_min;
-		return d;
-	}
-
-
-	_pg_Uint8	pg_adc_get_perc( void ) {
-		return ( ( 512 * 100 ) / ( pow( 2 , PG_ADC_RES_BITS ) - 1 ) );
-	}
-
-
-	_pg_Uint16 pg_adc_acq_with_average( _pg_Uint8 channel , _pg_Uint8 average ) {
+	_pg_Uint16 pg_adc_start_avg( _pg_Uint8 channel , _pg_Uint8 average ) {		// if ( PIE1bits.ADIE == PG_DISABLE ) ???
 		_pg_Uint8 cont;
-		_pg_Uint16_VAL	value_get;
-		_pg_Uint32 somma;
+		_pg_Uint32 accumulator;
 		_pg_int16 res;
 		if ( average >= PG_MAX_AVERAGE ) {
 			res = -1;
@@ -177,21 +153,83 @@
 		}
 		else {
 			for( cont = 0 ; cont < average ; cont++ ) {
-				ADCON0 |= PG_CH_MASK;
-				ADCON0 &= channel;
-				ADCON0bits.GO = 1;
-				while( ADCON0bits.GO ) ;
-				value_get.byte.HB = ADRESH;
-				value_get.byte.LB = ADRESL;
-				somma += (_pg_Uint32)value_get.Val & 0x00ff ;
+				accumulator += (_pg_Uint32)pg_adc_start( channel );
 			}
-			res = (_pg_Uint32)(somma / average);
+			res = (_pg_Uint16)( accumulator / average );
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
 			#endif
 		}
 		return res;
 	}
+
+
+	_pg_Uint16	pg_adc_get( void ) {
+		_pg_Uint16_VAL	value_get;
+		value_get.byte.HB = ADRESH;
+		value_get.byte.LB = ADRESL;
+		return value_get.Val;
+	}
+
+
+//	_pg_int16	pg_adc_get_user_scale( void ) {
+//		long a , b , c , d;
+//		a = pg_adc_user_scale_max - pg_adc_user_scale_min;
+//		b = pg_adc_get() * a;
+//		c = b / ( pow( 2 , PG_ADC_RES_BITS ) - 1 );
+//		d = c + pg_adc_user_scale_min;
+//		return d;
+//	}
+
+
+	_pg_int16	pg_adc_get_user_scale( void ) {
+		return ( ( ( ( pg_adc_user_scale_max - pg_adc_user_scale_min ) / PG_ADC_RES_STEPS ) * pg_adc_get() ) + pg_adc_user_scale_min );
+	}
+
+
+//	_pg_Uint8	pg_adc_get_perc( void ) {
+//		return ( ( 512 * 100 ) / ( pow( 2 , PG_ADC_RES_BITS ) - 1 ) );
+//	}
+
+
+	_pg_Uint8	pg_adc_get_perc( void ) {
+		return ( ( 100 / PG_ADC_RES_STEPS ) * pg_adc_get() );
+	}
+
+
+	float	pg_adc_get_perc_f( void ) {
+		return ( ( 100.0 / PG_ADC_RES_STEPS ) * pg_adc_get() );
+	}
+
+
+//	_pg_Uint16 pg_adc_acq_with_average( _pg_Uint8 channel , _pg_Uint8 average ) {
+//		_pg_Uint8 cont;
+//		_pg_Uint16_VAL	value_get;
+//		_pg_Uint32 somma;
+//		_pg_int16 res;
+//		if ( average >= PG_MAX_AVERAGE ) {
+//			res = -1;
+//			#if PG_ERROR_IS_ENABLE
+//				pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_TOO_AVERAGE , PG_ERROR_CRITICAL );
+//			#endif
+//		}
+//		else {
+//			for( cont = 0 ; cont < average ; cont++ ) {
+//				ADCON0 |= PG_CH_MASK;
+//				ADCON0 &= channel;
+//				ADCON0bits.GO = 1;
+//				while( ADCON0bits.GO ) ;
+//				value_get.byte.HB = ADRESH;
+//				value_get.byte.LB = ADRESL;
+//				somma += (_pg_Uint32)value_get.Val & 0x00ff ;
+//			}
+//			res = (_pg_Uint32)(somma / average);
+//			#if PG_ERROR_IS_ENABLE
+//				pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
+//			#endif
+//		}
+//		return res;
+//	}
 	
 #endif
 

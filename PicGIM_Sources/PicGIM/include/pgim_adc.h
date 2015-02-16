@@ -176,7 +176,7 @@
 						\b PG_OK : Everything is ok. \n
 						\b PG_ADC_ERROR_TOO_AVERAGE : This error indicates that averages required are more than the maximum allowed. \n
 		*/
-		_pg_Uint16	pg_adc_acq_with_average		( _pg_Uint8 channel , _pg_Uint8 average );
+		_pg_Uint16	pg_adc_start_avg			( _pg_Uint8 channel , _pg_Uint8 average );
 		
 		/*!
 			\brief		This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made.
@@ -186,6 +186,16 @@
 
 		*/
 		_pg_Uint8	pg_adc_get_perc				( void );
+		
+		/*!
+			\brief		This function returns the float percentage value of the last acquisition made.
+			\param 		Nothing.
+			\return		The percentage of the last sampling.
+			\test		This function does not change the error status.
+
+		*/
+		float	pg_adc_get_perc_f				( void );
+		
 
 	#endif
 #endif
@@ -265,8 +275,8 @@
 				
 				\arg \b pg_adc_set() : This is the function to set the main parameters of the module. 
 				\arg \b pg_adc_start() : When this function is called the acquisition is carried out. 
+				\arg \b pg_adc_start_avg() : When this function is called the acquisition is carried out with [n] averages.
 				\arg \b pg_adc_get() : This function returns the value of the last acquisition made.
-				\arg \b pg_adc_acq_with_average() : This function acquires with [n] averages.
 				\arg \b pg_adc_get_perc() : This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made. 
 				
 				\endcode
