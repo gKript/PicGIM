@@ -50,7 +50,8 @@
 	
 		#define	PG_ADC_ERROR					100					//!<	This error indicates a generic ADC error.
 		#define	PG_ADC_ERROR_TOO_AVERAGE		101					//!<	This error indicates that averages required are more than the maximum allowed.
-		
+		#define	PG_ADC_ERROR_NO_AVARAGE			102					//!<	This error indicates that averages function return only one acquisition due to ADinterrupt enabled. The average function work only with AD interrupt disabled.
+
 		#define	PG_FOSC_PARAM					1					//!<	The \e parameter FOSC for the pg_adc_set() function. \n With this you can choose the FOSC value.
 		#define	PG_TAD_PARAM					2					//!<	The \e parameter TAD for the pg_adc_set() function. \n With this you can choose the TAD value.
 		#define	PG_ANALOG_CHANNELS_PARAM		3					//!<	The \e parameter CHANNELS for the pg_adc_set() function. \n With this you can choose the number of AD channels.

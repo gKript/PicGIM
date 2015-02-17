@@ -145,22 +145,30 @@
 		_pg_Uint8 cont;
 		_pg_Uint32 accumulator;
 		_pg_int16 res;
-		if ( average >= PG_MAX_AVERAGE ) {
-			res = -1;
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_TOO_AVERAGE , PG_ERROR_CRITICAL );
-			#endif
+		if ( PIE1bits.ADIE == PG_DISABLE ) {
+			if ( average >= PG_MAX_AVERAGE ) {
+				res = -1;
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_NO_AVARAGE , PG_ERROR_CRITICAL );
+				#endif
+			}
+			else {
+				for( cont = 0 ; cont < average ; cont++ ) {
+					accumulator += (_pg_Uint32)pg_adc_start( channel );
+				}
+				res = (_pg_Uint16)( accumulator / average );
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
+				#endif
+			}
+			return res;
 		}
 		else {
-			for( cont = 0 ; cont < average ; cont++ ) {
-				accumulator += (_pg_Uint32)pg_adc_start( channel );
-			}
-			res = (_pg_Uint16)( accumulator / average );
 			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
+				pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_NO_AVERAGE , PG_ERROR_CRITICAL );
 			#endif
+			return pg_adc_start( channel );
 		}
-		return res;
 	}
 
 
