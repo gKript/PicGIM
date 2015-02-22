@@ -113,11 +113,14 @@
 		 *	\brief		This is the function to set the main parameters of the module. 
 			\return		Nothing.
 		 	\param		parameter	Is the main parameter you want to set. 	Possible value : \n
-								\ref PG_TAD_PARAM :	The \e parameter TAD for the pg_adc_set() function. \n With this you can choose the TAD value. \n
-								\ref PG_FOSC_PARAM :	The \e parameter FOSC for the pg_adc_set() function. \n With this you can choose the FOSC value. \n
-								\ref PG_ADC_MODULE :	The \e parameter ADC for the pg_adc_set() function. \n With this you can turn ON or OFF the ADC device. \n
-								\ref PG_JUSTIFICATION_PARAM :		The \e parameter JUSTIFICATION for the pg_adc_set() function. \n With this you can choose if you want the result justified to the right or to the left. \n 
+								\ref PG_TAD_PARAM :				The \e parameter TAD for the pg_adc_set() function. \n With this you can choose the TAD value. \n
+								\ref PG_FOSC_PARAM :			The \e parameter FOSC for the pg_adc_set() function. \n With this you can choose the FOSC value. \n
+								\ref PG_ADC_MODULE :			The \e parameter ADC for the pg_adc_set() function. \n With this you can turn ON or OFF the ADC device. \n
+								\ref PG_JUSTIFICATION_PARAM :	The \e parameter JUSTIFICATION for the pg_adc_set() function. \n With this you can choose if you want the result justified to the right or to the left. \n 
 								\ref PG_ANALOG_CHANNELS_PARAM :	The \e parameter CHANNELS for the pg_adc_set() function. \n With this you can choose the number of AD channels. \n
+								\ref PG_USER_SCALE_MIN :		The \e parameter CHANNELS for the pg_adc_set() function. \n With this you can choose the minimum value of the user scal
+								\ref PG_USER_SCALE_MAX :		The \e parameter CHANNELS for the pg_adc_set() function. \n With this you can choose the maximum value of the user scal
+
 
 			\param		value		The value of the relative parameter. \n
 									Possible value : Refer to the table below. \n
@@ -278,7 +281,8 @@
 				\arg \b pg_adc_start() : When this function is called the acquisition is carried out. 
 				\arg \b pg_adc_start_avg() : When this function is called the acquisition is carried out with [n] averages.
 				\arg \b pg_adc_get() : This function returns the value of the last acquisition made.
-				\arg \b pg_adc_get_perc() : This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made. 
+				\arg \b pg_adc_get_perc() : This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made.
+				\arg \b pg_adc_get_perc_f()	: This function returns the value as a percentage in float ( 0.0 - 100.0 ) of the last acquisition made.
 				
 				\endcode
 				
