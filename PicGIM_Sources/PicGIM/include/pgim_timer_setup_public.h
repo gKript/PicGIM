@@ -45,7 +45,7 @@
 //	#if ( PGIM_TIMER != PG_DISABLE )
 	
 		//		D E V I C E S   E N A B L I N G
-		#define PGIM_TIMER_0					PG_DISABLE		//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
+		#define PGIM_TIMER_0					PG_ENABLE		//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
 		#define PGIM_TIMER_1					PG_DISABLE		//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
 	
 		//		P A R A M E T E R S
