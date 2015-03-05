@@ -79,7 +79,8 @@
 	#define		PG_MAX_RAM					16384				//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				0					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory. The 24FJ256GB110 does NOT have eeprom.
 	
-	#define		PG_MCU_SUPPLY_MAX			3.30				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_VOLT_MAX		3.60				//!<	The maximum power supply voltage with regulator enabled
+	#define		PG_MCU_SUPPLY_VOLT_MIN		2.20				//!<	The minimum power supply voltage with regulator enabled
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
 	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.

@@ -69,7 +69,7 @@
 			//If volt_ad_ref used by AD MODULE is Vdd, it returns the power supply voltage value.
 			
 			// Parameter "volt_stable_ref" value check
-			if( volt_stable_ref > PG_USER_SUPPLY ) {
+			if( volt_stable_ref > PG_USER_SUPPLY_VOLT ) {
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH , PG_ERROR_CRITICAL );
 				#endif
@@ -140,10 +140,10 @@
 			#endif
 
 			//Calculation of ntc voltage
-			Ntc_Volt = ( PG_USER_SUPPLY * Ad_Measure_Accumulator / PG_ADC_RES_STEPS );
+			Ntc_Volt = ( PG_USER_SUPPLY_VOLT * Ad_Measure_Accumulator / PG_ADC_RES_STEPS );
 			
 			//Calculating ntc resistance value
-			Ntc_Res = ( ( Ntc_Volt * PGIM_SENSOR_NTC_HIGH_RESISTOR ) / ( PG_USER_SUPPLY - Ntc_Volt ) );
+			Ntc_Res = ( ( Ntc_Volt * PGIM_SENSOR_NTC_HIGH_RESISTOR ) / ( PG_USER_SUPPLY_VOLT - Ntc_Volt ) );
 			
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_OK , PG_ERROR_OK );

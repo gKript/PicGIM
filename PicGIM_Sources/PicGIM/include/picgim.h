@@ -700,6 +700,9 @@
 		#include "pgim_sensor.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_SENSOR Loaded
+			#if ( ( PGIM_SENSOR_ADC_REF == PG_DISABLE ) && ( PG_USER_SUPPLY_BATTERY	== PG_YES ) )
+				#warning	PG_HS_PG PG_HM_SENSOR PG_HS_SUGG With the battery power supply (voltage non-constant) it is better to use the ADC-Ref module for the measurement of the true supply voltage.
+			#endif
 		#endif
 	#endif
 	//---[ END Sensor ]---

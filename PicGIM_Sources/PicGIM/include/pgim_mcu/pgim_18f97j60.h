@@ -97,7 +97,8 @@
 	#define		PG_MAX_RAM					3808				//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				0					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory. The 18F97J60 does NOT have eeprom.
 	
-	#define		PG_MCU_SUPPLY_MAX			3.30				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_VOLT_MAX		3.60				//!<	The maximum power supply voltage with regulator enabled (ENVREG tied to VDD)
+	#define		PG_MCU_SUPPLY_VOLT_MIN		2.70				//!<	The minimum power supply voltage with regulator enabled (ENVREG tied to VDD)
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
 	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.
@@ -170,13 +171,21 @@
 					#define		PG_MAX_RAM			3808
 				\endcode
 
-			\subsection		PSUPPLY97J60		PG_MCU_SUPPLY_MAX
+			\subsection		PSUPPLY97J60_VMAX		PG_MCU_SUPPLY_VOLT_MAX
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
-					#define		PG_MCU_SUPPLY_MAX			3.3
+					#define		PG_MCU_SUPPLY_VOLT_MAX			3.3
 				\endcode
 
+			\subsection		PSUPPLY97J60_VMIN		PG_MCU_SUPPLY_VOLT_MIN
+				It is the minimum applicable power supply voltage of the MCU. \n
+				For the precise voltage to use, refer to the datasheet from the previous chapter : \ref datasheet
+				Also make sure that the voltage is enough for the clock frequency chosen.
+				\code
+					#define		PG_MCU_SUPPLY_VOLT_MIN			2.00
+				\endcode
+				
 		\section	SXINST97J60			Extended Instruction Code
 			\endhtmlonly
 			\endcode

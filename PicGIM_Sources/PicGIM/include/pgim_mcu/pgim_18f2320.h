@@ -81,7 +81,8 @@
 	#define		PG_MAX_RAM					512					//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				256					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory
 	
-	#define		PG_MCU_SUPPLY_MAX			5.00				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_VOLT_MAX		5.50				//!<	The maximum power supply voltage
+	#define		PG_MCU_SUPPLY_VOLT_MIN		2.00				//!<	The minimum power supply voltage
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
 	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.
@@ -150,11 +151,20 @@
 				#define		PG_MAX_RAM			512
 			\endcode
 
-			\subsection		PSUPPLY		PG_MCU_SUPPLY_MAX
-				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
-				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
+			\subsection		PSUPPLY2320_VMAX		PG_MCU_SUPPLY_VOLT_MAX
+				It is the maximum applicable power supply voltage of the MCU. \n
+				For the precise voltage to use, refer to the datasheet from the previous chapter : \ref datasheet
+				Also make sure that the voltage is enough for the clock frequency chosen.
 				\code
-					#define		PG_MCU_SUPPLY_MAX			5.0
+					#define		PG_MCU_SUPPLY_VOLT_MAX			5.50
+				\endcode
+
+			\subsection		PSUPPLY2320_VMIN		PG_MCU_SUPPLY_VOLT_MIN
+				It is the minimum applicable power supply voltage of the MCU. \n
+				For the precise voltage to use, refer to the datasheet from the previous chapter : \ref datasheet
+				Also make sure that the voltage is enough for the clock frequency chosen.
+				\code
+					#define		PG_MCU_SUPPLY_VOLT_MIN			2.00
 				\endcode
 
 		\section	SXINST	Extended Instruction Code

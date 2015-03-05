@@ -87,6 +87,17 @@
 			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN		5						//!< Guard limit on the minimum acquired row value (shorted sensor detection)
 			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX		50						//!< Guard limit on the maximum acquired row value (unplugged sensor detection)
 			
+			//		U S E R   D E F I N E D   N T C   S E N S O R   P I N
+			//		(Please replace "sensorname" with the name of the sensor so that it can be more easy to use with a mnemonic name.)
+			#define	PGIM_SENSOR_NTC_USER_0_sensorname		PG_CH_0					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_1_sensorname		PG_CH_1					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_2_sensorname		PG_CH_2					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_3_sensorname		PG_CH_3					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_4_sensorname		PG_CH_4					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_5_sensorname		PG_CH_5					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_6_sensorname		PG_CH_6					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_NTC_USER_7_sensorname		PG_CH_7					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			
 		#endif
 	#endif
 #endif /* _PGIM_SENSOR_SETUP_PUBLIC_H_ */

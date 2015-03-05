@@ -149,7 +149,7 @@
 			if ( average >= PG_MAX_AVERAGE ) {
 				res = -1;
 				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_NO_AVARAGE , PG_ERROR_CRITICAL );
+					pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR_NO_AVERAGE , PG_ERROR_CRITICAL );
 				#endif
 			}
 			else {
