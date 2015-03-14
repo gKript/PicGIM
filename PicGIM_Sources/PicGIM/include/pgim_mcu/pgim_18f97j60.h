@@ -175,7 +175,7 @@
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
-					#define		PG_MCU_SUPPLY_VOLT_MAX			3.3
+					#define		PG_MCU_SUPPLY_VOLT_MAX			3.60
 				\endcode
 
 			\subsection		PSUPPLY97J60_VMIN		PG_MCU_SUPPLY_VOLT_MIN
@@ -183,7 +183,7 @@
 				For the precise voltage to use, refer to the datasheet from the previous chapter : \ref datasheet
 				Also make sure that the voltage is enough for the clock frequency chosen.
 				\code
-					#define		PG_MCU_SUPPLY_VOLT_MIN			2.00
+					#define		PG_MCU_SUPPLY_VOLT_MIN			2.70
 				\endcode
 				
 		\section	SXINST97J60			Extended Instruction Code

@@ -703,6 +703,23 @@
 			#if ( ( PGIM_SENSOR_ADC_REF == PG_DISABLE ) && ( PG_USER_SUPPLY_BATTERY	== PG_YES ) )
 				#warning	PG_HS_PG PG_HM_SENSOR PG_HS_SUGG With the battery power supply (voltage non-constant) it is better to use the ADC-Ref module for the measurement of the true supply voltage.
 			#endif
+			// Parameter "PGIM_SENSOR_ADC_REF_VOLT" value check
+			#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
+				#if( PGIM_SENSOR_ADC_REF_VOLT > PG_USER_SUPPLY_VOLT )
+					#warning	PG_HS_PG PG_HM_SENSOR Reference voltage value too big!
+				#endif
+				#if( ( PGIM_SENSOR_ADC_REF_VOLT < 0 ) || ( PGIM_SENSOR_ADC_REF_VOLT == 0 ) )
+					#warning	PG_HS_PG PG_HM_SENSOR Reference voltage value negative or zero!
+				#endif
+			#endif
+			#if ( ( PGIM_SENSOR_NTC_USE_ADCREF == PG_YES ) && ( PGIM_SENSOR_ADC_REF == PG_DISABLE ) )
+				#warning	PG_HS_PG PG_HM_SENSOR ADC-Ref sensor must be enabled to be used with the NTC sensor!
+			#endif
+			#if ( ( PGIM_SENSOR_NTC_USE_ADCREF == PG_YES ) && ( PGIM_SENSOR_ADC_REF == PG_ENABLE ) )
+				#warning 	PG_HS_PG PG_HM_SENSOR Using ADC-Ref sensor to measure the power supply voltage for the NTC sensor.
+			#else
+				#warning 	PG_HS_PG PG_HM_SENSOR Using declared power supply voltage for the NTC sensor.
+			#endif
 		#endif
 	#endif
 	//---[ END Sensor ]---

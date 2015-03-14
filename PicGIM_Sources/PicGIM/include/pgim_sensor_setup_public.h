@@ -45,7 +45,7 @@
 	#if ( PGIM_SENSOR == PG_ENABLE )
 	
 		//		S E N S O R S   E N A B L I N G
-		#define PGIM_SENSOR_ADC_REF							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_SENSOR_ADC_REF							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PGIM_SENSOR_NTC								PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 		
@@ -56,8 +56,8 @@
 		////////////////////////////////////////////////////////////////////////////////		
 
 		#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-			#define	PGIM_SENSOR_ADC_REF_CH					PG_CH_0					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
-			
+			#define	PGIM_SENSOR_ADC_REF_CH					PG_CH_2					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
+			#define	PGIM_SENSOR_ADC_REF_VOLT				2.49					//!< The ouput voltage of ADC-Ref sensor in [V]
 		#endif
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,8 @@
 			#define PGIM_SENSOR_NTC_HIGH_RESISTOR			10002.0					//!< High side resitor exact value [Ohm]
 			
 			//		A C Q U I S I T I O N  -  P A R A M E T E R S					(Common value for all ntc)
-			#define	PGIM_SENSOR_NTC_AD_AVERAGE				10						//!< Averages number of measurement
+			#define	PGIM_SENSOR_NTC_USE_ADCREF				PG_YES					//!< Must be: PG_YES || PG_NO
+			#define	PGIM_SENSOR_NTC_AD_AVERAGE				10						//!< Number of averages for measurement
 			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN		5						//!< Guard limit on the minimum acquired row value (shorted sensor detection)
 			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX		50						//!< Guard limit on the maximum acquired row value (unplugged sensor detection)
 			

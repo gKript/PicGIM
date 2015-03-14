@@ -44,59 +44,67 @@
 	#define _PGIM_SENSOR_H_
 		
 	#if ( PGIM_SENSOR == PG_ENABLE )
-	
-		//---[ Errors ]---
-			//---[ Errors Adc Ref]---
-			#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-				#define	PG_SENSOR_ADC_REF_ERROR_OK					1			//!< No error. Correct value.
-				#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH		-1			//!< Reference voltage value too big.
-				#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW			-2			//!< Reference voltage value negative or zero.
-			#endif
-			//---[ End Errors Adc Ref]---
-			
-			//---[ Errors Ntc ]---
-			#if ( PGIM_SENSOR_NTC == PG_ENABLE )
-				#define	PG_SENSOR_NTC_ERROR_OK						2			//!< No error. Correct value.
-				#define	PG_SENSOR_NTC_ERROR_UNPLUGGED				-11			//!< Unplugged sensor.
-				#define	PG_SENSOR_NTC_ERROR_SHORTED					-12			//!< Shorted sensor.
-			#endif
-			//---[ End Errors Ntc ]---
-		//---[ END Errors ]---
+		#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
+			//---[ Errors ADC-Ref ]---
+				//---[ Errors Adc Ref]---
+	/*			#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
+					#define	PG_SENSOR_ADC_REF_ERROR_OK					1			//!< No error. Correct value.
+					#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH		-1			//!< Reference voltage value too big.
+					#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW			-2			//!< Reference voltage value negative or zero.
+				#endif
+	*/		//---[ End Errors ADC-Ref ]---
 				
-		/*!
-			\brief			This function measures the value of the reference voltage of the AD converter.
+			//---[ Prototypes ADC-Ref ]---
+			extern _pg_float	pg_sensor_adc_ref_measured;							//!< ADC module measured voltage reference
 			
-			\param			volt_stable_ref : a stable voltage reference to measure by ADC MODULE. \n
-			
-			\return			A float value of the reference voltage of the AD converter.\n
-							It also sets the following values in the ERROR MODULE(if enabled): \n
-							\b PG_OK : if all value are right. \n
-							\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH : if the reference voltage value is too big. \n
-							\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW : if the reference voltage value is negative or zero. \n
-							
-			\note			This function can measure the supply voltage of the micro-controller. \n
-							It is useful with battery powered device. \n
-							It is able to perform his job because the AD-Module uses ALWAYS the Vdd as superior reference. \n
-		*/
-		_pg_float			pg_sensor_adc_ref			( _pg_float volt_stable_ref );
+			/*!
+				\brief			This function measures the value of the reference voltage of the AD converter.
+				
+				\param			None. \n
+				
+				\return			A float value of the reference voltage of the AD converter.\n
+								It also sets the following values in the ERROR MODULE(if enabled): \n
+								\b PG_OK : if all value are right. \n
+								\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH : if the reference voltage value is too big. \n
+								\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW : if the reference voltage value is negative or zero. \n
+								
+				\note			This function can measure the supply voltage of the micro-controller. \n
+								It is useful with battery powered device. \n
+								It is able to perform his job because the AD-Module uses ALWAYS the Vdd as superior reference. \n
+			*/
+			_pg_float			pg_sensor_adc_ref			( void );
+			//---[ End Prototypes ADC-Ref ]---
+		#endif
 
-		/*!
-			\brief			This function measures the temperature value of an NTC sensor.
+		#if ( PGIM_SENSOR_NTC == PG_ENABLE )
+			//---[ Errors Ntc ]---
+				#if ( PGIM_SENSOR_NTC == PG_ENABLE )
+					#define	PG_SENSOR_NTC_ERROR_OK						2			//!< No error. Correct value.
+					#define	PG_SENSOR_NTC_ERROR_UNPLUGGED				-11			//!< Unplugged sensor.
+					#define	PG_SENSOR_NTC_ERROR_SHORTED					-12			//!< Shorted sensor.
+				#endif
+			//---[ End Errors Ntc ]---
 			
-			\param			ad_channel : channel where is connected the ntc to measure on AD input. \n
-							Must be specified in ad_converter style, like as PG_CH_0, PG_CH_1, PG_CH_2... \n
-							This module will only execute the calls pg_adc_start() and pg_adc_get(). \n
-							
-			\return			A foat value of temperature in Celsius degrees. \n
-							It also sets the following values in the ERROR MODULE(if enabled): \n
-							\b PG_OK : if all value are right. \n
-							\b PG_SENSOR_NTC_ERROR_UNPLUGGED : if the sensor is unplugged. \n
-							\b PG_SENSOR_NTC_ERROR_SHORTED : if the sensor is shorted. \n
-							
-		*/		
-		_pg_float			pg_sensor_ntc				( _pg_Uint8 ad_channel );
-
-		//---[ END Prototypes ]---
+			//---[ Prototypes Ntc ]---
+			extern	_pg_float	pg_sensor_ntc_measured;								//!< Celsius degree read by sensor
+			
+			/*!
+				\brief			This function measures the temperature value of an NTC sensor.
+				
+				\param			ad_channel : channel where is connected the ntc to measure on AD input. \n
+								Must be specified in ad_converter style, like as PG_CH_0, PG_CH_1, PG_CH_2... \n
+								This module will only execute the calls pg_adc_start() and pg_adc_get(). \n
+								
+				\return			A foat value of temperature in Celsius degrees. \n
+								It also sets the following values in the ERROR MODULE(if enabled): \n
+								\b PG_OK : if all value are right. \n
+								\b PG_SENSOR_NTC_ERROR_UNPLUGGED : if the sensor is unplugged. \n
+								\b PG_SENSOR_NTC_ERROR_SHORTED : if the sensor is shorted. \n
+								
+			*/		
+			_pg_float			pg_sensor_ntc				( _pg_Uint8 ad_channel );
+			//---[ END Prototypes ]---
+		#endif
 	#endif	
 #endif /* _PGIM_SENSOR_H_ */
 
@@ -212,16 +220,27 @@
 					\li \e File : pgim_module_setup_public.h \n
 					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_CH \n
 					\li \e Reference : \ref PG_CH_0 \n
-					
+							
+			\subsection	sensor_adcref_volt		(ADC-Ref) - Reference voltage.
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define	PGIM_SENSOR_ADC_REF_VOLT				2.49
+				\endcode	
+					This define sets the reference voltage generated by the sensor ADC-Ref. \n
+					It must be measured accurately (for example by a digital multimeter). \n
+					The unit of measure by which it must be expressed is Volt [V].
+				
+				\subsubsection	s_sensor_adcref_volt		References
+					\li \e File : pgim_module_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_VOLT \n
+
 			\subsection	sensor_adcref_sch	(ADC-Ref) - Schematic
 				\htmlonly <hr> \endhtmlonly
-				\htmlonly
 				In this circuit schematic, for example, a 2.5V reference voltage is used. \n
 				Of course, nothing prevents from using other values. \n
 				It is important that the \b exact \b value of voltage generated is measured and written in the relative configuration file \n
 				specified in the initial section of this module documentation. \n \n
-				An example of circuit schematic.<br>
-				\endhtmlonly
+				An example of circuit schematic.
 				\image html	sensor_voltadref.png
 			
 			\subsection	sensor_adcref_func	(ADC-Ref) - Public function
@@ -236,7 +255,7 @@
 						pg_initialize();
 						pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 						pg_adc_set( PG_ADC_MODULE , PG_ON );
-						real_pic_vdd = pg_sensor_adc_ref( 2.5 );
+						real_pic_vdd = pg_sensor_adc_ref( );
 						PG_INFINITE_LOOP;
 					}
 				\endcode
@@ -246,7 +265,7 @@
 			\htmlonly <hr> \endhtmlonly
 				This sensor allows to measure the temperature via a resistor NTC connected as shown in the schematic. \n
 				The values of the circuit components must be declared in the configuration files \ref pgim_sensor_setup_public.h \n \n
-							
+				
 			\subsection	sensor_ntc_res		(Ntc) - Resistance
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -313,6 +332,19 @@
 					In the reference schematic, it is marked by R1 label.<br>
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
+				
+			\subsection	sensor_ntc_use_adcref		(Ntc) - Average
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define	PGIM_SENSOR_NTC_USE_ADCREF			PG_YES
+				\endcode
+				\htmlonly
+					This define specifies the averages number of measurement.<br>
+					The number of measurements indicated is executed and then the average is calculated.<br>
+					<br><br>It must be:
+				\endhtmlonly
+					\arg \b PG_YES : The supply voltage value used is measured by means of the sensor ADC-Ref.
+					\arg \b PG_NO : The supply voltage value used in the calculations that declared by the user in pgim_project_setup_public.h.
 				
 			\subsection	sensor_ntc_avg		(Ntc) - Average
 				\htmlonly <hr> \endhtmlonly

@@ -162,7 +162,7 @@
 				Is the supply voltage of the MCU. This voltage is a reference for PicGIM but is not precise. \n
 				For the precise voltage refer to the datasheet from the previous chapter : \ref datasheet
 				\code
-					#define		PG_MCU_SUPPLY_VOLT_MAX			5.0
+					#define		PG_MCU_SUPPLY_VOLT_MAX			5.50
 				\endcode
 
 			\subsection		PSUPPLY4550_VMIN		PG_MCU_SUPPLY_VOLT_MIN

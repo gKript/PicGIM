@@ -46,7 +46,7 @@
 	//		S O F T W A R E   G E N E R A L
 	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	//#define	PGIM_CONVERSION					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_FTOA							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
 	#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -65,7 +65,6 @@
 	//		H A R D W A R E   G K R I P T
 	#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
-	//
 
 	////////////////////////////////////////////////////////////////////////////////
 	//
