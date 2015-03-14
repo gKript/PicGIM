@@ -41,8 +41,7 @@
 
 #ifndef _PGIM_FTOA_H
 	#define	_PGIM_FTOA_H
-	#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_SERIAL == PG_ENABLE ) || ( PGIM_SPI == PG_ENABLE ) )
-
+	#if ( PGIM_FTOA == PG_ENABLE )
 		//---[ Decimal Digits ]---
 		#define PG_FTOA_DECIMAL_DIGITS_1			10					//!< One decimal digit after decimal point.
 		#define PG_FTOA_DECIMAL_DIGITS_2			100					//!< Two decimal digits after decimal point.
@@ -55,19 +54,22 @@
 		#define PG_FTOA_MAX_DIGITS					8					//!< Maximum manageable total digit number with high accuracy.
 		//---[ END Decimal Digits ]---
 		
-		//---[ Error ]---
+		//---[ Errors ]---
 		#define PG_FTOA_ERROR_OK					201					//!< No errors.
 		#define PG_FTOA_ERROR_OVER_8_ACCURACY		202					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy required.
 		#define PG_FTOA_ERROR_OVER_8_ACCURACY_NO	203					//!< Digits are more than PG_FTOA_MAX_DIGITS. Accuracy is not required.
-		#define PG_FTOA_ERROR_BUFFER_DISABLED		204					//!< Trying to use the internal buffer, but that is disabled
-		#define PG_FTOA_ERROR_WRONG_CONFIG_BUFFER	205					//!< Wrong configuration of the buffer in "pgim_module_setup_public.h"
-		//---[ END Error ]---
+		//#define PG_FTOA_ERROR_BUFFER_DISABLED		204					//!< Trying to use the internal buffer, but that is disabled
+		//#define PG_FTOA_ERROR_WRONG_CONFIG_BUFFER	205					//!< Wrong configuration of the buffer in "pgim_module_setup_public.h"
+		//---[ END Errors ]---
 
+		//---[ Prototypes FtoA ]---
+		extern	char		pg_ftoa_internal_buffer[ 32 ];				//!< String with float value converted in char
+		
 		/*!
 			\brief			Converts a float to string.
 		*/			
-		char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits, char * pg_ftoa_buffer );
-
+		char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits );
+		//---[ END Prototypes FtoA ]---
 	#endif
 #endif	/* _PGIM_FTOA_H */
 
@@ -114,4 +116,4 @@
 				We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
-
+//#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_SERIAL == PG_ENABLE ) || ( PGIM_SPI == PG_ENABLE ) )

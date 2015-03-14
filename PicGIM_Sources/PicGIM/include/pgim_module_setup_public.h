@@ -44,7 +44,7 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_FTOA							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
@@ -64,35 +64,70 @@
 
 	//		H A R D W A R E   G K R I P T
 	#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-
-
-	////////////////////////////////////////////////////////////////////////////////
-	//
+	
+	
+	
+	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   E R R O R   H A N D L E R
-	//
-	////////////////////////////////////////////////////////////////////////////////
-
+	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
 		#define	PGIM_ERROR_LED_PRESENT			PG_NO					//!< Must be: PG_YES || PG_NO
 		#define	PGIM_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
 	#endif
 
-	
-	////////////////////////////////////////////////////////////////////////////////
-	//
-	//		S O F T W A R E   C O N F I G   |   F T O A
-	//
-	////////////////////////////////////////////////////////////////////////////////
-	
-	#define	PG_FTOA_BUFFER_INTERNAL				PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	
-	
-	////////////////////////////////////////////////////////////////////////////////
-	//
-	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
-	//
-	////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   C A L - D E L A Y
+	//------------------------------------------------------------------------------
+	//Nothing to configure here.
 
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   F T O A
+	//------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   E V E N T S
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_event_setup_public.h" file.
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   A D - C O N V E R T E R
+	//------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   S P I
+	//------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   E E
+	//------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   T I M E R
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_timer_setup_public.h" file.
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   P W M 
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_pwm_setup_public.h" file.
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   S E R I A L
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_serial_setup_public.h" file.
+	//Nothing to configure here.
+	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_hardware_setup_public.h" file too.
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
 		#define	PG_LCD_HD44780_COLUMNS			16						//!< Number of columns of the display
 		#define	PG_LCD_HD44780_LINES			2						//!< Number of lines of the display
@@ -105,16 +140,11 @@
 		#define PG_LCD_HD44780_SPLASH_TIME		1						//!< Show time of splash in seconds [s] || 0 = do not clear
 	#endif
 
-	
-	////////////////////////////////////////////////////////////////////////////////
-	//
+	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R
-	//
-	////////////////////////////////////////////////////////////////////////////////
-
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_hardware_setup_public.h" file too.
 	#if ( PGIM_BUZZER == PG_ENABLE )
-//		#define	PG_BUZZER_
-//		#define	PG_BUZZER_
 		#define PG_BEEP_LONG					100						/*!	Defines the long duration of the beep	*/
 		#define	PG_BEEP_SHORT					40						/*!	Defines the short duration of the beep	*/
 		#define	PG_BEEP_HIGH					1						/*!	Defines the high tone of the beep		*/
@@ -122,29 +152,23 @@
 		#define	PG_BEEP_LOW						7						/*!	Defines the low tone of the beep		*/
 	#endif
 	
-
-	////////////////////////////////////////////////////////////////////////////////
-	//
-	//		S O F T W A R E   C O N F I G   |   E X T E R N A L   M E M O R Y
-	//
-	////////////////////////////////////////////////////////////////////////////////
-
-//	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
-////		#define	PG_EXTERNAL_MEMORY_
-////		#define	PG_EXTERNAL_MEMORY_
-//	#endif
-
-
-	////////////////////////////////////////////////////////////////////////////////
-	//
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   S E N S O R
+	//------------------------------------------------------------------------------
+	//Please, configure "pgim_sensor_setup_public.h" file.
+	
+	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   E N C O D E R
-	//
-	////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------------
+	//Please, configure in "pgim_hardware_setup_public.h" file.
+	//Nothing to configure here.
+	/*	#if ( PGIM_ENCODER == PG_ENABLE )
+			#define	PG_ENCODER_
+			#define	PG_ENCODER_
+		#endif
+	*/
+#endif 
 
-	#if ( PGIM_ENCODER == PG_ENABLE )
-//		#define	PG_ENCODER_
-//		#define	PG_ENCODER_
-	#endif
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,21 +176,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
-
-//	#define	PGIM_FONTS							PG_ENABLE				// PG_ENABLE   PG_DISABLE
-//	#define PGIM_LCD_PCD8544					PG_ENABLE				// PG_ENABLE   PG_DISABLE
+//	New in the next Milestone
+//
+//	#define	PGIM_FONTS							PG_ENABLE				// PG_ENABLE   PG_DISABLE	#define PGIM_LCD_PCD8544					PG_ENABLE				// PG_ENABLE   PG_DISABLE
 //	#define PGIM_LCD_9340						PG_ENABLE				// PG_ENABLE   PG_DISABLE
 //
-//	New in the next Milestone
-
-
-//	////////////////////////////////////////////////////////////////////////////////
-//	//
+//	//------------------------------------------------------------------------------
 //	//		S O F T W A R E   C O N F I G   |   L C D - P C D 8 5 4 4
-//	//
-//	////////////////////////////////////////////////////////////////////////////////
-//
+//	//------------------------------------------------------------------------------
+//	//Please, configure in "pgim_hardware_setup_public.h" file too.
 //	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
 //		#define PG_LCD_PCD8544_SPI_PORT			PG_SPI_0				//!<	Must be : PG_SPI_0 || PG_SPI_1 || PG_SPI_2
 //		#define PG_LCD_PCD8544_SPI_SYNC_MODE	PG_SPI_MASTER_FOSC_64	//!<	Must be : PG_SPI_MASTER_FOSC_4 || PG_SPI_MASTER_FOSC_16 || PG_SPI_MASTER_FOSC_64 || PG_SPI_MASTER_FOSC_TMR2
@@ -174,22 +192,23 @@
 //		#define PG_LCD_PCD8544_SPI_SMP_PHASE	SMPEND            		//!<	Must be : SMPEND || SMPEND
 //	#endif
 //
-//
-//	////////////////////////////////////////////////////////////////////////////////
-//	//
+//	//------------------------------------------------------------------------------
 //	//		S O F T W A R E   C O N F I G   |   L C D - 9 3 4 0
-//	//
-//	////////////////////////////////////////////////////////////////////////////////
-//
+//	//------------------------------------------------------------------------------
+//	//Please, configure in "pgim_hardware_setup_public.h" file too.
 //	#if ( PGIM_LCD_9340 == PG_ENABLE )
-////		#define PG_LCD_9340_
-////		#define PG_LCD_9340_
+//		//#define PG_LCD_9340_
+//		//#define PG_LCD_9340_
 //	#endif
 //	
+//	//------------------------------------------------------------------------------
+//	//		S O F T W A R E   C O N F I G   |   E X T E R N A L   M E M O R Y
+//	//------------------------------------------------------------------------------
+//	//Please, configure in "pgim_hardware_setup_public.h" file too.
+//	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
+//			#define	PG_EXTERNAL_MEMORY_
+//			#define	PG_EXTERNAL_MEMORY_
+//	#endif
 
-/*!
-	
- */
 
-#endif 
 

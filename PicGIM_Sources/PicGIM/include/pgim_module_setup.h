@@ -51,15 +51,15 @@
 #ifndef _PGIM_MODULE_SETUP_H_
 	#define	_PGIM_MODULE_SETUP_H_
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------------
 	//      F O R   D E B U G   O N L Y
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------------
 
 	#define PGIM_ALL_MODULES_DISABLED   PG_DISABLE				// PG_ENABLE   PG_DISABLE
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------------
 	//      I N C L U S I O N   O F   P U B L I C   F I L E S
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------------
 
 	#include "pgim_project_setup_public.h"
 
@@ -75,8 +75,6 @@
 	#define PGIM_BOARD			PG_BOARD_USER_DEFINED
 	#include "pgim_module_setup_public.h"
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //	#include "pgim_font_setup_public.h"
 	#include "pgim_event_setup_public.h"
 	#include "pgim_timer_setup_public.h"
@@ -85,17 +83,15 @@
 //	#include "pgim_external_memory_setup_public.h"
 	#include "pgim_sensor_setup_public.h"
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     #include "pgim_hardware_setup.h"
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////	
-	//	D e p e n d e n c y    m a n a g e m e n t
-	//////////////////////////////////////////////////////////////////////////////////////////////////////	
+	//------------------------------------------------------------------------------	
+	//		D E P E N D E N C Y    M A N A G E M E N T
+	//------------------------------------------------------------------------------	
 
-
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   D E B U G
-	//  -------------------------------------
+	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
 		#if ( PG_PROJECT_STATE != PG_DEBUG )
 			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must set the PROJECT STATE to DEBUG in pgim_project_setup_public.h as required by other modules or DISABLE the module that need DEBUG STATE
@@ -104,11 +100,10 @@
 			#endif
 		#endif
 	#endif
-
-
-
+	
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   D E L A Y
-	//  -------------------------------------
+	//------------------------------------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_LCD_PCD8544 == PG_ENABLE ) || \
 		( PGIM_LCD_9340 == PG_ENABLE ) || ( PGIM_BUZZER == PG_ENABLE ) || \
 		( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( ( PGIM_SERIAL_DEBUG_TO_PIN == PG_ENABLE ) || \
@@ -124,9 +119,9 @@
 		#endif
 	#endif
 
-
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   A D   C O N V E R T E R
-	//  -------------------------------------
+	//------------------------------------------------------------------------------
 	#if ( PGIM_SENSOR == PG_ENABLE )
 
 		#if ( PGIM_AD_CONVERTER == PG_DISABLE )
@@ -137,11 +132,9 @@
 		#endif
 	#endif
 
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   S P I
-	//  ---------------------------------
-	//	|| ( PGIM_TIMER == PG_ENABLE )
-	//	( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) &&
-
+	//------------------------------------------------------------------------------
 	#if ( ( PGIM_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
 		
 		#if	( PGIM_SPI == PG_DISABLE )
@@ -152,8 +145,9 @@
 		#endif
 	#endif
 
-	//	D e p e n d e n c y   o n   L C D - P C D 8 5 4 4
-	//  -------------------------------------------------
+//	//------------------------------------------------------------------------------
+//	//	D e p e n d e n c y   o n   L C D - P C D 8 5 4 4
+//	//------------------------------------------------------------------------------
 //	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
 //
 //		#if ( PGIM_LCD_PCD8544 == PG_DISABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
@@ -164,8 +158,9 @@
 //		#endif
 //	#endif
 	
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   L C D - H D 4 4 7 8 0
-	//  -------------------------------------------------
+	//------------------------------------------------------------------------------
 	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_HD44780 == PG_ENABLE ) ) \
 		&& defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 		
@@ -177,8 +172,9 @@
 		#endif
 	#endif
 
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   B U Z Z E R
-	//  ---------------------------------------
+	//------------------------------------------------------------------------------
 	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_BUZZER == PG_ENABLE ) )
 		 
 		#if ( PGIM_BUZZER == PG_DISABLE )
@@ -189,8 +185,9 @@
 		#endif
 	#endif
 	
-	//	D e p e n d e n c y   o n   F O N T S
-	//  -------------------------------------
+//	//------------------------------------------------------------------------------
+//	//	D e p e n d e n c y   o n   F O N T S
+//	//------------------------------------------------------------------------------
 //	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
 //
 //		#if ( PGIM_SERIAL == PG_ENABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
@@ -209,11 +206,9 @@
 //		#endif
 //	#endif
 	
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	//	C o n f l i c t   m a n a g e m e n t
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	//------------------------------------------------------------------------------
+	//		C O N F L I C T   M A N A G E M E N T
+	//------------------------------------------------------------------------------
 	#if ( PGIM_BOARD == PG_BOARD_A )
 		#if ( PG_PIN_NUMBER != 28 )
 			#warning	PG_HS_PG PG_HS_ERR PG_HB_A You are using an MCU NOT COMPATIBLE with Board A.

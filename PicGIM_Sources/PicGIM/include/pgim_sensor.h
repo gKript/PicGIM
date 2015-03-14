@@ -45,14 +45,11 @@
 		
 	#if ( PGIM_SENSOR == PG_ENABLE )
 		#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-			//---[ Errors ADC-Ref ]---
-				//---[ Errors Adc Ref]---
-	/*			#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-					#define	PG_SENSOR_ADC_REF_ERROR_OK					1			//!< No error. Correct value.
-					#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH		-1			//!< Reference voltage value too big.
-					#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW			-2			//!< Reference voltage value negative or zero.
-				#endif
-	*/		//---[ End Errors ADC-Ref ]---
+			//---[ Error ADC-Ref ]---
+			#define	PG_SENSOR_ADC_REF_ERROR_OK						1			//!< No error. Correct value.
+			//#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH		-1			//!< Reference voltage value too big.
+			//#define	PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW			-2			//!< Reference voltage value negative or zero.
+			//---[ End Errors ADC-Ref ]---
 				
 			//---[ Prototypes ADC-Ref ]---
 			extern _pg_float	pg_sensor_adc_ref_measured;							//!< ADC module measured voltage reference
@@ -65,8 +62,6 @@
 				\return			A float value of the reference voltage of the AD converter.\n
 								It also sets the following values in the ERROR MODULE(if enabled): \n
 								\b PG_OK : if all value are right. \n
-								\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH : if the reference voltage value is too big. \n
-								\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW : if the reference voltage value is negative or zero. \n
 								
 				\note			This function can measure the supply voltage of the micro-controller. \n
 								It is useful with battery powered device. \n
@@ -78,11 +73,9 @@
 
 		#if ( PGIM_SENSOR_NTC == PG_ENABLE )
 			//---[ Errors Ntc ]---
-				#if ( PGIM_SENSOR_NTC == PG_ENABLE )
-					#define	PG_SENSOR_NTC_ERROR_OK						2			//!< No error. Correct value.
-					#define	PG_SENSOR_NTC_ERROR_UNPLUGGED				-11			//!< Unplugged sensor.
-					#define	PG_SENSOR_NTC_ERROR_SHORTED					-12			//!< Shorted sensor.
-				#endif
+			#define	PG_SENSOR_NTC_ERROR_OK						2			//!< No error. Correct value.
+			#define	PG_SENSOR_NTC_ERROR_UNPLUGGED				-11			//!< Unplugged sensor.
+			#define	PG_SENSOR_NTC_ERROR_SHORTED					-12			//!< Shorted sensor.
 			//---[ End Errors Ntc ]---
 			
 			//---[ Prototypes Ntc ]---
@@ -103,7 +96,7 @@
 								
 			*/		
 			_pg_float			pg_sensor_ntc				( _pg_Uint8 ad_channel );
-			//---[ END Prototypes ]---
+			//---[ END Prototypes Ntc ]---
 		#endif
 	#endif	
 #endif /* _PGIM_SENSOR_H_ */
@@ -333,18 +326,19 @@
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
-			\subsection	sensor_ntc_use_adcref		(Ntc) - Average
+			\subsection	sensor_ntc_use_adcref		(Ntc) - Reference voltage
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_USE_ADCREF			PG_YES
 				\endcode
 				\htmlonly
-					This define specifies the averages number of measurement.<br>
-					The number of measurements indicated is executed and then the average is calculated.<br>
+					This define allows to choose the reference voltage to utilize with the AD module.<br>
+					It can be chosen between the supply voltage declared in the project,<br>
+					or to measure it via the sensor ADC-Ref, which must obviously be enabled and configured.<br>
 					<br><br>It must be:
 				\endhtmlonly
-					\arg \b PG_YES : The supply voltage value used is measured by means of the sensor ADC-Ref.
-					\arg \b PG_NO : The supply voltage value used in the calculations that declared by the user in pgim_project_setup_public.h.
+					\arg \b PG_YES : The supply voltage value used is measured by means of the \b ADC-Ref sensor.
+					\arg \b PG_NO : The supply voltage value used in the calculations is that declared by the user in pgim_project_setup_public.h.
 				
 			\subsection	sensor_ntc_avg		(Ntc) - Average
 				\htmlonly <hr> \endhtmlonly
@@ -405,4 +399,8 @@
 		\htmlonly <br><br> \endhtmlonly
 
 */
+
+//								\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH : if the reference voltage value is too big. \n
+//								\b PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW : if the reference voltage value is negative or zero. \n
+
 

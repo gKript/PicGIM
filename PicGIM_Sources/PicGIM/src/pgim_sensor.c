@@ -138,67 +138,67 @@
 
 
 // First version with reference voltage as parameter:
-/*	#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
-		_pg_float	pg_sensor_adc_ref( _pg_float volt_stable_ref ) {
-			//--------------------------------------------------------------------
-			//Connect the analog input selected in pgim_sensor_setup_public.h to a stable voltage reference "volt_ref".
-			//Such as for example 2.5V by a TL431 powered between VDD and GND.
-			//volt_ad_ref = ( ( volt_stable_ref * PG_ADC_RES_STEPS ) / pg_adc_get( ) );
-			//i.e.: 5 = ( ( 2.5 * 1024 ) / 512 )	
-			//If volt_ad_ref used by AD MODULE is Vdd, it returns the power supply voltage value.
-			
-			// Parameter "volt_stable_ref" value check
-			#if PG_ERROR_IS_ENABLE
-				if( volt_stable_ref > PG_USER_SUPPLY_VOLT ) {
-					pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH , PG_ERROR_CRITICAL );
-				}
-				if( ( volt_stable_ref < 0 ) || ( volt_stable_ref == 0 ) ) {
-					pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW , PG_ERROR_CRITICAL );
-				}
-			#endif
-
-			pg_adc_start( PGIM_SENSOR_ADC_REF_CH );
-			
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_OK , PG_ERROR_OK );
-			#endif
-			
-			pg_sensor_adc_ref_measured = ( ( volt_stable_ref * PG_ADC_RES_STEPS ) / pg_adc_get( ) );
-			return( pg_sensor_adc_ref_measured );	
-		}
-	#endif
-*/
-
-/*
-_pg_int16	Read_Ntc_Temperature( _pg_Uint8 ADChannel , _pg_int16 Ntc_Beta ) {								//AD_CHANNEL_PANEL, AD_CHANNEL_TANK, AD_CHANNEL_AMB   //PG_CH_0 = Panel; PG_CH_1 = Tank; PG_CH_2 = Ambient
-	//--------------------------------------------------------------------
-	_pg_float	Ntc_Res, Ntc_Volt;
-	//_pg_Uint16	Adc_Get_Sample[ ADC_GET_AVERAGE ];
-	_pg_Uint32	Adc_Get_Accumulator = 0;
-	_pg_Uint8	Avg_Index;
-
-	//Acquisisco ADC_GET_AVERAGE campioni, sommandoli tra di loro e poi dividendo per il loro numero ADC_GET_AVERAGE
-	for ( Avg_Index = 0; Avg_Index < ADC_GET_AVERAGE; Avg_Index++ ) {
-		pg_adc_start( ADChannel );	//Chiamare ogni volta prima di pg_adc_get( )
-		Adc_Get_Accumulator += pg_adc_get( );
-	}
-	Adc_Get_Accumulator /= ADC_GET_AVERAGE;
-	
-	//Ntc_Volt = ( PWR_SUPPLY_VDD * pg_adc_get( ) / PG_ADC_RES_STEPS );
-	Ntc_Volt = ( PWR_SUPPLY_VDD * Adc_Get_Accumulator / PG_ADC_RES_STEPS );
-	Ntc_Res = ( ( Ntc_Volt * PULLUP_NTC_R1 ) / ( PWR_SUPPLY_VDD - Ntc_Volt ) );
-	
-	//Return with BETA
-	// 1/T = (1/T0) + (1/B)*ln(R/R0)  =>  T = 1 / ( (1/T0) + ( (1/B)*ln(R/R0) ) )	//logaritmo NATURALE !
-	return( (_pg_int16)( ( 1.0 / ( ( 1.0 / NTC_T_ZERO ) + ( ( 1.0 / Ntc_Beta ) * log( Ntc_Res / NTC_R_ZERO ) ) ) ) - NTC_KELVIN_CONST ) );
-	
-	//Return with a,b,c (formula verificata, ma a,b,c sono ancora fisse sotto define)
-	//(_pg_int16)( ( 1.0 / ( a + ( b * ( log R ) ) + ( c * log ( R ) * log ( R ) * log ( R ) ) ) ) - 273.15 )
-	//return (_pg_int16)( ( 1.0 / ( NTC_A + ( NTC_B * ( log ( Ntc_Res ) ) ) + ( NTC_C * log ( Ntc_Res ) * log ( Ntc_Res ) * log ( Ntc_Res ) ) ) ) - NTC_KELVIN_CONST );
-} 
-*/
-
-			//Acquisition and calculating average
+//	#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
+//		_pg_float	pg_sensor_adc_ref( _pg_float volt_stable_ref ) {
+//			//--------------------------------------------------------------------
+//			//Connect the analog input selected in pgim_sensor_setup_public.h to a stable voltage reference "volt_ref".
+//			//Such as for example 2.5V by a TL431 powered between VDD and GND.
+//			//volt_ad_ref = ( ( volt_stable_ref * PG_ADC_RES_STEPS ) / pg_adc_get( ) );
+//			//i.e.: 5 = ( ( 2.5 * 1024 ) / 512 )	
+//			//If volt_ad_ref used by AD MODULE is Vdd, it returns the power supply voltage value.
+//			
+//			// Parameter "volt_stable_ref" value check
+//			#if PG_ERROR_IS_ENABLE
+//				if( volt_stable_ref > PG_USER_SUPPLY_VOLT ) {
+//					pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_REF_TOO_HIGH , PG_ERROR_CRITICAL );
+//				}
+//				if( ( volt_stable_ref < 0 ) || ( volt_stable_ref == 0 ) ) {
+//					pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_REF_TOO_LOW , PG_ERROR_CRITICAL );
+//				}
+//			#endif
+//
+//			pg_adc_start( PGIM_SENSOR_ADC_REF_CH );
+//			
+//			#if PG_ERROR_IS_ENABLE
+//				pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_ADC_REF_ERROR_OK , PG_ERROR_OK );
+//			#endif
+//			
+//			pg_sensor_adc_ref_measured = ( ( volt_stable_ref * PG_ADC_RES_STEPS ) / pg_adc_get( ) );
+//			return( pg_sensor_adc_ref_measured );	
+//		}
+//	#endif
+//
+//
+//
+//_pg_int16	Read_Ntc_Temperature( _pg_Uint8 ADChannel , _pg_int16 Ntc_Beta ) {								//AD_CHANNEL_PANEL, AD_CHANNEL_TANK, AD_CHANNEL_AMB   //PG_CH_0 = Panel; PG_CH_1 = Tank; PG_CH_2 = Ambient
+//	//--------------------------------------------------------------------
+//	_pg_float	Ntc_Res, Ntc_Volt;
+//	//_pg_Uint16	Adc_Get_Sample[ ADC_GET_AVERAGE ];
+//	_pg_Uint32	Adc_Get_Accumulator = 0;
+//	_pg_Uint8	Avg_Index;
+//
+//	//Acquisisco ADC_GET_AVERAGE campioni, sommandoli tra di loro e poi dividendo per il loro numero ADC_GET_AVERAGE
+//	for ( Avg_Index = 0; Avg_Index < ADC_GET_AVERAGE; Avg_Index++ ) {
+//		pg_adc_start( ADChannel );	//Chiamare ogni volta prima di pg_adc_get( )
+//		Adc_Get_Accumulator += pg_adc_get( );
+//	}
+//	Adc_Get_Accumulator /= ADC_GET_AVERAGE;
+//	
+//	//Ntc_Volt = ( PWR_SUPPLY_VDD * pg_adc_get( ) / PG_ADC_RES_STEPS );
+//	Ntc_Volt = ( PWR_SUPPLY_VDD * Adc_Get_Accumulator / PG_ADC_RES_STEPS );
+//	Ntc_Res = ( ( Ntc_Volt * PULLUP_NTC_R1 ) / ( PWR_SUPPLY_VDD - Ntc_Volt ) );
+//	
+//	//Return with BETA
+//	// 1/T = (1/T0) + (1/B)*ln(R/R0)  =>  T = 1 / ( (1/T0) + ( (1/B)*ln(R/R0) ) )	//logaritmo NATURALE !
+//	return( (_pg_int16)( ( 1.0 / ( ( 1.0 / NTC_T_ZERO ) + ( ( 1.0 / Ntc_Beta ) * log( Ntc_Res / NTC_R_ZERO ) ) ) ) - NTC_KELVIN_CONST ) );
+//	
+//	//Return with a,b,c (formula verificata, ma a,b,c sono ancora fisse sotto define)
+//	//(_pg_int16)( ( 1.0 / ( a + ( b * ( log R ) ) + ( c * log ( R ) * log ( R ) * log ( R ) ) ) ) - 273.15 )
+//	//return (_pg_int16)( ( 1.0 / ( NTC_A + ( NTC_B * ( log ( Ntc_Res ) ) ) + ( NTC_C * log ( Ntc_Res ) * log ( Ntc_Res ) * log ( Ntc_Res ) ) ) ) - NTC_KELVIN_CONST );
+//} 
+//
+//
+//			//Acquisition and calculating average
 //			for ( Ad_Measure_Avg_Index = 0; Ad_Measure_Avg_Index < PGIM_SENSOR_NTC_AD_AVERAGE; Ad_Measure_Avg_Index++ ) {
 //				pg_adc_start( ad_channel );	//Chiamare ogni volta prima di pg_adc_get( ) per aggiornare la lettura
 //

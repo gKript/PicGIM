@@ -42,7 +42,7 @@
 #ifndef _PGIM_TIMER_SETUP_PUBLIC_H_
 	#define _PGIM_TIMER_SETUP_PUBLIC_H_
 
-//	#if ( PGIM_TIMER != PG_DISABLE )
+	#if ( PGIM_TIMER != PG_DISABLE )
 	
 		//		D E V I C E S   E N A B L I N G
 		#define PGIM_TIMER_0					PG_ENABLE		//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
@@ -52,7 +52,7 @@
 		#define PG_TIMER_0_DELAY_TRIM			320				//!< Set the correct value of delay in uSec resulting from test
 		#define PG_TIMER_1_DELAY_TRIM			299				//!< Set the correct value of delay in uSec resulting from test
 
-//	#endif
+	#endif
 #endif /* _PGIM_TIMER_SETUP_PUBLIC_H_ */
  
  

@@ -48,24 +48,17 @@
 		#define PGIM_SENSOR_ADC_REF							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PGIM_SENSOR_NTC								PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
-		
-		////////////////////////////////////////////////////////////////////////////////
-		//
+		//------------------------------------------------------------------------------
 		//		S E N S O R   C O N F I G   |   A D C _ R E F
-		//
-		////////////////////////////////////////////////////////////////////////////////		
-
+		//------------------------------------------------------------------------------		
 		#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )
 			#define	PGIM_SENSOR_ADC_REF_CH					PG_CH_2					//!< Must be: PG_CH_0, PG_CH_1, PG_CH_2, and so on... (See ADC-Module documentation )
 			#define	PGIM_SENSOR_ADC_REF_VOLT				2.49					//!< The ouput voltage of ADC-Ref sensor in [V]
 		#endif
 
-		////////////////////////////////////////////////////////////////////////////////
-		//
+		//------------------------------------------------------------------------------
 		//		S E N S O R   C O N F I G   |   N T C
-		//
-		////////////////////////////////////////////////////////////////////////////////		
-
+		//------------------------------------------------------------------------------		
 		#if ( PGIM_SENSOR_NTC == PG_ENABLE )
 		
 			//		N T C  -  P A R A M E T E R S									(Common value for all ntc)
