@@ -56,7 +56,7 @@ void main( void ) {
 	char *	str;
 	pg_initialize();
 	//str = pg_ftoa( -1237890123.4567, 5);
-	str = pg_ftoa( -735.3112, 3);
+	str = pg_ftoa( -567.9876, 3);
 	
 //	_pg_int32	out;
 //	char	Str[32];

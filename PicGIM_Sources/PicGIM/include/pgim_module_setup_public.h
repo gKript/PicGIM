@@ -90,7 +90,6 @@
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   E V E N T S
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_event_setup_public.h" file.
 	//Nothing to configure here.
 	
 	//------------------------------------------------------------------------------
@@ -111,25 +110,21 @@
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   T I M E R
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_timer_setup_public.h" file.
 	//Nothing to configure here.
 	
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   P W M 
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_pwm_setup_public.h" file.
 	//Nothing to configure here.
 	
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   S E R I A L
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_serial_setup_public.h" file.
 	//Nothing to configure here.
 	
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_hardware_setup_public.h" file too.
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
 		#define	PG_LCD_HD44780_COLUMNS			16						//!< Number of columns of the display
 		#define	PG_LCD_HD44780_LINES			2						//!< Number of lines of the display
@@ -145,7 +140,6 @@
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_hardware_setup_public.h" file too.
 	#if ( PGIM_BUZZER == PG_ENABLE )
 		#define PG_BEEP_LONG					100						/*!	Defines the long duration of the beep	*/
 		#define	PG_BEEP_SHORT					40						/*!	Defines the short duration of the beep	*/
@@ -157,12 +151,11 @@
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   S E N S O R
 	//------------------------------------------------------------------------------
-	//Please, configure "pgim_sensor_setup_public.h" file.
+	//Nothing to configure here.
 	
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   E N C O D E R
 	//------------------------------------------------------------------------------
-	//Please, configure in "pgim_hardware_setup_public.h" file.
 	//Nothing to configure here.
 	/*	#if ( PGIM_ENCODER == PG_ENABLE )
 			#define	PG_ENCODER_
