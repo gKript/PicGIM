@@ -71,8 +71,8 @@
 	//		S O F T W A R E   C O N F I G   |   E R R O R   H A N D L E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
-		#define	PGIM_ERROR_LED_PRESENT			PG_NO					//!< Must be: PG_YES || PG_NO
-		#define	PGIM_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
+		#define	PG_ERROR_LED_PRESENT			PG_NO					//!< Must be: PG_YES || PG_NO
+		#define	PG_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
 	#endif
 
 	//------------------------------------------------------------------------------
@@ -83,7 +83,9 @@
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   F T O A
 	//------------------------------------------------------------------------------
-	//Nothing to configure here.
+	#if ( PGIM_FTOA == PG_ENABLE )
+		#define PG_FTOA_CONVERSION_ACCURATE 	PG_YES					//!< Must be: PG_YES || PG_NO
+	#endif
 	
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   E V E N T S

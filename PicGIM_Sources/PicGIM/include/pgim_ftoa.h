@@ -51,7 +51,7 @@
 		#define PG_FTOA_DECIMAL_DIGITS_6			1000000				//!< Six decimal digits after decimal point.
 		#define PG_FTOA_DECIMAL_DIGITS_7			10000000			//!< Seven decimal digits after decimal point.
 		
-		#define PG_FTOA_MAX_DIGITS					8					//!< Maximum manageable total digit number with high accuracy.
+		#define PG_FTOA_MAX_DIGITS					7					//!< Maximum manageable total digit number with high accuracy.
 		//---[ END Decimal Digits ]---
 		
 		//---[ Errors ]---
@@ -63,7 +63,7 @@
 		//---[ END Errors ]---
 
 		//---[ Prototypes FtoA ]---
-		extern	char		pg_ftoa_internal_buffer[ 32 ];				//!< String with float value converted in char
+		extern	char		pg_ftoa_internal_buffer[ ];					//!< String with float value converted in char
 		
 		/*!
 			\brief			Converts a float to string.
@@ -77,39 +77,36 @@
 	\page 		SWG_float			Float to Ascii
 		
 		\tableofcontents
-
-		\image html	ftoa.png
 		
-		This function converts a float in a character string. \n
+		\n \n
+		\image html	ftoa.png
+		\n \n
+		
+		This function converts a float in a character string, managing the sign. \n
 		
 		\code
-			pg_ftoa( 1.2345678, PG_FLOAT_DECIMAL_DIGITS_3, null ); //Returns a pointer to string: "1.234"
+			pg_ftoa( 1.234567, PG_FLOAT_DECIMAL_DIGITS_3 ); //Returns a pointer to string: "1.234"
 		\endcode
 		
 		The function performs always the conversion, but: \n
-		\arg  if the number of digits of the integer part plus the number of truncated (specified by pg_ftoa_trunc_decimal_digits parameter)
-		decimal part, is less than or equal to \ref PG_FTOA_MAX_DIGITS, it corresponds exactly to the digits of the value to be converted; \n \n
-		\arg  if more, the precision fells correspondingly and goes out of control. \n
-		In this case if the \ref PG_FTOA_CONVERSION_ACCURATE define in \ref pgim_module_setup_public.h file, is set to \ref PG_YES (high accuracy),
-		the function performs the conversion and sets a CRITICAL message, otherwise if it is set to \ref PG_NO,
-		the function performs the conversion and sets only a WARNING message. \n
+		\arg  If the number of digits of the integer part plus the number of truncated decimal part \n
+		(specified by \b pg_ftoa_trunc_decimal_digits parameter) is less than or equal to \ref PG_FTOA_MAX_DIGITS, \n
+		it corresponds exactly to the digits of the value to be converted; \n \n
+		\arg  If the number of digits of the integer part plus the number of truncated decimal part, \n
+		the precision fells correspondingly and goes out of control. \n
+		In this case if the \ref PG_FTOA_CONVERSION_ACCURATE define in \ref pgim_module_setup_public.h file, \n
+		is set to \ref PG_YES (high accuracy), the function performs the conversion and sets a CRITICAL message, \n
+		otherwise if it is set to \ref PG_NO, the function performs the conversion and sets only a WARNING message. \n
 		See \ref PGIM_ERROR documentation.
 		
-		\return			If the character pointer \ref pg_ftoa_buffer is specified, it writes the string in it and returns NULL. \n
-						If to the character pointer \ref pg_ftoa_buffer, NULL is passed, it returns a pointer to an internal buffer containing the string.
+		\return			It returns a pointer to an internal buffer containing the string.
 
-		\param			pg_ftoa_value					The 32-bit float value to convert to string. \n
-		\param			pg_ftoa_trunc_decimal_digits	Number of digits after the decimal point at which to truncate. \n
-		\param			pg_ftoa_buffer					The pointer to buffer where store the string (optional).
+		\param			pg_ftoa_value					The 32-bit float value to converted to string. \n
+		\param			pg_ftoa_trunc_decimal_digits	The number of digits after the decimal point at which to truncate. \n
 			
 		\htmlonly
 			<br><br><br><br>
 		\endhtmlonly
-		
-		\note	This feature is automatically included by enabling the following modules: \n
-					\arg \b PGIM_LCD_HD44780 \n
-					\arg \b PGIM_SERIAL \n
-					\arg \b PGIM_SPI \n
 				
 		\attention	Here a link to the file : \ref pgim_ftoa.h \n
 				This is not a file defined as public and therefore would not be edited. \n 

@@ -45,7 +45,7 @@
 	//------------------------------------------------------------------------------
 	//		H A R D W A R E   C O N F I G   |   L E D - E R R O R
 	//------------------------------------------------------------------------------
-	#if ( ( PGIM_ERROR == PG_ENABLE ) && ( PGIM_ERROR_LED_PRESENT == PG_YES ) )
+	#if ( ( PGIM_ERROR == PG_ENABLE ) && ( PG_ERROR_LED_PRESENT == PG_YES ) )
 		#define	PG_ERROR_LED						L_B3
 		#define	PG_ERROR_LED_TRIS					T_B3
 	#endif

@@ -74,7 +74,7 @@
             PG_ERROR_CODE       = code;
             PG_ERROR_MODULE     = module;
             PG_ERROR_SEVERITY   = severity;
-            #if ( ( PGIM_ERROR_LED_PRESENT == PG_YES ) || ( ( PGIM_LCD_HD44780 == PG_ENABLE ) && ( PGIM_ERROR_LCD_PRESENT == PG_HD44780 ) ) )
+            #if ( ( PG_ERROR_LED_PRESENT == PG_YES ) || ( ( PGIM_LCD_HD44780 == PG_ENABLE ) && ( PG_ERROR_LCD_PRESENT == PG_HD44780 ) ) )
                 if ( PG_ERROR_SEVERITY == PG_ERROR_FATAL )
 					pg_error_led();
             #endif
@@ -104,7 +104,7 @@
 		return res;
 	}
 
-	#if ( PGIM_ERROR_LED_PRESENT == PG_YES )
+	#if ( PG_ERROR_LED_PRESENT == PG_YES )
 
 		void	pg_error_led_sequence ( void ) {
 			PG_ERROR_LED = PG_OFF;
@@ -153,7 +153,7 @@
 					break;
 				}
 				case PG_ERROR_FATAL : {
-					#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) && ( PGIM_ERROR_LCD_PRESENT == PG_HD44780 ) )	/* HD44780 LCD */
+					#if ( ( PGIM_LCD_HD44780 == PG_ENABLE ) && ( PG_ERROR_LCD_PRESENT == PG_HD44780 ) )	/* HD44780 LCD */
 						pg_lcd_hd44780_clear( PG_CONTROLLER_0 );
 						pg_lcd_hd44780_write( PG_CONTROLLER_0 , 0 , 0 , "Error on %s" , pg_error_code_to_module( PG_ERROR_MODULE ) );
 						pg_lcd_hd44780_write( PG_CONTROLLER_0 , 1 , 0 , "Code : %d" , (unsigned int)PG_ERROR_CODE );

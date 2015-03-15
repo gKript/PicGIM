@@ -81,7 +81,7 @@
 		 */
 		char *	pg_error_severity_str( _pg_Uint8 severity );
 
-	#if ( PGIM_ERROR_LED_PRESENT == PG_YES )
+	#if ( PG_ERROR_LED_PRESENT == PG_YES )
 
 		void	pg_error_led_sequence ( void );
 
@@ -161,7 +161,7 @@
 			\subsection	dwjp2cnbperroren	Indicator LED enabling
 				\htmlonly <hr> \endhtmlonly
 				\code
-					#define	PGIM_ERROR_LED_PRESENT			PG_YES
+					#define	PG_ERROR_LED_PRESENT			PG_YES
 				\endcode
 					These defines enable or disable the indicator LED. \n
 					They must be: \n
@@ -170,7 +170,7 @@
 
 				\subsubsection	errorchenreflen		References
 					\li \e File : pgim_module_setup_public.h \n
-					\li \e Reference : \ref PGIM_ERROR_LED_PRESENT \n
+					\li \e Reference : \ref PG_ERROR_LED_PRESENT \n
 
 			\subsection	dwjp2cnbperrorset	Indicator LED setting
 				\htmlonly <hr> \endhtmlonly
@@ -187,7 +187,7 @@
 
 				\subsubsection	errorchensetref		References
 					\li \e File : pgim_hardware_setup_public.h \n
-					\li \e Reference : \ref PGIM_ERROR_LED_PRESENT \n
+					\li \e Reference : \ref PG_ERROR_LED_PRESENT \n
 
 
 		\section	fdwerrorcsdwfun		Functions
