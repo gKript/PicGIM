@@ -217,7 +217,7 @@
 	#define	PG_CONSTANTS_PLANK_EV					( 4.13562852E-15 )					//!< Planck's constant. Unit of measure: [eV*s]
 	#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565E-19 ) 				//!< Elementary charge. Unit of measure: [C]
 	#define	PG_CONSTANTS_GRAVITY_ACCELERATION		9.80665								//!< Gravitational acceleration. Unit of measure: [m/(s^2)]
-	#define	PG_CONSTANTS_KELVIN_CONST				273.15								//!< Absolute value of the absolute zero temperature (0�K) in degrees Celsius
+	#define	PG_CONSTANTS_KELVIN_CONST				-273.15								//!< Absolute value of the absolute zero temperature (0�K) in degrees Celsius
 
 	//------------------------------------------------------------------------------
 	//		C H E M I S T R Y   C O N S T A N T S
