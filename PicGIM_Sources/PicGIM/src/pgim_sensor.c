@@ -89,7 +89,7 @@
 			
 			//Power supply voltage selection
 			#if ( ( PGIM_SENSOR_ADC_REF == ENABLE ) && ( PGIM_SENSOR_NTC_USE_ADCREF == PG_YES ) )
-				Supply_Volt = pg_sensor_adc_ref( );
+				Supply_Volt = pg_sensor_adc_ref();
 			#else
 				Supply_Volt = PG_USER_SUPPLY_VOLT;
 			#endif

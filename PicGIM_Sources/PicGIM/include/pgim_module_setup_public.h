@@ -58,7 +58,7 @@
 	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
-	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 

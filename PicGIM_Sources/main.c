@@ -56,21 +56,23 @@ void main( void ) {
 	char *	str;
 	pg_initialize();
 	//str = pg_ftoa( -1237890123.4567, 5);
-	str = pg_ftoa( -567.9876, 3);
+//	str = pg_ftoa( -567.9876, 3);
 	
 //	_pg_int32	out;
 //	char	Str[32];
-//	pg_pin_mode( T_B3 , PG_OUT );
-//	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_2_CHANNELS );
-//	pg_adc_set( PG_ADC_MODULE , PG_ON );
+	pg_pin_mode( T_B3 , PG_OUT );
+	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_2_CHANNELS );
+	pg_adc_set( PG_ADC_MODULE , PG_ON );
 	pg_loop {
-	;
-//		pg_delay_sec( 1 );
-//		pg_pin_toggle( L_B3 );
-//		pg_lcd_hd44780_clear( PG_CONTROLLER_0 );
-//		flo = pg_sensor_ntc( PG_CH_1 );
-//		pg_lcd_hd44780_write_p_float( PG_CONTROLLER_0 , PG_LINE_0 , 0 , PG_FTOA_DECIMAL_DIGITS_2 , flo );
-//		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "%d" , pg_adc_get() );
+		pg_delay_sec( 1 );
+		pg_pin_toggle( L_B3 );
+		pg_lcd_hd44780_clear( PG_CONTROLLER_0 );
+		flo = pg_sensor_ntc( PG_CH_1 );
+		pg_lcd_hd44780_write_p_float( PG_CONTROLLER_0 , PG_LINE_0 , 0 , PG_FTOA_DECIMAL_DIGITS_4 , flo );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "%d" , pg_adc_get() );
+		flo = pg_sensor_adc_ref();
+		pg_lcd_hd44780_write_p_float( PG_CONTROLLER_0 , PG_LINE_0 , 8 , PG_FTOA_DECIMAL_DIGITS_4 , flo );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 8 , "%d" , pg_adc_get() );
 	}
 /*
 	pg_initialize();

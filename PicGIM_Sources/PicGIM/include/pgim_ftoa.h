@@ -43,13 +43,13 @@
 	#define	_PGIM_FTOA_H
 	#if ( PGIM_FTOA == PG_ENABLE )
 		//---[ Decimal Digits ]---
-		#define PG_FTOA_DECIMAL_DIGITS_1			10					//!< One decimal digit after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_2			100					//!< Two decimal digits after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_3			1000				//!< Three decimal digits after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_4			10000				//!< Four decimal digits after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_5			100000				//!< Five decimal digits after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_6			1000000				//!< Six decimal digits after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_7			10000000			//!< Seven decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_1			1					//!< One decimal digit after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_2			2					//!< Two decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_3			3					//!< Three decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_4			4					//!< Four decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_5			5					//!< Five decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_6			6					//!< Six decimal digits after decimal point.
+		#define PG_FTOA_DECIMAL_DIGITS_7			7					//!< Seven decimal digits after decimal point.
 		
 		#define PG_FTOA_MAX_DIGITS					7					//!< Maximum manageable total digit number with high accuracy.
 		//---[ END Decimal Digits ]---
