@@ -49,7 +49,7 @@
 		#define PG_FTOA_DECIMAL_DIGITS_4			4					//!< Four decimal digits after decimal point.
 		#define PG_FTOA_DECIMAL_DIGITS_5			5					//!< Five decimal digits after decimal point.
 		#define PG_FTOA_DECIMAL_DIGITS_6			6					//!< Six decimal digits after decimal point.
-		#define PG_FTOA_DECIMAL_DIGITS_7			7					//!< Seven decimal digits after decimal point.
+//		#define PG_FTOA_DECIMAL_DIGITS_7			7					//!< Seven decimal digits after decimal point.
 		
 		#define PG_FTOA_MAX_DIGITS					7					//!< Maximum manageable total digit number with high accuracy.
 		//---[ END Decimal Digits ]---

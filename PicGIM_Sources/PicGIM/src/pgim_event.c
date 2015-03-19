@@ -245,13 +245,13 @@
 		#endif
 		#if ( PG_EVENT_SET_INT1 == PG_ENABLE )
 			case PG_EVENT_INT1: {
-				PG_INTERRUPT_INT0_ENABLE = int_state;
+				PG_INTERRUPT_INT1_ENABLE = int_state;
 				break;
 			}
 		#endif
 		#if ( PG_EVENT_SET_INT2 == PG_ENABLE )
 			case PG_EVENT_INT2:	{
-				PG_INTERRUPT_INT0_ENABLE = int_state;
+				PG_INTERRUPT_INT2_ENABLE = int_state;
 				break;
 			}
 		#endif

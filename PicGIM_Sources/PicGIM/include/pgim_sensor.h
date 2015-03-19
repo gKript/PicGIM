@@ -52,7 +52,7 @@
 			//---[ End Errors ADC-Ref ]---
 				
 			//---[ Prototypes ADC-Ref ]---
-			extern _pg_float	pg_sensor_adc_ref_measured;							//!< ADC module measured voltage reference
+			extern _pg_float	pg_sensor_adc_ref_volt_measured;							//!< ADC module measured voltage reference
 			
 			/*!
 				\brief			This function measures the value of the reference voltage of the AD converter.
@@ -79,7 +79,7 @@
 			//---[ End Errors Ntc ]---
 			
 			//---[ Prototypes Ntc ]---
-			extern	_pg_float	pg_sensor_ntc_measured;								//!< Celsius degree read by sensor
+			extern	_pg_float	pg_sensor_ntc_tempc_measured;				//!< Celsius degree read by sensor
 			
 			/*!
 				\brief			This function measures the temperature value of an NTC sensor.

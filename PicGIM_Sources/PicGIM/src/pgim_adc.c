@@ -179,7 +179,7 @@
 	}
 
 	_pg_int16	pg_adc_get_user_scale( void ) {
-		return ( ( ( ( pg_adc_user_scale_max - pg_adc_user_scale_min ) / PG_ADC_RES_STEPS ) * pg_adc_get() ) + pg_adc_user_scale_min );
+		return (_pg_int16)( ( ( ( pg_adc_user_scale_max - pg_adc_user_scale_min ) / PG_ADC_RES_STEPS ) * (_pg_int16)pg_adc_get() ) + pg_adc_user_scale_min );
 	}
 
 
