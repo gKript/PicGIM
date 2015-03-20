@@ -481,31 +481,10 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		#if ( PG_LCD_HD44780_EN_0_PRESENT  ==  PG_DISABLE )
-			#undef	PG_LCD_HD44780_EN_0
-			#define	PG_LCD_HD44780_EN_0		L_A1
-			#undef	PG_LCD_HD44780_EN_0_TRIS
-			#define	PG_LCD_HD44780_EN_0_TRIS	T_A1
-		#endif
-		#if ( PG_LCD_HD44780_EN_1_PRESENT  ==  PG_DISABLE )
-			#undef	PG_LCD_HD44780_EN_1
-			#define	PG_LCD_HD44780_EN_1		L_A1
-			#undef	PG_LCD_HD44780_EN_1_TRIS
-			#define	PG_LCD_HD44780_EN_1_TRIS	T_A1
-		#endif
-		#if ( PG_LCD_HD44780_EN_2_PRESENT  ==  PG_DISABLE )
-			#undef	PG_LCD_HD44780_EN_2
-			#define	PG_LCD_HD44780_EN_2		L_A1
-			#undef	PG_LCD_HD44780_EN_2_TRIS
-			#define	PG_LCD_HD44780_EN_2_TRIS	T_A1
-		#endif
-		#if ( PG_LCD_HD44780_EN_3_PRESENT  ==  PG_DISABLE )
-			#undef	PG_LCD_HD44780_EN_3
-			#define	PG_LCD_HD44780_EN_3		L_A1
-			#undef	PG_LCD_HD44780_EN_3_TRIS
-			#define	PG_LCD_HD44780_EN_3_TRIS	T_A1
-		#endif
 		#include "pgim_lcd_hd44780.h"
+		#if ( ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE ) && ( PG_LCD_HD44780_RW_PRESENT == PG_NO ) )
+			#error	PG_HS_PG PG_HM_LCD_HD44780 Can not read busy flag, because writing pin is not used!
+		#endif
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_LCD_HD44780 Loaded
 		#endif

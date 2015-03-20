@@ -50,7 +50,6 @@
 	_pg_int16	pg_adc_user_scale_min;
 	_pg_int16	pg_adc_user_scale_max;
 
-
 	void pg_adc_init( void ) {
 		pg_adc_set( PG_FOSC_PARAM , PG_FOSC_16 );
 		pg_adc_set( PG_TAD_PARAM , PG_TAD_16 );
@@ -179,7 +178,7 @@
 	}
 
 	_pg_int16	pg_adc_get_user_scale( void ) {
-		return (_pg_int16)( ( ( ( pg_adc_user_scale_max - pg_adc_user_scale_min ) / PG_ADC_RES_STEPS ) * (_pg_int16)pg_adc_get() ) + pg_adc_user_scale_min );
+		return (_pg_int16)( ( ( (float)( pg_adc_user_scale_max - pg_adc_user_scale_min ) / PG_ADC_RES_STEPS ) * pg_adc_get() ) + pg_adc_user_scale_min );
 	}
 
 

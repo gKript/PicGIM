@@ -81,12 +81,21 @@
 	void pg_lcd_hd44780_init_routine( _pg_Uint8 ControllerNumber ) {
 		_pg_Uint8 c, r;
 		
-		if( PG_LCD_HD44780_EN_0_PRESENT ) 	PG_LCD_HD44780_EN_0_TRIS = PG_OUT;
-		if( PG_LCD_HD44780_EN_1_PRESENT ) 	PG_LCD_HD44780_EN_1_TRIS = PG_OUT;
-		if( PG_LCD_HD44780_EN_2_PRESENT ) 	PG_LCD_HD44780_EN_2_TRIS = PG_OUT;
-		if( PG_LCD_HD44780_EN_3_PRESENT ) 	PG_LCD_HD44780_EN_3_TRIS = PG_OUT;
-
-		PG_LCD_HD44780_RW_TRIS  = PG_OUT;
+		#if ( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_0_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_1_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_2_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_3_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_RW_PRESENT == PG_YES )
+			PG_LCD_HD44780_RW_TRIS  = PG_OUT;
+		#endif
 		PG_LCD_HD44780_RS_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_0_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_1_TRIS  = PG_OUT;
@@ -95,7 +104,8 @@
 
 		pg_delay_msec( 200 );
 		PG_LCD_HD44780_RS = PG_COMMAND;
-		PG_LCD_HD44780_RW = PG_WRITE;
+		if( PG_LCD_HD44780_RW_PRESENT )
+			PG_LCD_HD44780_RW = PG_WRITE;
 		pg_lcd_hd44780_en_select( ControllerNumber , PG_DISABLE );
 		pg_lcd_hd44780_en_select( ControllerNumber , PG_ENABLE );		//superfluo? ci pensera' la write-nibble
 		pg_delay_msec( 1 );
@@ -137,10 +147,10 @@
 		pg_lcd_hd44780_goto( ControllerNumber , 0 , 0 );
 		pg_delay_msec( 10 );
 		
-		if( PG_LCD_HD44780_BL_PRESENT ) {
+		#if ( PG_LCD_HD44780_BL_PRESENT == PG_YES )
 			PG_LCD_HD44780_BL_TRIS = PG_OUT;
 			PG_LCD_HD44780_BL = PG_ENABLE;
-		}
+		#endif
 		#if ( PG_LCD_HD44780_SPLASH_ENABLE == PG_ENABLE )
 			for ( r = 0  ; r < PG_LCD_HD44780_LINES ; r++ ) {
 				for ( c = 0  ; c < PG_LCD_HD44780_COLUMNS ; c++ ) {
@@ -210,11 +220,13 @@
 		#if ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE )
 			_pg_Uint8 Status;
 			PG_LCD_HD44780_RS = PG_COMMAND;
-			PG_LCD_HD44780_RW = PG_READ;
+			if( PG_LCD_HD44780_RW_PRESENT )
+				PG_LCD_HD44780_RW = PG_READ;
 			do {
 				Status = pg_lcd_hd44780_read_byte( ControllerNumber );
 			} while ( Status & 0x80 );
-			PG_LCD_HD44780_RW = PG_WRITE;
+			if( PG_LCD_HD44780_RW_PRESENT )
+				PG_LCD_HD44780_RW = PG_WRITE;
 		#else
 			pg_delay_usec( 1 );
 		#endif
@@ -229,7 +241,8 @@
 			return;	//gestire errore
 			
 		PG_LCD_HD44780_RS = DataType;
-		PG_LCD_HD44780_RW = PG_WRITE;
+		if( PG_LCD_HD44780_RW_PRESENT )
+			PG_LCD_HD44780_RW = PG_WRITE;
 		pg_lcd_hd44780_en_select( ControllerNumber , PG_ENABLE );
 		pg_delay_msec( 1 );
 		
@@ -254,14 +267,22 @@
 	
 	void pg_lcd_hd44780_en_select( _pg_Uint8 ControllerNumber , _pg_Uint8 EnState ) {
 		//	es.: pg_lcd_hd44780_en_select( PG_CONTROLLER_0 , PG_ENABLE );
-		if	( ( ControllerNumber == PG_CONTROLLER_0 ) && ( PG_LCD_HD44780_EN_0_PRESENT ) )
-			PG_LCD_HD44780_EN_0 = EnState;
-		if	( ( ControllerNumber == PG_CONTROLLER_1 ) && ( PG_LCD_HD44780_EN_1_PRESENT ) )
-			PG_LCD_HD44780_EN_1 = EnState;
-		if	( ( ControllerNumber == PG_CONTROLLER_2 ) && ( PG_LCD_HD44780_EN_2_PRESENT ) )
-			PG_LCD_HD44780_EN_2 = EnState;
-		if	( ( ControllerNumber == PG_CONTROLLER_3 ) && ( PG_LCD_HD44780_EN_3_PRESENT ) )
-			PG_LCD_HD44780_EN_3 = EnState;
+		#if ( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
+			if	( ControllerNumber == PG_CONTROLLER_0 )
+				PG_LCD_HD44780_EN_0 = EnState;
+		#endif
+		#if ( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
+			if	( ControllerNumber == PG_CONTROLLER_1 )
+				PG_LCD_HD44780_EN_1 = EnState;
+		#endif
+		#if ( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
+			if	( ControllerNumber == PG_CONTROLLER_2 )
+				PG_LCD_HD44780_EN_2 = EnState;
+		#endif
+		#if ( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
+			if	( ControllerNumber == PG_CONTROLLER_3 )
+				PG_LCD_HD44780_EN_3 = EnState;
+		#endif
 	}
 
 

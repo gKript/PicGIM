@@ -376,8 +376,8 @@
 		\subsection	CLCDpinen	Pin: EN
 			\htmlonly <hr> \endhtmlonly
 			\code
-				#define PG_LCD_HD44780_EN_0_PRESENT			PG_ENABLE
-				#define PG_LCD_HD44780_EN_1_PRESENT			PG_DISABLE			
+				#define PG_LCD_HD44780_EN_0_PRESENT			PG_YES
+				#define PG_LCD_HD44780_EN_1_PRESENT			PG_PG_NO			
 				#define PG_LCD_HD44780_EN_2_PRESENT			PG_DISABLE		
 				#define PG_LCD_HD44780_EN_3_PRESENT			PG_DISABLE
 			\endcode
@@ -416,7 +416,7 @@
 		\subsection	CLCDpinbl	Pin: BL
 			\htmlonly <hr> \endhtmlonly
 			\code
-				#define PG_LCD_HD44780_BL_PRESENT			PG_ENABLE
+				#define PG_LCD_HD44780_BL_PRESENT			PG_YES
 			\endcode	
 			\htmlonly
 				This define declares the availability of the BACKLIGHT pin control.<br>

@@ -60,9 +60,10 @@ void main( void ) {
 	
 //	_pg_int32	out;
 //	char	Str[32];
-	pg_pin_mode( T_B3 , PG_OUT );
-	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_2_CHANNELS );
-	pg_adc_set( PG_ADC_MODULE , PG_ON );
+	
+//	pg_pin_mode( T_B3 , PG_OUT );
+//	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_2_CHANNELS );
+//	pg_adc_set( PG_ADC_MODULE , PG_ON );
 	pg_loop {
 		pg_delay_sec( 1 );
 		pg_pin_toggle( L_B3 );

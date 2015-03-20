@@ -54,39 +54,40 @@
 	//		H A R D W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
 	//------------------------------------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		#define PG_LCD_HD44780_RW					L_D5
 		#define PG_LCD_HD44780_RS					L_D4
-		#define PG_LCD_HD44780_EN_0_PRESENT			PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_EN_0					L_D6
-		#define PG_LCD_HD44780_EN_1_PRESENT			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_EN_1				
-		#define PG_LCD_HD44780_EN_2_PRESENT			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_EN_2				
-		#define PG_LCD_HD44780_EN_3_PRESENT			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_EN_3				
-		#define PG_LCD_HD44780_DATA_0				L_D0
-		#define PG_LCD_HD44780_DATA_1				L_D1
-		#define PG_LCD_HD44780_DATA_2				L_D2
-		#define PG_LCD_HD44780_DATA_3				L_D3
-		#define PG_LCD_HD44780_BL_PRESENT			PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_BL					L_D7
+		#define PG_LCD_HD44780_RW_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_RW					L_D5				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_0_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_EN_0					L_D6				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_1_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_EN_1					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_2_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_EN_2					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_3_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_EN_3					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_DATA_0				L_D0				//!< Must be: <pin-lat-name>
+		#define PG_LCD_HD44780_DATA_1				L_D1				//!< Must be: <pin-lat-name>
+		#define PG_LCD_HD44780_DATA_2				L_D2				//!< Must be: <pin-lat-name>
+		#define PG_LCD_HD44780_DATA_3				L_D3				//!< Must be: <pin-lat-name>
+		#define PG_LCD_HD44780_BL_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_BL					L_D7				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
 
-		#define PG_LCD_HD44780_RW_TRIS				T_D5
-		#define PG_LCD_HD44780_RS_TRIS				T_D4
-		#define PG_LCD_HD44780_EN_0_TRIS			T_D6
-		#define PG_LCD_HD44780_EN_1_TRIS			
-		#define PG_LCD_HD44780_EN_2_TRIS			
-		#define PG_LCD_HD44780_EN_3_TRIS			
-		#define PG_LCD_HD44780_DATA_0_TRIS			T_D0
-		#define PG_LCD_HD44780_DATA_1_TRIS			T_D1
-		#define PG_LCD_HD44780_DATA_2_TRIS			T_D2
-		#define PG_LCD_HD44780_DATA_3_TRIS			T_D3
-		#define PG_LCD_HD44780_BL_TRIS				T_D7
+		#define PG_LCD_HD44780_RS_TRIS				T_D4				//!< Must be: <pin-tris-name>
+		#define PG_LCD_HD44780_RW_TRIS				T_D5				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_0_TRIS			T_D6				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_1_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_2_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_3_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_DATA_0_TRIS			T_D0				//!< Must be: <pin-tris-name>
+		#define PG_LCD_HD44780_DATA_1_TRIS			T_D1				//!< Must be: <pin-tris-name>
+		#define PG_LCD_HD44780_DATA_2_TRIS			T_D2				//!< Must be: <pin-tris-name>
+		#define PG_LCD_HD44780_DATA_3_TRIS			T_D3				//!< Must be: <pin-tris-name>
+		#define PG_LCD_HD44780_BL_TRIS				T_D7				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		
-		#define PG_LCD_HD44780_DATA_0_PORT			P_D0
-		#define PG_LCD_HD44780_DATA_1_PORT			P_D1
-		#define PG_LCD_HD44780_DATA_2_PORT			P_D2
-		#define PG_LCD_HD44780_DATA_3_PORT			P_D3
+		#define PG_LCD_HD44780_DATA_0_PORT			P_D0				//!< Must be: <pin-port-name>
+		#define PG_LCD_HD44780_DATA_1_PORT			P_D1				//!< Must be: <pin-port-name>
+		#define PG_LCD_HD44780_DATA_2_PORT			P_D2				//!< Must be: <pin-port-name>
+		#define PG_LCD_HD44780_DATA_3_PORT			P_D3				//!< Must be: <pin-port-name>
 	#endif
 
 	//------------------------------------------------------------------------------
