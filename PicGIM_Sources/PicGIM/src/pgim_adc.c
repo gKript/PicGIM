@@ -47,15 +47,15 @@
 		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
 	#endif
 
-	_pg_int16	pg_adc_user_scale_min;
-	_pg_int16	pg_adc_user_scale_max;
+//	_pg_int16	pg_adc_user_scale_min;
+//	_pg_int16	pg_adc_user_scale_max;
 
 	void pg_adc_init( void ) {
 		pg_adc_set( PG_FOSC_PARAM , PG_FOSC_16 );
 		pg_adc_set( PG_TAD_PARAM , PG_TAD_16 );
 		pg_adc_set( PG_JUSTIFICATION_PARAM , PG_JUSTIFIED_RIGHT );
-		pg_adc_user_scale_min = 0;
-		pg_adc_user_scale_max = pow( 2 , PG_ADC_RES_BITS ) - 1 ;
+//		pg_adc_user_scale_min = 0;
+//		pg_adc_user_scale_max = pow( 2 , PG_ADC_RES_BITS ) - 1 ;
 	}
 
 	
@@ -104,22 +104,22 @@
 				#endif
 				break;
 			}
-			case PG_USER_SCALE_MIN:
-			{
-				pg_adc_user_scale_min = value ;
-				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
-				#endif
-				break;
-			}
-			case PG_USER_SCALE_MAX:
-			{
-				pg_adc_user_scale_max = value ;
-				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
-				#endif
-				break;
-			}
+//			case PG_USER_SCALE_MIN:
+//			{
+//				pg_adc_user_scale_min = value ;
+//				#if PG_ERROR_IS_ENABLE
+//					pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
+//				#endif
+//				break;
+//			}
+//			case PG_USER_SCALE_MAX:
+//			{
+//				pg_adc_user_scale_max = value ;
+//				#if PG_ERROR_IS_ENABLE
+//					pg_error_set( PG_ERROR_ADC , PG_OK , PG_ERROR_OK );
+//				#endif
+//				break;
+//			}
 			default : {
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_ADC , PG_ADC_ERROR , PG_ERROR_WARNING );
@@ -177,8 +177,8 @@
 		return value_get.Val;
 	}
 
-	_pg_int16	pg_adc_get_user_scale( void ) {
-		return (_pg_int16)( ( ( (float)( pg_adc_user_scale_max - pg_adc_user_scale_min ) / PG_ADC_RES_STEPS ) * pg_adc_get() ) + pg_adc_user_scale_min );
+	_pg_int16	pg_adc_get_user_scale( _pg_int16 Min , _pg_int16 Max ) {
+		return (_pg_int16)( ( ( (float)( Max - Min ) / ( PG_ADC_RES_STEPS - 1 ) ) * pg_adc_get() ) + Min );
 	}
 
 

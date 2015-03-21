@@ -49,7 +49,7 @@
 	#define PGIM_FTOA							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
-	#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EVENTS							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_AD_CONVERTER					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -128,7 +128,7 @@
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
 		#define	PG_LCD_HD44780_COLUMNS			16						//!< Number of columns of the display
 		#define	PG_LCD_HD44780_LINES			2						//!< Number of lines of the display
-		#define PG_LCD_HD44780_BUSY_FLAG		PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PG_LCD_HD44780_BUSY_FLAG		PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_LCD_HD44780_LINE_0_ADDRESS	0x00					//!< Address (default 0x00) for the line number 1. Must be : PG_MISSING if there is not.
 		#define PG_LCD_HD44780_LINE_1_ADDRESS	0X40					//!< Address (default 0x40) for the line number 2. Must be : PG_MISSING if there is not.
 		#define PG_LCD_HD44780_LINE_2_ADDRESS	PG_MISSING				//!< Address (default 0x00) for the line number 3. Must be : PG_MISSING if there is not.

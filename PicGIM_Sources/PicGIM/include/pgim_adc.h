@@ -99,8 +99,8 @@
 		#define	PG_MAX_AVERAGE					50				//!<	Maximum number of readings in a sample.
 
 
-		extern _pg_int16	pg_adc_user_scale_min;
-		extern _pg_int16	pg_adc_user_scale_max;
+//		extern _pg_int16	pg_adc_user_scale_min;
+//		extern _pg_int16	pg_adc_user_scale_max;
 
 		/*!
 		 *	\brief			This is the initialization function of the ADC handler module.
@@ -156,12 +156,13 @@
 		_pg_Uint16	pg_adc_get					( void );
 
 		/*!
-			\brief		This function returns the value of the last acquisition made in a user secified range .
-			\param 		Nothing.
+			\brief		This function returns the value of the last acquisition made in a user secified range.
+			\param 		Min	The minimum value of the user scale.
+		    \param 		Max	The maximum value of the user scale.
 			\return		The value of the last samplingin a user secified range.
 			\test		This function does not change the error status.
 		*/
-		_pg_int16	pg_adc_get_user_scale		( void );
+		_pg_int16	pg_adc_get_user_scale		( _pg_int16 Min , _pg_int16 Max );
 
 		/*!
 			\brief		This function acquires with [n] averages.
