@@ -51,7 +51,7 @@
 				#pragma	config FOSC			= ECPLLIO_EC  		// Used only with external oscillator
 			#endif
 			
-			#pragma	config PLLDIV			= 1  				// Used only with external oscillator
+			#pragma	config PLLDIV			= 5  				// Used only with external oscillator
 			#pragma	config CPUDIV			= OSC1_PLL2  		// Used only with external oscillator
 			#pragma	config USBDIV			= 1  				// Used only with external oscillator
 			

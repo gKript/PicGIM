@@ -57,7 +57,7 @@
 
 		void my_isr( void ) {
 			_asm
-			GOTO pg_event_occurred
+				GOTO pg_event_occurred
 			_endasm
 		}
 		

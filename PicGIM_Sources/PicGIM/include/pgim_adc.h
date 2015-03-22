@@ -96,7 +96,7 @@
 		#define	PG_CH_6							0b11011011			//!<	To select the ADC channel 6.
 		#define	PG_CH_7							0b11011111			//!<	To select the ADC channel 7.
 
-		#define	PG_MAX_AVERAGE					50				//!<	Maximum number of readings in a sample.
+		#define	PG_MAX_AVERAGE					250				//!<	Maximum number of readings in a sample.
 
 
 //		extern _pg_int16	pg_adc_user_scale_min;

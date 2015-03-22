@@ -223,14 +223,19 @@
 
 
 	void	pg_event_set( char int_event , char int_state ) {
+		pg_event_clear_bit( int_event );
 		switch( int_event ) {
 			case PG_EVENT_ANY: {
 				INTCONbits.GIE = int_state;
+				INTCONbits.GIEH = int_state;
+				INTCONbits.GIEL = int_state;
 				INTCONbits.PEIE = int_state;
 				break;
 			}
 			case PG_EVENT_GLOBAL: {
 				INTCONbits.GIE = int_state;
+				INTCONbits.GIEH = int_state;
+				INTCONbits.GIEL = int_state;
 				break;
 			}
 			case PG_EVENT_PERIPHERAL: {
@@ -240,6 +245,8 @@
 		#if ( PG_EVENT_SET_INT0 == PG_ENABLE )
 			case PG_EVENT_INT0: {
 				PG_INTERRUPT_INT0_ENABLE = int_state;
+				INTCON2bits.RBPU = 1;				// Pull ups on Portb are enable
+				INTCON2bits.INTEDG0 = 0;			// Activates on raising edge
 				break;
 			}
 		#endif
@@ -342,7 +349,6 @@
 			}
 		#endif
 		}
-		pg_event_clear_bit( int_event );
 	}
 
 
