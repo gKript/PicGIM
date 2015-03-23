@@ -42,14 +42,14 @@
 
 #include "picgim_main.h"
 
-void int0_test( void ) {
+void ext_test( void ) {
 	pg_pin_toggle( L_B2 );
 }
 
 
 void timer_test( void ) {
-	float		flo;
-	char *		str;
+	float	flo;
+	char *	str;
 	pg_pin_toggle( L_B3 );
 	pg_lcd_hd44780_clear( PG_CONTROLLER_0 );
 //	flo = pg_sensor_ntc( PG_CH_1 );
@@ -70,16 +70,20 @@ void main( void ) {
 	pg_pin_mode( T_B2 , PG_OUT );
 	pg_pin_mode( T_B0 , PG_IN );
 
-    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
-    pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
-	pg_event_attach( PG_EVENT_INT0 , int0_test );
-    pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
-	pg_event_attach( PG_EVENT_TMR0 , timer_test );
-    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
-//	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_3_CHANNELS );
-//	pg_adc_set( PG_ADC_MODULE , PG_ON );
 	pg_timer_set_period( PG_TIMER_0 , 1 , PG_SEC );
 	pg_timer_start( PG_TIMER_0 );
+
+    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
+    pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
+
+	pg_event_attach( PG_EVENT_TMR0 , timer_test );
+    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
+
+//	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_3_CHANNELS );
+//	pg_adc_set( PG_ADC_MODULE , PG_ON );
+
+	pg_event_attach( PG_EVENT_INT0 , ext_test );
+    pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
 
 	pg_loop;
 }

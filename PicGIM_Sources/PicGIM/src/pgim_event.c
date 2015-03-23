@@ -245,7 +245,7 @@
 		#if ( PG_EVENT_SET_INT0 == PG_ENABLE )
 			case PG_EVENT_INT0: {
 				PG_INTERRUPT_INT0_ENABLE = int_state;
-				INTCON2bits.RBPU = 1;				// Pull ups on Portb are enable
+				INTCON2bits.RBPU = 0;				// Pull ups on Portb are enable
 				INTCON2bits.INTEDG0 = 0;			// Activates on raising edge
 				break;
 			}

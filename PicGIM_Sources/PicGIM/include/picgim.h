@@ -225,7 +225,8 @@
 	
 	//--------------------------------------------------
 	#if ( PGIM_EVENTS == PG_ENABLE )
-	
+
+		#include <portb.h>
 		#include "pgim_event.h"
 //		#include "pgim_interrupt_callbacks.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
