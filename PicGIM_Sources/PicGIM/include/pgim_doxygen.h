@@ -1299,7 +1299,6 @@
 
 			-	\subpage	SWG_delay
 			-	\subpage	SWG_error
-			-	\subpage	SWG_constants
 			-	\subpage	SWG_float
 
 	\page	HW_int		HARDWARE::INTERNAL Modules

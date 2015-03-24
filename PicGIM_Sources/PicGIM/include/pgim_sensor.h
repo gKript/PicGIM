@@ -103,7 +103,7 @@
 
 /*!
 
-	\page	HWE_sensor	Sensor
+	\page	HWE_sensor	Sensors
 
 		\tableofcontents
 

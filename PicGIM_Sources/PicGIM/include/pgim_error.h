@@ -109,9 +109,13 @@
 
 		The \b ERROR \b HANDLING \b MODULE takes care, in case of error, to set correctly three variables useful for the user to understand in detail what the error means. \n
 		The three variables are the following : \n
-			\arg \ref PG_ERROR_MODULE	: The caller MODULE described by the \ref _pgmodules_code_enum enumerator.
-			\arg \ref PG_ERROR_CODE		: The error code returned by the caller function.
+			\arg \ref PG_ERROR_MODULE	: The caller MODULE described by the \ref _pgmodules_code_enum enumerator. \n
+			\arg \ref PG_ERROR_CODE		: The error code returned by the caller function. \n
 			\arg \ref PG_ERROR_SEVERITY	: One of those indicated by the following enumerator: :  \ref _pg_error_state_enum
+
+		The severity Critical produces a blink (about 800mS) on LED assigned to debugging before resuming normal execution. \n
+		The severity Error produces three flashes (about 800mS each one) on the LED assigned to debugging before resuming normal execution. \n
+		The severity Fatal move into an infinite loop (about 800mS each one) on the LED assigned to the debugging and if it also enabled the LCD display the module and error code will be written. \n
 
 		\warning		A FATAL error will produce an infinite loop only if you have set the LED to report errors. \n If enabled, all interrupts are disabled.
 
