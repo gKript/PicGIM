@@ -190,7 +190,7 @@
 			For the module AD_CONVERTER, the Vref reference is the power supply voltage of the microcontroller, or VDD. \n
 			It is therefore possible to measure the supply voltage of the pic, very useful in case of battery powered devices. \n \n
 			
-			\subsection	sensor_adcref_ch		(ADC-Ref) - Channel selection
+			\subsection	sensor_adcref_ch		Channel selection
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_ADC_REF_CH					PG_CH_0
@@ -214,7 +214,7 @@
 					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_CH \n
 					\li \e Reference : \ref PG_CH_0 \n
 							
-			\subsection	sensor_adcref_volt		(ADC-Ref) - Reference voltage.
+			\subsection	sensor_adcref_volt		Reference voltage.
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_ADC_REF_VOLT				2.49
@@ -227,7 +227,7 @@
 					\li \e File : pgim_module_setup_public.h \n
 					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_VOLT \n
 
-			\subsection	sensor_adcref_sch	(ADC-Ref) - Schematic
+			\subsection	sensor_adcref_sch	Schematic
 				\htmlonly <hr> \endhtmlonly
 				In this circuit schematic, for example, a 2.5V reference voltage is used. \n
 				Of course, nothing prevents from using other values. \n
@@ -236,11 +236,11 @@
 				An example of circuit schematic.
 				\image html	sensor_voltadref.png
 			
-			\subsection	sensor_adcref_func	(ADC-Ref) - Public function
+			\subsection	sensor_adcref_func	Public function
 				\htmlonly <hr> \endhtmlonly
 				\arg \b pg_sensor_adc_ref() : This function measures the value of the reference voltage of the AD converter. \n \n 
 			
-			\subsection	sensor_adcref_code		(ADC-Ref) - Example code
+			\subsection	sensor_adcref_code		Example code
 				\htmlonly <hr> \endhtmlonly
 				\code
 					void main( void ) {
@@ -259,7 +259,7 @@
 				This sensor allows to measure the temperature via a resistor NTC connected as shown in the schematic. \n
 				The values of the circuit components must be declared in the configuration files \ref pgim_sensor_setup_public.h \n \n
 				
-			\subsection	sensor_ntc_res		(Ntc) - Resistance
+			\subsection	sensor_ntc_res		Resistance
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_RES_REF				10000.0
@@ -269,7 +269,7 @@
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
-			\subsection	sensor_ntc_tempref		(Ntc) - Temp ref
+			\subsection	sensor_ntc_tempref		Temp ref
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_TEMP_REF			25.0
@@ -279,7 +279,7 @@
 					It must be measured in Celsius degrees.<br>
 				\endhtmlonly 
 
-			\subsection	sensor_ntc_beta			(Ntc) - BETA constant
+			\subsection	sensor_ntc_beta			BETA constant
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_BETA 				3988
@@ -289,7 +289,7 @@
 					The value is specified by the device manufacturer.<br>
 				\endhtmlonly
 
-			\subsection	sensor_ntc_abc		(Ntc) - A B C coefficients
+			\subsection	sensor_ntc_abc		A B C coefficients
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define PGIM_SENSOR_NTC_COEF_A				1.028444E-3
@@ -301,7 +301,7 @@
 					The value is specified by the device manufacturer.<br>
 				\endhtmlonly
 
-			\subsection	sensor_ntc_method		(Ntc) - Calculation method
+			\subsection	sensor_ntc_method		Calculation method
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_CALCULATION_METHOD	PG_SENSOR_METHOD_BETA
@@ -315,7 +315,7 @@
 				\arg \b	PG_SENSOR_METHOD_BETA : Calculations performed using the BETA constant.
 				\arg \b PG_SENSOR_METHOD_COEF : Calculations performed using "A", "B", "C" coefficients.
 				
-			\subsection	sensor_ntc_hires	(Ntc) - High resistor
+			\subsection	sensor_ntc_hires	High resistor
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define PGIM_SENSOR_NTC_HIGH_RESISTOR		10002.0
@@ -326,7 +326,7 @@
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
-			\subsection	sensor_ntc_use_adcref		(Ntc) - Reference voltage
+			\subsection	sensor_ntc_use_adcref		Reference voltage
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_USE_ADCREF			PG_YES
@@ -340,7 +340,7 @@
 					\arg \b PG_YES : The supply voltage value used is measured by means of the \b ADC-Ref sensor.
 					\arg \b PG_NO : The supply voltage value used in the calculations is that declared by the user in pgim_project_setup_public.h.
 				
-			\subsection	sensor_ntc_avg		(Ntc) - Average
+			\subsection	sensor_ntc_avg		Average
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_AD_AVERAGE			10
@@ -350,7 +350,7 @@
 					The number of measurements indicated is executed and then the average is calculated.<br>
 				\endhtmlonly
 
-			\subsection	sensor_ntc_guard_min	(Ntc) - Guard raw min
+			\subsection	sensor_ntc_guard_min	Guard raw min
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_AD_RAW_GUARD_MIN	5
@@ -361,7 +361,7 @@
 					Set a value not too high, so do not compromise the measurement.<br>
 				\endhtmlonly
 		
-			\subsection	sensor_ntc_guard_max	(Ntc) - Guard raw max
+			\subsection	sensor_ntc_guard_max	Guard raw max
 				\htmlonly <hr> \endhtmlonly
 				\code
 					#define	PGIM_SENSOR_NTC_AD_RAW_GUARD_MAX	50
@@ -372,16 +372,16 @@
 					Set a value not too low, so do not compromise the measurement.<br>
 				\endhtmlonly
 				
-			\subsection	sensor_ntc_sch		(Ntc) - Schematic	
+			\subsection	sensor_ntc_sch		Schematic	
 				\htmlonly <hr> \endhtmlonly
 				Typology circuit to be used: \n
 				\image html	sensor_ntc.png
 		
-			\subsection	sensor_ntc_pubfunc	(Ntc) - Public function
+			\subsection	sensor_ntc_pubfunc	Public function
 				\htmlonly <hr> \endhtmlonly
 				\arg \b pg_sensor_ntc() : This function measures the temperature value of an NTC sensor. \n \n 
 				
-			\subsection sensor_ntc_code		(Ntc) - Example code
+			\subsection sensor_ntc_code		Example code
 				\htmlonly <hr> \endhtmlonly
 				\code
 					void main( void ) {
