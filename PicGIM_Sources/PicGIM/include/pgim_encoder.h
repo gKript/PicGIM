@@ -78,7 +78,7 @@
 	#endif	
 #endif /* _PGIM_ENCODER_H_ */
 
-/*
+/*!
 	\page	HWG_encoder		Encoder
 
 

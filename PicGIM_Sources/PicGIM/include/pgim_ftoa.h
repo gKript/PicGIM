@@ -92,19 +92,19 @@
 		\image html	ftoa.png
 		\n \n
 		
-		This function converts a float in a character string, managing the sign. \n
+		This module converts a float in a character string, managing the sign. \n
 		In the public configuration file \ref pgim_module_setup_public.h are specified clearly \n
 		the possible values for the various parameters. \n
 		For software reference please read the documentation in \ref pgim_ftoa.h
-		The function performs always the conversion, but: \n
+		The module performs always the conversion, but: \n
 		\arg  If the number of digits of the integer part plus the number of truncated decimal part \n
 		(specified by \b pg_ftoa_trunc_decimal_digits parameter) is less than or equal to \ref PG_FTOA_MAX_DIGITS, \n
 		it corresponds exactly to the digits of the value to be converted; \n \n
 		\arg  If the number of digits of the integer part plus the number of truncated decimal part, \n
 		the precision fells correspondingly and goes out of control. \n
 		In this case if the \ref PG_FTOA_CONVERSION_ACCURATE define in \ref pgim_module_setup_public.h file, \n
-		is set to \ref PG_YES (high accuracy), the function performs the conversion and sets a \a CRITICAL message, \n
-		otherwise if it is set to \ref PG_NO, the function performs the conversion and sets only a \a WARNING message. \n
+		is set to \ref PG_YES (high accuracy), the module performs the conversion and sets a \a CRITICAL message, \n
+		otherwise if it is set to \ref PG_NO, the module performs the conversion and sets only a \a WARNING message. \n
 		See \ref PGIM_ERROR documentation.
 		
 		\attention	Here a link to the file : \ref pgim_ftoa.h \n
@@ -115,16 +115,16 @@
 					The string produced will contain a maximum of \ref PG_FTOA_MAX_DIGITS characters, \n
 					excluding the decimal point and the possible sign.
 
-		\bug		The function is not able to handle float expressed in the format "E+000".
+		\note		The module is not able to handle float expressed in the format "E+000".
 
 		\htmlonly <BR><BR><BR> \endhtmlonly
 
-		\section	ftoaconf	Function configuration
+		\section	ftoaconf	Module configuration
 
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 			<p>
-			In order to use this function, it must be enabled and configured in: \n
+			In order to use this module, it must be enabled and configured in: \n
 				\arg \b pgim_module_setup_public.h : the main management file for the modules that must be included in the project. \n
 					In this file there are these configurations  : \n \n
 					&nbsp;&nbsp;&nbsp;&nbsp; \ref fewtimerconfenm  \n
@@ -137,24 +137,24 @@
 
   			\n \n \n
 
-		\subsection	ftoaen		Function enabling
+		\subsection	ftoaen		Module enabling
 			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PGIM_FTOA							PG_ENABLE
 			\endcode
-				This define enables or disables the function.<br>
+				This define enables or disables the module.<br>
 			\htmlonly
 				It must be:<br>
 			\endhtmlonly
-				\arg \b PG_ENABLE : FtoA function enabled.
-				\arg \b PG_DISABLE : FtoA function disabled.
+				\arg \b PG_ENABLE : FtoA module enabled.
+				\arg \b PG_DISABLE : FtoA module disabled.
 				\endcode
 
 			\subsubsection	ftoaenref		References
 				\li \e File : pgim_module_setup_public.h \n
 				\li \e Reference : \ref PGIM_FTOA \n
 				
-		\subsection	ftoapar		Function parameter
+		\subsection	ftoapar		Module parameter
 			\htmlonly <hr> \endhtmlonly
 			\code
 				#define PG_FTOA_CONVERSION_ACCURATE			PG_YES

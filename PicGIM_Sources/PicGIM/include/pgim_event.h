@@ -245,8 +245,6 @@
 		
 		\todo 	In the next milestone [1.0] the interrupts module will support high and low priority.
 
-		\bug	At the moment \b external \b interrupts \b are \b not \b detected. Will be released as soon as possible a proper bugfix.
- 
 		\htmlonly
 		<br> <br>
 		\endhtmlonly

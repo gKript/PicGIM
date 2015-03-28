@@ -58,8 +58,9 @@ void timer_test( void ) {
 //	pg_lcd_hd44780_write_p_float( PG_CONTROLLER_0 , PG_LINE_0 , 8 , PG_FTOA_DECIMAL_DIGITS_2 , flo );
 //	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "%d" , pg_adc_start_avg( PG_CH_0 , 200 ) );
 //	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "%d" , pg_adc_get_user_scale( -700 , 100 ) );
-	pg_lcd_hd44780_write( PG_CONTROLLER_0 , PG_LINE_0 , 8 , "Int 0" );
-	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 8 , "%d" , PG_INTERRUPT_INT0_FLAG );
+	pg_lcd_hd44780_write( PG_CONTROLLER_0 , PG_LINE_0 , 8 , "Int Tmr" );
+	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 8 , "%d" , PG_INTERRUPT_INT1_FLAG );
+	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 12 , "%d" , PG_INTERRUPT_TMR0_FLAG );
 }
 
 
@@ -68,7 +69,7 @@ void main( void ) {
 
 	pg_pin_mode( T_B3 , PG_OUT );
 	pg_pin_mode( T_B2 , PG_OUT );
-	pg_pin_mode( T_B0 , PG_IN );
+	pg_pin_mode( T_B1 , PG_IN );
 
 	pg_timer_set_period( PG_TIMER_0 , 1 , PG_SEC );
 	pg_timer_start( PG_TIMER_0 );
@@ -81,6 +82,9 @@ void main( void ) {
 
 //	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_3_CHANNELS );
 //	pg_adc_set( PG_ADC_MODULE , PG_ON );
+
+	pg_event_attach( PG_EVENT_INT1 , ext_test );
+    pg_event_set( PG_EVENT_INT1 , PG_ENABLE );
 
 	pg_event_attach( PG_EVENT_INT0 , ext_test );
     pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
