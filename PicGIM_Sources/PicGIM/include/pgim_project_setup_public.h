@@ -47,7 +47,7 @@
 	#define PG_PROJECT_ORGANIZATION										//!< The name of your Organization
 	#define PG_PROJECT_AUTHOR											//!< Your name or, if you like, your nickname
 	#define PG_PROJECT_VERSION											//!< The version of your project
-	#define PG_PROJECT_STATE					PG_DEBUG				//!< Must be: PG_DEBUG  ||  PG_RELEASE
+	#define PG_PROJECT_STATE					PG_RELEASE				//!< Must be: PG_DEBUG  ||  PG_RELEASE
 	#define PG_PROJECT_DATE												//!< Date of the project
 	
 	//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M

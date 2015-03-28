@@ -102,12 +102,12 @@
 	//		H A R D W A R E   C O N F I G   |   E N C O D E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ENCODER == PG_ENABLE )
-		#define	PG_ENCODER_STEP						L_B5
-		#define	PG_ENCODER_DIR						L_B4
-		#define	PG_ENCODER_SW						L_B6
+		#define	PG_ENCODER_STEP						P_B0
+		#define	PG_ENCODER_DIR						P_B5
+		#define	PG_ENCODER_SW						P_B6
 
-		#define	PG_ENCODER_STEP_TRIS				T_B5
-		#define	PG_ENCODER_DIR_TRIS					T_B4
+		#define	PG_ENCODER_STEP_TRIS				T_B0
+		#define	PG_ENCODER_DIR_TRIS					T_B5
 		#define	PG_ENCODER_SW_TRIS					T_B6
 	#endif
 

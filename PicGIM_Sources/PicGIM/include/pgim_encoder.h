@@ -71,6 +71,8 @@
 		extern	_pg_int8				pg_encoder_direction;
 
 
+		void		pg_encoder_init							( void );
+		_pg_int8	pg_encoder_get_direction				( void );
 		void		pg_encoder_start_end_pulse_block		( void );
 		_pg_Uint8	pg_encoder_start_end_pulse_non_block	( void );
 		_pg_int8	pg_encoder_pulse						( void );

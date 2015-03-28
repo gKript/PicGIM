@@ -52,6 +52,18 @@
 	_pg_int8 pg_encoder_intensity = 0;
 
 
+	void pg_encoder_init( void ) {
+		PG_ENCODER_STEP_TRIS = PG_IN;
+		PG_ENCODER_DIR_TRIS = PG_IN;
+		PG_ENCODER_SW_TRIS = PG_IN;
+	}
+
+
+	_pg_int8	pg_encoder_get_direction( void ) {
+		pg_encoder_direction = 	PG_ENCODER_DIR;
+	}
+
+
 	void pg_encoder_start_end_pulse_block( ) {
 		while( ! PG_ENCODER_STEP );
 		Delay1KTCYx( DELAY_AR );
@@ -77,37 +89,36 @@ ENC_CW;ENC_CCW; [GLOBALI]=> pg_encoder_direction; pg_encoder_intensity;
 		_pg_Uint16 t = 0 , vel = 0;
 		_pg_int8 res = 0;
 		pg_encoder_button = PG_NO;
-		pg_encoder_direction = PG_NO;
-		pg_encoder_intensity = PG_NO;
+		pg_encoder_direction = ENC_UNK;
 		Delay1KTCYx( DELAY_AR );
-		while ( ! ENCODER_PULSE ) {
-			if( ENCODER_SW ) {
+		while ( ! PG_ENCODER_STEP ) {
+			if( PG_ENCODER_SW ) {
 				pg_encoder_button = PG_YES;
 				return 0;
 			}
 		}
 		Delay1KTCYx( DELAY_AR );
 		pg_encoder_direction = PG_ENCODER_DIR;
-		#if ( PG_ENCODER_INTENSITY == PG_ENABLE )
-			for ( t = 0 ; t < ITERATION ; t++ ) {
-				if ( enc_start_end_pulse_non_block( ) )
-					vel++;
-			}
-			if ( vel <= ENC_DELAY_2 )
-				res = 1;
-			if ( vel > ENC_DELAY_2 )
-				res = 2;
-			if ( vel > ENC_DELAY_3 )
-				res = 3;
-			if ( vel > ENC_DELAY_4 )
-				if ( vel > ENC_DELAY_4 )
-					res = 4;
-			pg_encoder_intensity = res;
-			return( res );
-		#else
-			pg_encoder_intensity = PG_YES;
+//		#if ( PG_ENCODER_INTENSITY == PG_ENABLE )
+//			for ( t = 0 ; t < ITERATION ; t++ ) {
+//				if ( enc_start_end_pulse_non_block( ) )
+//					vel++;
+//			}
+//			if ( vel <= ENC_DELAY_2 )
+//				res = 1;
+//			if ( vel > ENC_DELAY_2 )
+//				res = 2;
+//			if ( vel > ENC_DELAY_3 )
+//				res = 3;
+//			if ( vel > ENC_DELAY_4 )
+//				if ( vel > ENC_DELAY_4 )
+//					res = 4;
+//			pg_encoder_intensity = res;
+//			return( res );
+//		#else
+//			pg_encoder_intensity = PG_YES;
 			return( 1 );
-		#endif
+//		#endif
 	}
 
 #endif

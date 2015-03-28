@@ -85,6 +85,10 @@ void pg_initialize( void ) {
 		pg_ee_init( );
 	#endif
 
+	#if	( PGIM_ENCODER == PG_ENABLE )
+		pg_encoder_init( );
+	#endif
+
 	#if	( PGIM_LCD_HD44780 == PG_ENABLE )
 		pg_lcd_hd44780_init( );
 	#endif
