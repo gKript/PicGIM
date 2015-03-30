@@ -36,7 +36,6 @@ Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 ; Name: "full8";  Description: "PicGIM for Mplab 8";
 Name: "custom";   Description: "PicGIM custom installation"; Flags: iscustom
 
-
 [Components]
 Name: "license"; Description: "PicGIM license"; Types: custom; Flags: fixed
 Name: "sources"; Description: "PicGIM sources"; Types: custom;
@@ -53,6 +52,7 @@ Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\PicGIM_M
 Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\PicGIM_Sources\*"; DestDir: "{app}\PicGIM_Sources"; Components: sources; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
+Name: "{group}\gKript.org Web Site"; Filename: "{#MyAppURL}"
+Name: "{group}\Submit a bug"; Filename: "https://github.com/gKript/PicGIM_05/issues/new"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 
