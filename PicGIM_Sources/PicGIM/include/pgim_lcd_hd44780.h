@@ -219,7 +219,10 @@
 			\param			Str						The pointer to the string in \a RAM.
 		*/	
 		void	pg_lcd_hd44780_write_p_string		( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8 * Str );
-		
+
+
+		void	pg_lcd_hd44780_write_p_string_flash	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit );
+
 		/*!
 			\brief			Print a constant string by a pointer, in a specific position. 
 			\return			Nothing.
@@ -229,7 +232,9 @@
 			\param			Str						The pointer to the string in \a ROM.
 		*/	
 		void	pg_lcd_hd44780_write_p_string_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str );
-		
+
+		void	pg_lcd_hd44780_write_p_string_flash_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str , _pg_Uint8 time , _pg_Uint8 unit );
+
 		/*!
 			\brief			Print an integer, specifying the Format, in a specific position. 
 			\return			Nothing.

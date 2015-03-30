@@ -49,12 +49,11 @@
 	
 	
 	void pg_lcd_hd44780_init( void ) {		
-		if( PG_LCD_HD44780_EN_0_PRESENT )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_0 );
-		if( PG_LCD_HD44780_EN_1_PRESENT )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_1 );
-		if( PG_LCD_HD44780_EN_2_PRESENT )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_2 );
-		if( PG_LCD_HD44780_EN_3_PRESENT )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_3 );
+		if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_0 );
+		if( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_1 );
+		if( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_2 );
+		if( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_3 );
 	}
-
 
 
 	//	Location 0,1,2,...7
@@ -380,11 +379,38 @@ LCD 4x16 (tipo WH1604A)
 	}
 
 
+	void pg_lcd_hd44780_write_p_string_flash( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
+		_pg_Uint8 i = 0;
+		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+		while ( Str[i] )
+			pg_lcd_hd44780_put_char( ControllerNumber , Str[i++] );
+		pg_delay( time , unit );
+		i = 0;
+		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+		while ( Str[i++] )
+			pg_lcd_hd44780_put_char( ControllerNumber , ' ' );
+	}
+
+
 	void pg_lcd_hd44780_write_p_string_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str ) {
 		_pg_Uint8 i = 0;
 		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
 		while ( Str[ i ] )
 			pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
+	}
+
+
+	void pg_lcd_hd44780_write_p_string_flash_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
+		_pg_Uint8 i = 0;
+		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+		while ( Str[ i ] )
+			pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
+		
+		pg_delay( time , unit );
+		i = 0;
+		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+		while ( Str[i++] )
+			pg_lcd_hd44780_put_char( ControllerNumber , ' ' );
 	}
 
 
