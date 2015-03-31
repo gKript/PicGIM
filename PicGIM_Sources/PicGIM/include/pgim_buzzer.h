@@ -98,8 +98,8 @@
 				\htmlonly
 					It must be:<br>
 				\endhtmlonly
-					\arg \b PG_ENABLE : Interrupts module enabled.
-					\arg \b PG_DISABLE : Interrupts module disabled.
+					\arg \b PG_ENABLE : Buzzer module enabled.
+					\arg \b PG_DISABLE : Buzzer module disabled.
 					\endcode
 
 				\subsubsection	ieemodenref		References
@@ -107,6 +107,25 @@
 					\li \e Reference : \ref PGIM_BUZZER \n
 
 		 			\htmlonly <br><br> \endhtmlonly
+
+
+			\subsection	buzzcnbperrorset	Indicator LED setting
+				\htmlonly <hr> \endhtmlonly
+				\code
+					#define	PG_BUZZER_PIN						L_C2
+					#define	PG_BUZZER_PIN_TRIS					T_C2
+				\endcode
+					These defines enable or disable the indicator LED. \n
+					They may be: \n
+					\arg For \ref PG_BUZZER_PIN		: A LAT bit correctly defined in relation to the MCU used. \n
+					e.g. : L_C2
+					\arg For \ref PG_BUZZER_PIN_TRIS : The TRIS bits used for \ref PG_ERROR_LED . \n
+					e.g. : T_C2
+
+				\subsubsection	errorchensetref		References
+					\li \e File : pgim_hardware_setup_public.h \n
+					\li \e Reference : \ref PG_ERROR_LED_PRESENT \n
+
 
 		\section	buzcfunct		Functions
 			\htmlonly <hr> \endhtmlonly
@@ -121,6 +140,23 @@
 
 			\htmlonly <br><br> \endhtmlonly
 
+	\section	buzzexampleuse	A code example
+		\htmlonly <hr> \endhtmlonly
+		\endhtmlonly
+
+		Here is a simple example of how to use the module in your code.
+		\warning	In order to compile this example, the module must be enabled and properly configured.
+
+		\code
+			...
+			pg_buzzer_beep( PG_BEEP_LOW , PG_BEEP_SHORT );
+			pg_buzzer_beep( PG_BEEP_MID , PG_BEEP_SHORT );
+			pg_buzzer_beep( PG_BEEP_HIGH , PG_BEEP_LONG );
+			...
+
+		\endcode
+
+		\htmlonly <br><br> \endhtmlonly
 
 
  */

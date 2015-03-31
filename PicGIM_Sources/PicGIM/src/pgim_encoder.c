@@ -47,15 +47,17 @@
 		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
 	#endif
 
-	_pg_int8 pg_encoder_button = ENC_UNK;
-	_pg_int8 pg_encoder_direction = ENC_UNK;
-	_pg_int8 pg_encoder_intensity = 0;
+	_pg_int8 pg_encoder_button;
+	_pg_int8 pg_encoder_direction;
+//	_pg_int8 pg_encoder_intensity = 0;
 
 
 	void pg_encoder_init( void ) {
 		PG_ENCODER_STEP_TRIS = PG_IN;
 		PG_ENCODER_DIR_TRIS = PG_IN;
 		PG_ENCODER_SW_TRIS = PG_IN;
+		pg_encoder_button = PG_NO;
+		pg_encoder_direction = PG_ENCODER_UNK;
 	}
 
 
@@ -66,38 +68,39 @@
 
 	void pg_encoder_start_end_pulse_block( ) {
 		while( ! PG_ENCODER_STEP );
-		Delay1KTCYx( DELAY_AR );
+		pg_delay_msec( DELAY_AR );
 		while( PG_ENCODER_STEP );
 	}
 
 
 	_pg_Uint8 pg_encoder_start_end_pulse_non_block( ) {
 		if ( PG_ENCODER_STEP ) {
-			Delay1KTCYx( DELAY_AR );
+			pg_delay_msec( DELAY_AR );
 			while( PG_ENCODER_STEP );
-			return 1;
+			return PG_EVENT_OCCURRED;
 		}
-		return 0;
+		return PG_NONE;
 	}
 
-/*
-if ( pg_encoder_button == PG_YES )	pulsante premuto
-if ( pg_encoder_intensity > 0 )	encoder girato di "pg_encoder_intensity" step e "pg_encoder_direction" direzione
-ENC_CW;ENC_CCW; [GLOBALI]=> pg_encoder_direction; pg_encoder_intensity;
-*/
+
+	/*
+	if ( pg_encoder_button == PG_YES )	pulsante premuto
+	if ( pg_encoder_intensity > 0 )	encoder girato di "pg_encoder_intensity" step e "pg_encoder_direction" direzione
+	ENC_CW;ENC_CCW; [GLOBALI]=> pg_encoder_direction; pg_encoder_intensity;
+	*/
 	_pg_int8	pg_encoder_pulse( void ) {
-		_pg_Uint16 t = 0 , vel = 0;
-		_pg_int8 res = 0;
+//		_pg_Uint16 t = 0 , vel = 0;
+//		_pg_int8 res = 0;
 		pg_encoder_button = PG_NO;
-		pg_encoder_direction = ENC_UNK;
-		Delay1KTCYx( DELAY_AR );
+		pg_encoder_direction = PG_ENCODER_UNK;
+		pg_delay_msec( DELAY_AR );
 		while ( ! PG_ENCODER_STEP ) {
 			if( PG_ENCODER_SW ) {
 				pg_encoder_button = PG_YES;
-				return 0;
+				return PG_ENCODER_PRESSED;
 			}
 		}
-		Delay1KTCYx( DELAY_AR );
+		pg_delay_msec( DELAY_AR );
 		pg_encoder_direction = PG_ENCODER_DIR;
 //		#if ( PG_ENCODER_INTENSITY == PG_ENABLE )
 //			for ( t = 0 ; t < ITERATION ; t++ ) {
@@ -117,7 +120,7 @@ ENC_CW;ENC_CCW; [GLOBALI]=> pg_encoder_direction; pg_encoder_intensity;
 //			return( res );
 //		#else
 //			pg_encoder_intensity = PG_YES;
-			return( 1 );
+			return( pg_encoder_direction );
 //		#endif
 	}
 

@@ -85,6 +85,8 @@
 	#define	PG_ENABLE						1				/*!	An alternative way to say "logic value 1"	*/
 	#define	PG_DISABLE						0				/*!	An alternative way to say "logic value 0"	*/
 
+	#define	PG_EVENT_OCCURRED				1				/*!	An alternative way to say "logic value 1"	*/
+
 //	#define PG_ENABLE_1_S					2				/*!	To program the TIMER to do just only one count 	*/
 //	#define PG_ENABLE_LOOP					3				/*!	To program the TIMER to do a continuos counting	*/
 

@@ -136,7 +136,15 @@
 				\arg \b pgim_hardware_setup_public.h : where are collected configuration details for the indicator LED. \n
 						In this file there are these configurations  : \n \n
 						&nbsp;&nbsp;&nbsp;&nbsp; \ref dwjp2cnbperrorset \n
-						\n \n \n &nbsp;&nbsp;&nbsp;&nbsp;
+						 \n \n &nbsp;&nbsp;&nbsp;&nbsp;
+
+			\warning	This module requires the \b DEBUG mode it activated. \n
+						\code
+							#define PG_PROJECT_STATE					PG_DEBUG
+						\endcode
+						This setting is in this file : \ref pgim_project_setup_public.h
+
+			\n \n
 
 			\attention	For software reference, please read the documentation about \b pgim_error.h . \n
 						This is \b not a file defined as \b public and therefore it would not be edited. \n
@@ -186,7 +194,7 @@
 					They may be: \n
 					\arg For \ref PG_ERROR_LED		: A LAT bit correctly defined in relation to the MCU used. \n
 					e.g. : L_B0
-					\arg For \ref PG_ERROR_LED		: The TRIS bits used for \ref PG_ERROR_LED . \n
+					\arg For \ref PG_ERROR_LED_TRIS : The TRIS bits used for \ref PG_ERROR_LED . \n
 					e.g. : T_B0
 
 				\subsubsection	errorchensetref		References

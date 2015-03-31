@@ -313,7 +313,7 @@
 		\endhtmlonly
 	
 		If the interrupt handling is enable is possible, through the interrupt signal \ref PG_EVENT_SET_AD, have an interrupt at every end of conversion. \n 
-		If using the \b Automatic \b Interrupts \b Handler pg_event_auto_handler() will call the associated callback: pg_interrupts_event_ad() \n
+		If using the \b Automatic \b Interrupts \b Handler pg_event_auto_handler() will call the user attached callback.\n
 		So once entered the code inside the callback it will be executed at every end of conversion. \n 
 		
 		\b References : \n
