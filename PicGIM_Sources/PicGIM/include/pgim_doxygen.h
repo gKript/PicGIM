@@ -1206,6 +1206,7 @@
 				<ul>
 						<li> \endhtmlonly \ref SWG_delay \htmlonly </li>
 						<li> \endhtmlonly \ref SWG_error \htmlonly </li>
+						<li> \endhtmlonly \ref SWG_float \htmlonly </li>
 				</ul>
 				The <b>HARDWARE::INTERNAL</b> modules refer to the internal devices of the MCU and are as follows:<br>
 				<ul>
@@ -1220,10 +1221,10 @@
  				</ul>
 				The <b>HARDWARE::EXTERNAL</b> modules refer to generic hardware normally used, for example LCD display, and are as follows:<br>
 				<ul>
-						<li> \endhtmlonly \ref HWE_ext_mem \htmlonly </li>
 						<li> \endhtmlonly \ref HWE_buzzer \htmlonly </li>
 						<li> \endhtmlonly \ref HWE_lcd_HD44780 \htmlonly </li>
- 				</ul>
+						<li> \endhtmlonly \ref HWE_sensor \htmlonly </li>
+  				</ul>
 				The <b>HARDWARE::GKRIPT</b> modules refer to hardware specifically created by <b>gKript.org</b>, like graphics controller and encoder management, and are as follows:<br>
 				<ul>
 					<li> \endhtmlonly \ref HWG_encoder \htmlonly </li>
@@ -1238,26 +1239,26 @@
 
  				\code
 					//		S O F T W A R E   G E N E R A L
-					#define PGIM_ERROR							PG_DISABLE
-					#define PGIM_CAL_DELAY						PG_DISABLE
+					#define PGIM_ERROR							PG_ENABLE
+					#define PGIM_CAL_DELAY						PG_ENABLE
+					#define PGIM_FTOA							PG_ENABLE
 
 					//		H A R D W A R E   I N T E R N A L
-					#define PGIM_EVENTS							PG_DISABLE
-					#define PGIM_AD_CONVERTER					PG_DISABLE
-					#define PGIM_SPI							PG_DISABLE
-					#define PGIM_EE								PG_DISABLE
-					#define PGIM_TIMER							PG_DISABLE
-					#define PGIM_PWM							PG_DISABLE
-					#define PGIM_SERIAL							PG_DISABLE
+					#define PGIM_EVENTS							PG_ENABLE
+					#define PGIM_AD_CONVERTER					PG_ENABLE
+					#define PGIM_SPI							PG_ENABLE
+					#define PGIM_EE								PG_ENABLE
+					#define PGIM_TIMER							PG_ENABLE
+					#define PGIM_PWM							PG_ENABLE
+					#define PGIM_SERIAL							PG_ENABLE
 
 					//		H A R D W A R E   E X T E R N A L
-					#define PGIM_LCD_HD44780					PG_DISABLE
-					#define PGIM_BUZZER							PG_DISABLE
-					#define PGIM_SENSOR							PG_DISABLE
+					#define PGIM_LCD_HD44780					PG_ENABLE
+					#define PGIM_BUZZER							PG_ENABLE
+					#define PGIM_SENSOR							PG_ENABLE
 
 					//		H A R D W A R E   G K R I P T
-					#define PGIM_ENCODER						PG_DISABLE
- 
+					#define PGIM_ENCODER						PG_ENABLE
 				\endcode
 				\endhtmlonly
 				\n \n
@@ -1323,10 +1324,7 @@
 
 			-	\subpage	HWG_encoder
 
-
- */
-
-
+*/
 
 
 
