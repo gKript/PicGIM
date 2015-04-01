@@ -51,17 +51,18 @@
 
 //		#define PG_ENCODER_GKPD
 
-		#define	DELAY_AR				1													//!<	Thisi is the delay for the debounce
-//		#define	DELAY_OUT				40
-//		#define	ITERATION				7000
+		#define	DELAY_AR					1													//!<	Thisi is the delay for the debounce
+//		#define	DELAY_OUT					40
+//		#define	ITERATION					7000
 
-		#define	PG_ENCODER_UNK			-1													//!<	This is the state of the encoder without having been moved.
-		#define	PG_ENCODER_CW			0													//!<	This is the state of the encoder after a clockwise rotation.
-		#define	PG_ENCODER_CCW			1													//!<	This is the state of the encoder after a counterclockwise rotation.
-		#define	PG_ENCODER_PRESSED		2													//!<	This is the state of the encoder after a button pressed.
+		#define	PG_ENCODER_UNK				-1													//!<	This is the state of the encoder without having been moved.
+		#define	PG_ENCODER_CW				0													//!<	This is the state of the encoder after a clockwise rotation.
+		#define	PG_ENCODER_CCW				1													//!<	This is the state of the encoder after a counterclockwise rotation.
+		#define	PG_ENCODER_PRESSED			2													//!<	This is the state of the encoder after a button pressed.
+		#define	PG_ENCODER_EVENT_OCCURRED	3
 
-		#define	PG_ENCODER_SW_STATE		( ! PG_ENCODER_SW )									//!<	This macro feels the pressing of encoder button.
-		#define	PG_ENCODER_ANY			( ENCODER_STEP  || ENCODER_DIR || ENCODER_SW )		//!<	This macro feels the event of each encoder signal.
+		#define	PG_ENCODER_SW_STATE			( ! PG_ENCODER_SW )									//!<	This macro feels the pressing of encoder button.
+		#define	PG_ENCODER_ANY				( ENCODER_STEP  || ENCODER_DIR || ENCODER_SW )		//!<	This macro feels the event of each encoder signal.
 
 //		#define	PG_ENCODER_DELAY_1		1
 //		#define	PG_ENCODER_DELAY_2		3
@@ -69,8 +70,8 @@
 //		#define	PG_ENCODER_DELAY_4		7
 
 
-		extern	_pg_int8				pg_encoder_button;									//!<	This variable will contain the status of the encoder button.
-		extern	_pg_int8				pg_encoder_direction;								//!<	This variable will contain the status of the encoder direction.
+		extern	_pg_int8					pg_encoder_button;									//!<	This variable will contain the status of the encoder button.
+		extern	_pg_int8					pg_encoder_direction;								//!<	This variable will contain the status of the encoder direction.
 
 
 		/*!

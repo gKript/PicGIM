@@ -42,52 +42,52 @@
 
 #include "picgim_main.h"
 
-void encoder_pbt( void ) {
-	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "PUSHED" );
-	pg_buzzer_beep( PG_BEEP_MID , PG_BEEP_SHORT );
-	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "      " );
-}
-
-
-void encoder_act( void ) {
-	if ( pg_encoder_get_direction() ) {
-		pg_buzzer_beep( PG_BEEP_LOW , PG_BEEP_SHORT );
-	}
-	else {
-		pg_buzzer_beep( PG_BEEP_HIGH , PG_BEEP_SHORT );
-	}
-}
-
-
-void timer_test( void ) {
-	static _pg_int16 cont = 0 ;
-	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 8 , "%d" , cont++ );
-}
-
+//void encoder_pbt( void ) {
+//	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "PUSHED" );
+//	pg_buzzer_beep( PG_BEEP_MID , PG_BEEP_SHORT );
+//	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "      " );
+//}
+//
+//
+//void encoder_act( void ) {
+//	if ( pg_encoder_get_direction() ) {
+//		pg_buzzer_beep( PG_BEEP_LOW , PG_BEEP_SHORT );
+//	}
+//	else {
+//		pg_buzzer_beep( PG_BEEP_HIGH , PG_BEEP_SHORT );
+//	}
+//}
+//
+//
+//void timer_test( void ) {
+//	static _pg_int16 cont = 0 ;
+//	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 8 , "%d" , cont++ );
+//}
+//
 
 void main( void ) {
 	pg_initialize();
-
-	pg_pin_mode( T_B3 , PG_OUT );
-	pg_pin_mode( T_B2 , PG_OUT );
-	pg_pin_mode( T_B1 , PG_IN );
-	pg_pin_mode( T_B0 , PG_IN );
-
-	pg_timer_set_period( PG_TIMER_0 , 1 , PG_SEC );
-	pg_timer_start( PG_TIMER_0 );
-
-    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
-    pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
-
-	pg_event_attach( PG_EVENT_TMR0 , timer_test );
-    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
-
-	pg_event_attach( PG_EVENT_INT0 , encoder_act );
-    pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
-
-	pg_event_attach( PG_EVENT_INT1 , encoder_pbt );
-    pg_event_set( PG_EVENT_INT1 , PG_ENABLE );
-
+//
+//	pg_pin_mode( T_B3 , PG_OUT );
+//	pg_pin_mode( T_B2 , PG_OUT );
+//	pg_pin_mode( T_B1 , PG_IN );
+//	pg_pin_mode( T_B0 , PG_IN );
+//
+//	pg_timer_set_period( PG_TIMER_0 , 1 , PG_SEC );
+//	pg_timer_start( PG_TIMER_0 );
+//
+//    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
+//    pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
+//
+//	pg_event_attach( PG_EVENT_TMR0 , timer_test );
+//    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
+//
+//	pg_event_attach( PG_EVENT_INT0 , encoder_act );
+//    pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
+//
+//	pg_event_attach( PG_EVENT_INT1 , encoder_pbt );
+//    pg_event_set( PG_EVENT_INT1 , PG_ENABLE );
+//
 	pg_loop;
 }
 

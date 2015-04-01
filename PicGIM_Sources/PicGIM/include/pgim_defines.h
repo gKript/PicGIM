@@ -776,7 +776,7 @@
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 
-			The SPI Converter module has no dependencies. \n
+			The SPI module has no dependencies. \n
 			The SPI module supports the module ERRORS. \n
 			The table and graphs show the data in every possible configuration. \n \n
 
@@ -802,7 +802,88 @@
 
 			\n\n
 
-*/
+		\subsection		planmicrodetailsensor		The Sensor module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b Sensor module has as a dependency the \b AD \b converter module.. \n
+			The \b Sensor module supports the module \b ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailssensortable		Table
+			\endcode
+
+			\image	html	sensor-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailssensorchart		Charts
+			\endcode
+
+			\image	html	sensor_graph.png
+
+			\n
+
+			Chart for the Sensor with ERRORS enabled: \n
+
+			\image	html	sensor_error_graph.png
+
+			\n\n
+
+ 		\subsection		planmicrodetailencoder		The Encoder module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b Encoder module has as a dependency the \b Delay module.. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailsencodertable		Table
+			\endcode
+
+			\image	html	encoder-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailsencoderchart		Charts
+			\endcode
+
+			\image	html	encoder_graph.png
+
+			\n\n
+
+ 		\subsection		planmicrodetailbuzzer		The Buzzer module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b Buzzer module has as a dependency the \b Delay module.. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailsbuzzertable		Table
+			\endcode
+
+			\image	html	buzzer-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailsbuzzerchart		Charts
+			\endcode
+
+			\image	html	buzzer_graph.png
+
+			\n\n
+
+
+
+ */
 
 
 

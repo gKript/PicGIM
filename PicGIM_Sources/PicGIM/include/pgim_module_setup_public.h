@@ -44,26 +44,26 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_FTOA							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
-	#define PGIM_EVENTS							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_AD_CONVERTER					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SPI							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_EE								PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_TIMER							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_PWM							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
-	#define PGIM_LCD_HD44780					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SENSOR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SENSOR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   G K R I P T
-	#define PGIM_ENCODER						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	
 	
@@ -71,7 +71,7 @@
 	//		S O F T W A R E   C O N F I G   |   E R R O R   H A N D L E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
-		#define	PG_ERROR_LED_PRESENT			PG_YES					//!< Must be: PG_YES || PG_NO
+		#define	PG_ERROR_LED_PRESENT			PG_NO					//!< Must be: PG_YES || PG_NO
 		#define	PG_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
 	#endif
 

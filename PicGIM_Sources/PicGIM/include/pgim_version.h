@@ -46,13 +46,13 @@
 	#include "pgim_defines.h"
 	#include "pgim_project_setup_public.h"
 
-	#define PG_VERSION_STATE				"dev"       //!< \b "rel" for release or \b "dev" for devel
+	#define PG_VERSION_STATE				"rel"       //!< \b "rel" for release or \b "dev" for devel
 
 	#define	PG_MAJOR						0			//!<	The major version of PicGIM
-	#define	PG_MINOR						4			//!<	The minor version of PicGIM
-	#define PG_SUBMINOR						9			//!<	The subminor version of PicGIM
+	#define	PG_MINOR						5			//!<	The minor version of PicGIM
+	#define PG_SUBMINOR						0			//!<	The subminor version of PicGIM
 
-	#define PG_VERSION						"0.4-9" 	//!<	The string for the current version of Gim	*/
+	#define PG_VERSION						"0.5-0" 	//!<	The string for the current version of Gim	*/
 	#define	PG_MILESTONE					"0.5"		//!<	The relative Milestone
 
 //		#if ( PG_VERSION_UTILS == PG_ENABLE )

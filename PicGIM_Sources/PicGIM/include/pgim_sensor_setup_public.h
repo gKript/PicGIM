@@ -76,7 +76,7 @@
 			#define PGIM_SENSOR_NTC_HIGH_RESISTOR			10002.0					//!< High side resitor exact value [Ohm]
 			
 			//		A C Q U I S I T I O N  -  P A R A M E T E R S					(Common value for all ntc)
-			#define	PGIM_SENSOR_NTC_USE_ADCREF				PG_YES					//!< Must be: PG_YES || PG_NO
+			#define	PGIM_SENSOR_NTC_USE_ADCREF				PG_NO					//!< Must be: PG_YES || PG_NO
 			#define	PGIM_SENSOR_NTC_AD_AVERAGE				10						//!< Number of averages for measurement
 			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN		5						//!< Guard limit on the minimum acquired row value (shorted sensor detection)
 			#define	PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX		50						//!< Guard limit on the maximum acquired row value (unplugged sensor detection)

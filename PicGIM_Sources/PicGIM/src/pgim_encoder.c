@@ -77,7 +77,7 @@
 		if ( PG_ENCODER_STEP ) {
 			pg_delay_msec( DELAY_AR );
 			while( PG_ENCODER_STEP );
-			return PG_EVENT_OCCURRED;
+			return PG_ENCODER_EVENT_OCCURRED;
 		}
 		return PG_NONE;
 	}

@@ -210,7 +210,7 @@
 				\endhtmlonly
 			
 				\subsubsection	s_sensor_adcref_ch		References
-					\li \e File : pgim_module_setup_public.h \n
+					\li \e File : pgim_sensor_setup_public.h \n
 					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_CH \n
 					\li \e Reference : \ref PG_CH_0 \n
 							
@@ -224,7 +224,7 @@
 					The unit of measure by which it must be expressed is Volt [V].
 				
 				\subsubsection	s_sensor_adcref_volt		References
-					\li \e File : pgim_module_setup_public.h \n
+					\li \e File : pgim_sensor_setup_public.h \n
 					\li \e Reference : \ref PGIM_SENSOR_ADC_REF_VOLT \n
 
 			\subsection	sensor_adcref_sch	Schematic
@@ -235,11 +235,11 @@
 				specified in the initial section of this module documentation. \n \n
 				An example of circuit schematic.
 				\image html	sensor_voltadref.png
-			
+
 			\subsection	sensor_adcref_func	Public function
 				\htmlonly <hr> \endhtmlonly
 				\arg \b pg_sensor_adc_ref() : This function measures the value of the reference voltage of the AD converter. \n \n 
-			
+
 			\subsection	sensor_adcref_code		Example code
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -269,6 +269,10 @@
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
+				\subsubsection	s_sensor_ntc_res		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_RES_REF \n
+
 			\subsection	sensor_ntc_tempref		Temp ref
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -279,6 +283,10 @@
 					It must be measured in Celsius degrees.<br>
 				\endhtmlonly 
 
+				\subsubsection	s_sensor_ntc_tempref		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_TEMP_REF \n
+
 			\subsection	sensor_ntc_beta			BETA constant
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -288,6 +296,10 @@
 					This define specifies the ntc "BETA" constant.<br>
 					The value is specified by the device manufacturer.<br>
 				\endhtmlonly
+
+				\subsubsection	s_sensor_ntc_beta		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_BETA \n
 
 			\subsection	sensor_ntc_abc		A B C coefficients
 				\htmlonly <hr> \endhtmlonly
@@ -300,6 +312,12 @@
 					These define specify the three coefficients that characterize the NTC.<br>
 					The value is specified by the device manufacturer.<br>
 				\endhtmlonly
+
+				\subsubsection	s_sensor_ntc_abc		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_COEF_A \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_COEF_B \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_COEF_C \n
 
 			\subsection	sensor_ntc_method		Calculation method
 				\htmlonly <hr> \endhtmlonly
@@ -315,6 +333,10 @@
 				\arg \b	PG_SENSOR_METHOD_BETA : Calculations performed using the BETA constant.
 				\arg \b PG_SENSOR_METHOD_COEF : Calculations performed using "A", "B", "C" coefficients.
 				
+				\subsubsection	s_sensor_ntc_method		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_CALCULATION_METHOD \n
+
 			\subsection	sensor_ntc_hires	High resistor
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -326,6 +348,10 @@
 					It must be expressed in [ohm].<br>
 				\endhtmlonly
 				
+				\subsubsection	s_sensor_ntc_hires		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_HIGH_RESISTOR \n
+
 			\subsection	sensor_ntc_use_adcref		Reference voltage
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -340,6 +366,10 @@
 					\arg \b PG_YES : The supply voltage value used is measured by means of the \b ADC-Ref sensor.
 					\arg \b PG_NO : The supply voltage value used in the calculations is that declared by the user in pgim_project_setup_public.h.
 				
+				\subsubsection	s_sensor_ntc_use_adcref		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_USE_ADCREF \n
+
 			\subsection	sensor_ntc_avg		Average
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -349,6 +379,10 @@
 					This define specifies the averages number of measurement.<br>
 					The number of measurements indicated is executed and then the average is calculated.<br>
 				\endhtmlonly
+
+				\subsubsection	s_sensor_ntc_avg		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_AD_AVERAGE \n
 
 			\subsection	sensor_ntc_guard_min	Guard raw min
 				\htmlonly <hr> \endhtmlonly
@@ -361,6 +395,10 @@
 					Set a value not too high, so do not compromise the measurement.<br>
 				\endhtmlonly
 		
+				\subsubsection	s_sensor_ntc_guard_min		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_AD_RAW_GUARD_MIN \n
+
 			\subsection	sensor_ntc_guard_max	Guard raw max
 				\htmlonly <hr> \endhtmlonly
 				\code
@@ -372,6 +410,10 @@
 					Set a value not too low, so do not compromise the measurement.<br>
 				\endhtmlonly
 				
+				\subsubsection	s_sensor_ntc_guard_max		References
+					\li \e File : pgim_sensor_setup_public.h \n
+					\li \e Reference : \ref PGIM_SENSOR_NTC_AD_RAW_GUARD_MAX \n
+
 			\subsection	sensor_ntc_sch		Schematic	
 				\htmlonly <hr> \endhtmlonly
 				Typology circuit to be used: \n
