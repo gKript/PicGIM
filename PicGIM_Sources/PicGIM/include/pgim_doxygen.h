@@ -308,79 +308,262 @@
 
 			\section		getstartmp8fullcontrol	 	Easy PicGIM configuration
 
-			\htmlonly <hr> \endhtmlonly
-			\endcode
+				\htmlonly <hr> \endhtmlonly
+				\endcode
 
-			\htmlonly
 				Every public file can be edited to adjust easily PicGIM to your project. \n
 				To easily configure PicGIM for the project it is necessary to know which files are editable by user. \n
 				So here is a list of the public files : \n \n
-				<table width="80%" border="0" >
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_event_setup_public.h \htmlonly </td>
-						<td>With this file you can enable the global management of interruptions.<br>PicGIM automatically will include all the setting for interrupt vector.<br>
-						PicGIM implements management of interrupts without priority levels for maximum compatibility between the various MCU supported.<br>
-						With this file you can also enable or disable each event handled by the Microchip<small>&#8482;</small> MCU.</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_hardware_setup_public.h \htmlonly </td>
-						<td>Through this file you set the hardware pinout for your project.<BR>Each module, when enabled, will follow the settings declared in this file.</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_module_setup_public.h \htmlonly </td>
-						<td>This public file makes it easy to to include in your project all the code needed for different hardware supported by PicGIM.<br>For more details see: \endhtmlonly \ref WPC_module \htmlonly </td>
-					</tr>
-					<tr align="left" >
-						<td width="20%"> \endhtmlonly pgim_project_setup_public.h \htmlonly </td>
-						<td>With this file you can set the basic parameters of the project and the parameters of PicGIM behavior as verbosity.</td>
-					</tr>
-					<tr align="left" >
-						<td width="20%"> \endhtmlonly pgim_pwm_setup_public.h \htmlonly </td>
-						<td>With this file it is possible to specify in detail the operating mode of the PWM channels.</td>
-					</tr>
-					<tr align="left" >
-						<td width="20%"> \endhtmlonly pgim_serial_setup_public.h \htmlonly </td>
-						<td>With this file it is possible to specify in detail the operating mode of the Serial.</td>
-					</tr>
-					<tr align="left" >
-						<td width="20%"> \endhtmlonly pgim_timer_setup_public.h \htmlonly </td>
-						<td>With this file it is possible to specify in detail the operating mode of the Timers.</td>
-					</tr>
-					<tr align="left" valign="center" >
-						<td width="20%"> \endhtmlonly pgim_18f2320_public.h \htmlonly </td>
-						<td>The public file for the 18F2320 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f2550_public.h \htmlonly </td>
-						<td>The public file for the 18F2550 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f2553_public.h \htmlonly</td>
-						<td>The public file for the 18F2553 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4520_public.h \htmlonly</td>
-						<td>The public file for the 18F4520 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4550_public.h \htmlonly</td>
-						<td>The public file for the 18F4550 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4553_public.h \htmlonly</td>
-						<td>The public file for the 18F4553 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f4620_public.h \htmlonly</td>
-						<td>The public file for the 18F4620 MCU</td>
-					</tr>
-					<tr align="left">
-						<td width="20%"> \endhtmlonly pgim_18f97j60_public.h \htmlonly</td>
-						<td>The public file for the 18F97j60 MCU</td>
-					</tr>
-				</table>
-				<br>
-			\endhtmlonly
+
+				\subsection	getstartmp8fullcontrolcore	The Core public files
+
+		 			\htmlonly
+
+ 						<table class="cl_table" width="80%" border="0" >
+							<THEAD>
+								<tr>
+									<th width="20%" align="left">File</th>
+									<th width="30%" align="center">Module</th>
+									<th align="left">Description</th>
+								</tr>
+							</THEAD>
+							<TBODY>
+								<tr>
+									<td> \endhtmlonly pgim_hardware_setup_public.h \htmlonly </td>
+									<td align="center">&nbsp;</td>
+									<td>Through this file you set the hardware pinout for your project.<BR>Each module, when enabled, will follow the settings declared in this file.</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_module_setup_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref WPC_module \htmlonly </td>
+									<td>This public file makes it easy to to include in your project all the code needed for different hardware supported by PicGIM. \htmlonly </td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_project_setup_public.h \htmlonly </td>
+									<td align="center">&nbsp;</td>
+									<td>With this file you can set the basic parameters of the project and the parameters of PicGIM behavior as verbosity.</td>
+								</tr>
+ 							<TBODY>
+						</table>
+						<br>
+					\endhtmlonly
+
+				\subsection	getstartmp8fullcontrolmod	The module public files
+
+		 			\htmlonly
+
+ 						<table class="cl_table" width="80%" border="0" >
+							<THEAD>
+								<tr>
+									<th width="20%" align="left">File</th>
+									<th width="30%" align="center">Module</th>
+									<th align="left">Description</th>
+								</tr>
+							</THEAD>
+							<TBODY>
+								<tr>
+									<td> \endhtmlonly pgim_event_setup_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref HWI_interrupt \htmlonly </td>
+									<td>With this file you can enable the global management of interruptions.<br>PicGIM automatically will include all the setting for interrupt vector.<br>
+									PicGIM implements management of interrupts without priority levels for maximum compatibility between the various MCU supported.<br>
+									With this file you can also enable or disable each event handled by the Microchip<small>&#8482;</small> MCU.</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_pwm_setup_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref HWI_pwm \htmlonly </td>
+									<td>With this file it is possible to specify in detail the operating mode of the PWM channels.</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_serial_setup_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref HWI_serial \htmlonly </td>
+									<td>With this file it is possible to specify in detail the operating mode of the Serial.</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_timer_setup_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref HWI_timer \htmlonly </td>
+									<td>With this file it is possible to specify in detail the operating mode of the Timers.</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_sensor_setup_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref HWE_sensor \htmlonly </td>
+									<td>The SENSOR module is able to handle a multitude of sensors or similar equipment. \n It can be expanded to be able to control new devices. </td>
+								</tr>
+ 							<TBODY>
+						</table>
+						<br>
+					\endhtmlonly
+
+				\subsection	getstartmp8fullcontrolmcu	The microcontroller public files
+
+		 			\htmlonly
+
+ 						<table class="cl_table" width="80%" border="0" >
+							<THEAD>
+								<tr>
+									<th width="20%" align="left">File</th>
+									<th width="30%" align="center">Module</th>
+									<th align="left">Description</th>
+								</tr>
+							</THEAD>
+							<TBODY>
+								<tr>
+									<td> \endhtmlonly pgim_18f2320_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F2320 \htmlonly </td>
+									<td>The public file for the 18F2320 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f2550_public.h \htmlonly </td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F2550 \htmlonly </td>
+									<td>The public file for the 18F2550 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f2553_public.h \htmlonly</td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F2553 \htmlonly </td>
+									<td>The public file for the 18F2553 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f4520_public.h \htmlonly</td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F4520 \htmlonly </td>
+									<td>The public file for the 18F4520 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f4550_public.h \htmlonly</td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F4550 \htmlonly </td>
+									<td>The public file for the 18F4550 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f4553_public.h \htmlonly</td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F4553 \htmlonly </td>
+									<td>The public file for the 18F4553 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f4620_public.h \htmlonly</td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F4620 \htmlonly </td>
+									<td>The public file for the 18F4620 MCU</td>
+								</tr>
+								<tr>
+									<td> \endhtmlonly pgim_18f97j60_public.h \htmlonly</td>
+									<td align="center"> \endhtmlonly \ref MCU_PIC18F97J60 \htmlonly </td>
+									<td>The public file for the 18F97j60 MCU</td>
+								</tr>
+ 							<TBODY>
+						</table>
+						<br>
+					\endhtmlonly
+
+			\section	getstartmp8projectpublic	The Project public files
+
+ 				\htmlonly <hr> \endhtmlonly
+				\endcode
+
+				This public file will describe our project in its main parts. \n
+				In its generality and also in the most relevant technical aspects such as the supply voltage or the use of the internal oscillator. \n
+
+				\subsection	getstartmp8projectpublicdetail	The project details
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					The name of your Project
+					\code
+ 						#define PG_PROJECT_NAME						None
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					The name of your Organization
+					\code
+ 						#define PG_PROJECT_ORGANIZATION				None
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					Your name or, if you like, your nickname
+					\code
+						#define PG_PROJECT_AUTHOR					None
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					The version of your project
+					\code
+						#define PG_PROJECT_VERSION					0.0
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					Must be: PG_DEBUG  ||  PG_RELEASE
+					\code
+						#define PG_PROJECT_STATE					PG_DEBUG
+					\endcode
+					\note	When the project is in DEBUG PicGIM carries out checks on the parameters and set errors. \n You can enable the ERROR Manager module only when PG_PROJECT_STATE is set as PG_DEBUG.
+
+ 					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					Date of the project
+					\code
+						#define PG_PROJECT_DATE						01/01/2015
+					\endcode
+
+				\subsection	getstartmp8projectpublichardware	The project hardware
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. 
+					\code
+ 						#define PG_CLOCK							40.000
+					\endcode
+					\note			The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.
+ *					\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
+
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [V]. Accuracy: X.XX
+					\code
+ 						#define PG_USER_SUPPLY_VOLT					5.00
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					Must be: PG_YES  ||  PG_NO
+					\code
+						#define PG_USER_SUPPLY_BATTERY				PG_NO
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					Must be: PG_ENABLE  ||  PG_DISABLE
+					\code
+						#define PG_USE_INTERNAL_OSC					PG_DISABLE
+					\endcode
+
+
+				\subsection	getstartmp8projectpublicbeha	The project behaviour
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					Set the verbosity level of PicGIM output compiling. \n
+					Must be: PG_ENABLE  ||  PG_DISABLE
+					\code
+ 						#define PG_VERBOSE							PG_ENABLE
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					If enabled PicGIM provide suggestions to the developer while compiling. \n
+ 					Must be: PG_ENABLE  ||  PG_DISABLE
+					\code
+ 						#define PG_SUGGESTION						PG_ENABLE
+					\endcode
+					\htmlonly <hr> \endhtmlonly
+					\endhtmlonly
+
+					If enabled PicGIM provide while compiling the details of the project such as project name, developer and version.
+					Must be: PG_ENABLE  ||  PG_DISABLE
+					\code
+						#define PG_PROJECT_INFO_SHOW				PG_DISABLE
+					\endcode
 
 
 

@@ -43,17 +43,17 @@
 	#define	_PGIM_PROJECT_SETUP_PUBLIC_H_
 
 	//	P R O J E C T   D E T A I L S
-	#define PG_PROJECT_NAME												//!< The name of your Project
-	#define PG_PROJECT_ORGANIZATION										//!< The name of your Organization
-	#define PG_PROJECT_AUTHOR											//!< Your name or, if you like, your nickname
-	#define PG_PROJECT_VERSION											//!< The version of your project
+	#define PG_PROJECT_NAME						None					//!< The name of your Project
+	#define PG_PROJECT_ORGANIZATION				None					//!< The name of your Organization
+	#define PG_PROJECT_AUTHOR					None					//!< Your name or, if you like, your nickname
+	#define PG_PROJECT_VERSION					0.0						//!< The version of your project
 	#define PG_PROJECT_STATE					PG_DEBUG				//!< Must be: PG_DEBUG  ||  PG_RELEASE
-	#define PG_PROJECT_DATE												//!< Date of the project
+	#define PG_PROJECT_DATE						01/01/2015				//!< Date of the project
 	
 	//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M
 	#define PG_CLOCK							40.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
 	#define PG_USER_SUPPLY_VOLT					5.00					//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [V]. Accuracy: X.XX
-	#define PG_USER_SUPPLY_BATTERY				PG_YES					//!< Must be: PG_YES  ||  PG_NO
+	#define PG_USER_SUPPLY_BATTERY				PG_NO					//!< Must be: PG_YES  ||  PG_NO
 	#define PG_USE_INTERNAL_OSC					PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
 	
 	//	P I C G I M   B E H A V I O U R
