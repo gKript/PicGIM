@@ -44,8 +44,8 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
@@ -55,11 +55,11 @@
 	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
 	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_BUZZER							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_BUZZER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   G K R I P T

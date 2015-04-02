@@ -857,30 +857,35 @@
 
 			\n\n
 
- 		\subsection		planmicrodetailbuzzer		The Buzzer module
+ 		\subsection		planmicrodetailserial		The Serial module
 
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 
-			The \b Buzzer module has as a dependency the \b Delay module.. \n
+			The \b Serial module has no dependency. \n
 			The table and graphs show the data in every possible configuration. \n \n
 
-			\subsubsection	planmicrodetailsbuzzertable		Table
+			\subsubsection	planmicrodetailsserialtable		Table
 			\endcode
 
-			\image	html	buzzer-table.png
+			\image	html	serial-table.png
 
 			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
 
 			\n
 
-			\subsubsection	planmicrodetailsbuzzerchart		Charts
+			\subsubsection	planmicrodetailsserialchart		Charts
 			\endcode
 
-			\image	html	buzzer_graph.png
+			\image	html	serial_graph.png
+
+			\n
+
+			Chart for the Serial with ERRORS enabled: \n
+
+			\image	html	serial_error_graph.png
 
 			\n\n
-
 
 
  */
