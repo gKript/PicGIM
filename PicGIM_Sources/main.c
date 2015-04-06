@@ -57,23 +57,24 @@
 //		pg_buzzer_beep( PG_BEEP_HIGH , PG_BEEP_SHORT );
 //	}
 //}
-//
-//
+
+
 //void timer_test( void ) {
 //	static _pg_int16 cont = 0 ;
-//	pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 8 , "%d" , cont++ );
+//	PORTC = cont++;
 //}
-//
+
 
 void main( void ) {
 	pg_initialize();
+//	TRISC = PG_8BIT_OUT;
 //
 //	pg_pin_mode( T_B3 , PG_OUT );
 //	pg_pin_mode( T_B2 , PG_OUT );
 //	pg_pin_mode( T_B1 , PG_IN );
 //	pg_pin_mode( T_B0 , PG_IN );
 //
-//	pg_timer_set_period( PG_TIMER_0 , 1 , PG_SEC );
+//	pg_timer_set_period( PG_TIMER_0 , 500 , PG_MSEC );
 //	pg_timer_start( PG_TIMER_0 );
 //
 //    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
@@ -81,7 +82,9 @@ void main( void ) {
 //
 //	pg_event_attach( PG_EVENT_TMR0 , timer_test );
 //    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
-//
+//	
+
+
 //	pg_event_attach( PG_EVENT_INT0 , encoder_act );
 //    pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
 //

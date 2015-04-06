@@ -99,9 +99,6 @@
 		#define	PG_MAX_AVERAGE					250				//!<	Maximum number of readings in a sample.
 
 
-//		extern _pg_int16	pg_adc_user_scale_min;
-//		extern _pg_int16	pg_adc_user_scale_max;
-
 		/*!
 		 *	\brief			This is the initialization function of the ADC handler module.
 		 *	\warning		Internal use only.

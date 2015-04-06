@@ -45,8 +45,8 @@
 //	#if ( PGIM_PWM == PG_ENABLE )
 	
 		//		C H A N N E L S   E N A B L I N G
-		#define PGIM_PWM_1							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PGIM_PWM_2							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_PWM_1							PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_PWM_2							PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 
 		
 		//		E N H A N C E D   M O D E
@@ -55,7 +55,7 @@
 
 		
 		//		E N H A N C E D   M O D E   C O N F I G U R A T I O N
-		#define PG_PWM_1_OUT_CONF					HALF_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV
+		#define PG_PWM_1_OUT_CONF					SINGLE_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV
 		#define PG_PWM_1_OUT_MODE					PWM_MODE_1		//!< Must be: PWM_MODE_1 || PWM_MODE_2 || PWM_MODE_3 || PWM_MODE_4
 	
 		#define PG_PWM_2_OUT_CONF					SINGLE_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV

@@ -46,8 +46,8 @@
 	//		H A R D W A R E   C O N F I G   |   L E D - E R R O R
 	//------------------------------------------------------------------------------
 	#if ( ( PGIM_ERROR == PG_ENABLE ) && ( PG_ERROR_LED_PRESENT == PG_YES ) )
-		#define	PG_ERROR_LED						L_B1
-		#define	PG_ERROR_LED_TRIS					T_B1
+		#define	PG_ERROR_LED						L_B0
+		#define	PG_ERROR_LED_TRIS					T_B0
 	#endif
 
 	//------------------------------------------------------------------------------
@@ -120,51 +120,5 @@
 	#endif
 
 #endif /* _PGIM_HARDWARE_SETUP_PUBLIC_H_ */
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-//	New in the next Milestone
-//	//------------------------------------------------------------------------------
-//	//		H A R D W A R E   C O N F I G   |   L C D - P C D 8 5 4 4
-//	//------------------------------------------------------------------------------
-//	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
-//		#define	PG_LCD_PCD8544_VIDEO_MEMORY			PG_NO			// PG_YES	PG_NO
-//
-//		#define PG_LCD_PCD8544_PWR					L_C0
-//		#define PG_LCD_PCD8544_RST					L_B1			// !Reset
-//		#define PG_LCD_PCD8544_CE 					L_B2			// !ChipEnable
-//		#define PG_LCD_PCD8544_DC					L_B3			// Data / Command ( 1 = Data; 0 = Command )
-//		#define	PG_LCD_PCD8544_BACKLIGHT			L_C1
-//
-//		#define PG_LCD_PCD8544_PWR_TRIS				T_C0
-//		#define PG_LCD_PCD8544_RST_TRIS				T_B1
-//		#define PG_LCD_PCD8544_CE_TRIS				T_B2
-//		#define PG_LCD_PCD8544_DC_TRIS				T_B3
-//		#define	PG_LCD_PCD8544_BACKLIGHT_TRIS		T_C1
-//	#endif
-//
-//
-//	//------------------------------------------------------------------------------
-//	//		H A R D W A R E   C O N F I G   |   L C D - 9 3 4 0
-//	//------------------------------------------------------------------------------
-//	#if ( PGIM_LCD_9340 == PG_ENABLE )
-//		#define	PG_LCD_9340_VIDEO_MEMORY			PG_DISABLE		// PG_ENABLE	PG_DISABLE
-//
-//		#define PG_LCD_9340_PWR						L_C4
-//		#define PG_LCD_9340_CS						L_C2			// !ChipSelect
-//		#define PG_LCD_9340_RST						L_C1			// !Reset
-//		#define PG_LCD_9340_RS						L_C0			// RegisterSelect ( 1 = Data; 0 = Command )
-//		#define	PG_LCD_9340_BACKLIGHT				L_B2
-//
-//		#define PG_LCD_9340_PWR_TRIS				T_C4
-//		#define PG_LCD_9340_CS_TRIS					T_C2
-//		#define PG_LCD_9340_RST_TRIS				T_C1
-//		#define PG_LCD_9340_RS_TRIS					T_C0
-//		#define	PG_LCD_9340_BACKLIGHT_TRIS			T_B2
-//	#endif
 
 

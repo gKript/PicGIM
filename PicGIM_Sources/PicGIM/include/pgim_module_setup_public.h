@@ -44,8 +44,8 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
@@ -53,9 +53,9 @@
 	#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_TIMER							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
 	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -71,7 +71,7 @@
 	//		S O F T W A R E   C O N F I G   |   E R R O R   H A N D L E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
-		#define	PG_ERROR_LED_PRESENT			PG_NO					//!< Must be: PG_YES || PG_NO
+		#define	PG_ERROR_LED_PRESENT			PG_YES					//!< Must be: PG_YES || PG_NO
 		#define	PG_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
 	#endif
 
@@ -157,53 +157,9 @@
 	//		S O F T W A R E   C O N F I G   |   E N C O D E R
 	//------------------------------------------------------------------------------
 	//Nothing to configure here.
-	/*	#if ( PGIM_ENCODER == PG_ENABLE )
-			#define	PG_ENCODER_
-			#define	PG_ENCODER_
-		#endif
-	*/
+
 #endif 
 
-
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-//	New in the next Milestone
-//
-//	#define	PGIM_FONTS							PG_ENABLE				// PG_ENABLE   PG_DISABLE	#define PGIM_LCD_PCD8544					PG_ENABLE				// PG_ENABLE   PG_DISABLE
-//	#define PGIM_LCD_9340						PG_ENABLE				// PG_ENABLE   PG_DISABLE
-//
-//	//------------------------------------------------------------------------------
-//	//		S O F T W A R E   C O N F I G   |   L C D - P C D 8 5 4 4
-//	//------------------------------------------------------------------------------
-//	//Please, configure in "pgim_hardware_setup_public.h" file too.
-//	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
-//		#define PG_LCD_PCD8544_SPI_PORT			PG_SPI_0				//!<	Must be : PG_SPI_0 || PG_SPI_1 || PG_SPI_2
-//		#define PG_LCD_PCD8544_SPI_SYNC_MODE	PG_SPI_MASTER_FOSC_64	//!<	Must be : PG_SPI_MASTER_FOSC_4 || PG_SPI_MASTER_FOSC_16 || PG_SPI_MASTER_FOSC_64 || PG_SPI_MASTER_FOSC_TMR2
-//		#define PG_LCD_PCD8544_SPI_BUS_MODE		MODE_00					//!<	Must be : MODE_00 || MODE_01 || MODE_10 || MODE_11
-//		#define PG_LCD_PCD8544_SPI_SMP_PHASE	SMPEND            		//!<	Must be : SMPEND || SMPEND
-//	#endif
-//
-//	//------------------------------------------------------------------------------
-//	//		S O F T W A R E   C O N F I G   |   L C D - 9 3 4 0
-//	//------------------------------------------------------------------------------
-//	//Please, configure in "pgim_hardware_setup_public.h" file too.
-//	#if ( PGIM_LCD_9340 == PG_ENABLE )
-//		//#define PG_LCD_9340_
-//		//#define PG_LCD_9340_
-//	#endif
-//	
-//	//------------------------------------------------------------------------------
-//	//		S O F T W A R E   C O N F I G   |   E X T E R N A L   M E M O R Y
-//	//------------------------------------------------------------------------------
-//	//Please, configure in "pgim_hardware_setup_public.h" file too.
-//	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
-//			#define	PG_EXTERNAL_MEMORY_
-//			#define	PG_EXTERNAL_MEMORY_
-//	#endif
 
 
 

@@ -863,6 +863,7 @@
 			\endcode
 
 			The \b Serial module has no dependency. \n
+			The Serial module supports the module ERRORS. \n
 			The table and graphs show the data in every possible configuration. \n \n
 
 			\subsubsection	planmicrodetailsserialtable		Table
@@ -884,6 +885,37 @@
 			Chart for the Serial with ERRORS enabled: \n
 
 			\image	html	serial_error_graph.png
+
+			\n\n
+
+ 		\subsection		planmicrodetailpwm		The PWM module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b PWM module has no dependency. \n
+			The PWM module supports the module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailspwmtable		Table
+			\endcode
+
+			\image	html	pwm-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailspwmchart		Charts
+			\endcode
+
+			\image	html	pwm_graph.png
+
+			\n
+
+			Chart for the PWM with ERRORS enabled: \n
+
+			\image	html	pwm_error_graph.png
 
 			\n\n
 

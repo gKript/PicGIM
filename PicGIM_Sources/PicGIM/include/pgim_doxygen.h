@@ -1336,6 +1336,35 @@
 
 		\htmlonly <br><br> \endhtmlonly
 
+ 	\section	langpinmpc	The Mathematical,Phisical and Chemistry constants
+		\htmlonly <hr> \endhtmlonly
+		PicGIM also contains defines mathematical, physical and chemical properties useful if necessary for possible formulas in the user application.
+
+		\htmlonly <br><br> \endhtmlonly
+		\code
+			//------------------------------------------------------------------------------
+			//		M A T H E M A T I C A L   C O N S T A N T S
+			//------------------------------------------------------------------------------
+			#define	PG_CONSTANTS_PI							3.1415926535897
+			#define	PG_CONSTANTS_EULER						2.7182818284590
+
+			//------------------------------------------------------------------------------
+			//		P H Y S I C A L   C O N S T A N T S
+			//------------------------------------------------------------------------------
+			#define	PG_CONSTANTS_LIGHT_VELOCITY				299792458
+			#define	PG_CONSTANTS_BOLTZMANN					( 1.3806488E-23 )
+			#define	PG_CONSTANTS_PLANK_JS					( 6.62606957E-34 )
+			#define	PG_CONSTANTS_PLANK_EV					( 4.13562852E-15 )
+			#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565E-19 )
+			#define	PG_CONSTANTS_GRAVITY_ACCELERATION		9.80665
+			#define	PG_CONSTANTS_KELVIN_CONST				-273.15
+
+			//------------------------------------------------------------------------------
+			//		C H E M I S T R Y   C O N S T A N T S
+			//------------------------------------------------------------------------------
+			#define	PG_CONSTANTS_AVOGADRO					( 6.02214129E+23 )
+ 		\endcode
+
 
 */
 

@@ -30,10 +30,10 @@
 
 /*!		\file			pgim_caldelay.h
 		\version		0.5-0
-		\date			2002 - 2014
+		\date			2002 - 2015
 		\brief			Delay functions for PicGIM
-		\details			To easily delays with acceptable error in seconds, milliseconds and microseconds. It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays.
-		\note		It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays in the \ref PG_CLOCK define : \ref hwdelay
+		\details		To easily delays with acceptable error in seconds, milliseconds and microseconds. It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays.
+		\note			It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays in the \ref PG_CLOCK define : \ref hwdelay
 						These delay functions are not perfectly accurate. \n Have been written to give to the programmer a delay in the order of time needed with any system clock. \n
 						Here is a table of accuracy:
 						\htmlonly
@@ -52,8 +52,7 @@
 						\endhtmlonly
 		\author			Danilo Zannoni (AsYntote)
 		\author			Corrado Tumiati (SkyMatrix)
-		\copyright		Released under the terms of the GNU General Public License v2<BR>
-						[ http://gkript.org/gk_gpl_v2.php ]
+		\copyright		Released under the terms of the GNU General Public License v3
 		\attention		This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
