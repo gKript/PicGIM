@@ -581,7 +581,7 @@
 		\attention		In this table are ONLY microcontrollers currently supported by PicGIM. \n The microcontrollers supported are constantly increasing, and in case of a specific request, please write to info@gkript.org.
 
 		<p>
-			As you can see the 18F2320 is colored orange which means critical. \n
+			As you can see the 18F2320 is colored orange which means a critical situation. \n
 			This does NOT mean that there are no applications that PicGIM can do on this MCU. \n
 			Simply will need a good project planning for configuring PicGIM always keeping in mind the amount of Program Memory required for main algorithm. \n
  			In the next section are shown, in detail, the amount of Program Memory and Static RAM necessary for the inclusion of each module.
@@ -600,7 +600,7 @@
 		The calculations were performed in conditions of "FROZEN CODE". \n
 		The calculation methods were as follows : \n \n
 
-		\warning	If is used MplabX you must keep in mind that is not supported directly the Extended Instruction Set modality in compilation. \n It will be necessary to set this mode manually by following the guide HERE. 
+		\warning	If is used MplabX you must keep in mind that is not supported directly the Extended Instruction Set modality in compilation. \n It will be necessary to set this mode manually by following the guide HERE : \ref getstartmpxhowtoxinst
 
 		\n
  
@@ -919,8 +919,94 @@
 
 			\n\n
 
+ 		\subsection		planmicrodetailtimer		The Timer module
 
- */
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b Timer module has no dependency. \n
+			The Timer module supports the module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailstimertable		Table
+			\endcode
+
+			\image	html	timer-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailstimerchart		Charts
+			\endcode
+
+			\image	html	timer_graph.png
+
+			\n
+
+			Chart for the Timer with ERRORS enabled: \n
+
+			\image	html	timer_error_graph.png
+
+			\n\n
+
+ 		\subsection		planmicrodetailee		The Internal EEprom module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b Internal EEprom module has no dependency. \n
+			The Internal EEprom module supports the module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailseetable		Table
+			\endcode
+
+			\image	html	ee-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailseechart		Charts
+			\endcode
+
+			\image	html	ee_graph.png
+
+			\n\n
+
+ 		\subsection		planmicrodetailftoa		The FTOA module
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+
+			The \b FTOA module has no dependency. \n
+			The FTOA module supports the module ERRORS. \n
+			The table and graphs show the data in every possible configuration. \n \n
+
+			\subsubsection	planmicrodetailsftoatable		Table
+			\endcode
+
+			\image	html	ftoa-table.png
+
+			\note	The resources needed by each module were calculated compiling PicGIM with only this module enabled, including any dependencies, and subtracting the amount of Program memory and Static RAM of the PicGIM structure.
+
+			\n
+
+			\subsubsection	planmicrodetailsftoachart		Charts
+			\endcode
+
+			\image	html	ftoa_graph.png
+
+			\n
+
+			Chart for the FTOA with ERRORS enabled: \n
+
+			\image	html	ftoa_error_graph.png
+
+			\n\n
+
+  */
 
 
 

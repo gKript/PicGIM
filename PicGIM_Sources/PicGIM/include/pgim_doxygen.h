@@ -1340,31 +1340,316 @@
 		\htmlonly <hr> \endhtmlonly
 		PicGIM also contains defines mathematical, physical and chemical properties useful if necessary for possible formulas in the user application.
 
+		\htmlonly 		
+			<table class="cl_table" width="80%" border="0" >
+				<THEAD>
+					<tr>
+						<th width="20%" align="center">Type</th>
+						<th width="30%" align="left">Name</th>
+						<th align="left">Description</th>
+					</tr>
+				</THEAD>
+				<TBODY>
+					<tr>
+						<td align="center">Mathematical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_PI \htmlonly </td>
+						<td>Pi-Greek</td>
+					</tr>
+					<tr>
+						<td align="center">Mathematical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_EULER \htmlonly </td>
+						<td>Euler's number. Base of the natural logarithm</td>
+					</tr>
+					<tr>
+						<td align="center"><hr></td>
+						<td><hr></td>
+						<td><hr></td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_LIGHT_VELOCITY \htmlonly </td>
+						<td>Speed of light. Unit of measure: [m/s]</td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_BOLTZMANN \htmlonly </td>
+						<td>Boltzmann's constant. Unit of measure: [J/K]</td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_PLANK_JS \htmlonly </td>
+						<td>Planck's constant. Unit of measure: [J*s]</td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_PLANK_EV \htmlonly </td>
+						<td>Planck's constant. Unit of measure: [eV*s]</td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_ELEMENTARY_CHARGE \htmlonly </td>
+						<td>Elementary charge. Unit of measure: [C]</td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_GRAVITY_ACCELERATION \htmlonly </td>
+						<td>Gravitational acceleration. Unit of measure: [m/(s^2)]</td>
+					</tr>
+					<tr>
+						<td align="center">Phisical</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_KELVIN_CONST \htmlonly </td>
+						<td>Absolute value of the absolute zero temperature (0°K) in degrees Celsius</td>
+					</tr>
+					<tr>
+						<td align="center"><hr></td>
+						<td><hr></td>
+						<td><hr></td>
+					</tr>
+					<tr>
+						<td align="center">Chemistry</td>
+						<td> \endhtmlonly \ref PG_CONSTANTS_AVOGADRO \htmlonly </td>
+						<td>Avogadro's number</td>
+					</tr>
+				<TBODY>
+			</table>
+			<br>
+		\endhtmlonly
+		
+
 		\htmlonly <br><br> \endhtmlonly
-		\code
-			//------------------------------------------------------------------------------
-			//		M A T H E M A T I C A L   C O N S T A N T S
-			//------------------------------------------------------------------------------
-			#define	PG_CONSTANTS_PI							3.1415926535897
-			#define	PG_CONSTANTS_EULER						2.7182818284590
-
-			//------------------------------------------------------------------------------
-			//		P H Y S I C A L   C O N S T A N T S
-			//------------------------------------------------------------------------------
-			#define	PG_CONSTANTS_LIGHT_VELOCITY				299792458
-			#define	PG_CONSTANTS_BOLTZMANN					( 1.3806488E-23 )
-			#define	PG_CONSTANTS_PLANK_JS					( 6.62606957E-34 )
-			#define	PG_CONSTANTS_PLANK_EV					( 4.13562852E-15 )
-			#define	PG_CONSTANTS_ELEMENTARY_CHARGE			( 1.602176565E-19 )
-			#define	PG_CONSTANTS_GRAVITY_ACCELERATION		9.80665
-			#define	PG_CONSTANTS_KELVIN_CONST				-273.15
-
-			//------------------------------------------------------------------------------
-			//		C H E M I S T R Y   C O N S T A N T S
-			//------------------------------------------------------------------------------
-			#define	PG_CONSTANTS_AVOGADRO					( 6.02214129E+23 )
- 		\endcode
-
+		
+	\section	langpinmpcdefine		The Defines of PicGIM.
+		\htmlonly <hr> \endhtmlonly
+		PicGIM provides the programmer some defines that help to maintain the context of the code.
+		There are three categories of defines: Loop, Tris, Logical and Time/Frequency.
+		Here the reference table:
+		
+		\htmlonly 		
+			<table class="cl_table" width="80%" border="0" >
+				<THEAD>
+					<tr>
+						<th width="20%" align="center">Type</th>
+						<th width="30%" align="left">Name</th>
+						<th align="left">Description</th>
+					</tr>
+				</THEAD>
+				<TBODY>
+					<tr>
+						<td align="center">Loop</td>
+						<td> \endhtmlonly \ref PG_LOOP( a ) \htmlonly </td>
+						<td>A conditional Loop</td>
+					</tr>
+					<tr>
+						<td align="center">Loop</td>
+						<td> \endhtmlonly \ref PG_INFINITE_LOOP \htmlonly </td>
+						<td>A forever loop</td>
+					</tr>
+					<tr>
+						<td align="center">Loop</td>
+						<td> \endhtmlonly \ref PG_HALT \htmlonly </td>
+						<td>A forever loop</td>
+					</tr>
+					<tr>
+						<td align="center">Loop</td>
+						<td> \endhtmlonly \ref pg_loop \htmlonly </td>
+						<td>A forever loop</td>
+					</tr>
+					<tr>
+						<td align="center">Loop</td>
+						<td> \endhtmlonly \ref PG_FOREVER \htmlonly </td>
+						<td>An argument for \endhtmlonly \ref PG_LOOP( a ) \htmlonly </td>
+					</tr>
+					<tr>
+						<td align="center"><hr></td>
+						<td><hr></td>
+						<td><hr></td>
+					</tr>
+					<tr>
+						<td align="center">Tris</td>
+						<td> \endhtmlonly \ref PG_IN \htmlonly </td>
+						<td>To program a PIN in INPUT</td>
+					</tr>
+					<tr>
+						<td align="center">Tris</td>
+						<td> \endhtmlonly \ref PG_OUT \htmlonly </td>
+						<td>To program a PIN in OUTPUT</td>
+					</tr>
+					<tr>
+						<td align="center">Tris</td>
+						<td> \endhtmlonly \ref PG_8BIT_IN \htmlonly </td>
+						<td>To program an entire PORT in INPUT</td>
+					</tr>
+					<tr>
+						<td align="center">Tris</td>
+						<td> \endhtmlonly \ref PG_8BIT_OUT \htmlonly </td>
+						<td>To program an entire PORT in OUTPUT	</td>
+					<tr>
+						<td align="center"><hr></td>
+						<td><hr></td>
+						<td><hr></td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_OK \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_NOK \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_DONE \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_NOT_DONE \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_YES \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_NO \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_ON \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_OFF \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_HIGH \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_LOW \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_TRISTATE \htmlonly </td>
+						<td>Tristate when available</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_SET \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_CLEAR \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_START \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_STOP \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_ENABLE \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_DISABLE \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_NOT_INCLUDE \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_MASTER \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_SLAVE \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_BUSY \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_READY \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_TRUE \htmlonly </td>
+						<td>An alternative way to say "logic value 1"</td>
+					</tr>
+					<tr>
+						<td align="center">Logical </td>
+						<td> \endhtmlonly \ref PG_FALSE \htmlonly </td>
+						<td>An alternative way to say "logic value 0"</td>
+					</tr>
+					<tr>
+						<td align="center"><hr></td>
+						<td><hr></td>
+						<td><hr></td>
+					</tr>
+					<tr>
+						<td align="center">Time/Frequency</td>
+						<td> \endhtmlonly \ref PG_SEC \htmlonly </td>
+						<td>A time unit : Second	</td>
+					</tr>
+					<tr>
+						<td align="center">Time/Frequency</td>
+						<td> \endhtmlonly \ref PG_MSEC \htmlonly </td>
+						<td>A time unit : Millisecond</td>
+					</tr>
+					<tr>
+						<td align="center">Time/Frequency</td>
+						<td> \endhtmlonly \ref PG_USEC \htmlonly </td>
+						<td>A time unit : Microsecond</td>
+					</tr>
+					<tr>
+					<tr>
+						<td align="center">Time/Frequency</td>
+						<td> \endhtmlonly \ref PG_HZ \htmlonly </td>
+						<td>A frequency unit : Hertz</td>
+					</tr>
+					<tr>
+						<td align="center">Time/Frequency</td>
+						<td> \endhtmlonly \ref PG_KHZ \htmlonly </td>
+						<td>A frequency unit : Kilohertz</td>
+					</tr>
+					<tr>
+						<td align="center">Time/Frequency</td>
+						<td> \endhtmlonly \ref PG_MHZ \htmlonly </td>
+						<td>A frequency unit : Megahertz</td>
+					</tr>
+				<TBODY>
+			</table>
+			<br>
+		\endhtmlonly
+		
+		
 
 */
 
