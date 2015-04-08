@@ -29,7 +29,6 @@ SolidCompression=yes
 [Languages]
 Name: "english";    MessagesFile: "compiler:Default.isl"
 Name: "italian";    MessagesFile: "compiler:Languages\Italian.isl"
-Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 
 [Types]
 ; Name: "fullx";  Description: "PicGIM for Mplab X";
