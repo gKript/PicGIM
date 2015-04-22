@@ -1,97 +1,41 @@
-//
-// main.c
-//
-// PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
-// AsYntote - SkyMatrix
-//
-/*#############################################################################
+/*
+	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	Copyright (C) 2002 - 2014 
-	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
+	File name :		main.c
+	Project :		<Insert here the name of your project>
+	Author :		<Inter your nick here>
 
-	This file is part of PicGim library.
+	START LICENSE	GPL V3.0
 
-	PicGim is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+		PicGIM is a "modular library from scratch"..
+		PicGIM is developed to work with PIC18F (R) MCU family only.
 
-	PicGim is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
 
-	You should have received a copy of the GNU General Public License
-	along with picGim; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
 
-#############################################################################*/
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
 
-/*!		\file			main.c
-		\version		0.5-0
-		\date			2002 - 2014
-		\brief			
-		\details		
-		\author			Danilo Zannoni (AsYntote)
-		\author			Corrado Tumiati (SkyMatrix)
-		\copyright		Released under the terms of the GNU General Public License v2<BR>
-						[ http://gkript.org/gk_gpl_v2.php ]
-*/
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	END LICENSE
+ */
+
 
 
 #include "picgim_main.h"
 
-//void encoder_pbt( void ) {
-//	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "PUSHED" );
-//	pg_buzzer_beep( PG_BEEP_MID , PG_BEEP_SHORT );
-//	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "      " );
-//}
-//
-//
-//void encoder_act( void ) {
-//	if ( pg_encoder_get_direction() ) {
-//		pg_buzzer_beep( PG_BEEP_LOW , PG_BEEP_SHORT );
-//	}
-//	else {
-//		pg_buzzer_beep( PG_BEEP_HIGH , PG_BEEP_SHORT );
-//	}
-//}
-
-
-//void timer_test( void ) {
-//	static _pg_int16 cont = 0 ;
-//	PORTC = cont++;
-//}
-
-
 void main( void ) {
 	pg_initialize();
-//	TRISC = PG_8BIT_OUT;
-//
-//	pg_pin_mode( T_B3 , PG_OUT );
-//	pg_pin_mode( T_B2 , PG_OUT );
-//	pg_pin_mode( T_B1 , PG_IN );
-//	pg_pin_mode( T_B0 , PG_IN );
-//
-//	pg_timer_set_period( PG_TIMER_0 , 500 , PG_MSEC );
-//	pg_timer_start( PG_TIMER_0 );
-//
-//    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
-//    pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
-//
-//	pg_event_attach( PG_EVENT_TMR0 , timer_test );
-//    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
-//	
 
-
-//	pg_event_attach( PG_EVENT_INT0 , encoder_act );
-//    pg_event_set( PG_EVENT_INT0 , PG_ENABLE );
-//
-//	pg_event_attach( PG_EVENT_INT1 , encoder_pbt );
-//    pg_event_set( PG_EVENT_INT1 , PG_ENABLE );
-//
-	pg_loop;
+	PG_HALT;
 }
 
 

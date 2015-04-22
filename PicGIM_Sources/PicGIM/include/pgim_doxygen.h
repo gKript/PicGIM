@@ -99,7 +99,7 @@
 
 			\section	Cosae		What is PicGIM
 				<p>
-					\b PicGIM is a <i>"modular library from scratch"</i> \n
+					\b PicGIM is a <i>"modular library from scratch".</i> \n
 					\b PicGIM is developed to work with \b PIC18F \b MCU family only and with \b C18 compiler. \n
 					\b PicGIM will compile only the modules enabled. \n
 					Through a set of public files, you can configure PicGIM molding it to your project having the most help in programming with a minimum amount of program memory and ram. \n
