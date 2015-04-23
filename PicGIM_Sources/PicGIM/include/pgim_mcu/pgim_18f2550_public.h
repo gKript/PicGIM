@@ -43,9 +43,10 @@
 		\author		Danilo Zannoni (AsYntote)
 		\author		Corrado Tumiati (SkyMatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
-					PicGIM is released under the terms of the GNU General Public V3 license. \n
-					Each part of <b>We.PIC project</b> is released under the GNU General Public V3 license. \n
-					[ http://www.gnu.org/licenses/gpl-3.0.html ]
+					PicGIM is released under the terms of the GNU General Public License V3. \n
+					Each part of <b>We.PIC project</b> is released under the GNU General Public License V3. \n
+					[ http://www.gnu.org/licenses/gpl-3.0.html ] 		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n 
+		\attention	This file is defined as public and therefore must be edited for proper configuration of the library.
 */
 
 #ifndef _PGIM_18F2550_PUBLIC_H_

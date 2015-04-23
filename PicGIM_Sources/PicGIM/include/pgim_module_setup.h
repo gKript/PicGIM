@@ -1,53 +1,61 @@
-//
-// pgim_module_setup.h
-//
-// PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
-// AsYntote - SkyMatrix
-//
-/*#############################################################################
+/*
+	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	Copyright (C) 2002 - 2014 
-	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
+	File name :		pgim_module_setup.h
+	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
+	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
-	This file is part of PicGim library.
+	Current Milestone :		0.5
+	Current version :		0.5-0
+	Since version :			0.1-0
+	Deprecated version :	This file is not deprecated.
 
-	PicGim is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+	START LICENSE	GPL	V3.0
 
-	PicGim is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+		PicGIM is a "modular library from scratch".
+		PicGIM is developed to work with PIC18F (R) MCU family only.
 
-	You should have received a copy of the GNU General Public License
-	along with picGim; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
 
-#############################################################################*/
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
 
-/*!		\file			pgim_module_setup.h
-		\version		0.5-0
-		\date			2002 - 2014
-		\brief			Management modules: inclusions, dependencies and conflicts
-		\details		
-		\author			Danilo Zannoni (AsYntote)
-		\author			Corrado Tumiati (SkyMatrix)
-		\copyright		Released under the terms of the GNU General Public License v2<BR>
-						[ http://gkript.org/gk_gpl_v2.php ]
-		\todo			<b>In the next Milestone</b> \n \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #38 &ensp; - &ensp; Reduction and optimization of the use of Ram and Program. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #14 &ensp; - &ensp; Integrated watchdog manager. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #22 &ensp; - &ensp; Sermon - Programmable Serial Monitor. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #43 &ensp; - &ensp; AN914 - Dynamic Memory Allocation. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #13 &ensp; - &ensp; Reset manager. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #8  &ensp; - &ensp; Develop ILI9340 LCD module. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #48 &ensp; - &ensp; Develop 5110 LCD module. \n
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #55 &ensp; - &ensp; Simple encryption algorithm. \n
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	END LICENSE
+ */
+
+ /*!
+		\file		pgim_module_setup.h
+		\version	0.5-0
+		\date		2002 - 2015
+		\brief		Management modules: inclusions, dependencies and conflicts
+		\author		Danilo Zannoni (asyntote)
+		\author		Corrado Tumiati (skymatrix)
+		\copyright	PicGIM is part of the We.PIC project. \n
+					PicGIM is released under the terms of the GNU General Public License V3. \n
+					Each part of <b>We.PIC project</b> is released under the GNU General Public License V3. \n
+					[ http://www.gnu.org/licenses/gpl-3.0.html ]
+		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing.
+  		\todo		<b>In the next Milestone</b> \n \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #20 &ensp; - &ensp; Reduction and optimization of the use of Ram and Program. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #21 &ensp; - &ensp; Integrated watchdog manager. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #27 &ensp; - &ensp; Sermon - Programmable Serial Monitor. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #24 &ensp; - &ensp; AN914 - Dynamic Memory Allocation. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #19 &ensp; - &ensp; Reset manager. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #31 &ensp; - &ensp; XC8 integration. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #22 &ensp; - &ensp; SMBus implementation. \n
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \b #26 &ensp; - &ensp; Simple encryption algorithm. \n
+
 */
-
 #ifndef _PGIM_MODULE_SETUP_H_
 	#define	_PGIM_MODULE_SETUP_H_
 
@@ -72,7 +80,7 @@
 	#endif
 
 	#include "pgim_ezfuse.h"
-	#define PGIM_BOARD			PG_BOARD_USER_DEFINED
+	#define PGIM_BOARD			PG_BOARD_USER_DEFINED		// Only for Milestone 0.5
 	#include "pgim_module_setup_public.h"
 
 //	#include "pgim_font_setup_public.h"

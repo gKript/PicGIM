@@ -1,58 +1,64 @@
-//
-// pgim_pwm_setup_public.h
-//
-// PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
-// AsYntote - SkyMatrix
-//
-/*#############################################################################
+/*
+	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	Copyright (C) 2002 - 2014 
-	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
+	File name :		pgim_pwm_setup_public.h
+	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
+	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
-	This file is part of PicGim library.
+	Current Milestone :		0.5
+	Current version :		0.5-0
+	Since version :			0.1-0
+	Deprecated version :	This file is not deprecated.
 
-	PicGim is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+	START LICENSE	GPL	V3.0
 
-	PicGim is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+		PicGIM is a "modular library from scratch".
+		PicGIM is developed to work with PIC18F (R) MCU family only.
 
-	You should have received a copy of the GNU General Public License
-	along with picGim; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
 
-#############################################################################*/
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
 
-/*!		\file			pgim_pwm_setup_public.h
-		\version		0.5-0
-		\date			2002 - 2014
-		\brief			PWM module configuration public file
-		\details		The modules supported are PWM1 and PWM2
-		\author			Danilo Zannoni (AsYntote)
-		\author			Corrado Tumiati (SkyMatrix)
-		\copyright		Released under the terms of the GNU General Public License v2<BR>
-						[ http://gkript.org/gk_gpl_v2.php ]
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	END LICENSE
+ */
+
+ /*!
+		\file		pgim_pwm_setup_public.h
+		\version	0.5-0
+		\date		2002 - 2015
+		\brief		PWM module configuration public file.
+		\author		Danilo Zannoni (asyntote)
+		\author		Corrado Tumiati (skymatrix)
+		\copyright	PicGIM is part of the We.PIC project. \n
+					PicGIM is released under the terms of the GNU General Public License V3. \n
+					Each part of <b>We.PIC project</b> is released under the GNU General Public License V3. \n
+					[ http://www.gnu.org/licenses/gpl-3.0.html ]
+		\attention	This file is defined as public and therefore must be edited for proper configuration of the library.
 */
 
 #ifndef _PGIM_PWM_SETUP_PUBLIC_H_
 	#define _PGIM_PWM_SETUP_PUBLIC_H_
 
-//	#if ( PGIM_PWM == PG_ENABLE )
+	#if ( PGIM_PWM == PG_ENABLE )
 	
-		//		C H A N N E L S   E N A B L I N G
-		#define PGIM_PWM_1							PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PGIM_PWM_2							PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-
+		//		P W M   C H A N N E L S   E N A B L I N G
+		#define PGIM_PWM_1							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+		#define PGIM_PWM_2							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 		
 		//		E N H A N C E D   M O D E
 		#define PG_PWM_1_ENHANCED					PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_PWM_2_ENHANCED					PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-
 		
 		//		E N H A N C E D   M O D E   C O N F I G U R A T I O N
 		#define PG_PWM_1_OUT_CONF					SINGLE_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV
@@ -72,7 +78,8 @@
 		//		D U T Y - C Y C L E   R E S O L U T I O N   M A X   C A L C U L A T I O N
 		#define PGIM_PWM_DC_RESOLUTION_MAX_CALC		PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 		
-//	#endif
+	#endif
+
 #endif /* _PGIM_PWM_SETUP_PUBLIC_H_ */
 
 

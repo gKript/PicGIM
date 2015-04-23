@@ -86,8 +86,8 @@ file_058=PicGIM_Mcu
 file_059=PicGIM_Mcu
 file_060=PicGIM
 file_061=PicGIM
-file_062=PicGIM
-file_063=PicGIM_Public
+file_062=PicGIM_Public
+file_063=PicGIM
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -280,12 +280,12 @@ file_057=..\PicGIM_Sources\PicGIM\include\pgim_mcu\pgim_18f4553.h
 file_058=..\PicGIM_Sources\PicGIM\include\pgim_mcu\pgim_18f4620.h
 file_059=..\PicGIM_Sources\PicGIM\include\pgim_mcu\pgim_18f97j60.h
 file_060=..\PicGIM_Sources\PicGIM\include\picgim_main.h
-file_061=E:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_sensor.h
-file_062=..\PicGIM_Sources\PicGIM\include\picgim.h
-file_063=..\PicGIM_Sources\PicGIM\include\pgim_sensor_setup_public.h
+file_061=..\PicGIM_Sources\PicGIM\include\picgim.h
+file_062=..\PicGIM_Sources\PicGIM\include\pgim_sensor_setup_public.h
+file_063=..\PicGIM_Sources\PicGIM\include\pgim_sensor.h
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
-suite_state=extended-mode
+suite_state=
 [TOOL_SETTINGS]
 TS{DD2213A8-6310-47B1-8376-9430CDFC013F}=
 TS{BFD27FBA-4A02-4C0E-A5E5-B812F3E7707C}=/m"$(BINDIR_)$(TARGETBASE).map" /w /o"$(BINDIR_)$(TARGETBASE).cof"

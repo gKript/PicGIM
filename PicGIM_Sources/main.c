@@ -7,10 +7,9 @@
 
 	START LICENSE	GPL V3.0
 
-		PicGIM is a "modular library from scratch"..
-		PicGIM is developed to work with PIC18F (R) MCU family only.
-
-		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
+		<one line to give the program's name and a brief idea of what it does.>
+ 
+	    Copyright (C) <year>  <name of author>
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by

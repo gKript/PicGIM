@@ -1,59 +1,70 @@
-//
-// pgim_caldelay.h
-//
-// PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
-// AsYntote - SkyMatrix
-//
-/*#############################################################################
+/*
+	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	Copyright (C) 2002 - 2014 
-	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
+	File name :		pgim_caldelay.h
+	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
+	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
-	This file is part of PicGim library.
+	Current Milestone :		0.5
+	Current version :		0.5-0
+	Since version :			0.1-0
+	Deprecated version :	This file is not deprecated.
 
-	PicGim is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+	See also related :		pgim_caldelay.c
 
-	PicGim is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+	START LICENSE	GPL	V3.0
 
-	You should have received a copy of the GNU General Public License
-	along with picGim; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		PicGIM is a "modular library from scratch".
+		PicGIM is developed to work with PIC18F (R) MCU family only.
 
-#############################################################################*/
+		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
 
-/*!		\file			pgim_caldelay.h
-		\version		0.5-0
-		\date			2002 - 2015
-		\brief			Delay functions for PicGIM
-		\details		To easily delays with acceptable error in seconds, milliseconds and microseconds. It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays.
-		\note			It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays in the \ref PG_CLOCK define : \ref hwdelay
-						These delay functions are not perfectly accurate. \n Have been written to give to the programmer a delay in the order of time needed with any system clock. \n
-						Here is a table of accuracy:
-						\htmlonly
-						<br><br>
-						<table width=50% border=1 >
-							<tr align="center">
-								<td width=40%><b>pg_delay_Sec</b></td><td>quite accurate</td>
-							</tr>
-							<tr align="center">
-								<td width=40%><b>pg_delay_mSec</b></td><td>quite accurate</td>
-							</tr>
-							<tr align="center">
-								<td width=40%><b>pg_delay_uSec</b></td><td>very inaccurate</td>
-							</tr>
-						</table>
-						\endhtmlonly
-		\author			Danilo Zannoni (AsYntote)
-		\author			Corrado Tumiati (SkyMatrix)
-		\copyright		Released under the terms of the GNU General Public License v3
-		\attention		This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	END LICENSE
+ */
+
+ /*!
+		\file		pgim_caldelay.h
+		\version	0.5-0
+		\date		2002 - 2015
+		\brief		Delay functions for PicGIM.
+		\details	To easily delays with acceptable error in seconds, milliseconds and microseconds. It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays.
+		\note		It is necessary to correctly set the oscillator frequency to obtain the correct functioning of the delays in the \ref PG_CLOCK define : \ref hwdelay
+					These delay functions are not perfectly accurate. \n Have been written to give to the programmer a delay in the order of time needed with any system clock. \n
+					Here is a table of accuracy:
+					\htmlonly
+					<br><br>
+					<table width=50% border=1 >
+						<tr align="center">
+							<td width=40%><b>pg_delay_Sec</b></td><td>quite accurate</td>
+						</tr>
+						<tr align="center">
+							<td width=40%><b>pg_delay_mSec</b></td><td>quite accurate</td>
+						</tr>
+						<tr align="center">
+							<td width=40%><b>pg_delay_uSec</b></td><td>very inaccurate</td>
+						</tr>
+					</table>
+					\endhtmlonly
+		\author		Danilo Zannoni (asyntote)
+		\author		Corrado Tumiati (skymatrix)
+		\copyright	PicGIM is part of the We.PIC project. \n
+					PicGIM is released under the terms of the GNU General Public License V3. \n
+					Each part of <b>We.PIC project</b> is released under the GNU General Public License V3. \n
+					[ http://www.gnu.org/licenses/gpl-3.0.html ]
+		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n 
 */
 
 #ifndef _PGIM_CALDELAY_H_

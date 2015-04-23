@@ -1,49 +1,55 @@
-//
-// pgim_doxygen.h
-//
-// PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
-// AsYntote - SkyMatrix
-//
-/*#############################################################################
+/*
+	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	Copyright (C) 2002 - 2014 
-	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
+	File name :		pgim_doxygen.h
+	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
+	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
-	This file is part of PicGim library.
+	Current Milestone :		0.5
+	Current version :		0.5-0
+	Since version :			0.1-0
+	Deprecated version :	This file is not deprecated.
 
-	PicGim is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+	START LICENSE	GPL	V3.0
 
-	PicGim is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+		PicGIM is a "modular library from scratch".
+		PicGIM is developed to work with PIC18F (R) MCU family only.
 
-	You should have received a copy of the GNU General Public License
-	along with picGim; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
 
-#############################################################################*/
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
 
-/*!		
-	\file			pgim_doxygen.h
-	\version		0.5-0
-	\date			2002 - 2014
-	\brief			
-	\details		
-	\author			Danilo Zannoni (AsYntote)
-	\author			Corrado Tumiati (SkyMatrix)
-	\copyright		PicGIM is under the terms of the GNU General Public License v3<BR>
-						[ \ref LicenseGPLV3 ]
-	\note			This file does not contain any line of code. \n It contains only formatted for Doxygen documentation.
-	\attention		This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	END LICENSE
+ */
+
+ /*!
+		\file		pgim_doxygen.h
+		\version	0.5-0
+		\date		2002 - 2015
+		\brief		This file only serve for the automated documentation from DoxyGen.
+		\author		Danilo Zannoni (asyntote)
+		\author		Corrado Tumiati (skymatrix)
+		\copyright	PicGIM is part of the We.PIC project. \n
+					PicGIM is released under the terms of the GNU General Public License V3. \n
+					Each part of <b>We.PIC project</b> is released under the GNU General Public License V3. \n
+					[ http://www.gnu.org/licenses/gpl-3.0.html ]
+		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
+
 //----------------------------------------------------------------------------
-//	This file only serve for the automated documentation from doxygen 
+//	This file only serve for the automated documentation from doxygen.
 //----------------------------------------------------------------------------
 
 /*!	\mainpage
@@ -138,6 +144,8 @@
 			\section htsmain	Start in a few steps
 				<p>
 					In this section you can find <b> all the details in three easy steps </b> for starting a new <b>PicGIM</b> project. \n \n
+					To obtain a copy of PicGIM simply download it from www.gkript.org. \n
+					<b>Once downloaded, please refer to this guide:</b> \ref getstartrelease \n \n
 
 					<b>First step</b> is to plan: choose the right components for the hardware is crucial for the success of a project. \n
 					This documentation provides detailed resource consumption by PicGIM: \ref PG_consideraproj \n \n
@@ -234,10 +242,239 @@
 			So you need to follow the guide of the environment used. \n
 		</p>
 
+		\section	getstartrelease 	A PicGIM release
+
+			\htmlonly <hr> \endhtmlonly
+			\endcode
+			\subsection	getstartreleasepol 		Release policy
+
+				\htmlonly <hr> \endhtmlonly
+				\endcode
+
+				When \b PicGIM is released officially, unlike a download from \b GitHub, has a very specific configuration and absolutely NOT random. \n
+				Each module is disabled and thus also any configuration of modules. \n \n
+
+				From	\ref pgim_module_setup_public.h
+ 				\code
+
+					//		S O F T W A R E   G E N E R A L
+					#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+
+					//		H A R D W A R E   I N T E R N A L
+					#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+
+					//		H A R D W A R E   E X T E R N A L
+					#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_BUZZER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_SENSOR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+
+					//		H A R D W A R E   G K R I P T
+					#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+
+				\endcode
+
+				\n
+				From	\ref pgim_timer_setup_public.h
+ 				\code
+					//		T I M E R   E N A B L I N G
+					#define PGIM_TIMER_0						PG_DISABLE				//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
+					#define PGIM_TIMER_1						PG_DISABLE				//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
+				\endcode
+
+				\n
+				From	\ref pgim_sensor_setup_public.h
+ 				\code
+					//		S E N S O R S   E N A B L I N G
+					#define PGIM_SENSOR_ADC_REF					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_SENSOR_NTC						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+				\endcode
+
+				\n
+				From	\ref pgim_pwm_setup_public.h
+  				\code
+					//		P W M   C H A N N E L S   E N A B L I N G
+					#define PGIM_PWM_1							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PGIM_PWM_2							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+
+					//		E N H A N C E D   M O D E
+					#define PG_PWM_1_ENHANCED					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+					#define PG_PWM_2_ENHANCED					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+				\endcode
+
+				\n
+				From	\ref pgim_event_setup_public.h
+ 				\code
+
+					//	-------- Auto Interrupts Handler -----------------------------------------------------------
+
+					#define PG_EVENT_AUTO_HANDLER			PG_ENABLE					// PG_ENABLE	PG_DISABLE
+
+					//	-------- External Interrupts ----------------------------------------------------------------
+
+					#define PG_EVENT_SET_INT0				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_INT1				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_INT2				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_RB0				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+
+					//	-------- Internal Interrupts ----------------------------------------------------------------
+
+					#define PG_EVENT_SET_TMR0				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_TMR1				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_TMR2				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_AD					PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_USARTRC			PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_USARTTX			PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_SSP				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_CCP1				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_CCP2				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_OSCF				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_CM					PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_EE					PG_DISABLE					// PG_ENABLE	PG_DISABLE
+					#define PG_EVENT_SET_BCL				PG_DISABLE					// PG_ENABLE	PG_DISABLE
+
+				\endcode
+
+ 				The working frequency of the microcontroller and its power supply are set to 0. \n \n
+
+  				From	\ref pgim_project_setup_public.h
+ 				\code
+
+					//	P R O J E C T   D E T A I L S
+					#define PG_PROJECT_NAME						None					//!< The name of your Project
+					#define PG_PROJECT_ORGANIZATION				None					//!< The name of your Organization
+					#define PG_PROJECT_AUTHOR					None					//!< Your name or, if you like, your nickname
+					#define PG_PROJECT_VERSION					0.0						//!< The version of your project
+					#define PG_PROJECT_STATE					PG_DEBUG				//!< Must be: PG_DEBUG  ||  PG_RELEASE
+					#define PG_PROJECT_DATE						01/01/2015				//!< Date of the project
+
+					//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M
+					#define PG_CLOCK							00.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
+					#define PG_USER_SUPPLY_VOLT					0.00					//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [V]. Accuracy: X.XX
+					#define PG_USER_SUPPLY_BATTERY				PG_NO					//!< Must be: PG_YES  ||  PG_NO
+					#define PG_USE_INTERNAL_OSC					PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
+
+					//	P I C G I M   B E H A V I O U R
+					#define PG_VERBOSE							PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
+					#define PG_SUGGESTION						PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
+					#define PG_PROJECT_INFO_SHOW				PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
+
+  				\endcode
+
+				The \b main.c file is empty except for the initialization call PicGIM and PG_HALT to block the program execution.
+
+ 				\code
+					#include "picgim_main.h"
+
+					void main( void ) {
+						pg_initialize();
+
+						PG_HALT;
+					}
+ 				\endcode
+
+				\n \n
+
+			\subsection	getstartreleasepak 		PicGIM package
+
+				\htmlonly <hr> \endhtmlonly
+				\endcode
+
+				\b PicGIM self-installing package is realized by using the \b Inno technology. \n
+				The package contains the files of the GNU GPL V3, a clean project for MPLAB 8, a clean project for MPLAB X and an offline copy of the entire documentation PicGIM 0.5 in html.
+
+				\image html	inno-logo.png
+
+				\n
+
+
+			\subsection	getstartreleaseinst		PicGIM installation
+
+				\htmlonly <hr> \endhtmlonly
+				\endcode
+
+				Here you can see step by step how to install \b PicGIM on the computer. \n
+ 				After downloading \b PicGIM \b 0.5 from <b>www.gkript.org</b> double click on the installer icon. \n
+				The first step is to choose the language for the installer.
+
+				\image html	pgpac-lang.png
+
+				In this example we have chosen English. \n
+
+				\image html	pgpac-welcome.png
+
+ 				\n
+
+				\image html	pgpac-license.png
+
+ 				\n
+
+				If you do not accept the license agreement, you can not continue the installation. \n
+				After accepting the license agreement, proceed with the selection of the target location. \n
+
+				\image html	pgpac-location.png
+
+ 				\n
+
+				Now you can choose what content you want to install. \n
+
+				\image html	pgpac-content.png
+
+ 				\n
+
+				Now We must give a name to the folder that will appear in the start menu. \n
+				If you do not want a folder will need to click the check in the bottom left. \n
+				If you want multiple installations of PicGIM must assign a different name for each installation. \n
+				Typically this is the name of the project. \n
+
+				\image html	pgpac-folder.png
+
+ 				\n
+
+				Now we are ready to install PicGIM. \n
+				Here's a summary of what is about to happen. \n
+
+				\image html	pgpac-summary.png
+
+ 				\n
+
+				\image html	pgpac-installing.png
+
+ 				\n
+
+				\image html	pgpac-finish.png
+
+ 				\n
+
+			\subsection	getstartreleaseuninst		PicGIM uninstall
+
+				\htmlonly <hr> \endhtmlonly
+				\endcode
+
+				To remove pidgin select from the menu Start / Program Files / Project name, Uninstall.
+
+				\image html	pgpac-uninst.png
+
+ 				\n
+
+				Once uninstalled this message appears.
+
+				\image html	pgpac-finish-un.png
+
+ 				\n
+
+
 		\section	getstartmp8 		PicGIM with MPLAB 8
 
-		\htmlonly <hr> \endhtmlonly
-		\endcode
+			\htmlonly <hr> \endhtmlonly
+			\endcode
 
 			\subsection	getstartmp8howto 		How to create a project step by step
 
