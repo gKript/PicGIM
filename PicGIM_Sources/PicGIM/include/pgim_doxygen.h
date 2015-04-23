@@ -253,6 +253,9 @@
 
 				When \b PicGIM is released officially, unlike a download from \b GitHub, has a very specific configuration and absolutely NOT random. \n
 				Each module is disabled and thus also any configuration of modules. \n \n
+			
+				\attention		If \b PicGIM is compiled without at least edit the file \ref pgim_project_setup_public.h an \b error is returned. \n
+									it is necessary to modify at least the \b frequency and \b voltage \b supply of the microcontroller chosen.
 
 				From	\ref pgim_module_setup_public.h
  				\code
@@ -380,7 +383,10 @@
 					}
  				\endcode
 
-				\n \n
+				\n 
+			
+				\attention		If \b PicGIM is compiled without at least edit the file \ref pgim_project_setup_public.h an \b error is returned. \n
+									it is necessary to modify at least the \b frequency and \b voltage \b supply of the microcontroller chosen.
 
 			\subsection	getstartreleasepak 		PicGIM package
 
