@@ -45,6 +45,7 @@
 					Each part of <b>We.PIC project</b> is released under the GNU General Public License V3. \n
 					[ http://www.gnu.org/licenses/gpl-3.0.html ]
 		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
+	\todo			In the next mileston the XC8 compiler will be supported
 */
 
 
@@ -167,7 +168,7 @@
 				\n \n
 				<p>
 					We chose GitHub as a development platform for the version control system as well as issue tracking tool. \n
-					Here is the link for the repository of PicGIM : \htmlonly <a href="http://gkript.github.io/PicGIM_05/" target="_blank" >PicGIM Repository</a> \endhtmlonly
+					Here is the link for the repository of PicGIM : \htmlonly <a href="http://gkript.github.io/PicGIM/" target="_blank" >PicGIM Repository</a> \endhtmlonly
 				</p>
 
 				\n
@@ -232,7 +233,7 @@
 
 		<p>
 			In this section you can find all the details in easy steps for starting to use PicGIM. \n
-			PicGIM is compatible with the two standard environments MicroChip: MPLAB 8 and MPLAB X. \n \n
+			PicGIM is compatible with the two standard environments Microchip: MPLAB 8 and MPLAB X. \n \n
 
 			\htmlonly
 			&nbsp;&nbsp;&nbsp;&nbsp;<img src="ides.png" alt="ides.png">
@@ -464,7 +465,7 @@
 				\htmlonly <hr> \endhtmlonly
 				\endcode
 
-				To remove pidgin select from the menu Start / Program Files / Project name, Uninstall.
+				To remove PicGIM select from the menu Start / Program Files / Project name, Uninstall.
 
 				\image html	pgpac-uninst.png
 
