@@ -358,18 +358,22 @@
 				\htmlonly <hr> \endhtmlonly
 				
 				\subsubsection CLCDenmc_s1	Output configuration
+
 				\code
 					#define PG_PWM_1_OUT_CONF					SINGLE_OUT
 					#define PG_PWM_2_OUT_CONF					SINGLE_OUT
 				\endcode
 
-					These defines select the output type of <i>PWM 1</i> or <i>PWM 2</i> channel. \n
-					They must be: \n
+				\htmlonly
+					These defines select the output type of <i>PWM 1</i> or <i>PWM 2</i> channel. <br>
+					They must be: <br>
+				\endhtmlonly
+				\endcode
 					\arg \b SINGLE_OUT : single output.
 					\arg \b HALF_OUT : HALF-Bridge output.
 					\arg \b FULL_OUT_FWD : FULL-Bridge output forward.
 					\arg \b FULL_OUT_REV : FULL-Bridge output reverse.
-				
+ 
 					\subsubsection	pwmenhconfref		References
 						\li \e File : pgim_pwm_setup_public.h \n
 						\li \e Reference : \ref PG_PWM_1_OUT_CONF \n

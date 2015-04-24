@@ -482,6 +482,10 @@
 			\htmlonly <hr> \endhtmlonly
 			\endcode
 
+			\attention	During the development of \b PicGIM we sometimes encountered some problems with <b>MPLAB 8</b> for what concerns absolute or relative paths. \n \n
+						\image html mplab8-filenotfound.png
+						\n \n If there are files in the project marked as <b>"file not found"</b> you must <b>remove it from the project and add it again</b> indicating to use the relative path. \n
+
 			\subsection	getstartmp8howto 		How to create a project step by step
 
 				\htmlonly <hr> \endhtmlonly
