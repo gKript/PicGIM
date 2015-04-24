@@ -18,5 +18,5 @@ cd ..
 
 echo Done!!!
 
-C:\Programmi\CopyTo\CopyTo.exe	 .\DocumentationSynk.cp2
-echo Syncronized!!!
+rem C:\Programmi\CopyTo\CopyTo.exe	 .\DocumentationSynk.cp2
+rem echo Syncronized!!!
