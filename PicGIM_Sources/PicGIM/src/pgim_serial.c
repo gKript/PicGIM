@@ -74,9 +74,9 @@
 	_pg_Uint8 	pg_serial_baudrate_speed;				//for OpenUSART: 64 for BRGH = 0; 16 for BRGH = 0;
 	
 	_pg_Uint8 pg_serial_string_baudrate[16];
-	_pg_Uint8 pg_serial_string_error[100];		//da ridefinire
+	_pg_Uint8 pg_serial_string_error[100];				//to re-define
 	
-	//extern	rom const _pg_Uint8 font_5x8[];									// E' DA LASCIARE?????
+	//extern	rom const _pg_Uint8 font_5x8[];
 	
 	//---[ Serial Init ]---
 	_pg_int8 pg_serial_init( void ) {
@@ -491,8 +491,3 @@
 */
 
 	
-	
-
-
-
-

@@ -111,11 +111,11 @@
 			#if PG_ERROR_IS_ENABLE
 				if( pg_adc_get( ) >= ( PG_ADC_RES_STEPS - PGIM_SENSOR_NTC_AD_ROW_GUARD_MAX ) ) {
 						pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_UNPLUGGED , PG_ERROR_CRITICAL );
-						//stampare su std_err "Sensore sul canale ad_channel scollegato" (come identifico il sensore?)
+						//Show error "Sensor on the #ad_channel disconnected!" (Identify the sensor)
 				}
 				if( ( pg_adc_get( ) <= PGIM_SENSOR_NTC_AD_ROW_GUARD_MIN) ) {
 						pg_error_set( PG_ERROR_SENSOR , PG_SENSOR_NTC_ERROR_SHORTED , PG_ERROR_CRITICAL );
-						//stampare su std_err "Sensore sul canale ad_channel in corto" (come identifico il sensore?)
+						//Show error "Sensor on the #ad_channel in short-circuit!" (Identify the sensor)
 				}
 			#endif
 

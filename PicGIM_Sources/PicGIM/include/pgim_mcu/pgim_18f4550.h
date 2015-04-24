@@ -499,7 +499,6 @@
 				EBTRB = ON		Boot block (000000-0007FFh) protected from table reads executed in other blocks
 				EBTRB = OFF	Boot block (000000-0007FFh) not protected from table reads executed in other blocks
 			\endcode
-
 */
 
 

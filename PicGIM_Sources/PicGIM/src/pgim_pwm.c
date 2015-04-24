@@ -138,22 +138,22 @@
 			//--------------------------------------------------
 			//	AUTO-SHUTDOWN		( Only available in the Enhanced mode )
 			#if ( PG_PWM_AUTO_SHUTDOWN == PG_DISABLE )
-				ECCP1ASbits.ECCPASE = 0;							// Clear fault flag; 1 = shutdown state; 0 = pwm is operating
+				ECCP1ASbits.ECCPASE = 0;								// Clear fault flag; 1 = shutdown state; 0 = pwm is operating
 				
-				ECCP1ASbits.ECCPAS2 = 0;							// Auto-Shtdown DISABLED. No fault source
+				ECCP1ASbits.ECCPAS2 = 0;								// Auto-Shtdown DISABLED. No fault source
 				ECCP1ASbits.ECCPAS1 = 0;
 				ECCP1ASbits.ECCPAS0 = 0;
 			#endif
 			
 			#if ( PG_PWM_AUTO_SHUTDOWN == PG_ENABLE )
-				ECCP1ASbits.ECCPASE = 0;							// Clear fault flag; 1 = shutdown state; 0 = pwm is operating
+				ECCP1ASbits.ECCPASE = 0;								// Clear fault flag; 1 = shutdown state; 0 = pwm is operating
 				
 				//	MODE
 				#if ( PG_PWM_AUTO_SHUTDOWN_MODE == PG_AUTOMATIC )		
-					PWM1CONbits.PRSEN = 1;							// ECCP1ASbits.ECCPASE will be resetted automatically and PWM will restart on event goes away
+					PWM1CONbits.PRSEN = 1;								// ECCP1ASbits.ECCPASE will be resetted automatically and PWM will restart on event goes away
 				#endif
 				#if ( PG_PWM_AUTO_SHUTDOWN_MODE == PG_MANUAL )
-					PWM1CONbits.PRSEN = 0;							// ECCP1ASbits.ECCPASE must be resetted manually by pg_pwm_restart() to restart PWM, but after event is gone away
+					PWM1CONbits.PRSEN = 0;								// ECCP1ASbits.ECCPASE must be resetted manually by pg_pwm_restart() to restart PWM, but after event is gone away
 				#endif
 				
 				//	OUTPUT STATE ON FAIL
@@ -186,7 +186,7 @@
 				#endif
 				
 				//	Enabling...
-				ECCP1ASbits.ECCPAS2 = 1;							// Auto-Shutdown ENABLED. Only FLT0 pin is e fault source
+				ECCP1ASbits.ECCPAS2 = 1;								// Auto-Shutdown ENABLED. Only FLT0 pin is e fault source
 				ECCP1ASbits.ECCPAS1 = 0;
 				ECCP1ASbits.ECCPAS0 = 0;
 
@@ -201,10 +201,10 @@
 	//---[ END Pwm Init ]---	
 
 
-	//---[ Pwm Set Frequency or Period ]---						// Pwm frequency is common for all channel
+	//---[ Pwm Set Frequency or Period ]---								// Pwm frequency is common for all channel
 	_pg_int8	pg_pwm_set( _pg_float pwm_value , _pg_Uint8 unit_measure ) {
 		
-		T2CONbits.TMR2ON = 0;									// Stop PWM signal.
+		T2CONbits.TMR2ON = 0;											// Stop PWM signal.
 			
 			//--------------------------------------------------
 			//If pwm_value is a FREQUENCY:
@@ -213,7 +213,7 @@
 				if ( unit_measure == PG_MHZ )
 					pwm_value *= 1000;
 				if ( ( unit_measure == PG_MHZ ) || ( unit_measure == PG_KHZ ) )
-					pwm_value *= 1000;								// Now we have freq in [Hz]!
+					pwm_value *= 1000;									// Now we have freq in [Hz]!
 
 				// Lower frequency limit check
 				if ( pwm_value <= pg_pwm_freq_min )
@@ -223,8 +223,8 @@
 				if ( pwm_value > pg_pwm_freq_max )
 					return PG_PWM_ERROR_FREQ_TOO_HIGH;
 
-				pg_pwm_freq = pwm_value;							// [Hz]
-				pg_pwm_period = ( 1 / pg_pwm_freq );				//[s]	<<<===	TARGET!!!
+				pg_pwm_freq = pwm_value;								// [Hz]
+				pg_pwm_period = ( 1 / pg_pwm_freq );					//[s]	<<<===	TARGET!!!
 			}
 			
 			//--------------------------------------------------
@@ -234,7 +234,7 @@
 			if ( unit_measure == PG_USEC )
 				pwm_value /= 1000;
 			if ( ( unit_measure == PG_USEC ) || ( unit_measure == PG_MSEC ) )
-				pwm_value /= 1000;								//Now we have time in [s]!
+				pwm_value /= 1000;										//Now we have time in [s]!
 
 			// Lower period limit check
 			if ( pwm_value <= pg_pwm_period_min )
@@ -244,7 +244,7 @@
 			if ( pwm_value > pg_pwm_period_max )
 				return PG_PWM_ERROR_PERIOD_TOO_LONG;
 
-			pg_pwm_period = pwm_value;							//[s]	<<<===	TARGET!!!
+			pg_pwm_period = pwm_value;									//[s]	<<<===	TARGET!!!
 		}
 		
 		//--------------------------------------------------
@@ -252,18 +252,18 @@
 		//	Searching for the right value
 		if ( pg_pwm_period <= pg_pwm_period_max_no_prescaler ) {
 			pg_pwm_tmr2_prescaler = 1;
-			T2CONbits.T2CKPS1 = 0;								//Set prescaler to 1
-			T2CONbits.T2CKPS0 = 0;								//Timer2 Clock Prescale Select bits: "00" = Prescaler is 1
+			T2CONbits.T2CKPS1 = 0;										//Set prescaler to 1
+			T2CONbits.T2CKPS0 = 0;										//Timer2 Clock Prescale Select bits: "00" = Prescaler is 1
 		} 	
 		else if ( pg_pwm_period < ( pg_pwm_period_max_no_prescaler * 4 ) ) {
 			pg_pwm_tmr2_prescaler = 4;
-			T2CONbits.T2CKPS1 = 0;								//Set prescaler to 4
-			T2CONbits.T2CKPS0 = 1;								//Timer2 Clock Prescale Select bits: "01" = Prescaler is 4
+			T2CONbits.T2CKPS1 = 0;										//Set prescaler to 4
+			T2CONbits.T2CKPS0 = 1;										//Timer2 Clock Prescale Select bits: "01" = Prescaler is 4
 		} 	
 		else {
 			pg_pwm_tmr2_prescaler = 16;
-			T2CONbits.T2CKPS1 = 1;								//Set prescaler to 16
-			T2CONbits.T2CKPS0 = 0;								//Timer2 Clock Prescale Select bits: "1x" = Prescaler is 16
+			T2CONbits.T2CKPS1 = 1;										//Set prescaler to 16
+			T2CONbits.T2CKPS0 = 0;										//Timer2 Clock Prescale Select bits: "1x" = Prescaler is 16
 		}
 		
 		//--------------------------------------------------
@@ -272,8 +272,8 @@
 		//	Calculation: PWM Period = [(PR2) + 1] * 4 * TOSC * (TMR2 Prescale Value)
 		pg_pwm_pr2_reg_value = (_pg_Uint8)( ( pg_pwm_period / ( PG_PWM_FOSC_DIVIDER * ( 1 / ( PG_CLOCK * 1000000 ) ) * pg_pwm_tmr2_prescaler ) ) - 1 );
 		
-		PR2 = pg_pwm_pr2_reg_value;								//		<<<===	TARGET!!!
-		PG_PWM_FLAG_SET_OK = 1;									// Set has configured pwm freq correctly
+		PR2 = pg_pwm_pr2_reg_value;										//		<<<===	TARGET!!!
+		PG_PWM_FLAG_SET_OK = 1;											// Set has configured pwm freq correctly
 		
 		//--------------------------------------------------
 		#if ( PGIM_PWM_1 == PG_ENABLE )
@@ -302,7 +302,7 @@
 		#endif
 
 		//--------------------------------------------------		
-		T2CONbits.TMR2ON = 1;									// Start PWM signal.
+		T2CONbits.TMR2ON = 1;											// Start PWM signal.
 		return PG_OK;
 	}
 	//---[ END Pwm Set Frequency or Period ]---
@@ -368,10 +368,10 @@
 			#if ( PGIM_PWM_1 == PG_ENABLE )
 				case PG_PWM_1:
 				{
-					if ( PG_PWM_FLAG_1_DC_OK == 0 )					// If dutycycle has NOT been calculated...
+					if ( PG_PWM_FLAG_1_DC_OK == 0 )						// If dutycycle has NOT been calculated...
 						return PG_PWM_ERROR_NOT_DC_1;
 						
-					if ( ! PG_PWM_FLAG_1_RUNNING ) {				// If PWM1 is NOT running...
+					if ( ! PG_PWM_FLAG_1_RUNNING ) {					// If PWM1 is NOT running...
 						OpenPWM1( pg_pwm_pr2_reg_value );
 						PG_PWM_FLAG_1_RUNNING = 1;
 						return PG_OK;
@@ -385,10 +385,10 @@
 			#if ( PGIM_PWM_2 == PG_ENABLE )
 				case PG_PWM_2:
 				{
-					if ( PG_PWM_FLAG_2_DC_OK == 0 )					// If dutycycle has NOT been calculated...
+					if ( PG_PWM_FLAG_2_DC_OK == 0 )						// If dutycycle has NOT been calculated...
 						return PG_PWM_ERROR_NOT_DC_2;
 						
-					if ( ! PG_PWM_FLAG_2_RUNNING ) {				// If PWM2 is NOT running...
+					if ( ! PG_PWM_FLAG_2_RUNNING ) {					// If PWM2 is NOT running...
 						OpenPWM2( pg_pwm_pr2_reg_value );
 						PG_PWM_FLAG_2_RUNNING = 1;
 						return PG_OK;
@@ -414,7 +414,7 @@
 			#if ( PGIM_PWM_1 == PG_ENABLE )
 				case PG_PWM_1:
 				{
-					if ( PG_PWM_FLAG_1_RUNNING ) {					// If PWM1 is running...
+					if ( PG_PWM_FLAG_1_RUNNING ) {						// If PWM1 is running...
 						ClosePWM1( );
 						PG_PWM_FLAG_1_RUNNING = 0;
 						return PG_OK;
@@ -428,7 +428,7 @@
 			#if ( PGIM_PWM_2 == PG_ENABLE )
 				case PG_PWM_2:
 				{
-					if ( PG_PWM_FLAG_2_RUNNING ) {					// If PWM2 is running...
+					if ( PG_PWM_FLAG_2_RUNNING ) {						// If PWM2 is running...
 						ClosePWM2( );
 						PG_PWM_FLAG_2_RUNNING = 0;
 						return PG_OK;
@@ -447,7 +447,7 @@
 
 
 	//---[ Pwm Shutdown ]---
-	_pg_int8	pg_pwm_shutdown( void ) {							// Stop output in fault condition in enhanced mode
+	_pg_int8	pg_pwm_shutdown( void ) {								// Stop output in fault condition in enhanced mode
 	
 		#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
 			( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )
@@ -549,7 +549,6 @@ SetOutputPWM1( SINGLE_OUT, PWM_MODE_1 );
  */
  
  /*
-	//--- oppure a mano
 	CCPR1L = pg_pwm_1_dutycycle_reg >> 2;	//Msb Byte <9:2> of 10bit
 	CCP1CONbits.DC1B1 = 0;					//Bit <1> of 10bit
 	CCP1CONbits.DC1B0 = 0;					//Bit <0> of 10bit

@@ -131,11 +131,11 @@
 	#define PG_SEMI_AUTOMATIC				1				/*!	A Serial module mode : SemiAutomatic	*/
 	#define PG_AUTOMATIC					2				/*!	A Serial module mode : Automatic	*/
 
-	#define	PG_DEBUG_LCD_CHAR				1				/*! To use the LCD CHAR as debug output */
+	#define	PG_DEBUG_LCD_CHAR				1				/*!	To use the LCD CHAR as debug output */
 //	#define PG_DEBUG_LCD_PCD8544			2
 	
-	#define PG_COMMAND						0				/*! The byte is a Command */
-	#define PG_DATA							1				/*! The byte is a Data */
+	#define PG_COMMAND						0				/*!	The byte is a Command */
+	#define PG_DATA							1				/*!	The byte is a Data */
 	
 	#define PG_MISSING						-1				/*!	An error state : Missing */
 	
@@ -154,16 +154,16 @@
 	#define	PG_SENSOR_METHOD_BETA			1				/*!	Beta calculation method for ntc sensors */
 	#define	PG_SENSOR_METHOD_COEF			2				/*!	Coefficients calculation method for ntc sensors */
 	
-	#define	PG_DEGREES_CELSIUS				1				/*! Indicates the use of Celsius scale */		//(generic define, not dedicated to the sensor module)
-	#define	PG_DEGREES_FAHRENHEIT			2				/*! Indicates the use of Fahrenheit scale */	//(generic define, not dedicated to the sensor module)
+	#define	PG_DEGREES_CELSIUS				1				/*!	Indicates the use of Celsius scale */		//(generic define, not dedicated to the sensor module)
+	#define	PG_DEGREES_FAHRENHEIT			2				/*!	Indicates the use of Fahrenheit scale */	//(generic define, not dedicated to the sensor module)
 	
 	//------------------------------------------------------------------------------
 	//      B O A R D   D E F I N E S
 	//------------------------------------------------------------------------------
 
-	#define	PG_BOARD_USER_DEFINED	0				/*!	PicGIM will run on a user define board */
-	#define	PG_BOARD_A				1				/*!	PicGIM will run on a BOARD A */
-	#define	PG_BOARD_EXPERIENCE		2				/*!	PicGIM will run on a BOARD EXPERIENCE */
+	#define	PG_BOARD_USER_DEFINED			0				/*!	PicGIM will run on a user define board */
+	#define	PG_BOARD_A						1				/*!	PicGIM will run on a BOARD A */
+	#define	PG_BOARD_EXPERIENCE				2				/*!	PicGIM will run on a BOARD EXPERIENCE */
 
 	//------------------------------------------------------------------------------
 	//      H E A D E R   M E S S A G E S
@@ -239,12 +239,12 @@
 
 	// PORT (P_) to read, LAT (L_) to write, TRIS (T_) to set the mode.
 
-//	#define	pinMode( a , b )		T_ ## a = PG_ ## b
-//	#define	pinSet( a )				L_ ## a = PG_SET
-//	#define	pinClear( a )			L_ ## a = PG_CLEAR
-//	#define	digitalWrite( a , b )	L_ ## a = b
-//	#define	digitalRead( a )		P_ ## a
-//	#define	pinToggle( a )			L_ ## a ^= 1
+	//	#define	pinMode( a , b )		T_ ## a = PG_ ## b
+	//	#define	pinSet( a )				L_ ## a = PG_SET
+	//	#define	pinClear( a )			L_ ## a = PG_CLEAR
+	//	#define	digitalWrite( a , b )	L_ ## a = b
+	//	#define	digitalRead( a )		P_ ## a
+	//	#define	pinToggle( a )			L_ ## a ^= 1
 
 	/*!
 	 * \brief			This macro is useful to set a specific bit as INPUT or OUTPUT.
@@ -1014,6 +1014,5 @@
 			\n\n
 
   */
-
 
 

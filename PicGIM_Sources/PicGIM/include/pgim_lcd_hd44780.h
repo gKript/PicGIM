@@ -616,11 +616,3 @@
 */
 	
 
-/*
-		/*	\fn		void	pg_lcd_hd44780_write( _pg_Uint8 Pos , _pg_Uint8 Ln , const rom far _pg_int8 * Format , ... )
-			\brief	With this method you can set an error in Gim style from your program.\n
-					\a Type is per dafault \a GIM_ERROR_MESSAGE and value is per default \a 0
-			\param	function	It is the name of the function generate the error.
-			\param	message	The message of the error.
-		*/
-

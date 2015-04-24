@@ -3,7 +3,7 @@
 
 	File name :		main.c
 	Project :		<Insert here the name of your project>
-	Author :		<Inter your nick here>
+	Author :		<Insert here your nick>
 
 	START LICENSE	GPL V3.0
 
@@ -28,7 +28,6 @@
  */
 
 
-
 #include "picgim_main.h"
 
 void main( void ) {
@@ -36,6 +35,5 @@ void main( void ) {
 
 	PG_HALT;
 }
-
 
 

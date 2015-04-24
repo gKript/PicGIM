@@ -134,7 +134,6 @@
 			return( pg_encoder_direction );
 //		#endif
 	}
-
 #endif
 
 
