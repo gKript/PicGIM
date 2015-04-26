@@ -3,7 +3,7 @@
 ![MicroChip](http://gkript.org/PIC-MCU-Chip.png)
 
 _The current mileston is : **0.5**_   
-_Package to download_ : **NOT YET!!!** You can only do a checkout from the Repository but you must keep in mind that **PicGIM** is unstable yet.
+_Package to download_ : ![PicGIM 0.5-0](http://www.gkript.org/resources/PicGIM_05_installer.exe) 
 
 ***
 
