@@ -21,7 +21,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName=.\{#MyAppName}
 DefaultGroupName=PicGIM 0.5
 AllowNoIcons=yes
-LicenseFile=C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\LICENSE
+LicenseFile=..\LICENSE
 OutputBaseFilename=PicGIM_05_installer
 Compression=lzma
 SolidCompression=yes
@@ -44,11 +44,11 @@ Name: "project\mpx"; Description: "Mplab X files";  Types: custom; Flags: exclus
 Name: "docs"; Description: "PicGIM documentation";
 
 [Files]
-Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\LICENSE"; DestDir: "{app}"; Components: license; Flags: ignoreversion
-Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\PicGIM_Documentation\*"; DestDir: "{app}\PicGIM_Documentation"; Components: docs; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\PicGIM_MPlab_8\*"; DestDir: "{app}\PicGIM_MPlab_8"; Components: project\mp8; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\PicGIM_MPlab_X\*"; DestDir: "{app}\PicGIM_MPlab_X"; Components: project\mpx; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\temp\PicGIM_Sources\*"; DestDir: "{app}\PicGIM_Sources"; Components: sources; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\LICENSE"; DestDir: "{app}"; Components: license; Flags: ignoreversion
+Source: "..\PicGIM_Documentation\*"; DestDir: "{app}\PicGIM_Documentation"; Components: docs; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\PicGIM_MPlab_8\*"; DestDir: "{app}\PicGIM_MPlab_8"; Components: project\mp8; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\PicGIM_MPlab_X\*"; DestDir: "{app}\PicGIM_MPlab_X"; Components: project\mpx; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\PicGIM_Sources\*"; DestDir: "{app}\PicGIM_Sources"; Components: sources; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\gKript.org Web Site"; Filename: "{#MyAppURL}"
