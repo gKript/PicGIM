@@ -31,14 +31,15 @@
 		along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	END LICENSE
- */
+*/
 
 /*
 	This howto is part of the kit PicGIM 0.5 library.
- 
-	In this example we analyze how to configure and how to write the right code to use a 0-5 volt analog input and use it as a duty cycle of a PWM output to modulate the brightness of an LED..
+
+	In this example we analyze how to configure PicGIM and how to write the right code using a 0-5 volt analog input
+	to control the duty cycle of a PWM output that modulates the brightness of a LED.
 	In this example we will use a PIC18F4620 with a 20MHz oscillator.
-	As always, the first thing to do is to configure the file pgim_project_setup_public.h to customize the project.
+	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
 
 			//	P R O J E C T   D E T A I L S
@@ -61,10 +62,10 @@
 			#define PG_PROJECT_INFO_SHOW				PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
 
 	Before compile PicGIM we still have to set some configuration files.
-	The pgim_module_setup_public.h file defines which modules are included and compiled.
-	This example requires the presence of the ADC module and PWM.
+	The "pgim_module_setup_public.h" file defines which modules are included and compiled.
+	This example requires the presence of the ADC and PWM module.
 	So here are the necessary settings:
- 
+
 			//		S O F T W A R E   G E N E R A L
 			#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -90,8 +91,11 @@
 	Once you enabled the required modules we configure the HARDWARE.
 	ADC and PWM are internal devices and are part of the category HARDWARE INTERNAL.
 	This means that I do not have to assign any pins to the devices.
-	But the PWM has special features which change the parameters and operation.
-	These settings are made by editing the file pgim_pwm_setup_public.h
+	ADC module does not require any setting.
+	PWM module needs to be configured, because it has special features
+	which change the parameters and operation.
+	We will use only the first channel of PWM module.
+	These settings are made by editing the file "pgim_pwm_setup_public.h".
 	Here are the settings required:
 
 			//		P W M   C H A N N E L S   E N A B L I N G
@@ -120,7 +124,6 @@
 			//		D U T Y - C Y C L E   R E S O L U T I O N   M A X   C A L C U L A T I O N
 			#define PGIM_PWM_DC_RESOLUTION_MAX_CALC		PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 
-
 	Now PicGIM is properly configured for the project to be developed.
 
 	These are the warnings that PicGIM returns during compilation.
@@ -146,7 +149,7 @@
 			Warning [2105] PicGIM:  PWM 1 module >  ~~~  Keep in mind that this module supports the ENHANCED mode
 			Warning [2105] PicGIM:  PWM module >  Enabled duty-cycle resolution max calculation [bit]
 
- */
+*/
 
 
 //	Only in the file main.c it is always necessary to include the header file picgim_main.h.
@@ -156,8 +159,9 @@ void main( void ) {
 	//	It is compulsory to initialize PicGIM with this function.
 	pg_initialize();
 
-	//	I enable only one channel as analog input and turn on the ADC module.
+	//	I enable only one channel (AN0) as analog input.
 	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
+	//	I turn on the ADC module.
 	pg_adc_set( PG_ADC_MODULE , PG_ON );
 
 	//	I enable the PWM setting the maximum frequency calculated by PicGIM based on the frequency of the oscillator used in the project.
@@ -167,9 +171,12 @@ void main( void ) {
 	PG_LOOP ( PG_FOREVER ) {
 		//	I perform an analog conversion averaged over 10 readings to increase the accuracy.
 		pg_adc_start_avg( PG_CH_0 , 10 );
-		//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted. For example
+		//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted.
+		//  For example with a supply voltage of 5V an analog conversion of 2.5V match to 50%.
 		pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
 	}
 }
+
+//	At this point you can compile the project and verify that the brightness of the LED changes depending on the input voltage.
 
 

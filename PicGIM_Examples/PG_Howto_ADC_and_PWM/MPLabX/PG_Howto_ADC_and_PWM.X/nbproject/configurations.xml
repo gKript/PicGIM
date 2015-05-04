@@ -43,8 +43,8 @@
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f1" displayName="Core_files" projectFiles="true">
           <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_hardware_setup_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_module_setup_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_project_setup_public.h</itemPath>
+          <itemPath>Sources/pgim_module_setup_public.h</itemPath>
+          <itemPath>Sources/pgim_project_setup_public.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2"
                        displayName="Microcontroller_files"
@@ -61,10 +61,10 @@
         </logicalFolder>
         <logicalFolder name="f3" displayName="Module_files" projectFiles="true">
           <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_event_setup_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_pwm_setup_public.h</itemPath>
           <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_sensor_setup_public.h</itemPath>
           <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
           <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_timer_setup_public.h</itemPath>
+          <itemPath>Sources/pgim_pwm_setup_public.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
