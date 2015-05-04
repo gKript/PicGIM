@@ -31,17 +31,19 @@
 		along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	END LICENSE
- */
+*/
 
 /*
 	This howto is part of the kit PicGIM 0.5 library.
-	In this example we analyze how to configure and how to write the right code to use a 0-5 volt analog input and use it as a duty cycle of a PWM output to modulate the brightness of an LED..
+
+	In this example we analyze how to configure PicGIM and how to write the right code using the TIMER interrupt
+	to control the blinking of a LED.
 	In this example we will use a PIC18F4620 with a 20MHz oscillator.
-	As always, the first thing to do is to configure the file pgim_project_setup_public.h to customize the project.
+	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
 
 			//	P R O J E C T   D E T A I L S
-			#define PG_PROJECT_NAME						ADC_to_PWM				//!< The name of your Project
+			#define PG_PROJECT_NAME						EVENTS_and_TIMER		//!< The name of your Project
 			#define PG_PROJECT_ORGANIZATION				gKript Howto			//!< The name of your Organization
 			#define PG_PROJECT_AUTHOR					asyntote				//!< Your name or, if you like, your nickname
 			#define PG_PROJECT_VERSION					0.1						//!< The version of your project
@@ -60,22 +62,24 @@
 			#define PG_PROJECT_INFO_SHOW				PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
 
 	Before compile PicGIM we still have to set some configuration files.
-	The pgim_module_setup_public.h file defines which modules are included and compiled.
-	This example requires the presence of the ADC module and PWM.
+	The "pgim_module_setup_public.h" file defines which modules are included and compiled.
+	This example requires the presence of the TIMER and EVENTS module.
+	To operate the TIMER module needs the DELAY module.
+	If you do not enable the DELAY module you will get a dependency error in compilation.
 	So here are the necessary settings:
- 
+
 			//		S O F T W A R E   G E N E R A L
 			#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 			//		H A R D W A R E   I N T E R N A L
-			#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_AD_CONVERTER					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_EVENTS							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_PWM							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_TIMER							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 			//		H A R D W A R E   E X T E R N A L
@@ -87,37 +91,50 @@
 			#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	Once you enabled the required modules we configure the HARDWARE.
-	ADC and PWM are internal devices and are part of the category HARDWARE INTERNAL.
+	TIMER and EVENTS are internal devices and are part of the category HARDWARE INTERNAL.
 	This means that I do not have to assign any pins to the devices.
-	But the PWM has special features which change the parameters and operation.
-	These settings are made by editing the file pgim_pwm_setup_public.h
+	
+	TIMER and EVENTS module needs to be configured, because thay have special features
+	which change the parameters and operation.
+	We will use only the TIMER 0 of TIMER module.
+	These settings are made by editing the file "pgim_timer_setup_public.h".
 	Here are the settings required:
 
-			//		P W M   C H A N N E L S   E N A B L I N G
-			#define PGIM_PWM_1							PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_PWM_2							PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+			//		T I M E R   E N A B L I N G
+			#define PGIM_TIMER_0					PG_ENABLE		//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
+			#define PGIM_TIMER_1					PG_DISABLE		//!< Must be: PG_DISABLE || PG_ENABLE_1_SHOT || PG_ENABLE_LOOP
 
-			//		E N H A N C E D   M O D E
-			#define PG_PWM_1_ENHANCED					PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PG_PWM_2_ENHANCED					PG_DISABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+			//		P A R A M E T E R S
+			#define PG_TIMER_0_DELAY_TRIM			320				//!< Set the correct value of delay in uSec resulting from test
+			#define PG_TIMER_1_DELAY_TRIM			299				//!< Set the correct value of delay in uSec resulting from test
 
-			//		E N H A N C E D   M O D E   C O N F I G U R A T I O N
-			#define PG_PWM_1_OUT_CONF					SINGLE_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV
-			#define PG_PWM_1_OUT_MODE					PWM_MODE_1		//!< Must be: PWM_MODE_1 || PWM_MODE_2 || PWM_MODE_3 || PWM_MODE_4
+	We will get only the interrupt from the TIMER 0.
+	These settings are made by editing the file "pgim_event_setup_public.h".
+	Here are the settings required:
 
-			#define PG_PWM_2_OUT_CONF					SINGLE_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV
-			#define PG_PWM_2_OUT_MODE					PWM_MODE_1		//!< Must be: PWM_MODE_1 || PWM_MODE_2 || PWM_MODE_3 || PWM_MODE_4
+			//	-------- Auto Interrupts Handler -----------------------------------------------------------
+			#define PG_EVENT_AUTO_HANDLER		PG_ENABLE			// PG_ENABLE	PG_DISABLE
 
-			#define PG_PWM_DEAD_TIME					12.000			//!< A value in micro-seconds [us]. Used only in HalfBridge mode!
+			//	-------- External Interrupts ----------------------------------------------------------------
+			#define PG_EVENT_SET_INT0			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_INT1			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_INT2			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_RB0			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 
-			#define PG_PWM_AUTO_SHUTDOWN				PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PG_PWM_AUTO_SHUTDOWN_MODE			PG_AUTOMATIC	//!< Must be: PG_MANUAL || PG_AUTOMATIC
-			#define PG_PWM_AUTO_SHUTDOWN_STATE_AC		PG_TRISTATE		//!< Must be: PG_TRISTATE || PG_HIGH || PG_LOW
-			#define PG_PWM_AUTO_SHUTDOWN_STATE_BD		PG_TRISTATE		//!< Must be: PG_TRISTATE || PG_HIGH || PG_LOW
-
-
-			//		D U T Y - C Y C L E   R E S O L U T I O N   M A X   C A L C U L A T I O N
-			#define PGIM_PWM_DC_RESOLUTION_MAX_CALC		PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
+			//	-------- Internal Interrupts ----------------------------------------------------------------
+			#define PG_EVENT_SET_TMR0			PG_ENABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_TMR1			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_TMR2			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_AD				PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_USARTRC        PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_USARTTX        PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_SSP			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_CCP1			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_CCP2			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_OSCF			PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_CM				PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_EE				PG_DISABLE			// PG_ENABLE	PG_DISABLE
+			#define PG_EVENT_SET_BCL			PG_DISABLE			// PG_ENABLE	PG_DISABLE
 
 
 	Now PicGIM is properly configured for the project to be developed.
@@ -129,7 +146,7 @@
 			Warning [2105] PicGIM:  Message >  ~~~  Check periodically on www.gkript.org if you are using the latest PicGIM released!
 			Warning [2105] -
 			Warning [2105] -
-			Warning [2105] PicGIM:  Project: [ ADC_to_PWM   V 0.1  ] by [ gKript Howto  ]  -  Author: [ asyntote  ]
+			Warning [2105] PicGIM:  Project: [ TIMER_to_EVENTS   V 0.1  ] by [ gKript Howto  ]  -  Author: [ asyntote  ]
 			Warning [2105] -
 			Warning [2105] -
 			Warning [2105] PicGIM:  Core >  Set 18F4620 as current mcu
@@ -138,14 +155,10 @@
 			Warning [2105] PicGIM:  Core >  ~~~  TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
 			Warning [2105] PicGIM:  Core >  Set MCU POWER SUPPLY to 5.00  [V]
 			Warning [2105] PicGIM:  Core >  Make sure that the 5.00  voltage is enough for the clock frequency chosen.
-			Warning [2105] PicGIM:  Note >  INTERRUPTS disabled
-			Warning [2105] PicGIM:  Note >  ~~~  Keep in mind that PicGim offers a very simple way to use them. See the documentation.
-			Warning [2105] PicGIM:  ADC module >  Loaded
-			Warning [2105] PicGIM:  PWM 1 module >  Loaded
-			Warning [2105] PicGIM:  PWM 1 module >  ~~~  Keep in mind that this module supports the ENHANCED mode
-			Warning [2105] PicGIM:  PWM module >  Enabled duty-cycle resolution max calculation [bit]
-
- */
+			Warning [2105] PicGIM:  DELAY module >  Loaded
+			Warning [2105] PicGIM:  IRQ module >  INTERRUPTS handle module loaded
+			Warning [2105] PicGIM:  Note >  ~~~  See the documentation to know how initialize interrupts you want to manage.
+*/
 
 
 //	Only in the file main.c it is always necessary to include the header file picgim_main.h.
@@ -155,20 +168,18 @@ void main( void ) {
 	//	It is compulsory to initialize PicGIM with this function.
 	pg_initialize();
 
-	//	I enable only one channel as analog input and turn on the ADC module.
-	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
-	pg_adc_set( PG_ADC_MODULE , PG_ON );
+    pg_pin_mode( MY_LED_TRIS , PG_OUT );        // metto il pin associato al led in uscita
+    pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );        // abilito gli eventi globali
+    pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );        // abilito gli eventi da periferica
+    pg_event_attach( PG_EVENT_TMR0 , led_blink );        // attacco la funzione "led_blink" all'interrupt del timer_0
+    pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );            // abilito la ricezione dell'interrupt dal timer_0
+    pg_timer_set_freq( PG_TIMER_0 , 4 , PG_HZ );    // setto il timer_0 a 4Hz ( 250 mSec ) così tra spento ed acceso ho 2Hz
+    pg_timer_start( PG_TIMER_0 );        // abilito il timer_0
 
-	//	I enable the PWM setting the maximum frequency calculated by PicGIM based on the frequency of the oscillator used in the project.
-	pg_pwm_set( pg_pwm_freq_max , PG_HZ );
-
-	//	We enter into an infinite loop that will run our program.
-	PG_LOOP ( PG_FOREVER ) {
-		//	I perform an analog conversion averaged over 10 readings to increase the accuracy.
-		pg_adc_start_avg( PG_CH_0 , 10 );
-		//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted. For example
-		pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
-	}
+	//	We enter into an infinite loop.
+	PG_INFINITE_LOOP;
 }
+
+//	At this point you can compile the project and verify that the brightness of the LED changes depending on the input voltage.
 
 
