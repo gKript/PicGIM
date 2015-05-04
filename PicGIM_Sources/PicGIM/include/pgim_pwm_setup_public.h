@@ -74,7 +74,6 @@
 		#define PG_PWM_AUTO_SHUTDOWN_STATE_AC		PG_TRISTATE		//!< Must be: PG_TRISTATE || PG_HIGH || PG_LOW
 		#define PG_PWM_AUTO_SHUTDOWN_STATE_BD		PG_TRISTATE		//!< Must be: PG_TRISTATE || PG_HIGH || PG_LOW
 		
-		
 		//		D U T Y - C Y C L E   R E S O L U T I O N   M A X   C A L C U L A T I O N
 		#define PGIM_PWM_DC_RESOLUTION_MAX_CALC		PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 		
