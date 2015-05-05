@@ -6,65 +6,65 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="PicGIM" projectFiles="true">
         <logicalFolder name="f1" displayName="_Supported_Processor" projectFiles="true">
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2320.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2550.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2553.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4520.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4550.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4553.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4620.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f97j60.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_24fj256gb110.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f2320.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f2550.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f2553.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4520.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4550.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4553.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4620.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f97j60.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_24fj256gb110.h</itemPath>
         </logicalFolder>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_adc.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_buzzer.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_caldelay.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_custom_type.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_defines.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_doxygen.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_ee.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_encoder.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_error.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_event.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_ezfuse.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_ftoa.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_int_osc.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_lcd_hd44780.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_module_setup.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_pwm.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_sensor.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_serial.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_spi.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_timer.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_version.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/picgim.h</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/include/picgim_main.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_adc.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_buzzer.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_caldelay.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_custom_type.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_defines.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_doxygen.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_ee.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_encoder.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_error.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_event.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_ezfuse.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_ftoa.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_int_osc.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_lcd_hd44780.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_module_setup.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_pwm.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_sensor.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_serial.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_spi.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_timer.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/pgim_version.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/picgim.h</itemPath>
+        <itemPath>../../Sources/PicGIM/include/picgim_main.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f1" displayName="Core_files" projectFiles="true">
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_hardware_setup_public.h</itemPath>
-          <itemPath>../../Sources/pgim_module_setup_public.h</itemPath>
-          <itemPath>../../Sources/pgim_project_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_hardware_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_module_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_project_setup_public.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2"
                        displayName="Microcontroller_files"
                        projectFiles="true">
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2320_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2550_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f2553_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4520_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4550_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4553_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f4620_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_18f97j60_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_mcu/pgim_24fj256gb110_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f2320_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f2550_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f2553_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4520_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4550_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4553_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f4620_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_18f97j60_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_mcu/pgim_24fj256gb110_public.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f3" displayName="Module_files" projectFiles="true">
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_sensor_setup_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
-          <itemPath>../../../../PicGIM_Sources/PicGIM/include/pgim_pwm_setup_public.h</itemPath>
-          <itemPath>../../Sources/pgim_event_setup_public.h</itemPath>
-          <itemPath>../../Sources/pgim_timer_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_sensor_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_pwm_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_event_setup_public.h</itemPath>
+          <itemPath>../../Sources/PicGIM/include/pgim_timer_setup_public.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -76,22 +76,22 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="PicGIM" projectFiles="true">
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_adc.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_buzzer.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_caldelay.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_ee.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_encoder.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_error.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_event.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_ftoa.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_init.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_int_osc.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_lcd_hd44780.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_pwm.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_sensor.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_serial.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_spi.c</itemPath>
-        <itemPath>../../../../PicGIM_Sources/PicGIM/src/pgim_timer.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_buzzer.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_caldelay.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_ee.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_encoder.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_error.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_event.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_ftoa.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_init.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_int_osc.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_lcd_hd44780.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_pwm.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_sensor.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_serial.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_spi.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_timer.c</itemPath>
+        <itemPath>../../Sources/PicGIM/src/pgim_adc.c</itemPath>
       </logicalFolder>
       <itemPath>../../main.c</itemPath>
     </logicalFolder>
@@ -102,8 +102,8 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>../../../../PicGIM_Sources/PicGIM/include</Elem>
-    <Elem>../../../../PicGIM_Sources/PicGIM/src</Elem>
+    <Elem>../../Sources/PicGIM/include</Elem>
+    <Elem>../../Sources/PicGIM/src</Elem>
     <Elem>../..</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
@@ -124,11 +124,8 @@
           <linkerLibItems>
           </linkerLibItems>
         </linkerTool>
-        <archiverTool>
-        </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
       </compileType>
@@ -145,7 +142,7 @@
         <property key="code-model" value="ms"/>
         <property key="data-model" value="oa-"/>
         <property key="default-char-unsigned" value="false"/>
-        <property key="enable-all-optimizations" value="false"/>
+        <property key="enable-all-optimizations" value="true"/>
         <property key="enable-int-promotion" value="false"/>
         <property key="enable-multi-bank-stack-model" value="false"/>
         <property key="enable-ob" value="true"/>
@@ -160,7 +157,7 @@
         <property key="enable-ou" value="true"/>
         <property key="enable-ow" value="true"/>
         <property key="extra-include-directories"
-                  value="..\..\Sources;..\..\..\..\PicGIM_Sources\PicGIM\include;..\..\..\..\PicGIM_Sources\PicGIM\include\pgim_mcu"/>
+                  value="..\..\Sources\PicGIM\include;..\..\Sources\PicGIM\include\pgim_mcu"/>
         <property key="optimization-master" value="Enable all"/>
         <property key="preprocessor-macros" value=""/>
         <property key="procedural-abstraction-passes" value="4"/>

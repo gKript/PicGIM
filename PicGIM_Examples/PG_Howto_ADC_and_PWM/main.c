@@ -38,7 +38,7 @@
 
 	In this example we analyze how to configure PicGIM and how to write the right code using a 0-5 volt analog input
 	to control the duty cycle of a PWM output that modulates the brightness of a LED.
-	In this example we will use a PIC18F4620 with a 20MHz oscillator.
+	In this example we will use a PIC18F4620 with a 40MHz oscillator.
 	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
 
@@ -51,7 +51,7 @@
 			#define PG_PROJECT_DATE						04/05/2015				//!< Date of the project
 
 			//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M
-			#define PG_CLOCK							20.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
+			#define PG_CLOCK							40.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
 			#define PG_USER_SUPPLY_VOLT					5.00					//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [V]. Accuracy: X.XX
 			#define PG_USER_SUPPLY_BATTERY				PG_NO					//!< Must be: PG_YES  ||  PG_NO
 			#define PG_USE_INTERNAL_OSC					PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
@@ -137,7 +137,7 @@
 			Warning [2105] -
 			Warning [2105] -
 			Warning [2105] PicGIM:  Core >  Set 18F4620 as current mcu
-			Warning [2105] PicGIM:  Core >  Using EXTERNAL oscillator ( 20.000  [MHz] )
+			Warning [2105] PicGIM:  Core >  Using EXTERNAL oscillator ( 40.000  [MHz] )
 			Warning [2105] PicGIM:  Core >  ~~~  All fuses are set as you want.
 			Warning [2105] PicGIM:  Core >  ~~~  TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
 			Warning [2105] PicGIM:  Core >  Set MCU POWER SUPPLY to 5.00  [V]
@@ -149,6 +149,13 @@
 			Warning [2105] PicGIM:  PWM 1 module >  ~~~  Keep in mind that this module supports the ENHANCED mode
 			Warning [2105] PicGIM:  PWM module >  Enabled duty-cycle resolution max calculation [bit]
 
+*/
+
+/*
+	RELATED TO THIS EXAMPLE :
+
+	ADC module	: http://howto.gkript.org/picgim/0.5/a00004.html
+	PWM module	: http://howto.gkript.org/picgim/0.5/a00052.html
 */
 
 
