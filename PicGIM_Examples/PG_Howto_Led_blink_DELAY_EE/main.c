@@ -36,13 +36,13 @@
 /*
 	This howto is part of the kit PicGIM 0.5 library.
 
-	In this example we analyze how to configure PicGIM and how to write the right code to blink a LED once per second.
+	In this example we analyze how to configure PicGIM and how to write the right code to blink a LED once per second using the internal EEPROM and a DELAY without a real LOOP.
 	In this example we will use a PIC18F4620 with a 40MHz oscillator.
 	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
 
 			//	P R O J E C T   D E T A I L S
-			#define PG_PROJECT_NAME						Led_blink_DELAY			//!< The name of your Project
+			#define PG_PROJECT_NAME						Led_blink_DELAY_EE		//!< The name of your Project
 			#define PG_PROJECT_ORGANIZATION				gKript Howto			//!< The name of your Organization
 			#define PG_PROJECT_AUTHOR					asyntote				//!< Your name or, if you like, your nickname
 			#define PG_PROJECT_VERSION					0.1						//!< The version of your project
@@ -74,7 +74,7 @@
 			#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_AD_CONVERTER					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_EE								PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_PWM							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -87,10 +87,11 @@
 			//		H A R D W A R E   G K R I P T
 			#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
-	Once you enabled the DELAY module we configure the HARDWARE.
+	Once you enabled the DELAY and the EE modules we configure the HARDWARE.
 	The DELAY module is software and is part of the SOFTWARE GENERAL category.
+	The DELAY module is an internal peripheral and is part of the HARWARE INTERNAL category.
 	This means that I do not have to assign any pins to the devices.
-	The DELAY module not needs to be configured. Is crucial to indicate correctly the oscillator frequency.
+	The DELAY and EE modules not needs to be configured. Is crucial to indicate correctly the oscillator frequency.
 
 	Now PicGIM is properly configured for the project to be developed.
 
@@ -113,6 +114,7 @@
 			Warning [2105] PicGIM:  DELAY module >  Loaded
 			Warning [2105] PicGIM:  Note >  INTERRUPTS disabled
 			Warning [2105] PicGIM:  Note >  ~~~  Keep in mind that PicGim offers a very simple way to use them. See the documentation.
+			Warning [2105] PicGIM:  EE module >  Loaded
 
 */
 
@@ -120,6 +122,7 @@
 	RELATED TO THIS EXAMPLE :
 
 	DELAY module	: http://howto.gkript.org/picgim/0.5/a00008.html
+	DELAY module	: http://howto.gkript.org/picgim/0.5/
 	PINS name		: http://howto.gkript.org/picgim/0.5/a00014.html#langpins
 	DEFINES			: http://howto.gkript.org/picgim/0.5/a00014.html#langpinmpcdefine
 	MACRO			: http://howto.gkript.org/picgim/0.5/a00014.html#langpinmacro
