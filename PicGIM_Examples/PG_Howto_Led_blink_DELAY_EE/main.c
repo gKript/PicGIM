@@ -36,7 +36,8 @@
 /*
 	This howto is part of the kit PicGIM 0.5 library.
 
-	In this example we analyze how to configure PicGIM and how to write the right code to blink a LED once per second using the internal EEPROM and a DELAY without a real LOOP.
+	In this example we analyze how to configure PicGIM and how to write the right code
+	to blink a LED once per second using the internal EEPROM and a DELAY without a real LOOP.
 	In this example we will use a PIC18F4620 with a 40MHz oscillator.
 	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
@@ -91,7 +92,8 @@
 	The DELAY module is software and is part of the SOFTWARE GENERAL category.
 	The DELAY module is an internal peripheral and is part of the HARWARE INTERNAL category.
 	This means that I do not have to assign any pins to the devices.
-	The DELAY and EE modules not needs to be configured. Is crucial to indicate correctly the oscillator frequency.
+	The DELAY and EE modules not needs to be configured.
+	Is crucial to indicate correctly the oscillator frequency.
 
 	Now PicGIM is properly configured for the project to be developed.
 
