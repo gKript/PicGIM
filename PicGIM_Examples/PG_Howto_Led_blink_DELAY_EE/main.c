@@ -122,7 +122,7 @@
 	RELATED TO THIS EXAMPLE :
 
 	DELAY module	: http://howto.gkript.org/picgim/0.5/a00008.html
-	DELAY module	: http://howto.gkript.org/picgim/0.5/
+	EEPROM module	: http://howto.gkript.org/picgim/0.5/a00036.html
 	PINS name		: http://howto.gkript.org/picgim/0.5/a00014.html#langpins
 	DEFINES			: http://howto.gkript.org/picgim/0.5/a00014.html#langpinmpcdefine
 	MACRO			: http://howto.gkript.org/picgim/0.5/a00014.html#langpinmacro
@@ -138,26 +138,52 @@
 //	A TRIS definition for the PIN ( TRISBbits.TRISB3 = T_B3 )
 #define MY_LED_TRIS     T_B3
 
+//	The location I chose to store the LED status.
+#define MY_LED_ADDRESS  0x0001
+
+//	With this mask I execute a logical AND with the variable led_status to obtain only the least significant bit.
+#define MY_LED_MASK  0x01
 
 void main( void ) {
+
+	//	I declare a backing variable to hold in ram led status.
+	_pg_Uint8 led_state = PG_OFF;
+
 	//	It is compulsory to initialize PicGIM with this function.
 	pg_initialize();
 
 	//	This macro sets a TRIS as required by the user. It is not compulsory to use these macros.
     pg_pin_mode( MY_LED_TRIS , PG_OUT );
 
-	//	This MACRO sets the logic state 0 to the PIN indicated by the user.
-	pg_pin_clear( MY_LED );
+	//	Using the module EE I read the memory location I chose to store the LED status.
+	led_state = (_pg_Uint8)pg_ee_read( MY_LED_ADDRESS );
 
-	//	We enter into an infinite loop.
-	PG_LOOP( PG_FOREVER ) {
+	if ( led_state & MY_LED_MASK ) {		//	If the led_status LSB is '1'
 
-		// This macro takes care to invert the status of a PIN.
-		pg_pin_toggle( MY_LED );
+		//	This MACRO sets the logic state 1 to the PIN indicated by the user.
+		pg_pin_set( MY_LED );
 
-		//	The DELAY function to wait 500mS
-		pg_delay( 500 , PG_MSEC );
+		//	I reverse the LED status for the next iteration.
+		led_state = 0x00;
 	}
+	else {									//	If the led_status LSB is '0'
+		
+		//	This MACRO sets the logic state 0 to the PIN indicated by the user.
+		pg_pin_clear( MY_LED );
+
+		//	I reverse the LED status for the next iteration.
+		led_state = 0x01;
+	}
+
+	//	Using the module EE I write the memory location I chose to store the LED status.
+	pg_ee_write( led_state , MY_LED_ADDRESS );
+
+	//	The DELAY function to wait 500mS
+	pg_delay( 500 , PG_MSEC );
+
+	//	I reset the microcontroller to reiterate the state of the LED.
+	Reset();
+
 }
 
 //	At this point you can compile the project and verify that the LED will blink 2 times per second.
