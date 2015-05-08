@@ -219,7 +219,7 @@
         <property key="tracecontrol.timestamp" value="2"/>
         <property key="tracecontrol.tracebufmax" value="546000"/>
         <property key="tracecontrol.tracefile"
-                  value="C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\PicGIM\branches\PicGIM-0.5\PicGIM_Examples\PG_Howto_LCD_HD44780_HelloWorld\MPLabX\PG_Howto_LCD_HD44780_HelloWorld.X\defmplabxtrace.log"/>
+                  value="C:\Documents and Settings\danilo.zannoni\Documenti\We.PIC\PicGIM\branches\PicGIM-0.5\PicGIM_Examples\PG_Howto_ENCODER_BUZZER_and_EVENTS\MPLabX\PG_Howto_ENCODER_BUZZER_and_EVENTS.X\defmplabxtrace.log"/>
         <property key="tracecontrol.traceresetonrun" value="false"/>
         <property key="uart10io.output" value="window"/>
         <property key="uart10io.outputfile" value=""/>
