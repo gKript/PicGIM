@@ -37,16 +37,16 @@
 	This howto is part of the kit PicGIM 0.5 library.
 
 	In this example we analyze how to configure PicGIM and how to write the right code
-	with the purpose of writing a text on a HD44780 controller lcd display, using the busy flag bit.
-	The aim is to write "Hello world!" on the first line.
+	with the purpose of writing a text on a HD44780 controller 16x2 lcd display, using the busy flag bit.
+	The aim is to write "Hello world!" on the first row, starting from the third column.
 	We choose to use, for example, a PIC18F4620 with a 20MHz oscillator.
 	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
 
 			//	P R O J E C T   D E T A I L S
-			#define PG_PROJECT_NAME						LCD_HD44780_Busy_Text	//!< The name of your Project
+			#define PG_PROJECT_NAME						LCD_HD44780_HelloWorld	//!< The name of your Project
 			#define PG_PROJECT_ORGANIZATION				gKript Howto			//!< The name of your Organization
-			#define PG_PROJECT_AUTHOR					skymatrix				//!< Your name or, if you like, your nickname
+			#define PG_PROJECT_AUTHOR					skymatrix/asyntote		//!< Your name or, if you like, your nickname
 			#define PG_PROJECT_VERSION					0.1						//!< The version of your project
 			#define PG_PROJECT_STATE					PG_DEBUG				//!< Must be: PG_DEBUG  ||  PG_RELEASE
 			#define PG_PROJECT_DATE						07/05/2015				//!< Date of the project
@@ -64,12 +64,20 @@
 
 	Before compile PicGIM we still have to set some configuration files.
 	The "pgim_module_setup_public.h" file defines which modules are included and compiled.
-	This example only requires the presence of the LCD_HD44780 module.
+	This example code requires the presence of the LCD_HD44780 module.
+	The LCD module is dependent on the DELAY module, then this one must also be enabled.
+	If you do not enable it, PicGIM will return a compilation error.
+	
+	The DELAY module is software and is part of the SOFTWARE GENERAL category.
+	This means that I do not have to assign any pins to the devices.
+	The DELAY module not needs to be configured, it is crucial to indicate correctly
+	the oscillator frequency, so that it can correctly calculate timings.
+	
 	So here are the necessary settings:
 
 			//		S O F T W A R E   G E N E R A L
 			#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-			#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PGIM_CAL_DELAY						PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 			#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 			//		H A R D W A R E   I N T E R N A L
@@ -90,11 +98,11 @@
 			#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
 
 	Always in the same "pgim_module_setup_public.h" file, if required,
-	we must configure the related software configuration.	
-	We use, for example, a 2x16 display with only one controller.
-	Controllers not used must declared unused by PG_MISSING define.
-	We need to read busy flag.
-	The first row is at address 0x00
+	we must modify the related software configuration.	
+	In a 2x16 lcd display there is only one on-board controller.
+	Controllers not used must be declared unused, by PG_MISSING define.
+	We need to read busy flag bit, from lcd.
+	The first row is at address 0x00.
 	We want a spash screen for a time of two seconds.
 	So, here is how to configure it:
 	
@@ -109,11 +117,12 @@
 			#define PG_LCD_HD44780_SPLASH_TIME		2						//!< Show time of splash in seconds [s] || 0 = do not clear
 
 
-	Now that the module is enabled and software side configured, it must be HARDWARE configured.
-	LCD_HD44780 is an external devices and is part of the category HARDWARE EXTERNAL.
-	This means that pins are to be assigned to it, in order to be able to control its functions.
+	Now that the modules are enabled and software side configured, we must configure the HARDWARE.
+	LCD_HD44780 is an external devices and is part of the category HARDWARE EXTERNAL;
+	this means that Pic pins are to be assigned to display, in order to be able to control its functions.
 	These settings are made by editing the dedicated section in the file "pgim_hardware_setup_public.h".
-	Our display has a single controller and a led backlight (BL).
+	Our display has a single controller, then only one enable pin.
+	It is provided of a led backlight (BL), so a pin is dedicated to drive it.
 	We will use it in the configuration with four bits of data.
 	We assign the following pin as in the following table:
 	
@@ -132,11 +141,13 @@
 	If not, we have to indicate them are missing by PG_MISSING define
 	(referring to the relative physical pin define) and by PG_NO (referring
 	to the related "_PRESENT" define).
-	After the latch bits, in the same way, we assign the tris bits corrected
-	and also port bits (we have to read the busy bit flag).
-	Here are the settings required:
+	After the latch bits, in the same way, we assign the right tris bits
+	and also the right port bits (because we have to read the busy bit flag).
+	It is of fundamental importance that the number of the port pins
+	is the same for all three values!
+	Here are the required settings:
 
-			#define PG_LCD_HD44780_RS					L_D4
+			#define PG_LCD_HD44780_RS					L_D4				//!< Must be: <pin-lat-name>
 			#define PG_LCD_HD44780_RW_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
 			#define PG_LCD_HD44780_RW					L_D5				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
 			#define PG_LCD_HD44780_EN_0_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
@@ -166,10 +177,30 @@
 			#define PG_LCD_HD44780_DATA_3_TRIS			T_D3				//!< Must be: <pin-tris-name>
 			#define PG_LCD_HD44780_BL_TRIS				T_D7				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 			
-			#define PG_LCD_HD44780_DATA_0_PORT			P_D0				//!< Must be: <pin-port-name>
-			#define PG_LCD_HD44780_DATA_1_PORT			P_D1				//!< Must be: <pin-port-name>
-			#define PG_LCD_HD44780_DATA_2_PORT			P_D2				//!< Must be: <pin-port-name>
-			#define PG_LCD_HD44780_DATA_3_PORT			P_D3				//!< Must be: <pin-port-name>
+			#define PG_LCD_HD44780_DATA_0_PORT			P_D0				//!< Must be: <pin-port-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_1_PORT			P_D1				//!< Must be: <pin-port-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_2_PORT			P_D2				//!< Must be: <pin-port-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_3_PORT			P_D3				//!< Must be: <pin-port-name> || PG_MISSING if not used.
+
+	It is also possible not to use the busy flag. Of course it will lose speed, but we save a pin
+	because the RW must remain fixed at low level (the display will only be written and never read).
+	Here now are only defines that need to be changed in the configuration just created to not use the busy flag:
+	
+			Lcd RW pin -> not used (permanently connect it to low level)
+			#define PG_LCD_HD44780_BUSY_FLAG			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+			#define PG_LCD_HD44780_RW_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
+			#define PG_LCD_HD44780_RW					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_RW_TRIS				PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_0_PORT			PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_1_PORT			PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_2_PORT			PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_DATA_3_PORT			PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
+	
+	If the backlight is not present, files must be configured in this way:
+	
+			#define PG_LCD_HD44780_BL_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
+			#define PG_LCD_HD44780_BL					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+			#define PG_LCD_HD44780_BL_TRIS				PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 
 	Now PicGIM is properly configured for the project to be developed.
 
@@ -177,32 +208,38 @@
 	If all goes well they will be like these :
 
 			Warning [2105] PicGIM:  Core >  ...
+			
 */
 
 /*
 	RELATED TO THIS EXAMPLE :
 
 	HD44780 module	: http://howto.gkript.org/picgim/0.5/a00050.html
+	DELAY module	: http://howto.gkript.org/picgim/0.5/a00008.html
 */
 
 
 //	Only in the file main.c it is always necessary to include the header file picgim_main.h.
 #include "picgim_main.h"
 
+#define	LCD_CONTROLLER
+#define	LCD_ROW
+#define	LCD_COLUMN
+
 void main( void ) {
 	//	It is compulsory to initialize PicGIM with this function.
 	pg_initialize();
 	
-	//	Write text string to lcd on controller "0", on the first line from the third character.
-	pg_lcd_hd44780_write_p_string_rom( 0 , 0 , 2 , "Hallo world!" ); 
+	//	Write text string to lcd on controller '0', on the first row from the third column.
+	pg_lcd_hd44780_write_p_string_rom( LCD_CONTROLLER , LCD_ROW , LCD_COLUMN , "Hello world!" ); 
 	
 	//	We enter into an infinite loop.
 	PG_HALT;
 }
 
 /*	At this point you can compile the project and verify that the display
-	power on backlight, shows the slpash screen for two seconds and then
-	correctly printing the string on the first line from the third character.
+	power on backlight, shows the slpash screen and then
+	correctly print the string on the first line from the third column.
 */
 
 
