@@ -431,13 +431,17 @@ LCD 4x16 (tipo WH1604A)
 		sprintf( Str , Format , Val );
 		pg_lcd_hd44780_write_string( ControllerNumber , Str );
 	}
+	
+	
+	#if ( PGIM_FTOA	== PG_ENABLE )
+		void	pg_lcd_hd44780_write_p_float( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint24 Decimal_Digits , float Flt ) {
+//			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
+			pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );
+			pg_lcd_hd44780_write_string( ControllerNumber , pg_ftoa( Flt, Decimal_Digits ) );
+		}
+	#endif
 
-	void	pg_lcd_hd44780_write_p_float( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint24 Decimal_Digits , float Flt ) {
-//		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
-		pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );
-		pg_lcd_hd44780_write_string( ControllerNumber , pg_ftoa( Flt, Decimal_Digits ) );
-	}
-
+	
 	void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int8 Chr ) {
 		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
 		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );

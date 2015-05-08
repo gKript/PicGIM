@@ -51,12 +51,12 @@
 	#define	_PGIM_PROJECT_SETUP_PUBLIC_H_
 
 		//	P R O J E C T   D E T A I L S
-		#define PG_PROJECT_NAME						ADC_to_PWM				//!< The name of your Project
+		#define PG_PROJECT_NAME						LCD_HD44780_HelloWorld	//!< The name of your Project
 		#define PG_PROJECT_ORGANIZATION				gKript Howto			//!< The name of your Organization
-		#define PG_PROJECT_AUTHOR					asyntote				//!< Your name or, if you like, your nickname
+		#define PG_PROJECT_AUTHOR					skymatrix/asyntote		//!< Your name or, if you like, your nickname
 		#define PG_PROJECT_VERSION					0.1						//!< The version of your project
 		#define PG_PROJECT_STATE					PG_DEBUG				//!< Must be: PG_DEBUG  ||  PG_RELEASE
-		#define PG_PROJECT_DATE						04/05/2015				//!< Date of the project
+		#define PG_PROJECT_DATE						07/05/2015				//!< Date of the project
 	
 		//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M
 		#define PG_CLOCK							20.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.

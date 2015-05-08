@@ -38,7 +38,7 @@
 
 	In this example we analyze how to configure PicGIM and how to write the right code
 	with the purpose of writing a text on a HD44780 controller 16x2 lcd display, using the busy flag bit.
-	The aim is to write "Hello world!" on the first row, starting from the third column.
+	The aim is to write "Hello world!" on the first line, starting from the third column.
 	We choose to use, for example, a PIC18F4620 with a 20MHz oscillator.
 	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
@@ -73,7 +73,7 @@
 	The DELAY module not needs to be configured, it is crucial to indicate correctly
 	the oscillator frequency, so that it can correctly calculate timings.
 	
-	So here are the necessary settings:
+	Here, there are the necessary settings:
 
 			//		S O F T W A R E   G E N E R A L
 			#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
@@ -102,9 +102,9 @@
 	In a 2x16 lcd display there is only one on-board controller.
 	Controllers not used must be declared unused, by PG_MISSING define.
 	We need to read busy flag bit, from lcd.
-	The first row is at address 0x00.
+	The first line is at address 0x00.
 	We want a spash screen for a time of two seconds.
-	So, here is how to configure it:
+	Here, there are the necessary settings:
 	
 			#define	PG_LCD_HD44780_COLUMNS			16						//!< Number of columns of the display
 			#define	PG_LCD_HD44780_LINES			2						//!< Number of lines of the display
@@ -142,10 +142,10 @@
 	(referring to the relative physical pin define) and by PG_NO (referring
 	to the related "_PRESENT" define).
 	After the latch bits, in the same way, we assign the right tris bits
-	and also the right port bits (because we have to read the busy bit flag).
+	and also the right port bits (because we have to read the busy flag bit ).
 	It is of fundamental importance that the number of the port pins
 	is the same for all three values!
-	Here are the required settings:
+	Here, there are the required settings:
 
 			#define PG_LCD_HD44780_RS					L_D4				//!< Must be: <pin-lat-name>
 			#define PG_LCD_HD44780_RW_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
@@ -184,7 +184,7 @@
 
 	It is also possible not to use the busy flag. Of course it will lose speed, but we save a pin
 	because the RW must remain fixed at low level (the display will only be written and never read).
-	Here now are only defines that need to be changed in the configuration just created to not use the busy flag:
+	Now, here we have the only defines that need to be changed in the configuration just created to not use the busy flag bit:
 	
 			Lcd RW pin -> not used (permanently connect it to low level)
 			#define PG_LCD_HD44780_BUSY_FLAG			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -207,31 +207,47 @@
 	These are the warnings that PicGIM returns during compilation.
 	If all goes well they will be like these :
 
-			Warning [2105] PicGIM:  Core >  ...
-			
+			Warning [2105] PicGIM:  Core >  Version "0.5-0"  : Milestone "0.5"  : State "rel" 
+			Warning [2105] PicGIM:  Message >  ~~~  Check periodically on www.gkript.org if you are using the latest PicGIM released!
+			Warning [2105] -
+			Warning [2105] -
+			Warning [2105] PicGIM:  Project: [ LCD_HD44780_HelloWorld   V 0.1  ] by [ gKript Howto  ]  -  Author: [ skymatrix/asyntote  ]
+			Warning [2105] -
+			Warning [2105] -
+			Warning [2105] PicGIM:  Core >  Set 18F4620 as current mcu
+			Warning [2105] PicGIM:  Core >  Using EXTERNAL oscillator ( 20.000  [MHz] )
+			Warning [2105] PicGIM:  Core >  ~~~  All fuses are set as you want.
+			Warning [2105] PicGIM:  Core >  ~~~  TRADITIONAL code activated but EXTENDED Instructions Set is available with this MCU. Keep on mind!
+			Warning [2105] PicGIM:  Core >  Set MCU POWER SUPPLY to 5.00  [V]
+			Warning [2105] PicGIM:  Core >  Make sure that the 5.00  voltage is enough for the clock frequency chosen.
+			Warning [2105] PicGIM:  DELAY module >  Loaded
+			Warning [2105] PicGIM:  Note >  INTERRUPTS disabled
+			Warning [2105] PicGIM:  Note >  ~~~  Keep in mind that PicGim offers a very simple way to use them. See the documentation.
+			Warning [2105] PicGIM:  LCD HD44780 module >  Loaded
 */
 
 /*
 	RELATED TO THIS EXAMPLE :
-
-	HD44780 module	: http://howto.gkript.org/picgim/0.5/a00050.html
-	DELAY module	: http://howto.gkript.org/picgim/0.5/a00008.html
+	
+	HD44780 module :		http://howto.gkript.org/picgim/0.5/a00050.html
+	DELAY module :			http://howto.gkript.org/picgim/0.5/a00008.html
+	PIN name reference :	http://howto.gkript.org/picgim/0.5/a00014.html#langpins
 */
 
 
 //	Only in the file main.c it is always necessary to include the header file picgim_main.h.
 #include "picgim_main.h"
 
-#define	LCD_CONTROLLER
-#define	LCD_ROW
-#define	LCD_COLUMN
+#define	LCD_CONTROLLER		0		//The controller number. The first and only is '0'.
+#define	LCD_LINE			0		//The line number. The first is '0'.
+#define	LCD_COLUMN			2		//The column number. In this instance is the third.
 
 void main( void ) {
 	//	It is compulsory to initialize PicGIM with this function.
 	pg_initialize();
 	
-	//	Write text string to lcd on controller '0', on the first row from the third column.
-	pg_lcd_hd44780_write_p_string_rom( LCD_CONTROLLER , LCD_ROW , LCD_COLUMN , "Hello world!" ); 
+	//	Write text string to lcd on controller '0', on the first line from the third column.
+	pg_lcd_hd44780_write_p_string_rom( LCD_CONTROLLER , LCD_LINE , LCD_COLUMN , "Hello world!" ); 
 	
 	//	We enter into an infinite loop.
 	PG_HALT;
