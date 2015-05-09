@@ -38,7 +38,7 @@
 
 	In this example we analyze how to configure PicGIM and how to write the right code using the TIMER interrupt
 	to control the blinking of a LED.
-	In this example we will use a PIC18F4620 with a 20MHz oscillator.
+	In this example we will use a PIC18F4620 with a 40MHz oscillator.
 	As always, the first thing to do is to configure the file "pgim_project_setup_public.h" to customize the project.
 	In this example we filled out the necessary fields in this way:
 
@@ -51,7 +51,7 @@
 			#define PG_PROJECT_DATE						04/05/2015				//!< Date of the project
 
 			//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M
-			#define PG_CLOCK							20.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
+			#define PG_CLOCK							40.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [MHz]. Accuracy: X.XXX. \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
 			#define PG_USER_SUPPLY_VOLT					5.00					//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [V]. Accuracy: X.XX
 			#define PG_USER_SUPPLY_BATTERY				PG_NO					//!< Must be: PG_YES  ||  PG_NO
 			#define PG_USE_INTERNAL_OSC					PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
@@ -210,9 +210,9 @@ void main( void ) {
 	//	Enabling the event from TIMER 0.
     pg_event_set( PG_EVENT_TMR0 , PG_ENABLE );
 
-	//	You set the frequency of the timer 0 to 4 Hz.
-	//	Each 4Hz we will get an interrupt.
-    pg_timer_set_freq( PG_TIMER_0 , 4 , PG_HZ );
+	//	You set the frequency of the timer 0 to 2 Hz.
+	//	Each 2Hz we will get an interrupt.
+    pg_timer_set_freq( PG_TIMER_0 , 2 , PG_HZ );
 
 	//	Starting the TIMER 0.
 	//	After this line will begin the interrupts.
