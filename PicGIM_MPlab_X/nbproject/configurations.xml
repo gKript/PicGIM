@@ -124,7 +124,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>C18</languageToolchain>
-        <languageToolchainVersion></languageToolchainVersion>
+        <languageToolchainVersion>3.34</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
