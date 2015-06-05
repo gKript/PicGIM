@@ -59,11 +59,41 @@
 	#endif
 	
 	
-	void pg_lcd_hd44780_init( void ) {		
-		if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_0 );
-		if( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_1 );
-		if( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_2 );
-		if( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )		pg_lcd_hd44780_init_routine( PG_CONTROLLER_3 );
+	void pg_lcd_hd44780_init( void ) {
+		#if ( PG_LCD_HD44780_RW_PRESENT == PG_YES )
+			PG_LCD_HD44780_RW = PG_LOW;
+			PG_LCD_HD44780_RW_TRIS = PG_OUT;
+		#endif
+
+		#if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_0 = PG_DISABLE;
+			PG_LCD_HD44780_EN_0_TRIS = PG_OUT;
+		#endif
+		#if( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_1 = PG_DISABLE;
+			PG_LCD_HD44780_EN_1_TRIS = PG_OUT;
+		#endif
+		#if( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_2 = PG_DISABLE;
+			PG_LCD_HD44780_EN_2_TRIS = PG_OUT;
+		#endif
+		#if( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
+			PG_LCD_HD44780_EN_3 = PG_DISABLE;
+			PG_LCD_HD44780_EN_3_TRIS = PG_OUT;
+		#endif
+		
+		#if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
+			pg_lcd_hd44780_init_routine( PG_CONTROLLER_0 );
+		#endif
+		#if( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
+			pg_lcd_hd44780_init_routine( PG_CONTROLLER_1 );
+		#endif
+		#if( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
+			pg_lcd_hd44780_init_routine( PG_CONTROLLER_2 );
+		#endif
+		#if( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
+			pg_lcd_hd44780_init_routine( PG_CONTROLLER_3 );
+		#endif
 	}
 
 
@@ -77,35 +107,20 @@
 			pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , new_char[i] );
 	}
 
+	
 	#if	( PGIM_EE == PG_ENABLE )
-
 		void pg_lcd_hd44780_char_generator_from_EE( _pg_Uint8 ControllerNumber ,char location , _pg_Uint16 ee_addy ) {
 			char i;
 			pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
 			for( i = 0 ; i < 8 ; i++ )
 				pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , pg_ee_read( ee_addy + i ) );
 		}
-
 	#endif
 
+	
 	void pg_lcd_hd44780_init_routine( _pg_Uint8 ControllerNumber ) {
 		_pg_Uint8 c, r;
 		
-		#if ( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
-			PG_LCD_HD44780_EN_0_TRIS = PG_OUT;
-		#endif
-		#if ( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
-			PG_LCD_HD44780_EN_1_TRIS = PG_OUT;
-		#endif
-		#if ( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
-			PG_LCD_HD44780_EN_2_TRIS = PG_OUT;
-		#endif
-		#if ( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
-			PG_LCD_HD44780_EN_3_TRIS = PG_OUT;
-		#endif
-		#if ( PG_LCD_HD44780_RW_PRESENT == PG_YES )
-			PG_LCD_HD44780_RW_TRIS  = PG_OUT;
-		#endif
 		PG_LCD_HD44780_RS_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_0_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_1_TRIS  = PG_OUT;
@@ -161,6 +176,7 @@
 			PG_LCD_HD44780_BL_TRIS = PG_OUT;
 			PG_LCD_HD44780_BL = PG_ENABLE;
 		#endif
+		
 		#if ( PG_LCD_HD44780_SPLASH_ENABLE == PG_ENABLE )
 			for ( r = 0  ; r < PG_LCD_HD44780_LINES ; r++ ) {
 				for ( c = 0  ; c < PG_LCD_HD44780_COLUMNS ; c++ ) {
@@ -178,8 +194,7 @@
 //			#endif
 			pg_delay_msec( 500 );
 		#endif
-		}
-
+	}
 
 
 	#if ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE )
@@ -221,12 +236,10 @@
 			
 			return Dat;
 		}
-		
 	#endif 
 
 
 	void pg_lcd_hd44780_wait_busy( _pg_Uint8 ControllerNumber ) {
-
 		#if ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE )
 			_pg_Uint8 Status;
 			PG_LCD_HD44780_RS = PG_COMMAND;
@@ -241,7 +254,6 @@
 			pg_delay_usec( 1 );
 		#endif
 	}
-
 
 
 	void pg_ldc_hd44780_write_nibble( _pg_Uint8 ControllerNumber , _pg_Uint8 DataType , _pg_Uint8 Dat ) {
@@ -326,7 +338,6 @@
 			pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , ( 0x80 | ( PG_LCD_HD44780_LINE_3_ADDRESS + Pos ) ) );
 			
 		pg_lcd_hd44780_wait_busy( ControllerNumber );
-
 /*
 LCD 4x16 (tipo WH1604A)
 
@@ -338,7 +349,6 @@ LCD 4x16 (tipo WH1604A)
 	3		50 51 --- 5F
 
 */
-
 	}
 
 
@@ -432,7 +442,6 @@ LCD 4x16 (tipo WH1604A)
 		pg_lcd_hd44780_write_string( ControllerNumber , Str );
 	}
 
-	
 	#if ( PGIM_FTOA	== PG_ENABLE )
 		void	pg_lcd_hd44780_write_p_float( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint24 Decimal_Digits , float Flt ) {
 //			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
@@ -441,7 +450,6 @@ LCD 4x16 (tipo WH1604A)
 		}
 	#endif
 
-	
 	void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int8 Chr ) {
 		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
 		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
