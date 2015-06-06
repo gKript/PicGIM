@@ -58,13 +58,7 @@
 		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
 	#endif
 	
-	
 	void pg_lcd_hd44780_init( void ) {
-		#if ( PG_LCD_HD44780_RW_PRESENT == PG_YES )
-			PG_LCD_HD44780_RW = PG_LOW;
-			PG_LCD_HD44780_RW_TRIS = PG_OUT;
-		#endif
-
 		#if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
 			PG_LCD_HD44780_EN_0 = PG_DISABLE;
 			PG_LCD_HD44780_EN_0_TRIS = PG_OUT;
@@ -81,6 +75,17 @@
 			PG_LCD_HD44780_EN_3 = PG_DISABLE;
 			PG_LCD_HD44780_EN_3_TRIS = PG_OUT;
 		#endif
+
+		#if ( PG_LCD_HD44780_RW_PRESENT == PG_YES )
+			PG_LCD_HD44780_RW = PG_LOW;
+			PG_LCD_HD44780_RW_TRIS = PG_OUT;
+		#endif
+		
+		PG_LCD_HD44780_RS_TRIS  = PG_OUT;
+		PG_LCD_HD44780_DATA_0_TRIS  = PG_OUT;
+		PG_LCD_HD44780_DATA_1_TRIS  = PG_OUT;
+		PG_LCD_HD44780_DATA_2_TRIS  = PG_OUT;
+		PG_LCD_HD44780_DATA_3_TRIS  = PG_OUT;
 		
 		#if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
 			pg_lcd_hd44780_init_routine( PG_CONTROLLER_0 );
@@ -97,42 +102,15 @@
 	}
 
 
-	//	Location 0,1,2,...7
-	//	pattern[8]={0x06,0x09,0x09,0x06,0x00,0x00,0x00,0x00};
-	//	pg_lcd_hd44780_char_generator( 0 , pattern );
-	void pg_lcd_hd44780_char_generator( _pg_Uint8 ControllerNumber ,char location , char * new_char ) {
-		char i;
-		pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
-		for( i = 0 ; i < 8 ; i++ )
-			pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , new_char[i] );
-	}
-
-	
-	#if	( PGIM_EE == PG_ENABLE )
-		void pg_lcd_hd44780_char_generator_from_EE( _pg_Uint8 ControllerNumber ,char location , _pg_Uint16 ee_addy ) {
-			char i;
-			pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
-			for( i = 0 ; i < 8 ; i++ )
-				pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , pg_ee_read( ee_addy + i ) );
-		}
-	#endif
-
-	
 	void pg_lcd_hd44780_init_routine( _pg_Uint8 ControllerNumber ) {
 		_pg_Uint8 c, r;
 		
-		PG_LCD_HD44780_RS_TRIS  = PG_OUT;
-		PG_LCD_HD44780_DATA_0_TRIS  = PG_OUT;
-		PG_LCD_HD44780_DATA_1_TRIS  = PG_OUT;
-		PG_LCD_HD44780_DATA_2_TRIS  = PG_OUT;
-		PG_LCD_HD44780_DATA_3_TRIS  = PG_OUT;
-
 		pg_delay_msec( 200 );
 		PG_LCD_HD44780_RS = PG_COMMAND;
 		if( PG_LCD_HD44780_RW_PRESENT )
 			PG_LCD_HD44780_RW = PG_WRITE;
 		pg_lcd_hd44780_en_select( ControllerNumber , PG_DISABLE );
-		pg_lcd_hd44780_en_select( ControllerNumber , PG_ENABLE );		//superfluo? ci pensera' la write-nibble
+//		pg_lcd_hd44780_en_select( ControllerNumber , PG_ENABLE );
 		pg_delay_msec( 1 );
 		
 		pg_ldc_hd44780_write_nibble( ControllerNumber , PG_COMMAND , 0b00000011 );
@@ -339,19 +317,39 @@
 			
 		pg_lcd_hd44780_wait_busy( ControllerNumber );
 /*
-LCD 4x16 (tipo WH1604A)
+		LCD 4x16 ( Model: WH1604A )
 
-			 0  1 --- 15
-			------------
-	0		00 01 --- 0F
-	1		40 41 --- 4F
-	2		10 11 --- 1F
-	3		50 51 --- 5F
-
+					 0  1 --- 15
+					------------
+			0		00 01 --- 0F
+			1		40 41 --- 4F
+			2		10 11 --- 1F
+			3		50 51 --- 5F
 */
 	}
+	
+	
+	void pg_lcd_hd44780_char_generator( _pg_Uint8 ControllerNumber ,char location , char * new_char ) {
+		//	Location 0,1,2,...7
+		//	pattern[8]={0x06,0x09,0x09,0x06,0x00,0x00,0x00,0x00};
+		//	pg_lcd_hd44780_char_generator( 0 , pattern );
+		char i;
+		pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
+		for( i = 0 ; i < 8 ; i++ )
+			pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , new_char[i] );
+	}
 
+	
+	#if	( PGIM_EE == PG_ENABLE )
+		void pg_lcd_hd44780_char_generator_from_EE( _pg_Uint8 ControllerNumber ,char location , _pg_Uint16 ee_addy ) {
+			char i;
+			pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
+			for( i = 0 ; i < 8 ; i++ )
+				pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , pg_ee_read( ee_addy + i ) );
+		}
+	#endif
 
+	
 	void pg_lcd_hd44780_put_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Data ) {
 		pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , Data );
 		pg_lcd_hd44780_wait_busy( ControllerNumber );

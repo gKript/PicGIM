@@ -32,7 +32,11 @@
 
 void main( void ) {
 	pg_initialize();
-
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , 0 , 0 , "//--> 00" );
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , 1 , 0 , "//--> 01" );
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_1 , 0 , 0 , "//--> 10" );
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_1 , 1 , 0 , "//--> 11" );
+	pg_buzzer_beep( PG_BEEP_HIGH , PG_BEEP_LONG );
 	PG_HALT;
 }
 

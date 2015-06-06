@@ -67,8 +67,8 @@
 		#define PG_LCD_HD44780_RW					L_D5				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_0_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
 		#define PG_LCD_HD44780_EN_0					L_D6				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
-		#define PG_LCD_HD44780_EN_1_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
-		#define PG_LCD_HD44780_EN_1					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_1_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
+		#define PG_LCD_HD44780_EN_1					L_B0				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_2_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
 		#define PG_LCD_HD44780_EN_2					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_3_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
@@ -83,7 +83,7 @@
 		#define PG_LCD_HD44780_RS_TRIS				T_D4				//!< Must be: <pin-tris-name>
 		#define PG_LCD_HD44780_RW_TRIS				T_D5				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_0_TRIS			T_D6				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
-		#define PG_LCD_HD44780_EN_1_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_LCD_HD44780_EN_1_TRIS			T_B0				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_2_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_3_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_DATA_0_TRIS			T_D0				//!< Must be: <pin-tris-name>
