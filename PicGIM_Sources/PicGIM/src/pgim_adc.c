@@ -193,12 +193,12 @@
 
 
 	_pg_Uint8	pg_adc_get_perc( void ) {
-		return (_pg_Uint8)( ( 100 / PG_ADC_RES_STEPS ) * pg_adc_get() );
+		return (_pg_Uint8)( ( 100.0 / ( PG_ADC_RES_STEPS - 1 ) * pg_adc_get() ) );
 	}
 
 
 	float	pg_adc_get_perc_f( void ) {
-		return (float)( ( 100.0 / PG_ADC_RES_STEPS ) * pg_adc_get() );
+		return (float)( ( 100.0 / ( PG_ADC_RES_STEPS - 1 ) ) * pg_adc_get() );
 	}
 
 	
