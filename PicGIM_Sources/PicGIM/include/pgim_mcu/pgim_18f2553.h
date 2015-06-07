@@ -111,6 +111,7 @@
 	#define		PG_PWM_1_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_FOSC_DIVIDER			4.000				//!<	Internal clock divider to drive timer
+	#define		PG_PWM_2_MPLEX_AVAILABLE	PG_YES				//!<	Available output pin multiplexed with other pin
 	
 	#define		PG_SERIAL_TX_TRIS			TRISCbits.TRISC6	//!<	Tx pin of USART port
 	#define		PG_SERIAL_RX_TRIS			TRISCbits.TRISC7	//!<	Rx pin of USART port
@@ -122,6 +123,34 @@
 
 	#define		PG_I2C_SDA_TRIS				TRISBbits.TRISB0	//!<	I2C data I/O
 	#define		PG_I2C_SCL_TRIS				TRISBbits.TRISB1	//!<	I2C clock
+	
+	#define		PG_HW_PIN_SERIAL_TX			17					//!<	Serial(Uart)transmission hardware pin number
+	#define		PG_HW_PIN_SERIAL_TX_N		RC6					//!<	Serial(Uart)transmission hardware pin name
+	#define		PG_HW_PIN_SERIAL_RX			18					//!<	Serial(Uart)reception hardware pin number
+	#define		PG_HW_PIN_SERIAL_RX_N		RC7					//!<	Serial(Uart)reception hardware pin name
+	#define		PG_HW_PIN_SPI_SDI			21					//!<	SPI Input hardware pin number
+	#define		PG_HW_PIN_SPI_SDI_N			RB0					//!<	SPI Input hardware pin name
+	#define		PG_HW_PIN_SPI_SDO			18					//!<	SPI Output hardware pin number
+	#define		PG_HW_PIN_SPI_SDO_N			RC7					//!<	SPI Output hardware pin name
+	#define		PG_HW_PIN_SPI_SCK			22					//!<	SPI Clock hardware pin number
+	#define		PG_HW_PIN_SPI_SCK_N			RB1					//!<	SPI Clock hardware pin name
+	#define		PG_HW_PIN_SPI_SS			7					//!<	SPI Slave Select hardware pin number
+	#define		PG_HW_PIN_SPI_SS_N			RA5					//!<	SPI Slave Select hardware pin name
+	#define		PG_HW_PIN_IRQ_INT0			21					//!<	Event (IRQ) Int0 hardware pin number
+	#define		PG_HW_PIN_IRQ_INT0_N		RB0					//!<	Event (IRQ) Int0 hardware pin name
+	#define		PG_HW_PIN_IRQ_INT1			22					//!<	Event (IRQ) Int1 hardware pin number
+	#define		PG_HW_PIN_IRQ_INT1_N		RB1					//!<	Event (IRQ) Int1 hardware pin name
+	#define		PG_HW_PIN_IRQ_INT2			23					//!<	Event (IRQ) Int2 hardware pin number
+	#define		PG_HW_PIN_IRQ_INT2_N		RB2					//!<	Event (IRQ) Int2 hardware pin name
+	#define		PG_HW_PIN_PWM1				13					//!<	PWM1 output hardware pin number
+	#define		PG_HW_PIN_PWM1_N			RC2					//!<	PWM1 output hardware pin name	
+	#define		PG_HW_PIN_PWM2				12					//!<	PWM2 output hardware pin number
+	#define		PG_HW_PIN_PWM2_N			RC1					//!<	PWM2 output hardware pin name
+	
+	#define		PG_HW_PIN_USB_DPOS			16					//!<	USB Positive Data hardware pin number
+	#define		PG_HW_PIN_USB_DPOS_N		RC5					//!<	USB Positive Data hardware pin name
+	#define		PG_HW_PIN_USB_DNEG			15					//!<	USB Negative Data hardware pin number
+	#define		PG_HW_PIN_USB_DNEG_N		RC4					//!<	USB Negative Data hardware pin name
 	//---[ END Hardware Resources ]---
 	
 #endif /* _PGIM_18F2553_PRIVATE_H_ */
