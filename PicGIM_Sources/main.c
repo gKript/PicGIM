@@ -32,7 +32,29 @@
 
 void main( void ) {
 	pg_initialize();
-
+	
+	//	I enable only one channel (AN0) as analog input.
+	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
+	//	I turn on the ADC module.
+	pg_adc_set( PG_ADC_MODULE , PG_ON );
+	//	I perform the first analog conversion.
+	pg_adc_start( PG_CH_0 );
+	//	I enable the PWM setting the maximum frequency calculated by PicGIM based on the frequency of the oscillator used in the project.
+	
+	pg_pwm_set( 1 , PG_KHZ );
+	//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted.
+	pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
+	//	I starting the PWM device
+	pg_pwm_start( PG_PWM_1 );
+	//	We enter into an infinite loop that will run our program.
+	
+	PG_LOOP ( PG_FOREVER ) {
+		//	I perform an analog conversion.
+		pg_adc_start( PG_CH_0 );
+		//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted.
+		//  For example with a supply voltage of 5V an analog conversion of 2.5V match to 50%.
+		pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
+	}
 	PG_HALT;
 }
 

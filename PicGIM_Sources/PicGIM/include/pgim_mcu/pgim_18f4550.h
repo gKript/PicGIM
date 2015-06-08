@@ -107,7 +107,6 @@
 	#define		PG_PWM_1_MODE				PG_ENHANCED			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_FOSC_DIVIDER			4.000				//!<	Internal clock divider to drive timer
-	#define		PG_PWM_2_MPLEX_AVAILABLE	PG_YES				//!<	Available output pin multiplexed with other pin
 	
 	#define		PG_SERIAL_TX_TRIS			TRISCbits.TRISC6	//!<	Tx pin of USART port
 	#define		PG_SERIAL_RX_TRIS			TRISCbits.TRISC7	//!<	Rx pin of USART port
