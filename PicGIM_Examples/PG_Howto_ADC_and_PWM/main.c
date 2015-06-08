@@ -166,8 +166,6 @@ void main( void ) {
 	//	It is compulsory to initialize PicGIM with this function.
 	pg_initialize();
 
-//	pg_pin_mode( T_C2 , PG_OUT );
-
 	//	I enable only one channel (AN0) as analog input.
 	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 	//	I turn on the ADC module.
@@ -175,12 +173,14 @@ void main( void ) {
 	//	I perform the first analog conversion.
 	pg_adc_start( PG_CH_0 );
 	//	I enable the PWM setting the maximum frequency calculated by PicGIM based on the frequency of the oscillator used in the project.
+	
 	pg_pwm_set( 15 , PG_KHZ );
 	//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted.
 	pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
 	//	I starting the PWM device
-	pg_pwm_start( PGIM_PWM_1 );
+	pg_pwm_start( PG_PWM_1 );
 	//	We enter into an infinite loop that will run our program.
+	
 	PG_LOOP ( PG_FOREVER ) {
 		//	I perform an analog conversion.
 		pg_adc_start( PG_CH_0 );
