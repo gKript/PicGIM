@@ -51,26 +51,26 @@
 	#define	_PGIM_MODULE_SETUP_PUBLIC_H_
 
 	//		S O F T W A R E   G E N E R A L
-	#define PGIM_ERROR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_CAL_DELAY						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_FTOA							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_CAL_DELAY							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_FTOA								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
-	#define PGIM_EVENTS							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_AD_CONVERTER					PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SPI							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_EE								PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_TIMER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_PWM							PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_AD_CONVERTER						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SPI								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_TIMER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_PWM								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   E X T E R N A L
-	#define PGIM_LCD_HD44780					PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_BUZZER							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SENSOR							PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		H A R D W A R E   G K R I P T
-	#define PGIM_ENCODER						PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ENCODER							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	
 	
@@ -78,8 +78,8 @@
 	//		S O F T W A R E   C O N F I G   |   E R R O R   H A N D L E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
-		#define	PG_ERROR_LED_PRESENT			PG_NO					//!< Must be: PG_YES || PG_NO
-		#define	PG_ERROR_LCD_PRESENT			PG_NO					//!< Must be: PG_NO  || PG_HD44780
+		#define	PG_ERROR_LED_PRESENT				PG_NO				//!< Must be: PG_YES || PG_NO
+		#define	PG_ERROR_LCD_PRESENT				PG_NO				//!< Must be: PG_NO  || PG_HD44780
 	#endif
 
 	//------------------------------------------------------------------------------
@@ -91,7 +91,7 @@
 	//		S O F T W A R E   C O N F I G   |   F T O A
 	//------------------------------------------------------------------------------
 	#if ( PGIM_FTOA == PG_ENABLE )
-		#define PG_FTOA_CONVERSION_ACCURATE 	PG_YES					//!< Must be: PG_YES || PG_NO
+		#define PG_FTOA_CONVERSION_ACCURATE 		PG_YES				//!< Must be: PG_YES || PG_NO
 	#endif
 	
 	//------------------------------------------------------------------------------
@@ -133,26 +133,43 @@
 	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
 	//------------------------------------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		#define	PG_LCD_HD44780_COLUMNS			16						//!< Number of columns of the display
-		#define	PG_LCD_HD44780_LINES			2						//!< Number of lines of the display
-		#define PG_LCD_HD44780_BUSY_FLAG		PG_DISABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_LINE_0_ADDRESS	0x00					//!< Address (default 0x00) for the line number 1. Must be : PG_MISSING if there is not.
-		#define PG_LCD_HD44780_LINE_1_ADDRESS	0X40					//!< Address (default 0x40) for the line number 2. Must be : PG_MISSING if there is not.
-		#define PG_LCD_HD44780_LINE_2_ADDRESS	PG_MISSING				//!< Address (default 0x00) for the line number 3. Must be : PG_MISSING if there is not.
-		#define PG_LCD_HD44780_LINE_3_ADDRESS	PG_MISSING				//!< Address (default 0x40) for the line number 4. Must be : PG_MISSING if there is not.
-		#define PG_LCD_HD44780_SPLASH_ENABLE	PG_ENABLE				//!< Must be: PG_ENABLE || PG_DISABLE
-		#define PG_LCD_HD44780_SPLASH_TIME		1						//!< Show time of splash in seconds [s] || 0 = do not clear
+		#define	PG_LCD_HD44780_COLUMNS				16					//!< Number of columns of the display
+		#define	PG_LCD_HD44780_LINES				2					//!< Number of lines of the display
+		#define	PG_LCD_HD44780_BUSY_FLAG			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_BUSY_DELAY			1					//!< Waiting time for display processing in micro-seconds [us]
+		#define	PG_LCD_HD44780_LINE_0_ADDRESS		0x00				//!< Address (default 0x00) for the line number 1. Must be : PG_MISSING if there is not.
+		#define	PG_LCD_HD44780_LINE_1_ADDRESS		0X40				//!< Address (default 0x40) for the line number 2. Must be : PG_MISSING if there is not.
+		#define	PG_LCD_HD44780_LINE_2_ADDRESS		PG_MISSING			//!< Address (default 0x00) for the line number 3. Must be : PG_MISSING if there is not.
+		#define	PG_LCD_HD44780_LINE_3_ADDRESS		PG_MISSING			//!< Address (default 0x40) for the line number 4. Must be : PG_MISSING if there is not.
+		#define	PG_LCD_HD44780_BL_0_ENABLE			PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_BL_1_ENABLE			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_BL_2_ENABLE			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_BL_3_ENABLE			PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_BL_0_ENABLE_LOGIC	PG_POSITIVE			//!< Must be: PG_POSITIVE || PG_NEGATIVE
+		#define	PG_LCD_HD44780_BL_1_ENABLE_LOGIC	PG_POSITIVE			//!< Must be: PG_POSITIVE || PG_NEGATIVE
+		#define	PG_LCD_HD44780_BL_2_ENABLE_LOGIC	PG_POSITIVE			//!< Must be: PG_POSITIVE || PG_NEGATIVE
+		#define	PG_LCD_HD44780_BL_3_ENABLE_LOGIC	PG_POSITIVE			//!< Must be: PG_POSITIVE || PG_NEGATIVE
+		#define	PG_LCD_HD44780_SPLASH_FULL_0_EN		PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_FULL_1_EN		PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_FULL_2_EN		PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_FULL_3_EN		PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_FULL_DELAY	1					//!< Show time of splash in seconds [s] || 0 = do not clear
+		#define	PG_LCD_HD44780_SPLASH_SLIDE_0_EN	PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_SLIDE_1_EN	PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_SLIDE_2_EN	PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_SLIDE_3_EN	PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+		#define	PG_LCD_HD44780_SPLASH_SLIDE_SPEED	1					//!< Slowdown time of slider in milli-seconds [ms]
 	#endif
 
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_BUZZER == PG_ENABLE )
-		#define PG_BEEP_LONG					100						/*!	Defines the long duration of the beep	*/
-		#define	PG_BEEP_SHORT					40						/*!	Defines the short duration of the beep	*/
-		#define	PG_BEEP_HIGH					1						/*!	Defines the high tone of the beep		*/
-		#define	PG_BEEP_MID						3						/*!	Defines the mean tone of the beep		*/
-		#define	PG_BEEP_LOW						7						/*!	Defines the low tone of the beep		*/
+		#define PG_BEEP_LONG						100					//!< Defines the long duration of the beep
+		#define	PG_BEEP_SHORT						40					//!< Defines the short duration of the beep
+		#define	PG_BEEP_HIGH						1					//!< Defines the high tone of the beep
+		#define	PG_BEEP_MID							3					//!< Defines the mean tone of the beep
+		#define	PG_BEEP_LOW							7					//!< Defines the low tone of the beep
 	#endif
 	
 	//------------------------------------------------------------------------------

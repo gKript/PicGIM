@@ -59,6 +59,45 @@
 	#endif
 	
 	void pg_lcd_hd44780_init( void ) {
+		//Backlight turn-off and tris
+		#if ( PG_LCD_HD44780_BL_0_PRESENT == PG_YES )
+			#if ( PG_LCD_HD44780_BL_0_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_0 = PG_LOW;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_0_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_0 = PG_HIGH;	//Active Low
+			#endif
+			PG_LCD_HD44780_BL_0_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_BL_1_PRESENT == PG_YES )
+			#if ( PG_LCD_HD44780_BL_1_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_1 = PG_LOW;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_1_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_1 = PG_HIGH;	//Active Low
+			#endif
+			PG_LCD_HD44780_BL_1_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_BL_2_PRESENT == PG_YES )
+			#if ( PG_LCD_HD44780_BL_2_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_2 = PG_LOW;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_2_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_2 = PG_HIGH;	//Active Low
+			#endif
+			PG_LCD_HD44780_BL_2_TRIS = PG_OUT;
+		#endif
+		#if ( PG_LCD_HD44780_BL_3_PRESENT == PG_YES )
+			#if ( PG_LCD_HD44780_BL_3_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_3 = PG_LOW;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_3_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_3 = PG_HIGH;	//Active Low
+			#endif
+			PG_LCD_HD44780_BL_3_TRIS = PG_OUT;
+		#endif
+
+		//Lcd control tris
 		#if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
 			PG_LCD_HD44780_EN_0 = PG_DISABLE;
 			PG_LCD_HD44780_EN_0_TRIS = PG_OUT;
@@ -75,36 +114,95 @@
 			PG_LCD_HD44780_EN_3 = PG_DISABLE;
 			PG_LCD_HD44780_EN_3_TRIS = PG_OUT;
 		#endif
-
 		#if ( PG_LCD_HD44780_RW_PRESENT == PG_YES )
 			PG_LCD_HD44780_RW = PG_LOW;
 			PG_LCD_HD44780_RW_TRIS = PG_OUT;
 		#endif
-		
 		PG_LCD_HD44780_RS_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_0_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_1_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_2_TRIS  = PG_OUT;
 		PG_LCD_HD44780_DATA_3_TRIS  = PG_OUT;
 		
-		#if( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
+		//Initialize controllers
+		#if ( PG_LCD_HD44780_EN_0_PRESENT == PG_YES )
 			pg_lcd_hd44780_init_routine( PG_CONTROLLER_0 );
 		#endif
-		#if( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
+		#if ( PG_LCD_HD44780_EN_1_PRESENT == PG_YES )
 			pg_lcd_hd44780_init_routine( PG_CONTROLLER_1 );
 		#endif
-		#if( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
+		#if ( PG_LCD_HD44780_EN_2_PRESENT == PG_YES )
 			pg_lcd_hd44780_init_routine( PG_CONTROLLER_2 );
 		#endif
-		#if( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
+		#if ( PG_LCD_HD44780_EN_3_PRESENT == PG_YES )
 			pg_lcd_hd44780_init_routine( PG_CONTROLLER_3 );
+		#endif
+		
+		//Backlight turn-on
+		#if ( ( PG_LCD_HD44780_BL_0_PRESENT == PG_YES ) && ( PG_LCD_HD44780_BL_0_ENABLE == PG_ENABLE ) )
+			#if ( PG_LCD_HD44780_BL_0_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_0 = PG_HIGH;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_0_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_0 = PG_LOW;	//Active Low
+			#endif
+		#endif
+		#if ( ( PG_LCD_HD44780_BL_1_PRESENT == PG_YES ) && ( PG_LCD_HD44780_BL_1_ENABLE == PG_ENABLE ) )
+			#if ( PG_LCD_HD44780_BL_1_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_1 = PG_HIGH;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_1_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_1 = PG_LOW;	//Active Low
+			#endif
+		#endif
+		#if ( ( PG_LCD_HD44780_BL_2_PRESENT == PG_YES ) && ( PG_LCD_HD44780_BL_2_ENABLE == PG_ENABLE ) )
+			#if ( PG_LCD_HD44780_BL_2_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_2 = PG_HIGH;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_2_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_2 = PG_LOW;	//Active Low
+			#endif
+		#endif
+		#if ( ( PG_LCD_HD44780_BL_3_PRESENT == PG_YES ) && ( PG_LCD_HD44780_BL_3_ENABLE == PG_ENABLE ) )
+			#if ( PG_LCD_HD44780_BL_3_ENABLE_LOGIC == PG_POSITIVE )
+				PG_LCD_HD44780_BL_3 = PG_HIGH;	//Active High
+			#endif
+			#if ( PG_LCD_HD44780_BL_3_ENABLE_LOGIC == PG_NEGATIVE )
+				PG_LCD_HD44780_BL_3 = PG_LOW;	//Active Low
+			#endif
+		#endif
+		
+		//Splash screen FULL
+		#if ( ( PG_LCD_HD44780_EN_0_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_FULL_0_EN ) )
+			pg_lcd_hd44780_splash_full( PG_CONTROLLER_0 );
+		#endif
+		#if ( ( PG_LCD_HD44780_EN_1_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_FULL_1_EN ) )
+			pg_lcd_hd44780_splash_full( PG_CONTROLLER_1 );
+		#endif
+		#if ( ( PG_LCD_HD44780_EN_2_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_FULL_2_EN ) )
+			pg_lcd_hd44780_splash_full( PG_CONTROLLER_2 );
+		#endif
+		#if ( ( PG_LCD_HD44780_EN_3_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_FULL_3_EN ) )
+			pg_lcd_hd44780_splash_full( PG_CONTROLLER_3 );
+		#endif
+		
+		//Splash screen SLIDE
+		#if ( ( PG_LCD_HD44780_EN_0_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_SLIDE_0_EN ) )
+			pg_lcd_hd44780_splash_slide( PG_CONTROLLER_0 );
+		#endif
+		#if ( ( PG_LCD_HD44780_EN_1_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_SLIDE_1_EN ) )
+			pg_lcd_hd44780_splash_slide( PG_CONTROLLER_1 );
+		#endif
+		#if ( ( PG_LCD_HD44780_EN_2_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_SLIDE_2_EN ) )
+			pg_lcd_hd44780_splash_slide( PG_CONTROLLER_2 );
+		#endif
+		#if ( ( PG_LCD_HD44780_EN_3_PRESENT == PG_YES ) && ( PG_LCD_HD44780_SPLASH_SLIDE_3_EN ) )
+			pg_lcd_hd44780_splash_slide( PG_CONTROLLER_3 );
 		#endif
 	}
 
 
 	void pg_lcd_hd44780_init_routine( _pg_Uint8 ControllerNumber ) {
-		_pg_Uint8 c, r;
-		
 		pg_delay_msec( 200 );
 		PG_LCD_HD44780_RS = PG_COMMAND;
 		if( PG_LCD_HD44780_RW_PRESENT )
@@ -149,32 +247,52 @@
 		pg_delay_msec( 10 );
 		pg_lcd_hd44780_goto( ControllerNumber , 0 , 0 );
 		pg_delay_msec( 10 );
-		
-		#if ( PG_LCD_HD44780_BL_PRESENT == PG_YES )
-			PG_LCD_HD44780_BL_TRIS = PG_OUT;
-			PG_LCD_HD44780_BL = PG_ENABLE;
-		#endif
-		
-		#if ( PG_LCD_HD44780_SPLASH_ENABLE == PG_ENABLE )
+	}
+	
+	
+	#if ( ( PG_LCD_HD44780_SPLASH_FULL_0_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_FULL_1_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_FULL_2_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_FULL_3_EN == PG_ENABLE ) )
+		void	pg_lcd_hd44780_splash_full( _pg_Uint8 ControllerNumber ) {
+			_pg_Uint8 c, r;
 			for ( r = 0  ; r < PG_LCD_HD44780_LINES ; r++ ) {
 				for ( c = 0  ; c < PG_LCD_HD44780_COLUMNS ; c++ ) {
 					pg_lcd_hd44780_write_p_char( ControllerNumber , r , c , "%c" , 0xff );
-					pg_delay_msec( 100 );
+				}
+			}
+			#if ( PG_LCD_HD44780_SPLASH_FULL_DELAY != 0 )
+				pg_delay_sec( PG_LCD_HD44780_SPLASH_FULL_DELAY );
+				pg_lcd_hd44780_clear( ControllerNumber );
+				pg_lcd_hd44780_goto( ControllerNumber , 0 , 0 );
+			#endif
+			pg_delay_msec( 500 );
+		}		
+	#endif
+
+	
+	#if ( ( PG_LCD_HD44780_SPLASH_SLIDE_0_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_1_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_2_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_3_EN == PG_ENABLE ) )
+		void	pg_lcd_hd44780_splash_slide( _pg_Uint8 ControllerNumber ) {
+			_pg_Uint8 c, r;
+			for ( r = 0 ; r < PG_LCD_HD44780_LINES ; r++ ) {
+				for ( c = 0 ; c < PG_LCD_HD44780_COLUMNS ; c++ ) {
+					pg_lcd_hd44780_write_p_char( ControllerNumber , r , c , "%c" , 0xff );
+					pg_delay_msec( PG_LCD_HD44780_SPLASH_SLIDE_SPEED );	//100
 					if ( c >= 1 )
 						pg_lcd_hd44780_write_p_char( ControllerNumber , r , c - 1 , "%c" , 0x20 );
 				}
 				pg_lcd_hd44780_write_p_char( ControllerNumber , r , c , "%c" , 0x20 );
 			}
-//			#if ( PG_LCD_HD44780_SPLASH_TIME != 0 )
-//				pg_delay_sec( PG_LCD_HD44780_SPLASH_TIME );
-				pg_lcd_hd44780_clear( ControllerNumber );
-				pg_lcd_hd44780_goto( ControllerNumber , 0 , 0 );
-//			#endif
+			pg_lcd_hd44780_clear( ControllerNumber );
+			pg_lcd_hd44780_goto( ControllerNumber , 0 , 0 );
 			pg_delay_msec( 500 );
-		#endif
-	}
+		}
+	#endif
 
-
+	
 	#if ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE )
 		_pg_Uint8 pg_lcd_hd44780_read_byte( _pg_Uint8 ControllerNumber ) {
 			_pg_Uint8 	Dat;
@@ -229,7 +347,7 @@
 			if( PG_LCD_HD44780_RW_PRESENT )
 				PG_LCD_HD44780_RW = PG_WRITE;
 		#else
-			pg_delay_usec( 1 );
+			pg_delay_usec( PG_LCD_HD44780_BUSY_DELAY );
 		#endif
 	}
 
@@ -316,29 +434,30 @@
 			pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , ( 0x80 | ( PG_LCD_HD44780_LINE_3_ADDRESS + Pos ) ) );
 			
 		pg_lcd_hd44780_wait_busy( ControllerNumber );
-/*
-		LCD 4x16 ( Model: WH1604A )
 
-					 0  1 --- 15
-					------------
-			0		00 01 --- 0F
-			1		40 41 --- 4F
-			2		10 11 --- 1F
-			3		50 51 --- 5F
-*/
+		//		LCD 4x16 ( Model: WH1604A )
+		//		
+		//			 0  1  2 ... 15
+		//	-----------------------
+		//	0		00 01 02 ... 0F
+		//	1		40 41 42 ... 4F
+		//	2		10 11 12 ... 1F
+		//	3		50 51 52 ... 5F
 	}
 	
 	
-	void pg_lcd_hd44780_char_generator( _pg_Uint8 ControllerNumber ,char location , char * new_char ) {
-		//	Location 0,1,2,...7
-		//	pattern[8]={0x06,0x09,0x09,0x06,0x00,0x00,0x00,0x00};
-		//	pg_lcd_hd44780_char_generator( 0 , pattern );
-		char i;
-		pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
-		for( i = 0 ; i < 8 ; i++ )
-			pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , new_char[i] );
-	}
-
+	#if ( PG_LCD_HD44780_CHAR_GENERATOR___SC == PG_ENABLE )
+		void pg_lcd_hd44780_char_generator( _pg_Uint8 ControllerNumber ,char location , char * new_char ) {
+			//	Location 0,1,2,...7
+			//	pattern[8]={0x06,0x09,0x09,0x06,0x00,0x00,0x00,0x00};
+			//	pg_lcd_hd44780_char_generator( 0 , pattern );
+			char i;
+			pg_lcd_hd44780_write_byte( ControllerNumber , PG_COMMAND , 0x40 + ( location * 8 ) );
+			for( i = 0 ; i < 8 ; i++ )
+				pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , new_char[i] );
+		}
+	#endif
+	
 	
 	#if	( PGIM_EE == PG_ENABLE )
 		void pg_lcd_hd44780_char_generator_from_EE( _pg_Uint8 ControllerNumber ,char location , _pg_Uint16 ee_addy ) {
@@ -356,25 +475,31 @@
 	}
 
 	
-	void pg_lcd_hd44780_put_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint8 Data ) {
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , Data );
-		pg_lcd_hd44780_wait_busy( ControllerNumber );
-	}
-
+	#if ( PG_LCD_HD44780_PUT_P_CHAR___SC == PG_ENABLE )
+		void pg_lcd_hd44780_put_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint8 Data ) {
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			pg_lcd_hd44780_write_byte( ControllerNumber , PG_DATA , Data );
+			pg_lcd_hd44780_wait_busy( ControllerNumber );
+		}
+	#endif
 	
-	void pg_lcd_hd44780_put_byte( _pg_Uint8 ControllerNumber , _pg_Uint8 Val ) {
-		pg_lcd_hd44780_put_char( ControllerNumber , Val / 10 + '0' );
-		pg_lcd_hd44780_put_char( ControllerNumber , Val % 10 + '0' );
-	}
-
 	
-	void pg_lcd_hd44780_put_p_byte( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint8 Val ) {
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		pg_lcd_hd44780_put_char( ControllerNumber , Val / 10 + '0' );
-		pg_lcd_hd44780_put_char( ControllerNumber , Val % 10 + '0' );
-	}
-
+	#if ( PG_LCD_HD44780_PUT_BYTE___SC == PG_ENABLE )
+		void pg_lcd_hd44780_put_byte( _pg_Uint8 ControllerNumber , _pg_Uint8 Val ) {
+			pg_lcd_hd44780_put_char( ControllerNumber , Val / 10 + '0' );
+			pg_lcd_hd44780_put_char( ControllerNumber , Val % 10 + '0' );
+		}
+	#endif
+	
+	
+	#if ( PG_LCD_HD44780_PUT_P_BYTE___SC == PG_ENABLE )
+		void pg_lcd_hd44780_put_p_byte( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint8 Val ) {
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			pg_lcd_hd44780_put_char( ControllerNumber , Val / 10 + '0' );
+			pg_lcd_hd44780_put_char( ControllerNumber , Val % 10 + '0' );
+		}
+	#endif
+	
 	
 	void pg_lcd_hd44780_write_string( _pg_Uint8 ControllerNumber , _pg_int8  *Str ) {
 		_pg_Uint8 i = 0;
@@ -383,63 +508,76 @@
 	}
 
 
-	void pg_lcd_hd44780_write_string_rom( _pg_Uint8 ControllerNumber , const rom _pg_int8  *Str ) {
-		_pg_Uint8 i = 0;
-		while ( Str[ i ] )
-			pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
-	}
+	#if ( PG_LCD_HD44780_WRITE_STRING_ROM___SC == PG_ENABLE )
+		void pg_lcd_hd44780_write_string_rom( _pg_Uint8 ControllerNumber , const rom _pg_int8  *Str ) {
+			_pg_Uint8 i = 0;
+			while ( Str[ i ] )
+				pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
+		}
+	#endif
+	
 
+	#if ( PG_LCD_HD44780_WRITE_P_STRING___SC == PG_ENABLE 	)
+			void pg_lcd_hd44780_write_p_string( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8  *Str ) {
+			_pg_Uint8 i = 0;
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+				while ( Str[i] )
+				pg_lcd_hd44780_put_char( ControllerNumber , Str[i++] );
+		}
+	#endif
+	
 
-	void pg_lcd_hd44780_write_p_string( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8  *Str ) {
-		_pg_Uint8 i = 0;
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		while ( Str[i] )
-			pg_lcd_hd44780_put_char( ControllerNumber , Str[i++] );
-	}
+	#if ( PG_LCD_HD44780_WRITE_P_STRING_FLASH___SC == PG_ENABLE )
+		void pg_lcd_hd44780_write_p_string_flash( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
+			_pg_Uint8 i = 0;
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			while ( Str[i] )
+				pg_lcd_hd44780_put_char( ControllerNumber , Str[i++] );
+			pg_delay( time , unit );
+			i = 0;
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			while ( Str[i++] )
+				pg_lcd_hd44780_put_char( ControllerNumber , ' ' );
+		}
+	#endif
 
-
-	void pg_lcd_hd44780_write_p_string_flash( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
-		_pg_Uint8 i = 0;
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		while ( Str[i] )
-			pg_lcd_hd44780_put_char( ControllerNumber , Str[i++] );
-		pg_delay( time , unit );
-		i = 0;
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		while ( Str[i++] )
-			pg_lcd_hd44780_put_char( ControllerNumber , ' ' );
-	}
-
-
-	void pg_lcd_hd44780_write_p_string_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str ) {
-		_pg_Uint8 i = 0;
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		while ( Str[ i ] )
-			pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
-	}
-
-
-	void pg_lcd_hd44780_write_p_string_flash_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
-		_pg_Uint8 i = 0;
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		while ( Str[ i ] )
-			pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
-		
-		pg_delay( time , unit );
-		i = 0;
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		while ( Str[i++] )
-			pg_lcd_hd44780_put_char( ControllerNumber , ' ' );
-	}
-
-
-	void	pg_lcd_hd44780_write_p_int( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int16 Val ) {
-		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
-		pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );
-		sprintf( Str , Format , Val );
-		pg_lcd_hd44780_write_string( ControllerNumber , Str );
-	}
-
+	
+	#if ( PG_LCD_HD44780_WRITE_P_STRING_ROM___SC == PG_ENABLE )
+		void pg_lcd_hd44780_write_p_string_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str ) {
+			_pg_Uint8 i = 0;
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			while ( Str[ i ] )
+				pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
+		}
+	#endif
+	
+	
+	#if ( PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM___SC == PG_ENABLE )
+		void pg_lcd_hd44780_write_p_string_flash_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
+			_pg_Uint8 i = 0;
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			while ( Str[ i ] )
+				pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
+			
+			pg_delay( time , unit );
+			i = 0;
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			while ( Str[ i++ ] )
+				pg_lcd_hd44780_put_char( ControllerNumber , ' ' );
+		}
+	#endif
+	
+	
+	#if ( PG_LCD_HD44780_WRITE_P_INT___SC == PG_ENABLE )
+		void	pg_lcd_hd44780_write_p_int( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int16 Val ) {
+			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
+			pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );
+			sprintf( Str , Format , Val );
+			pg_lcd_hd44780_write_string( ControllerNumber , Str );
+		}	
+	#endif
+	
+	
 	#if ( PGIM_FTOA	== PG_ENABLE )
 		void	pg_lcd_hd44780_write_p_float( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_Uint24 Decimal_Digits , float Flt ) {
 //			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
@@ -448,22 +586,37 @@
 		}
 	#endif
 
-	void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int8 Chr ) {
-		_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
-		pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
-		sprintf( Str , Format , Chr );
-		pg_lcd_hd44780_write_string( ControllerNumber , Str );
-	}
+	
+	#if ( ( PG_LCD_HD44780_SPLASH_FULL_0_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_FULL_1_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_FULL_2_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_FULL_3_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_0_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_1_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_2_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_SPLASH_SLIDE_3_EN == PG_ENABLE ) || \
+		( PG_LCD_HD44780_WRITE_P_CHAR___SC == PG_ENABLE ) )
+		void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int8 Chr ) {
+			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			sprintf( Str , Format , Chr );
+			pg_lcd_hd44780_write_string( ControllerNumber , Str );
+		}
+	#endif
 
-
-	void	pg_lcd_hd44780_write( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... ) {
-		char    Message[2 * PG_LCD_HD44780_COLUMNS];
-		va_list	VAList;
-		va_start( VAList , Format );
-		vsprintf( Message , Format , VAList );
-		va_end( VAList );
-		pg_lcd_hd44780_write_p_string( ControllerNumber , Ln , Pos , Message );
-	}
+	
+	#if ( PG_LCD_HD44780_WRITE___SC == PG_ENABLE )
+		void	pg_lcd_hd44780_write( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... ) {
+			char    Message[ 2 * PG_LCD_HD44780_COLUMNS ];
+			va_list	VAList;
+			va_start( VAList , Format );
+			vsprintf( Message , Format , VAList );
+			va_end( VAList );
+			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
+			//pg_lcd_hd44780_write_string( ControllerNumber , Ln , Pos , Message );
+			pg_lcd_hd44780_write_string( ControllerNumber , Message );
+		}
+	#endif
 #endif
 
 

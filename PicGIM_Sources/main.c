@@ -30,9 +30,40 @@
 
 #include "picgim_main.h"
 
+#define MY_LED          L_B2
+#define MY_LED_TRIS     T_B2
+
+
+void main( void ) {
+	
+	_pg_Uint16	kappa = 0;
+
+	pg_initialize();
+
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , 0 , 0 , "00 Ok!" );
+	pg_lcd_hd44780_write			 ( PG_CONTROLLER_0 , 0 , 7 , "%dV %dMHz" , (int)PG_USER_SUPPLY_VOLT , (int)PG_CLOCK );
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , 1 , 0 , "01 Ok!" );
+	
+    pg_pin_mode( MY_LED_TRIS , PG_OUT );
+	pg_pin_clear( MY_LED );
+
+	PG_LOOP( PG_FOREVER ) {
+		pg_pin_toggle( MY_LED );
+		pg_lcd_hd44780_write		 ( PG_CONTROLLER_0 , 1 , 7 , "%d" , kappa );
+		kappa++;
+		pg_delay_msec( 50 );
+		//pg_delay( 500 , PG_MSEC );
+	}
+	PG_HALT;
+}
+
+/*
 void main( void ) {
 	pg_initialize();
-	
+
+	T_B2 = PG_OUT;
+	PG_LOOP ( PG_FOREVER ) {
+
 	//	I enable only one channel (AN0) as analog input.
 	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
 	//	I turn on the ADC module.
@@ -58,4 +89,5 @@ void main( void ) {
 	PG_HALT;
 }
 
+*/
 

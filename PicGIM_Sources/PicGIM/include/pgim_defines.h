@@ -108,6 +108,9 @@
 
 	#define PG_TRUE							1				/*!	An alternative way to say "logic value 1"	*/
 	#define PG_FALSE						0				/*!	An alternative way to say "logic value 0"	*/
+	
+	#define	PG_POSITIVE						1				/*!	Positive logic	*/
+	#define	PG_NEGATIVE						-1				/*!	Negative logic	*/
 
 	#define PG_READ							1				/*!	An alternative way to say "logic value 1"	*/
 	#define PG_WRITE						0				/*!	An alternative way to say "logic value 0"	*/
@@ -137,7 +140,7 @@
 	#define PG_COMMAND						0				/*!	The byte is a Command */
 	#define PG_DATA							1				/*!	The byte is a Data */
 	
-	#define PG_MISSING						-1				/*!	An error state : Missing */
+	#define PG_MISSING						-100			/*!	An error state : Missing */
 	
 	#define PG_CONTROLLER_0					0				/*!	This is the controller 0 */
 	#define PG_CONTROLLER_1					1				/*!	This is the controller 1 */

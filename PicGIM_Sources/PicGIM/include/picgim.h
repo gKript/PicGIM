@@ -486,6 +486,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
+		#include "pgim_lcd_hd44780___sc.h"
 		#include "pgim_lcd_hd44780.h"
 		#if ( ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE ) && ( PG_LCD_HD44780_RW_PRESENT == PG_NO ) )
 			#error	PG_HS_PG PG_HM_LCD_HD44780 Can not read busy flag, because writing pin is not used!

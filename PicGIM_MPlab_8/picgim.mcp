@@ -88,6 +88,8 @@ file_060=PicGIM
 file_061=PicGIM
 file_062=PicGIM_Public
 file_063=PicGIM
+file_064=PicGIM
+file_065=PicGIM
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -153,6 +155,8 @@ file_060=no
 file_061=no
 file_062=no
 file_063=no
+file_064=no
+file_065=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -218,6 +222,8 @@ file_060=no
 file_061=no
 file_062=no
 file_063=no
+file_064=no
+file_065=no
 [FILE_INFO]
 file_000=..\PicGIM_Sources\main.c
 file_001=..\PicGIM_Sources\PicGIM\src\pgim_adc.c
@@ -283,6 +289,8 @@ file_060=..\PicGIM_Sources\PicGIM\include\picgim_main.h
 file_061=..\PicGIM_Sources\PicGIM\include\picgim.h
 file_062=..\PicGIM_Sources\PicGIM\include\pgim_sensor_setup_public.h
 file_063=..\PicGIM_Sources\PicGIM\include\pgim_sensor.h
+file_064=E:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_lcd_hd44780___sc.h
+file_065=E:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_lcd_hd44780.h
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=

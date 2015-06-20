@@ -90,7 +90,21 @@
 							Already called in pg_initialize().
 		*/		
 		void	pg_lcd_hd44780_init_routine			( _pg_Uint8 ControllerNumber );
+
+		/*!
+			\brief			Turn on all the pixels of the display. 
+			\return			Nothing.
+			\param			ControllerNumber		The number of the controller.
+		*/			
+		void	pg_lcd_hd44780_splash_full( _pg_Uint8 ControllerNumber );
 		
+		/*!
+			\brief			Show full cursor moving.
+			\return			Nothing.
+			\param			ControllerNumber		The number of the controller.
+		*/			
+		void	pg_lcd_hd44780_splash_slide( _pg_Uint8 ControllerNumber );
+
 		/*!
 			\brief			Delete all character on the display. 
 			\return			Nothing.
