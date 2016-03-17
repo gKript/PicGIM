@@ -165,6 +165,7 @@ void main( void ) {
 	PG_INFINITE_LOOP {
 	
 		//	Write a string using the usual functions of Microchip library.
+		while(BusyUSART());
 		putrsUSART( "Hello world! " );
 	}
 }
