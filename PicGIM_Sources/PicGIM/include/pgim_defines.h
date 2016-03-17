@@ -160,6 +160,9 @@
 	#define	PG_DEGREES_CELSIUS				1				/*!	Indicates the use of Celsius scale */		//(generic define, not dedicated to the sensor module)
 	#define	PG_DEGREES_FAHRENHEIT			2				/*!	Indicates the use of Fahrenheit scale */	//(generic define, not dedicated to the sensor module)
 	
+	#define	PG_MSB_FIRST					1				/*! It indicates whether the byte is read or written starting from the most significant bit MSB */
+	#define	PG_LSB_FIRST					0				/*! It indicates whether the byte is read or written starting from the least significant bit LSB */
+
 	//------------------------------------------------------------------------------
 	//      B O A R D   D E F I N E S
 	//------------------------------------------------------------------------------
@@ -206,6 +209,8 @@
 	#define PG_HM_ENCODER		ENCODER module >	
 	#define PG_HM_UNIV_CONST	UNIVERSAL CONSTANTS >
 	#define PG_HM_SENSOR		SENSOR module >
+	#define PG_HM_RTC_DS1302	RTC_DS1302 module >
+	#define PG_HM_3WIRE			3WIRE module >
 	
 	#define PG_HF_FTOA			FTOA function >
 	

@@ -135,6 +135,27 @@
 		#define	PG_EXTERNAL_MEMORY_CS_TRIS			T_C3				//!< Must be: <pin-tris-name>
 	#endif
 
+	//------------------------------------------------------------------------------
+	//		H A R D W A R E   C O N F I G   |   R T C   D S 1 3 0 2
+	//------------------------------------------------------------------------------
+	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
+		#define	PG_RTC_DS1302_CS 					L_B0
+		#define PG_RTC_DS1302_CS_TRIS				T_B0
+	#endif
+
+	//------------------------------------------------------------------------------
+	//		H A R D W A R E   C O N F I G   |   3 W I R E
+	//------------------------------------------------------------------------------
+	#if ( PGIM_3WIRE == PG_ENABLE )
+		#define PG_3WIRE_IO							L_B1
+		#define PG_3WIRE_CK 						L_B2
+		
+		#define PG_3WIRE_IO_TRIS					T_B1
+		#define PG_3WIRE_CK_TRIS					T_B2
+		
+		#define PG_3WIRE_IO_PORT					P_B1
+	#endif
+	
 #endif /* _PGIM_HARDWARE_SETUP_PUBLIC_H_ */
 
 

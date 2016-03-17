@@ -130,7 +130,9 @@
 			PG_SPI,
 			PG_TIMER,
 			PG_FTOA,
-			PG_SENSOR
+			PG_SENSOR,
+			PG_RTC_DS1302,
+			PG_3WIRE
 		};
 
 		#include "pgim_error.h"
@@ -699,6 +701,43 @@
 	#endif
 	//---[ END Sensor ]---
 
+	
+	//---[ RTC_DS1302 ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_RTC_DS1302
+		#define		PGIM_RTC_DS1302		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_RTC_DS1302
+		#define		PGIM_RTC_DS1302		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
+		#include "pgim_rtc_ds1302.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PG_HS_PG PG_HM_RTC_DS1302 Loaded
+		#endif
+	#endif
+	//---[ END RTC_DS1302 ]---
+	
+	
+	//---[ 3Wire ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_3WIRE
+		#define		PGIM_3WIRE		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_3WIRE
+		#define		PGIM_3WIRE		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	//#if ( PGIM_3WIRE == PG_ENABLE )
+		#include "pgim_3wire.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PG_HS_PG PG_HM_3WIRE Loaded
+		#endif
+	#endif
+	//---[ END 3Wire ]---
+	
+	
 	
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T

@@ -27,67 +27,44 @@
 	END LICENSE
  */
 
+//	This test code works on a 16x2 HD44780 lcd display.
 
 #include "picgim_main.h"
 
-#define MY_LED          L_B2
-#define MY_LED_TRIS     T_B2
-
-
 void main( void ) {
 	
-	_pg_Uint16	kappa = 0;
-
-	pg_initialize();
-
-	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , 0 , 0 , "00 Ok!" );
-	pg_lcd_hd44780_write			 ( PG_CONTROLLER_0 , 0 , 7 , "%dV %dMHz" , (int)PG_USER_SUPPLY_VOLT , (int)PG_CLOCK );
-	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , 1 , 0 , "01 Ok!" );
+	pg_initialize( );
 	
-    pg_pin_mode( MY_LED_TRIS , PG_OUT );
-	pg_pin_clear( MY_LED );
-
-	PG_LOOP( PG_FOREVER ) {
-		pg_pin_toggle( MY_LED );
-		pg_lcd_hd44780_write		 ( PG_CONTROLLER_0 , 1 , 7 , "%d" , kappa );
-		kappa++;
-		pg_delay_msec( 50 );
-		//pg_delay( 500 , PG_MSEC );
+	//---[ Programming clock/calendar: ]--------------------------------------------------------------------
+	// 1.) Remove the comment of the three functions below;
+	// 2.) Fill with the correct data and program the device;
+	// 3.) Comment again and program again, so the updated information
+	//     of the running clock will not be overwritten at the next reset.
+	//------------------------------------------------------------------------------------------------------
+//	pg_rtc_ds1302_wr_date( 31 , 12 , 15 );					// Programming function #1, to setup date
+//	pg_rtc_ds1302_wr_time( 23 , 59 , 50 );					// Programming function #2, to setup clock
+//	pg_rtc_ds1302_wr_weekday( PG_RTC_DS1302_WEEKDAY_SUN );	// Programming function #3, to setup week day
+	
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "Date=  /  /  " );
+	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "Time=  :  :  " );
+		
+	pg_loop {
+		pg_rtc_ds1302_rd_date( );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  5 , "%02d" , (int)ds1302_day );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  8 , "%02d" , (int)ds1302_month );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 11 , "%02d" , (int)ds1302_year );
+		
+		pg_rtc_ds1302_rd_time( );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  5 , "%02d" , (int)ds1302_hour );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  8 , "%02d" , (int)ds1302_min );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 11 , "%02d" , (int)ds1302_sec );
+		
+		pg_rtc_ds1302_rd_weekday( );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  14 , "%d" , (int)ds1302_weekday );
+		
+		pg_delay( 1 , PG_SEC );
 	}
 	PG_HALT;
 }
 
-/*
-void main( void ) {
-	pg_initialize();
-
-	T_B2 = PG_OUT;
-	PG_LOOP ( PG_FOREVER ) {
-
-	//	I enable only one channel (AN0) as analog input.
-	pg_adc_set( PG_ANALOG_CHANNELS_PARAM , PG_1_CHANNEL );
-	//	I turn on the ADC module.
-	pg_adc_set( PG_ADC_MODULE , PG_ON );
-	//	I perform the first analog conversion.
-	pg_adc_start( PG_CH_0 );
-	//	I enable the PWM setting the maximum frequency calculated by PicGIM based on the frequency of the oscillator used in the project.
-	
-	pg_pwm_set( 1 , PG_KHZ );
-	//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted.
-	pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
-	//	I starting the PWM device
-	pg_pwm_start( PG_PWM_1 );
-	//	We enter into an infinite loop that will run our program.
-	
-	PG_LOOP ( PG_FOREVER ) {
-		//	I perform an analog conversion.
-		pg_adc_start( PG_CH_0 );
-		//	I set the Duty Cycle of PWM passing the percentage of the analog signal converted.
-		//  For example with a supply voltage of 5V an analog conversion of 2.5V match to 50%.
-		pg_pwm_dutycycle( PG_PWM_1 , pg_adc_get_perc() );
-	}
-	PG_HALT;
-}
-
-*/
 

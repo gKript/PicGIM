@@ -120,6 +120,13 @@ void pg_initialize( void ) {
 		pg_delay( 1 , PG_MSEC );				// Delay to wait memory becomes ready; no chip-select allowed
 	#endif
 	
+	#if ( PGIM_3WIRE == PG_ENABLE )
+		pg_3wire_init( );
+	#endif
+
+	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
+		pg_rtc_ds1302_init( );
+	#endif
 }
 
 

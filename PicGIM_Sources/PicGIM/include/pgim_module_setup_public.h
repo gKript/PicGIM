@@ -54,6 +54,9 @@
 	#define PGIM_ERROR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_FTOA								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+
+	//		S O F T W A R E   D E V I C E
+	#define PGIM_3WIRE								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
 	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -68,7 +71,8 @@
 	#define PGIM_LCD_HD44780						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-
+	#define	PGIM_RTC_DS1302							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	
 	//		H A R D W A R E   G K R I P T
 	#define PGIM_ENCODER							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
@@ -129,6 +133,14 @@
 	//------------------------------------------------------------------------------
 	//Nothing to configure here.
 	
+	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   3 W I R E
+	//------------------------------------------------------------------------------
+	#if ( PGIM_3WIRE == PG_ENABLE )
+		#define PG_3WIRE_DIRECTION_INPUT		PG_LSB_FIRST			//!< Must be: PG_MSB_FIRST || PG_LSB_FIRST
+		#define PG_3WIRE_DIRECTION_OUTPUT		PG_LSB_FIRST			//!< Must be: PG_MSB_FIRST || PG_LSB_FIRST
+	#endif
+
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
 	//------------------------------------------------------------------------------

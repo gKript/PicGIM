@@ -194,6 +194,19 @@
 		#endif
 	#endif
 	
+	//------------------------------------------------------------------------------
+	//	D e p e n d e n c y   o n   3 W I R E
+	//------------------------------------------------------------------------------
+	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
+		 
+		#if ( PGIM_3WIRE == PG_DISABLE )
+			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the 3WIRE module required by other modules
+			#ifndef		PG_EXIT_ON_ERROR
+				#define		PG_EXIT_ON_ERROR
+			#endif
+		#endif
+	#endif
+	
 //	//------------------------------------------------------------------------------
 //	//	D e p e n d e n c y   o n   F O N T S
 //	//------------------------------------------------------------------------------
