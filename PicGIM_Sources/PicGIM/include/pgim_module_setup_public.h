@@ -99,6 +99,14 @@
 	#endif
 	
 	//------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   3 W I R E
+	//------------------------------------------------------------------------------
+	#if ( PGIM_3WIRE == PG_ENABLE )
+		#define PG_3WIRE_DIRECTION_INPUT		PG_LSB_FIRST			//!< Must be: PG_MSB_FIRST || PG_LSB_FIRST
+		#define PG_3WIRE_DIRECTION_OUTPUT		PG_LSB_FIRST			//!< Must be: PG_MSB_FIRST || PG_LSB_FIRST
+	#endif
+
+	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   E V E N T S
 	//------------------------------------------------------------------------------
 	//Nothing to configure here.
@@ -133,14 +141,6 @@
 	//------------------------------------------------------------------------------
 	//Nothing to configure here.
 	
-	//------------------------------------------------------------------------------
-	//		S O F T W A R E   C O N F I G   |   3 W I R E
-	//------------------------------------------------------------------------------
-	#if ( PGIM_3WIRE == PG_ENABLE )
-		#define PG_3WIRE_DIRECTION_INPUT		PG_LSB_FIRST			//!< Must be: PG_MSB_FIRST || PG_LSB_FIRST
-		#define PG_3WIRE_DIRECTION_OUTPUT		PG_LSB_FIRST			//!< Must be: PG_MSB_FIRST || PG_LSB_FIRST
-	#endif
-
 	//------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
 	//------------------------------------------------------------------------------

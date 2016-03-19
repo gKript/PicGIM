@@ -2,6 +2,7 @@
 // pgim_rtc_ds1302.c
 //
 // PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
+
 // Version 0.5-x
 // AsYntote - SkyMatrix
 //
@@ -49,14 +50,14 @@
 	
 	//Doc. Ref.: DALLAS Semiconductor, DS1302 Trickle-Charge Timekeeping Chip
 	
-	_pg_Uint8 ds1302_sec;			//!<	0-59			( Decimal value accepted range )
-	_pg_Uint8 ds1302_min;			//!<	0-59			( Decimal value accepted range )
-	_pg_Uint8 ds1302_hour;			//!<	1-12/0-23		( Decimal value accepted range )
-	_pg_Uint8 ds1302_day;			//!<	1-31			( Decimal value accepted range )
-	_pg_Uint8 ds1302_month;			//!<	1-12			( Decimal value accepted range )
-	_pg_Uint8 ds1302_weekday;		//!<	1-7				( Decimal value accepted range )
-	_pg_Uint8 ds1302_year;			//!<	00-99			( Decimal value accepted range )
-	_pg_Uint8 ds1302_halt_clock;	//!<	Halt clock flag ( 0 = running )
+	_pg_Uint8 ds1302_sec;			//	0-59			( Decimal value accepted range )
+	_pg_Uint8 ds1302_min;			//	0-59			( Decimal value accepted range )
+	_pg_Uint8 ds1302_hour;			//	1-12/0-23		( Decimal value accepted range )
+	_pg_Uint8 ds1302_day;			//	1-31			( Decimal value accepted range )
+	_pg_Uint8 ds1302_month;			//	1-12			( Decimal value accepted range )
+	_pg_Uint8 ds1302_weekday;		//	1-7				( Decimal value accepted range )
+	_pg_Uint8 ds1302_year;			//	00-99			( Decimal value accepted range )
+	_pg_Uint8 ds1302_halt_clock;	//	Halt clock flag ( 0 = running )
 	
 	
 	void	pg_rtc_ds1302_init( void ) {
@@ -72,64 +73,29 @@
 		ds1302_year			= 0x00;
 		ds1302_halt_clock	= 0x00; //Running clock
 		
-		pg_rtc_ds1302_wr_disable( );
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
 	}
 
 	
-	void	pg_rtc_ds1302_wr_enable( void ) {
+	void	pg_rtc_ds1302_wr_access( _pg_Uint8 ds1302_wr_access ) { //PG_ENABLE, PG_DISABLE
 		PG_RTC_DS1302_CS = PG_ENABLE;
 		PG_RTC_DS1302_CS_DELAY
 		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_WRPROTECT ); //Command to write WP Write Protect Bit7 ( 1 = Protected )
-		pg_3wire_wr_byte( 0b00000000 ); //Bit7 = 0 to enable writing
+		if( ds1302_wr_access )
+			pg_3wire_wr_byte( 0b00000000 ); //Bit7 = 0 to enable writing
+		else
+			pg_3wire_wr_byte( 0b10000000 ); //Bit7 = 1 to disable writing
 		PG_RTC_DS1302_CS = PG_DISABLE;
 		PG_RTC_DS1302_CS_DELAY
 	}
 	
 	
-	void	pg_rtc_ds1302_wr_disable( void) {
-		PG_RTC_DS1302_CS = PG_ENABLE;
-		PG_RTC_DS1302_CS_DELAY
-		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_WRPROTECT ); //Command to write WP Write Protect Bit7 ( 1 = Protected )
-		pg_3wire_wr_byte( 0b10000000 ); //Bit7 = 1 to disable writing
-		PG_RTC_DS1302_CS = PG_DISABLE;
-		PG_RTC_DS1302_CS_DELAY
-	}
-	
-	
-	void	pg_rtc_ds1302_wr_time(_pg_Uint8 ds1302_set_hour, _pg_Uint8 ds1302_set_min, _pg_Uint8 ds1302_set_sec ){
+	void	pg_rtc_ds1302_wr_time_sec( _pg_Uint8 ds1302_set_sec ) {	
+	//---[ Write SECOND ]------------------------------------------------------------
 		_pg_Uint8 temp;
 		
-		//---[ Write HOUR ]---------------------------------------------------------------
-		pg_rtc_ds1302_wr_enable( );
-		
-		if( ds1302_set_hour < 24 ) { //0-23; unsigned, never is < 0.
-			temp = 0x00;
-			temp = ( ( ( ds1302_set_hour / 10 ) << 4 ) + ( ds1302_set_hour % 10 ) );
-			PG_RTC_DS1302_CS = PG_ENABLE;
-			PG_RTC_DS1302_CS_DELAY
-			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_HOUR ); //Command to write hours
-			pg_3wire_wr_byte( temp );
-			PG_RTC_DS1302_CS = PG_DISABLE;
-			PG_RTC_DS1302_CS_DELAY
-		}
-		else {
-			//Error: wrong hours value;
-		}
-		//---[ Write MINUTE ]------------------------------------------------------------
-		if( ds1302_set_min < 60 ) {	//0-59; unsigned, never is < 0.
-			temp = 0x00;
-			temp = ( ( ( ds1302_set_min / 10 ) << 4 ) + ( ds1302_set_min % 10 ) );
-			PG_RTC_DS1302_CS = PG_ENABLE;
-			PG_RTC_DS1302_CS_DELAY
-			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_MIN ); //Command to write minutes
-			pg_3wire_wr_byte( temp );
-			PG_RTC_DS1302_CS = PG_DISABLE;
-			PG_RTC_DS1302_CS_DELAY
-		}
-		else {
-			//Error: wrong minutes value;
-		}
-		//---[ Write SECOND ]------------------------------------------------------------
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
+	
 		if( ds1302_set_sec < 60 ) {	//0-59; unsigned, never is < 0.
 			temp = 0x00;
 			temp = ( ( ( ds1302_set_sec / 10 ) << 4 ) + ( ds1302_set_sec % 10 ) );
@@ -145,52 +111,62 @@
 		else {
 			//Error: wrong seconds value;
 		}
-		pg_rtc_ds1302_wr_disable( );
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
 	}
 	
 	
-	void	pg_rtc_ds1302_rd_time( void ) {
+	void	pg_rtc_ds1302_wr_time_min( _pg_Uint8 ds1302_set_min ) {		
+		//---[ Write MINUTE ]------------------------------------------------------------
 		_pg_Uint8 temp;
 		
-		//---[ Read HOUR ]---------------------------------------------------------------
-		PG_RTC_DS1302_CS = PG_ENABLE;
-		PG_RTC_DS1302_CS_DELAY
-		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_HOUR ); //Command to read hours
-		temp = pg_3wire_rd_byte( );
-		temp = temp & 0b00111111; //Clear unused Bit7 and Bit6, h24 NOT supported!
-		ds1302_hour = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
-		PG_RTC_DS1302_CS = PG_DISABLE;
-		PG_RTC_DS1302_CS_DELAY
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
 		
-		//---[ Read MINUTE ]--------------------------------------------------------------
-		PG_RTC_DS1302_CS = PG_ENABLE;
-		PG_RTC_DS1302_CS_DELAY
-		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_MIN ); //Command to read minutes
-		temp = pg_3wire_rd_byte( );
-		temp = temp & 0b01111111; //Clear unused Bit7
-		ds1302_min = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
-		PG_RTC_DS1302_CS = PG_DISABLE;
-		PG_RTC_DS1302_CS_DELAY
-		
-		//---[ Read SECOND ]--------------------------------------------------------------
-		PG_RTC_DS1302_CS = PG_ENABLE;
-		PG_RTC_DS1302_CS_DELAY
-		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_SEC ); //Command to read "Clock Halt Flag" and seconds
-		temp = pg_3wire_rd_byte( );
-		ds1302_halt_clock = temp & 0b10000000; //1 = stopped
-		temp = temp & 0b01111111; //Clear "Clock Halt Flag" bit to extract right seconds
-		ds1302_sec = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
-		PG_RTC_DS1302_CS = PG_DISABLE;
-		PG_RTC_DS1302_CS_DELAY
+		if( ds1302_set_min < 60 ) {	//0-59; unsigned, never is < 0.
+			temp = 0x00;
+			temp = ( ( ( ds1302_set_min / 10 ) << 4 ) + ( ds1302_set_min % 10 ) );
+			PG_RTC_DS1302_CS = PG_ENABLE;
+			PG_RTC_DS1302_CS_DELAY
+			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_MIN ); //Command to write minutes
+			pg_3wire_wr_byte( temp );
+			PG_RTC_DS1302_CS = PG_DISABLE;
+			PG_RTC_DS1302_CS_DELAY
+		}
+		else {
+			//Error: wrong minutes value;
+		}
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
 	}
 	
 	
-	void	pg_rtc_ds1302_wr_date( _pg_Uint8 ds1302_set_day, _pg_Uint8 ds1302_set_month, _pg_Uint8 ds1302_set_year ) {
+	void	pg_rtc_ds1302_wr_time_hour( _pg_Uint8 ds1302_set_hour ) {	
+		//---[ Write HOUR ]---------------------------------------------------------------
 		_pg_Uint8 temp;
 		
-		pg_rtc_ds1302_wr_enable( );
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
 		
+		if( ds1302_set_hour < 24 ) { //0-23; unsigned, never is < 0.
+			temp = 0x00;
+			temp = ( ( ( ds1302_set_hour / 10 ) << 4 ) + ( ds1302_set_hour % 10 ) );
+			PG_RTC_DS1302_CS = PG_ENABLE;
+			PG_RTC_DS1302_CS_DELAY
+			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_HOUR ); //Command to write hours
+			pg_3wire_wr_byte( temp );
+			PG_RTC_DS1302_CS = PG_DISABLE;
+			PG_RTC_DS1302_CS_DELAY
+		}
+		else {
+			//Error: wrong hours value;
+		}
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
+	}
+	
+	
+	void	pg_rtc_ds1302_wr_date_day( _pg_Uint8 ds1302_set_day ) {
 		//---[ Write DAY (1-31) ]---------------------------------------------------------
+		_pg_Uint8 temp;
+		
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
+		
 		if( ( ds1302_set_day > 0 ) &&  ( ds1302_set_day < 32 ) ) { //1-31
 			temp = 0x00;
 			temp = ( ( ( ds1302_set_day / 10 ) << 4 ) + ( ds1302_set_day % 10 ) );
@@ -204,7 +180,16 @@
 		else {
 			//Error: wrong day value;
 		}
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
+	}
+
+	
+	void	pg_rtc_ds1302_wr_date_month( _pg_Uint8 ds1302_set_month ) {
 		//---[ Write MONTH ]--------------------------------------------------------------
+		_pg_Uint8 temp;
+		
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
+		
 		if( ( ds1302_set_month > 0 ) &&  ( ds1302_set_month < 13 ) ) { //1-12
 			temp = 0x00;
 			temp = ( ( ( ds1302_set_month / 10 ) << 4 ) + ( ds1302_set_month % 10 ) );
@@ -218,6 +203,15 @@
 		else {
 			//Error: wrong month value;
 		}
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
+	}
+
+	
+	void	pg_rtc_ds1302_wr_date_year( _pg_Uint8 ds1302_set_year ) {
+		_pg_Uint8 temp;
+		
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
+		
 		//---[ Write YEAR ]---------------------------------------------------------------
 		if( ( ds1302_set_year > 0 ) &&  ( ds1302_set_year < 100 ) ) { //00-99
 			temp = 0x00;
@@ -232,14 +226,92 @@
 		else {
 			//Error: wrong year value;
 		}
-		pg_rtc_ds1302_wr_disable( );
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
 	}
 	
 		
-	void	pg_rtc_ds1302_rd_date( void ) {
+	void	pg_rtc_ds1302_wr_weekday( _pg_Uint8 ds1302_set_weekday ) {
+		//---[ Write WEEKDAY (1-7) ]------------------------------------------------------
 		_pg_Uint8 temp;
 		
+		pg_rtc_ds1302_wr_access( PG_ENABLE );
+		
+		if( ( ds1302_set_weekday > 0 ) &&  ( ds1302_set_weekday < 8 ) ) { //1-7
+			PG_RTC_DS1302_CS = PG_ENABLE;
+			PG_RTC_DS1302_CS_DELAY
+			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_WEEKDAY ); //Command to write weekday
+			pg_3wire_wr_byte( ds1302_set_weekday );
+			PG_RTC_DS1302_CS = PG_DISABLE;
+			PG_RTC_DS1302_CS_DELAY
+		}
+		else
+			//Error: wrong day value;
+		pg_rtc_ds1302_wr_access( PG_DISABLE );
+	}
+
+	
+	void	pg_rtc_ds1302_wr_time_all( _pg_Uint8 ds1302_set_hour_all, _pg_Uint8 ds1302_set_min_all, _pg_Uint8 ds1302_set_sec_all ) {
+		//---[ Write TIME ALL ]---------------------------------------------------------------
+		pg_rtc_ds1302_wr_time_hour( ds1302_set_hour_all );
+		pg_rtc_ds1302_wr_time_min( ds1302_set_min_all );
+		pg_rtc_ds1302_wr_time_sec( ds1302_set_sec_all );
+	}
+	
+	
+	void	pg_rtc_ds1302_wr_date_all( _pg_Uint8 ds1302_set_day_all, _pg_Uint8 ds1302_set_month_all, _pg_Uint8 ds1302_set_year_all ) {
+		//---[ Write DATE ALL ]---------------------------------------------------------------
+		pg_rtc_ds1302_wr_date_day( ds1302_set_day_all );
+		pg_rtc_ds1302_wr_date_month(  ds1302_set_month_all );
+		pg_rtc_ds1302_wr_date_year( ds1302_set_year_all );
+	}
+	
+	
+	void	pg_rtc_ds1302_rd_time_sec( void ) {
+		_pg_Uint8 temp;
+		//---[ Read SECOND ]--------------------------------------------------------------
+		PG_RTC_DS1302_CS = PG_ENABLE;
+		PG_RTC_DS1302_CS_DELAY
+		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_SEC ); //Command to read "Clock Halt Flag" and seconds
+		temp = pg_3wire_rd_byte( );
+		ds1302_halt_clock = temp & 0b10000000; //1 = stopped
+		temp = temp & 0b01111111; //Clear "Clock Halt Flag" bit to extract right seconds
+		ds1302_sec = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
+		PG_RTC_DS1302_CS = PG_DISABLE;
+		PG_RTC_DS1302_CS_DELAY
+	}
+
+
+	void	pg_rtc_ds1302_rd_time_min( void ) {
+		_pg_Uint8 temp;
+		//---[ Read MINUTE ]--------------------------------------------------------------
+		PG_RTC_DS1302_CS = PG_ENABLE;
+		PG_RTC_DS1302_CS_DELAY
+		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_MIN ); //Command to read minutes
+		temp = pg_3wire_rd_byte( );
+		temp = temp & 0b01111111; //Clear unused Bit7
+		ds1302_min = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
+		PG_RTC_DS1302_CS = PG_DISABLE;
+		PG_RTC_DS1302_CS_DELAY
+	}
+	
+	
+	void	pg_rtc_ds1302_rd_time_hour( void ) {
+		//---[ Read HOUR ]---------------------------------------------------------------
+		_pg_Uint8 temp;
+		PG_RTC_DS1302_CS = PG_ENABLE;
+		PG_RTC_DS1302_CS_DELAY
+		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_HOUR ); //Command to read hours
+		temp = pg_3wire_rd_byte( );
+		temp = temp & 0b00111111; //Clear unused Bit7 and Bit6, h24 NOT supported!
+		ds1302_hour = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
+		PG_RTC_DS1302_CS = PG_DISABLE;
+		PG_RTC_DS1302_CS_DELAY
+	}
+
+		
+	void	pg_rtc_ds1302_rd_date_day( void ) {
 		//---[ Read DAY (1-31) ]----------------------------------------------------------
+		_pg_Uint8 temp;
 		PG_RTC_DS1302_CS = PG_ENABLE;
 		PG_RTC_DS1302_CS_DELAY
 		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_DAY ); //Command to read day 1-31
@@ -248,8 +320,12 @@
 		ds1302_day = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
 		PG_RTC_DS1302_CS = PG_DISABLE;
 		PG_RTC_DS1302_CS_DELAY
-
+	}
+	
+	
+	void	pg_rtc_ds1302_rd_date_month( void ) {
 		//---[ Read MONTH ]---------------------------------------------------------------
+		_pg_Uint8 temp;
 		PG_RTC_DS1302_CS = PG_ENABLE;
 		PG_RTC_DS1302_CS_DELAY
 		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_MONTH ); //Command to read month
@@ -258,8 +334,12 @@
 		ds1302_month = ( ( temp >> 4 ) * 10 ) + ( temp & 0b00001111 );
 		PG_RTC_DS1302_CS = PG_DISABLE;
 		PG_RTC_DS1302_CS_DELAY
-
+	}
+	
+	
+	void	pg_rtc_ds1302_rd_date_year( void ) {
 		//---[ Read YEAR ]----------------------------------------------------------------
+		_pg_Uint8 temp;
 		PG_RTC_DS1302_CS = PG_ENABLE;
 		PG_RTC_DS1302_CS_DELAY
 		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_YEAR ); //Command to read year
@@ -270,31 +350,9 @@
 	}
 	
 	
-	void	pg_rtc_ds1302_wr_weekday( _pg_Uint8 ds1302_set_weekday ) {
-		_pg_Uint8 temp;
-		
-		pg_rtc_ds1302_wr_enable( );
-		
-		//---[ Write WEEKDAY (1-7) ]------------------------------------------------------
-		if( ( ds1302_set_weekday > 0 ) &&  ( ds1302_set_weekday < 8 ) ) { //1-7
-			PG_RTC_DS1302_CS = PG_ENABLE;
-			PG_RTC_DS1302_CS_DELAY
-			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_WR_WEEKDAY ); //Command to write weekday
-			pg_3wire_wr_byte( ds1302_set_weekday );
-			PG_RTC_DS1302_CS = PG_DISABLE;
-			PG_RTC_DS1302_CS_DELAY
-		}
-		else {
-			//Error: wrong day value;
-		}
-		pg_rtc_ds1302_wr_disable( );
-	}
-
-	
 	void	pg_rtc_ds1302_rd_weekday( void ) {
-		_pg_Uint8 temp;
-		
 		//---[ Read WEEKDAY (1-7) ]-------------------------------------------------------
+		_pg_Uint8 temp;
 		PG_RTC_DS1302_CS = PG_ENABLE;
 		PG_RTC_DS1302_CS_DELAY
 		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_WEEKDAY ); //Command to read weekday 1-7
@@ -305,19 +363,35 @@
 	}
 	
 	
-	void	pg_rtc_ds1302_start_clock	( void ) {
-		//---[ Start clock ]--------------------------------------------------------------
-		pg_rtc_ds1302_rd_time( );
-		ds1302_halt_clock = 0x00;
-		pg_rtc_ds1302_wr_time( ds1302_hour, ds1302_min, ds1302_sec );
+	void	pg_rtc_ds1302_rd_time_all( void ) {
+		//---[ Read TIME ALL ]----------------------------------------------------------------
+		pg_rtc_ds1302_rd_time_hour( );
+		pg_rtc_ds1302_rd_time_min( );
+		pg_rtc_ds1302_rd_time_sec( );
 	}
 	
 	
-	void	pg_rtc_ds1302_stop_clock	( void ) {
+	void	pg_rtc_ds1302_rd_date_all( void ) {
+		//---[ Read DATE ALL ]----------------------------------------------------------------
+		pg_rtc_ds1302_rd_date_day( );
+		pg_rtc_ds1302_rd_date_month( );
+		pg_rtc_ds1302_rd_date_year( );
+	}
+
+
+	void	pg_rtc_ds1302_start( void ) {
+		//---[ Start clock ]--------------------------------------------------------------
+		pg_rtc_ds1302_rd_time_sec( );
+		ds1302_halt_clock = 0x00;
+		pg_rtc_ds1302_wr_time_sec( ds1302_sec );
+	}
+	
+	
+	void	pg_rtc_ds1302_stop( void ) {
 		//---[ Stop clock ]---------------------------------------------------------------
-		pg_rtc_ds1302_rd_time( );
+		pg_rtc_ds1302_rd_time_sec( );
 		ds1302_halt_clock = 0x01;
-		pg_rtc_ds1302_wr_time( ds1302_hour, ds1302_min, ds1302_sec );
+		pg_rtc_ds1302_wr_time_sec( ds1302_sec );
 	}
 	
 #endif

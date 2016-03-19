@@ -100,21 +100,32 @@
 	extern	_pg_Uint8 	ds1302_year;				//!<	00-99			( Decimal value accepted range )
 	extern	_pg_Uint8 	ds1302_halt_clock;			//!<	Halt clock flag ( 1 = stopped; 0 = running )
 	
-	void		pg_rtc_ds1302_init					( void );
+	void	pg_rtc_ds1302_init( void );
+	void	pg_rtc_ds1302_wr_access( _pg_Uint8 ds1302_wr_access );
+	void	pg_rtc_ds1302_start( void );
+	void	pg_rtc_ds1302_stop( void );
 	
-	void		pg_rtc_ds1302_wr_enable				( void );
-	void		pg_rtc_ds1302_wr_disable			( void );
+	void	pg_rtc_ds1302_wr_time_sec( _pg_Uint8 ds1302_set_sec );
+	void	pg_rtc_ds1302_wr_time_min( _pg_Uint8 ds1302_set_min );		
+	void	pg_rtc_ds1302_wr_time_hour( _pg_Uint8 ds1302_set_hour );	
+	void	pg_rtc_ds1302_wr_date_day( _pg_Uint8 ds1302_set_day );
+	void	pg_rtc_ds1302_wr_date_month( _pg_Uint8 ds1302_set_month );
+	void	pg_rtc_ds1302_wr_date_year( _pg_Uint8 ds1302_set_year );
+	void	pg_rtc_ds1302_wr_weekday( _pg_Uint8 ds1302_set_weekday );
 	
-	void		pg_rtc_ds1302_wr_time				( _pg_Uint8 ds1302_set_hour, _pg_Uint8 ds1302_set_min, _pg_Uint8 ds1302_set_sec );			
-	void		pg_rtc_ds1302_wr_date				( _pg_Uint8 ds1302_set_day, _pg_Uint8 ds1302_set_month, _pg_Uint8 ds1302_set_year );
-	void		pg_rtc_ds1302_wr_weekday			( _pg_Uint8 ds1302_set_weekday );
+	void	pg_rtc_ds1302_wr_time_all( _pg_Uint8 ds1302_set_hour_all, _pg_Uint8 ds1302_set_min_all, _pg_Uint8 ds1302_set_sec_all );
+	void	pg_rtc_ds1302_wr_date_all( _pg_Uint8 ds1302_set_day_all, _pg_Uint8 ds1302_set_month_all, _pg_Uint8 ds1302_set_year_all );
 	
-	void		pg_rtc_ds1302_rd_time				( void );
-	void		pg_rtc_ds1302_rd_date				( void );
-	void		pg_rtc_ds1302_rd_weekday			( void );
+	void	pg_rtc_ds1302_rd_time_hour( void );
+	void	pg_rtc_ds1302_rd_time_min( void );
+	void	pg_rtc_ds1302_rd_time_sec( void );
+	void	pg_rtc_ds1302_rd_date_day( void );
+	void	pg_rtc_ds1302_rd_date_month( void );
+	void	pg_rtc_ds1302_rd_date_year( void );
+	void	pg_rtc_ds1302_rd_weekday( void );
 	
-	void		pg_rtc_ds1302_start_clock			( void );
-	void		pg_rtc_ds1302_stop_clock			( void );
+	void	pg_rtc_ds1302_rd_time_all( void );
+	void	pg_rtc_ds1302_rd_date_all( void );
 	//---[ End Prototypes ]---	
 	
 	#endif

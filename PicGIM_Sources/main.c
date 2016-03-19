@@ -35,26 +35,27 @@ void main( void ) {
 	
 	pg_initialize( );
 	
+	pg_pin_mode( T_B4 , PG_IN );
+	
 	//---[ Programming clock/calendar: ]--------------------------------------------------------------------
-	// 1.) Remove the comment of the three functions below;
-	// 2.) Fill with the correct data and program the device;
-	// 3.) Comment again and program again, so the updated information
-	//     of the running clock will not be overwritten at the next reset.
+	//	Make a pull-up on PORTB4 pin. At reset time, PORTB4 is probed. If low, rtc will be programmed.
 	//------------------------------------------------------------------------------------------------------
-//	pg_rtc_ds1302_wr_date( 31 , 12 , 15 );					// Programming function #1, to setup date
-//	pg_rtc_ds1302_wr_time( 23 , 59 , 50 );					// Programming function #2, to setup clock
-//	pg_rtc_ds1302_wr_weekday( PG_RTC_DS1302_WEEKDAY_SUN );	// Programming function #3, to setup week day
+	if( !P_B4 ) {
+		pg_rtc_ds1302_wr_date_all( 31 , 12 , 15 );
+		pg_rtc_ds1302_wr_time_all( 23 , 59 , 50 );
+		pg_rtc_ds1302_wr_weekday( PG_RTC_DS1302_WEEKDAY_SUN );
+	}
 	
 	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "Date=  /  /  " );
 	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "Time=  :  :  " );
 		
 	pg_loop {
-		pg_rtc_ds1302_rd_date( );
+		pg_rtc_ds1302_rd_date_all( );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  5 , "%02d" , (int)ds1302_day );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  8 , "%02d" , (int)ds1302_month );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 11 , "%02d" , (int)ds1302_year );
 		
-		pg_rtc_ds1302_rd_time( );
+		pg_rtc_ds1302_rd_time_all( );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  5 , "%02d" , (int)ds1302_hour );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  8 , "%02d" , (int)ds1302_min );
 		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 11 , "%02d" , (int)ds1302_sec );
