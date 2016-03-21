@@ -38,7 +38,8 @@ void main( void ) {
 	pg_pin_mode( T_B4 , PG_IN );
 	
 	//---[ Programming clock/calendar: ]--------------------------------------------------------------------
-	//	Make a pull-up on PORTB4 pin. At reset time, PORTB4 is probed. If low, rtc will be programmed.
+	//	Make a push-button and a pull-up on PORTB4 pin.
+	//	At reset time, PORTB4 is probed. If low, rtc will be programmed.
 	//------------------------------------------------------------------------------------------------------
 	if( !P_B4 ) {
 		pg_rtc_ds1302_wr_date_all( 31 , 12 , 15 );

@@ -94,6 +94,7 @@ file_066=PicGIM
 file_067=PicGIM
 file_068=PicGIM
 file_069=PicGIM
+file_070=PicGIM
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -165,6 +166,7 @@ file_066=no
 file_067=no
 file_068=no
 file_069=no
+file_070=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -236,6 +238,7 @@ file_066=no
 file_067=no
 file_068=no
 file_069=no
+file_070=no
 [FILE_INFO]
 file_000=..\PicGIM_Sources\main.c
 file_001=..\PicGIM_Sources\PicGIM\src\pgim_adc.c
@@ -302,11 +305,12 @@ file_061=..\PicGIM_Sources\PicGIM\include\pgim_mcu\pgim_18f97j60.h
 file_062=..\PicGIM_Sources\PicGIM\include\picgim.h
 file_063=..\PicGIM_Sources\PicGIM\include\pgim_sensor_setup_public.h
 file_064=..\PicGIM_Sources\PicGIM\include\pgim_sensor.h
-file_065=E:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_lcd_hd44780___sc.h
-file_066=E:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_lcd_hd44780.h
-file_067=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_rtc_ds1302.h
-file_068=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\picgim_main.h
-file_069=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_3wire.h
+file_065=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_rtc_ds1302.h
+file_066=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\picgim_main.h
+file_067=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_3wire.h
+file_068=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_rtc_ds1302___sc.h
+file_069=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_lcd_hd44780.h
+file_070=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include\pgim_lcd_hd44780___sc.h
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=

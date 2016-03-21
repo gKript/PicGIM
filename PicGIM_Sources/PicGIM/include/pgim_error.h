@@ -69,7 +69,8 @@
 					PG_ERROR_ADC,
 					PG_ERROR_TIMER,
 					PG_ERROR_FTOA,
-					PG_ERROR_SENSOR
+					PG_ERROR_SENSOR,
+					PG_ERROR_RTC_DS1302
                 };
 
 		extern _pg_Uint32_VAL			pg_error_state;					//!<	The ERROR registry
