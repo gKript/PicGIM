@@ -78,7 +78,7 @@
 
 			\section	intro_sec 	Introduction
 				\htmlonly
-					<h3>PicGIM Documentation Milestone 0.5</h3>
+					<h3>PicGIM Documentation Milestone 0.6</h3>
 					gKript.org &copy; Copyright 2002, 2014<BR>
 					Danilo Zannoni (<i>AsYntote</i>) - Corrado Tumiati (<i>SkyMatrix</i>)<BR>
 					<i>PicGIM<i> is part of <i>We.PIC</i> project by <i>gKript.org</i>. <BR><BR>
@@ -195,7 +195,7 @@
 					\endhtmlonly
 					\n \n
 					This documentation is made with \b Doxygen [ http://www.doxygen.org/ ]. \n
-					The version of this documentation is \b 0.5 . \n
+					The version of this documentation is \b 0.6 . \n
 					If you find error or you think there is need more precision in some point, please write us \b here [ info@gkript.org ]. \n
 					The license references for this documentation can be found here: \ref WDlic
 				</p>
@@ -1926,6 +1926,7 @@
 				<ul>
 						<li><b> \endhtmlonly \ref SW_cmp \htmlonly </b></li>
 						<li><b> \endhtmlonly \ref SW_gen \htmlonly </b></li>
+						<li><b> \endhtmlonly \ref SW_dev \htmlonly </b></li>
 				</ul>
 				<b>HARDWARE</b> modules are divided into the following three classes:
 				<ul>
@@ -1952,6 +1953,10 @@
 						<li> \endhtmlonly \ref SWG_delay \htmlonly </li>
 						<li> \endhtmlonly \ref SWG_error \htmlonly </li>
 						<li> \endhtmlonly \ref SWG_float \htmlonly </li>
+				</ul>
+ 				The <b>DEVICE</b> modules are software modules, as protocols or any software devices and are as follows:<br>
+				<ul>
+						<li> \endhtmlonly \ref SWD_3wire \htmlonly </li>
 				</ul>
 				The <b>HARDWARE::INTERNAL</b> modules refer to the internal devices of the MCU and are as follows:<br>
 				<ul>
@@ -2028,6 +2033,7 @@
 
 			-	\subpage	SW_cmp
 			-	\subpage	SW_gen
+			-	\subpage	SW_dev
 
 	\page	HWPAGE		HARDWARE Modules
 
@@ -2046,6 +2052,10 @@
 			-	\subpage	SWG_delay
 			-	\subpage	SWG_error
 			-	\subpage	SWG_float
+
+	\page	SW_dev		SOFTWARE::DEVICE Modules
+
+			-	\subpage	SWD_3wire
 
 	\page	HW_int		HARDWARE::INTERNAL Modules
 
