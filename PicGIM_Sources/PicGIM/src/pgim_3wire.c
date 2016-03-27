@@ -55,19 +55,20 @@
 	#endif
 	
 	void	pg_3wire_init( void ) {
+		//---[ Init ]---------------------------------------------------------
 		PG_3WIRE_IO 			= PG_LOW;
 		PG_3WIRE_CK 			= PG_LOW;
-		PG_3WIRE_IO_TRIS		= PG_OUT;
-		PG_3WIRE_CK_TRIS		= PG_OUT;
+		PG_3WIRE_IO_TRIS		= PG_IN; //Set IN as default
+		PG_3WIRE_CK_TRIS		= PG_OUT; //Always OUT
 	}
 	
 	
 	void	pg_3wire_wr_byte( _pg_Uint8 wr_byte ) {
+		//---[ Write BYTE ]---------------------------------------------------
 		_pg_Uint8	cycle;
-		
 		for( cycle = 0; cycle < 8; cycle++ ) {
 			PG_3WIRE_IO = PG_LOW;
-			
+			PG_3WIRE_IO_TRIS = PG_OUT; //Set again data tris out every cycle, because before the clock falling edge data tris must be set as IN
 			#if ( PG_3WIRE_DIRECTION_OUTPUT == PG_MSB_FIRST )
 				if( wr_byte & 0b10000000 )
 					PG_3WIRE_IO = PG_HIGH;
@@ -78,25 +79,23 @@
 					PG_3WIRE_IO = PG_HIGH;
 				wr_byte = wr_byte >> 1;
 			#endif
-			
-			PG_3WIRE_CK = PG_HIGH;
+			PG_3WIRE_CK = PG_HIGH; //Data is written here with clock rising edge
 			pg_delay( 1, PG_USEC );
-			PG_3WIRE_CK = PG_LOW;
+			PG_3WIRE_IO_TRIS = PG_IN; //Set data tris IN, because for a reading command, the data is immediately ready on the falling edge of last cycle (bit7)
+			PG_3WIRE_CK = PG_LOW; //On the last bit (bit7), first data bit is pushed out now, ready for reading
 		}
 	}
 	
 
 	_pg_Uint8	pg_3wire_rd_byte( void ) {
+		//---[ Read BYTE ]----------------------------------------------------
 		_pg_Uint8	rd_byte;
 		_pg_Uint8	cycle;
-		
 		rd_byte = 0x00;
-		
 		//The first bit of data to be received is already present
 		//and is available from the falling edge of the last clock pulse of the command just sent
-		PG_3WIRE_IO_TRIS = PG_IN;		
+		PG_3WIRE_IO_TRIS = PG_IN; // It should already be set IN by write function or by default...
 		for( cycle = 0; cycle < 8; cycle++ ) {
-
 			pg_delay( 1, PG_USEC );
 			#if ( PG_3WIRE_DIRECTION_INPUT == PG_LSB_FIRST )
 				rd_byte = rd_byte >> 1;
@@ -108,12 +107,10 @@
 				if( PGIM_3WIRE_IO_PORT )
 					rd_byte = rd_byte | 0b00000001;
 			#endif
-			
 			PG_3WIRE_CK = PG_HIGH;
 			pg_delay( 1, PG_USEC );
 			PG_3WIRE_CK = PG_LOW;
 		}
-		PG_3WIRE_IO_TRIS = PG_OUT;
 		return( rd_byte );
 	}
 	

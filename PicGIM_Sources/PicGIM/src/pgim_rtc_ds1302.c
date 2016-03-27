@@ -80,6 +80,7 @@
 	#endif
 	_pg_Uint8 ds1302_halt_clock;		//	( 1 = stopped; 0 = running )
 	
+	
 	void	pg_rtc_ds1302_init( void ) {
 		PG_RTC_DS1302_CS 		= PG_DISABLE;
 		PG_RTC_DS1302_CS_TRIS 	= PG_OUT;
@@ -123,7 +124,7 @@
 	
 	
 	void	pg_rtc_ds1302_start( void ) {
-		//---[ Start clock ]--------------------------------------------------------------
+		//---[ Start clock ]--------------------------------------------------
 		pg_rtc_ds1302_rd_time_sec( );
 		ds1302_halt_clock = 0x00;
 		pg_rtc_ds1302_wr_time_sec( ds1302_sec );
@@ -131,7 +132,7 @@
 	
 	
 	void	pg_rtc_ds1302_stop( void ) {
-		//---[ Stop clock ]---------------------------------------------------------------
+		//---[ Stop clock ]---------------------------------------------------
 		pg_rtc_ds1302_rd_time_sec( );
 		ds1302_halt_clock = 0x01;
 		pg_rtc_ds1302_wr_time_sec( ds1302_sec );
@@ -139,7 +140,7 @@
 
 
 	_pg_Uint8	pg_rtc_ds1302_wr_time_sec( _pg_Uint8 ds1302_set_sec ) {	//Required for start and stop function too
-	//---[ Write SECOND ]------------------------------------------------------------
+		//---[ Write SECOND ]-------------------------------------------------
 		_pg_Uint8 temp;
 		pg_rtc_ds1302_wr_access( PG_ENABLE );
 		if( ds1302_set_sec < 60 ) {	//0-59; unsigned, never is < 0.
@@ -164,9 +165,10 @@
 		return PG_OK;
 	}
 	
+	
 	#if( PG_RTC_DS1302_USE_MIN___SC )
 		_pg_Uint8	pg_rtc_ds1302_wr_time_min( _pg_Uint8 ds1302_set_min ) {		
-			//---[ Write MINUTE ]------------------------------------------------------------
+			//---[ Write MINUTE ]-------------------------------------------------
 			_pg_Uint8 temp;
 			pg_rtc_ds1302_wr_access( PG_ENABLE );
 			if( ds1302_set_min < 60 ) {	//0-59; unsigned, never is < 0.
@@ -193,7 +195,7 @@
 	
 	#if( PG_RTC_DS1302_USE_HOUR___SC )
 		_pg_Uint8	pg_rtc_ds1302_wr_time_hour( _pg_Uint8 ds1302_set_hour ) {	
-			//---[ Write HOUR ]---------------------------------------------------------------
+			//---[ Write HOUR ]---------------------------------------------------
 			_pg_Uint8 temp;
 			pg_rtc_ds1302_wr_access( PG_ENABLE );
 			if( ds1302_set_hour < 24 ) { //0-23; unsigned, never is < 0.
@@ -220,7 +222,7 @@
 	
 	#if( PG_RTC_DS1302_USE_DAY___SC )
 		_pg_Uint8	pg_rtc_ds1302_wr_date_day( _pg_Uint8 ds1302_set_day ) {
-			//---[ Write DAY (1-31) ]---------------------------------------------------------
+			//---[ Write DAY (1-31) ]---------------------------------------------
 			_pg_Uint8 temp;
 			pg_rtc_ds1302_wr_access( PG_ENABLE );
 			if( ( ds1302_set_day > 0 ) &&  ( ds1302_set_day < 32 ) ) { //1-31
@@ -247,7 +249,7 @@
 	
 	#if( PG_RTC_DS1302_USE_MONTH___SC )
 		_pg_Uint8	pg_rtc_ds1302_wr_date_month( _pg_Uint8 ds1302_set_month ) {
-			//---[ Write MONTH ]--------------------------------------------------------------
+			//---[ Write MONTH ]--------------------------------------------------
 			_pg_Uint8 temp;
 			pg_rtc_ds1302_wr_access( PG_ENABLE );
 			if( ( ds1302_set_month > 0 ) &&  ( ds1302_set_month < 13 ) ) { //1-12
@@ -274,9 +276,9 @@
 	
 	#if( PG_RTC_DS1302_USE_YEAR___SC )
 		_pg_Uint8	pg_rtc_ds1302_wr_date_year( _pg_Uint8 ds1302_set_year ) {
+			//---[ Write YEAR ]---------------------------------------------------
 			_pg_Uint8 temp;
 			pg_rtc_ds1302_wr_access( PG_ENABLE );
-			//---[ Write YEAR ]---------------------------------------------------------------
 			if( ( ds1302_set_year > 0 ) &&  ( ds1302_set_year < 100 ) ) { //00-99
 				temp = 0x00;
 				temp = ( ( ( ds1302_set_year / 10 ) << 4 ) + ( ds1302_set_year % 10 ) );
@@ -301,7 +303,7 @@
 	
 	#if( PG_RTC_DS1302_USE_WEEKDAY___SC )
 		_pg_Uint8	pg_rtc_ds1302_wr_weekday( _pg_Uint8 ds1302_set_weekday ) {
-			//---[ Write WEEKDAY (1-7) ]------------------------------------------------------
+			//---[ Write WEEKDAY (1-7) ]------------------------------------------
 			_pg_Uint8 temp;
 			pg_rtc_ds1302_wr_access( PG_ENABLE );
 			if( ( ds1302_set_weekday > 0 ) &&  ( ds1302_set_weekday < 8 ) ) { //1-7
@@ -327,7 +329,7 @@
 	#if( PG_RTC_DS1302_WR_TIME_ALL___SC == PG_ENABLE )
 		#if( ( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE ) )
 			void	pg_rtc_ds1302_wr_time_all( _pg_Uint8 ds1302_set_hour_all, _pg_Uint8 ds1302_set_min_all, _pg_Uint8 ds1302_set_sec_all ) {
-				//---[ Write TIME ALL ]---------------------------------------------------------------
+				//---[ Write TIME ALL ]-----------------------------------------------
 				pg_rtc_ds1302_wr_time_hour( ds1302_set_hour_all );
 				pg_rtc_ds1302_wr_time_min( ds1302_set_min_all );
 				pg_rtc_ds1302_wr_time_sec( ds1302_set_sec_all );
@@ -339,7 +341,7 @@
 	#if( PG_RTC_DS1302_WR_DATE_ALL___SC == PG_ENABLE )
 		#if( ( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_MONTH___SC  == PG_ENABLE ) && ( PG_RTC_DS1302_USE_YEAR___SC  == PG_ENABLE ) )
 			void	pg_rtc_ds1302_wr_date_all( _pg_Uint8 ds1302_set_day_all, _pg_Uint8 ds1302_set_month_all, _pg_Uint8 ds1302_set_year_all ) {
-				//---[ Write DATE ALL ]---------------------------------------------------------------
+				//---[ Write DATE ALL ]-----------------------------------------------
 				pg_rtc_ds1302_wr_date_day( ds1302_set_day_all );
 				pg_rtc_ds1302_wr_date_month(  ds1302_set_month_all );
 				pg_rtc_ds1302_wr_date_year( ds1302_set_year_all );
@@ -349,8 +351,8 @@
 	
 
 	void	pg_rtc_ds1302_rd_time_sec( void ) {	//Required for start and stop function too
+		//---[ Read SECOND ]--------------------------------------------------
 		_pg_Uint8 temp;
-		//---[ Read SECOND ]--------------------------------------------------------------
 		PG_RTC_DS1302_CS = PG_ENABLE;
 		PG_RTC_DS1302_CS_DELAY
 		pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_SEC ); //Command to read "Clock Halt Flag" and seconds
@@ -362,10 +364,11 @@
 		PG_RTC_DS1302_CS_DELAY
 	}
 
+	
 	#if( PG_RTC_DS1302_USE_MIN___SC )
 		void	pg_rtc_ds1302_rd_time_min( void ) {
+			//---[ Read MINUTE ]--------------------------------------------------
 			_pg_Uint8 temp;
-			//---[ Read MINUTE ]--------------------------------------------------------------
 			PG_RTC_DS1302_CS = PG_ENABLE;
 			PG_RTC_DS1302_CS_DELAY
 			pg_3wire_wr_byte( PG_RTC_DS1302_CMD_RD_MIN ); //Command to read minutes
@@ -380,7 +383,7 @@
 	
 	#if( PG_RTC_DS1302_USE_HOUR___SC )
 		void	pg_rtc_ds1302_rd_time_hour( void ) {
-			//---[ Read HOUR ]---------------------------------------------------------------
+			//---[ Read HOUR ]----------------------------------------------------
 			_pg_Uint8 temp;
 			PG_RTC_DS1302_CS = PG_ENABLE;
 			PG_RTC_DS1302_CS_DELAY
@@ -396,7 +399,7 @@
 	
 	#if( PG_RTC_DS1302_USE_DAY___SC )
 		void	pg_rtc_ds1302_rd_date_day( void ) {
-			//---[ Read DAY (1-31) ]----------------------------------------------------------
+			//---[ Read DAY (1-31) ]----------------------------------------------
 			_pg_Uint8 temp;
 			PG_RTC_DS1302_CS = PG_ENABLE;
 			PG_RTC_DS1302_CS_DELAY
@@ -412,7 +415,7 @@
 	
 	#if( PG_RTC_DS1302_USE_MONTH___SC )
 		void	pg_rtc_ds1302_rd_date_month( void ) {
-			//---[ Read MONTH ]---------------------------------------------------------------
+			//---[ Read MONTH ]---------------------------------------------------
 			_pg_Uint8 temp;
 			PG_RTC_DS1302_CS = PG_ENABLE;
 			PG_RTC_DS1302_CS_DELAY
@@ -428,7 +431,7 @@
 	
 	#if( PG_RTC_DS1302_USE_YEAR___SC )
 		void	pg_rtc_ds1302_rd_date_year( void ) {
-			//---[ Read YEAR ]----------------------------------------------------------------
+			//---[ Read YEAR ]----------------------------------------------------
 			_pg_Uint8 temp;
 			PG_RTC_DS1302_CS = PG_ENABLE;
 			PG_RTC_DS1302_CS_DELAY
@@ -443,7 +446,7 @@
 	
 	#if( PG_RTC_DS1302_USE_WEEKDAY___SC )
 		void	pg_rtc_ds1302_rd_weekday( void ) {
-			//---[ Read WEEKDAY (1-7) ]-------------------------------------------------------
+			//---[ Read WEEKDAY (1-7) ]-------------------------------------------
 			_pg_Uint8 temp;
 			PG_RTC_DS1302_CS = PG_ENABLE;
 			PG_RTC_DS1302_CS_DELAY
@@ -459,7 +462,7 @@
 	#if( PG_RTC_DS1302_RD_TIME_ALL___SC == PG_ENABLE )
 		#if( ( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE ) )
 			void	pg_rtc_ds1302_rd_time_all( void ) {
-				//---[ Read TIME ALL ]----------------------------------------------------------------
+				//---[ Read TIME ALL ]------------------------------------------------
 				pg_rtc_ds1302_rd_time_sec( );
 				pg_rtc_ds1302_rd_time_min( );
 				pg_rtc_ds1302_rd_time_hour( );
@@ -471,7 +474,7 @@
 	#if( PG_RTC_DS1302_RD_DATE_ALL___SC == PG_ENABLE )
 		#if( ( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE ) )
 			void	pg_rtc_ds1302_rd_date_all( void ) {
-				//---[ Read DATE ALL ]----------------------------------------------------------------
+				//---[ Read DATE ALL ]------------------------------------------------
 				pg_rtc_ds1302_rd_date_day( );
 				pg_rtc_ds1302_rd_date_month( );
 				pg_rtc_ds1302_rd_date_year( );

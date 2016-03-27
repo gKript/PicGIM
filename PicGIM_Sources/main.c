@@ -44,7 +44,7 @@ void main( void ) {
 	if( !P_B4 ) {
 		pg_rtc_ds1302_wr_date_all( 31 , 12 , 15 );
 		pg_rtc_ds1302_wr_time_all( 23 , 59 , 50 );
-		pg_rtc_ds1302_wr_weekday( PG_RTC_DS1302_WEEKDAY_SUN );
+ 		pg_rtc_ds1302_wr_weekday( PG_RTC_DS1302_WEEKDAY_SUN );
 	}
 	
 	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "Date=  /  /  " );
