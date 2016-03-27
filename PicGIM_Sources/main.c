@@ -52,17 +52,17 @@ void main( void ) {
 		
 	pg_loop {
 		pg_rtc_ds1302_rd_date_all( );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  5 , "%02d" , (int)ds1302_day );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  8 , "%02d" , (int)ds1302_month );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 11 , "%02d" , (int)ds1302_year );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  5 , "%02d" , (_pg_int16)ds1302_day );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  8 , "%02d" , (_pg_int16)ds1302_month );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 11 , "%02d" , (_pg_int16)ds1302_year );
 		
 		pg_rtc_ds1302_rd_time_all( );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  5 , "%02d" , (int)ds1302_hour );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  8 , "%02d" , (int)ds1302_min );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 11 , "%02d" , (int)ds1302_sec );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  5 , "%02d" , (_pg_int16)ds1302_hour );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  8 , "%02d" , (_pg_int16)ds1302_min );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 11 , "%02d" , (_pg_int16)ds1302_sec );
 		
 		pg_rtc_ds1302_rd_weekday( );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  14 , "%d" , (int)ds1302_weekday );
+		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  14 , "%d" , (_pg_int16)ds1302_weekday );
 		
 		pg_delay( 1 , PG_SEC );
 	}

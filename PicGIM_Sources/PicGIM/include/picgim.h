@@ -718,12 +718,12 @@
 		//Check pgim_rtc_ds1302___sc.h file
 		#if( ( PG_RTC_DS1302_WR_TIME_ALL___SC == PG_ENABLE ) || ( PG_RTC_DS1302_RD_TIME_ALL___SC == PG_ENABLE ) )
 			#if( ( PG_RTC_DS1302_USE_MIN___SC == PG_DISABLE ) || ( PG_RTC_DS1302_USE_HOUR___SC == PG_DISABLE ) )
-				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_rtc_ds1302___sc.h configuration file. Must be enabled minutes and hours, if you want to use *_ALL relative functions!
-			#enfif
+				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_rtc_ds1302___sc.h configuration file. Must be enabled minutes and hours, if you want to use *_ALL functions!
+			#endif
 		#endif
 		#if( ( PG_RTC_DS1302_WR_DATE_ALL___SC == PG_ENABLE ) || ( PG_RTC_DS1302_RD_DATE_ALL___SC == PG_ENABLE ) )
 			#if( ( PG_RTC_DS1302_USE_DAY___SC == PG_DISABLE ) || ( PG_RTC_DS1302_USE_MONTH___SC == PG_DISABLE ) || ( PG_RTC_DS1302_USE_YEAR___SC == PG_DISABLE ) )
-				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_rtc_ds1302___sc.h configuration file. Must be enabled day, month and year, if you want to use *_ALL relative functions!
+				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_rtc_ds1302___sc.h configuration file. Must be enabled day, month and year, if you want to use *_ALL functions!
 			#endif
 		#endif
 		//If all is OK...

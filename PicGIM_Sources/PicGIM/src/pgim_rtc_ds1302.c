@@ -59,21 +59,32 @@
 	
 	//Doc. Ref.: DALLAS Semiconductor (R), DS1302 Trickle-Charge Timekeeping Chip
 	
-	_pg_Uint8 ds1302_sec;			//	0-59			( Decimal value accepted range )
-	_pg_Uint8 ds1302_min;			//	0-59			( Decimal value accepted range )
-	_pg_Uint8 ds1302_hour;			//	1-12/0-23		( Decimal value accepted range )
-	_pg_Uint8 ds1302_day;			//	1-31			( Decimal value accepted range )
-	_pg_Uint8 ds1302_month;			//	1-12			( Decimal value accepted range )
-	_pg_Uint8 ds1302_weekday;		//	1-7				( Decimal value accepted range )
-	_pg_Uint8 ds1302_year;			//	00-99			( Decimal value accepted range )
-	_pg_Uint8 ds1302_halt_clock;	//	Halt clock flag ( 0 = running )
-	
+	_pg_Uint8 ds1302_sec;				//	0-59
+	#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		_pg_Uint8 ds1302_min;			//	0-59
+	#endif
+	#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		_pg_Uint8 ds1302_hour;			//	0-23
+	#endif
+	#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		_pg_Uint8 ds1302_day;			//	1-31
+	#endif
+	#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		_pg_Uint8 ds1302_month;			//	1-12
+	#endif
+	#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		_pg_Uint8 ds1302_weekday;		//	1-7
+	#endif
+	#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		_pg_Uint8 ds1302_year;			//	00-99
+	#endif
+	_pg_Uint8 ds1302_halt_clock;		//	( 1 = stopped; 0 = running )
 	
 	void	pg_rtc_ds1302_init( void ) {
-		PG_RTC_DS1302_CS 			= PG_DISABLE;
-		PG_RTC_DS1302_CS_TRIS 		= PG_OUT;
+		PG_RTC_DS1302_CS 		= PG_DISABLE;
+		PG_RTC_DS1302_CS_TRIS 	= PG_OUT;
 
-		ds1302_sec			= 0x00;	//Required for start and stop function too
+			ds1302_sec			= 0x00;	//Required for start and stop function too
 		#if( PG_RTC_DS1302_USE_MIN___SC )
 			ds1302_min			= 0x00;
 		#endif
