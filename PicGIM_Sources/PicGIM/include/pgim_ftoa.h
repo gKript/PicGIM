@@ -5,8 +5,8 @@
 	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
 	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
-	Current Milestone :		0.5
-	Current version :		0.5-0
+	Current Milestone :		0.6
+	Current version :		0.6-0
 	Since version :			0.1-0
 	Deprecated version :	This file is not deprecated.
 
@@ -17,7 +17,7 @@
 		PicGIM is a "modular library from scratch".
 		PicGIM is developed to work with PIC18F (R) MCU family only.
 
-		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
+		Copyright (C) 2016  gKript.org - We.PIC project - <http://www.gkript.org>
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@
  /*!
 		\file		pgim_ftoa.h
 		\version	0.5-0
-		\date		2002 - 2015
+		\date		2002 - 2016
 		\brief		To convert a float to string.
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
@@ -88,7 +88,7 @@
 			\param			pg_ftoa_trunc_decimal_digits	The number of digits after the decimal point at which to truncate. \n
 															
 		*/		
-		char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint24 pg_ftoa_trunc_decimal_digits );
+		char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint8 pg_ftoa_trunc_decimal_digits );
 		//---[ END Prototypes FtoA ]---
 	#endif
 #endif	/* _PGIM_FTOA_H */

@@ -81,7 +81,7 @@
 			#define	PG_RTC_DS1302_CMD_WR_YEAR			0x8C		//!< Command to set year
 		#endif
 		#define	PG_RTC_DS1302_CMD_WR_WRPROTECT			0x8E		//!< Command to set or remove device write protection
-//		#define	PG_RTC_DS1302_CMD_WR_CHARGE				0x90		//!< Command to set trickle-charge configuration
+//		#define	PG_RTC_DS1302_CMD_WR_CHARGE				0x90		//!< Command to set trickle-charge configuration (Not yet implemented)
 		//---[ END Write Command Addresses ]---
 		
 		//---[ Read Command Addresses ]---
@@ -105,7 +105,7 @@
 			#define	PG_RTC_DS1302_CMD_RD_YEAR			0x8D		//!< Command to get year
 		#endif
 		#define	PG_RTC_DS1302_CMD_RD_WRPROTECT			0x8F		//!< Command to get device write protection status
-//		#define	PG_RTC_DS1302_CMD_RD_CHARGE				0x91		//!< Command to get trickle-charge configuration
+//		#define	PG_RTC_DS1302_CMD_RD_CHARGE				0x91		//!< Command to get trickle-charge configuration (Not yet implemented)
 		//---[ END Read Command Addresses ]---
 		
 		//---[ Error ]---

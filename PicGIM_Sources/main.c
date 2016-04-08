@@ -32,41 +32,39 @@
 #include "picgim_main.h"
 
 void main( void ) {
-	
-	pg_initialize( );
-	
-	pg_pin_mode( T_B4 , PG_IN );
-	
-	//---[ Programming clock/calendar: ]--------------------------------------------------------------------
-	//	Make a push-button and a pull-up on PORTB4 pin.
-	//	At reset time, PORTB4 is probed. If low, rtc will be programmed.
-	//------------------------------------------------------------------------------------------------------
-	if( !P_B4 ) {
-		pg_rtc_ds1302_wr_date_all( 31 , 12 , 15 );
-		pg_rtc_ds1302_wr_time_all( 23 , 59 , 50 );
- 		pg_rtc_ds1302_wr_weekday( PG_RTC_DS1302_WEEKDAY_SUN );
-	}
-	
-	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_0 , 0 , "Date=  /  /  " );
-	pg_lcd_hd44780_write_p_string_rom( PG_CONTROLLER_0 , PG_LINE_1 , 0 , "Time=  :  :  " );
-		
-	pg_loop {
-		pg_rtc_ds1302_rd_date_all( );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  5 , "%02d" , (_pg_int16)ds1302_day );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  8 , "%02d" , (_pg_int16)ds1302_month );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 , 11 , "%02d" , (_pg_int16)ds1302_year );
-		
-		pg_rtc_ds1302_rd_time_all( );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  5 , "%02d" , (_pg_int16)ds1302_hour );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 ,  8 , "%02d" , (_pg_int16)ds1302_min );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_1 , 11 , "%02d" , (_pg_int16)ds1302_sec );
-		
-		pg_rtc_ds1302_rd_weekday( );
-		pg_lcd_hd44780_write_p_int( PG_CONTROLLER_0 , PG_LINE_0 ,  14 , "%d" , (_pg_int16)ds1302_weekday );
-		
-		pg_delay( 1 , PG_SEC );
-	}
-	PG_HALT;
+        pg_initialize( );
+
+		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 3 ) ); // 123.456
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4561, 3 ) ); // 123.456
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4569, 3 ) ); // 123.456
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 4 ) ); // 123.4567
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4561, 4 ) ); // 123.4560
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4569, 4 ) ); // 123.4568
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( -123.4569, 4 ) ); // -123.4568
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 12345.7841, 4 ) ); // 12345.7841 12345.7837
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123456.7841, 3 ) ); // 123456.776
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123456.78, 2 ) ); // 123456.77
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 99999.999, 2 ) ); // 100000.00
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 999999999.9999, 2 ) ); // 1000000000.00
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 4000000000.1234, 2 ) ); // 4000000000.00
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 40000001.1234,10 ) ); //acquisisce float 4000000e+007 e stampa String = "40000000.00"
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 4000000.1234, 10 ) );//acquisisce float 4000000.
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123456.0000, 6 ) ); // 123455.989360
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 3.234567891, 13 ) ); // 3.2345678806304
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.012, 2 ) ); // 1.01
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.012, 6 ) ); // 1.011999
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.999, 5 ) ); // 123.99899
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 12.5678, 5 ) ); // 12.56779
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( -0.0056789, 7 ) ); // -0.0056788
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( -0.005678, 6 ) ); // -0.005677
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.0/3, 10 ) ); // 0.3333333492
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.2345, 3 ) ); // 1.234
+		PG_HALT;
 }
+
+
+
+//		4.294.967.295 max
+//		4294967295 max
 
 
