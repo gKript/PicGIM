@@ -63,7 +63,6 @@
 	char *	pg_ftoa( _pg_float pg_ftoa_value, _pg_Uint8 pg_ftoa_trunc_decimal_digits ) {
 	//----------------------------------------------------------------------------------
 		_pg_Uint8	index_int_buf = 0;
-		_pg_Uint8	integer_alone = 0;
 		_pg_int8	integer_digits = 1;
 
 		if ( pg_ftoa_value < 0 ) { //gestione segno meno
@@ -77,8 +76,7 @@
 		}
 		pg_ftoa_trunc_decimal_digits = pg_ftoa_trunc_decimal_digits + integer_digits;
 		while ( pg_ftoa_trunc_decimal_digits ) { //da implementare per scegliere numero cifre se dopo la virgola oppure in totale escluso punto e segno meno
-			integer_alone = (_pg_Uint8)pg_ftoa_value;
-			pg_ftoa_internal_buffer[ index_int_buf ] = integer_alone + '0'; //stampo la parte intera che ora e' una cifra sola
+			pg_ftoa_internal_buffer[ index_int_buf ] = (_pg_Uint8)pg_ftoa_value + '0'; //stampo la parte intera che ora e' una cifra sola
 			pg_ftoa_trunc_decimal_digits--;
 			index_int_buf++;
 			integer_digits--;
@@ -86,7 +84,7 @@
 				pg_ftoa_internal_buffer[ index_int_buf ] = '.';
 				index_int_buf++;
 			}
-			pg_ftoa_value = ( ( pg_ftoa_value - integer_alone ) * 10 ); //sposto la virgola a dx di un posto ed elimino la decina
+			pg_ftoa_value = ( ( pg_ftoa_value - (_pg_Uint8)pg_ftoa_value ) * 10 ); //sposto la virgola a dx di un posto ed elimino la decina
 		}
 		pg_ftoa_internal_buffer[ index_int_buf ] = '\0';
 		return ( pg_ftoa_internal_buffer );

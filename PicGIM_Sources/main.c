@@ -34,7 +34,7 @@
 void main( void ) {
         pg_initialize( );
 
-		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 3 ) ); // 123.456
+//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 3 ) ); // 123.456
 //		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4561, 3 ) ); // 123.456
 //		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4569, 3 ) ); // 123.456
 //		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 4 ) ); // 123.4567
