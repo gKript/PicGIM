@@ -56,7 +56,7 @@
 	#define PGIM_FTOA								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 
 	//		S O F T W A R E   D E V I C E
-	#define PGIM_3WIRE								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_3WIRE								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//		H A R D W A R E   I N T E R N A L
 	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
