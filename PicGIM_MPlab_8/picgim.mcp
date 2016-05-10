@@ -8,7 +8,7 @@ dir_src=
 dir_bin=
 dir_tmp=
 dir_sin=
-dir_inc=D:\GH_SVN_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include
+dir_inc=C:\DATA\GITHUB_PicGIM_WC\trunk\PicGIM_Sources\PicGIM\include
 dir_lib=C:\MCC18\lib
 dir_lkr=
 [CAT_FILTERS]

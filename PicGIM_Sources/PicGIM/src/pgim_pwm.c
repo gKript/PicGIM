@@ -129,10 +129,15 @@
 				pg_pwm_deadtime_cyclemachine = (_pg_Uint8)( PG_PWM_DEAD_TIME / ( ( 1 / PG_CLOCK ) * PG_TCYCLEPERI ) );
 				pg_pwm_deadtime_us_max = ( ( 1 / PG_CLOCK ) * PG_TCYCLEPERI * 0x7F );	// [us] (Resolution is one cycle-machine: ( ( 1 / PG_CLOCK ) * PG_TCYCLEPERI ) ); Non necessaria alle funzioni
 				
-				if ( pg_pwm_deadtime_cyclemachine > 0x7F )
-					return PG_PWM_ERROR_DEAD_TIME_OVER;
-				else
+				if ( pg_pwm_deadtime_cyclemachine > 0x7F ) {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_DEAD_TIME_OVER , PG_ERROR_ERROR );
+					#endif
+					return PG_NOK;
+				}
+				else {
 					PWM1CON = PWM1CON + pg_pwm_deadtime_cyclemachine;	//pg_pwm_deadtime_cyclemachine & 0x7F
+				}
 			#endif
 			
 			//--------------------------------------------------
@@ -189,12 +194,13 @@
 				ECCP1ASbits.ECCPAS2 = 1;								// Auto-Shutdown ENABLED. Only FLT0 pin is e fault source
 				ECCP1ASbits.ECCPAS1 = 0;
 				ECCP1ASbits.ECCPAS0 = 0;
-
 			#endif
-		
 		#endif
 		
-		return PG_DONE;
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_PWM , PG_DONE , PG_ERROR_OK );
+		#endif
+		return PG_OK;
 		
 		//TRIS reg will be set by C18 cal functions
 	}
@@ -206,44 +212,56 @@
 		
 		T2CONbits.TMR2ON = 0;											// Stop PWM signal.
 			
-			//--------------------------------------------------
-			//If pwm_value is a FREQUENCY:
-			if ( ( unit_measure == PG_MHZ ) || ( unit_measure == PG_KHZ ) || ( unit_measure == PG_HZ ) ) {
-				
-				if ( unit_measure == PG_MHZ )
-					pwm_value *= 1000;
-				if ( ( unit_measure == PG_MHZ ) || ( unit_measure == PG_KHZ ) )
-					pwm_value *= 1000;									// Now we have freq in [Hz]!
+		//--------------------------------------------------
+		//If pwm_value is a FREQUENCY:
+		if ( ( unit_measure == PG_MHZ ) || ( unit_measure == PG_KHZ ) || ( unit_measure == PG_HZ ) ) {
+			
+			if ( unit_measure == PG_MHZ )
+				pwm_value *= 1000;
+			if ( ( unit_measure == PG_MHZ ) || ( unit_measure == PG_KHZ ) )
+				pwm_value *= 1000;									// Now we have freq in [Hz]!
 
-				// Lower frequency limit check
-				if ( pwm_value <= pg_pwm_freq_min )
-					return PG_PWM_ERROR_FREQ_TOO_LOW;
-
-				// Upper frequency limit check
-				if ( pwm_value > pg_pwm_freq_max )
-					return PG_PWM_ERROR_FREQ_TOO_HIGH;
-
-				pg_pwm_freq = pwm_value;								// [Hz]
-				pg_pwm_period = ( 1 / pg_pwm_freq );					//[s]	<<<===	TARGET!!!
+			// Lower frequency limit check
+			if ( pwm_value <= pg_pwm_freq_min ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_FREQ_TOO_LOW , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
 			}
-			
-			//--------------------------------------------------
-			//If pwm_value is a TIME:
-			if ( ( unit_measure == PG_USEC ) || ( unit_measure == PG_MSEC ) || ( unit_measure == PG_SEC ) ) {
-			
+			// Upper frequency limit check
+			if ( pwm_value > pg_pwm_freq_max ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_FREQ_TOO_HIGH , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
+			pg_pwm_freq = pwm_value;								// [Hz]
+			pg_pwm_period = ( 1 / pg_pwm_freq );					//[s]	<<<===	TARGET!!!
+		}
+		
+		//--------------------------------------------------
+		//If pwm_value is a TIME:
+		if ( ( unit_measure == PG_USEC ) || ( unit_measure == PG_MSEC ) || ( unit_measure == PG_SEC ) ) {
+		
 			if ( unit_measure == PG_USEC )
 				pwm_value /= 1000;
 			if ( ( unit_measure == PG_USEC ) || ( unit_measure == PG_MSEC ) )
 				pwm_value /= 1000;										//Now we have time in [s]!
 
 			// Lower period limit check
-			if ( pwm_value <= pg_pwm_period_min )
-				return PG_PWM_ERROR_PERIOD_TOO_SHORT;
-
+			if ( pwm_value <= pg_pwm_period_min ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_PERIOD_TOO_SHORT , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
 			// Upper period limit check
-			if ( pwm_value > pg_pwm_period_max )
-				return PG_PWM_ERROR_PERIOD_TOO_LONG;
-
+			if ( pwm_value > pg_pwm_period_max ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_PERIOD_TOO_LONG , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
 			pg_pwm_period = pwm_value;									//[s]	<<<===	TARGET!!!
 		}
 		
@@ -303,6 +321,9 @@
 
 		//--------------------------------------------------		
 		T2CONbits.TMR2ON = 1;											// Start PWM signal.
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+		#endif
 		return PG_OK;
 	}
 	//---[ END Pwm Set Frequency or Period ]---
@@ -311,9 +332,13 @@
 	//---[ Pwm Dutycycle ]---
 	_pg_int8	pg_pwm_dutycycle( _pg_Uint8 pwm_id , _pg_float pwm_dutycycle_percent ) {	//Called after pg_pwm_set, because need (TMR2 Prescale Value) and time period
 			
-		if ( ( pwm_dutycycle_percent < PG_PWM_DUTYCYCLE_MIN ) || ( pwm_dutycycle_percent > PG_PWM_DUTYCYCLE_MAX ) )
-			return PG_PWM_ERROR_DUTYCYCLE_RANGE;
-
+		if ( ( pwm_dutycycle_percent < PG_PWM_DUTYCYCLE_MIN ) || ( pwm_dutycycle_percent > PG_PWM_DUTYCYCLE_MAX ) ) {
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_DUTYCYCLE_RANGE , PG_ERROR_ERROR );
+			#endif
+			return PG_NOK;
+		}
+		
 		switch( pwm_id ) {
 			//--------------------------------------------------
 			#if ( PGIM_PWM_1 == PG_ENABLE )
@@ -328,6 +353,9 @@
 					SetDCPWM1( pg_pwm_1_dutycycle_reg );
 					PG_PWM_FLAG_1_DC_OK = 1;
 					
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+					#endif
 					return PG_OK;
 				}
 			#endif
@@ -345,13 +373,20 @@
 					SetDCPWM2( pg_pwm_2_dutycycle_reg );
 					PG_PWM_FLAG_2_DC_OK = 1;
 					
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+					#endif
 					return PG_OK;
 				}
 			#endif
 			
 			//--------------------------------------------------
-			default:
-				return PG_PWM_ERROR_ID;
+			default: {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ID , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
 		}
 	}
 	//---[ END Pwm Dutycycle ]---
@@ -360,24 +395,38 @@
 	//---[ Pwm Start ]---
 	_pg_int8	pg_pwm_start( _pg_Uint8 pwm_id ) {
 		
-		if ( PG_PWM_FLAG_SET_OK == 0 )
-			return PG_PWM_ERROR_NOT_SET;
+		if ( PG_PWM_FLAG_SET_OK == 0 ) {
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_NOT_SET , PG_ERROR_FATAL );
+			#endif
+			return PG_NOK;
+		}
 		
 		switch( pwm_id ) {
 			//--------------------------------------------------
 			#if ( PGIM_PWM_1 == PG_ENABLE )
 				case PG_PWM_1:
 				{
-					if ( PG_PWM_FLAG_1_DC_OK == 0 )						// If dutycycle has NOT been calculated...
-						return PG_PWM_ERROR_NOT_DC_1;
-						
+					if ( PG_PWM_FLAG_1_DC_OK == 0 )	{					// If dutycycle has NOT been calculated...
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_NOT_DC_1 , PG_ERROR_FATAL );
+						#endif
+						return PG_NOK;
+					}	
 					if ( ! PG_PWM_FLAG_1_RUNNING ) {					// If PWM1 is NOT running...
 						OpenPWM1( pg_pwm_pr2_reg_value );
 						PG_PWM_FLAG_1_RUNNING = 1;
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+						#endif
 						return PG_OK;
 					}
-					else
-						return PG_PWM_ERROR_ALREADY_STARTED;
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STARTED , PG_ERROR_ERROR );
+						#endif
+						return PG_NOK;
+					}
 				}
 			#endif
 			
@@ -385,22 +434,36 @@
 			#if ( PGIM_PWM_2 == PG_ENABLE )
 				case PG_PWM_2:
 				{
-					if ( PG_PWM_FLAG_2_DC_OK == 0 )						// If dutycycle has NOT been calculated...
-						return PG_PWM_ERROR_NOT_DC_2;
-						
+					if ( PG_PWM_FLAG_2_DC_OK == 0 )	{					// If dutycycle has NOT been calculated...
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_NOT_DC_2 , PG_ERROR_FATAL );
+						#endif
+						return PG_NOK;
+					}
 					if ( ! PG_PWM_FLAG_2_RUNNING ) {					// If PWM2 is NOT running...
 						OpenPWM2( pg_pwm_pr2_reg_value );
 						PG_PWM_FLAG_2_RUNNING = 1;
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+						#endif
 						return PG_OK;
 					}
-					else
-						return PG_PWM_ERROR_ALREADY_STARTED;
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STARTED , PG_ERROR_ERROR );
+						#endif
+						return PG_NOK;
+					}
 				}
 			#endif
 			
 			//--------------------------------------------------
-			default:
-					return PG_PWM_ERROR_ID;
+			default: {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ID , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
 		}
 	}
 	//---[ END Pwm Start ]---
@@ -417,10 +480,17 @@
 					if ( PG_PWM_FLAG_1_RUNNING ) {						// If PWM1 is running...
 						ClosePWM1( );
 						PG_PWM_FLAG_1_RUNNING = 0;
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+						#endif
 						return PG_OK;
 					}
-					else
-						return PG_PWM_ERROR_ALREADY_STOPPED;
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STOPPED , PG_ERROR_ERROR );
+						#endif
+						return PG_NOK;
+					}	
 				}
 			#endif
 			
@@ -431,16 +501,27 @@
 					if ( PG_PWM_FLAG_2_RUNNING ) {						// If PWM2 is running...
 						ClosePWM2( );
 						PG_PWM_FLAG_2_RUNNING = 0;
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+						#endif
 						return PG_OK;
 					} 
-					else
-						return PG_PWM_ERROR_ALREADY_STOPPED;
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STOPPED , PG_ERROR_ERROR );
+						#endif
+						return PG_NOK;
+					}
 				}
 			#endif
 			
 			//--------------------------------------------------
-			default:
-				return PG_PWM_ERROR_ID;
+			default: {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ID , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
 		}
 	}
 	//---[ END Pwm Stop ]---
@@ -455,10 +536,18 @@
 			//	SHUTDOWN:					( Only available in the Enhanced mode and in Half-Bridge )
 			if ( ECCP1ASbits.ECCPASE = 0 ) {
 				ECCP1ASbits.ECCPASE = 1;
-			if ( ECCP1ASbits.ECCPASE = 1 )
-				return PG_OK;
-			else
-				return PG_PWM_ERROR_SHUTDOWN_FAILED;
+				if ( ECCP1ASbits.ECCPASE = 1 ) {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+					#endif
+					return PG_OK;
+				}
+				else {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_SHUTDOWN_FAILED , PG_ERROR_FATAL );
+					#endif
+					return PG_NOK;
+				}
 			}
 		#endif
 	}
@@ -473,10 +562,18 @@
 			//	RESTART AFTER SHUTDOWN:			( Only available in the Enhanced mode and in Half-Bridge )
 			if ( ECCP1ASbits.ECCPASE = 1 ) {
 				ECCP1ASbits.ECCPASE = 0;
-			if ( ECCP1ASbits.ECCPASE = 0 )
-				return PG_OK;
-			else
-				return PG_PWM_ERROR_RESTART_FAILED;
+				if ( ECCP1ASbits.ECCPASE = 0 ) {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+					#endif
+					return PG_OK;
+				}
+				else {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_RESTART_FAILED , PG_ERROR_ERROR );
+					#endif
+					return PG_NOK;
+				}
 			}
 		#endif
 	}
@@ -488,10 +585,15 @@
 	
 		#if ( ( PGIM_PWM_1 == PG_ENABLE ) || ( PGIM_PWM_2 == PG_ENABLE ) ) && ( PGIM_PWM_DC_RESOLUTION_MAX_CALC == PG_ENABLE )
 			pg_pwm_dutycycle_resolution_max = ( ( log10 ( ( PG_CLOCK * 1000000 ) / pg_pwm_freq ) ) / log10 ( 2.00 ) );
-			if ( ( pg_pwm_dutycycle_resolution_max > 1.00 ) && ( pg_pwm_dutycycle_resolution_max <= 10.00 ) )
+			if ( ( pg_pwm_dutycycle_resolution_max > 1.00 ) && ( pg_pwm_dutycycle_resolution_max <= 10.00 ) ) {
 				return pg_pwm_dutycycle_resolution_max;
-			else
-				return PG_PWM_ERROR_RES_MAX_OUT_OF_VALUE;
+			}
+			else {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_RES_MAX_OUT_OF_VALUE , PG_ERROR_ERROR );
+				#endif
+				return PG_NOK;
+			}
 		#endif
 	}
 	//---[ END Pwm Resolution Max ]---

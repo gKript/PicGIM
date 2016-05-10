@@ -107,8 +107,20 @@
 				strcpypgm2ram( res , "TIMER" );
 				break;
 			}
+			case PG_ERROR_PWM : {
+				strcpypgm2ram( res , "PWM" );
+				break;
+			}
+			case PG_ERROR_FTOA : {
+				strcpypgm2ram( res , "FTOA" );
+				break;
+			}
 			case PG_ERROR_SENSOR : {
 				strcpypgm2ram( res , "SENSOR" );
+				break;
+			}
+			case PG_ERROR_RTC_DS1302 : {
+				strcpypgm2ram( res , "RTC_DS1302" );
 				break;
 			}
 		}

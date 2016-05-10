@@ -52,7 +52,7 @@
 #ifndef _PGIM_ERROR_H_
 	#define _PGIM_ERROR_H_
 
-        #define PG_ERROR_IS_ENABLE      ( PGIM_ERROR == PG_ENABLE )
+	#define PG_ERROR_IS_ENABLE      ( PGIM_ERROR == PG_ENABLE )
 
 	#if ( PGIM_ERROR == PG_ENABLE )
 
@@ -68,6 +68,7 @@
                     PG_ERROR_SPI = 10,
 					PG_ERROR_ADC,
 					PG_ERROR_TIMER,
+					PG_ERROR_PWM,
 					PG_ERROR_FTOA,
 					PG_ERROR_SENSOR,
 					PG_ERROR_RTC_DS1302
@@ -79,35 +80,32 @@
 		#define	PG_ERROR_CODE			pg_error_state.byte.HB			//!<	The error code returned by the caller function
 		#define	PG_ERROR_SEVERITY		pg_error_state.byte.MB			//!<	May be one of this :  OK, WARNING, CRITICAL, ERROR or FATAL
 
-
-
 		/*!
-		 *  \brief This Function initialize the error handler module
+		 *  \brief This Function initialize the error handler module.
 		 */
 		void	pg_error_init( void );
 
 		/*!
-		 *  \brief This Function convert the severity in string
+		 *  \brief This Function convert the severity in string.
 		 */
 		char *	pg_error_severity_str( _pg_Uint8 severity );
 
-	#if ( PG_ERROR_LED_PRESENT == PG_YES )
+		#if ( PG_ERROR_LED_PRESENT == PG_YES )
+			/*!
+			 *  \brief This Function sets led blink timing (for internal use).
+			 */
+			 void	pg_error_led_sequence ( void );
 
-		void	pg_error_led_sequence ( void );
-
-		/*!
-		 *  \brief This Function stop the flow of the program in an infinite loop. If a LED is present and correctly set ( pgim_hardware_setup_public.h ) it will blink quickly several times and pause.
-		 */
-		void	pg_error_led( void );
-
-	#endif
+			/*!
+			 *  \brief This Function stop the flow of the program in an infinite loop. If a LED is present and correctly set ( pgim_hardware_setup_public.h ) it will blink quickly several times and pause.
+			 */
+			void	pg_error_led( void );
+		#endif
 
 		void			pg_error_set( _pg_Uint8 module , _pg_Uint8 code , _pg_Uint8 severity );
-
 		const char *	pg_error_code_to_module( _pg_Uint8 module );
 		
 	#endif
-	
 #endif /* _PGIM_EE_H_ */
 
 /*!

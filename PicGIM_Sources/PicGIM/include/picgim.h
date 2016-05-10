@@ -743,7 +743,7 @@
 		#define		PGIM_3WIRE		PG_DISABLE
 	#endif
 	//--------------------------------------------------
-	//#if ( PGIM_3WIRE == PG_ENABLE )
+	#if ( PGIM_3WIRE == PG_ENABLE )
 		#include "pgim_3wire.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_3WIRE Loaded
