@@ -76,7 +76,7 @@
 	#include "pgim_defines.h"
 	#include "pgim_module_setup.h"
 	#include "pgim_hardware_setup_public.h"
-
+	#include "pgim_selective_compiling.h"
 	
 	//-------------------------------------------------------------------------------
 	//    I N C L U S I O N S
@@ -488,7 +488,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		#include "pgim_lcd_hd44780___sc.h"
+		//#include "pgim_lcd_hd44780___sc.h"
 		#include "pgim_lcd_hd44780.h"
 		#if ( ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE ) && ( PG_LCD_HD44780_RW_PRESENT == PG_NO ) )
 			#error	PG_HS_PG PG_HM_LCD_HD44780 Can not read busy flag, because writing pin is not used!
@@ -712,7 +712,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
-		#include "pgim_rtc_ds1302___sc.h"
+		//#include "pgim_rtc_ds1302___sc.h"
 		#include "pgim_rtc_ds1302.h"
 		// E R R O R   C H E C K   B E F O R E   L O A D   M O D U L E
 		//Check pgim_rtc_ds1302___sc.h file

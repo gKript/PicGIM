@@ -264,7 +264,7 @@
 			}
 			else {
 				#if( PG_ERROR_IS_ENABLE == PG_ENABLE )	//Error: wrong month value;
-					pg_error_set( PG_ERROR_RTC_DS1302 , PG_RTC_DS1302_ERROR_VALUE_MONTHS , PG_ERROR_ERROR );
+					pg_error_set( PG_ERROR_RTC_DS1302 , PG_RTC_DS1302_ERROR_VALUE_MONTH , PG_ERROR_ERROR );
 				#endif
 				return PG_NOK;
 			}
@@ -291,7 +291,7 @@
 			}
 			else {
 				#if( PG_ERROR_IS_ENABLE == PG_ENABLE )	//Error: wrong year value;
-					pg_error_set( PG_ERROR_RTC_DS1302 , PG_RTC_DS1302_ERROR_VALUE_YEARS , PG_ERROR_ERROR );
+					pg_error_set( PG_ERROR_RTC_DS1302 , PG_RTC_DS1302_ERROR_VALUE_YEAR , PG_ERROR_ERROR );
 				#endif
 				return PG_NOK;
 			}
