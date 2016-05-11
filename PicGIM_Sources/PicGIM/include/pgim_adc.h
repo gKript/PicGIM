@@ -161,53 +161,59 @@
 		*/
 		_pg_Uint16	pg_adc_get					( void );
 
-		/*!
-			\brief		This function returns the value of the last acquisition made in a user secified range.
-			\param 		Min	The minimum value of the user scale.
-		    \param 		Max	The maximum value of the user scale.
-			\return		The value of the last samplingin a user secified range.
-			\test		This function does not change the error status.
-		*/
-		_pg_int16	pg_adc_get_user_scale		( _pg_int16 Min , _pg_int16 Max );
+		#if defined( PG_DOXYGEN ) || ( PG_ADC_GET_USER_SCALE___SC == PG_ENABLE )
+			/*!
+				\brief		This function returns the value of the last acquisition made in a user secified range.
+				\param 		Min	The minimum value of the user scale.
+				\param 		Max	The maximum value of the user scale.
+				\return		The value of the last samplingin a user secified range.
+				\test		This function does not change the error status.
+			*/
+			_pg_int16	pg_adc_get_user_scale		( _pg_int16 Min , _pg_int16 Max );
+		#endif
 
-		/*!
-			\brief		This function acquires with [n] averages.
-			\param		channel		Indicates the channel on which to make the acquisition. Possible value : \n
-								\ref PG_CH_0 : To select the ADC channel 0. \n
-								\ref PG_CH_1 : To select the ADC channel 1. \n
-								\ref PG_CH_2 : To select the ADC channel 2. \n
-								\ref PG_CH_3 : To select the ADC channel 3. \n
-								\ref PG_CH_4 : To select the ADC channel 4. \n
-								\ref PG_CH_5 : To select the ADC channel 5. \n
-								\ref PG_CH_6 : To select the ADC channel 6. \n
-								\ref PG_CH_7 : To select the ADC channel 7. \n
-			\param		average		How do acquisition.
-			\return		\b The \b value of the sampling averaged or \b -1 if something wrong. \n
-			\test	This function set the error status if the \ref SWG_error is enabled . \n \n
-						\b PG_OK : Everything is ok. \n
-						\b PG_ADC_ERROR_TOO_AVERAGE : This error indicates that averages required are more than the maximum allowed. \n
-		*/
-		_pg_Uint16	pg_adc_start_avg			( _pg_Uint8 channel , _pg_Uint8 average );
+		#if defined( PG_DOXYGEN ) || ( PG_ADC_START_AVG___SC == PG_ENABLE )
+			/*!
+				\brief		This function acquires with [n] averages.
+				\param		channel		Indicates the channel on which to make the acquisition. Possible value : \n
+									\ref PG_CH_0 : To select the ADC channel 0. \n
+									\ref PG_CH_1 : To select the ADC channel 1. \n
+									\ref PG_CH_2 : To select the ADC channel 2. \n
+									\ref PG_CH_3 : To select the ADC channel 3. \n
+									\ref PG_CH_4 : To select the ADC channel 4. \n
+									\ref PG_CH_5 : To select the ADC channel 5. \n
+									\ref PG_CH_6 : To select the ADC channel 6. \n
+									\ref PG_CH_7 : To select the ADC channel 7. \n
+				\param		average		How do acquisition.
+				\return		\b The \b value of the sampling averaged or \b -1 if something wrong. \n
+				\test	This function set the error status if the \ref SWG_error is enabled . \n \n
+							\b PG_OK : Everything is ok. \n
+							\b PG_ADC_ERROR_TOO_AVERAGE : This error indicates that averages required are more than the maximum allowed. \n
+			*/
+			_pg_Uint16	pg_adc_start_avg			( _pg_Uint8 channel , _pg_Uint8 average );
+		#endif
+	
+		#if defined( PG_DOXYGEN ) || ( PG_ADC_GET_PERC___SC == PG_ENABLE )
+			/*!
+				\brief		This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made.
+				\param 		Nothing.
+				\return		The percentage of the last sampling.
+				\test		This function does not change the error status.
+
+			*/
+			_pg_Uint8	pg_adc_get_perc				( void );
+		#endif
 		
-		/*!
-			\brief		This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made.
-			\param 		Nothing.
-			\return		The percentage of the last sampling.
-			\test		This function does not change the error status.
+		#if defined( PG_DOXYGEN ) || ( PG_ADC_GET_PERC_F___SC == PG_ENABLE )
+			/*!
+				\brief		This function returns the float percentage value of the last acquisition made.
+				\param 		Nothing.
+				\return		The percentage of the last sampling.
+				\test		This function does not change the error status.
 
-		*/
-		_pg_Uint8	pg_adc_get_perc				( void );
-		
-		/*!
-			\brief		This function returns the float percentage value of the last acquisition made.
-			\param 		Nothing.
-			\return		The percentage of the last sampling.
-			\test		This function does not change the error status.
-
-		*/
-		float	pg_adc_get_perc_f				( void );
-		
-
+			*/
+			float	pg_adc_get_perc_f				( void );
+		#endif
 	#endif
 #endif
 

@@ -64,27 +64,27 @@
 	//----------------------------------------------------------------------------------
 		_pg_Uint8	index_int_buf = 0;
 		_pg_int8	integer_digits = 1;
-
-		if ( pg_ftoa_value < 0 ) { //gestione segno meno
+		
+		if ( pg_ftoa_value < 0 ) {
 			pg_ftoa_internal_buffer[ index_int_buf ] = '-';
 			index_int_buf++;
 			pg_ftoa_value *= -1;
 		}
 		while ( pg_ftoa_value >= 10 ) {
-			pg_ftoa_value = pg_ftoa_value / 10; //sposto la virgola a sx di un posto
+			pg_ftoa_value = pg_ftoa_value / 10; //move the decimal point to the left by one digit
 			integer_digits++;
 		}
 		pg_ftoa_trunc_decimal_digits = pg_ftoa_trunc_decimal_digits + integer_digits;
-		while ( pg_ftoa_trunc_decimal_digits ) { //da implementare per scegliere numero cifre se dopo la virgola oppure in totale escluso punto e segno meno
-			pg_ftoa_internal_buffer[ index_int_buf ] = (_pg_Uint8)pg_ftoa_value + '0'; //stampo la parte intera che ora e' una cifra sola
+		while ( pg_ftoa_trunc_decimal_digits ) {
+			pg_ftoa_internal_buffer[ index_int_buf ] = (_pg_Uint8)pg_ftoa_value + '0'; //print the integer part which is now a single digit
 			pg_ftoa_trunc_decimal_digits--;
 			index_int_buf++;
 			integer_digits--;
-			if ( ( integer_digits == 0 ) && ( pg_ftoa_trunc_decimal_digits > 0 ) ) { //evita di stampare il '.' con nessuna cifra dopo
+			if ( ( integer_digits == 0 ) && ( pg_ftoa_trunc_decimal_digits > 0 ) ) { //it avoids printing the '.' with no digit after
 				pg_ftoa_internal_buffer[ index_int_buf ] = '.';
 				index_int_buf++;
 			}
-			pg_ftoa_value = ( ( pg_ftoa_value - (_pg_Uint8)pg_ftoa_value ) * 10 ); //sposto la virgola a dx di un posto ed elimino la decina
+			pg_ftoa_value = ( ( pg_ftoa_value - (_pg_Uint8)pg_ftoa_value ) * 10 ); //move the decimal point to the right by one digit and delete the decade
 		}
 		pg_ftoa_internal_buffer[ index_int_buf ] = '\0';
 		return ( pg_ftoa_internal_buffer );

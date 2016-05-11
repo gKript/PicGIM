@@ -68,48 +68,57 @@
 			pg_uninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) ) / 2;
 		}
 
-
-		void pg_delay_sec( _pg_Uint8 sec ) {
-			while ( sec-- ) {
-				Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-				Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-				Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-				Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-				Delay10KTCYx( ( pg_ninstus * 20 ) );
+		#if ( PG_DELAY_SEC___SC == PG_ENABLE )
+			void pg_delay_sec( _pg_Uint8 sec ) {
+				while ( sec-- ) {
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
+					Delay10KTCYx( ( pg_ninstus * 20 ) );
+				}
 			}
-		}
-
-
-		void pg_delay_msec( _pg_Uint16 msec ) {
-			while ( msec-- ) {
-				Delay10TCYx( pg_ninstus * 20 );
-				Delay10TCYx( pg_ninstus * 20 );
-				Delay10TCYx( pg_ninstus * 20 );
-				Delay10TCYx( pg_ninstus * 20 );
-				Delay10TCYx( pg_ninstus * 20 );
-			}
-		}
-
-
-		void pg_delay_usec( _pg_Uint16 tusec )  {
-			tusec /= 10;
-			while( tusec-- ) {
-				Delay10TCYx( pg_ninstus );
-			}
-		}
-
-
-		void	pg_delay( _pg_Uint16 req_delay , _pg_Uint8 unit ) {
-			if ( unit == PG_SEC )
-				pg_delay_sec( req_delay );
-			if ( unit == PG_MSEC )
-				pg_delay_msec( req_delay );
-			if ( unit == PG_USEC )
-				pg_delay_usec( req_delay );
-		}
-
+		#endif
 		
-		#if	( PGIM_EVENTS == PG_ENABLE )
+		#if ( PG_DELAY_MSEC___SC == PG_ENABLE )
+			void pg_delay_msec( _pg_Uint16 msec ) {
+				while ( msec-- ) {
+					Delay10TCYx( pg_ninstus * 20 );
+					Delay10TCYx( pg_ninstus * 20 );
+					Delay10TCYx( pg_ninstus * 20 );
+					Delay10TCYx( pg_ninstus * 20 );
+					Delay10TCYx( pg_ninstus * 20 );
+				}
+			}
+		#endif
+
+		#if ( PG_DELAY_USEC___SC == PG_ENABLE )
+			void pg_delay_usec( _pg_Uint16 tusec )  {
+				tusec /= 10;
+				while( tusec-- ) {
+					Delay10TCYx( pg_ninstus );
+				}
+			}
+		#endif
+
+		#if ( PG_DELAY___SC == PG_ENABLE )
+			void	pg_delay( _pg_Uint16 req_delay , _pg_Uint8 unit ) {
+				#if ( PG_DELAY_SEC___SC == PG_ENABLE )
+					if ( unit == PG_SEC )
+						pg_delay_sec( req_delay );
+				#endif
+				#if ( PG_DELAY_MSEC___SC == PG_ENABLE )
+					if ( unit == PG_MSEC )
+						pg_delay_msec( req_delay );
+				#endif
+				#if ( PG_DELAY_USEC___SC == PG_ENABLE )
+					if ( unit == PG_USEC )
+						pg_delay_usec( req_delay );
+				#endif
+			}
+		#endif
+		
+		#if	( ( PGIM_EVENTS == PG_ENABLE ) && ( PG_DELAY_HIGH_PRIORITY___SC == PG_ENABLE ) )
 			void pg_delay_high_priority( _pg_Uint16 req_delay , _pg_Uint8 unit ) {
 				_pg_Uint8 GIE_state , PIE_state;
 				GIE_state = PG_INTERRUPT_GLOBAL_ENABLE;
@@ -118,12 +127,18 @@
 					pg_event_set( PG_EVENT_GLOBAL , PG_DISABLE );
 				if ( PIE_state )
 					pg_event_set( PG_EVENT_PERIPHERAL , PG_DISABLE );
-				if ( unit == PG_SEC )
-					pg_delay_sec( req_delay );
-				if ( unit == PG_MSEC )
-					pg_delay_msec( req_delay );
-				if ( unit == PG_USEC )
-					pg_delay_usec( req_delay );
+				#if ( PG_DELAY_SEC___SC == PG_ENABLE )
+					if ( unit == PG_SEC )
+						pg_delay_sec( req_delay );
+				#endif
+				#if ( PG_DELAY_MSEC___SC == PG_ENABLE )
+					if ( unit == PG_MSEC )
+						pg_delay_msec( req_delay );
+				#endif
+				#if ( PG_DELAY_USEC___SC == PG_ENABLE )
+					if ( unit == PG_USEC )
+						pg_delay_usec( req_delay );
+				#endif
 				if ( GIE_state )
 					pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 				if ( PIE_state )

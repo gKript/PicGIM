@@ -101,46 +101,54 @@
 			*/
 			void	pg_delay_NinstusCalc	( void );
 
-			/*!
-				\brief		To do a delay in seconds.
-				\param		sec	The seconds of delay you want to do, \n
-								\a sec > 0
-								\a sec <= 255
-			*/
-			void	pg_delay_sec			( _pg_Uint8 sec );
+			#if defined( PG_DOXYGEN ) || ( PG_DELAY_SEC___SC == PG_ENABLE )
+				/*!
+					\brief		To do a delay in seconds.
+					\param		sec	The seconds of delay you want to do, \n
+									\a sec > 0
+									\a sec <= 255
+				*/
+				void	pg_delay_sec			( _pg_Uint8 sec );
+			#endif
+			
+			#if defined( PG_DOXYGEN ) || ( PG_DELAY_MSEC___SC == PG_ENABLE )
+				/*!	
+					\brief		To do a delay in milliseconds.
+					\param		msec	The milliseconds of delay you want to do, \n
+									\a msec > 0
+									\a msec <= 255
+				*/
+				void	pg_delay_msec		( _pg_Uint16 msec );
+			#endif
+			
+			#if defined( PG_DOXYGEN ) || ( PG_DELAY_USEC___SC == PG_ENABLE )
+				/*!
+					\brief		To do a delay in microseconds.
+					\param		usec	The microseconds of delay you want to do, \n
+									\a usec > 0 \n
+									\a usec <= 65534 \n
+					\note		This function provides a delay very inaccurate. \n
+									If you need an accuracy delay based on the system clock please write it.
+				*/
+				void	pg_delay_usec			( _pg_Uint16 usec );
+			#endif
+			
+			#if defined( PG_DOXYGEN ) || ( PG_DELAY___SC == PG_ENABLE )
+				/*!
+					\brief		To do a delay in various units of time.
+					\param		req_delay	The delay you want to do, \n
+									\a req_delay > 0 \n
+									\a req_delay <= 255
+					\param		unit		The unit of time request. \n
+									\a unit = \a PG_SEC  ||  \a unit = \a PG_MSEC  ||  \a unit = \a PG_USEC
 
-			/*!	
-				\brief		To do a delay in milliseconds.
-				\param		msec	The milliseconds of delay you want to do, \n
-								\a msec > 0
-								\a msec <= 255
-			*/
-			void	pg_delay_msec		( _pg_Uint16 msec );
-
-			/*!
-				\brief		To do a delay in microseconds.
-				\param		usec	The microseconds of delay you want to do, \n
-								\a usec > 0 \n
-								\a usec <= 65534 \n
-				\note		This function provides a delay very inaccurate. \n
-								If you need an accuracy delay based on the system clock please write it.
-			*/
-			void	pg_delay_usec			( _pg_Uint16 usec );
-
-			/*!
-				\brief		To do a delay in various units of time.
-				\param		req_delay	The delay you want to do, \n
-								\a req_delay > 0 \n
-								\a req_delay <= 255
-				\param		unit		The unit of time request. \n
-								\a unit = \a PG_SEC  ||  \a unit = \a PG_MSEC  ||  \a unit = \a PG_USEC
-
-				\note		When you use this function with \a PG_USEC it provides a delay very inaccurate. \n
-								If you need an accuracy in uSec delay based on the system clock please write it yourself in asm.
-			*/
-			void	pg_delay	( _pg_Uint16 req_delay , _pg_Uint8 unit );
-
-			  #if ( PGIM_EVENTS == PG_ENABLE )
+					\note		When you use this function with \a PG_USEC it provides a delay very inaccurate. \n
+									If you need an accuracy in uSec delay based on the system clock please write it yourself in asm.
+				*/
+				void	pg_delay	( _pg_Uint16 req_delay , _pg_Uint8 unit );
+			#endif
+			
+			#if defined( PG_DOXYGEN ) || ( ( PGIM_EVENTS == PG_ENABLE ) && ( PG_DELAY_HIGH_PRIORITY___SC == PG_ENABLE ) )
 				/*!
 					\brief		To do a delay in various units of time. This function is uninterruptable.
 					\param		req_delay	The delay you want to do, \n

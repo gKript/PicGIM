@@ -54,87 +54,220 @@
 	//==============================================================================
 	
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-	
-		//		F U N C T I O N S   T H A T   C A N   B E   D I S A B L E D   I F   N O T   U S E D ( manual )
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_lcd_hd44780_char_generator()
 		#define	PG_LCD_HD44780_CHAR_GENERATOR___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_put_p_char()
 		#define	PG_LCD_HD44780_PUT_P_CHAR___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_put_byte()
 		#define	PG_LCD_HD44780_PUT_BYTE___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_put_p_byte()
 		#define	PG_LCD_HD44780_PUT_P_BYTE___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write_string_rom()
 		#define	PG_LCD_HD44780_WRITE_STRING_ROM___SC			PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write_p_string()
 		#define	PG_LCD_HD44780_WRITE_P_STRING___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write_p_string_flash()
 		#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH___SC		PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write_p_string_rom()
 		#define	PG_LCD_HD44780_WRITE_P_STRING_ROM___SC			PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write_p_string_flash_rom()
 		#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM___SC	PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write_p_int()
 		#define	PG_LCD_HD44780_WRITE_P_INT___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_lcd_hd44780_write()
 		#define	PG_LCD_HD44780_WRITE___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
 		
-		//		F U N C T I O N S   T H A T   C A N   B E   D I S A B L E D   I F   N O T   U S E D ( semi-automatic )
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_lcd_hd44780_write_p_char()
 		#define	PG_LCD_HD44780_WRITE_P_CHAR___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
 		
-		//	---------------------------------------------------------
-		//	Functions disabled automatically if not required
-		//	---------------------------------------------------------
-		//	pg_lcd_hd44780_splash_full
-		//	pg_lcd_hd44780_splash_slide
-		//	pg_lcd_hd44780_read_byte
-		//	pg_lcd_hd44780_char_generator_from_EE
-		//	pg_lcd_hd44780_write_p_float
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	pg_lcd_hd44780_splash_full()
+		//	pg_lcd_hd44780_splash_slide()
+		//	pg_lcd_hd44780_read_byte()
+		//	pg_lcd_hd44780_char_generator_from_EE()
+		//	pg_lcd_hd44780_write_p_float()
 		
-		//	---------------------------------------------------------
-		//	Compulsory functions ( must be compiled )
-		//	---------------------------------------------------------
-		//	pg_lcd_hd44780_init
-		//	pg_lcd_hd44780_init_routine
-		//	pg_lcd_hd44780_wait_busy
-		//	pg_ldc_hd44780_write_nibble
-		//	pg_lcd_hd44780_write_byte
-		//	pg_lcd_hd44780_en_select
-		//	pg_lcd_hd44780_clear	
-		//	pg_lcd_hd44780_goto
-		//	pg_lcd_hd44780_put_char
-		//	pg_lcd_hd44780_write_string
+		//------------------------------------------------------------------------------------------------------------
+		//		COMPULSORY FUNCTIONS ( must be compiled ):
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	pg_lcd_hd44780_init()
+		//	pg_lcd_hd44780_init_routine()
+		//	pg_lcd_hd44780_wait_busy()
+		//	pg_ldc_hd44780_write_nibble()
+		//	pg_lcd_hd44780_write_byte()
+		//	pg_lcd_hd44780_en_select()
+		//	pg_lcd_hd44780_clear()
+		//	pg_lcd_hd44780_goto()
+		//	pg_lcd_hd44780_put_char()
+		//	pg_lcd_hd44780_write_string()
 
 	#endif
 
-	
 	
 	//==============================================================================
 	//		RTC_DS1302  -  S e l e c t i v e   c o m p i l i n g
 	//==============================================================================
 		
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
-	
-		//		F U N C T I O N S   T H A T   C A N   B E   D I S A B L E D   I F   N O T   U S E D ( manual )
-
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_rtc_ds1302_use_min()
 		#define	PG_RTC_DS1302_USE_MIN___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_use_hour()
 		#define	PG_RTC_DS1302_USE_HOUR___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_use_day()
 		#define	PG_RTC_DS1302_USE_DAY___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_use_month()
 		#define	PG_RTC_DS1302_USE_MONTH___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_use_year()
 		#define	PG_RTC_DS1302_USE_YEAR___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_use_weekday()
 		#define	PG_RTC_DS1302_USE_WEEKDAY___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
 
-		//		F U N C T I O N S   T H A T   C A N   B E   D I S A B L E D   I F   N O T   U S E D ( semi-automatic )
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_rtc_ds1302_wr_time_all()
 		#define	PG_RTC_DS1302_WR_TIME_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_rd_time_all()
 		#define	PG_RTC_DS1302_RD_TIME_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_wr_date_all()
 		#define	PG_RTC_DS1302_WR_DATE_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_rtc_ds1302_rd_date_all()
 		#define	PG_RTC_DS1302_RD_DATE_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
 		
-		//	---------------------------------------------------------
-		//	Functions disabled automatically if not required
-		//	---------------------------------------------------------
-		//	Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	None.
 
-		//	---------------------------------------------------------
-		//	Compulsory functions ( must be compiled )
-		//	---------------------------------------------------------
-		//	pg_rtc_ds1302_init
-		//	pg_rtc_ds1302_wr_access
-		//	pg_rtc_ds1302_start
-		//	pg_rtc_ds1302_stop
-		//	pg_rtc_ds1302_wr_time_sec
-		//	pg_rtc_ds1302_rd_time_sec
+		//------------------------------------------------------------------------------------------------------------
+		//		COMPULSORY FUNCTIONS ( must be compiled ):
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	pg_rtc_ds1302_init()
+		//	pg_rtc_ds1302_wr_access()
+		//	pg_rtc_ds1302_start()
+		//	pg_rtc_ds1302_stop()
+		//	pg_rtc_ds1302_wr_time_sec()
+		//	pg_rtc_ds1302_rd_time_sec()
 	
 	#endif
+
+	
+	//==============================================================================
+	//		AD_CONVERTER  -  S e l e c t i v e   c o m p i l i n g
+	//==============================================================================
+		
+	#if ( PGIM_AD_CONVERTER == PG_ENABLE )
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_adc_get_user_scale()
+		#define	PG_ADC_GET_USER_SCALE___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_adc_start_avg()
+		#define	PG_ADC_START_AVG___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_adc_get_perc()
+		#define	PG_ADC_GET_PERC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_adc_get_perc_f()
+		#define	PG_ADC_GET_PERC_F___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
+		//------------------------------------------------------------------------------------------------------------
+		//	None.
+		
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	None.
+		
+		//------------------------------------------------------------------------------------------------------------
+		//		COMPULSORY FUNCTIONS ( must be compiled ):
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	pg_adc_init()
+		//	pg_adc_set()
+		//	pg_adc_start()
+		//	pg_adc_get()
+	
+	#endif
+	
+	
+	//==============================================================================
+	//		CALDELAY  -  S e l e c t i v e   c o m p i l i n g
+	//==============================================================================
+		
+	#if ( PGIM_CAL_DELAY == PG_ENABLE )
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_delay_sec()
+		#define	PG_DELAY_SEC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_delay_msec()
+		#define	PG_DELAY_MSEC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_delay_usec()
+		#define	PG_DELAY_USEC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//pg_delay()
+		#define	PG_DELAY___SC							PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
+		//------------------------------------------------------------------------------------------------------------
+		//pg_delay_high_priority()
+		#define	PG_DELAY_HIGH_PRIORITY___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
+		
+		//------------------------------------------------------------------------------------------------------------
+		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	None.
+		
+		//------------------------------------------------------------------------------------------------------------
+		//		COMPULSORY FUNCTIONS ( must be compiled ):
+		//		Nothing to configure here.
+		//------------------------------------------------------------------------------------------------------------
+		//	pg_delay_NinstusCalc()
+		
+	#endif
 #endif /* _PGIM_SELECTIVE_COMPILING_H_ */
+
 
 
