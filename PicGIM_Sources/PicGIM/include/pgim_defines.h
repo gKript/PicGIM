@@ -115,6 +115,9 @@
 	#define PG_READ							1				/*!	An alternative way to say "logic value 1"	*/
 	#define PG_WRITE						0				/*!	An alternative way to say "logic value 0"	*/
 
+	#define PG_INCLUDE						1				/*!	It indicates that an object is included		*/
+	#define PG_EXCLUDE						0				/*!	It indicates that an object is removed		*/
+
 	#define	PG_SEC							1				/*!	A time unit : Second	*/
 	#define	PG_MSEC							2				/*!	A time unit : Millisecond	*/
 	#define	PG_USEC							3				/*!	A time unit : Microsecond	*/

@@ -62,43 +62,49 @@
 		 */
 		void	pg_ee_init( void );
 		
-		/*!
-		 * \brief	This Function write a byte to the internal EEPROM of the MCU
-		 * \param	[in] ee_data The byte to write in EEPROM
-		 * \param	[in] ee_addy The EEPROM address where to write the byte
-			\return	This function performs the \b writing \b verification. If the test is successful returns \b PG_OK otherwise it returns \b PG_NOK.
-		 */
-		 _pg_Uint8 pg_ee_write( _pg_Uint8 ee_data , _pg_Uint16 ee_addy );
+		#if ( PG_EE_WRITE == PG_INCLUDE )
+			/*!
+			 * \brief	This Function write a byte to the internal EEPROM of the MCU
+			 * \param	[in] ee_data The byte to write in EEPROM
+			 * \param	[in] ee_addy The EEPROM address where to write the byte
+				\return	This function performs the \b writing \b verification. If the test is successful returns \b PG_OK otherwise it returns \b PG_NOK.
+			 */
+			 _pg_Uint8 pg_ee_write( _pg_Uint8 ee_data , _pg_Uint16 ee_addy );
+		#endif
 
-		/*!
-		 *  \brief 		This Function read a byte from the internal EEPROM of the MCU
-		 *  \param 	[in] ee_addy The EEPROM address where to read the byte
-		 *  \return 	The read byte.
-		 */
-		char pg_ee_read( _pg_Uint16 ee_addy );
+		#if ( PG_EE_READ == PG_INCLUDE )		
+			/*!
+			 *  \brief 		This Function read a byte from the internal EEPROM of the MCU
+			 *  \param 	[in] ee_addy The EEPROM address where to read the byte
+			 *  \return 	The read byte.
+			 */
+			char pg_ee_read( _pg_Uint16 ee_addy );
+		#endif
 
-		/*!
-		 *  \brief 		This Function write a buffer to the internal EEPROM of the MCU
-		 *  \param 	[in] ee_addy The address at which the buffer will be written
-		 *  \param 	[in] buffer The buffer to write
-		 *  \param 	[in] buflen The buffer lenght
-			\return		Nothing.
-		 */ 
-		void	pg_ee_write_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen );
-
-		/*!
-		 *  \brief 		This Function read a buffer from the internal EEPROM of the MCU
-		 *  \param	[in] ee_addy The address at which the buffer will be read
-		 *  \param 	[out] buffer The buffer to read
-		 *  \param 	[in] buflen The buffer lenght
-			\return		Nothing.
-		 */
-		void	pg_ee_read_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen );
-
+		#if ( PG_EE_WRITE_BUFFER == PG_INCLUDE )
+			/*!
+			 *  \brief 		This Function write a buffer to the internal EEPROM of the MCU
+			 *  \param 	[in] ee_addy The address at which the buffer will be written
+			 *  \param 	[in] buffer The buffer to write
+			 *  \param 	[in] buflen The buffer lenght
+				\return		Nothing.
+			 */ 
+			void	pg_ee_write_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen );
+		#endif
+		
+		#if ( PG_EE_READ_BUFFER == PG_INCLUDE )
+			/*!
+			 *  \brief 		This Function read a buffer from the internal EEPROM of the MCU
+			 *  \param	[in] ee_addy The address at which the buffer will be read
+			 *  \param 	[out] buffer The buffer to read
+			 *  \param 	[in] buflen The buffer lenght
+				\return		Nothing.
+			 */
+			void	pg_ee_read_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen );
+		#endif
 	#endif
-	
 #endif
-
+		
 /*!
 	\page	HWI_ee		Internal EEPROM
 

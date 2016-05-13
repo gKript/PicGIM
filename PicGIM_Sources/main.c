@@ -32,8 +32,12 @@
 #include "picgim_main.h"
 
 void main( void ) {
+		_pg_Uint16 one;
+		
         pg_initialize( );
-
+		pg_delay_usec( 10 );
+		one = pg_ee_read( 03 );
+		pg_rtc_ds1302_start();
 //		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 3 ) ); // 123.456
 //		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4561, 3 ) ); // 123.456
 //		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4569, 3 ) ); // 123.456

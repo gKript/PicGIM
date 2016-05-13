@@ -11,7 +11,6 @@
 	Deprecated version :	This file is not deprecated.
 
 	See also related :		pgim_rtc_da1302.c
-							pgim_rtc_da1302___sc.h
 							
 	START LICENSE	GPL	V3.0
 
@@ -62,22 +61,22 @@
 		
 		//---[ Write Command Addresses ]---
 		#define	PG_RTC_DS1302_CMD_WR_SEC				0x80		//!< Command to set second
-		#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MIN == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_WR_MIN			0x82		//!< Command to set minute
 		#endif
-		#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_WR_HOUR			0x84		//!< Command to set hour
 		#endif
-		#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_DAY == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_WR_DAY			0x86		//!< Command to set day
 		#endif
-		#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_WR_MONTH			0x88		//!< Command to set month
 		#endif
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_WR_WEEKDAY		0x8A		//!< Command to set week day number
 		#endif
-		#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_WR_YEAR			0x8C		//!< Command to set year
 		#endif
 		#define	PG_RTC_DS1302_CMD_WR_WRPROTECT			0x8E		//!< Command to set or remove device write protection
@@ -86,22 +85,22 @@
 		
 		//---[ Read Command Addresses ]---
 		#define	PG_RTC_DS1302_CMD_RD_SEC				0x81		//!< Command to get second
-		#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MIN == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_RD_MIN			0x83		//!< Command to get minute
 		#endif
-		#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_RD_HOUR			0x85		//!< Command to get hour
 		#endif
-		#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_DAY == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_RD_DAY			0x87		//!< Command to get day
 		#endif
-		#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_RD_MONTH			0x89		//!< Command to get month
 		#endif
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_RD_WEEKDAY		0x8B		//!< Command to get week day number
 		#endif
-		#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE )
 			#define	PG_RTC_DS1302_CMD_RD_YEAR			0x8D		//!< Command to get year
 		#endif
 		#define	PG_RTC_DS1302_CMD_RD_WRPROTECT			0x8F		//!< Command to get device write protection status
@@ -110,28 +109,28 @@
 		
 		//---[ Error ]---
 		#define	PG_RTC_DS1302_ERROR_VALUE_SEC			201			//!< Wrong seconds value
-		#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MIN == PG_INCLUDE )
 			#define	PG_RTC_DS1302_ERROR_VALUE_MIN		202			//!< Wrong seconds value
 		#endif
-		#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE )
 			#define	PG_RTC_DS1302_ERROR_VALUE_HOUR		203			//!< Wrong seconds value
 		#endif
-		#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_DAY == PG_INCLUDE )
 			#define	PG_RTC_DS1302_ERROR_VALUE_DAY		204			//!< Wrong seconds value
 		#endif
-		#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE )
 			#define	PG_RTC_DS1302_ERROR_VALUE_MONTH		205			//!< Wrong seconds value
 		#endif
-		#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE )
 			#define	PG_RTC_DS1302_ERROR_VALUE_YEAR		206			//!< Wrong seconds value
 		#endif
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
 			#define	PG_RTC_DS1302_ERROR_VALUE_WEEKDAY	207			//!< Wrong seconds value
 		#endif
 		//---[ END Error ]---
 		
 		//---[ Days of the week ]---
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
 			enum	_pg_rtc_ds1302_weekday_ita_enum {
 						PG_RTC_DS1302_WEEKDAY_LUN = 1,
 						PG_RTC_DS1302_WEEKDAY_MAR,
@@ -155,89 +154,195 @@
 		//---[ END Days of the week ]---
 		
 		extern	_pg_Uint8 	ds1302_sec;						//!<	0-59	( Decimal value accepted range )
-		#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		
+		#if( PG_RTC_DS1302_USE_MIN == PG_INCLUDE )
 			extern	_pg_Uint8 	ds1302_min;					//!<	0-59	( Decimal value accepted range )
 		#endif
-		#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE )
 			extern	_pg_Uint8 	ds1302_hour;				//!<	0-23	( Decimal value accepted range )
 		#endif
-		#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_DAY == PG_INCLUDE )
 			extern	_pg_Uint8 	ds1302_day;					//!<	1-31	( Decimal value accepted range )
 		#endif
-		#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE )
 			extern	_pg_Uint8 	ds1302_month;				//!<	1-12	( Decimal value accepted range )
 		#endif
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
 			extern	_pg_Uint8 	ds1302_weekday;				//!<	1-7		( Decimal value accepted range )
 		#endif
-		#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE )
 			extern	_pg_Uint8 	ds1302_year;				//!<	00-99	( Decimal value accepted range )
 		#endif
+		
 		extern	_pg_Uint8 	ds1302_halt_clock;				//!<	Return or set clock flag status ( 1 = stopped; 0 = running )
 		
+		/*!
+			\brief			<item>					<note>
+			\return			<item>					<note>
+			\param			<item>					<note>
+		*/
 		void		pg_rtc_ds1302_init( void );
+		
+		/*!
+			\brief			<item>					<note>
+			\return			<item>					<note>
+			\param			<item>					<note>
+		*/
 		void		pg_rtc_ds1302_wr_access( _pg_Uint8 ds1302_wr_access );
+		
+		/*!
+			\brief			<item>					<note>
+			\return			<item>					<note>
+			\param			<item>					<note>
+		*/
 		void		pg_rtc_ds1302_start( void );
+		
+		/*!
+			\brief			<item>					<note>
+			\return			<item>					<note>
+			\param			<item>					<note>
+		*/
 		void		pg_rtc_ds1302_stop( void );
 		
 		_pg_Uint8	pg_rtc_ds1302_wr_time_sec( _pg_Uint8 ds1302_set_sec );
-		#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		
+		#if( PG_RTC_DS1302_USE_MIN == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			_pg_Uint8	pg_rtc_ds1302_wr_time_min( _pg_Uint8 ds1302_set_min );
 		#endif
-		#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			_pg_Uint8	pg_rtc_ds1302_wr_time_hour( _pg_Uint8 ds1302_set_hour );	
 		#endif
-		#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_DAY == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			_pg_Uint8	pg_rtc_ds1302_wr_date_day( _pg_Uint8 ds1302_set_day );
 		#endif
-		#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			_pg_Uint8	pg_rtc_ds1302_wr_date_month( _pg_Uint8 ds1302_set_month );
 		#endif
-		#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			_pg_Uint8	pg_rtc_ds1302_wr_date_year( _pg_Uint8 ds1302_set_year );
 		#endif
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			_pg_Uint8	pg_rtc_ds1302_wr_weekday( _pg_Uint8 ds1302_set_weekday );
 		#endif
 		
-		#if( PG_RTC_DS1302_WR_TIME_ALL___SC == PG_ENABLE )
-			#if( ( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE ) )
-				void	pg_rtc_ds1302_wr_time_all( _pg_Uint8 ds1302_set_hour_all, _pg_Uint8 ds1302_set_min_all, _pg_Uint8 ds1302_set_sec_all );
+		#if( PG_RTC_DS1302_WR_TIME_ALL == PG_INCLUDE )
+			#if( ( PG_RTC_DS1302_USE_MIN == PG_INCLUDE ) && ( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE ) )
+				/*!
+					\brief			<item>					<note>
+					\return			<item>					<note>
+					\param			<item>					<note>
+				*/
+			void	pg_rtc_ds1302_wr_time_all( _pg_Uint8 ds1302_set_hour_all, _pg_Uint8 ds1302_set_min_all, _pg_Uint8 ds1302_set_sec_all );
 			#endif
 		#endif		
-		#if( PG_RTC_DS1302_WR_DATE_ALL___SC == PG_ENABLE )
-			#if( ( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_MONTH___SC  == PG_ENABLE ) && ( PG_RTC_DS1302_USE_YEAR___SC  == PG_ENABLE ) )
-				void	pg_rtc_ds1302_wr_date_all( _pg_Uint8 ds1302_set_day_all, _pg_Uint8 ds1302_set_month_all, _pg_Uint8 ds1302_set_year_all );
+		#if( PG_RTC_DS1302_WR_DATE_ALL == PG_INCLUDE )
+			#if( ( PG_RTC_DS1302_USE_DAY == PG_INCLUDE ) && ( PG_RTC_DS1302_USE_MONTH  == PG_INCLUDE ) && ( PG_RTC_DS1302_USE_YEAR  == PG_INCLUDE ) )
+				/*!
+					\brief			<item>					<note>
+					\return			<item>					<note>
+					\param			<item>					<note>
+				*/
+			void	pg_rtc_ds1302_wr_date_all( _pg_Uint8 ds1302_set_day_all, _pg_Uint8 ds1302_set_month_all, _pg_Uint8 ds1302_set_year_all );
 			#endif
 		#endif
 		
 		void	pg_rtc_ds1302_rd_time_sec( void );
-		#if( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MIN == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			void	pg_rtc_ds1302_rd_time_min( void );
 		#endif
-		#if( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			void	pg_rtc_ds1302_rd_time_hour( void );
 		#endif
-		#if( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_DAY == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			void	pg_rtc_ds1302_rd_date_day( void );
 		#endif
-		#if( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			void	pg_rtc_ds1302_rd_date_month( void );
 		#endif
-		#if( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			void	pg_rtc_ds1302_rd_date_year( void );
 		#endif
-		#if( PG_RTC_DS1302_USE_WEEKDAY___SC == PG_ENABLE )
+		#if( PG_RTC_DS1302_USE_WEEKDAY == PG_INCLUDE )
+			/*!
+				\brief			<item>					<note>
+				\return			<item>					<note>
+				\param			<item>					<note>
+			*/
 			void	pg_rtc_ds1302_rd_weekday( void );
 		#endif
 		
-		#if( PG_RTC_DS1302_RD_TIME_ALL___SC == PG_ENABLE )
-			#if( ( PG_RTC_DS1302_USE_MIN___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_HOUR___SC == PG_ENABLE ) )		
+		#if( PG_RTC_DS1302_RD_TIME_ALL == PG_INCLUDE )
+			#if( ( PG_RTC_DS1302_USE_MIN == PG_INCLUDE ) && ( PG_RTC_DS1302_USE_HOUR == PG_INCLUDE ) )		
+				/*!
+					\brief			<item>					<note>
+					\return			<item>					<note>
+					\param			<item>					<note>
+				*/
 				void	pg_rtc_ds1302_rd_time_all( void );
 			#endif
 		#endif
-		#if( PG_RTC_DS1302_RD_DATE_ALL___SC == PG_ENABLE )
-			#if( ( PG_RTC_DS1302_USE_DAY___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_MONTH___SC == PG_ENABLE ) && ( PG_RTC_DS1302_USE_YEAR___SC == PG_ENABLE ) )
+		#if( PG_RTC_DS1302_RD_DATE_ALL == PG_INCLUDE )
+			#if( ( PG_RTC_DS1302_USE_DAY == PG_INCLUDE ) && ( PG_RTC_DS1302_USE_MONTH == PG_INCLUDE ) && ( PG_RTC_DS1302_USE_YEAR == PG_INCLUDE ) )
+				/*!
+					\brief			<item>					<note>
+					\return			<item>					<note>
+					\param			<item>					<note>
+				*/
 				void	pg_rtc_ds1302_rd_date_all( void );
 			#endif
 		#endif

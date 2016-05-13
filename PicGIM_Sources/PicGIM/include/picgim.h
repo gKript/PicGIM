@@ -76,7 +76,9 @@
 	#include "pgim_defines.h"
 	#include "pgim_module_setup.h"
 	#include "pgim_hardware_setup_public.h"
-	#include "pgim_selective_compiling.h"
+	
+	#include "pgim_selective_compiling_setup.h"	//load second last
+	#include "pgim_selective_compiling.h"		//load last
 	
 	//-------------------------------------------------------------------------------
 	//    I N C L U S I O N S
@@ -110,12 +112,12 @@
 		#define		PGIM_ERROR		PG_DISABLE
 	#endif
 	#if ( PGIM_ERROR == PG_ENABLE )
-
+/*
 		enum _pgmodules_code_enum {
 			PG_ADC,
 			PG_BUZZER,
 			PG_DELAY,
-			PG_CONSTANTS,
+			//PG_CONSTANTS,
 			PG_EE,
 			PG_ENCODER,
 			PG_EXT_MEM,
@@ -134,7 +136,7 @@
 			PG_RTC_DS1302,
 			PG_3WIRE
 		};
-
+*/
 		#include "pgim_error.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PG_HS_PG PG_HM_ERROR Loaded
@@ -488,7 +490,6 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		//#include "pgim_lcd_hd44780___sc.h"
 		#include "pgim_lcd_hd44780.h"
 		#if ( ( PG_LCD_HD44780_BUSY_FLAG == PG_ENABLE ) && ( PG_LCD_HD44780_RW_PRESENT == PG_NO ) )
 			#error	PG_HS_PG PG_HM_LCD_HD44780 Can not read busy flag, because writing pin is not used!
@@ -712,18 +713,16 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
-		//#include "pgim_rtc_ds1302___sc.h"
 		#include "pgim_rtc_ds1302.h"
 		// E R R O R   C H E C K   B E F O R E   L O A D   M O D U L E
-		//Check pgim_rtc_ds1302___sc.h file
-		#if( ( PG_RTC_DS1302_WR_TIME_ALL___SC == PG_ENABLE ) || ( PG_RTC_DS1302_RD_TIME_ALL___SC == PG_ENABLE ) )
-			#if( ( PG_RTC_DS1302_USE_MIN___SC == PG_DISABLE ) || ( PG_RTC_DS1302_USE_HOUR___SC == PG_DISABLE ) )
-				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_rtc_ds1302___sc.h configuration file. Must be enabled minutes and hours, if you want to use *_ALL functions!
+		#if( ( PG_RTC_DS1302_WR_TIME_ALL == PG_INCLUDE ) || ( PG_RTC_DS1302_RD_TIME_ALL == PG_INCLUDE ) )
+			#if( ( PG_RTC_DS1302_USE_MIN == PG_EXCLUDE ) || ( PG_RTC_DS1302_USE_HOUR == PG_EXCLUDE ) )
+				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_selective_compiling_setup.h configuration file. Must be enabled minutes and hours, if you want to use *_ALL functions!
 			#endif
 		#endif
-		#if( ( PG_RTC_DS1302_WR_DATE_ALL___SC == PG_ENABLE ) || ( PG_RTC_DS1302_RD_DATE_ALL___SC == PG_ENABLE ) )
-			#if( ( PG_RTC_DS1302_USE_DAY___SC == PG_DISABLE ) || ( PG_RTC_DS1302_USE_MONTH___SC == PG_DISABLE ) || ( PG_RTC_DS1302_USE_YEAR___SC == PG_DISABLE ) )
-				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_rtc_ds1302___sc.h configuration file. Must be enabled day, month and year, if you want to use *_ALL functions!
+		#if( ( PG_RTC_DS1302_WR_DATE_ALL == PG_INCLUDE ) || ( PG_RTC_DS1302_RD_DATE_ALL == PG_INCLUDE ) )
+			#if( ( PG_RTC_DS1302_USE_DAY == PG_EXCLUDE ) || ( PG_RTC_DS1302_USE_MONTH == PG_EXCLUDE ) || ( PG_RTC_DS1302_USE_YEAR == PG_EXCLUDE ) )
+				#error	PG_HS_PG PG_HM_RTC_DS1302 PG_HS_ERR Incorrect pgim_selective_compiling_setup.h configuration file. Must be enabled day, month and year, if you want to use *_ALL functions!
 			#endif
 		#endif
 		//If all is OK...

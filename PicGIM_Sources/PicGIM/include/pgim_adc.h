@@ -161,7 +161,7 @@
 		*/
 		_pg_Uint16	pg_adc_get					( void );
 
-		#if defined( PG_DOXYGEN ) || ( PG_ADC_GET_USER_SCALE___SC == PG_ENABLE )
+		#if ( PG_ADC_GET_USER_SCALE == PG_ENABLE )
 			/*!
 				\brief		This function returns the value of the last acquisition made in a user secified range.
 				\param 		Min	The minimum value of the user scale.
@@ -172,7 +172,7 @@
 			_pg_int16	pg_adc_get_user_scale		( _pg_int16 Min , _pg_int16 Max );
 		#endif
 
-		#if defined( PG_DOXYGEN ) || ( PG_ADC_START_AVG___SC == PG_ENABLE )
+		#if ( PG_ADC_START_AVG == PG_ENABLE )
 			/*!
 				\brief		This function acquires with [n] averages.
 				\param		channel		Indicates the channel on which to make the acquisition. Possible value : \n
@@ -193,7 +193,7 @@
 			_pg_Uint16	pg_adc_start_avg			( _pg_Uint8 channel , _pg_Uint8 average );
 		#endif
 	
-		#if defined( PG_DOXYGEN ) || ( PG_ADC_GET_PERC___SC == PG_ENABLE )
+		#if ( PG_ADC_GET_PERC == PG_ENABLE )
 			/*!
 				\brief		This function returns the value as a percentage ( 0 - 100 ) of the last acquisition made.
 				\param 		Nothing.
@@ -204,7 +204,7 @@
 			_pg_Uint8	pg_adc_get_perc				( void );
 		#endif
 		
-		#if defined( PG_DOXYGEN ) || ( PG_ADC_GET_PERC_F___SC == PG_ENABLE )
+		#if ( PG_ADC_GET_PERC_F == PG_ENABLE )
 			/*!
 				\brief		This function returns the float percentage value of the last acquisition made.
 				\param 		Nothing.

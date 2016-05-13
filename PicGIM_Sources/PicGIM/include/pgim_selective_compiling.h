@@ -48,226 +48,201 @@
 
 #ifndef _PGIM_SELECTIVE_COMPILING_H_
 	#define _PGIM_SELECTIVE_COMPILING_H_
-	
-	//==============================================================================
-	//		LCD_HD44780  -  S e l e c t i v e   c o m p i l i n g
-	//==============================================================================
-	
-	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_lcd_hd44780_char_generator()
-		#define	PG_LCD_HD44780_CHAR_GENERATOR___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_put_p_char()
-		#define	PG_LCD_HD44780_PUT_P_CHAR___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_put_byte()
-		#define	PG_LCD_HD44780_PUT_BYTE___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_put_p_byte()
-		#define	PG_LCD_HD44780_PUT_P_BYTE___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write_string_rom()
-		#define	PG_LCD_HD44780_WRITE_STRING_ROM___SC			PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write_p_string()
-		#define	PG_LCD_HD44780_WRITE_P_STRING___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write_p_string_flash()
-		#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH___SC		PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write_p_string_rom()
-		#define	PG_LCD_HD44780_WRITE_P_STRING_ROM___SC			PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write_p_string_flash_rom()
-		#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM___SC	PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write_p_int()
-		#define	PG_LCD_HD44780_WRITE_P_INT___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_lcd_hd44780_write()
-		#define	PG_LCD_HD44780_WRITE___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_lcd_hd44780_write_p_char()
-		#define	PG_LCD_HD44780_WRITE_P_CHAR___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	pg_lcd_hd44780_splash_full()
-		//	pg_lcd_hd44780_splash_slide()
-		//	pg_lcd_hd44780_read_byte()
-		//	pg_lcd_hd44780_char_generator_from_EE()
-		//	pg_lcd_hd44780_write_p_float()
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		COMPULSORY FUNCTIONS ( must be compiled ):
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	pg_lcd_hd44780_init()
-		//	pg_lcd_hd44780_init_routine()
-		//	pg_lcd_hd44780_wait_busy()
-		//	pg_ldc_hd44780_write_nibble()
-		//	pg_lcd_hd44780_write_byte()
-		//	pg_lcd_hd44780_en_select()
-		//	pg_lcd_hd44780_clear()
-		//	pg_lcd_hd44780_goto()
-		//	pg_lcd_hd44780_put_char()
-		//	pg_lcd_hd44780_write_string()
 
-	#endif
-
-	
-	//==============================================================================
-	//		RTC_DS1302  -  S e l e c t i v e   c o m p i l i n g
-	//==============================================================================
+	#if defined( PG_DOXYGEN )
+		//==============================================================================
+		//		LCD_HD44780  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_LCD_HD44780 == PG_ENABLE )
+			#undef	PG_LCD_HD44780_CHAR_GENERATOR
+			#define	PG_LCD_HD44780_CHAR_GENERATOR					PG_INCLUDE
+			#undef	PG_LCD_HD44780_PUT_P_CHAR
+			#define	PG_LCD_HD44780_PUT_P_CHAR						PG_INCLUDE
+			#undef	PG_LCD_HD44780_PUT_BYTE
+			#define	PG_LCD_HD44780_PUT_BYTE							PG_INCLUDE
+			#undef	PG_LCD_HD44780_PUT_P_BYTE
+			#define	PG_LCD_HD44780_PUT_P_BYTE						PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_STRING_ROM
+			#define	PG_LCD_HD44780_WRITE_STRING_ROM					PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING
+			#define	PG_LCD_HD44780_WRITE_P_STRING					PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING_FLASH
+			#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH				PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING_ROM
+			#define	PG_LCD_HD44780_WRITE_P_STRING_ROM				PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM
+			#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM			PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_INT
+			#define	PG_LCD_HD44780_WRITE_P_INT						PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_CHAR
+			#define	PG_LCD_HD44780_WRITE_P_CHAR						PG_INCLUDE
+			#undef	PG_LCD_HD44780_WRITE
+			#define	PG_LCD_HD44780_WRITE							PG_INCLUDE
+		#endif
+		//==============================================================================
+		//		RTC_DS1302  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_RTC_DS1302 == PG_ENABLE )
+			#undef	PG_RTC_DS1302_USE_MIN
+			#define	PG_RTC_DS1302_USE_MIN							PG_INCLUDE
+			#undef	PG_RTC_DS1302_USE_HOUR
+			#define	PG_RTC_DS1302_USE_HOUR							PG_INCLUDE
+			#undef	PG_RTC_DS1302_USE_DAY
+			#define	PG_RTC_DS1302_USE_DAY							PG_INCLUDE
+			#undef	PG_RTC_DS1302_USE_MONTH
+			#define	PG_RTC_DS1302_USE_MONTH							PG_INCLUDE
+			#undef	PG_RTC_DS1302_USE_YEAR
+			#define	PG_RTC_DS1302_USE_YEAR							PG_INCLUDE
+			#undef	PG_RTC_DS1302_USE_WEEKDAY
+			#define	PG_RTC_DS1302_USE_WEEKDAY						PG_INCLUDE
+			#undef	PG_RTC_DS1302_WR_TIME_ALL
+			#define	PG_RTC_DS1302_WR_TIME_ALL						PG_INCLUDE
+			#undef	PG_RTC_DS1302_RD_TIME_ALL
+			#define	PG_RTC_DS1302_RD_TIME_ALL						PG_INCLUDE
+			#undef	PG_RTC_DS1302_WR_DATE_ALL
+			#define	PG_RTC_DS1302_WR_DATE_ALL						PG_INCLUDE
+			#undef	PG_RTC_DS1302_RD_DATE_ALL
+			#define	PG_RTC_DS1302_RD_DATE_ALL						PG_INCLUDE
+		#endif
+		//==============================================================================
+		//		AD_CONVERTER  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_AD_CONVERTER == PG_ENABLE )
+			#undef	PG_ADC_GET_USER_SCALE
+			#define	PG_ADC_GET_USER_SCALE							PG_INCLUDE
+			#undef	PG_ADC_START_AVG
+			#define	PG_ADC_START_AVG								PG_INCLUDE
+			#undef	PG_ADC_GET_PERC
+			#define	PG_ADC_GET_PERC									PG_INCLUDE
+			#undef	PG_ADC_GET_PERC_F
+			#define	PG_ADC_GET_PERC_F								PG_INCLUDE
+		#endif
+		//==============================================================================
+		//		CALDELAY  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_CAL_DELAY == PG_ENABLE )
+			#undef	PG_DELAY_SEC
+			#define	PG_DELAY_SEC									PG_INCLUDE
+			#undef	PG_DELAY_MSEC
+			#define	PG_DELAY_MSEC									PG_INCLUDE
+			#undef	PG_DELAY_USEC
+			#define	PG_DELAY_USEC									PG_INCLUDE
+			#undef	PG_DELAY
+			#define	PG_DELAY										PG_INCLUDE
+			#undef	PG_DELAY_HIGH_PRIORITY
+			#define	PG_DELAY_HIGH_PRIORITY							PG_INCLUDE
+		#endif
+		//==============================================================================
+		//		EE  -  S e l e c t i v e   c o m p i l i n g
+		//==============================================================================
+		#if ( PGIM_EE == PG_ENABLE )
+			#undef	PG_EE_WRITE										
+			#define	PG_EE_WRITE										PG_INCLUDE
+			#undef	PG_EE_READ										
+			#define	PG_EE_READ										PG_INCLUDE
+			#undef	PG_EE_WRITE_BUFFER								
+			#define	PG_EE_WRITE_BUFFER								PG_INCLUDE
+			#undef	PG_EE_READ_BUFFER								
+			#define	PG_EE_READ_BUFFER								PG_INCLUDE
+		#endif
 		
-	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_rtc_ds1302_use_min()
-		#define	PG_RTC_DS1302_USE_MIN___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_use_hour()
-		#define	PG_RTC_DS1302_USE_HOUR___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_use_day()
-		#define	PG_RTC_DS1302_USE_DAY___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_use_month()
-		#define	PG_RTC_DS1302_USE_MONTH___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_use_year()
-		#define	PG_RTC_DS1302_USE_YEAR___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_use_weekday()
-		#define	PG_RTC_DS1302_USE_WEEKDAY___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_rtc_ds1302_wr_time_all()
-		#define	PG_RTC_DS1302_WR_TIME_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_rd_time_all()
-		#define	PG_RTC_DS1302_RD_TIME_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_wr_date_all()
-		#define	PG_RTC_DS1302_WR_DATE_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_rtc_ds1302_rd_date_all()
-		#define	PG_RTC_DS1302_RD_DATE_ALL___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	None.
-
-		//------------------------------------------------------------------------------------------------------------
-		//		COMPULSORY FUNCTIONS ( must be compiled ):
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	pg_rtc_ds1302_init()
-		//	pg_rtc_ds1302_wr_access()
-		//	pg_rtc_ds1302_start()
-		//	pg_rtc_ds1302_stop()
-		//	pg_rtc_ds1302_wr_time_sec()
-		//	pg_rtc_ds1302_rd_time_sec()
-	
-	#endif
-
-	
-	//==============================================================================
-	//		AD_CONVERTER  -  S e l e c t i v e   c o m p i l i n g
-	//==============================================================================
-		
-	#if ( PGIM_AD_CONVERTER == PG_ENABLE )
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_adc_get_user_scale()
-		#define	PG_ADC_GET_USER_SCALE___SC					PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_adc_start_avg()
-		#define	PG_ADC_START_AVG___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_adc_get_perc()
-		#define	PG_ADC_GET_PERC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_adc_get_perc_f()
-		#define	PG_ADC_GET_PERC_F___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
-		//------------------------------------------------------------------------------------------------------------
-		//	None.
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	None.
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		COMPULSORY FUNCTIONS ( must be compiled ):
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	pg_adc_init()
-		//	pg_adc_set()
-		//	pg_adc_start()
-		//	pg_adc_get()
-	
-	#endif
-	
-	
-	//==============================================================================
-	//		CALDELAY  -  S e l e c t i v e   c o m p i l i n g
-	//==============================================================================
-		
-	#if ( PGIM_CAL_DELAY == PG_ENABLE )
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( manual )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_delay_sec()
-		#define	PG_DELAY_SEC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_delay_msec()
-		#define	PG_DELAY_MSEC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_delay_usec()
-		#define	PG_DELAY_USEC___SC						PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//pg_delay()
-		#define	PG_DELAY___SC							PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS CAN BE DISABLED IF NOT USED ( semi-automatic )
-		//------------------------------------------------------------------------------------------------------------
-		//pg_delay_high_priority()
-		#define	PG_DELAY_HIGH_PRIORITY___SC				PG_ENABLE	//!< Must be: PG_ENABLE || PG_DISABLE
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		THESE FUNCTIONS ARE AUTOMATICALLY DISABLED IF NOT REQUIRED:
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	None.
-		
-		//------------------------------------------------------------------------------------------------------------
-		//		COMPULSORY FUNCTIONS ( must be compiled ):
-		//		Nothing to configure here.
-		//------------------------------------------------------------------------------------------------------------
-		//	pg_delay_NinstusCalc()
-		
+	#elif ( ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG ) )
+		//==============================================================================
+		//		LCD_HD44780  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_LCD_HD44780 == PG_ENABLE )
+			#undef	PG_LCD_HD44780_CHAR_GENERATOR
+			#define	PG_LCD_HD44780_CHAR_GENERATOR					PG_EXCLUDE
+			#undef	PG_LCD_HD44780_PUT_P_CHAR
+			#define	PG_LCD_HD44780_PUT_P_CHAR						PG_EXCLUDE
+			#undef	PG_LCD_HD44780_PUT_BYTE
+			#define	PG_LCD_HD44780_PUT_BYTE							PG_EXCLUDE
+			#undef	PG_LCD_HD44780_PUT_P_BYTE
+			#define	PG_LCD_HD44780_PUT_P_BYTE						PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_STRING_ROM
+			#define	PG_LCD_HD44780_WRITE_STRING_ROM					PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING
+			#define	PG_LCD_HD44780_WRITE_P_STRING					PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING_FLASH
+			#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH				PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING_ROM
+			#define	PG_LCD_HD44780_WRITE_P_STRING_ROM				PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM
+			#define	PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM			PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_INT
+			#define	PG_LCD_HD44780_WRITE_P_INT						PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE_P_CHAR
+			#define	PG_LCD_HD44780_WRITE_P_CHAR						PG_EXCLUDE
+			#undef	PG_LCD_HD44780_WRITE
+			#define	PG_LCD_HD44780_WRITE							PG_EXCLUDE
+		#endif
+		//==============================================================================
+		//		RTC_DS1302  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_RTC_DS1302 == PG_ENABLE )
+			#undef	PG_RTC_DS1302_USE_MIN
+			#define	PG_RTC_DS1302_USE_MIN							PG_EXCLUDE
+			#undef	PG_RTC_DS1302_USE_HOUR
+			#define	PG_RTC_DS1302_USE_HOUR							PG_EXCLUDE
+			#undef	PG_RTC_DS1302_USE_DAY
+			#define	PG_RTC_DS1302_USE_DAY							PG_EXCLUDE
+			#undef	PG_RTC_DS1302_USE_MONTH
+			#define	PG_RTC_DS1302_USE_MONTH							PG_EXCLUDE
+			#undef	PG_RTC_DS1302_USE_YEAR
+			#define	PG_RTC_DS1302_USE_YEAR							PG_EXCLUDE
+			#undef	PG_RTC_DS1302_USE_WEEKDAY
+			#define	PG_RTC_DS1302_USE_WEEKDAY						PG_EXCLUDE
+			#undef	PG_RTC_DS1302_WR_TIME_ALL
+			#define	PG_RTC_DS1302_WR_TIME_ALL						PG_EXCLUDE
+			#undef	PG_RTC_DS1302_RD_TIME_ALL
+			#define	PG_RTC_DS1302_RD_TIME_ALL						PG_EXCLUDE
+			#undef	PG_RTC_DS1302_WR_DATE_ALL
+			#define	PG_RTC_DS1302_WR_DATE_ALL						PG_EXCLUDE
+			#undef	PG_RTC_DS1302_RD_DATE_ALL
+			#define	PG_RTC_DS1302_RD_DATE_ALL						PG_EXCLUDE
+		#endif
+		//==============================================================================
+		//		AD_CONVERTER  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_AD_CONVERTER == PG_ENABLE )
+			#undef	PG_ADC_GET_USER_SCALE
+			#define	PG_ADC_GET_USER_SCALE							PG_EXCLUDE
+			#undef	PG_ADC_START_AVG
+			#define	PG_ADC_START_AVG								PG_EXCLUDE
+			#undef	PG_ADC_GET_PERC
+			#define	PG_ADC_GET_PERC									PG_EXCLUDE
+			#undef	PG_ADC_GET_PERC_F
+			#define	PG_ADC_GET_PERC_F								PG_EXCLUDE
+		#endif
+		//==============================================================================
+		//		CALDELAY  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_CAL_DELAY == PG_ENABLE )
+			#undef	PG_DELAY_SEC
+			#define	PG_DELAY_SEC									PG_EXCLUDE
+			#undef	PG_DELAY_MSEC
+			#define	PG_DELAY_MSEC									PG_EXCLUDE
+			#undef	PG_DELAY_USEC
+			#define	PG_DELAY_USEC									PG_EXCLUDE
+			#undef	PG_DELAY
+			#define	PG_DELAY										PG_EXCLUDE
+			#undef	PG_DELAY_HIGH_PRIORITY
+			#define	PG_DELAY_HIGH_PRIORITY							PG_EXCLUDE
+		#endif
+		//==============================================================================
+		//		EE  -  S e l e c t i v e   c o m p i l i n g
+		//==============================================================================
+		#if ( PGIM_EE == PG_ENABLE )
+			#undef	PG_EE_WRITE										
+			#define	PG_EE_WRITE										PG_EXCLUDE
+			#undef	PG_EE_READ										
+			#define	PG_EE_READ										PG_EXCLUDE
+			#undef	PG_EE_WRITE_BUFFER								
+			#define	PG_EE_WRITE_BUFFER								PG_EXCLUDE
+			#undef	PG_EE_READ_BUFFER								
+			#define	PG_EE_READ_BUFFER								PG_EXCLUDE
+		#endif
 	#endif
 #endif /* _PGIM_SELECTIVE_COMPILING_H_ */
-
 
 

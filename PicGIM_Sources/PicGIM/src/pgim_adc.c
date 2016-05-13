@@ -149,7 +149,7 @@
 		return pg_adc_get();
 	}
 
-	#if ( PG_ADC_START_AVG___SC == PG_ENABLE )
+	#if ( PG_ADC_START_AVG == PG_INCLUDE )
 		_pg_Uint16 pg_adc_start_avg( _pg_Uint8 channel , _pg_Uint8 average ) {		// if ( PIE1bits.ADIE == PG_DISABLE ) ???
 			_pg_Uint8 cont;
 			_pg_Uint32 accumulator = 0;
@@ -187,19 +187,19 @@
 		return value_get.Val;
 	}
 
-	#if ( PG_ADC_GET_USER_SCALE___SC == PG_ENABLE )
+	#if ( PG_ADC_GET_USER_SCALE == PG_INCLUDE )
 		_pg_int16	pg_adc_get_user_scale( _pg_int16 Min , _pg_int16 Max ) {
 			return (_pg_int16)( ( ( (float)( Max - Min ) / ( PG_ADC_RES_STEPS - 1 ) ) * pg_adc_get() ) + Min );
 		}
 	#endif
 	
-	#if ( PG_ADC_GET_PERC___SC == PG_ENABLE )
+	#if ( PG_ADC_GET_PERC == PG_INCLUDE )
 		_pg_Uint8	pg_adc_get_perc( void ) {
 			return (_pg_Uint8)( ( 100.0 / ( PG_ADC_RES_STEPS - 1 ) * pg_adc_get() ) );
 		}
 	#endif
 	
-	#if ( PG_ADC_GET_PERC_F___SC == PG_ENABLE )
+	#if ( PG_ADC_GET_PERC_F == PG_INCLUDE )
 		float	pg_adc_get_perc_f( void ) {
 			return (float)( ( 100.0 / ( PG_ADC_RES_STEPS - 1 ) ) * pg_adc_get() );
 		}

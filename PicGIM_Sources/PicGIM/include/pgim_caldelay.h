@@ -101,7 +101,7 @@
 			*/
 			void	pg_delay_NinstusCalc	( void );
 
-			#if defined( PG_DOXYGEN ) || ( PG_DELAY_SEC___SC == PG_ENABLE )
+			#if ( PG_DELAY_SEC == PG_INCLUDE )
 				/*!
 					\brief		To do a delay in seconds.
 					\param		sec	The seconds of delay you want to do, \n
@@ -111,7 +111,7 @@
 				void	pg_delay_sec			( _pg_Uint8 sec );
 			#endif
 			
-			#if defined( PG_DOXYGEN ) || ( PG_DELAY_MSEC___SC == PG_ENABLE )
+			#if ( PG_DELAY_MSEC == PG_INCLUDE )
 				/*!	
 					\brief		To do a delay in milliseconds.
 					\param		msec	The milliseconds of delay you want to do, \n
@@ -121,7 +121,7 @@
 				void	pg_delay_msec		( _pg_Uint16 msec );
 			#endif
 			
-			#if defined( PG_DOXYGEN ) || ( PG_DELAY_USEC___SC == PG_ENABLE )
+			#if ( PG_DELAY_USEC == PG_INCLUDE )
 				/*!
 					\brief		To do a delay in microseconds.
 					\param		usec	The microseconds of delay you want to do, \n
@@ -133,7 +133,7 @@
 				void	pg_delay_usec			( _pg_Uint16 usec );
 			#endif
 			
-			#if defined( PG_DOXYGEN ) || ( PG_DELAY___SC == PG_ENABLE )
+			#if ( PG_DELAY == PG_INCLUDE )
 				/*!
 					\brief		To do a delay in various units of time.
 					\param		req_delay	The delay you want to do, \n
@@ -148,7 +148,7 @@
 				void	pg_delay	( _pg_Uint16 req_delay , _pg_Uint8 unit );
 			#endif
 			
-			#if defined( PG_DOXYGEN ) || ( ( PGIM_EVENTS == PG_ENABLE ) && ( PG_DELAY_HIGH_PRIORITY___SC == PG_ENABLE ) )
+			#if ( ( PGIM_EVENTS == PG_ENABLE ) && ( PG_DELAY_HIGH_PRIORITY == PG_INCLUDE ) )
 				/*!
 					\brief		To do a delay in various units of time. This function is uninterruptable.
 					\param		req_delay	The delay you want to do, \n

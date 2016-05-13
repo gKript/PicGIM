@@ -63,62 +63,74 @@
 		EECON1bits.CFGS = 0;
 	}
 
-
-	_pg_Uint8 pg_ee_write( _pg_Uint8 ee_data , _pg_Uint16 ee_addy ) {
-		_pg_Uint8 GIE_state;
-		_pg_Uint16 count = 0;
-		
-		#if ( PG_INTERRUPTS == PG_ENABLE )
-			GIE_state = PG_INTERRUPT_GLOBAL_ENABLE;
-			if ( PG_INTERRUPT_GLOBAL_ENABLE )
-				pg_event_set( PG_EVENT_GLOBAL , PG_DISABLE );
-		#endif
-		
-		EEADR = ee_addy;
-		EEDATA = ee_data;
-		EECON1bits.WREN = 1;
-		EECON2 = 0x55;
-		EECON2 = 0xAA;
-		EECON1bits.WR = 1;
-		while ( EECON1bits.WR );
-		
-		#if ( PG_INTERRUPTS == PG_ENABLE )
-			if ( GIE_state )
-				pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
-		#endif
+	#if ( PG_EE_WRITE == PG_INCLUDE )
+		_pg_Uint8 pg_ee_write( _pg_Uint8 ee_data , _pg_Uint16 ee_addy ) {
+			_pg_Uint8 GIE_state;
+			_pg_Uint16 count = 0;
 			
-		EECON1bits.WREN = 0;
-		if ( pg_ee_read( ee_addy ) == ee_data )
-			return PG_OK;
-		else
-			return PG_NOK;
-	}
+			#if ( PG_INTERRUPTS == PG_ENABLE )
+				GIE_state = PG_INTERRUPT_GLOBAL_ENABLE;
+				if ( PG_INTERRUPT_GLOBAL_ENABLE )
+					pg_event_set( PG_EVENT_GLOBAL , PG_DISABLE );
+			#endif
+			
+			EEADR = ee_addy;
+			EEDATA = ee_data;
+			EECON1bits.WREN = 1;
+			EECON2 = 0x55;
+			EECON2 = 0xAA;
+			EECON1bits.WR = 1;
+			while ( EECON1bits.WR );
+			
+			#if ( PG_INTERRUPTS == PG_ENABLE )
+				if ( GIE_state )
+					pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
+			#endif
+				
+			EECON1bits.WREN = 0;
+			if ( pg_ee_read( ee_addy ) == ee_data )
+				return PG_OK;
+			else
+				return PG_NOK;
+		}
+	#endif
 
+	#if ( PG_EE_READ == PG_INCLUDE )
+		char pg_ee_read( _pg_Uint16 ee_addy ) {
+			_pg_Uint8 ee_data = 0;
+			EEADR = ee_addy;
+			EECON1bits.RD = 1;
+			ee_data = EEDATA;
+			return ee_data;
+		}
+	#endif
 
-	char pg_ee_read( _pg_Uint16 ee_addy ) {
-		_pg_Uint8 ee_data = 0;
-		EEADR = ee_addy;
-		EECON1bits.RD = 1;
-		ee_data = EEDATA;
-		return ee_data;
-	}
-
-
-	void pg_ee_write_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen ) {
-		_pg_Uint8 GIE_state;
-		_pg_Uint16 count = 0;
-		EECON1bits.WREN = PG_ENABLE;
-		for( count = 0 ; count < buflen ; count++ )
-			pg_ee_write( *( buffer + count ) , ee_addy + count );
-		EECON1bits.WREN = PG_DISABLE;
-	}
-
-
-	void pg_ee_read_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen ) {
-		_pg_Uint16 count = 0;
-		for( count = 0 ; count < buflen ; count++ )
-			*( buffer + count ) = pg_ee_read( ee_addy + count );
-	}
+	#if ( PG_EE_WRITE_BUFFER == PG_INCLUDE )
+		void pg_ee_write_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen ) {
+			_pg_Uint8 GIE_state;
+			_pg_Uint16 count = 0;
+			EECON1bits.WREN = PG_ENABLE;
+			for( count = 0 ; count < buflen ; count++ )
+				pg_ee_write( *( buffer + count ) , ee_addy + count );
+			EECON1bits.WREN = PG_DISABLE;
+		}
+	#endif
+	
+	#if ( PG_EE_READ_BUFFER == PG_INCLUDE )
+		void pg_ee_read_buffer( _pg_Uint16 ee_addy , char * buffer , _pg_Uint16 buflen ) {
+			_pg_Uint16 count = 0;
+			for( count = 0 ; count < buflen ; count++ )
+				*( buffer + count ) = pg_ee_read( ee_addy + count );
+		}
+	#endif
 #endif
 
 
+
+
+		
+		
+
+
+
+	
