@@ -141,8 +141,11 @@
 		extern _pg_float pg_pwm_1_dutycycle;							//!< PWM 1 module calculated duty-cycle [s].
 		extern _pg_float pg_pwm_2_dutycycle;							//!< PWM 2 module calculated duty-cycle [s].
 		extern _pg_Uint8 pg_pwm_deadtime_us_max;						//!< Maximum deadtime [us](micro-seconds).
-		extern _pg_float pg_pwm_dutycycle_resolution_max;				//!< Maximum achievable duty-cycle resolution [bit].
-
+		
+		#if ( PG_PWM_DC_RES_MAX == PG_INCLUDE )
+			extern _pg_float pg_pwm_dutycycle_resolution_max;			//!< Maximum achievable duty-cycle resolution [bit].
+		#endif
+		
 		/*!
 			\brief			This function properly initializes the PWM module. 
 			\return			\b PG_DONE : if the initialization has ended. \n
@@ -207,55 +210,63 @@
 		*/
 		_pg_int8	pg_pwm_start					( _pg_Uint8 pwm_id );
 		
-		/*!
-			\brief			This function stop the selected pwm device.
-			\note			Must be called after setting the frequency or the period of the PWM device, \n
-							therefore it is necessary to call the \ref pg_pwm_set function first.
-			\return			\b PG_OK : if everything was successful. \n
-							\b PG_PWM_ERROR_ALREADY_STOPPED : if the pwm device is already stopped.
-			\param			pwm_id					The identification number of the pwm channel. \n
-								Use \b PG_PWM_1 to select \a PWM 1 \n
-								Use \b PG_PWM_2 to select \a PWM 2
-		*/
-		_pg_int8	pg_pwm_stop						( _pg_Uint8 pwm_id );
+		#if ( PG_PWM_STOP == PG_INCLUDE )
+			/*!
+				\brief			This function stop the selected pwm device.
+				\note			Must be called after setting the frequency or the period of the PWM device, \n
+								therefore it is necessary to call the \ref pg_pwm_set function first.
+				\return			\b PG_OK : if everything was successful. \n
+								\b PG_PWM_ERROR_ALREADY_STOPPED : if the pwm device is already stopped.
+				\param			pwm_id					The identification number of the pwm channel. \n
+									Use \b PG_PWM_1 to select \a PWM 1 \n
+									Use \b PG_PWM_2 to select \a PWM 2
+			*/
+			_pg_int8	pg_pwm_stop						( _pg_Uint8 pwm_id );
+		#endif
 		
-		/*!
-			\brief			This function restart all \a supported pwm device after a software or hardware shut-down event. \n
-							Please, refer to the manual of the micro-controller to check if the shut-down feature is available \n
-							for the pwm device which has been chosen.
-			\note			In order to work the fault condition has to be removed before the call.
-			\return			\b PG_OK : if everything was successful. \n
-							\b PG_PWM_ERROR_RESTART_FAILED : if the necessary conditions are not met: \n
-								\arg Pwm mode must be \a ENHANCED
-								\arg Pwm configuration must NOT be \a SINGLE_OUT
-			\param			Nothing.
-		*/
-		_pg_int8	pg_pwm_restart					( void );
+		#if ( PG_PWM_RESTART == PG_INCLUDE )
+			/*!
+				\brief			This function restart all \a supported pwm device after a software or hardware shut-down event. \n
+								Please, refer to the manual of the micro-controller to check if the shut-down feature is available \n
+								for the pwm device which has been chosen.
+				\note			In order to work the fault condition has to be removed before the call.
+				\return			\b PG_OK : if everything was successful. \n
+								\b PG_PWM_ERROR_RESTART_FAILED : if the necessary conditions are not met: \n
+									\arg Pwm mode must be \a ENHANCED
+									\arg Pwm configuration must NOT be \a SINGLE_OUT
+				\param			Nothing.
+			*/
+			_pg_int8	pg_pwm_restart					( void );
+		#endif
 		
-		/*!
-			\brief			This function shut-down all \a supported pwm device in the case of fault condition. \n
-							Please, refer to the manual of the micro-controller to check if the shut-down feature is available \n
-							for the pwm device which has been chosen. \n
-							Only available in the Enhanced mode. \n
-							A shutdown event can be caused by a low level on the fault input hardware pin (FLT0), \n
-							or it can be forced by means of this function.
-			\return			\b PG_OK : if everything was successful. \n
-							\b PG_PWM_ERROR_SHUTDOWN_FAILED : if the necessary conditions are not met: \n
-								\arg Pwm mode must be \a ENHANCED
-								\arg Pwm configuration must NOT be \a SINGLE_OUT
-			\param			Nothing.
-		*/
-		_pg_int8	pg_pwm_shutdown					( void );
+		#if ( PG_PWM_SHUTDOWN == PG_INCLUDE )
+			/*!
+				\brief			This function shut-down all \a supported pwm device in the case of fault condition. \n
+								Please, refer to the manual of the micro-controller to check if the shut-down feature is available \n
+								for the pwm device which has been chosen. \n
+								Only available in the Enhanced mode. \n
+								A shutdown event can be caused by a low level on the fault input hardware pin (FLT0), \n
+								or it can be forced by means of this function.
+				\return			\b PG_OK : if everything was successful. \n
+								\b PG_PWM_ERROR_SHUTDOWN_FAILED : if the necessary conditions are not met: \n
+									\arg Pwm mode must be \a ENHANCED
+									\arg Pwm configuration must NOT be \a SINGLE_OUT
+				\param			Nothing.
+			*/
+			_pg_int8	pg_pwm_shutdown					( void );
+		#endif
 		
-		/*!
-			\brief			This function returns the value of the maximum resolution obtained in accordance \n
-							with the parameters and the values set in the configuration.
-			\return			\b pg_pwm_dutycycle_resolution_max : the resolution value expressed in bits [bit]. \n
-							Maximum resolution value is 10[bit]. \n
-							\b PG_PWM_ERROR_RES_MAX_OUT_OF_VALUE : if the calculation returned an incorrect value.
-			\param			Nothing.
-		*/
-		_pg_float	pg_pwm_dc_res_max				( void );
+		#if ( PG_PWM_DC_RES_MAX == PG_INCLUDE )
+			/*!
+				\brief			This function returns the value of the maximum resolution obtained in accordance \n
+								with the parameters and the values set in the configuration.
+				\return			\b pg_pwm_dutycycle_resolution_max : the resolution value expressed in bits [bit]. \n
+								Maximum resolution value is 10[bit]. \n
+								\b PG_PWM_ERROR_RES_MAX_OUT_OF_VALUE : if the calculation returned an incorrect value.
+				\param			Nothing.
+			*/
+			_pg_float	pg_pwm_dc_res_max				( void );
+		#endif
 		//---[ ENDPrototypes ]---
 
 	#endif	

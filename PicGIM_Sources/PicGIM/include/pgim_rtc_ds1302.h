@@ -48,7 +48,7 @@
 					[ http://www.gnu.org/licenses/gpl-3.0.html ]
 */
 
-//Doc. Ref.: DALLAS Semiconductor, DS1302 Trickle-Charge Timekeeping Chip
+//Doc. Ref.: DALLAS Semiconductor (R), DS1302 Trickle-Charge Timekeeping Chip
 
 #ifndef _PGIM_RTC_DS1302_H_
 	#define _PGIM_RTC_DS1302_H_

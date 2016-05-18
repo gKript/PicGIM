@@ -66,9 +66,17 @@
 		_pg_int8	integer_digits = 1;
 		
 		if ( pg_ftoa_value < 0 ) {
-			pg_ftoa_internal_buffer[ index_int_buf ] = '-';
-			index_int_buf++;
+			#if ( PG_FTOA_PRINT_SIGN_MINUS == PG_YES )
+				pg_ftoa_internal_buffer[ index_int_buf ] = '-';
+				index_int_buf++;
+			 #endif
 			pg_ftoa_value *= -1;
+		}
+		else {
+			#if ( PG_FTOA_PRINT_SIGN_PLUS == PG_YES )
+				pg_ftoa_internal_buffer[ index_int_buf ] = '+';
+				index_int_buf++;
+			#endif
 		}
 		while ( pg_ftoa_value >= 10 ) {
 			pg_ftoa_value = pg_ftoa_value / 10; //move the decimal point to the left by one digit

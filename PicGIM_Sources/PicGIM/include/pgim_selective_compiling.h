@@ -133,7 +133,7 @@
 			#define	PG_DELAY_HIGH_PRIORITY							PG_INCLUDE
 		#endif
 		//==============================================================================
-		//		EE  -  S e l e c t i v e   c o m p i l i n g
+		//		EE  -  R e d e f i n i t i o n s
 		//==============================================================================
 		#if ( PGIM_EE == PG_ENABLE )
 			#undef	PG_EE_WRITE										
@@ -145,6 +145,21 @@
 			#undef	PG_EE_READ_BUFFER								
 			#define	PG_EE_READ_BUFFER								PG_INCLUDE
 		#endif
+		//==============================================================================
+		//		PWM  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_PWM == PG_ENABLE )
+			#undef	PG_PWM_STOP										
+			#define	PG_PWM_STOP										PG_INCLUDE
+			#undef	PG_PWM_RESTART										
+			#define	PG_PWM_RESTART									PG_INCLUDE
+			#undef	PG_PWM_SHUTDOWN								
+			#define	PG_PWM_SHUTDOWN									PG_INCLUDE
+			#undef	PG_PWM_DC_RES_MAX								
+			#define	PG_PWM_DC_RES_MAX								PG_INCLUDE
+		#endif
+		
+		
 		
 	#elif ( ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG ) )
 		//==============================================================================
@@ -230,7 +245,7 @@
 			#define	PG_DELAY_HIGH_PRIORITY							PG_EXCLUDE
 		#endif
 		//==============================================================================
-		//		EE  -  S e l e c t i v e   c o m p i l i n g
+		//		EE  -  R e d e f i n i t i o n s
 		//==============================================================================
 		#if ( PGIM_EE == PG_ENABLE )
 			#undef	PG_EE_WRITE										
@@ -241,6 +256,19 @@
 			#define	PG_EE_WRITE_BUFFER								PG_EXCLUDE
 			#undef	PG_EE_READ_BUFFER								
 			#define	PG_EE_READ_BUFFER								PG_EXCLUDE
+		#endif
+		//==============================================================================
+		//		PWM  -  R e d e f i n i t i o n s
+		//==============================================================================
+		#if ( PGIM_PWM == PG_ENABLE )
+			#undef	PG_PWM_STOP										
+			#define	PG_PWM_STOP										PG_EXCLUDE
+			#undef	PG_PWM_RESTART										
+			#define	PG_PWM_RESTART									PG_EXCLUDE
+			#undef	PG_PWM_SHUTDOWN								
+			#define	PG_PWM_SHUTDOWN									PG_EXCLUDE
+			#undef	PG_PWM_DC_RES_MAX								
+			#define	PG_PWM_DC_RES_MAX								PG_EXCLUDE
 		#endif
 	#endif
 #endif /* _PGIM_SELECTIVE_COMPILING_H_ */

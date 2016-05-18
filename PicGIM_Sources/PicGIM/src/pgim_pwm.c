@@ -75,8 +75,11 @@
 	_pg_float	pg_pwm_period_max_no_prescaler;					// [s]
 	_pg_Uint8	pg_pwm_pr2_reg_value;							// 8bit
 	_pg_Uint8	pg_pwm_tmr2_prescaler;							// 1,4,16
-	_pg_float	pg_pwm_dutycycle_resolution_max;				// [bit]; Max 10 bit
-
+	
+	#if ( PG_PWM_DC_RES_MAX == PG_INCLUDE )
+		_pg_float	pg_pwm_dutycycle_resolution_max;			// [bit]; Max 10 bit
+	#endif
+	
 	_pg_Uint8_BITS	pg_pwm_state;								// PWM running flag; If PWM1 is running: Bit1=1; If PWM2 is stopped: Bit2=0;
 	
 	#if ( PGIM_PWM_1 == PG_ENABLE )
@@ -470,132 +473,140 @@
 
 
 	//---[ Pwm Stop ]---
-	_pg_int8	pg_pwm_stop( _pg_Uint8 pwm_id ) {
-	
-		switch( pwm_id ) {
-			//--------------------------------------------------
-			#if ( PGIM_PWM_1 == PG_ENABLE )
-				case PG_PWM_1:
-				{
-					if ( PG_PWM_FLAG_1_RUNNING ) {						// If PWM1 is running...
-						ClosePWM1( );
-						PG_PWM_FLAG_1_RUNNING = 0;
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
-						#endif
-						return PG_OK;
+	#if ( PG_PWM_STOP == PG_INCLUDE )
+		_pg_int8	pg_pwm_stop( _pg_Uint8 pwm_id ) {
+		
+			switch( pwm_id ) {
+				//--------------------------------------------------
+				#if ( PGIM_PWM_1 == PG_ENABLE )
+					case PG_PWM_1:
+					{
+						if ( PG_PWM_FLAG_1_RUNNING ) {						// If PWM1 is running...
+							ClosePWM1( );
+							PG_PWM_FLAG_1_RUNNING = 0;
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+							#endif
+							return PG_OK;
+						}
+						else {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STOPPED , PG_ERROR_ERROR );
+							#endif
+							return PG_NOK;
+						}	
 					}
-					else {
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STOPPED , PG_ERROR_ERROR );
-						#endif
-						return PG_NOK;
-					}	
-				}
-			#endif
-			
-			//--------------------------------------------------
-			#if ( PGIM_PWM_2 == PG_ENABLE )
-				case PG_PWM_2:
-				{
-					if ( PG_PWM_FLAG_2_RUNNING ) {						// If PWM2 is running...
-						ClosePWM2( );
-						PG_PWM_FLAG_2_RUNNING = 0;
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
-						#endif
-						return PG_OK;
-					} 
-					else {
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STOPPED , PG_ERROR_ERROR );
-						#endif
-						return PG_NOK;
-					}
-				}
-			#endif
-			
-			//--------------------------------------------------
-			default: {
-				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ID , PG_ERROR_ERROR );
 				#endif
-				return PG_NOK;
+				
+				//--------------------------------------------------
+				#if ( PGIM_PWM_2 == PG_ENABLE )
+					case PG_PWM_2:
+					{
+						if ( PG_PWM_FLAG_2_RUNNING ) {						// If PWM2 is running...
+							ClosePWM2( );
+							PG_PWM_FLAG_2_RUNNING = 0;
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+							#endif
+							return PG_OK;
+						} 
+						else {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ALREADY_STOPPED , PG_ERROR_ERROR );
+							#endif
+							return PG_NOK;
+						}
+					}
+				#endif
+				
+				//--------------------------------------------------
+				default: {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_ID , PG_ERROR_ERROR );
+					#endif
+					return PG_NOK;
+				}
 			}
 		}
-	}
+	#endif
 	//---[ END Pwm Stop ]---
 
 
 	//---[ Pwm Shutdown ]---
-	_pg_int8	pg_pwm_shutdown( void ) {								// Stop output in fault condition in enhanced mode
-	
-		#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
-			( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )
-			//--------------------------------------------------
-			//	SHUTDOWN:					( Only available in the Enhanced mode and in Half-Bridge )
-			if ( ECCP1ASbits.ECCPASE = 0 ) {
-				ECCP1ASbits.ECCPASE = 1;
-				if ( ECCP1ASbits.ECCPASE = 1 ) {
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
-					#endif
-					return PG_OK;
+	#if ( PG_PWM_SHUTDOWN == PG_INCLUDE )
+		_pg_int8	pg_pwm_shutdown( void ) {								// Stop output in fault condition in enhanced mode
+		
+			#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
+				( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )
+				//--------------------------------------------------
+				//	SHUTDOWN:					( Only available in the Enhanced mode and in Half-Bridge )
+				if ( ECCP1ASbits.ECCPASE = 0 ) {
+					ECCP1ASbits.ECCPASE = 1;
+					if ( ECCP1ASbits.ECCPASE = 1 ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+						#endif
+						return PG_OK;
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_SHUTDOWN_FAILED , PG_ERROR_FATAL );
+						#endif
+						return PG_NOK;
+					}
 				}
-				else {
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_SHUTDOWN_FAILED , PG_ERROR_FATAL );
-					#endif
-					return PG_NOK;
-				}
-			}
-		#endif
-	}
+			#endif
+		}
+	#endif
 	//---[ END Pwm Shutdown ]---	
 
 	//---[ Pwm Restart ]---
-	_pg_int8	pg_pwm_restart( void ) {
-	
-		#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
-			( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )
-			//--------------------------------------------------
-			//	RESTART AFTER SHUTDOWN:			( Only available in the Enhanced mode and in Half-Bridge )
-			if ( ECCP1ASbits.ECCPASE = 1 ) {
-				ECCP1ASbits.ECCPASE = 0;
-				if ( ECCP1ASbits.ECCPASE = 0 ) {
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
-					#endif
-					return PG_OK;
+	#if ( PG_PWM_RESTART == PG_INCLUDE )
+		_pg_int8	pg_pwm_restart( void ) {
+		
+			#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
+				( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )
+				//--------------------------------------------------
+				//	RESTART AFTER SHUTDOWN:			( Only available in the Enhanced mode and in Half-Bridge )
+				if ( ECCP1ASbits.ECCPASE = 1 ) {
+					ECCP1ASbits.ECCPASE = 0;
+					if ( ECCP1ASbits.ECCPASE = 0 ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_OK , PG_ERROR_OK );
+						#endif
+						return PG_OK;
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_RESTART_FAILED , PG_ERROR_ERROR );
+						#endif
+						return PG_NOK;
+					}
 				}
-				else {
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_RESTART_FAILED , PG_ERROR_ERROR );
-					#endif
-					return PG_NOK;
-				}
-			}
-		#endif
-	}
+			#endif
+		}
+	#endif
 	//---[ END Pwm Restart ]---	
 	
 	
 	//---[ Pwm Resolution Max]---
-	_pg_float	pg_pwm_dc_res_max( void ) {
+	#if ( PG_PWM_DC_RES_MAX == PG_INCLUDE )
+		_pg_float	pg_pwm_dc_res_max( void ) {
 	
-		#if ( ( PGIM_PWM_1 == PG_ENABLE ) || ( PGIM_PWM_2 == PG_ENABLE ) ) && ( PGIM_PWM_DC_RESOLUTION_MAX_CALC == PG_ENABLE )
-			pg_pwm_dutycycle_resolution_max = ( ( log10 ( ( PG_CLOCK * 1000000 ) / pg_pwm_freq ) ) / log10 ( 2.00 ) );
-			if ( ( pg_pwm_dutycycle_resolution_max > 1.00 ) && ( pg_pwm_dutycycle_resolution_max <= 10.00 ) ) {
-				return pg_pwm_dutycycle_resolution_max;
-			}
-			else {
-				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_RES_MAX_OUT_OF_VALUE , PG_ERROR_ERROR );
-				#endif
-				return PG_NOK;
-			}
-		#endif
-	}
+			#if ( ( PGIM_PWM_1 == PG_ENABLE ) || ( PGIM_PWM_2 == PG_ENABLE ) ) && ( PGIM_PWM_DC_RESOLUTION_MAX_CALC == PG_ENABLE )
+				pg_pwm_dutycycle_resolution_max = ( ( log10 ( ( PG_CLOCK * 1000000 ) / pg_pwm_freq ) ) / log10 ( 2.00 ) );
+				if ( ( pg_pwm_dutycycle_resolution_max > 1.00 ) && ( pg_pwm_dutycycle_resolution_max <= 10.00 ) ) {
+					return pg_pwm_dutycycle_resolution_max;
+				}
+				else {
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_PWM , PG_PWM_ERROR_RES_MAX_OUT_OF_VALUE , PG_ERROR_ERROR );
+					#endif
+					return PG_NOK;
+				}
+			#endif
+		}
+	#endif
 	//---[ END Pwm Resolution Max ]---
 	
 #endif
