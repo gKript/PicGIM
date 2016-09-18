@@ -59,7 +59,7 @@
 	//AD_CONVERTER module must be already configured.
 	
 	#if	( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
 	#if ( PGIM_SENSOR_ADC_REF == PG_ENABLE )

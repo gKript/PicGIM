@@ -100,12 +100,12 @@
 			/*******************************************************************/
 
 			#if PG_VERBOSE == PG_ENABLE
-				#warning	PG_HS_PG PG_HS_CORE All fuses are set as you want.
+				#warning	PicGIM >>> Core >>> All fuses are set as you want.
 			#endif
 
 		#else
 
-			#warning	PG_HS_PG PG_HS_CORE This file is not for a direct include!
+			#warning	PicGIM >>> Core >>> This file is not for a direct include!
 			
 		#endif
 	#endif

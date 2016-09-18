@@ -137,6 +137,18 @@
 	#define PG_SEMI_AUTOMATIC				1				/*!	A Serial module mode : SemiAutomatic	*/
 	#define PG_AUTOMATIC					2				/*!	A Serial module mode : Automatic	*/
 
+//	#define	PG_PWM_1_MODE					//defined in pgim_<mcu>.h
+//	#define	PG_PWM_2_MODE					//defined in pgim_<mcu>.h
+
+//	#define SINGLE_OUT						//defined in ../plib/pwm.h
+//	#define HALF_OUT						//defined in ../plib/pwm.h
+//	#define FULL_OUT_FWD					//defined in ../plib/pwm.h
+//	#define FULL_OUT_REV					//defined in ../plib/pwm.h
+//	#define PWM_MODE_1						//defined in ../plib/pwm.h
+//	#define PWM_MODE_2						//defined in ../plib/pwm.h
+//	#define PWM_MODE_3						//defined in ../plib/pwm.h
+//	#define PWM_MODE_4						//defined in ../plib/pwm.h
+		
 	#define	PG_DEBUG_LCD_CHAR				1				/*!	To use the LCD CHAR as debug output */
 //	#define PG_DEBUG_LCD_PCD8544			2
 	
@@ -174,53 +186,7 @@
 	#define	PG_BOARD_A						1				/*!	PicGIM will run on a BOARD A */
 	#define	PG_BOARD_EXPERIENCE				2				/*!	PicGIM will run on a BOARD EXPERIENCE */
 
-	//------------------------------------------------------------------------------
-	//      H E A D E R   M E S S A G E S
-	//------------------------------------------------------------------------------
-	//		HM = HEADER-MODULE;	HS = HEADER-SYSTEM; HB = HEADER-BOARD; HF = HEADER-FUNCTION;
-	
-	#define PG_HS_PG			PicGIM:
-	
-	#define PG_HS_CORE			Core >
-	#define PG_HS_MSG			Message >
-	#define PG_HS_NOTE			Note >
-	#define PG_HS_SUGG			~~~
-	#define PG_HS_ERR			!!! ERROR !!! :
-	#define PG_HS_CONTINUE		continue >
-	
-	#define PG_HM_LCD_HD44780	LCD HD44780 module >
-	#define PG_HM_LCD_PCD8544	LCD PCD8544 module >	
-	#define PG_HM_LCD_9340		LCD 9340 module >
-	#define PG_HM_IRQ			IRQ module >
-	#define PG_HM_EXT_MEM		EXTERNAL MEMORY module >
-	#define PG_HM_DELAY			DELAY module >
-	#define PG_HM_SERVO			SERVO module >
-	#define PG_HM_ERROR			ERROR module >
-	#define PG_HM_FONT			FONT module >
-	#define PG_HM_ADC			ADC module >
-	#define PG_HM_SPI			SPI module >
-	#define PG_HM_SERIAL		SERIAL module >
-	#define PG_HM_EE			EE module >
-	#define PG_HM_TIMER			TIMER module >
-	#define PG_HM_TIMER0		TIMER 0 module >
-	#define PG_HM_TIMER1		TIMER 1 module >
-	#define PG_HM_SPI			SPI module >
-	#define PG_HM_PWM			PWM module >				
-	#define PG_HM_PWM1			PWM 1 module >	
-	#define PG_HM_PWM2			PWM 2 module >		
-	#define PG_HM_BUZZER		BUZZER module >	
-	#define PG_HM_ENCODER		ENCODER module >	
-	#define PG_HM_UNIV_CONST	UNIVERSAL CONSTANTS >
-	#define PG_HM_SENSOR		SENSOR module >
-	#define PG_HM_RTC_DS1302	RTC_DS1302 module >
-	#define PG_HM_3WIRE			3WIRE module >
-	
-	#define PG_HF_FTOA			FTOA function >
-	
-	#define PG_HB_A				Board A >
-	#define PG_HB_EXPERIENCE	Experience Board >
-
-	#include <math.h>
+    #include <math.h>
 
 	//------------------------------------------------------------------------------
 	//		M A T H E M A T I C A L   C O N S T A N T S
@@ -535,6 +501,55 @@
 	#define	T_H7				TRISHbits.TRISH7
 
 #endif /* _PGIM_DEFINES_H_ */
+
+
+	//------------------------------------------------------------------------------
+	//      H E A D E R   M E S S A G E S
+	//------------------------------------------------------------------------------
+	//		HM = HEADER-MODULE;	HS = HEADER-SYSTEM; HB = HEADER-BOARD; HF = HEADER-FUNCTION;
+	
+//	#define PG_HS_PG			PicGIM >>>
+	
+//	#define PG_HS_CORE			Core >>>
+//	#define PG_HS_MSG			Message >>>
+//	#define PG_HS_NOTE			Note >>>
+//	#define PG_HS_SUGG			Hint >>>
+//	#define PG_HS_ERR			ERROR !!! >>>
+//	#define PG_HS_CONTINUE		Continue >>>
+	
+//	#define PG_HM_LCD_HD44780	LCD HD44780 module >>>
+//	#define PG_HM_LCD_PCD8544	LCD PCD8544 module >>>
+//	#define PG_HM_LCD_9340		LCD 9340 module >>>
+//	#define PG_HM_IRQ			IRQ module >>>
+//	#define PG_HM_EXT_MEM		EXTERNAL MEMORY module >>>
+//	#define PG_HM_DELAY			DELAY module >>>
+//	#define PG_HM_SERVO			SERVO module >>>
+//	#define PG_HM_ERROR			ERROR module >>>
+//	#define PG_HM_FONT			FONT module >>>
+//	#define PG_HM_ADC			ADC module >>>
+//	#define PG_HM_SPI			SPI module >>>
+//	#define PG_HM_SERIAL		SERIAL module >>>
+//	#define PG_HM_EE			EE module >>>
+//	#define PG_HM_TIMER			TIMER module >>>
+//	#define PG_HM_TIMER0		TIMER 0 module >>>
+//	#define PG_HM_TIMER1		TIMER 1 module >>>
+//	#define PG_HM_SPI			SPI module >>>
+//	#define PG_HM_PWM			PWM module >>>
+//	#define PG_HM_PWM1			PWM 1 module >>>
+//	#define PG_HM_PWM2			PWM 2 module >>>
+//	#define PG_HM_BUZZER		BUZZER module >>>
+//	#define PG_HM_ENCODER		ENCODER module >>>
+//	#define PG_HM_UNIV_CONST	UNIVERSAL CONSTANTS >>>
+//	#define PG_HM_SENSOR		SENSOR module >>>
+//	#define PG_HM_RTC_DS1302	RTC_DS1302 module >>>
+//	#define PG_HM_3WIRE			3WIRE module >>>
+	
+//	#define PG_HF_FTOA			FTOA function >>>
+	
+//	#define PG_HB_A				Board A >>>
+//	#define PG_HB_EXPERIENCE	Experience Board >>>
+
+
 
 /*!
 	\page	PG_consideraproj		Planning a new project with PicGIM

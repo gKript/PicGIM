@@ -182,18 +182,18 @@
 
 			#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 				#if ( PGIM_TIMER_0 == PG_ENABLE_1_SHOT )
-					#warning	PG_HS_PG PG_HM_TIMER0 Set 1-SHOT mode
+					#warning	PicGIM >>> TIMER 0 module >>> Set 1-SHOT mode
 				#elif ( PGIM_TIMER_0 == PG_ENABLE_LOOP )
-					#warning	PG_HS_PG PG_HM_TIMER0 Set LOOP mode
+					#warning	PicGIM >>> TIMER 0 module >>> Set LOOP mode
 				#endif
 				#if ( PGIM_TIMER_0 != PG_DISABLE ) && ( PG_SUGGESTION == PG_ENABLE )
-					#warning	PG_HS_PG PG_HM_TIMER0 PG_HS_SUGG Max time available is PG_TIMER_FOSC_DIVIDER * PG_TIMER_0_TMR_REG_MAX * PG_TIMER_0_PRESCALER_MAX / PG_CLOCK [us]
+					#warning	PicGIM >>> TIMER 0 module >>> Hint >>> Max time available is PG_TIMER_FOSC_DIVIDER * PG_TIMER_0_TMR_REG_MAX * PG_TIMER_0_PRESCALER_MAX / PG_CLOCK [us]
 				#endif
 			#endif
 			
 			#if defined( _GIM_H_ ) && defined( __18CXX ) //&& ( PG_VERBOSE == PG_ENABLE )
 				#if ( PG_CLOCK < 4 )
-					#warning	PG_HS_PG PG_HM_TIMER0 Sorry, DOES NOT WORK correctly with a clock frequency below 4.000 [MHz]
+					#warning	PicGIM >>> TIMER 0 module >>> Sorry, DOES NOT WORK correctly with a clock frequency below 4.000 [MHz]
 				#endif
 			#endif
 		#endif
@@ -216,18 +216,18 @@
 
 			#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 				#if ( PGIM_TIMER_1 == PG_ENABLE_1_SHOT )
-					#warning	PG_HS_PG PG_HM_TIMER1 Set 1-SHOT mode
+					#warning	PicGIM >>> TIMER 1 module >>> Set 1-SHOT mode
 				#elif ( PGIM_TIMER_1 == PG_ENABLE_LOOP )
-					#warning PG_HS_PG PG_HM_TIMER1 Set LOOP mode
+					#warning PicGIM >>> TIMER 1 module >>> Set LOOP mode
 				#endif
 				#if ( PGIM_TIMER_1 != PG_DISABLE ) && ( PG_SUGGESTION == PG_ENABLE )
-					#warning	PG_HS_PG PG_HM_TIMER1 PG_HS_SUGG Max time available is PG_TIMER_FOSC_DIVIDER * PG_TIMER_1_TMR_REG_MAX * PG_TIMER_1_PRESCALER_MAX / PG_CLOCK [us]
+					#warning	PicGIM >>> TIMER 1 module >>> Hint >>> Max time available is PG_TIMER_FOSC_DIVIDER * PG_TIMER_1_TMR_REG_MAX * PG_TIMER_1_PRESCALER_MAX / PG_CLOCK [us]
 				#endif
 			#endif
 			
 			#if defined( _GIM_H_ ) && defined( __18CXX ) //&& ( PG_VERBOSE == PG_ENABLE )
 				#if ( PG_CLOCK < 4 )
-					#warning	PG_HS_PG PG_HM_TIMER1 Sorry, DOES NOT WORK correctly with a clock frequency below 4.000 [MHz]
+					#warning	PicGIM >>> TIMER 1 module >>> Sorry, DOES NOT WORK correctly with a clock frequency below 4.000 [MHz]
 				#endif
 			#endif
 		#endif

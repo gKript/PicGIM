@@ -98,10 +98,10 @@
 			/*******************************************************************/
 
 			#if ( PG_VERBOSE == PG_ENABLE ) && ( PG_SUGGESTION == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE PG_HS_SUGG All fuses are set as you want.
+				#warning	PicGIM >>> Core >>> Hint >>> All fuses are set as you want.
 			#endif
 		#else
-			#warning	PG_HS_PG PG_HS_CORE This file is not for a direct include!
+			#warning	PicGIM >>> Core >>> This file is not for a direct include!
 		#endif
 	#endif
 #endif /* _PGIM_18F4620_PUBLIC_H_ */

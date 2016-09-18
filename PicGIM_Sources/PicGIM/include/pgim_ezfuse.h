@@ -55,62 +55,126 @@
 		
 		#if defined( __18F2550 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F2550 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F2550 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f2550.h"
 			#define		PGIM_P18F2550
 		
 		#elif defined( __18F2320 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F2320 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F2320 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f2320.h"
 			#define		PGIM_P18F2320
 		
 		#elif defined( __18F4620 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F4620 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F4620 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f4620.h"
 			#define		PGIM_P18F4620
 		
 		#elif defined( __18F4550 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F4550 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F4550 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f4550.h"
 			#define		PGIM_P18F4550
 		
 		#elif defined( __18F4553 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F4553 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F4553 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f4553.h"
 			#define		PGIM_P18F4553
 		
 		#elif defined( __18F2553 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F2553 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F2553 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f2553.h"
 			#define		PGIM_P18F2553
 			
 		#elif defined( __18F97J60 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F97J60 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F97J60 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f97J60.h"
 			#define		PGIM_P18F97J60
 			
 		#elif defined( __18F4520 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 18F4520 as current mcu
+				#warning	PicGIM >>> Core >>> Set 18F4520 as current mcu
 			#endif
 			#include ".\pgim_mcu\pgim_18f4520.h"
 			#define		PGIM_P18F4520
 			
 		#else
-			#error	PG_HS_PG PG_HS_CORE !!!!!! MCU NOT SUPPORTED BY PICGIM. SORRY !!!!!!
+			#error	PicGIM >>> Core >>> !!!!!! MCU NOT SUPPORTED BY PICGIM. SORRY !!!!!!
+		#endif
+	#endif
+	
+	//-----------------------------------------------------	//kmod add section for xc8
+	#if defined( __XC8 ) 
+		
+		#if defined( _18F2550 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F2550 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f2550.h"
+			#define		PGIM_P18F2550
+		
+		#elif defined( _18F2320 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F2320 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f2320.h"
+			#define		PGIM_P18F2320
+		
+		#elif defined( _18F4620 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F4620 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f4620.h"
+			#define		PGIM_P18F4620
+		
+		#elif defined( _18F4550 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F4550 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f4550.h"
+			#define		PGIM_P18F4550
+		
+		#elif defined( _18F4553 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F4553 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f4553.h"
+			#define		PGIM_P18F4553
+		
+		#elif defined( _18F2553 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F2553 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f2553.h"
+			#define		PGIM_P18F2553
+			
+		#elif defined( _18F97J60 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F97J60 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f97J60.h"
+			#define		PGIM_P18F97J60
+			
+		#elif defined( _18F4520 )
+			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+				#warning	PicGIM >>> Core >>> Set 18F4520 as current mcu
+			#endif
+			#include ".\pgim_mcu\pgim_18f4520.h"
+			#define		PGIM_P18F4520
+			
+		#else
+			#error	PicGIM >>> Core >>> !!!!!! MCU NOT SUPPORTED BY PICGIM. SORRY !!!!!!
 		#endif
 	#endif
 	
@@ -118,12 +182,12 @@
 	#if defined( __24CXX ) 
 		#if defined( __24FJ256GB110 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-				#warning	PG_HS_PG PG_HS_CORE Set 24FJ256GB110 as current cpu
+				#warning	PicGIM >>> Core >>> Set 24FJ256GB110 as current cpu
 			#endif
 
 			#define		PGIM_P24FJ256GB110
 		#else
-			//	#error	PG_HS_PG PG_HS_CORE !!!!!! MCU NOT SUPPORTED BY PICGIM. SORRY !!!!!!
+			//	#error	PicGIM >>> Core >>> !!!!!! MCU NOT SUPPORTED BY PICGIM. SORRY !!!!!!
 		#endif
 	#endif
 

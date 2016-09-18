@@ -55,9 +55,8 @@
 #if ( PGIM_SPI == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
-
 
 	void	pg_spi_open( _pg_Uint8 portnumber , _pg_Uint8 sync_mode , _pg_Uint8 bus_mode , _pg_Uint8 smp_phase ) {
 		switch( portnumber ) {

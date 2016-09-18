@@ -55,6 +55,8 @@
 		
 	#if ( PGIM_PWM == PG_ENABLE )
 	
+        #include <plib/pwm.h>
+
 		//---[ Errors ]---
 		#define	PG_PWM_ERROR						-1						//!< Undefined error
 		#define PG_PWM_ERROR_ID						-2						//!< PWM ID not enabled or wrong

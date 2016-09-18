@@ -74,7 +74,7 @@
 	#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE ) && ( PG_PROJECT_INFO_SHOW == PG_ENABLE )
 		#warning	-
 		#warning	-
-		#warning	PG_HS_PG Project: [ PG_PROJECT_NAME  V PG_PROJECT_VERSION ] by [ PG_PROJECT_ORGANIZATION ]  -  Author: [ PG_PROJECT_AUTHOR ]
+		#warning	PicGIM >>> Project: [ PG_PROJECT_NAME  V PG_PROJECT_VERSION_MAJOR . PG_PROJECT_VERSION_MINOR ] by [ PG_PROJECT_ORGANIZATION ]  -  Author: [ PG_PROJECT_AUTHOR ]
 		#warning	-
 		#warning	-
 	#endif
@@ -102,7 +102,7 @@
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ERROR == PG_ENABLE )
 		#if ( PG_PROJECT_STATE != PG_DEBUG )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must set the PROJECT STATE to DEBUG in pgim_project_setup_public.h as required by other modules or DISABLE the module that need DEBUG STATE
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must set the PROJECT STATE to DEBUG in pgim_project_setup_public.h as required by other modules or DISABLE the module that need DEBUG STATE
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -121,7 +121,7 @@
 		( PGIM_ENCODER == PG_ENABLE )
 
 		#if ( PGIM_CAL_DELAY == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the DELAY module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the DELAY module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -134,7 +134,7 @@
 	#if ( PGIM_SENSOR == PG_ENABLE )
 
 		#if ( PGIM_AD_CONVERTER == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the AD CONVERTER module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the AD CONVERTER module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -147,7 +147,7 @@
 	#if ( ( PGIM_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
 		
 		#if	( PGIM_SPI == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the SPI module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the SPI module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -160,7 +160,7 @@
 //	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
 //
 //		#if ( PGIM_LCD_PCD8544 == PG_DISABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-//			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the LCD-PCD8544 module required by other modules
+//			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the LCD-PCD8544 module required by other modules
 //			#ifndef		PG_EXIT_ON_ERROR
 //				#define		PG_EXIT_ON_ERROR
 //			#endif
@@ -174,7 +174,7 @@
 		&& defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 		
 		#if ( PGIM_LCD_HD44780 == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the LCD-HD44780 module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the LCD-HD44780 module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -187,7 +187,7 @@
 	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_BUZZER == PG_ENABLE ) )
 		 
 		#if ( PGIM_BUZZER == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the BUZZER module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the BUZZER module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -200,7 +200,7 @@
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
 		 
 		#if ( PGIM_3WIRE == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the 3WIRE module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the 3WIRE module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -213,7 +213,7 @@
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
 		 
 		#if ( PGIM_3WIRE == PG_DISABLE )
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable the 3WIRE module required by other modules
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the 3WIRE module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
@@ -227,13 +227,13 @@
 //
 //		#if ( PGIM_SERIAL == PG_ENABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 //			#if ( PGIM_FONTS == PG_DISABLE )
-//				#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must enable FONTS as required by SERIAL debug
+//				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable FONTS as required by SERIAL debug
 //				#ifndef		PG_EXIT_ON_ERROR
 //					#define		PG_EXIT_ON_ERROR
 //				#endif
 //			#endif
 //			#if ( PGIM_FONT_5X8 == PG_NOT_INCLUDE )
-//				#warning	PG_HS_PG PG_HS_ERR PG_HS_CORE You must include 5X8 font as required by SERIAL debug
+//				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must include 5X8 font as required by SERIAL debug
 //				#ifndef		PG_EXIT_ON_ERROR
 //					#define		PG_EXIT_ON_ERROR
 //				#endif
@@ -246,12 +246,13 @@
 	//------------------------------------------------------------------------------
 	#if ( PGIM_BOARD == PG_BOARD_A )
 		#if ( PG_PIN_NUMBER != 28 )
-			#warning	PG_HS_PG PG_HS_ERR PG_HB_A You are using an MCU NOT COMPATIBLE with Board A.
-			#warning	PG_HS_PG PG_HS_ERR PG_HS_CONTINUE Board A can only support MCU DIL with 28 Pin.
+			#warning	PicGIM >>> ERROR !!! >>> Board A >>> You are using an MCU NOT COMPATIBLE with Board A.
+			#warning	PicGIM >>> ERROR !!! >>> Continue >>> Board A can only support MCU DIL with 28 Pin.
 			#ifndef		PG_EXIT_ON_ERROR
 				#define		PG_EXIT_ON_ERROR
 			#endif
-	#endif
+         #endif
+    #endif
 
 #endif /* _PGIM_MODULE_SETUP_H_ */
  

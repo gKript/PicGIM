@@ -54,7 +54,7 @@
 #if ( PGIM_FTOA == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HF_FTOA PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> FTOA function >>> Message >>> This file is compiling.
 	#endif
 	
 	char	pg_ftoa_internal_buffer[ 32 ];

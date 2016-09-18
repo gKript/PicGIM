@@ -67,7 +67,7 @@
 		#define PG_PWM_2_OUT_CONF					SINGLE_OUT		//!< Must be: SINGLE_OUT || HALF_OUT || FULL_OUT_FWD || FULL_OUT_REV
 		#define PG_PWM_2_OUT_MODE					PWM_MODE_1		//!< Must be: PWM_MODE_1 || PWM_MODE_2 || PWM_MODE_3 || PWM_MODE_4
 		
-		#define PG_PWM_DEAD_TIME					12.000			//!< A value in micro-seconds [us]. Used only in HalfBridge mode!
+		#define PG_PWM_DEAD_TIME					12  			//!< A value in micro-seconds [us]. Used only in HalfBridge mode!
 		
 		#define PG_PWM_AUTO_SHUTDOWN				PG_ENABLE		//!< Must be: PG_ENABLE || PG_DISABLE
 		#define PG_PWM_AUTO_SHUTDOWN_MODE			PG_AUTOMATIC	//!< Must be: PG_MANUAL || PG_AUTOMATIC

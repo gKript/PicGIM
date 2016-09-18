@@ -215,7 +215,8 @@
 			\param			Pos						It specifies the column.
 			\param			Format					The Format to use.
 		*/	
-		void	pg_lcd_hd44780_write				( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... );
+		//void	pg_lcd_hd44780_write				( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... );
+		void	pg_lcd_hd44780_write				( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8 * Format , ... );
 		
 		/*!
 			\brief			Print a string by a pointer, at the current position. 
@@ -231,7 +232,8 @@
 			\param			ControllerNumber		The number of the controller.
 			\param			Str						The pointer to the string in \a ROM.
 		*/	
-		void	pg_lcd_hd44780_write_string_rom		( _pg_Uint8 ControllerNumber , const rom _pg_int8 * Str );
+		//void	pg_lcd_hd44780_write_string_rom		( _pg_Uint8 ControllerNumber , const rom _pg_int8 * Str );
+        void	pg_lcd_hd44780_write_string_rom		( _pg_Uint8 ControllerNumber , const _pg_int8 * Str );
 		
 		/*!
 			\brief			Print a string by a pointer, in a specific position.
@@ -254,9 +256,11 @@
 			\param			Pos						It specifies the column.
 			\param			Str						The pointer to the string in \a ROM.
 		*/	
-		void	pg_lcd_hd44780_write_p_string_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str );
+		//void	pg_lcd_hd44780_write_p_string_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str );
+		void	pg_lcd_hd44780_write_p_string_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8 * Str );
 
-		void	pg_lcd_hd44780_write_p_string_flash_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str , _pg_Uint8 time , _pg_Uint8 unit );
+		//void	pg_lcd_hd44780_write_p_string_flash_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Str , _pg_Uint8 time , _pg_Uint8 unit );
+		void	pg_lcd_hd44780_write_p_string_flash_rom	( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8 * Str , _pg_Uint8 time , _pg_Uint8 unit );
 
 		/*!
 			\brief			Print an integer, specifying the Format, in a specific position. 
@@ -266,7 +270,8 @@
 			\param			Pos						It specifies the column.
 			\param			Format					The Format to use.
 		*/	
-		void	pg_lcd_hd44780_write_p_int			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , _pg_int16 Val );
+		//void	pg_lcd_hd44780_write_p_int			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , _pg_int16 Val );
+		void	pg_lcd_hd44780_write_p_int			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8 * Format , _pg_int16 Val );
 		
 		/*!
 			\brief			Print a float, specifying the Format, in a specific position. 
@@ -287,7 +292,8 @@
 			\param			Decimal_Digits			Number of digits of truncation, after the decimal point of the float value.
 			\param			Flt						Float value to be printed.
 		*/	
-		void	pg_lcd_hd44780_write_p_char			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , _pg_int8 chr );
+		//void	pg_lcd_hd44780_write_p_char			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , _pg_int8 chr );
+		void	pg_lcd_hd44780_write_p_char			( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8 * Format , _pg_int8 chr );
 		
 //		void	pg_lcd_hd44780_write_pchar_rom		( _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , const rom far _pg_int8 chr );
 		

@@ -55,7 +55,7 @@
 #if	( PGIM_LCD_HD44780 == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 	
 	void pg_lcd_hd44780_init( void ) {
@@ -352,7 +352,7 @@
 	}
 
 
-	void pg_ldc_hd44780_write_nibble( _pg_Uint8 ControllerNumber , _pg_Uint8 DataType , _pg_Uint8 Dat ) {
+	void pg_ldc_hd44780_write_nibble( _pg_int8 ControllerNumber , _pg_Uint8 DataType , _pg_Uint8 Dat ) {
 		// es.: pg_ldc_hd44780_write_nibble( PG_CONTROLLER_0 , PG_COMMAND , 0x01 );
 		
 		if( ( ControllerNumber < 0 ) || ( ControllerNumber > 4 ) || ( ControllerNumber == PG_MISSING ) )
@@ -509,7 +509,8 @@
 
 
 	#if ( PG_LCD_HD44780_WRITE_STRING_ROM == PG_INCLUDE )
-		void pg_lcd_hd44780_write_string_rom( _pg_Uint8 ControllerNumber , const rom _pg_int8  *Str ) {
+		//void pg_lcd_hd44780_write_string_rom( _pg_Uint8 ControllerNumber , const rom _pg_int8  *Str ) {
+		void pg_lcd_hd44780_write_string_rom( _pg_Uint8 ControllerNumber , const _pg_int8  *Str ) {
 			_pg_Uint8 i = 0;
 			while ( Str[ i ] )
 				pg_lcd_hd44780_put_char( ControllerNumber , Str[ i++ ] );
@@ -543,7 +544,8 @@
 
 	
 	#if ( PG_LCD_HD44780_WRITE_P_STRING_ROM == PG_INCLUDE )
-		void pg_lcd_hd44780_write_p_string_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str ) {
+		//void pg_lcd_hd44780_write_p_string_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str ) {
+		void pg_lcd_hd44780_write_p_string_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8  *Str ) {
 			_pg_Uint8 i = 0;
 			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
 			while ( Str[ i ] )
@@ -553,7 +555,8 @@
 	
 	
 	#if ( PG_LCD_HD44780_WRITE_P_STRING_FLASH_ROM == PG_INCLUDE )
-		void pg_lcd_hd44780_write_p_string_flash_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
+		//void pg_lcd_hd44780_write_p_string_flash_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
+		void pg_lcd_hd44780_write_p_string_flash_rom( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8  *Str , _pg_Uint8 time , _pg_Uint8 unit ) {
 			_pg_Uint8 i = 0;
 			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
 			while ( Str[ i ] )
@@ -569,7 +572,8 @@
 	
 	
 	#if ( PG_LCD_HD44780_WRITE_P_INT == PG_INCLUDE )
-		void	pg_lcd_hd44780_write_p_int( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int16 Val ) {
+		//void	pg_lcd_hd44780_write_p_int( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int16 Val ) {
+		void	pg_lcd_hd44780_write_p_int( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8  *Format , _pg_int16 Val ) {
 			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
 			pg_lcd_hd44780_goto( ControllerNumber ,Ln , Pos );
 			sprintf( Str , Format , Val );
@@ -596,7 +600,8 @@
 		( PG_LCD_HD44780_SPLASH_SLIDE_2_EN == PG_ENABLE ) || \
 		( PG_LCD_HD44780_SPLASH_SLIDE_3_EN == PG_ENABLE ) || \
 		( PG_LCD_HD44780_WRITE_P_CHAR == PG_ENABLE ) )
-		void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int8 Chr ) {
+		//void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8  *Format , _pg_int8 Chr ) {
+		void	pg_lcd_hd44780_write_p_char( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8  *Format , _pg_int8 Chr ) {
 			_pg_int8 Str[ PG_LCD_HD44780_COLUMNS ];
 			pg_lcd_hd44780_goto( ControllerNumber , Ln , Pos );
 			sprintf( Str , Format , Chr );
@@ -606,7 +611,8 @@
 
 	
 	#if ( PG_LCD_HD44780_WRITE == PG_INCLUDE )
-		void	pg_lcd_hd44780_write( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... ) {
+		//void	pg_lcd_hd44780_write( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const rom far _pg_int8 * Format , ... ) {
+		void	pg_lcd_hd44780_write( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , const _pg_int8 * Format , ... ) {
 			char    Message[ 2 * PG_LCD_HD44780_COLUMNS ];
 			va_list	VAList;
 			va_start( VAList , Format );

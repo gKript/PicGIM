@@ -55,7 +55,7 @@
 #if	( PGIM_EVENTS == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
 	volatile char pg_event_name;

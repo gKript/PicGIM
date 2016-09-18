@@ -78,10 +78,10 @@
 			
 			#if defined( __EXTENDED18__ )
 				#pragma	config XINST		= ON
-				#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set successful activated
+				#warning	PicGIM >>> Core >>> Extended Instructions Set successful activated
 			#else
 				#pragma	config XINST		= OFF
-				#warning	PG_HS_PG PG_HS_CORE Extended Instructions Set is available with this MCU. Keep on mind!
+				#warning	PicGIM >>> Core >>> Extended Instructions Set is available with this MCU. Keep on mind!
 			#endif
 			
 			#pragma config DEBUG			= OFF
@@ -105,11 +105,11 @@
 			
 			/*******************************************************************/
 
-			#warning	PG_HS_PG PG_HS_CORE Set fuses as you want.
+			#warning	PicGIM >>> Core >>> Set fuses as you want.
 
 		#else
 
-			#warning	PG_HS_PG PG_HS_CORE This file is not for a direct include!
+			#warning	PicGIM >>> Core >>> This file is not for a direct include!
 			
 		#endif
 	#endif

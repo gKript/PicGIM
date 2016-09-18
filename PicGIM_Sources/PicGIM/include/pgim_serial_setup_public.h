@@ -65,7 +65,8 @@
 		#define PGIM_SERIAL_BAUDRATE					2400				//!< The possible values are: 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200
 
 		//( CONFIG ONLY IN SEMI_AUTOMATIC AND AUTOMATIC MODE )
-		#define PGIM_SERIAL_BAUDRATE_ACCURACY			1.00				//!< Percentage baudrate error value. \n It is the reference for the calculation of the automatic configuration.
+//		#define PGIM_SERIAL_BAUDRATE_ACCURACY			1.00				//!< Percentage baudrate error value. \n It is the reference for the calculation of the automatic configuration.
+		#define PGIM_SERIAL_BAUDRATE_ACCURACY			1					//!< Percentage baudrate error value. \n It is the reference for the calculation of the automatic configuration.
 		
 		
 		//		R X   M O D E

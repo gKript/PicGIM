@@ -101,11 +101,11 @@
 						
 			/*******************************************************************/
 
-			#warning	PG_HS_PG PG_HS_CORE Set fuses as you want.
+			#warning	PicGIM >>> Core >>> Set fuses as you want.
 
 		#else
 
-			#warning	PG_HS_PG PG_HS_CORE This file is not for a direct include!
+			#warning	PicGIM >>> Core >>> This file is not for a direct include!
 			
 		#endif
 	#endif

@@ -55,29 +55,26 @@
 
 #if ( PGIM_ERROR == PG_ENABLE )
 
-	#warning	PG_HS_PG PG_HS_MSG This file is compiling
+	#warning	PicGIM >>> Message >>> This file is compiling
 
 	_pg_Uint32_VAL	pg_error_state;
 
-	char *	pg_error_severity_str( _pg_Uint8 severity ) {
+	const char *	pg_error_severity_str( _pg_Uint8 severity ) {   //kmod added const
 		switch( severity ) {
 			case PG_ERROR_WARNING : {
 				return "Warning";
-				break;
 			}
 			case PG_ERROR_CRITICAL : {
 				return "Critical";
-				break;
 			}
 			case PG_ERROR_ERROR : {
 				return "Error";
-				break;
 			}
 			case PG_ERROR_FATAL : {
 				return "Fatal";
-				break;
 			}
 		}
+        return "Undefined";     //kmod added
 	}
 
 
@@ -92,35 +89,35 @@
         }
 
 
-	const char *	pg_error_code_to_module( _pg_Uint8 module ) {
-		static const char res[16];
+	char *	pg_error_code_to_module( _pg_Uint8 module ) {
+		char res[16];
 		switch( module ) {
 			case PG_ERROR_SPI : {
-				strcpypgm2ram( res , "SPI" );
+				strcpy( res , "SPI" );
 				break;
 			}
 			case PG_ERROR_ADC : {
-				strcpypgm2ram( res , "ADC" );
+				strcpy( res , "ADC" );
 				break;
 			}
 			case PG_ERROR_TIMER : {
-				strcpypgm2ram( res , "TIMER" );
+				strcpy( res , "TIMER" );
 				break;
 			}
 			case PG_ERROR_PWM : {
-				strcpypgm2ram( res , "PWM" );
+				strcpy( res , "PWM" );
 				break;
 			}
 			case PG_ERROR_FTOA : {
-				strcpypgm2ram( res , "FTOA" );
+				strcpy( res , "FTOA" );
 				break;
 			}
 			case PG_ERROR_SENSOR : {
-				strcpypgm2ram( res , "SENSOR" );
+				strcpy( res , "SENSOR" );
 				break;
 			}
 			case PG_ERROR_RTC_DS1302 : {
-				strcpypgm2ram( res , "RTC_DS1302" );
+				strcpy( res , "RTC_DS1302" );
 				break;
 			}
 		}

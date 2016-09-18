@@ -60,12 +60,17 @@
 	#if	( PGIM_EVENTS == PG_ENABLE )
 		#pragma code my_isr = 0x08
 
+//		void my_isr( void ) {           //kmod
+//			_asm
+//				GOTO pg_event_occurred
+//			_endasm
+//		}
 		void my_isr( void ) {
-			_asm
-				GOTO pg_event_occurred
-			_endasm
+			#asm
+				goto pg_event_occurred
+			#endasm
 		}
-		
+    
 		#pragma code
 		#pragma interrupt pg_event_occurred
 

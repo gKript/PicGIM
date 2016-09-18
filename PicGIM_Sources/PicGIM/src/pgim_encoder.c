@@ -55,7 +55,7 @@
 #if ( PGIM_ENCODER == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
 	_pg_int8 pg_encoder_button;

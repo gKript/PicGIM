@@ -55,7 +55,7 @@
 #if ( PGIM_PWM == PG_ENABLE )
 
 	#if	( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 	
 	/*
@@ -94,8 +94,9 @@
 		_pg_Uint16	pg_pwm_2_dutycycle_reg;						// CCPRXL:CCPXCON<5:4> 10bit
 	#endif
 
-	#if ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || \
+//	#if ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || \
 		( ( PGIM_PWM_2 == PG_ENABLE ) && ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) )
+	#if ( ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || ( ( PGIM_PWM_2 == PG_ENABLE ) && ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) ) )		//kmod
 		_pg_Uint8	pg_pwm_deadtime_cyclemachine;				// # cycle-machine to be assigned to dead-time
 		_pg_Uint8	pg_pwm_deadtime_us_max;						// Maximum time in micro-sedonds [us] available for the dead time 
 	#endif
@@ -122,11 +123,13 @@
 			
 		//--------------------------------------------------
 		//	ENHANCED-MODE:
-		#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
-			( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )
-			
-			#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF == HALF_OUT ) ) || \
-				( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_2_OUT_CONF == HALF_OUT ) )
+//		#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || \
+//			( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) )		
+//			#if ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF == HALF_OUT ) ) || \
+//				( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_2_OUT_CONF == HALF_OUT ) )
+				
+		#if ( ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) || ( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT ) ) )
+			#if ( ( ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF == HALF_OUT ) ) || ( ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_2_OUT_CONF == HALF_OUT ) ) )
 				//--------------------------------------------------
 				//	DEAD-TIME:			( Only available in Enhanced mode && Half-Bridge )
 				pg_pwm_deadtime_cyclemachine = (_pg_Uint8)( PG_PWM_DEAD_TIME / ( ( 1 / PG_CLOCK ) * PG_TCYCLEPERI ) );
@@ -301,7 +304,7 @@
 			
 			//	ENHANCED mode configuration
 			#if ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF != SINGLE_OUT )
-				SetOutputPWM1( PG_PWM_1_OUT_CONF, PG_PWM_1_OUT_MODE );
+				SetOu   tputPWM1( PG_PWM_1_OUT_CONF, PG_PWM_1_OUT_MODE );
 			#endif
 			
 			//	DUTYCYCLE re-calculating for new frequency

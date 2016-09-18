@@ -88,7 +88,7 @@
 		/*!
 		 *  \brief This Function convert the severity in string.
 		 */
-		char *	pg_error_severity_str( _pg_Uint8 severity );
+		const char *	pg_error_severity_str( _pg_Uint8 severity );
 
 		#if ( PG_ERROR_LED_PRESENT == PG_YES )
 			/*!
@@ -103,7 +103,7 @@
 		#endif
 
 		void			pg_error_set( _pg_Uint8 module , _pg_Uint8 code , _pg_Uint8 severity );
-		const char *	pg_error_code_to_module( _pg_Uint8 module );
+		char *	pg_error_code_to_module( _pg_Uint8 module );
 		
 	#endif
 #endif /* _PGIM_EE_H_ */

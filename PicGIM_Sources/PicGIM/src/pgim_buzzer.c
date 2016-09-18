@@ -54,7 +54,7 @@
 #if ( PGIM_BUZZER == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
 	void	pg_buzzer_beep( _pg_Uint8 tone , _pg_Uint16 len ) {

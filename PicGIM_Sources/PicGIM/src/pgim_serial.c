@@ -56,7 +56,7 @@
 #if ( PGIM_SERIAL == PG_ENABLE )
 
 	#if	( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 	
 	_pg_Uint8	pg_serial_bitconf_cycle_index;			//cycle index 
@@ -188,6 +188,7 @@
 				return PG_SERIAL_ERROR_BAUDRATE_NOT_FOUND;
 			#endif
 		#endif
+        return ( 1 );       //kmod da valutare se applicare a tutti!!!
 	}
 	//---[ END Init ]---
 
@@ -359,47 +360,38 @@
 			case 0:
 			{
 				return( PG_SERIAL_BAUDRATE_115200 );
-				break;
 			}
 			case 1:
 			{
 				return( PG_SERIAL_BAUDRATE_57600 );
-				break;
 			}
 			case 2:
 			{
 				return( PG_SERIAL_BAUDRATE_38400 );
-				break;
 			}
 			case 3:
 			{
 				return( PG_SERIAL_BAUDRATE_19200 );
-				break;
 			}
 			case 4:
 			{
 				return( PG_SERIAL_BAUDRATE_9600 );
-				break;
 			}
 			case 5:
 			{
 				return( PG_SERIAL_BAUDRATE_4800 );
-				break;
 			}
 			case 6:
 			{
 				return( PG_SERIAL_BAUDRATE_2400 );
-				break;
 			}
 			case 7:
 			{
 				return( PG_SERIAL_BAUDRATE_1200 );
-				break;
 			}
 			case 8:
 			{
 				return( PG_SERIAL_BAUDRATE_300 );
-				break;
 			}
 			default: {
 			//	return( <WRONG PG_SERIAL_BAUDRATE_VALUE_QUANTITY> );

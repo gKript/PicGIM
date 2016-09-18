@@ -55,7 +55,7 @@
 #if	( PG_USE_INTERNAL_OSC == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
 
@@ -165,7 +165,7 @@
 		
 		//---[ Fail ]---
 		#ifndef	PG_INTERNAL_OSC_CONFIGURED
-			#error	PG_HS_PG PG_HS_CORE Failed configuring INTERNAL oscillator
+			#error	PicGIM >>> Core >>> Failed configuring INTERNAL oscillator
 		#endif
 		//---[ END Fail ]---
 	}

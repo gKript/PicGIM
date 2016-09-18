@@ -53,7 +53,7 @@
 #if ( PGIM_RTC_DS1302 == PG_ENABLE )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 	
 	//Doc. Ref.: DALLAS Semiconductor (R), DS1302 Trickle-Charge Timekeeping Chip

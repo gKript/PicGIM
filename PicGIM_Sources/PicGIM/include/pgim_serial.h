@@ -55,6 +55,8 @@
 
 	#if ( PGIM_SERIAL == PG_ENABLE )
 
+        #include <plib/usart.h>
+
 		//---[ Baudrate ]---
 		#define PG_SERIAL_BAUDRATE_300						300				//!< Baudrate value. The relative index is: 8
 		#define PG_SERIAL_BAUDRATE_1200						1200			//!< Baudrate value. The relative index is: 7

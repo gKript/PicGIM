@@ -70,9 +70,7 @@
 #ifndef _PGIM_CALDELAY_H_
 	#define _PGIM_CALDELAY_H_
 
-	#if defined( __18CXX )
-		#include <delays.h>
-	#endif
+	#include <plib/delays.h>
 
 	#if	( PGIM_CAL_DELAY == PG_ENABLE )
 
@@ -80,11 +78,13 @@
 			#error	FREQUENCY TOO HIGH FOR THIS MCU.
 		#endif
 
-		#if defined( __18CXX )
+//		#if defined( __18CXX )
+		#if defined( __XC8 )
 			/*!
 				A litle offset to fine adjust the delay
 			*/
-			#define PG_NINSTUS_OFFSET	0.500
+			//#define PG_NINSTUS_OFFSET	0.500           //kmod
+			#define PG_NINSTUS_OFFSET	5
 
 			/*!
 				A macro to obtain 10 usec

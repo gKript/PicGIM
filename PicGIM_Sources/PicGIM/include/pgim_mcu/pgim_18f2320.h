@@ -59,13 +59,13 @@
 			#pragma	config OSC = INTIO2					//!< Internal oscillator, OSC1 as RA7, OSC2 as RA6  		
 		#endif
 		#undef	PG_CLOCK
-		#define	PG_CLOCK 8.000								// Re-define new oscillator frequency
+		#define	PG_CLOCK 8000000								// Re-define new oscillator frequency
 		#if	defined( _GIM_H_ ) && PG_VERBOSE == PG_ENABLE
-			#warning	PG_HS_PG PG_HS_CORE Using INTERNAL oscillator requested by user ( PG_CLOCK [MHz] )
+			#warning	PicGIM >>> Core >>> Using INTERNAL oscillator requested by user ( PG_CLOCK [MHz] )
 		#endif
 	#else
 		#if	defined( _GIM_H_ ) && PG_VERBOSE == PG_ENABLE
-			#warning	PG_HS_PG PG_HS_CORE Using EXTERNAL oscillator configured by user ( PG_CLOCK [MHz] )
+			#warning	PicGIM >>> Core >>> Using EXTERNAL oscillator configured by user ( PG_CLOCK [MHz] )
 		#endif
 	#endif
 	//---[ END Internal Oscillator ]---
@@ -77,7 +77,7 @@
 	//---[ Extended Instructions Set ]--- NOT SUPPORTED
 	#ifdef _GIM_H_
 		#if defined( __EXTENDED18__ )
-			#error	PG_HS_PG This MCU don't support the Extended Instructions Set feature
+			#error	PicGIM >>> This MCU don't support the Extended Instructions Set feature
 		#endif
 	#endif
 	//---[ END Extended Instructions Set ]---
@@ -86,20 +86,20 @@
 	#define		PG_PIN_NUMBER				28					//!<	The number of pins
 
 	#define		PG_TCYCLEPERI				4					//!<	The number of cycles required for an instruction for the family PIC18
-	#define		PG_MAX_OSC_FREQ				40.000				//!<	The maximum working frequency
+	#define		PG_MAX_OSC_FREQ				40000000			//!<	The maximum working frequency [HZ] for this specific processor
 	
 	#define		PG_MAX_RAM					512					//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				256					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory
 	
-	#define		PG_MCU_SUPPLY_VOLT_MAX		5.50				//!<	The maximum power supply voltage
-	#define		PG_MCU_SUPPLY_VOLT_MIN		2.00				//!<	The minimum power supply voltage
+	#define		PG_MCU_SUPPLY_VOLT_MAX		5500				//!<	The maximum power supply voltage [mV]
+	#define		PG_MCU_SUPPLY_VOLT_MIN		2000				//!<	The minimum power supply voltage [mV]
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
 	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.
 	
 	#define		PG_PWM_1_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
-	#define		PG_PWM_FOSC_DIVIDER			4.000				//!<	Internal clock divider to drive timer
+	#define		PG_PWM_FOSC_DIVIDER			4					//!<	Internal clock divider to drive timer
 	
 	#define		PG_SERIAL_TX_TRIS			TRISCbits.TRISC6	//!<	Tx pin of USART port
 	#define		PG_SERIAL_RX_TRIS			TRISCbits.TRISC7	//!<	Rx pin of USART port

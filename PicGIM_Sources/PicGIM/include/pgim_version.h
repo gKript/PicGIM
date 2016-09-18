@@ -69,9 +69,9 @@
 //		#endif
 
 	#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-		#warning	PG_HS_PG PG_HS_CORE Version PG_VERSION : Milestone PG_MILESTONE : State PG_VERSION_STATE
+		#warning	PicGIM >>> Core >>> Version PG_VERSION : Milestone PG_MILESTONE : State PG_VERSION_STATE
 		#if ( PG_SUGGESTION == PG_ENABLE )
-			#warning	PG_HS_PG PG_HS_MSG PG_HS_SUGG Check periodically on www.gkript.org if you are using the latest PicGIM released!
+			#warning	PicGIM >>> Message >>> Hint >>> Check periodically on www.gkript.org if you are using the latest PicGIM released!
 		#endif
 	#endif
 	

@@ -54,28 +54,40 @@
 #if ( PGIM_CAL_DELAY == PG_ENABLE )
 
 	#if	( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
-	#if defined( __18CXX )
+	//#if defined( __18CXX )		//ori
+	#if defined( __XC8) )			//kmod added
 
 		_pg_Uint8	pg_ninstus 	= 0;
 		_pg_Uint8	pg_uninstus = 0;
 
 
 		void pg_delay_NinstusCalc( ) {
-			pg_ninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) );
-			pg_uninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) ) / 2;
+//			pg_ninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) );
+//			pg_uninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) ) / 2;
+			pg_ninstus = (_pg_Uint8)( 0.000001 / ( 1.0 / ( ( PG_CLOCK ) / PG_TCYCLEPERI ) ) );     //kmod
+			pg_uninstus = (_pg_Uint8)( 0.000001 / ( 1.0 / ( ( PG_CLOCK ) / PG_TCYCLEPERI ) ) ) / 2;
 		}
 
 		#if ( PG_DELAY_SEC == PG_INCLUDE )
 			void pg_delay_sec( _pg_Uint8 sec ) {
 				while ( sec-- ) {
-					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );
-					Delay10KTCYx( ( pg_ninstus * 20 ) );
+//					__delay_sec( sec );			//kmod added... non accetta variabili, vuole solo const, quindi modificare
+					//	As for the delay function the correct for XC8 is to use __delay_ms(), or __delay_us().						//kmod added
+
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );							//ori
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );							//ori
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );							//ori
+					Delay10KTCYx( ( ( pg_ninstus * 20 ) + PG_NINSTUS_OFFSET ) );							//ori
+					Delay10KTCYx( ( pg_ninstus * 20 ) );													//ori
+				
+//					Delay10KTCYx( (unsigned char)( ( pg_ninstus * 20 ) + ( PG_NINSTUS_OFFSET / 10 ) ) );		//kmod added
+//					Delay10KTCYx( ( pg_ninstus * 20 ) + ( PG_NINSTUS_OFFSET / 10 ) );							//kmod added
+//					Delay10KTCYx( ( pg_ninstus * 20 ) + ( PG_NINSTUS_OFFSET / 10 ) );							//kmod added
+//					Delay10KTCYx( ( pg_ninstus * 20 ) + ( PG_NINSTUS_OFFSET / 10 ) );							//kmod added
+//					Delay10KTCYx( pg_ninstus * 20 );
 				}
 			}
 		#endif
@@ -83,11 +95,12 @@
 		#if ( PG_DELAY_MSEC == PG_INCLUDE )
 			void pg_delay_msec( _pg_Uint16 msec ) {
 				while ( msec-- ) {
-					Delay10TCYx( pg_ninstus * 20 );
-					Delay10TCYx( pg_ninstus * 20 );
-					Delay10TCYx( pg_ninstus * 20 );
-					Delay10TCYx( pg_ninstus * 20 );
-					Delay10TCYx( pg_ninstus * 20 );
+//					__delay_ms( msec );																			//kmod added
+					Delay10TCYx( pg_ninstus * 20 );																//ori
+					Delay10TCYx( pg_ninstus * 20 );																//ori
+					Delay10TCYx( pg_ninstus * 20 );																//ori
+					Delay10TCYx( pg_ninstus * 20 );																//ori
+					Delay10TCYx( pg_ninstus * 20 );																//ori
 				}
 			}
 		#endif
@@ -96,7 +109,8 @@
 			void pg_delay_usec( _pg_Uint16 tusec )  {
 				tusec /= 10;
 				while( tusec-- ) {
-					Delay10TCYx( pg_ninstus );
+//					__delay_us( tusec );																		//kmod added
+					Delay10TCYx( pg_ninstus );																	//ori
 				}
 			}
 		#endif
@@ -145,21 +159,6 @@
 					pg_event_set( PG_EVENT_PERIPHERAL , PG_ENABLE );
 			}
 		#endif
-	#endif
-
-	#if defined( __C30__ )
-
-		#define FOSC					32000000LL						// Clock frequency in Hz with suffix LL (64-bit-long), eg. 32000000LL for 32MHz
-		#define FCY      				(FOSC/2)						// MCU is running at FCY MIPS
-
-		#define pg_delay_usec(x)		__delay32(((x*FCY)/1000000L))	// delays x us
-		#define pg_delay_msec(x)		__delay32(((x*FCY)/1000L))		// delays x ms
-		#define pg_delay_sec(x)			__delay32(((x*FCY)))			// delays x ms
-
-		#define __DELAY_H	1
-
-		#include <libpic30.h>
-
 	#endif
 #endif
 
