@@ -57,18 +57,18 @@
 		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
-	//#if defined( __18CXX )		//ori
-	#if defined( __XC8) )			//kmod added
+	#if defined( __18CXX )		//ori
+//	#if defined( __XC8) )			//kmod added
 
 		_pg_Uint8	pg_ninstus 	= 0;
 		_pg_Uint8	pg_uninstus = 0;
 
 
 		void pg_delay_NinstusCalc( ) {
-//			pg_ninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) );
-//			pg_uninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) ) / 2;
-			pg_ninstus = (_pg_Uint8)( 0.000001 / ( 1.0 / ( ( PG_CLOCK ) / PG_TCYCLEPERI ) ) );     //kmod
-			pg_uninstus = (_pg_Uint8)( 0.000001 / ( 1.0 / ( ( PG_CLOCK ) / PG_TCYCLEPERI ) ) ) / 2;
+			pg_ninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) );
+			pg_uninstus = ( 0.000001 / ( 1.0 / ( ( PG_CLOCK * 1000000 ) / PG_TCYCLEPERI ) ) ) / 2;
+//			pg_ninstus = (_pg_Uint8)( 0.000001 / ( 1.0 / ( ( PG_CLOCK ) / PG_TCYCLEPERI ) ) );     	//kmod
+//			pg_uninstus = (_pg_Uint8)( 0.000001 / ( 1.0 / ( ( PG_CLOCK ) / PG_TCYCLEPERI ) ) ) / 2;	//kmod
 		}
 
 		#if ( PG_DELAY_SEC == PG_INCLUDE )

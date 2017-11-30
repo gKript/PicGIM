@@ -65,11 +65,18 @@
 //				GOTO pg_event_occurred
 //			_endasm
 //		}
-		void my_isr( void ) {
-			#asm
-				goto pg_event_occurred
-			#endasm
+
+		void my_isr( void ) {           //kmod (ori)
+			_asm
+				GOTO pg_event_occurred
+			_endasm
 		}
+
+//		void my_isr( void ) {
+//			#asm
+//				goto pg_event_occurred
+//			#endasm
+//		}
     
 		#pragma code
 		#pragma interrupt pg_event_occurred

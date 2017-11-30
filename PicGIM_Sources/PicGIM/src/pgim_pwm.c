@@ -94,9 +94,9 @@
 		_pg_Uint16	pg_pwm_2_dutycycle_reg;						// CCPRXL:CCPXCON<5:4> 10bit
 	#endif
 
-//	#if ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || \
+	#if ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || \
 		( ( PGIM_PWM_2 == PG_ENABLE ) && ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) )
-	#if ( ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || ( ( PGIM_PWM_2 == PG_ENABLE ) && ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) ) )		//kmod
+//	#if ( ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) ) || ( ( PGIM_PWM_2 == PG_ENABLE ) && ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) ) )		//kmod
 		_pg_Uint8	pg_pwm_deadtime_cyclemachine;				// # cycle-machine to be assigned to dead-time
 		_pg_Uint8	pg_pwm_deadtime_us_max;						// Maximum time in micro-sedonds [us] available for the dead time 
 	#endif

@@ -546,6 +546,8 @@
 	
 //	#define PG_HF_FTOA			FTOA function >>>
 	
+//	#define PG_HF_GCP			GCP Protocol >
+	
 //	#define PG_HB_A				Board A >>>
 //	#define PG_HB_EXPERIENCE	Experience Board >>>
 

@@ -80,9 +80,9 @@
 				wr_byte = wr_byte >> 1;
 			#endif
 			PG_3WIRE_CK = PG_HIGH; //Data is written here with clock rising edge
-//			pg_delay_usec( 1 );		//kmod
-//			Delay10TCYx( 5 );		//kmod
-			__delay_us( 1 );		//kmod
+			pg_delay_usec( 1 );		//kmod
+			Delay10TCYx( 5 );		//kmod
+//			__delay_us( 1 );		//kmod
 			PG_3WIRE_IO_TRIS = PG_IN; //Set data tris IN, because for a reading command, the data is immediately ready on the falling edge of last cycle (bit7)
 			PG_3WIRE_CK = PG_LOW; //On the last bit (bit7), first data bit is pushed out now, ready for reading
 		}
@@ -98,9 +98,9 @@
 		//and is available from the falling edge of the last clock pulse of the command just sent
 		PG_3WIRE_IO_TRIS = PG_IN; // It should already be set IN by write function or by default...
 		for( cycle = 0; cycle < 8; cycle++ ) {
-//			pg_delay( 1, PG_USEC );		//kmod
-//			Delay10TCYx( 5 );			//kmod
-			__delay_us( 1 );			//kmod
+			pg_delay( 1, PG_USEC );		//kmod
+			Delay10TCYx( 5 );			//kmod
+//			__delay_us( 1 );			//kmod
 			#if ( PG_3WIRE_DIRECTION_INPUT == PG_LSB_FIRST )
 				rd_byte = rd_byte >> 1;
 				if( PG_3WIRE_IO_PORT )
@@ -112,9 +112,9 @@
 					rd_byte = rd_byte | 0b00000001;
 			#endif
 			PG_3WIRE_CK = PG_HIGH;
-//			pg_delay( 1, PG_USEC );		//kmod
-//			Delay10TCYx( 5 );			//kmod
-			__delay_us( 1 );			//kmod
+			pg_delay( 1, PG_USEC );		//kmod
+			Delay10TCYx( 5 );			//kmod
+//			__delay_us( 1 );			//kmod
 			PG_3WIRE_CK = PG_LOW;
 		}
 		return( rd_byte );

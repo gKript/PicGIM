@@ -352,7 +352,7 @@
 	}
 
 
-	void pg_ldc_hd44780_write_nibble( _pg_int8 ControllerNumber , _pg_Uint8 DataType , _pg_Uint8 Dat ) {
+	void pg_ldc_hd44780_write_nibble( _pg_Uint8 ControllerNumber , _pg_Uint8 DataType , _pg_Uint8 Dat ) {
 		// es.: pg_ldc_hd44780_write_nibble( PG_CONTROLLER_0 , PG_COMMAND , 0x01 );
 		
 		if( ( ControllerNumber < 0 ) || ( ControllerNumber > 4 ) || ( ControllerNumber == PG_MISSING ) )

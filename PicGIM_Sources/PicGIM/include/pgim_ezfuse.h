@@ -115,7 +115,7 @@
 	#endif
 	
 	//-----------------------------------------------------	//kmod add section for xc8
-	#if defined( __XC8 ) 
+/* 	#if defined( __XC8 ) 
 		
 		#if defined( _18F2550 )
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
@@ -176,7 +176,7 @@
 		#else
 			#error	PicGIM >>> Core >>> !!!!!! MCU NOT SUPPORTED BY PICGIM. SORRY !!!!!!
 		#endif
-	#endif
+	#endif */
 	
 	//-----------------------------------------------------
 	#if defined( __24CXX ) 

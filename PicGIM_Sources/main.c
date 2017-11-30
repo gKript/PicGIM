@@ -1,70 +1,193 @@
-/*
-	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
+//#################################################################################
+//#################################################################################
+//#################################################################################
+//GCP - General Communication Protocol
+//main_TX.c
+//#################################################################################
+//#################################################################################
+//#################################################################################
 
-	File name :		main.c
-	Project :		<Insert here the name of your project>
-	Author :		<Insert here your nick>
 
-	START LICENSE	GPL V3.0
-
-		<one line to give the program's name and a brief idea of what it does.>
- 
-	    Copyright (C) <year>  <name of author>
-
-		This program is free software: you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation, either version 3 of the License, or
-		(at your option) any later version.
-
-		This program is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.
-
-		You should have received a copy of the GNU General Public License
-		along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-	END LICENSE
- */
-
-//	This test code works on a 16x2 HD44780 lcd display.
 
 #include "picgim_main.h"
 
+#define	PG_GCP_DEBUG_DELAY			1
+#define	PG_GCP_DEBUG_DELAY_TIME1		500
+#define	PG_GCP_DEBUG_DELAY_TIME2		3000
 void main( void ) {
-        pg_initialize( );
-		
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( -123.4567, 2 ) ); // 123.456
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4561, 3 ) ); // 123.456
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4569, 3 ) ); // 123.456
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4567, 4 ) ); // 123.4567
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4561, 4 ) ); // 123.4560
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.4569, 4 ) ); // 123.4568
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( -123.4569, 4 ) ); // -123.4568
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 12345.7841, 4 ) ); // 12345.7841 12345.7837
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123456.7841, 3 ) ); // 123456.776
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123456.78, 2 ) ); // 123456.77
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 99999.999, 2 ) ); // 100000.00
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 999999999.9999, 2 ) ); // 1000000000.00
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 4000000000.1234, 2 ) ); // 4000000000.00
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 40000001.1234,10 ) ); //acquisisce float 4000000e+007 e stampa String = "40000000.00"
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 4000000.1234, 10 ) );//acquisisce float 4000000.
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123456.0000, 6 ) ); // 123455.989360
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 3.234567891, 13 ) ); // 3.2345678806304
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.012, 2 ) ); // 1.01
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.012, 6 ) ); // 1.011999
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 123.999, 5 ) ); // 123.99899
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 12.5678, 5 ) ); // 12.56779
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( -0.0056789, 7 ) ); // -0.0056788
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( -0.005678, 6 ) ); // -0.005677
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.0/3, 10 ) ); // 0.3333333492
-//		printf ( "String = \"%s\"\n\n", pg_ftoa( 1.2345, 3 ) ); // 1.234
-		PG_HALT;
+
+	_pg_Uint8 buffer_to_tx[ 3 ] = "jj\0";			//buffer creati dell' utente con stesse dimensioni del pg_gcp_buffer_rx_1[5] del protocollo opposto
+	
+	pg_initialize( );
+	pg_serial_open();
+	pg_lcd_hd44780_clear( 0 );
+ 	pg_gcp_init( );
+	pg_lcd_hd44780_put_char( 0 , 'T' );
+	
+	while( 1 ) {
+		pg_gcp_reset( );
+		pg_lcd_hd44780_clear( 0 );
+		pg_delay_sec( 1 );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_engage( );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_config( 1 );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_data( );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_tx_buffer( buffer_to_tx );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_data_end( );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_crc( buffer_to_tx, 3 );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_gcp_engage_end( );
+											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+		pg_delay_sec( 2 );
+	}										
+	PG_HALT;
 }
 
 
 
-//		4.294.967.295 max
-//		4294967295 max
+//#################################################################################
+//#################################################################################
+//#################################################################################
+//GCP - General Communication Protocol
+//main_RX.c
+//#################################################################################
+//#################################################################################
+//#################################################################################
+
+/*
+
+#include "picgim_main.h"
+
+void main( void ) {
+	
+	pg_initialize( );
+	pg_gcp_init( );
+	pg_serial_open( );
+	pg_lcd_hd44780_clear( 0 );
+	pg_lcd_hd44780_put_char( 0 , 'R' );
+	
+ 	while( 1 ) {
+		pg_gcp_rx();
+		//pg_delay_sec( 1 );
+		if( pg_gcp_rx_data_ready( ) != PG_GCP_RX_DATA_READY_NONE ) {
+			//pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + 48 );				//config attuale !!!
+			//pg_lcd_hd44780_put_char( 0 , rdr + 48 );						//config attuale !!!
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr );	//ok	???
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr );	//atroie
+			//*(_pg_int16 *)(pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr + 2) = 0;
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr );
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );	//ok	???
+			//pg_lcd_hd44780_put_char( 0 , *pg_gcp_rx_data_read( ) );
+			pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
+		}
+	}
+	PG_HALT;
+}
+
+*/
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 	while( 1 ) {
+//		while( !DataRdyUSART() ); 	//DataRdyUSART ret 1 if data is present
+//		pg_lcd_hd44780_put_char( 0 , ReadUSART() );
+//	}
+
+	//strcpypgm2ram( pg_gcp_buffer_rx_01, "hallo\0" );
+
+	//pg_lcd_hd44780_put_char( 0 , (pg_gcp_rx() - 77)  );
+	//pg_gcp_rx( );
+	//pg_lcd_hd44780_write_p_string		( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8 * Str );
+	//pg_lcd_hd44780_write_p_string( 0 , 0 , 5 , pg_gcp_buffer_rx_01 );
+	//pg_gcp_rx();
+	//pg_gcp_reset( );
+
+
+
+
+
+		//get = pg_gcp_rx_data_ready( );
+		//if( get != PG_GCP_RX_DATA_READY_NONE ) {
+			//pg_lcd_hd44780_write_p_string( 0 , 1 , 0 , pg_gcp_v_config[ get ].xbuffer_ptr );
+			//stampa bene quella in engage end
+			//pg_delay_sec( 1 );
+			//pg_lcd_hd44780_clear( 0 );
+			//pg_lcd_hd44780_put_char( 0 , '_' );
+			//pg_lcd_hd44780_put_char( 0 , get + 48 ); 
+			//pg_lcd_hd44780_put_char( 0 , '_' );
+			//pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + 48 );
+			//pg_lcd_hd44780_put_char( 0 , (_pg_Uint8)pg_gcp_bindex + 48 );	
+			//pg_gcp_rx_data_read( get );  //=1
+			//pg_lcd_hd44780_put_char( 0 , ' ' );
+			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr[ 0 ] );
+			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr[ 1 ] );
+			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr[ 0 ] );
+			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr[ 1 ] );
+			//pg_delay_sec( 1 );
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ get ].xbuffer_ptr ); sbaglia!
+		//}
+		
+		//if( pg_gcp_v_config[ 1 ].xbuffer_status == PG_GCP_BUFFER_FULL ) {
+//		if( pg_gcp_v_config[ 1 ].xbuffer_status > 169 ) {
+//			break;
+//		}
+	//pg_gcp_buffer_rx_01[7]='\0';
+	//pg_lcd_hd44780_write_p_string( 0 , 1 , 0 , pg_gcp_buffer_rx_01 );
+ 
+ 

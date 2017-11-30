@@ -54,14 +54,14 @@
 //	#include <GenericTypeDefs.h>
 //    typedef enum tBOOL { FALSE = 0 , TRUE } BOOL;
 
-    #if defined(__XC8)       
+/*     #if defined(__XC8)       
         //#include <xc.h>       
         #include <stdint.h>				//Standard types definitions
         #include <stdbool.h>			//True and False definitions
         #include <__size_t.h>			//size_t type definition
-    #endif       
+    #endif     */   
 
-    typedef bool                                _pg_bool;
+//    typedef bool                                _pg_bool;
 
 	#define	_pg_Font							const _pg_Uint8
 

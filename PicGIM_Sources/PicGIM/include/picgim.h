@@ -50,13 +50,13 @@
 #ifndef _PGIM_INCLUDES_H_
 	#define _PGIM_INCLUDES_H_
 
-    #pragma warning disable 520
+//    #pragma warning disable 520
 
 	#if ! defined( __18CXX ) && ! defined( __XC8 )
 		#error	PicGIM can be compiled ONLY under MCHP C18 or XC8 !!!
 	#endif
 
-    #include <xc.h>
+//    #include <xc.h>
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <stdarg.h>
@@ -125,7 +125,8 @@
 			PG_FTOA,
 			PG_SENSOR,
 			PG_RTC_DS1302,
-			PG_3WIRE
+			PG_3WIRE,
+			PG_GCP
 		};
 */
 		#include "pgim_error.h"
@@ -273,7 +274,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_SPI == PG_ENABLE )
-		#include <plib/spi.h>                //kmod
+//		#include <plib/spi.h>                //kmod
 		#include "pgim_spi.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PicGIM >>> SPI module >>> Loaded
@@ -317,7 +318,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_TIMER == PG_ENABLE )
-		#include <plib/timers.h>         //kmod
+//		#include <plib/timers.h>         //kmod
 		#include "pgim_timer.h"
 		#if ( PGIM_TIMER_0 != PG_DISABLE )
 			#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
@@ -571,7 +572,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_SERIAL == PG_ENABLE )
-//		#include <usart.h>          //kmod
+		#include <usart.h>          //kmod
 		#include "pgim_serial.h"
 
 		//		B A U D R A T E   D E B U G   O U T P U T   T O   P I N
@@ -748,6 +749,23 @@
 	#endif
 	//---[ END 3Wire ]---
 	
+	
+	//---[ GCP ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_GCP
+		#define		PGIM_GCP		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_GCP
+		#define		PGIM_GCP		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_GCP == PG_ENABLE ) 
+		#include "pgim_gcp.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> GCP module >>> Loaded
+		#endif
+	#endif
+	//---[ END GCP ]---
 	
 	
 	//------------------------------------------------------------------------------
