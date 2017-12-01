@@ -22,28 +22,32 @@ void main( void ) {
 	pg_serial_open();
 	pg_lcd_hd44780_clear( 0 );
  	pg_gcp_init( );
-	pg_lcd_hd44780_put_char( 0 , 'T' );
+	//pg_lcd_hd44780_put_char( 0 , 'T' );
+	//pg_delay_sec( 1 );
 	
 	while( 1 ) {
-		pg_gcp_reset( );
-		pg_lcd_hd44780_clear( 0 );
-		pg_delay_sec( 1 );
 											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_engage( );
+		if( pg_gcp_engage( ) != PG_OK ) {
 											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_config( 1 );
-											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_data( );
-											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_tx_buffer( buffer_to_tx );
-											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_data_end( );
-											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_crc( buffer_to_tx, 3 );
-											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_gcp_engage_end( );
-											if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		pg_delay_sec( 2 );
+			pg_gcp_reset( );
+		}
+		else {
+			pg_gcp_config( 1 );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_gcp_data( );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_gcp_tx_buffer( buffer_to_tx );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_gcp_data_end( );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_gcp_crc( buffer_to_tx, 3 );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_gcp_engage_end( );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_delay_sec( 2 );
+			pg_gcp_reset( );
+			pg_lcd_hd44780_clear( 0 );
+		}
 	}										
 	PG_HALT;
 }
@@ -69,7 +73,7 @@ void main( void ) {
 	pg_gcp_init( );
 	pg_serial_open( );
 	pg_lcd_hd44780_clear( 0 );
-	pg_lcd_hd44780_put_char( 0 , 'R' );
+	//pg_lcd_hd44780_put_char( 0 , 'R' );
 	
  	while( 1 ) {
 		pg_gcp_rx();

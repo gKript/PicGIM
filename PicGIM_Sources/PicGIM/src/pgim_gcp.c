@@ -5,8 +5,8 @@
 	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
 	Author :		Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
 
-	Current Milestone :		0.5
-	Current version :		0.5-0
+	Current Milestone :		0.6
+	Current version :		0.6-0
 	Since version :			0.1-0
 	Deprecated version :	This file is not deprecated.
 
@@ -180,6 +180,11 @@
 		//--------------------------------------------------------------------------
 		pg_gcp_reset_local();
 		
+		//---[ Clear Lcd ]---
+		#if ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) 
+			pg_lcd_hd44780_clear( 0 );
+		#endif
+		
 		//---[ Init HW ]---
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_ENGAGE_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_ENGAGE_LAT = PG_OFF;
@@ -255,6 +260,7 @@
 				PG_GCP_LED_RESET_LAT = PG_ON;
 			#endif
 			pg_delay_sec( 1 );
+			pg_delay_msec( PG_GCP_DELAY_RESET_TX );
 			pg_gcp_reset_local();
 			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
 				PG_GCP_LED_RESET_LAT = PG_OFF;
@@ -285,6 +291,16 @@
 		//pg_gcp_dbyte				= 0;		//!< Doesn't need.>
 		//pg_gcp_crc32_local		= 0;		//!< Doesn't need.>
 		//pg_gcp_crc32_remote		= 0;		//!< Doesn't need.>
+		
+		//---[ Clear Serial Buffer ]---
+		while( DataRdyUSART() ) { //DataRdyUSART() ret 1 if data is present.
+			ReadUSART();
+		}
+		
+		//---[ Clear Lcd ]---
+		#if ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) 
+			pg_lcd_hd44780_clear( 0 );
+		#endif
 		
 		//---[ Config Initialization ]---
 		//---[ Config Buffer 00 - Default ]---
@@ -532,7 +548,7 @@
 					PG_GCP_LED_CONFIG_LAT = PG_ON;
 				#endif
 				pg_gcp_send_byte_serial( configuration );
-				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 					if( pg_gcp_dbyte == configuration ) {
 						pg_gcp_send_byte_serial( PG_GCP_CONFIG_OK );
 						pg_gcp_nconfig = configuration;
@@ -563,7 +579,7 @@
 				if( pg_gcp_flag_data_mode == PG_NO ) {
 					if( pg_gcp_send_command_byte( PG_GCP_COMMAND_STATUS ) == PG_OK ) {
 						pg_gcp_send_byte_serial( PG_GCP_STATUS_WAITING );
-						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 							#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER == PG_ENABLE ) )
 								pg_lcd_hd44780_put_char( 0 , pg_gcp_dbyte + PG_GCP_DEBUG_CHAR_ASCII_OFFSET  );
 							#endif
@@ -593,7 +609,7 @@
 							pg_lcd_hd44780_put_char( 0 , value );
 						#endif
 						pg_gcp_send_byte_serial( value );
-						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 							if( pg_gcp_dbyte == value ) {
 								pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = value; //... e io  faccio qua.
 								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
@@ -757,7 +773,7 @@
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ESCAPE  );
 		#endif
 		pg_gcp_send_byte_serial( PG_GCP_COMMAND_ESCAPE );
-		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_TX ) == PG_OK ) {
 			if( pg_gcp_dbyte == PG_GCP_COMMAND_ESCAPE_REPLY ) {
 				switch( command ) {
 					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_RESET == PG_ENABLE ) )
@@ -807,7 +823,7 @@
 					#endif
 				}
 				pg_gcp_send_byte_serial( command );						
-				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 					if( pg_gcp_dbyte == ( command + PG_GCP_REPLY_OFFSET_ADD ) ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
@@ -866,7 +882,7 @@
 									pg_lcd_hd44780_put_char( 0 , pg_gcp_crc32_local.v[ i ]  );
 								#endif
 								pg_gcp_send_byte_serial( pg_gcp_crc32_local.v[ i ] );						//invio i 4 byte crc locale
-								if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) != PG_OK ) {		//attendo l'ack dell'rx
+								if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) != PG_OK ) {		//attendo l'ack dell'rx
 									#if PG_ERROR_IS_ENABLE
 										pg_error_set( PG_ERROR_GCP , PG_GCP_CRC_TX_FAILED , PG_ERROR_ERROR );
 									#endif
@@ -874,7 +890,7 @@
 									//return( PG_GCP_ERROR_CRC_NO_REPLY_TIMEOUT );
 								}	
 							}
-							if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {		//attendo risposta
+							if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_CRC ) == PG_OK ) {		//attendo risposta
 								if( pg_gcp_dbyte == PG_GCP_CRC_OK ) {
 									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_OK_CRC == PG_ENABLE ) )
 										pg_lcd_hd44780_put_char( 0 , '=' );
@@ -951,7 +967,7 @@
 	_pg_Uint8 pg_gcp_rx( void ) {		//BLOCKING (streaming)or NOT BLOCKING!!! Verifica per il tempo ( PG_GCP_TIMEOUT_MS ) se e' arrivato un byte e ritorna... richiamarla a ciclo dal main... Se BYTEDELAY=0 bloccante fino alla ricezione di un byte.
 		//--------------------------------------------------------------------------
 		while( 1 ) {
-			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_RX ) == PG_OK ) {
 				//---[ Escape ]---
 				if( pg_gcp_dbyte == PG_GCP_COMMAND_ESCAPE ) {
 					//--------------------------------------------------------------------------
@@ -961,7 +977,7 @@
 						pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ESCAPE_REPLY  );
 					#endif
 					pg_gcp_send_byte_serial( PG_GCP_COMMAND_ESCAPE_REPLY );
-					if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+					if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 						//--------------------------------------------------------------------------
 						//---[ Any Status ]---
 						//--------------------------------------------------------------------------
@@ -1080,7 +1096,8 @@
 		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_RESET_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_RESET_REPLY  );
 		#endif
-		pg_delay_msec( 200 );
+		//pg_delay_msec( 200 );
+		pg_delay_msec( PG_GCP_DELAY_RESET_RX );
 		pg_gcp_reset_local();
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_RESET_LAT = PG_OFF;
@@ -1125,12 +1142,12 @@
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_CONFIG_REPLY  );
 		#endif
 		pg_gcp_send_byte_serial( PG_GCP_COMMAND_CONFIG_REPLY );
-		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 			//pg_gcp_nconfig = pg_gcp_dbyte;
 			temp = pg_gcp_dbyte;
 			//pg_gcp_send_byte_serial( pg_gcp_nconfig );
 			pg_gcp_send_byte_serial( temp );
-			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				if( pg_gcp_dbyte == PG_GCP_CONFIG_OK ) {
 					pg_gcp_nconfig = temp;
 					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER_REPLY == PG_ENABLE ) )
@@ -1161,7 +1178,7 @@
 				pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + PG_GCP_DEBUG_CHAR_ASCII_OFFSET  );
 			#endif
 			pg_gcp_send_byte_serial( PG_GCP_COMMAND_REQUEST_REPLY );
-			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				if( pg_gcp_dbyte == ( PG_GCP_COMMAND_REQUEST ) ) {
 					//---
 					pg_gcp_flag_data_mode = PG_NO;
@@ -1249,7 +1266,7 @@
 				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS_REPLY );
 			#endif
 			pg_gcp_send_byte_serial( PG_GCP_COMMAND_STATUS_REPLY );								//rispondere con ':d' per richiedere la tx immediata dei dati
-			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				if( pg_gcp_dbyte == PG_GCP_STATUS_WAITING ) {
 					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_VALUE == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status );
@@ -1276,13 +1293,13 @@
 				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_MOD_STATUS_REPLY );
 			#endif
 			pg_gcp_send_byte_serial( PG_GCP_COMMAND_MOD_STATUS_REPLY );	
-			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_OK ) {
+			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = pg_gcp_dbyte;
 				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS_REPLY == PG_ENABLE ) )
 					pg_lcd_hd44780_put_char( 0 , pg_gcp_dbyte );
 				#endif
 				pg_gcp_send_byte_serial( pg_gcp_dbyte );
-				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS ) == PG_GCP_MOD_STATUS_OK ) {
+				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_GCP_MOD_STATUS_OK ) {
 					return( PG_GCP_MOD_STATUS_OK );
 				}
 			}
@@ -1308,7 +1325,7 @@
 			pg_gcp_send_byte_serial( PG_GCP_COMMAND_CRC_REPLY );
 			//ricevo crc del tx
 			for( c = 0; c < 4; c++ ) {
-				if( pg_gcp_read_byte_serial( PG_GCP_CRC_TIMEOUT_MS ) == PG_OK ) {
+				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_CRC ) == PG_OK ) {
 					pg_gcp_crc32_remote.v[ c ] = pg_gcp_dbyte; //salvo i 4 byte crc remota
 					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_WAITING_DATA == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , pg_gcp_dbyte );
