@@ -7,7 +7,7 @@
 //#################################################################################
 //#################################################################################
 
-
+/*
 
 #include "picgim_main.h"
 
@@ -36,14 +36,19 @@ void main( void ) {
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_data( );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_tx_buffer( buffer_to_tx );
+			//pg_gcp_tx_buffer( buffer_to_tx );
+			pg_gcp_send_byte_serial( buffer_to_tx[ 2 ] );
+			pg_gcp_send_byte_serial( buffer_to_tx[ 3 ] );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_data_end( );
+			pg_gcp_mod_status( PG_GCP_BUFFER_FULL );
+												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			pg_gcp_status( );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_crc( buffer_to_tx, 3 );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_engage_end( );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+			
 			pg_delay_sec( 2 );
 			pg_gcp_reset( );
 			pg_lcd_hd44780_clear( 0 );
@@ -52,7 +57,7 @@ void main( void ) {
 	PG_HALT;
 }
 
-
+*/
 
 //#################################################################################
 //#################################################################################
@@ -63,7 +68,7 @@ void main( void ) {
 //#################################################################################
 //#################################################################################
 
-/*
+
 
 #include "picgim_main.h"
 
@@ -93,7 +98,7 @@ void main( void ) {
 	PG_HALT;
 }
 
-*/
+
 
 
 

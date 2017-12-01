@@ -48,6 +48,8 @@
 		#define	PG_GCP_BUFFER_EMPTY								'e'
 		#define	PG_GCP_BUFFER_INCOMPLETE						'i'
 		#define	PG_GCP_BUFFER_FULL								'f'
+		#define	PG_GCP_BUFFER_UNKNOWN							'?'
+		
 		//---[ End Buffer Status ]---
 		
 		//---[ Buffer Rx Default ]---
@@ -218,6 +220,7 @@
 			PG_GCP_ERROR_RX_MOD_STATUS_FAILED,
 			PG_GCP_ERROR_RX_CRC_TIMEOUT,
 			PG_GCP_ERROR_RX_CRC_COMPARE_FAILED
+			
 			//...definirli tutti
 			
 		};
@@ -517,6 +520,7 @@
 		_pg_Uint8 pg_gcp_rx_status ( void );
 		_pg_Uint8 pg_gcp_rx_mod_status( void );
 		_pg_Uint8 pg_gcp_rx_crc( void );
+		void pg_gcp_request_set( _pg_Uint8 qvalue );
 
 		//---[ End Prototype ]---
  	#endif
