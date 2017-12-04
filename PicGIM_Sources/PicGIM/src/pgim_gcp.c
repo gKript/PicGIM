@@ -167,7 +167,7 @@
 		void		* xbuffer_ptr;						//!<Payload buffer pointer>
 		_pg_Uint16	xbuffer_length;						//!<Payload length. Total byte quantity to send in a packet; 0 = stream>
 		_pg_Uint16	xbuffer_index;						//!<Current position to write to next byte in buffer; 0 to ( PG_GCP_BUFFER_RX_xx_LENGTH - 1 ) >
-		#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+		#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 			_pg_Uint8	xbuffer_status;					//!<Status of buffer: PG_GCP_BUFFER_EMPTY, PG_GCP_BUFFER_INCOMPLETE, PG_GCP_BUFFER_FULL>
 		#endif
 	};
@@ -183,11 +183,6 @@
 	void pg_gcp_init( void ) {		
 		//--------------------------------------------------------------------------
 		pg_gcp_reset_local();
-		
-		//---[ Clear Lcd ]---
-		#if ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) 
-			pg_lcd_hd44780_clear( 0 );
-		#endif
 		
 		//---[ Init HW ]---
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_ENGAGE_ENABLE == PG_ENABLE ) )
@@ -293,16 +288,17 @@
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_RESET_LAT = PG_ON;
 		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_RESET_REPLY == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_RESET_REPLY  );
 		#endif
+
 		//pg_delay_msec( 200 );
 		pg_delay_msec( PG_GCP_DELAY_RESET_RX );
 		pg_gcp_reset_local();
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_RESET_LAT = PG_OFF;
 		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_RESET_CLEAR_LCD == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_CLEAR_LCD == PG_ENABLE ) )
 			pg_lcd_hd44780_clear( 0 );
 		#endif
 		#if PG_ERROR_IS_ENABLE
@@ -332,6 +328,29 @@
 			ReadUSART();
 		}
 		
+		//---[ Clear Led ]---
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_ENGAGE_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_ENGAGE_LAT = PG_OFF;
+		#endif
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_DATA_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_DATA_LAT = PG_OFF;
+		#endif
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CONFIG_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_CONFIG_LAT = PG_OFF;
+		#endif
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CRC_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_CRC_LAT = PG_OFF;
+		#endif		
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_RESET_LAT = PG_OFF;
+		#endif
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_TX_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_TX_LAT = PG_OFF;
+		#endif
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RX_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_RX_LAT = PG_OFF;
+		#endif
+		
 		//---[ Clear Lcd ]---
 		#if ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) 
 			pg_lcd_hd44780_clear( 0 );
@@ -347,7 +366,7 @@
 			pg_gcp_v_config[ 1 ].xbuffer_ptr			= pg_gcp_buffer_rx_01;
 			pg_gcp_v_config[ 1 ].xbuffer_length			= PG_GCP_BUFFER_RX_01_LENGTH;
 			pg_gcp_v_config[ 1 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 1 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -356,7 +375,7 @@
 			pg_gcp_v_config[ 2 ].xbuffer_ptr			= pg_gcp_buffer_rx_02;
 			pg_gcp_v_config[ 2 ].xbuffer_length			= PG_GCP_BUFFER_RX_02_LENGTH;
 			pg_gcp_v_config[ 2 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 2 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -365,7 +384,7 @@
 			pg_gcp_v_config[ 3 ].xbuffer_ptr			= pg_gcp_buffer_rx_03;
 			pg_gcp_v_config[ 3 ].xbuffer_length			= PG_GCP_BUFFER_RX_03_LENGTH;
 			pg_gcp_v_config[ 3 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 3 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif	
@@ -374,7 +393,7 @@
 			pg_gcp_v_config[ 4 ].xbuffer_ptr			= pg_gcp_buffer_rx_04;
 			pg_gcp_v_config[ 4 ].xbuffer_length			= PG_GCP_BUFFER_RX_04_LENGTH;
 			pg_gcp_v_config[ 4 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 4 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -383,7 +402,7 @@
 			pg_gcp_v_config[ 5 ].xbuffer_ptr			= pg_gcp_buffer_rx_05;
 			pg_gcp_v_config[ 5 ].xbuffer_length			= PG_GCP_BUFFER_RX_05_LENGTH;
 			pg_gcp_v_config[ 5 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 5 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -392,7 +411,7 @@
 			pg_gcp_v_config[ 6 ].xbuffer_ptr			= pg_gcp_buffer_rx_06;
 			pg_gcp_v_config[ 6 ].xbuffer_length			= PG_GCP_BUFFER_RX_06_LENGTH;
 			pg_gcp_v_config[ 6 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 6 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -401,7 +420,7 @@
 			pg_gcp_v_config[ 7 ].xbuffer_ptr			= pg_gcp_buffer_rx_07;
 			pg_gcp_v_config[ 7 ].xbuffer_length			= PG_GCP_BUFFER_RX_07_LENGTH;
 			pg_gcp_v_config[ 7 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 7 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -410,7 +429,7 @@
 			pg_gcp_v_config[ 8 ].xbuffer_ptr			= pg_gcp_buffer_rx_08;
 			pg_gcp_v_config[ 8 ].xbuffer_length			= PG_GCP_BUFFER_RX_08_LENGTH;
 			pg_gcp_v_config[ 8 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 8 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -419,7 +438,7 @@
 			pg_gcp_v_config[ 9 ].xbuffer_ptr			= pg_gcp_buffer_rx_09;
 			pg_gcp_v_config[ 9 ].xbuffer_length			= PG_GCP_BUFFER_RX_09_LENGTH;
 			pg_gcp_v_config[ 9 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 9 ].xbuffer_status		= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -428,7 +447,7 @@
 			pg_gcp_v_config[ 10 ].xbuffer_ptr			= pg_gcp_buffer_rx_10;
 			pg_gcp_v_config[ 10 ].xbuffer_length		= PG_GCP_BUFFER_RX_10_LENGTH;
 			pg_gcp_v_config[ 10 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 10 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -437,7 +456,7 @@
 			pg_gcp_v_config[ 11 ].xbuffer_ptr			= pg_gcp_buffer_rx_11;
 			pg_gcp_v_config[ 11 ].xbuffer_length		= PG_GCP_BUFFER_RX_11_LENGTH;
 			pg_gcp_v_config[ 11 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 11 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -446,7 +465,7 @@
 			pg_gcp_v_config[ 12 ].xbuffer_ptr			= pg_gcp_buffer_rx_12;
 			pg_gcp_v_config[ 12 ].xbuffer_length		= PG_GCP_BUFFER_RX_12_LENGTH;
 			pg_gcp_v_config[ 12 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 12 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -455,7 +474,7 @@
 			pg_gcp_v_config[ 13 ].xbuffer_ptr			= pg_gcp_buffer_rx_13;
 			pg_gcp_v_config[ 13 ].xbuffer_length		= PG_GCP_BUFFER_RX_13_LENGTH;
 			pg_gcp_v_config[ 13 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 13 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -464,7 +483,7 @@
 			pg_gcp_v_config[ 14 ].xbuffer_ptr			= pg_gcp_buffer_rx_14;
 			pg_gcp_v_config[ 14 ].xbuffer_length		= PG_GCP_BUFFER_RX_14_LENGTH;
 			pg_gcp_v_config[ 14 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 14 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -473,7 +492,7 @@
 			pg_gcp_v_config[ 15 ].xbuffer_ptr			= pg_gcp_buffer_rx_15;
 			pg_gcp_v_config[ 15 ].xbuffer_length		= PG_GCP_BUFFER_RX_15_LENGTH;
 			pg_gcp_v_config[ 15 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 15 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif
@@ -482,7 +501,7 @@
 			pg_gcp_v_config[ 16 ].xbuffer_ptr			= pg_gcp_buffer_rx_16;
 			pg_gcp_v_config[ 16 ].xbuffer_length		= PG_GCP_BUFFER_RX_16_LENGTH;
 			pg_gcp_v_config[ 16 ].xbuffer_index			= 0;
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				pg_gcp_v_config[ 16 ].xbuffer_status	= PG_GCP_BUFFER_EMPTY;
 			#endif
 		#endif		
@@ -519,7 +538,7 @@
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_ENGAGE_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_ENGAGE_LAT = PG_ON;
 		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_ENGAGE_REPLY == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ENGAGE_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ENGAGE_REPLY  );
 		#endif
 		pg_gcp_send_byte_serial( PG_GCP_COMMAND_ENGAGE_REPLY );
@@ -561,7 +580,7 @@
 	_pg_Uint8 pg_gcp_rx_engage_end( void ) {
 		//--------------------------------------------------------------------------
 		pg_gcp_flag_engage = PG_NO;
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_ENGAGE_END_REPLY == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ENGAGE_END_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ENGAGE_END_REPLY );
 		#endif
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_ENGAGE_ENABLE == PG_ENABLE ) )
@@ -606,7 +625,7 @@
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_DATA_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_DATA_LAT = PG_ON;
 		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_DATA_REPLY == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_DATA_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_DATA_REPLY );
 		#endif
 		pg_gcp_send_byte_serial( PG_GCP_COMMAND_DATA_REPLY );
@@ -646,7 +665,7 @@
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_DATA_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_DATA_LAT = PG_OFF;
 		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_DATA_END_REPLY == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_DATA_END_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_DATA_END_REPLY );
 		#endif
 		pg_gcp_send_byte_serial( PG_GCP_COMMAND_DATA_END_REPLY );
@@ -669,7 +688,7 @@
 					if( pg_gcp_dbyte == configuration ) {
 						pg_gcp_send_byte_serial( PG_GCP_CONFIG_OK );
 						pg_gcp_nconfig = configuration;
-						#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER == PG_ENABLE ) )
+						#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CONFIG_NUMBER == PG_ENABLE ) )
 							pg_lcd_hd44780_put_char( 0 , configuration + PG_GCP_DEBUG_CHAR_ASCII_OFFSET  );
 						#endif
 						#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CONFIG_ENABLE == PG_ENABLE ) )
@@ -697,7 +716,7 @@
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CONFIG_ENABLE == PG_ENABLE ) )
 			PG_GCP_LED_CONFIG_LAT = PG_ON;
 		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG_REPLY == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CONFIG_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_CONFIG_REPLY  );
 		#endif
 		pg_gcp_send_byte_serial( PG_GCP_COMMAND_CONFIG_REPLY );
@@ -709,7 +728,7 @@
 			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				if( pg_gcp_dbyte == PG_GCP_CONFIG_OK ) {
 					pg_gcp_nconfig = temp;
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER_REPLY == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CONFIG_NUMBER_REPLY == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + PG_GCP_DEBUG_CHAR_ASCII_OFFSET  );
 					#endif
 					#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CONFIG_ENABLE == PG_ENABLE ) )
@@ -730,19 +749,19 @@
 	}
 	
 	//#######################################################################
-	//---[   S T A T U S   ]---
+	//---[   S T A T U S   -   S Y N C   ]---
 	//#######################################################################
-	//---[ TX - Status Command ]---
-	#if ( PG_GCP_STATUS_ENABLE == PG_ENABLE )
-		_pg_Uint8 pg_gcp_status( void ) {		//ritorna lo stato del buffer a remoto; verifica non possibile
+	//---[ TX - Status Sync Command ]---
+	#if ( PG_GCP_STATUS_SYNC_ENABLE == PG_ENABLE )
+		_pg_Uint8 pg_gcp_status_sync( void ) {		//ritorna lo stato del buffer a remoto; verifica non possibile
 			//--------------------------------------------------------------------------
 			if( pg_gcp_flag_engage == PG_YES ) {
 				if( pg_gcp_flag_data_mode == PG_NO ) {
-					if( pg_gcp_send_command_byte( PG_GCP_COMMAND_STATUS ) == PG_OK ) {
+					if( pg_gcp_send_command_byte( PG_GCP_COMMAND_STATUS_SYNC ) == PG_OK ) {
 						pg_gcp_send_byte_serial( PG_GCP_STATUS_WAITING );
 						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 							pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = pg_gcp_dbyte;	//update status on tx
-							#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER == PG_ENABLE ) )
+							#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_SYNC == PG_ENABLE ) )
 								switch ( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status ) {
 									case PG_GCP_BUFFER_EMPTY :
 										pg_lcd_hd44780_put_char( 0 , PG_GCP_BUFFER_EMPTY );
@@ -761,7 +780,8 @@
 							#if PG_ERROR_IS_ENABLE
 								pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 							#endif
-							return( pg_gcp_dbyte );
+							//return( pg_gcp_dbyte );
+							return( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status );
 						}
 					}
 				}
@@ -773,17 +793,17 @@
 		}
 	#endif
 		
-	//---[ RX - Status ]---
-	#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+	//---[ RX - Status Sync ]---
+	#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 		_pg_Uint8 pg_gcp_rx_status ( void ) {
 			//--------------------------------------------------------------------------
 			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_STATUS_ENABLE == PG_ENABLE ) )
 				PG_GCP_LED_STATUS_LAT = PG_ON;
 			#endif
-			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_STATUS_REPLY == PG_ENABLE ) )
-				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS_REPLY );
+			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_SYNC_REPLY == PG_ENABLE ) )
+				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS_SYNC_REPLY );
 			#endif
-			pg_gcp_send_byte_serial( PG_GCP_COMMAND_STATUS_REPLY );								//rispondere con ':d' per richiedere la tx immediata dei dati
+			pg_gcp_send_byte_serial( PG_GCP_COMMAND_STATUS_SYNC_REPLY );								//rispondere con ':d' per richiedere la tx immediata dei dati
 			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				if( pg_gcp_dbyte == PG_GCP_STATUS_WAITING ) {
 					pg_gcp_send_byte_serial( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status );	//send status to tx
@@ -793,7 +813,11 @@
 					#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_STATUS_ENABLE == PG_ENABLE ) )
 						PG_GCP_LED_STATUS_LAT = PG_OFF;
 					#endif
-					return( PG_GCP_OK_STATUS_SEND );
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+					#endif
+					return PG_OK;
+					//return( PG_GCP_OK_STATUS_SEND );
 				}
 			}
 			#if PG_ERROR_IS_ENABLE
@@ -804,74 +828,84 @@
 	#endif	
 	
 	//#######################################################################
-	//---[   M O D   S T A T U S   ]---
+	//---[   S T A T U S   -   M O D   ]---
 	//#######################################################################
-	//---[ TX - Mod Status Command ]---
-	#if ( PG_GCP_MOD_STATUS_ENABLE == PG_ENABLE )
-		_pg_Uint8 pg_gcp_mod_status( _pg_Uint8 value ) {
+	//---[ TX - Status Mod Command ]---
+	#if ( PG_GCP_STATUS_MOD_ENABLE == PG_ENABLE )
+		_pg_Uint8 pg_gcp_status_mod( _pg_Uint8 value ) {
 			//--------------------------------------------------------------------------
 			//copiare la config e gestire in rx
 			if( pg_gcp_flag_engage == PG_YES ) {
 				if( pg_gcp_flag_data_mode == PG_NO ) {
-					if( pg_gcp_send_command_byte( PG_GCP_COMMAND_MOD_STATUS ) == PG_OK ) {
+					if( pg_gcp_send_command_byte( PG_GCP_COMMAND_STATUS_MOD ) == PG_OK ) {
 						//
-						#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
+						#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
 							pg_lcd_hd44780_put_char( 0 , value );
 						#endif
 						pg_gcp_send_byte_serial( value );
 						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 							if( pg_gcp_dbyte == value ) {
 								pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = value; //... e io  faccio qua.
-								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
+								pg_gcp_send_byte_serial( PG_GCP_STATUS_MOD_OK );	// che vuol dire "ok fai!" (in rx da implementare) //senza reply
+								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
 									pg_lcd_hd44780_put_char( 0 , '=' );
 								#endif
 								#if PG_ERROR_IS_ENABLE
 									pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 								#endif
-								pg_gcp_send_byte_serial( PG_GCP_MOD_STATUS_OK );	// che vuol dire "ok fai!" (in rx da implementare) //senza reply
 								return PG_OK;
+							}
+							else {
+								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
+									pg_lcd_hd44780_put_char( 0 , '!' );
+								#endif
 							}
 						}
 					}
 				}
 			}
-			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
+			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
 				pg_lcd_hd44780_put_char( 0 , '!' );
 			#endif
 			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_GCP_MOD_STATUS_FAILED , PG_ERROR_ERROR );
+				pg_error_set( PG_ERROR_GCP , PG_GCP_STATUS_MOD_FAILED , PG_ERROR_ERROR );
 			#endif
 			return PG_NOK;
 		}
 	#endif
 	
-	//---[ RX - Mod Status ]---		
-	#if ( PG_GCP_MOD_STATUS_ENABLE ==  PG_ENABLE )
-		_pg_Uint8 pg_gcp_rx_mod_status( void ) {
+	//---[ RX - Status Mod ]---		
+	#if ( PG_GCP_STATUS_MOD_ENABLE ==  PG_ENABLE )
+		_pg_Uint8 pg_gcp_rx_status_mod( void ) {
 			//--------------------------------------------------------------------------
 			_pg_Uint8 mtemp;
 			
-			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS_REPLY == PG_ENABLE ) )
-				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_MOD_STATUS_REPLY );
+			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD_REPLY == PG_ENABLE ) )
+				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS_MOD_REPLY );
 			#endif
-			pg_gcp_send_byte_serial( PG_GCP_COMMAND_MOD_STATUS_REPLY );
+			pg_gcp_send_byte_serial( PG_GCP_COMMAND_STATUS_MOD_REPLY );
 			//
 			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 				mtemp = pg_gcp_dbyte;
-				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS_REPLY == PG_ENABLE ) )
+				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD_REPLY == PG_ENABLE ) )
 					pg_lcd_hd44780_put_char( 0 , mtemp );
 				#endif
 				pg_gcp_send_byte_serial( mtemp );
-				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_GCP_MOD_STATUS_OK ) {
+				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_GCP_STATUS_MOD_OK ) {
 					pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = mtemp;
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , '=' );
 					#endif
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 					#endif
-					//return( PG_GCP_MOD_STATUS_OK );
+					//return( PG_GCP_STATUS_MOD_OK );
 					return PG_OK;
+				}
+				else {
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
+						pg_lcd_hd44780_put_char( 0 , '!' );
+					#endif
 				}
 			}
 			#if PG_ERROR_IS_ENABLE
@@ -953,7 +987,7 @@
 		#endif
 	}
 	 
-	 //---[ Read Byte Serial ]---
+	//---[ Read Byte Serial ]---
 	_pg_Uint8 pg_gcp_read_byte_serial( _pg_Uint16 tdelay ) { //Blocking (streaming) or NOT-Blocking
 		//--------------------------------------------------------------------------
 		//Internal use.
@@ -1001,7 +1035,7 @@
 	_pg_Uint8 pg_gcp_send_command_byte( _pg_Uint8 command ) {
 		//--------------------------------------------------------------------------
 		//Internal use.
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_ESCAPE == PG_ENABLE ) )
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ESCAPE == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ESCAPE  );
 		#endif
 		//---[Send Escape ]---
@@ -1009,52 +1043,52 @@
 		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_TX ) == PG_OK ) {
 			if( pg_gcp_dbyte == PG_GCP_COMMAND_ESCAPE_REPLY ) {
 				switch( command ) {
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_RESET == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET == PG_ENABLE ) )
 						case PG_GCP_COMMAND_RESET :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_RESET );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_ENGAGE == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ENGAGE == PG_ENABLE ) )
 						case PG_GCP_COMMAND_ENGAGE :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ENGAGE  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_ENGAGE_END == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ENGAGE_END == PG_ENABLE ) )
 						case PG_GCP_COMMAND_ENGAGE_END :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ENGAGE_END  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_DATA == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_DATA == PG_ENABLE ) )
 						case PG_GCP_COMMAND_DATA :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_DATA  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_DATA_END == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_DATA_END == PG_ENABLE ) )
 						case PG_GCP_COMMAND_DATA_END :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_DATA_END  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CONFIG == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CONFIG == PG_ENABLE ) )
 						case PG_GCP_COMMAND_CONFIG :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_CONFIG  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_STATUS == PG_ENABLE ) )
-						case PG_GCP_COMMAND_STATUS :
-							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS  );
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_SYNC == PG_ENABLE ) )
+						case PG_GCP_COMMAND_STATUS_SYNC :
+							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS_SYNC  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
-						case PG_GCP_COMMAND_MOD_STATUS :
-							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_MOD_STATUS  );
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
+						case PG_GCP_COMMAND_STATUS_MOD :
+							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_STATUS_MOD  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_REQUEST == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_REQUEST == PG_ENABLE ) )
 						case PG_GCP_COMMAND_REQUEST :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_REQUEST  );
 						break;
 					#endif
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CRC == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC == PG_ENABLE ) )
 						case PG_GCP_COMMAND_CRC :
 							pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_CRC  );
 						break;
@@ -1131,7 +1165,7 @@
 					//--------------------------------------------------------------------------
 					//---[ Command Mode ]-------------------------------------------------------
 					//--------------------------------------------------------------------------
-					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_ESCAPE_REPLY == PG_ENABLE ) )
+					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ESCAPE_REPLY == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_ESCAPE_REPLY  );
 					#endif
 					pg_gcp_send_byte_serial( PG_GCP_COMMAND_ESCAPE_REPLY );
@@ -1186,15 +1220,15 @@
 									return( pg_gcp_rx_engage_end( ) );
 								}
 								//---[ Status ]---
-								#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
-									if( pg_gcp_dbyte == PG_GCP_COMMAND_STATUS ) {
+								#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
+									if( pg_gcp_dbyte == PG_GCP_COMMAND_STATUS_SYNC ) {
 										return( pg_gcp_rx_status( ) );
 									}
 								#endif
 								//---[ Mod Status ]---		
-								#if ( PG_GCP_MOD_STATUS_ENABLE ==  PG_ENABLE )
-									if( pg_gcp_dbyte == PG_GCP_COMMAND_MOD_STATUS ) {
-										return( pg_gcp_rx_mod_status( ) );
+								#if ( PG_GCP_STATUS_MOD_ENABLE ==  PG_ENABLE )
+									if( pg_gcp_dbyte == PG_GCP_COMMAND_STATUS_MOD ) {
+										return( pg_gcp_rx_status_mod( ) );
 									}
 								#endif
 								//---[ Request ]---
@@ -1273,7 +1307,7 @@
 						#endif
 						if( pg_gcp_send_command_byte( PG_GCP_COMMAND_CRC ) == PG_OK ) {
 							for( i = 0; i < 4; i++ ) {
-								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CRC_BYTE == PG_ENABLE ) )
+								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC_BYTE == PG_ENABLE ) )
 									pg_lcd_hd44780_put_char( 0 , pg_gcp_crc32_local.v[ i ]  );
 								#endif
 								pg_gcp_send_byte_serial( pg_gcp_crc32_local.v[ i ] );						//invio i 4 byte crc locale
@@ -1287,7 +1321,7 @@
 							}
 							if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_CRC ) == PG_OK ) {		//attendo risposta
 								if( pg_gcp_dbyte == PG_GCP_CRC_OK ) {
-									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_OK_CRC == PG_ENABLE ) )
+									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC_OK == PG_ENABLE ) )
 										pg_lcd_hd44780_put_char( 0 , '=' );
 									#endif
 									#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CRC_ENABLE == PG_ENABLE ) )
@@ -1300,7 +1334,7 @@
 									return( PG_GCP_CRC_OK );
 								}
 								else {
-									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_MOD_STATUS == PG_ENABLE ) )
+									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
 										pg_lcd_hd44780_put_char( 0 , '!' );
 									#endif
 									#if PG_ERROR_IS_ENABLE
@@ -1327,7 +1361,7 @@
 			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CRC_ENABLE == PG_ENABLE ) )
 				PG_GCP_LED_CRC_LAT = PG_ON;
 			#endif
-			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_CRC_REPLY == PG_ENABLE ) )
+			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC_REPLY == PG_ENABLE ) )
 				pg_lcd_hd44780_put_char( 0 , PG_GCP_COMMAND_CRC_REPLY );
 			#endif
 			pg_gcp_send_byte_serial( PG_GCP_COMMAND_CRC_REPLY );
@@ -1338,7 +1372,7 @@
 					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_WAITING_DATA == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , pg_gcp_dbyte );
 					#endif
-					pg_gcp_send_byte_serial( WAITING_DATA );	//???
+					pg_gcp_send_byte_serial( PG_GCP_WAITING_DATA );	//???
 				}
 				else {
 					#if PG_ERROR_IS_ENABLE
@@ -1350,7 +1384,7 @@
 			}
 			pg_gcp_crc32_calc( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr, ( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_index - 1 ) );	//calcolo crc locale buffer attivo, usando come lunghezza, non quella del buffer ma quella dell'"index - 1", cosi' da poterlo calcolare anche per le stringhe piu' corte della lunghezza del buffer intero, dopo aver usato la "set_full".
 			if( ( pg_gcp_crc32_local.Val - pg_gcp_crc32_remote.Val ) == 0 ) {				//confronto
-				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_OK_CRC == PG_ENABLE ) )
+				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC_OK == PG_ENABLE ) )
 					pg_lcd_hd44780_put_char( 0 , '=' );
 				#endif
 				#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_CRC_ENABLE == PG_ENABLE ) )
@@ -1364,7 +1398,7 @@
 				//return( PG_GCP_CRC_OK );
 			}
 			else {
-				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_ERROR_CRC_FAILED == PG_ENABLE ) )
+				#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC_FAILED == PG_ENABLE ) )
 					pg_lcd_hd44780_put_char( 0 , '!' );
 				#endif
 				pg_gcp_send_byte_serial( PG_GCP_ERROR_CRC_FAILED );
@@ -1418,7 +1452,7 @@
 			//Tx ask rx flag value by Request-Command.
 			//If flag is set, they run pg_gcp_engage_end() togheter.
 			//
-			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_COMMAND_REQUEST == PG_ENABLE ) )
+			#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_REQUEST == PG_ENABLE ) )
 				pg_lcd_hd44780_put_char( 0 , '@' );
 			#endif
 			pg_gcp_flag_request = qvalue;
@@ -1482,6 +1516,9 @@
 //add send string.
 
 
-		
 
-		
+
+
+
+
+

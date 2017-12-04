@@ -8,34 +8,34 @@
 		//---[ Debug ]---
 		#define	PG_GCP_DEBUG_GLOBAL								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		//---
-		#define	PG_GCP_DEBUG_COMMAND_ESCAPE						PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_ESCAPE_REPLY				PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_ENGAGE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_ENGAGE_REPLY				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_ENGAGE_END					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_ENGAGE_END_REPLY			PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_DATA						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_DATA_REPLY					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_DATA_END					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_DATA_END_REPLY				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CRC						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CRC_REPLY					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CRC_BYTE					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_OK_CRC								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_ERROR_CRC_FAILED					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_REQUEST					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CONFIG						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CONFIG_OK					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CONFIG_REPLY				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_CONFIG_NUMBER_REPLY		PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_STATUS						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_STATUS_REPLY				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_MOD_STATUS					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_MOD_STATUS_REPLY			PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_RESET						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_RESET_REPLY				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define	PG_GCP_DEBUG_COMMAND_RESET_CLEAR_LCD			PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_ESCAPE								PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_ESCAPE_REPLY						PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_ENGAGE								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_ENGAGE_REPLY						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_ENGAGE_END							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_ENGAGE_END_REPLY					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_DATA								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_DATA_REPLY							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_DATA_END							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_DATA_END_REPLY						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CRC								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CRC_REPLY							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CRC_OK								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CRC_BYTE							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CRC_FAILED							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_REQUEST							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CONFIG								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CONFIG_REPLY						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CONFIG_OK							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CONFIG_NUMBER						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_CONFIG_NUMBER_REPLY				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_STATUS_SYNC						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_STATUS_SYNC_REPLY					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_STATUS_MOD							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_STATUS_MOD_REPLY					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_RESET								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_RESET_REPLY						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_RESET_CLEAR_LCD					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_STATUS_VALUE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_WAITING_DATA						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_TX_BUFFER							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
@@ -78,11 +78,11 @@
 		#define PG_GCP_COMMAND_DATA_END							'Z'
 		#define PG_GCP_COMMAND_DATA_END_REPLY					'z'
 		//---
-		#define PG_GCP_COMMAND_STATUS							'S'
-		#define PG_GCP_COMMAND_STATUS_REPLY						's'
+		#define PG_GCP_COMMAND_STATUS_SYNC						'S'
+		#define PG_GCP_COMMAND_STATUS_SYNC_REPLY				's'
 		//---
-		#define PG_GCP_COMMAND_MOD_STATUS						'M'
-		#define PG_GCP_COMMAND_MOD_STATUS_REPLY					'm'
+		#define PG_GCP_COMMAND_STATUS_MOD						'M'
+		#define PG_GCP_COMMAND_STATUS_MOD_REPLY					'm'
 		//---
 		#define PG_GCP_COMMAND_CRC								'V'
 		#define PG_GCP_COMMAND_CRC_REPLY						'v'
@@ -99,130 +99,43 @@
 		
 		//---[ Return Messages ]---			
 		enum _pg_gcp_return_code_enum {
-			PG_GCP_OK_RESET = 0,
-			PG_GCP_ERROR_RESET_REMOTE_FAILED,
-			PG_GCP_OK_ENGAGE,
-			PG_GCP_ERROR_ENGAGE_FAILED,
-			PG_GCP_ERROR_ENGAGE_ALREADY,
-			PG_GCP_OK_ENGAGE_END,
-			PG_GCP_ERROR_ENGAGE_END_FAILED,
-			PG_GCP_ERROR_ENGAGE_NOT_ENGAGED,
-			PG_GCP_ERROR_ENGAGE_DATA_MODE_ACTIVE,
-			PG_GCP_OK_REQUEST,
-			PG_GCP_ERROR_REQUEST_COMMAND_FAILED,
-			PG_GCP_ERROR_REQUEST_NOT_ENGAGED,
-			PG_GCP_OK_CONFIG,
-			PG_GCP_ERROR_CONFIG_PARAMETER_MISMATCH,
-			PG_GCP_ERROR_CONFIG_RX_COMMAND_TIMEOUT,
-			PG_GCP_ERROR_CONFIG_COMMAND_FAILED,
-			PG_GCP_ERROR_CONFIG_NOT_ENGAGED,
-			PG_GCP_OK_DATA_MODE,
-			PG_GCP_ERROR_DATA_MODE_COMMAND_FAILED,
-			PG_GCP_ERROR_DATA_MODE_ALREADY,
-			PG_GCP_ERROR_DATA_NOT_ENGAGED,
-			PG_GCP_OK_DATA_MODE_END,
-			PG_GCP_ERROR_DATA_END_COMMAND_FAILED,
-			PG_GCP_ERROR_DATA_END_NOT_DATA_MODE,
-			PG_GCP_ERROR_DATA_END_NOT_ENGAGED,
-			PG_GCP_PG_GCP_TIMEOUT_MS,
-			PG_GCP_ERROR_STATUS_COMMAND_FAILED,
-			PG_GCP_ERROR_STATUS_DATA_MODE_ACTIVE,
-			PG_GCP_ERROR_STATUS_NOT_ENGAGED,
-			PG_GCP_STATUS_WAITING,
-			PG_GCP_ERROR_STATUS_WRONG_WAITING,
-			PG_GCP_OK_STATUS_SEND,
-			PG_GCP_ERROR_STATUS_NO_REPLY_TIMEOUT,
-			PG_GCP_OK_SEND_COMMAND,
-			PG_GCP_ERROR_SEND_WRONG_COMMAND_REPLY_PLUS,
-			PG_GCP_ERROR_SEND_RX_BYTE_TIMEOUT,
-			PG_GCP_ERROR_SEND_WRONG_COMMAND_REPLY,
-			PG_GCP_ERROR_SEND_NO_REPLY_TIMEOUT,
-			PG_GCP_OK_TX,
-			PG_GCP_ERROR_TX_NOT_DATA_MODE,
-			PG_GCP_ERROR_TX_NOT_ENGAGED,
-			PG_GCP_OK_RESET_DONE,
-			PG_GCP_OK_ENGAGE_DONE,
-			PG_GCP_ERROR_ENGAGE_WRONG_COMMAND,
-			PG_GCP_OK_CONFIG_DONE,
-			PG_GCP_ERROR_CONFIG_NOT_CONFIRMED,
-			PG_GCP_ERROR_CONFIG_NO_REPLY_TIMEOUT_CONFIRM,
-			PG_GCP_ERROR_CONFIG_NO_REPLY_TIMEOUT,
-			PG_GCP_OK_REQUEST_DONE,
-			PG_GCP_ERROR_REQUEST_CONFIRM_FAILED,
-			PG_GCP_ERROR_REQUEST_NO_REPLY_TIMEOUT,
-			PG_GCP_ERROR_UNKNOWN_OR_WRONG_COMMAND_E,
-			PG_GCP_ERROR_UNKNOWN_OR_WRONG_COMMAND_ED,
-			PG_GCP_ERROR_CRC_NO_REPLY_TIMEOUT,
-			PG_GCP_ERROR_CRC_DATA_MODE_ACTIVE,
-			PG_GCP_ERROR_CRC_FAILURE,
-			PG_GCP_ERROR_CRC_COMMAND_FAILED,
-			PG_GCP_ERROR_CRC_MATH_TIMEOUT,
-			PG_GCP_WAITING_DATA,
-			PG_GCP_OK_CRC,
-			PG_GCP_ERROR_CRC_FAILED,
-			PG_GCP_ERROR_CRC_NOT_DATA_MODE,
-			PG_GCP_ERROR_UNKNOWN_OR_WRONG_COMMAND_EE,
-			PG_GCP_ERROR_RX_COMMAND_TIMEOUT_COMMAND,
-			PG_GCP_ERROR_RX_BYTE_TIMEOUT,
-			PG_GCP_OK_READ,
-			PG_GCP_ERROR_READ_BYTE_TIMEOUT,
-			PG_GCP_ERROR_CRC_TX,
-			PG_GCP_ERROR_CRC_NOT_ENGAGED,
-			PG_GCP_ERROR_CRC32_CANNOT_MATH,
-			PG_GCP_CRC32_DONE,
-			WAITING_DATA,
+			PG_GCP_DUMMY = 100,
 			PG_GCP_COMMAND_ESCAPE_CHAR_SAVED,
 			PG_GCP_COMMAND_DATA_MODE_END_DONE,
 			PG_GCP_COMMAND_DATA_MODE_DONE,
 			PG_GCP_COMMAND_ENGAGE_END_DONE,
-			PG_GCP_RX_DATA_READY_NONE,
-			PG_GCP_ERROR_WAITING_READ,
-			PG_GCP_OK_SAVED,
-			PG_GCP_RX_DATA_READ_NONE,
-			PG_GCP_ERROR_DATA_MODE_ACTIVE,
-			PG_GCP_OK_MOD,
-			PG_GCP_ERROR_MOD_FAILED,
-			PG_GCP_ERROR_MOD_TX_COMMAND_TIMEOUT,
-			PG_GCP_ERROR_MOD_WRONG_VALUE,
-			PG_GCP_ERROR_MOD_RX_VALUE_MISMATCH,
-			PG_GCP_ERROR_MOD_RX_COMMAND_TIMEOUT,
-			PG_GCP_ERROR_MOD_COMMAND_FAILED,
-			PG_GCP_ERROR_MOD_DATA_MODE_ACTIVE,
-			PG_GCP_ERROR_MOD_NOT_ENGAGED,
-			
-			//error
 			PG_GCP_RESET_FAILED,
-			PG_GCP_CONFIG_OK,
-			PG_GCP_MOD_STATUS_OK,
-			PG_GCP_CRC_OK,
-			
+			PG_GCP_WAITING_DATA,
 			PG_GCP_ENGAGE_FAILED,
 			PG_GCP_ENGAGE_END_FAILED,
+			PG_GCP_CONFIG_OK,
 			PG_GCP_DATA_FAILED,
 			PG_GCP_DATA_END_FAILED,
 			PG_GCP_CONFIG_FAILED,
-			PG_GCP_MOD_STATUS_FAILED,
 			PG_GCP_STATUS_FAILED,
-
+			PG_GCP_STATUS_WAITING,
+			PG_GCP_STATUS_MOD_OK,
+			PG_GCP_STATUS_MOD_FAILED,
 			PG_GCP_REQUEST_FAILED,
 			PG_GCP_SAVE_BYTE_BUFFER_FAILED,
-			PG_GCP_RX_DATA_READY_NO,
 			PG_GCP_READ_BYTE_SERIAL_TIMEOUT,
 			PG_GCP_SEND_COMMAND_FAILED,
 			PG_GCP_TX_BUFFER_FAILED,
-			PG_GCP_CRC_TX_FAILED,
-			PG_GCP_CRC_COMPARE_FAILED,
+			PG_GCP_RX_DATA_READY_NO,
 			PG_GCP_RX_COMMAND_TIMEOUT,
 			PG_GCP_RX_BYTE_TIMEOUT,
+			PG_GCP_RX_DATA_READY_NONE,
 			PG_GCP_ERROR_RX_CONFIG_FAILED,
 			PG_GCP_ERROR_RX_REQUEST_FAILED,
 			PG_GCP_ERROR_RX_STATUS_FAILED,
 			PG_GCP_ERROR_RX_MOD_STATUS_FAILED,
 			PG_GCP_ERROR_RX_CRC_TIMEOUT,
-			PG_GCP_ERROR_RX_CRC_COMPARE_FAILED
-			
-			//...definirli tutti
-			
+			PG_GCP_ERROR_RX_CRC_COMPARE_FAILED,
+			PG_GCP_ERROR_CRC_FAILED,
+			PG_GCP_ERROR_CRC32_CANNOT_MATH,
+			PG_GCP_CRC_OK,
+			PG_GCP_CRC_TX_FAILED,
+			PG_GCP_CRC_COMPARE_FAILED
 		};
 		//---[ END Return Message ]---
 		
@@ -295,15 +208,19 @@
 			void		* xbuffer_ptr;						//!<Payload buffer pointer>
 			_pg_Uint16	xbuffer_length;						//!<Payload length. Total byte quantity to send in a packet; 0 = stream>
 			_pg_Uint8	xbuffer_index;						//!<Current position to write to next byte in buffer; 0 to ( PG_GCP_BUFFER_RX_xx_LENGTH - 1 ) >
-			#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+			#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 				_pg_Uint8	xbuffer_status;					//!<Status of buffer: PG_GCP_BUFFER_EMPTY, PG_GCP_BUFFER_INCOMPLETE, PG_GCP_BUFFER_FULL>		
 			#endif
 		};
 		
 		extern struct pg_gcp_str_config pg_gcp_v_config[ ( PG_GCP_CONFIGS_NUMBER + 1 ) ];	//Config struct vector
-				
+		
+		//#######################################################################
+		//---[   C O M M A N D   ]---
+		//#######################################################################
+		
 		/*!
-			\brief			Initialize all protocol variables. \n
+			\brief			Command to initialize all protocol variables and set hardware.\n
 							Must be run by the first.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -313,7 +230,7 @@
 		void		pg_gcp_init								( void );
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to execute local reset function to remote host and then locally.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -322,7 +239,7 @@
 		_pg_Uint8	pg_gcp_reset							( void );	
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to reset all variables locally.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -331,7 +248,7 @@
 		void 		pg_gcp_reset_local						( void );		
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to occupy hardware channel and have the right to transmit.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -340,7 +257,7 @@
 		_pg_Uint8	pg_gcp_engage							( void );
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to release hardware channel.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -350,17 +267,27 @@
 
 		#if ( PG_GCP_REQUEST_ENABLE == PG_ENABLE )
 			/*!
-				\brief			What it do. \n 		//!!! La esegue il ricevente, al contrario degli a ltri comandi !!! 
+				\brief			Command sent from receiving host, requiring to transmitter.\n
 								Conditions.
 				\attention		Nothing.
 				\return 		Nothing.
 				\param			Nothing.
 			*/
 			_pg_Uint8	pg_gcp_request							( void );
+			
+
+			/*!
+				\brief			Command to set transmission request flag. \n
+								Conditions.
+				\attention		Nothing.
+				\return 		Nothing.
+				\param			Nothing.
+			*/
+			void		pg_gcp_request_set						( _pg_Uint8 qvalue );
 		#endif
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to change configuration. \n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -369,7 +296,7 @@
 		_pg_Uint8	pg_gcp_config							( _pg_Uint8 configuration );	
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to enter in data mode. \n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -378,7 +305,7 @@
 		_pg_Uint8	pg_gcp_data								( void );	
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to exit data mode.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -386,28 +313,34 @@
 		*/
 		_pg_Uint8	pg_gcp_data_end							( void ); 
 
-		#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
+		#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 			/*!
-				\brief			What it do. \n
+				\brief			Command to syncronize and retrieve remote status to local one.\n
 								Conditions.
 				\attention		Nothing.
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8	pg_gcp_status						( void );
+			_pg_Uint8	pg_gcp_status_sync						( void );
 		#endif
+		
+		#if ( PG_GCP_STATUS_MOD_ENABLE == PG_ENABLE )
+			/*!
+				\brief			Command to overwrite remote status. It is usefull with short string transmission, because void need to send full buffer, allowing to set buffer to full without complete transmission of buffer containing string.\n
+								Conditions.
+				\attention		Nothing.
+				\return 		Nothing.
+				\param			Nothing.
+			*/
+			_pg_Uint8 		pg_gcp_status_mod					( _pg_Uint8 value );
+		#endif
+		
+		//#######################################################################
+		//---[   F U N C T I O N   ]---
+		//#######################################################################
 
 		/*!
-			\brief			What it do.//cambia lo stato del buffer, utile se con le stringhe non lo si riempe tutto, lo si puo' mettere full \n
-							Conditions.
-			\attention		Nothing.
-			\return 		Nothing.
-			\param			Nothing.
-		*/
-		_pg_Uint8 		pg_gcp_mod_status					( _pg_Uint8 value );
-			
-		/*!
-			\brief			What it do. \n
+			\brief			Command to send a byte.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -416,7 +349,7 @@
 		_pg_Uint8	pg_gcp_send_command_byte				( _pg_Uint8 xcommand );
 
 		/*!
-			\brief			What it do. \n
+			\brief			Command to transmit a buffer.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -425,7 +358,7 @@
 		_pg_Uint8	pg_gcp_tx_buffer						( _pg_Uint8 * tbuffer );		
 
 		/*!
-			\brief			What it do. \n//BLOCKING or NOT BLOCKING!!! Verifica per poco tempo (BYTEDELAY) se e' arrivato un byte e ritorna... richiamarla a ciclo dal main... Se BYTEDELAY=0 bloccante fino alla ricezione di un byte.
+			\brief			Receiving routine. Inserted within a loop of the user code allows dialogue with the transmitting part.//BLOCKING or NOT BLOCKING\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -434,7 +367,7 @@
 		_pg_Uint8	pg_gcp_rx								( void );
 
 		/*!
-			\brief			What it do. \n
+			\brief			This function checks for incoming data.\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -443,7 +376,7 @@
 		_pg_Uint8	pg_gcp_rx_data_ready					( void );
 
 		/*!
-			\brief			What it do. //BLOCKING or NOT BLOCKING\n
+			\brief			This function must be used to read data from buffer, because manages parameters and status. //BLOCKING or NOT BLOCKING\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -452,7 +385,7 @@
 		_pg_Uint8	*	pg_gcp_rx_data_read					( void );
 
 		/*!
-			\brief			What it do. //BLOCKING or NOT BLOCKING\n
+???			\brief			What it do. //BLOCKING or NOT BLOCKING\n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
@@ -478,17 +411,6 @@
 		*/
 		_pg_Uint8	pg_gcp_save_byte_buffer					( void );
 		
-		#if ( PG_GCP_STATUS_ENABLE ==  PG_ENABLE )
-			/*!
-				\brief			What it do. \n	
-								Conditions.
-				\attention		Nothing.
-				\return 		Nothing.
-				\param			Nothing.
-			*/
-			_pg_Uint8	pg_gcp_check_buffer_status				( void );	
-		#endif
-		
 		#if ( PG_GCP_CRC_ENABLE == PG_ENABLE )
 			/*!
 				\brief			What it do. \n
@@ -506,110 +428,113 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8	pg_gcp_crc32_calc						( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );//( _pg_Uint8 * cbuffer );		
+			_pg_Uint8	pg_gcp_crc32_calc						( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );//( _pg_Uint8 * cbuffer );
+						/*!
+				\brief			What it do. \n
+								Conditions.
+				\attention		Nothing.
+				\return 		Nothing.
+				\param			Nothing.
+			*/
+			_pg_Uint8	pg_gcp_rx_crc							( void );
 		#endif
 		
-		_pg_Uint8 pg_gcp_rx_reset( void );
-		_pg_Uint8 pg_gcp_rx_engage( void );
-		_pg_Uint8 pg_gcp_rx_config( void );		
-		_pg_Uint8 pg_gcp_rx_request( void );
-		_pg_Uint8 pg_gcp_rx_escape( void );
-		_pg_Uint8 pg_gcp_rx_data_end( void );
-		_pg_Uint8 pg_gcp_rx_data( void );
-		_pg_Uint8 pg_gcp_rx_engage_end( void );
-		_pg_Uint8 pg_gcp_rx_status ( void );
-		_pg_Uint8 pg_gcp_rx_mod_status( void );
-		_pg_Uint8 pg_gcp_rx_crc( void );
-		void pg_gcp_request_set( _pg_Uint8 qvalue );
+		//#######################################################################
+		//---[   R X   ]---
+		//#######################################################################
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_reset								( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_engage							( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_config							( void );		
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_request							( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_escape							( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_data_end							( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_data								( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_engage_end						( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		_pg_Uint8	pg_gcp_rx_status_sync							( void );
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/_pg_Uint8	pg_gcp_rx_status_mod						( void );
 
 		//---[ End Prototype ]---
  	#endif
 #endif /* _PGIM_GCP_H_ */
  
  
- 
- 
- 
- 
 
- 
- 
- /* 		//---[ Return Messages ]---	
-		#define PG_GCP_OK_RESET									110
-		#define PG_GCP_ERROR_RESET_REMOTE_FAILED				111
-		#define PG_GCP_OK_ENGAGE								113
-		#define PG_GCP_ERROR_ENGAGE_FAILED						114
-		#define PG_GCP_ERROR_ENGAGE_ALREADY						115
-		#define PG_GCP_OK_ENGAGE_END							116
-		#define PG_GCP_ERROR_ENGAGE_END_FAILED					117
-		#define PG_GCP_ERROR_ENGAGE_NOT_ENGAGED					118
-		#define PG_GCP_ERROR_ENGAGE_DATA_MODE_ACTIVE			119
-		#define PG_GCP_OK_REQUEST								120
-		#define PG_GCP_ERROR_REQUEST_COMMAND_FAILED				121
-		#define PG_GCP_ERROR_REQUEST_NOT_ENGAGED				122
-		#define PG_GCP_OK_CONFIG								123
-		#define PG_GCP_ERROR_CONFIG_PARAMETER_MISMATCH			124
-		#define PG_GCP_ERROR_CONFIG_RX_COMMAND_TIMEOUT			125
-		#define PG_GCP_ERROR_CONFIG_COMMAND_FAILED				126
-		#define PG_GCP_ERROR_CONFIG_NOT_ENGAGED					127
-		#define PG_GCP_OK_DATA_MODE								128
-		#define PG_GCP_ERROR_DATA_MODE_COMMAND_FAILED			129
-		#define PG_GCP_ERROR_DATA_MODE_ALREADY					130
-		#define PG_GCP_ERROR_DATA_NOT_ENGAGED					131
-		#define PG_GCP_OK_DATA_MODE_END							132
-		#define PG_GCP_ERROR_DATA_END_COMMAND_FAILED			133
-		#define PG_GCP_ERROR_DATA_END_NOT_DATA_MODE				134
-		#define PG_GCP_ERROR_DATA_END_NOT_ENGAGED				135
-		#define PG_GCP_PG_GCP_TIMEOUT_MS						136
-		#define PG_GCP_ERROR_STATUS_COMMAND_FAILED				137
-		#define PG_GCP_ERROR_STATUS_DATA_MODE_ACTIVE			138
-		#define PG_GCP_ERROR_STATUS_NOT_ENGAGED	
-		#define PG_GCP_STATUS_WAITING
-		#define PG_GCP_ERROR_STATUS_WRONG_WAITING
-		#define PG_GCP_OK_STATUS_SEND
-		#define PG_GCP_ERROR_STATUS_NO_REPLY_TIMEOUT
-		#define PG_GCP_OK_SEND_COMMAND							139
-		#define PG_GCP_ERROR_SEND_WRONG_COMMAND_REPLY_PLUS		140
-		#define PG_GCP_ERROR_SEND_RX_BYTE_TIMEOUT				141
-		#define PG_GCP_ERROR_SEND_WRONG_COMMAND_REPLY			142
-		#define PG_GCP_ERROR_SEND_NO_REPLY_TIMEOUT				143
-		#define PG_GCP_OK_TX									144
-		#define PG_GCP_ERROR_TX_NOT_DATA_MODE					145
-		#define PG_GCP_ERROR_TX_NOT_ENGAGED						146
-		#define PG_GCP_OK_RESET_DONE							147
-		#define PG_GCP_OK_ENGAGE_DONE							148
-		#define PG_GCP_ERROR_ENGAGE_WRONG_COMMAND				149
-		#define PG_GCP_OK_CONFIG_DONE							150
-		#define PG_GCP_ERROR_CONFIG_NOT_CONFIRMED				151
-		#define PG_GCP_ERROR_CONFIG_NO_REPLY_TIMEOUT_CONFIRM	152
-		#define PG_GCP_ERROR_CONFIG_NO_REPLY_TIMEOUT			153
-		#define PG_GCP_OK_REQUEST_DONE							154
-		#define PG_GCP_ERROR_REQUEST_CONFIRM_FAILED				155
-		#define PG_GCP_ERROR_REQUEST_NO_REPLY_TIMEOUT			156
-		#define PG_GCP_ERROR_UNKNOWN_OR_WRONG_COMMAND_E			157
-		#define PG_GCP_ERROR_UNKNOWN_OR_WRONG_COMMAND_ED		158
-		#define PG_GCP_ERROR_CRC_NO_REPLY_TIMEOUT				159
-		#define PG_GCP_ERROR_CRC_DATA_MODE_ACTIVE
-		#define PG_GCP_ERROR_CRC_FAILURE
-		#define PG_GCP_ERROR_CRC_COMMAND_FAILED
-		#define PG_GCP_ERROR_CRC_MATH_TIMEOUT
-		#define PG_GCP_WAITING_DATA								160
-		#define PG_GCP_OK_CRC									161
-		#define PG_GCP_ERROR_CRC_FAILED							162
-		#define PG_GCP_ERROR_CRC_NOT_DATA_MODE					163
-		#define PG_GCP_ERROR_UNKNOWN_OR_WRONG_COMMAND_EE		164
-		#define PG_GCP_ERROR_RX_COMMAND_TIMEOUT_COMMAND			165
-		#define PG_GCP_ERROR_RX_BYTE_TIMEOUT					166
-		#define PG_GCP_OK_READ									167
-		#define PG_GCP_ERROR_READ_BYTE_TIMEOUT					168
-		#define PG_GCP_BUFFER_EMPTY								169
-		#define PG_GCP_BUFFER_MODIFIED							170
-		#define PG_GCP_BUFFER_INCOMPLETE						171
-		#define PG_GCP_BUFFER_FULL								172
-		#define PG_GCP_BUFFER_OVERLOADED						173
-		#define PG_GCP_ERROR_CRC_TX								174
-		#define PG_GCP_ERROR_CRC_NOT_ENGAGED					175
-		#define PG_GCP_ERROR_CRC32_CANNOT_MATH					176
-		#define PG_GCP_CRC32_DONE
-		#define WAITING_DATA									177
-		//---[ END Return Message ]--- */

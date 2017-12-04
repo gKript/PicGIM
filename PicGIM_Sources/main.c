@@ -41,9 +41,9 @@ void main( void ) {
 			pg_gcp_send_byte_serial( buffer_to_tx[ 3 ] );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_data_end( );
-			pg_gcp_mod_status( PG_GCP_BUFFER_FULL );
+			pg_gcp_status_mod( PG_GCP_BUFFER_FULL );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_status( );
+			pg_gcp_status_sync( );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_crc( buffer_to_tx, 3 );
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
@@ -92,7 +92,7 @@ void main( void ) {
 			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr );
 			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );	//ok	???
 			//pg_lcd_hd44780_put_char( 0 , *pg_gcp_rx_data_read( ) );
-			pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
 		}
 	}
 	PG_HALT;

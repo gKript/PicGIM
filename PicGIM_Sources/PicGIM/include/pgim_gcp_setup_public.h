@@ -5,11 +5,11 @@
 
 	#if ( PGIM_GCP == PG_ENABLE )
 		
-		//-------------------------------------------------------------------------------------------------------------		
-		//		S T A T U S
 		//-------------------------------------------------------------------------------------------------------------
-		#define PG_GCP_STATUS_ENABLE							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define PG_GCP_MOD_STATUS_ENABLE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		//		D E L A Y
+		//-------------------------------------------------------------------------------------------------------------
+		#define	PG_GCP_DELAY_RESET_TX							1000		//!< Min. 1ms - Max. 60000ms
+		#define	PG_GCP_DELAY_RESET_RX							200			//!< Min. 1ms - Max. 60000ms
 		
 		//-------------------------------------------------------------------------------------------------------------
 		//		T I M E O U T
@@ -18,12 +18,12 @@
 		#define	PG_GCP_TIMEOUT_MS_RX							2000		//!< Min. 1ms - Max. 60000ms
 		#define	PG_GCP_TIMEOUT_MS_DIAL							2000		//!< Min. 1ms - Max. 60000ms
 		#define PG_GCP_TIMEOUT_MS_CRC							6000		//!< Min. 1ms - Max. 60000ms
-		
+
+		//-------------------------------------------------------------------------------------------------------------		
+		//		S T A T U S
 		//-------------------------------------------------------------------------------------------------------------
-		//		D E L A Y
-		//-------------------------------------------------------------------------------------------------------------
-		#define	PG_GCP_DELAY_RESET_TX							1000		//!< Min. 1ms - Max. 60000ms
-		#define	PG_GCP_DELAY_RESET_RX							200			//!< Min. 1ms - Max. 60000ms
+		#define PG_GCP_STATUS_SYNC_ENABLE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define PG_GCP_STATUS_MOD_ENABLE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		
 		//-------------------------------------------------------------------------------------------------------------
 		//		C R C
@@ -89,7 +89,7 @@
 		// 		C O N F I G   11
 		#define PG_GCP_BUFFER_RX_11_ENABLE						PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define PG_GCP_BUFFER_RX_11_LENGTH						1			//!< Min. 1 - Max. xxxxxx >
-		
+
 		// 		C O N F I G   12
 		#define PG_GCP_BUFFER_RX_12_ENABLE						PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define PG_GCP_BUFFER_RX_12_LENGTH						1			//!< Min. 1 - Max. xxxxxx >		
@@ -112,6 +112,7 @@
 		
 		//-------------------------------------------------------------------------------------------------------------		
 		//		L E D - I N D I C A T O R 
+		//-------------------------------------------------------------------------------------------------------------
 		#define PG_GCP_LED_GLOBAL_ENABLE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		//
 		#define PG_GCP_LED_SCAN_ENABLE							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
