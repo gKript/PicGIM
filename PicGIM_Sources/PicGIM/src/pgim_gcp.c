@@ -110,6 +110,28 @@
 		_pg_Uint32_VAL	pg_gcp_crc32_local;				//variabile di supporto al calcolo e contenimento della crc del buffer
 		_pg_Uint32_VAL	pg_gcp_crc32_remote;			//variabile di supporto al calcolo e contenimento della crc del buffer
 	#endif	
+
+	//---[ Config Struct ]---
+	struct	pg_gcp_str_config {
+		void		* xbuffer_ptr;												//!<Payload buffer pointer>
+		_pg_Uint8	xbuffer_mode;												//!<It specifies the type of use: as buffer or as string <PG_GCP_BUFFER, PG_GCP_STRING>
+		_pg_Uint16	xbuffer_length;												//!<Payload length. Total byte quantity to send in a packet; 0 = stream>
+		_pg_Uint16	xbuffer_index;												//!<Current position to write to next byte in buffer; 0 to ( PG_GCP_BUFFER_RX_xx_LENGTH - 1 ) >
+		#if ( ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE ) || ( PG_GCP_STATUS_MOD_ENABLE ==  PG_ENABLE ) )
+			_pg_Uint8	xbuffer_status;											//!<Status of buffer: PG_GCP_BUFFER_EMPTY, PG_GCP_BUFFER_INCOMPLETE, PG_GCP_BUFFER_FULL>
+		#endif
+	};
+	
+	//---[ User Data Struct ]---
+	struct	pg_gcp_str_udata { 
+		_pg_Uint8	uconf;	//#configuration
+		void *		uptr;	//buffer-ptr
+		_pg_Uint16	ulen;	//#byte rx
+	};
+	
+	//---[ Struct ]---
+	struct	pg_gcp_str_config pg_gcp_v_config[ PG_GCP_CONFIGS_NUMBER + 1 ];	//Configuration types structures vector
+	struct	pg_gcp_str_udata	pg_gcp_udata;
 	
 	//---[ Default Buffer ]---
 	_pg_Uint8	pg_gcp_buffer_rx_default[ PG_GCP_BUFFER_RX_DEFAULT_LENGTH ];	//rx user buffer (config 00) - DEFAULT
@@ -163,28 +185,6 @@
 	#if ( PG_GCP_BUFFER_RX_16_ENABLE == PG_ENABLE )
 		_pg_Uint8	pg_gcp_buffer_rx_16[ PG_GCP_BUFFER_RX_16_LENGTH ];			//rx user buffer (config 16)
 	#endif
-
-	//---[ Config Struct ]---
-	struct pg_gcp_str_config {
-		void		* xbuffer_ptr;												//!<Payload buffer pointer>
-		_pg_Uint8	xbuffer_mode;												//!<It specifies the type of use: as buffer or as string <PG_GCP_BUFFER, PG_GCP_STRING>
-		_pg_Uint16	xbuffer_length;												//!<Payload length. Total byte quantity to send in a packet; 0 = stream>
-		_pg_Uint16	xbuffer_index;												//!<Current position to write to next byte in buffer; 0 to ( PG_GCP_BUFFER_RX_xx_LENGTH - 1 ) >
-		#if ( ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE ) || ( PG_GCP_STATUS_MOD_ENABLE ==  PG_ENABLE ) )
-			_pg_Uint8	xbuffer_status;											//!<Status of buffer: PG_GCP_BUFFER_EMPTY, PG_GCP_BUFFER_INCOMPLETE, PG_GCP_BUFFER_FULL>
-		#endif
-	};
-	
-	//---[ User Data Struct ]---
-	struct	pg_gcp_str_udata { 
-		_pg_Uint8	uconf;	//#configuration
-		void *		uptr;	//buffer-ptr
-		_pg_Uint8	ulen;	//#byte rx
-	};
-	
-	//---[ Struct ]---
-	struct pg_gcp_str_config pg_gcp_v_config[ PG_GCP_CONFIGS_NUMBER + 1 ];	//Configuration types structures vector
-	struct	pg_gcp_str_udata	pg_gcp_udata;
 	
 	//---[ Function ]--------------------------------------------------------
 	
@@ -1052,7 +1052,7 @@
 	//#######################################################################
 	//---[   F U N C T I O N S   ]---
 	//#######################################################################
-	
+/*
 	//---[ Save Byte ]---
 	_pg_Uint8 pg_gcp_save_byte_buffer( void ) {	
 		//--------------------------------------------------------------------------
@@ -1079,7 +1079,39 @@
 		#endif
 		return PG_OK;
 	}
+*/
 	
+	//---[ Save Byte ]---
+	_pg_Uint8 pg_gcp_save_byte_buffer( void ) {	
+		//--------------------------------------------------------------------------
+		//Internal use.
+		pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status );
+		
+		if( ( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status == PG_GCP_BUFFER_EMPTY ) || 		//Se FULL non si sovrascrive; se READ bisogna prima azzerare indice etc... quindi ci pensa la set_empty()
+			( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status == PG_GCP_BUFFER_INCOMPLETE ) ) {
+			//Write it!
+			pg_gcp_bindex = pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_index;											//copio la posizione del vettore della config attuale in bindex, per chiarezza.
+			*(_pg_Uint8 *)(pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr + pg_gcp_bindex ) = pg_gcp_dbyte;				//scrivo il dato	//ex: pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr[ pg_gcp_bindex ] = pg_gcp_dbyte;							
+			pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_index = ( pg_gcp_bindex + 1 );									//salvo l'indice della posizione nel buffer del config attuale //punta alla prossima posizione in cui scrivere.
+			if( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_index == pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_length ) { //sono gia' entrambi maggiori di una unita' rispetto al massimo valore acquisibile dall'indice
+				if( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_mode != PG_GCP_STRING ) {									//se sto scrivendo una stringa ed arrivo esattamnte in fondo con lo 0 a riempire il buffer, si setta due volte il buffer_full uno con la write-byte e l'altro con la send-string e nel mentre la read lo azzeera ad empty, quindi stampa 2 volte. Quindi con le stringhe qui non si setta il full .
+					pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = PG_GCP_BUFFER_FULL;								//se sono arrivato in fondo al buffer setto il full!
+				}
+			}
+			else {
+				pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = PG_GCP_BUFFER_INCOMPLETE;
+			}
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+			#endif
+			return PG_OK;
+		}
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_SAVE_BYTE_BUFFER_FAILED , PG_ERROR_ERROR );
+		#endif
+		return PG_NOK;		
+	}
+
 	//---[ Rx Data Ready ]---
 	_pg_Uint8 pg_gcp_rx_data_ready( void ) {
 		//--------------------------------------------------------------------------
@@ -1170,6 +1202,7 @@
 						#endif
 						#if ( PG_GCP_TIMEOUT_RESET == PG_ENABLE )
 							////////////////////////??????????????
+							pg_gcp_reset( ); //hmmm... deve chiamarla il tx...???
 						#endif
 						return PG_NOK;
 					}
@@ -1811,12 +1844,12 @@
 			//status_mod //???
 			#if ( PG_GCP_STATUS_MOD_ENABLE == PG_ENABLE )
 				if( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_mode == PG_GCP_STRING ) {
-						if( pg_gcp_status_mod( PG_GCP_BUFFER_FULL ) != PG_OK ) {
-							#if PG_ERROR_IS_ENABLE
-								pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_STATUS_MOD_FAILED , PG_ERROR_ERROR );
-							#endif
-							return( PG_NOK );
-						}
+					if( pg_gcp_status_mod( PG_GCP_BUFFER_FULL ) != PG_OK ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_STATUS_MOD_FAILED , PG_ERROR_ERROR );
+						#endif
+						return( PG_NOK );
+					}
 				}
 			#endif
 			//crc
@@ -1849,7 +1882,8 @@
 		if( pg_gcp_flag_engage == PG_YES ) {
 			for( ; pg_gcp_rdu_index < ( PG_GCP_CONFIGS_NUMBER + 1 ); pg_gcp_rdu_index++ ) {
 				if( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status == PG_GCP_BUFFER_FULL ) {
-					pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status == PG_GCP_BUFFER_READ;
+					pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status = PG_GCP_BUFFER_READ;
+					//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status );
 					//Fill user struct
 					pg_gcp_udata.uconf = pg_gcp_rdu_index;
 					pg_gcp_udata.uptr = pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_ptr;
@@ -1881,6 +1915,9 @@
 //strlen in rx se funziona...
 //r307 e r270 tempi reset
 //tx a richiesta o continua
+
+//ad inizio rx, set_empty disabilitata!!!
+//reset non va in timeout... in ogni condizione
 
 
 

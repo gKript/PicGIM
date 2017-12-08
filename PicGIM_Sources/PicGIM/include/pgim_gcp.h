@@ -256,7 +256,7 @@
 			extern _pg_Uint8	pg_gcp_buffer_rx_16[ PG_GCP_BUFFER_RX_16_LENGTH ];			//!< Rx user buffer (config 16)
 		#endif
 		
-		extern struct pg_gcp_str_config {
+		extern	struct pg_gcp_str_config {
 			void		* xbuffer_ptr;						//!<Payload buffer pointer>
 			_pg_Uint16	xbuffer_length;						//!<Payload length. Total byte quantity to send in a packet; 0 = stream>
 			_pg_Uint8	xbuffer_mode;						//!<It specifies the type of use: as buffer or as string <PG_GCP_BUFFER, PG_GCP_STRING>
@@ -268,7 +268,7 @@
 		extern	struct	pg_gcp_str_udata { 
 			_pg_Uint8	uconf;	//#configuration
 			void *		uptr;	//buffer-ptr
-			_pg_Uint8	ulen;	//#byte rx
+			_pg_Uint16	ulen;	//#byte rx
 		};
 		
 		extern	struct	pg_gcp_str_config pg_gcp_v_config[ ( PG_GCP_CONFIGS_NUMBER + 1 ) ];

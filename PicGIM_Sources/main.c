@@ -16,7 +16,9 @@
 #define	PG_GCP_DEBUG_DELAY_TIME2		3000
 void main( void ) {
 
-	_pg_Uint8 buffer_to_tx[ 3 ] = "aa";			//buffer creati dell' utente con stesse dimensioni del pg_gcp_buffer_rx_1[5] del protocollo opposto
+	_pg_Uint8 buffer_to_tx[ 4 ] = "aaa";			//buffer creati dell' utente con stesse dimensioni del pg_gcp_buffer_rx_1[5] del protocollo opposto
+	_pg_Uint8 mys[ 4 ];
+	_pg_Uint16 num = 0;
 	
 	pg_initialize( );
 	pg_serial_open();
@@ -29,9 +31,10 @@ void main( void ) {
 	while( 1 ) {
 																				
 		pg_gcp_engage( );
-																				
-		pg_gcp_send( buffer_to_tx, PG_GCP_CONFIG_01, PG_GCP_CRC_ON );
-																				
+		
+		
+		pg_gcp_send( itoa( num, mys ), PG_GCP_CONFIG_01, PG_GCP_CRC_ON );
+		num++;																		
 		//pg_gcp_status_sync( );
 																				
 		//pg_gcp_crc( buffer_to_tx, 3 );
@@ -39,7 +42,7 @@ void main( void ) {
 		pg_gcp_engage_end( );
 		
 		pg_delay_sec( 4 );
-		pg_gcp_reset( );
+		//pg_gcp_reset( );
 		pg_lcd_hd44780_clear( 0 );
 	}										
 	PG_HALT;
@@ -61,6 +64,7 @@ void main( void ) {
 #include "picgim_main.h"
 
 void main( void ) {
+	//_pg_Uint8	mystr[ 6 ];
 	
 	pg_initialize( );
 	pg_gcp_init( );
@@ -73,10 +77,16 @@ void main( void ) {
 		pg_gcp_rx();
 		
 		if( pg_gcp_read( ) != PG_NOK ) {
+			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.uconf + 48 ) );
 			pg_lcd_hd44780_write_string( 0 , pg_gcp_udata.uptr );
-			pg_lcd_hd44780_write_string( 0 , ( pg_gcp_udata.ulen ) );
+			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.ulen + 48 ) );
+			
+		pg_delay_sec( 3 );
+		pg_lcd_hd44780_clear( 0 );
 		}
 		
+		
+		//pg_lcd_hd44780_write_string( 0 , ( itoa( pg_gcp_udata.ulen, mystr ) ) );
 		
 		//_pg_Uint8 *	pg_gcp_read( void ) {
 		//pg_gcp_udata.uconf = pg_gcp_rdu_index;
@@ -98,7 +108,6 @@ void main( void ) {
 	}
 	PG_HALT;
 }
-
 
 
 

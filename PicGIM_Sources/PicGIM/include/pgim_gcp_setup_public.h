@@ -14,7 +14,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		//		T I M E O U T
 		//-------------------------------------------------------------------------------------------------------------
-		#define	PG_GCP_TIMEOUT_MS_TX							2000		//!< Min. 1ms - Max. 60000ms
+		#define	PG_GCP_TIMEOUT_MS_TX							5000		//!< Min. 1ms - Max. 60000ms
 		#define	PG_GCP_TIMEOUT_MS_RX							2000		//!< Min. 1ms - Max. 60000ms
 		#define	PG_GCP_TIMEOUT_MS_DIAL							2000		//!< Min. 1ms - Max. 60000ms
 		#define PG_GCP_TIMEOUT_MS_CRC							6000		//!< Min. 1ms - Max. 60000ms
@@ -53,7 +53,7 @@
 		//
 		// 		C O N F I G   01
 		#define PG_GCP_BUFFER_RX_01_ENABLE						PG_ENABLE		//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define PG_GCP_BUFFER_RX_01_LENGTH						5				//!< Min. 1 - Max. xxxxxx >
+		#define PG_GCP_BUFFER_RX_01_LENGTH						6				//!< Min. 1 - Max. xxxxxx >
 		#define	PG_GCP_BUFFER_RX_01_MODE						PG_GCP_STRING	//!< Must be: PG_GCP_BUFFER || PG_GCP_STRING
 		
 		// 		C O N F I G   02
