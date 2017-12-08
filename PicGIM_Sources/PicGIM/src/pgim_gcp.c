@@ -292,7 +292,7 @@
 				PG_GCP_LED_RESET_LAT = PG_ON;
 			#endif
 			//???
-			pg_delay_sec( 1 );
+			//pg_delay_sec( 1 );
 			pg_delay_msec( PG_GCP_DELAY_RESET_TX );
 			pg_gcp_reset_local();
 			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
@@ -986,7 +986,7 @@
 			if( pg_gcp_flag_data_mode == PG_YES ) {
 				if( pg_gcp_tx_control_byte( PG_GCP_CONTROL_STREAMING ) == PG_OK ) {
 					pg_gcp_tx_byte_serial( mode );
-					if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_TX ) == PG_OK ) {
+					if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 						if( pg_gcp_dbyte == mode ) {
 							pg_gcp_flag_streaming = PG_YES;
 							#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_STREAMING_ENABLE == PG_ENABLE ) )
@@ -1023,7 +1023,7 @@
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_CONTROL_STREAMING_REPLY );
 		#endif
 		pg_gcp_tx_byte_serial( PG_GCP_CONTROL_STREAMING_REPLY );
-		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_TX ) == PG_OK ) {
+		if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 			if( pg_gcp_dbyte == PG_GCP_STREAMING_ON ) {
 				pg_gcp_flag_streaming = PG_YES;
 				pg_gcp_tx_byte_serial( PG_GCP_STREAMING_ON );
@@ -1200,10 +1200,11 @@
 						#if PG_ERROR_IS_ENABLE
 							pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_READ_BYTE_SERIAL_TIMEOUT , PG_ERROR_WARNING );
 						#endif
-						#if ( PG_GCP_TIMEOUT_RESET == PG_ENABLE )
+						//#if ( PG_GCP_AUTORESET_TIMEOUT == PG_ENABLE )
 							////////////////////////??????????????
-							pg_gcp_reset( ); //hmmm... deve chiamarla il tx...???
-						#endif
+							//pg_gcp_reset( ); //hmmm... deve chiamarla il tx...???
+							//nessun reset se non arriva nulla, warning, e si aspetta
+						//#endif
 						return PG_NOK;
 					}
 				}
@@ -1283,13 +1284,36 @@
 					#endif
 					return PG_OK;
 					}
+					else{
+						//se ritorna un reply diverso da quello atteso
+						#if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
+							if( pg_gcp_reset( ) == PG_OK ) {
+								#if PG_ERROR_IS_ENABLE
+									pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESETTED , PG_ERROR_WARNING );
+								#endif
+								return( PG_NOK );
+							}
+						#endif
+					}
 				}
 			}
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_TX_CONTROL_FAILED , PG_ERROR_ERROR );
+			#endif
+			return PG_NOK;
 		}
-		#if PG_ERROR_IS_ENABLE
-			pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_TX_CONTROL_FAILED , PG_ERROR_ERROR );
+		#if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
+			if( pg_gcp_reset( ) == PG_OK ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESETTED , PG_ERROR_WARNING );
+				#endif
+				return( PG_NOK );
+			}
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESET_FAIL , PG_ERROR_ERROR );
+			#endif
+			return( PG_NOK );
 		#endif
-		return PG_NOK;
 	}
 		
 	//---[ Tx Buffer Control ]---
@@ -1590,6 +1614,7 @@
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 				#endif
+				pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = PG_GCP_BUFFER_CRC;
 				pg_gcp_tx_byte_serial( PG_GCP_CRC_OK );
 				return PG_OK;
 			}
@@ -1881,18 +1906,33 @@
 		// Return a ptr to the first full buffer/string user data struct.
 		if( pg_gcp_flag_engage == PG_YES ) {
 			for( ; pg_gcp_rdu_index < ( PG_GCP_CONFIGS_NUMBER + 1 ); pg_gcp_rdu_index++ ) {
-				if( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status == PG_GCP_BUFFER_FULL ) {
-					pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status = PG_GCP_BUFFER_READ;
-					//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status );
-					//Fill user struct
-					pg_gcp_udata.uconf = pg_gcp_rdu_index;
-					pg_gcp_udata.uptr = pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_ptr;
-					pg_gcp_udata.ulen = ( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_index - 1 );	// index for buffer and string (no .length)
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
-					#endif
-					return( &pg_gcp_udata );
-				}
+				#if ( PG_GCP_CRC_ENABLE == PG_ENABLE )
+					if( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status == PG_GCP_BUFFER_CRC ) {	//CRC
+						pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status = PG_GCP_BUFFER_READ;
+						//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status );
+						//Fill user struct
+						pg_gcp_udata.uconf = pg_gcp_rdu_index;
+						pg_gcp_udata.uptr = pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_ptr;
+						pg_gcp_udata.ulen = ( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_index - 1 );	// index for buffer and string (no .length)
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+						#endif
+						return( &pg_gcp_udata );
+					}
+				#else
+					if( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status == PG_GCP_BUFFER_FULL ) { //FULL
+						pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status = PG_GCP_BUFFER_READ;
+						//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_status );
+						//Fill user struct
+						pg_gcp_udata.uconf = pg_gcp_rdu_index;
+						pg_gcp_udata.uptr = pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_ptr;
+						pg_gcp_udata.ulen = ( pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_index - 1 );	// index for buffer and string (no .length)
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+						#endif
+						return( &pg_gcp_udata );
+					}
+				#endif
 			}
 			pg_gcp_rdu_index = 0;
 			#if PG_ERROR_IS_ENABLE
@@ -1915,10 +1955,9 @@
 //strlen in rx se funziona...
 //r307 e r270 tempi reset
 //tx a richiesta o continua
+//autoreset non funziona se si schianta l'rx dentro il controllo config o crc perche' e' messa solo dentro la send-control; nella control ci sono 2 autoreset...
 
-//ad inizio rx, set_empty disabilitata!!!
-//reset non va in timeout... in ogni condizione
-
+//se crc abilitata la read-user deve leggere non il full, ma il crc-ok
 
 
 

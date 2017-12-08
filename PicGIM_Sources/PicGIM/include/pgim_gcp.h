@@ -50,6 +50,7 @@
 		#define	PG_GCP_BUFFER_EMPTY								'e'
 		#define	PG_GCP_BUFFER_INCOMPLETE						'i'
 		#define	PG_GCP_BUFFER_FULL								'f'
+		#define	PG_GCP_BUFFER_CRC								'c'
 		#define	PG_GCP_BUFFER_READ								'r'
 		#define	PG_GCP_BUFFER_UNKNOWN							'?'
 		//---[ End Buffer Status ]---
@@ -152,6 +153,8 @@
 			PG_GCP_STREAMING_ON,
 			PG_GCP_STREAMING_OFF,
 			PG_GCP_RX_DATA_READY_NO,	// see in .c
+			PG_GCP_ERROR_CONTROLBYTE_RESETTED,
+			PG_GCP_ERROR_CONTROLBYTE_RESET_FAIL,
 			PG_GCP_ERROR_ENGAGE_FAILED,
 			PG_GCP_ERROR_ENGAGE_END_FAILED,
 			PG_GCP_ERROR_ENGAGE_RESETTED,

@@ -4,25 +4,26 @@
 	#define _PGIM_GCP_SETUP_PUBLIC_H_
 
 	#if ( PGIM_GCP == PG_ENABLE )
-		
 		//-------------------------------------------------------------------------------------------------------------
 		//		D E L A Y
 		//-------------------------------------------------------------------------------------------------------------
-		#define	PG_GCP_DELAY_RESET_TX							1000		//!< Min. 1ms - Max. 60000ms
+		#define	PG_GCP_DELAY_RESET_TX							1000		//!< Min. 1ms - Max. 60000ms	//t-TX > t-RX
 		#define	PG_GCP_DELAY_RESET_RX							200			//!< Min. 1ms - Max. 60000ms
 		
 		//-------------------------------------------------------------------------------------------------------------
 		//		T I M E O U T
 		//-------------------------------------------------------------------------------------------------------------
-		#define	PG_GCP_TIMEOUT_MS_TX							5000		//!< Min. 1ms - Max. 60000ms
-		#define	PG_GCP_TIMEOUT_MS_RX							2000		//!< Min. 1ms - Max. 60000ms
-		#define	PG_GCP_TIMEOUT_MS_DIAL							2000		//!< Min. 1ms - Max. 60000ms
-		#define PG_GCP_TIMEOUT_MS_CRC							6000		//!< Min. 1ms - Max. 60000ms
+		#define	PG_GCP_TIMEOUT_MS_TX							10000		//!< Min. 1ms - Max. 60000ms	//Only in Send-Control()
+		#define	PG_GCP_TIMEOUT_MS_RX							10000		//!< Min. 1ms - Max. 60000ms	//Only in Rx()
+		#define	PG_GCP_TIMEOUT_MS_DIAL							10000		//!< Min. 1ms - Max. 60000ms	//All reply answer
+		#define PG_GCP_TIMEOUT_MS_CRC							10000		//!< Min. 1ms - Max. 60000ms	//Onlt in Crc()
 
 		//-------------------------------------------------------------------------------------------------------------		
-		//		A U T O - R E S E T
+		//		R E S E T
 		//-------------------------------------------------------------------------------------------------------------
-		#define PG_GCP_AUTORESET_ENGAGE_ENABLE					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Autoreset on engage fail
+		//#define PG_GCP_AUTORESET_TIMEOUT						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Reset on none rx reply (PG_GCP_TIMEOUT_MS_DIAL)
+		#define PG_GCP_AUTORESET_ENGAGE_ENABLE					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Autoreset on engage fail (PG_GCP_TIMEOUT_MS_TX)
+		#define PG_GCP_AUTORESET_CONTROLBYTE_ENABLE				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Autoreset on send control byte fail (PG_GCP_TIMEOUT_MS_TX)
 
 		//-------------------------------------------------------------------------------------------------------------		
 		//		S T A T U S
@@ -33,7 +34,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		//		C R C
 		//-------------------------------------------------------------------------------------------------------------
-		#define PG_GCP_CRC_ENABLE								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define PG_GCP_CRC_ENABLE								PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		
 		//-------------------------------------------------------------------------------------------------------------
 		//		F U N C T I O N S

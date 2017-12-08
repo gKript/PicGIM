@@ -41,7 +41,7 @@ void main( void ) {
 																				
 		pg_gcp_engage_end( );
 		
-		pg_delay_sec( 4 );
+		pg_delay_sec( 1 );
 		//pg_gcp_reset( );
 		pg_lcd_hd44780_clear( 0 );
 	}										
@@ -81,7 +81,7 @@ void main( void ) {
 			pg_lcd_hd44780_write_string( 0 , pg_gcp_udata.uptr );
 			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.ulen + 48 ) );
 			
-		pg_delay_sec( 3 );
+		pg_delay_sec( 1 );
 		pg_lcd_hd44780_clear( 0 );
 		}
 		
