@@ -199,6 +199,7 @@
 		extern _pg_Uint8	pg_gcp_rdu_index;
 		extern _pg_Uint8	pg_gcp_rde_index;
 		
+		extern _pg_Uint8	pg_gcp_flag_tx;						//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_engage;						//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_data_mode;					//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_request;					//!<(1 bit flag todo?)
@@ -501,7 +502,7 @@
 				\param			Nothing.
 			*/
 			_pg_Uint8	pg_gcp_crc32_calc						( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );//( _pg_Uint8 * cbuffer );
-						/*!
+			/*!
 				\brief			What it do. \n
 								Conditions.
 				\attention		Nothing.

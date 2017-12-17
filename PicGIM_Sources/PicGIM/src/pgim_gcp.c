@@ -100,6 +100,7 @@
 	_pg_Uint8 	pg_gcp_rde_index;						//non parte sempre da zero ed evita il blocco del buffer da 1 byte
 	
 	//---[ Flag ]---
+	_pg_Uint8	pg_gcp_flag_tx;							//(1 bit flag todo)	E' il master, chi invia control.
 	_pg_Uint8	pg_gcp_flag_engage;						//(1 bit flag todo)
 	_pg_Uint8	pg_gcp_flag_data_mode;					//(1 bit flag todo)
 	_pg_Uint8	pg_gcp_flag_request;					//(1 bit flag todo)
@@ -285,7 +286,7 @@
 	//---[   R E S E T   ]---
 	//#######################################################################
 	//---[ TX - Reset Control ]---
-	_pg_Uint8 pg_gcp_reset( void ) {	//Reset ( remote and local )
+ 	_pg_Uint8 pg_gcp_reset( void ) {	//Reset ( remote and local )
 		//--------------------------------------------------------------------------
 		if( pg_gcp_tx_control_byte( PG_GCP_CONTROL_RESET ) == PG_OK ) {
 			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
@@ -310,7 +311,7 @@
 			return PG_NOK;
 		}
 	}
-	
+
 	//---[ RX - Reset ]---
 	_pg_Uint8 pg_gcp_rx_reset( void ) {
 		//--------------------------------------------------------------------------
@@ -321,8 +322,7 @@
 		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_REPLY == PG_ENABLE ) )
 			pg_lcd_hd44780_put_char( 0 , PG_GCP_CONTROL_RESET_REPLY  );
 		#endif
-		//???
-		//pg_delay_msec( 200 );
+		//
 		pg_delay_msec( PG_GCP_DELAY_RESET_RX );
 		pg_gcp_reset_local();
 		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
@@ -338,11 +338,59 @@
 		return PG_OK;
 	}
 	
+/*
+	//---[ TX - Reset Control ]---
+	_pg_Uint8 pg_gcp_reset( void ) {	//Reset ( remote and local )
+		//--------------------------------------------------------------------------
+		while( pg_gcp_tx_control_byte( PG_GCP_CONTROL_RESET ) == PG_OK ) {
+			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+				PG_GCP_LED_RESET_LAT = PG_ON;
+			#endif
+			//
+			pg_delay_msec( PG_GCP_DELAY_RESET_TX );
+			pg_gcp_reset_local();
+			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+				PG_GCP_LED_RESET_LAT = PG_OFF;
+			#endif
+		}
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+		#endif
+		return PG_OK;
+	}
+	
+	//---[ RX - Reset ]---
+	_pg_Uint8 pg_gcp_rx_reset( void ) {
+		//--------------------------------------------------------------------------
+		pg_gcp_tx_byte_serial( PG_GCP_CONTROL_RESET_REPLY );
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_RESET_LAT = PG_ON;
+		#endif
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_REPLY == PG_ENABLE ) )
+			pg_lcd_hd44780_put_char( 0 , PG_GCP_CONTROL_RESET_REPLY  );
+		#endif
+		//
+		pg_delay_msec( PG_GCP_DELAY_RESET_RX );	//to show led
+		pg_gcp_reset_local();
+		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+			PG_GCP_LED_RESET_LAT = PG_OFF;
+		#endif
+		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_CLEAR_LCD == PG_ENABLE ) )
+			pg_lcd_hd44780_clear( 0 );
+		#endif
+ 		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+		#endif
+		//return( PG_GCP_OK_RESET_DONE );
+		return PG_OK; 
+	}
+*/	
 	//---[ Reset Local Control ]---
 	void pg_gcp_reset_local( void ) {	//Reset ( local only )
 		//--------------------------------------------------------------------------
 		//---[ Variables Initialization ]---
 		pg_gcp_nconfig				= 0;
+		pg_gcp_flag_tx				= PG_NO;
 		pg_gcp_flag_engage			= PG_NO;
 		pg_gcp_flag_data_mode		= PG_NO;
 		pg_gcp_flag_request			= PG_NO;
@@ -571,6 +619,7 @@
 		if( pg_gcp_flag_engage == PG_NO ) {
 			if( pg_gcp_tx_control_byte( PG_GCP_CONTROL_ENGAGE ) == PG_OK ) {
 				pg_gcp_flag_engage = PG_YES;
+				pg_gcp_flag_tx == PG_YES;
 				#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_ENGAGE_ENABLE == PG_ENABLE ) )
 					PG_GCP_LED_ENGAGE_LAT = PG_ON;
 				#endif
@@ -579,7 +628,7 @@
 				#endif
 				return PG_OK;
 			}
-			#if ( PG_GCP_AUTORESET_ENGAGE_ENABLE == PG_ENABLE )
+  			#if ( PG_GCP_AUTORESET_ENGAGE_ENABLE == PG_ENABLE )
 				if( pg_gcp_reset( ) == PG_OK ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_ENGAGE_RESETTED , PG_ERROR_WARNING );
@@ -605,6 +654,7 @@
 		#endif
 		pg_gcp_tx_byte_serial( PG_GCP_CONTROL_ENGAGE_REPLY );
 		pg_gcp_flag_engage = PG_YES;
+		pg_gcp_flag_tx == PG_NO;
 		#if PG_ERROR_IS_ENABLE
 			pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 		#endif
@@ -1200,11 +1250,14 @@
 						#if PG_ERROR_IS_ENABLE
 							pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_READ_BYTE_SERIAL_TIMEOUT , PG_ERROR_WARNING );
 						#endif
-						//#if ( PG_GCP_AUTORESET_TIMEOUT == PG_ENABLE )
-							////////////////////////??????????????
-							//pg_gcp_reset( ); //hmmm... deve chiamarla il tx...???
-							//nessun reset se non arriva nulla, warning, e si aspetta
-						//#endif
+/* 						#if ( PG_GCP_AUTORESET_TIMEOUT == PG_ENABLE )
+							if( pg_gcp_flag_tx == PG_YES ) {	//TX reset remote ad local
+								pg_gcp_reset( );
+							}
+							if( pg_gcp_flag_tx == PG_NO ) {		//RX reset only local
+								pg_gcp_reset_local( );
+							} 
+						#endif */
 						return PG_NOK;
 					}
 				}
@@ -1284,7 +1337,7 @@
 					#endif
 					return PG_OK;
 					}
-					else{
+/* 					else{
 						//se ritorna un reply diverso da quello atteso
 						#if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
 							if( pg_gcp_reset( ) == PG_OK ) {
@@ -1294,26 +1347,26 @@
 								return( PG_NOK );
 							}
 						#endif
-					}
+					} */
 				}
 			}
-			#if PG_ERROR_IS_ENABLE
+ 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_TX_CONTROL_FAILED , PG_ERROR_ERROR );
 			#endif
 			return PG_NOK;
 		}
-		#if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
+/*  		#if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
 			if( pg_gcp_reset( ) == PG_OK ) {
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESETTED , PG_ERROR_WARNING );
 				#endif
 				return( PG_NOK );
 			}
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESET_FAIL , PG_ERROR_ERROR );
-			#endif
-			return( PG_NOK );
+		#endif */
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESET_FAIL , PG_ERROR_ERROR );
 		#endif
+		return( PG_NOK );
 	}
 		
 	//---[ Tx Buffer Control ]---
@@ -1662,6 +1715,9 @@
 	//#######################################################################
 	//---[   R E Q U E S T   ]---
 	//#######################################################################
+	
+	//gestire pg_gcp_flag_tx !!!!!!!!!!!!!
+	
 	#if ( PG_GCP_REQUEST_ENABLE == PG_ENABLE )
 		//---[ RX - Request Set ]---
 		void pg_gcp_request_set( _pg_Uint8 qvalue ) {	//PG_YES or PG_NO

@@ -1,111 +1,114 @@
+/*
+	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
+
+	File name :		main.c
+	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
+	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
+
+	Current Milestone :		0.5
+	Current version :		0.5-0
+	Since version :			0.1-0
+	Deprecated version :	This file is not deprecated.
+
+	START LICENSE	GPL	V3.0
+
+		PicGIM is a "modular library from scratch".
+		PicGIM is developed to work with PIC18F (R) MCU family only.
+
+		Copyright (C) 2015  gKript.org - We.PIC project - <http://www.gkript.org>
+
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	END LICENSE
+ */
+ 
+#include "picgim_main.h"
+/*
+
 //#################################################################################
 //#################################################################################
 //#################################################################################
-//GCP - General Communication Protocol
+//SSP -	Simple Serial Protocol
 //main_TX.c
 //#################################################################################
 //#################################################################################
 //#################################################################################
 
-/*
-
-#include "picgim_main.h"
-
-#define	PG_GCP_DEBUG_DELAY				1
-#define	PG_GCP_DEBUG_DELAY_TIME1		500
-#define	PG_GCP_DEBUG_DELAY_TIME2		3000
-void main( void ) {
-
-	_pg_Uint8 buffer_to_tx[ 4 ] = "aaa";			//buffer creati dell' utente con stesse dimensioni del pg_gcp_buffer_rx_1[5] del protocollo opposto
-	_pg_Uint8 mys[ 4 ];
-	_pg_Uint16 num = 0;
+void main( void ) {	//TX
+	//--------------------------------------------------------------------------
+	_pg_Uint8 text[ 8 ] = "abc\0";
+	
+	_pg_Uint8 sidx[ 8 ];
+	_pg_int16 idx = 0;
 	
 	pg_initialize( );
-	pg_serial_open();
+	pg_serial_open( );
 	pg_lcd_hd44780_clear( 0 );
- 	pg_gcp_init( );
-	//pg_lcd_hd44780_put_char( 0 , 'T' );
-	//pg_delay_sec( 1 );
-	//if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
+	
+	pg_ssp_init();
+	
+	//text[ 3	] = '\0';
 	
 	while( 1 ) {
-																				
-		pg_gcp_engage( );
-		
-		
-		pg_gcp_send( itoa( num, mys ), PG_GCP_CONFIG_01, PG_GCP_CRC_ON );
-		num++;																		
-		//pg_gcp_status_sync( );
-																				
-		//pg_gcp_crc( buffer_to_tx, 3 );
-																				
-		pg_gcp_engage_end( );
-		
-		pg_delay_sec( 1 );
-		//pg_gcp_reset( );
-		pg_lcd_hd44780_clear( 0 );
-	}										
+		itoa( idx, sidx );
+		//if( pg_ssp_tx( text , 8 ) == PG_OK ) {
+		if( pg_ssp_tx( sidx , 8 ) == PG_OK ) {
+			pg_lcd_hd44780_put_char( 0 , '!' );
+			idx++;
+		}
+		pg_delay( 3 , PG_SEC );
+		//pg_lcd_hd44780_clear( 0 );
+		pg_lcd_hd44780_goto( 0 , 0 , 0 );
+	}
 	PG_HALT;
+	//pg_serial_close();
 }
 
 */
 
+
+
 //#################################################################################
 //#################################################################################
 //#################################################################################
-//GCP - General Communication Protocol
+//SSP -	Simple Serial Protocol
 //main_RX.c
 //#################################################################################
 //#################################################################################
 //#################################################################################
 
-
-
-#include "picgim_main.h"
-
-void main( void ) {
-	//_pg_Uint8	mystr[ 6 ];
+void main( void ) { //RX
+	//--------------------------------------------------------------------------
+	_pg_Uint8 rbuffer[ 8 ];
 	
 	pg_initialize( );
-	pg_gcp_init( );
 	pg_serial_open( );
 	pg_lcd_hd44780_clear( 0 );
-	//pg_lcd_hd44780_put_char( 0 , 'R' );
-	//pg_delay_sec( 1 );
-	
- 	while( 1 ) {
-		pg_gcp_rx();
-		
-		if( pg_gcp_read( ) != PG_NOK ) {
-			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.uconf + 48 ) );
-			pg_lcd_hd44780_write_string( 0 , pg_gcp_udata.uptr );
-			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.ulen + 48 ) );
-			
-		pg_delay_sec( 1 );
-		pg_lcd_hd44780_clear( 0 );
+
+	pg_ssp_init();
+
+	PG_LOOP( PG_FOREVER ) {
+		//pg_lcd_hd44780_clear( 0 );
+		pg_lcd_hd44780_goto( 0 , 0 , 0 );
+		if( pg_ssp_rx( rbuffer ) == PG_OK ) {
+			pg_lcd_hd44780_put_char( 0 , '!' );
+			pg_lcd_hd44780_put_char( 0 , '!' );
+			pg_lcd_hd44780_put_char( 0 , '!' );
+			pg_lcd_hd44780_write_string( 0 , rbuffer );	
 		}
-		
-		
-		//pg_lcd_hd44780_write_string( 0 , ( itoa( pg_gcp_udata.ulen, mystr ) ) );
-		
-		//_pg_Uint8 *	pg_gcp_read( void ) {
-		//pg_gcp_udata.uconf = pg_gcp_rdu_index;
-		//pg_gcp_udata.uptr = pg_gcp_v_config[ pg_gcp_rdu_index ].xbuffer_ptr;
-		//pg_gcp_udata.len = ( p
-					
-					
-		//if( pg_gcp_rx_data_ready( ) != PG_GCP_RX_DATA_READY_NO ) {
-			//pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + 48 );				//config attuale !!!
-			//pg_lcd_hd44780_put_char( 0 , rdr + 48 );						//config attuale !!!
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr );	//ok	???
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr );	//atroie
-			//*(_pg_int16 *)(pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr + 2) = 0;
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr );
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );	//ok	???
-			//pg_lcd_hd44780_put_char( 0 , *pg_gcp_rx_data_read( ) );
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
-		//}
 	}
+	//pg_serial_close();
 	PG_HALT;
 }
 
@@ -116,7 +119,6 @@ void main( void ) {
 
 
 
-/*
 
 
 
@@ -124,147 +126,71 @@ void main( void ) {
 
 
 
+//pg_lcd_hd44780_put_char( 0 , 'T' );
+//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
 
+/* 
 
-
-/*
-
-#include "picgim_main.h"
-
-#define	PG_GCP_DEBUG_DELAY				1
-#define	PG_GCP_DEBUG_DELAY_TIME1		500
-#define	PG_GCP_DEBUG_DELAY_TIME2		3000
-void main( void ) {
-
-	_pg_Uint8 buffer_to_tx[ 3 ] = "jj\0";			//buffer creati dell' utente con stesse dimensioni del pg_gcp_buffer_rx_1[5] del protocollo opposto
-	
-	pg_initialize( );
-	pg_serial_open();
-	pg_lcd_hd44780_clear( 0 );
- 	pg_gcp_init( );
-	//pg_lcd_hd44780_put_char( 0 , 'T' );
-	//pg_delay_sec( 1 );
-	
-	while( 1 ) {
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		if( pg_gcp_engage( ) != PG_OK ) {	
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_reset( );
-		}
-		else {
-			pg_gcp_config( 1 );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_data( );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_tx_string( buffer_to_tx );
-			//pg_gcp_tx_buffer( buffer_to_tx );
-			//pg_gcp_send_byte_serial( buffer_to_tx[ 2 ] );
-			//pg_gcp_send_byte_serial( buffer_to_tx[ 3 ] );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_data_end( );
-			//pg_gcp_status_mod( PG_GCP_BUFFER_FULL );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_status_sync( );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_crc( buffer_to_tx, 3 );
-												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-			pg_gcp_engage_end( );
-			
-			pg_delay_sec( 2 );
-			pg_gcp_reset( );
-			pg_lcd_hd44780_clear( 0 );
-		}
-	}										
-	PG_HALT;
+void blink_led_error( void ) {
+	pg_pin_set( LED_ERROR );
+	pg_delay( 500 , PG_MSEC );
+	pg_pin_clear( LED_ERROR );
 }
 
-*/
+void blink_led_ok( void ) {
+	pg_pin_set( LED_OK );
+	pg_delay( 500 , PG_MSEC );
+	pg_pin_clear( LED_OK );
+}
+	pg_pin_clear( LED_OK );
+	pg_pin_clear( LED_ERROR );
+	pg_pin_mode( LED_OK_TRIS , PG_OUT );
+	pg_pin_mode( LED_ERROR_TRIS , PG_OUT );
+	pg_pin_mode( PUSH_TRIS , PG_IN );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 	while( 1 ) {
-//		while( !DataRdyUSART() ); 	//DataRdyUSART ret 1 if data is present
-//		pg_lcd_hd44780_put_char( 0 , ReadUSART() );
-//	}
-
-	//strcpypgm2ram( pg_gcp_buffer_rx_01, "hallo\0" );
-
-	//pg_lcd_hd44780_put_char( 0 , (pg_gcp_rx() - 77)  );
-	//pg_gcp_rx( );
-	//pg_lcd_hd44780_write_p_string		( _pg_Uint8 ControllerNumber , _pg_Uint8 Ln , _pg_Uint8 Pos , _pg_int8 * Str );
-	//pg_lcd_hd44780_write_p_string( 0 , 0 , 5 , pg_gcp_buffer_rx_01 );
-	//pg_gcp_rx();
-	//pg_gcp_reset( );
-
-
-
-
-
-		//get = pg_gcp_rx_data_ready( );
-		//if( get != PG_GCP_RX_DATA_READY_NONE ) {
-			//pg_lcd_hd44780_write_p_string( 0 , 1 , 0 , pg_gcp_v_config[ get ].xbuffer_ptr );
-			//stampa bene quella in engage end
-			//pg_delay_sec( 1 );
-			//pg_lcd_hd44780_clear( 0 );
-			//pg_lcd_hd44780_put_char( 0 , '_' );
-			//pg_lcd_hd44780_put_char( 0 , get + 48 ); 
-			//pg_lcd_hd44780_put_char( 0 , '_' );
-			//pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + 48 );
-			//pg_lcd_hd44780_put_char( 0 , (_pg_Uint8)pg_gcp_bindex + 48 );	
-			//pg_gcp_rx_data_read( get );  //=1
-			//pg_lcd_hd44780_put_char( 0 , ' ' );
-			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr[ 0 ] );
-			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr[ 1 ] );
-			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr[ 0 ] );
-			//pg_lcd_hd44780_put_char( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr[ 1 ] );
-			//pg_delay_sec( 1 );
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ get ].xbuffer_ptr ); sbaglia!
-		//}
 		
-		//if( pg_gcp_v_config[ 1 ].xbuffer_status == PG_GCP_BUFFER_FULL ) {
-//		if( pg_gcp_v_config[ 1 ].xbuffer_status > 169 ) {
-//			break;
-//		}
-	//pg_gcp_buffer_rx_01[7]='\0';
-	//pg_lcd_hd44780_write_p_string( 0 , 1 , 0 , pg_gcp_buffer_rx_01 );
- 
- 
+	pg_pin_clear( LED_OK );
+	pg_pin_clear( LED_ERROR );
+	pg_pin_mode( LED_OK_TRIS , PG_OUT );
+	pg_pin_mode( LED_ERROR_TRIS , PG_OUT );
+	
+	#define PUSH			P_B1
+	#define LED_OK			L_B2
+	#define LED_ERROR		L_B3
+
+	#define PUSH_TRIS		T_B1
+	#define LED_OK_TRIS		T_B2
+	#define LED_ERROR_TRIS	T_B3
+*/
+/*
+			switch ( responce ) {
+			case PG_OK :
+				pg_lcd_hd44780_clear( 0 );
+				pg_lcd_hd44780_write_string( 0 , rbuffer );
+			break;
+			default :
+				blink_led_error();
+			break;
+		}
+	*/
+
+
+
+//		if( !PUSH ) {				//debounce
+//			pg_delay_msec( 100 );	//debounce
+//			if( !PUSH ) {			//debounce
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

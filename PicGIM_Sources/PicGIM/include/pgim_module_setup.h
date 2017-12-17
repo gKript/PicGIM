@@ -91,6 +91,7 @@
 //	#include "pgim_external_memory_setup_public.h"
 	#include "pgim_sensor_setup_public.h"
 	#include "pgim_gcp_setup_public.h"
+	#include "pgim_ssp_setup_public.h"
 	
     #include "pgim_hardware_setup.h"
 

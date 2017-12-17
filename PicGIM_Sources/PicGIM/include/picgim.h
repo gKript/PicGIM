@@ -787,6 +787,23 @@
 	//---[ END GCP ]---
 	
 	
+	//---[ SSP ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_SSP
+		#define		PGIM_SSP		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_SSP
+		#define		PGIM_SSP		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_SSP == PG_ENABLE ) 
+		#include "pgim_ssp.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> SSP module >>> Loaded
+		#endif
+	#endif
+	//---[ END SSP ]---
+	
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T
 	//------------------------------------------------------------------------------

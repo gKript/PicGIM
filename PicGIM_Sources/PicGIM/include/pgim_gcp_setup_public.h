@@ -13,15 +13,15 @@
 		//-------------------------------------------------------------------------------------------------------------
 		//		T I M E O U T
 		//-------------------------------------------------------------------------------------------------------------
-		#define	PG_GCP_TIMEOUT_MS_TX							10000		//!< Min. 1ms - Max. 60000ms	//Only in Send-Control()
-		#define	PG_GCP_TIMEOUT_MS_RX							10000		//!< Min. 1ms - Max. 60000ms	//Only in Rx()
-		#define	PG_GCP_TIMEOUT_MS_DIAL							10000		//!< Min. 1ms - Max. 60000ms	//All reply answer
+		#define	PG_GCP_TIMEOUT_MS_TX							5000		//!< Min. 1ms - Max. 60000ms	//Only in Send-Control()
+		#define	PG_GCP_TIMEOUT_MS_RX							3000		//!< Min. 1ms - Max. 60000ms	//Only in Rx()
+		#define	PG_GCP_TIMEOUT_MS_DIAL							3000		//!< Min. 1ms - Max. 60000ms	//All reply answer
 		#define PG_GCP_TIMEOUT_MS_CRC							10000		//!< Min. 1ms - Max. 60000ms	//Onlt in Crc()
 
 		//-------------------------------------------------------------------------------------------------------------		
 		//		R E S E T
 		//-------------------------------------------------------------------------------------------------------------
-		//#define PG_GCP_AUTORESET_TIMEOUT						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Reset on none rx reply (PG_GCP_TIMEOUT_MS_DIAL)
+		#define PG_GCP_AUTORESET_TIMEOUT						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Reset on none rx reply (PG_GCP_TIMEOUT_MS_DIAL)
 		#define PG_GCP_AUTORESET_ENGAGE_ENABLE					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Autoreset on engage fail (PG_GCP_TIMEOUT_MS_TX)
 		#define PG_GCP_AUTORESET_CONTROLBYTE_ENABLE				PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE			Autoreset on send control byte fail (PG_GCP_TIMEOUT_MS_TX)
 
