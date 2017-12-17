@@ -37,7 +37,7 @@
 		\file		pgim_h32_setup_public.h
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		Multiplatform random number generator
+		\brief		Hash32
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n

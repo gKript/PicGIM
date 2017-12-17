@@ -42,141 +42,16 @@ void main( void ) {
 	_pg_Uint8 c;
 	
 	pg_initialize();
-	//pg_serial_open( );
 	pg_lcd_hd44780_clear( 0 );
 
-	pg_h32_prs_seed( pg_h32_Hash32( arg ) );
+	pg_prs_seed( pg_h32_hash32( arg ) );
 	printf( "chsum  %08X\n" , pg_h32_sum );
 	puts( "Pseudo seq:" );
 	for ( c = 0 ; c < 10 ; c++ ) {
-		printf ( " %3u " , pg_h32_prs_rand8() );
+		printf ( " %3u " , pg_prs_rand8() );
 	}
 	puts( "" );
-	//pg_lcd_hd44780_write_string( 0 , rbuffer );	
-	
-	//pg_serial_close();
 	PG_HALT;
 }
-
-
-
-
-
-
-
-//#################################################################################
-//#################################################################################
-//#################################################################################
-//SSP -	Simple Serial Protocol
-//main_RX.c
-//#################################################################################
-//#################################################################################
-//#################################################################################
-/* 
-void main( void ) { //RX
-	//--------------------------------------------------------------------------
-	_pg_Uint8 rbuffer[ 8 ];
-	
-	pg_initialize( );
-	pg_serial_open( );
-	pg_lcd_hd44780_clear( 0 );
-
-	pg_ssp_init();
-
-	PG_LOOP( PG_FOREVER ) {
-		//pg_lcd_hd44780_clear( 0 );
-		pg_lcd_hd44780_goto( 0 , 0 , 0 );
-		pg_delay( 4 , PG_SEC );
-		if( pg_ssp_rx( rbuffer ) == PG_OK ) {
-			pg_lcd_hd44780_put_char( 0 , '!' );
-			pg_lcd_hd44780_put_char( 0 , '!' );
-			pg_lcd_hd44780_put_char( 0 , '!' );
-			pg_lcd_hd44780_write_string( 0 , rbuffer );	
-		}
-	}
-	//pg_serial_close();
-	PG_HALT;
-}
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//pg_lcd_hd44780_put_char( 0 , 'T' );
-//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
-
-/* 
-
-void blink_led_error( void ) {
-	pg_pin_set( LED_ERROR );
-	pg_delay( 500 , PG_MSEC );
-	pg_pin_clear( LED_ERROR );
-}
-
-void blink_led_ok( void ) {
-	pg_pin_set( LED_OK );
-	pg_delay( 500 , PG_MSEC );
-	pg_pin_clear( LED_OK );
-}
-	pg_pin_clear( LED_OK );
-	pg_pin_clear( LED_ERROR );
-	pg_pin_mode( LED_OK_TRIS , PG_OUT );
-	pg_pin_mode( LED_ERROR_TRIS , PG_OUT );
-	pg_pin_mode( PUSH_TRIS , PG_IN );
-
-		
-	pg_pin_clear( LED_OK );
-	pg_pin_clear( LED_ERROR );
-	pg_pin_mode( LED_OK_TRIS , PG_OUT );
-	pg_pin_mode( LED_ERROR_TRIS , PG_OUT );
-	
-	#define PUSH			P_B1
-	#define LED_OK			L_B2
-	#define LED_ERROR		L_B3
-
-	#define PUSH_TRIS		T_B1
-	#define LED_OK_TRIS		T_B2
-	#define LED_ERROR_TRIS	T_B3
-*/
-/*
-			switch ( responce ) {
-			case PG_OK :
-				pg_lcd_hd44780_clear( 0 );
-				pg_lcd_hd44780_write_string( 0 , rbuffer );
-			break;
-			default :
-				blink_led_error();
-			break;
-		}
-	*/
-
-
-
-//		if( !PUSH ) {				//debounce
-//			pg_delay_msec( 100 );	//debounce
-//			if( !PUSH ) {			//debounce
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

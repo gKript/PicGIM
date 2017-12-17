@@ -126,7 +126,10 @@
 			PG_SENSOR,
 			PG_RTC_DS1302,
 			PG_3WIRE,
-			PG_GCP
+			PG_GCP,
+			PG_SSP,
+			PG_H32,
+			PG_PRS
 		};
 */
 		#include "pgim_error.h"
@@ -821,6 +824,24 @@
 		#endif
 	#endif
 	//---[ END H32 ]---
+	
+	
+	//---[ PRS ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_PRS
+		#define		PGIM_PRS		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_PRS
+		#define		PGIM_PRS		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_PRS == PG_ENABLE ) 
+		#include "pgim_prs.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> PRS module >>> Loaded
+		#endif
+	#endif
+	//---[ END PRS ]---
 	
 	
 	//------------------------------------------------------------------------------
