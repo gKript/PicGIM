@@ -804,6 +804,25 @@
 	#endif
 	//---[ END SSP ]---
 	
+	
+	//---[ H32 ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_H32
+		#define		PGIM_H32		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_H32
+		#define		PGIM_H32		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_H32 == PG_ENABLE ) 
+		#include "pgim_h32.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> H32 module >>> Loaded
+		#endif
+	#endif
+	//---[ END H32 ]---
+	
+	
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T
 	//------------------------------------------------------------------------------

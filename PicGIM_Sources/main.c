@@ -34,48 +34,33 @@
  */
  
 #include "picgim_main.h"
-/*
 
-//#################################################################################
-//#################################################################################
-//#################################################################################
-//SSP -	Simple Serial Protocol
-//main_TX.c
-//#################################################################################
-//#################################################################################
-//#################################################################################
-
-void main( void ) {	//TX
+void main( void ) {
 	//--------------------------------------------------------------------------
-	_pg_Uint8 text[ 8 ] = "abc\0";
+	_pg_Uint8 password[ 32 ];
+	_pg_Uint8 arg[] = "corrado";
+	_pg_Uint8 c;
 	
-	_pg_Uint8 sidx[ 8 ];
-	_pg_int16 idx = 0;
-	
-	pg_initialize( );
-	pg_serial_open( );
+	pg_initialize();
+	//pg_serial_open( );
 	pg_lcd_hd44780_clear( 0 );
-	
-	pg_ssp_init();
-	
-	//text[ 3	] = '\0';
-	
-	while( 1 ) {
-		itoa( idx, sidx );
-		//if( pg_ssp_tx( text , 8 ) == PG_OK ) {
-		if( pg_ssp_tx( sidx , 8 ) == PG_OK ) {
-			pg_lcd_hd44780_put_char( 0 , '!' );
-			idx++;
-		}
-		pg_delay( 3 , PG_SEC );
-		//pg_lcd_hd44780_clear( 0 );
-		pg_lcd_hd44780_goto( 0 , 0 , 0 );
+
+	pg_h32_prs_seed( pg_h32_Hash32( arg ) );
+	printf( "chsum  %08X\n" , pg_h32_sum );
+	puts( "Pseudo seq:" );
+	for ( c = 0 ; c < 10 ; c++ ) {
+		printf ( " %3u " , pg_h32_prs_rand8() );
 	}
-	PG_HALT;
+	puts( "" );
+	//pg_lcd_hd44780_write_string( 0 , rbuffer );	
+	
 	//pg_serial_close();
+	PG_HALT;
 }
 
-*/
+
+
+
 
 
 
@@ -87,7 +72,7 @@ void main( void ) {	//TX
 //#################################################################################
 //#################################################################################
 //#################################################################################
-
+/* 
 void main( void ) { //RX
 	//--------------------------------------------------------------------------
 	_pg_Uint8 rbuffer[ 8 ];
@@ -101,6 +86,7 @@ void main( void ) { //RX
 	PG_LOOP( PG_FOREVER ) {
 		//pg_lcd_hd44780_clear( 0 );
 		pg_lcd_hd44780_goto( 0 , 0 , 0 );
+		pg_delay( 4 , PG_SEC );
 		if( pg_ssp_rx( rbuffer ) == PG_OK ) {
 			pg_lcd_hd44780_put_char( 0 , '!' );
 			pg_lcd_hd44780_put_char( 0 , '!' );
@@ -111,7 +97,7 @@ void main( void ) { //RX
 	//pg_serial_close();
 	PG_HALT;
 }
-
+ */
 
 
 

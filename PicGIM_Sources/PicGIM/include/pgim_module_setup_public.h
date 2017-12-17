@@ -58,6 +58,7 @@
 	#define PGIM_FTOA								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GCP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_SSP								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_H32								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		S O F T W A R E   D E V I C E

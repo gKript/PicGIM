@@ -82,6 +82,7 @@
 //test 256° byte
 //init nel .h
 //gestire timeout
+//forse bisognerebbe svuotare buffer rx uart  on time out rx
 
 #include "picgim.h"
 
@@ -166,13 +167,13 @@
 		
 		//---[ PayLoad ]---
 		//??? togliere +1
-		for( tindex = 0; tindex < (pg_ssp_length+1); tindex++ ) {		// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' putsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
+		for( tindex = 0; tindex <= pg_ssp_length ; tindex++ ) {		// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' putsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
 			pg_ssp_send_byte( *( tbuffer + tindex ) );
 			#if ( PG_SSP_CRYPT_ENABLE == PG_ENABLE )
 				//---[ Crypt ]---
 			#endif
 			#if ( PG_SSP_CRC_ENABLE == PG_ENABLE )
-				//---[ ICheck ]---
+				//---[ Hash ]---
 			#endif
 		}
 		
@@ -204,10 +205,10 @@
 				
 		//---[ PayLoad ]---
 		//??? togliere +1
-		for( rindex = 0; rindex < (pg_ssp_length+1); rindex++ ) {				// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' getsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
+		for( rindex = 0; rindex <= pg_ssp_length ; rindex++ ) {				// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' getsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
 			*( rbuffer + rindex ) = pg_ssp_read_byte();	
 			#if ( PG_SSP_CRC_ENABLE == PG_ENABLE )
-				//---[ ICheck ]---
+				//---[ Hash ]---
 			#endif
 			#if ( PG_SSP_CRYPT_ENABLE == PG_ENABLE )
 				//---[ DeCrypt ]---
