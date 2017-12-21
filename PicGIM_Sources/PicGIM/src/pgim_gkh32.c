@@ -1,7 +1,7 @@
 /*
 	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	File name :		pgim_h32_setup_public.h
+	File name :		pgim_gkh32.c
 	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
 	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
@@ -34,10 +34,10 @@
  */
 
  /*!
-		\file		pgim_h32_setup_public.h
+		\file		pgim_gkh32.c
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		Hash32
+		\brief		GKHash32
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
@@ -47,17 +47,33 @@
 		\attention	This file is defined as public and therefore must be edited for proper configuration of the library.
 */
 
-#ifndef _PGIM_H32_SETUP_PUBLIC_H_
-	#define _PGIM_H32_SETUP_PUBLIC_H_
+#include "picgim.h"
 
-	#if ( PGIM_H32 == PG_ENABLE )
-		//-------------------------------------------------------------------------------------------------------------
-		//		S E E D 
-		//-------------------------------------------------------------------------------------------------------------
-		#define PG_H32_SEED										0xA6A6A6A6	//!< 
-	
+#if ( PGIM_GKH32 == PG_ENABLE )
+
+	#if	( PG_PROJECT_STATE == PG_DEBUG )
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
+
+	_pg_Uint32	pg_gkh32_sum	= 0; 
+
+	_pg_Uint32 pg_gkh32_hash32( _pg_Uint8 * pass ) {
+		_pg_Uint32	tmp	= 0;
+		_pg_Uint8	len	= 0;
+		_pg_Uint8	c;
+		
+		pg_gkh32_sum = 0;
+		while ( pass[ len ] != '\0' ) {
+			pg_gkh32_sum += pass[ len ] + ( GKPRS_MASK_XOR_A >> len ) ^ ( GKPRS_MASK_XOR_F << len );
+			len++;
+		}
+		for ( c = 1 ; c <= 32 ; c++ ) {
+			tmp += ( pg_gkh32_sum << 1 ) ^ c;
+			pg_gkh32_sum ^= tmp;
+		}
+		return pg_gkh32_sum;
+	}
+
 #endif
-	
-	
-	
+
+

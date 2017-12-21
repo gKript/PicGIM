@@ -37,7 +37,7 @@
 		\file		pgim_ssp.h
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		
+		\brief		Simple Serial Protocol
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
@@ -54,7 +54,7 @@
 	#define _PGIM_SSP_H_
 
 	#if ( PGIM_SSP == PG_ENABLE )
-		#define		PG_SSP_DEBUG				 PG_ENABLE
+		#define		PG_SSP_DEBUG				 		PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		
 		#define		PG_SSP_CONTROL_HEADER				'K'
 		#define		PG_SSP_CONTROL_HEADER_REPLY			'k'
@@ -71,14 +71,23 @@
 		extern _pg_Uint16	pg_ssp_waiting;				//Waiting time max on rx byte [ms]
 		extern _pg_Uint8	pg_ssp_length;				//Buffer length
 
+		// /*!
+			// \brief			What it do. \n
+							// Conditions.
+			// \attention		Nothing.
+			// \return 		Nothing.
+			// \param			Nothing.
+		// */			
+		// void		pg_ssp_init							( void );
+		
 		/*!
 			\brief			What it do. \n
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
 			\param			Nothing.
-		*/			
-		void		pg_ssp_init							( void );
+		*/		
+		void		pg_ssp_empty_serial					( void );
 		
 		/*!
 			\brief			What it do. \n

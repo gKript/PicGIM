@@ -128,7 +128,7 @@
 			PG_3WIRE,
 			PG_GCP,
 			PG_SSP,
-			PG_H32,
+			PG_GKH32,
 			PG_PRS
 		};
 */
@@ -810,17 +810,17 @@
 	
 	//---[ H32 ]---
 	#if defined( PG_DOXYGEN )
-		#undef		PGIM_H32
-		#define		PGIM_H32		PG_ENABLE
+		#undef		PGIM_GKH32
+		#define		PGIM_GKH32		PG_ENABLE
 	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
-		#undef		PGIM_H32
-		#define		PGIM_H32		PG_DISABLE
+		#undef		PGIM_GKH32
+		#define		PGIM_GKH32		PG_DISABLE
 	#endif
 	//--------------------------------------------------
-	#if ( PGIM_H32 == PG_ENABLE ) 
-		#include "pgim_h32.h"
+	#if ( PGIM_GKH32 == PG_ENABLE ) 
+		#include "pgim_gkh32.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PicGIM >>> H32 module >>> Loaded
+			#warning	PicGIM >>> GKH32 module >>> Loaded
 		#endif
 	#endif
 	//---[ END H32 ]---

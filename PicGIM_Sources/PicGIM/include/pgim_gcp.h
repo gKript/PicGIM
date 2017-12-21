@@ -4,6 +4,11 @@
 	#define _PGIM_GCP_H_
 
 	#if ( PGIM_GCP == PG_ENABLE )
+
+ 		//---[ Version ]---
+		#define	PG_GCP_VERSION_MAJOR							0
+		#define	PG_GCP_VERSION_MINOR							1
+		//---[ End Version ]---
 	
 		//---[ Debug ]---
 		#define	PG_GCP_DEBUG_GLOBAL								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
@@ -26,6 +31,8 @@
 		#define	PG_GCP_DEBUG_REQUEST							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_STREAMING							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_STREAMING_REPLY					PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_VERSION							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define	PG_GCP_DEBUG_VERSION_REPLY						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_CONFIG								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_CONFIG_REPLY						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_CONFIG_OK							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
@@ -41,7 +48,6 @@
 		#define	PG_GCP_DEBUG_STATUS_VALUE						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_WAITING_DATA						PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		#define	PG_GCP_DEBUG_TX_BUFFER							PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-
 		//---
 		#define PG_GCP_DEBUG_CHAR_ASCII_OFFSET					48
 		//---[ End Debug ]---
@@ -104,8 +110,11 @@
 		//---[ End Identifier Command Byte ]--- */
 
 		//---[ Control Byte ]---
-		#define	PG_GCP_CONTROL_ENGAGE							'K'	
-		#define	PG_GCP_CONTROL_ENGAGE_REPLY						'k'		//!< PG_GCP_CONTROL_ENGAGE_REPLY = PG_GCP_CONTROL_ENGAGE + PG_GCP_REPLY_OFFSET_ADD>
+		#define	PG_GCP_CONTROL_ENGAGE							'E'	
+		#define	PG_GCP_CONTROL_ENGAGE_REPLY						'e'		//!< PG_GCP_CONTROL_ENGAGE_REPLY = PG_GCP_CONTROL_ENGAGE + PG_GCP_REPLY_OFFSET_ADD>
+		//---
+		#define PG_GCP_CONTROL_VERSION							'V'
+		#define PG_GCP_CONTROL_VERSION_REPLY					'v'
 		//---
 		#define PG_GCP_CONTROL_CONFIG							'C'
 		#define PG_GCP_CONTROL_CONFIG_REPLY						'c'
@@ -122,8 +131,8 @@
 		#define PG_GCP_CONTROL_STATUS_MOD						'M'
 		#define PG_GCP_CONTROL_STATUS_MOD_REPLY					'm'
 		//---
-		#define PG_GCP_CONTROL_CRC								'V'
-		#define PG_GCP_CONTROL_CRC_REPLY						'v'
+		#define PG_GCP_CONTROL_CRC								'K'
+		#define PG_GCP_CONTROL_CRC_REPLY						'k'
 		//---
 		#define PG_GCP_CONTROL_ENGAGE_END						'X'
 		#define PG_GCP_CONTROL_ENGAGE_END_REPLY					'x'
@@ -152,7 +161,7 @@
 			PG_GCP_STATUS_MOD_OK,
 			PG_GCP_STREAMING_ON,
 			PG_GCP_STREAMING_OFF,
-			PG_GCP_RX_DATA_READY_NO,	// see in .c
+			PG_GCP_RX_DATA_READY_NO,
 			PG_GCP_ERROR_CONTROLBYTE_RESETTED,
 			PG_GCP_ERROR_CONTROLBYTE_RESET_FAIL,
 			PG_GCP_ERROR_ENGAGE_FAILED,
@@ -186,7 +195,14 @@
 			PG_GCP_ERROR_RX_MOD_STATUS_FAILED,
 			PG_GCP_ERROR_RX_CRC_TIMEOUT,
 			PG_GCP_ERROR_RX_CRC_COMPARE_FAILED,
-			PG_GCP_ERROR_RX_COMMAND_FAILED
+			PG_GCP_ERROR_RX_COMMAND_FAILED,
+			
+			PG_GCP_ERROR_VERSION_FAILED,
+			PG_GCP_ERROR_VERSION_WRONG_APPLICATION_NAME,
+			PG_GCP_ERROR_VERSION_WRONG_PICGIM_MINOR,
+			PG_GCP_ERROR_VERSION_WRONG_PICGIM_MAJOR,
+			PG_GCP_ERROR_VERSION_WRONG_APPLICATION_MINOR,
+			PG_GCP_ERROR_VERSION_WRONG_APPLICATION_MAIOR
 		};
 		//---[ END Return Message ]---
 				
@@ -199,8 +215,9 @@
 		extern _pg_Uint8	pg_gcp_rdu_index;
 		extern _pg_Uint8	pg_gcp_rde_index;
 		
-		extern _pg_Uint8	pg_gcp_flag_tx;						//!<(1 bit flag todo?)
+		extern _pg_Uint8	pg_gcp_flag_tx;							//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_engage;						//!<(1 bit flag todo?)
+		//extern _pg_Uint8	pg_gcp_flag_version;					//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_data_mode;					//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_request;					//!<(1 bit flag todo?)
 		extern _pg_Uint8	pg_gcp_flag_streaming;					//!<(1 bit flag todo?)
@@ -259,6 +276,14 @@
 		#if ( PG_GCP_BUFFER_RX_16_ENABLE == PG_ENABLE )
 			extern _pg_Uint8	pg_gcp_buffer_rx_16[ PG_GCP_BUFFER_RX_16_LENGTH ];			//!< Rx user buffer (config 16)
 		#endif
+		
+		extern	struct pg_gcp_str_version {
+			_pg_Uint8	user_app_name[ 4 ];					//!< Max.#4Byte. User's application name as identifier
+			_pg_Uint8	user_app_version_major;				//!< #1Byte. User's application major version.
+			_pg_Uint8	user_app_version_minor;				//!< #1Byte. User's application minor version.
+			_pg_Uint8	picgim_version_major;				//!< #1Byte. PicGIM major version.
+			_pg_Uint8	picgim_version_minor;				//!< #1Byte. PicGIM minor version.
+		};
 		
 		extern	struct pg_gcp_str_config {
 			void		* xbuffer_ptr;						//!<Payload buffer pointer>
@@ -329,16 +354,7 @@
 		_pg_Uint8	pg_gcp_engage_end						( void );
 
 		#if ( PG_GCP_REQUEST_ENABLE == PG_ENABLE )
-			/*!
-				\brief			Control sent from receiving host, requiring to transmitter.\n
-								Conditions.
-				\attention		Nothing.
-				\return 		Nothing.
-				\param			Nothing.
-			*/
-			_pg_Uint8	pg_gcp_request							( void );
 			
-
 			/*!
 				\brief			Control to set transmission request flag. \n
 								Conditions.
@@ -346,7 +362,25 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			void		pg_gcp_request_set						( _pg_Uint8 qvalue );
+			void		pg_gcp_request_set					( _pg_Uint8 qvalue );
+					
+			/*!
+				\brief			Control sent from receiving host, requiring to transmitter.\n
+								Conditions.
+				\attention		Nothing.
+				\return 		Nothing.
+				\param			Nothing.
+			*/
+			_pg_Uint8	pg_gcp_request						( void );
+
+			/*!
+				\brief			What it do. \n
+								Conditions.
+				\attention		Nothing.
+				\return 		Nothing.
+				\param			Nothing.
+			*/
+			_pg_Uint8	pg_gcp_rx_request					( void );
 		#endif
 
 		/*!
@@ -376,6 +410,24 @@
 		*/
 		_pg_Uint8	pg_gcp_data_end							( void ); 
 
+		/*!
+			\brief			Control to exit data mode.\n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/		
+		_pg_Uint8	pg_gcp_tx_version						( void );
+		
+		/*!
+			\brief			Control to exit data mode.\n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/		
+		_pg_Uint8	pg_gcp_rx_version						( void );
+	
 		#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 			/*!
 				\brief			Control to syncronize and retrieve remote status to local one.\n
@@ -384,7 +436,7 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8	pg_gcp_status_sync						( void );
+			_pg_Uint8	pg_gcp_status_sync					( void );
 		#endif
 		
 		#if ( PG_GCP_STATUS_MOD_ENABLE == PG_ENABLE )
@@ -395,7 +447,7 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8 		pg_gcp_status_mod					( _pg_Uint8 value );
+			_pg_Uint8 		pg_gcp_status_mod				( _pg_Uint8 value );
 		#endif
 		
 		//#######################################################################
@@ -409,7 +461,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_tx_control_byte				( _pg_Uint8 control );
+		_pg_Uint8	pg_gcp_tx_control_byte					( _pg_Uint8 control );
 
 		/*!
 			\brief			Control to transmit a buffer.\n
@@ -464,7 +516,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_tx_byte_serial					( _pg_Uint8 sbyte );		
+		_pg_Uint8	pg_gcp_send_byte_serial					( _pg_Uint8 sbyte );		
 
 		/*!
 			\brief			What it do. //cicla, o arriva il dato, o quando a zero esce con errore //BLOCKING or NOT BLOCKING\n
@@ -492,7 +544,7 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8	pg_gcp_crc								( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );
+			_pg_Uint8	pg_gcp_crc						( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );
 
 			/*!
 				\brief			What it do. //write directly in pg_gcp_crc32_local\n
@@ -501,7 +553,7 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8	pg_gcp_crc32_calc						( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );//( _pg_Uint8 * cbuffer );
+			_pg_Uint8	pg_gcp_crc32_calc				( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );//( _pg_Uint8 * cbuffer );
 			/*!
 				\brief			What it do. \n
 								Conditions.
@@ -509,7 +561,7 @@
 				\return 		Nothing.
 				\param			Nothing.
 			*/
-			_pg_Uint8	pg_gcp_rx_crc							( void );
+			_pg_Uint8	pg_gcp_rx_crc					( void );
 		#endif
 		
 		//#######################################################################
@@ -523,7 +575,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_reset								( void );
+		_pg_Uint8	pg_gcp_rx_reset							( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -532,7 +584,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_engage							( void );
+		_pg_Uint8	pg_gcp_rx_engage						( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -541,7 +593,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_config							( void );		
+		_pg_Uint8	pg_gcp_rx_config						( void );		
 		
 		/*!
 			\brief			What it do. \n
@@ -550,7 +602,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_request							( void );
+		_pg_Uint8	pg_gcp_rx_escape						( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -559,7 +611,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_escape							( void );
+		_pg_Uint8	pg_gcp_rx_data_end						( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -568,7 +620,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_data_end							( void );
+		_pg_Uint8	pg_gcp_rx_data							( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -577,7 +629,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_data								( void );
+		_pg_Uint8	pg_gcp_rx_engage_end					( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -586,7 +638,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_engage_end						( void );
+		_pg_Uint8	pg_gcp_rx_status_sync					( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -595,16 +647,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_status_sync							( void );
-		
-		/*!
-			\brief			What it do. \n
-							Conditions.
-			\attention		Nothing.
-			\return 		Nothing.
-			\param			Nothing.
-		*/
-		_pg_Uint8	pg_gcp_rx_status_mod						( void );
+		_pg_Uint8	pg_gcp_rx_status_mod					( void );
 
 		/*!
 			\brief			What it do. \n
@@ -613,7 +656,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_rx_command							( void );
+		_pg_Uint8	pg_gcp_rx_command						( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -622,7 +665,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_gcp_send									( void * object_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag );
+		_pg_Uint8	pg_gcp_send								( void * object_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ); // U S E R   F U N C T I O N
 		
 		/*!
 			\brief			What it do. \n
@@ -631,7 +674,16 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8 *	pg_gcp_read( void );		// U S E R   F U N C T I O N
+		//_pg_Uint8 *	pg_gcp_read								( void ); // U S E R   F U N C T I O N
+		_pg_Uint8	pg_gcp_read								( void ); // U S E R   F U N C T I O N
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/
+		void	pg_gcp_rx_set_empty							( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -640,11 +692,54 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		void	pg_gcp_rx_set_empty( void );	// U S E R   F U N C T I O N
+		void	pg_gcp_empty_serial							( void );
 		
 		//---[ End Prototype ]---
  	#endif
 #endif /* _PGIM_GCP_H_ */
  
  
+/* 
+	void		pg_gcp_init								( void );	 
+	_pg_Uint8	pg_gcp_reset							( void );	
+	void 		pg_gcp_reset_local						( void );	
+	_pg_Uint8	pg_gcp_engage							( void );
+	_pg_Uint8	pg_gcp_engage_end						( void );
+	_pg_Uint8	pg_gcp_data								( void );	
+	_pg_Uint8	pg_gcp_data_end							( void );
+	_pg_Uint8	pg_gcp_config							( _pg_Uint8 configuration );	
+	_pg_Uint8	pg_gcp_status_sync						( void );
+	_pg_Uint8 	pg_gcp_status_mod						( _pg_Uint8 value );
+	void		pg_gcp_request_set						( _pg_Uint8 qvalue );
+	_pg_Uint8	pg_gcp_crc								( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );
+	_pg_Uint8	pg_gcp_crc32_calc						( _pg_Uint8 * cbuffer, _pg_Uint16 cbuffer_length );//( _pg_Uint8 * cbuffer );
+	_pg_Uint8	pg_gcp_tx_version						( void );
+	_pg_Uint8	pg_gcp_rx_version						( void );
+	_pg_Uint8	pg_gcp_tx_control_byte					( _pg_Uint8 control );
+	_pg_Uint8	pg_gcp_tx_buffer						( _pg_Uint8 * tbuffer );
+	_pg_Uint8	pg_gcp_tx_string						( _pg_Uint8 * tstring );
+	_pg_Uint8	pg_gcp_rx								( void );
+	_pg_Uint8	pg_gcp_rx_data_ready					( void );
+	_pg_Uint8 * pg_gcp_rx_data_read						( void );
+	_pg_Uint8	pg_gcp_send_byte_serial					( _pg_Uint8 sbyte );		
+	_pg_Uint8	pg_gcp_read_byte_serial					( _pg_Uint16 tdelay );
+	_pg_Uint8	pg_gcp_save_byte_buffer					( void );
+	_pg_Uint8	pg_gcp_rx_crc							( void );
+	_pg_Uint8	pg_gcp_rx_reset							( void );
+	_pg_Uint8	pg_gcp_rx_engage						( void );
+	_pg_Uint8	pg_gcp_rx_config						( void );		
+	_pg_Uint8	pg_gcp_rx_request						( void );
+	_pg_Uint8	pg_gcp_rx_escape						( void );
+	_pg_Uint8	pg_gcp_rx_data_end						( void );
+	_pg_Uint8	pg_gcp_rx_data							( void );
+	_pg_Uint8	pg_gcp_rx_engage_end					( void );
+	_pg_Uint8	pg_gcp_rx_status_sync					( void );
+	_pg_Uint8	pg_gcp_rx_status_mod					( void );
+	_pg_Uint8	pg_gcp_rx_command						( void );
+	_pg_Uint8	pg_gcp_send								( void * object_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ); // U S E R   F U N C T I O N
+	_pg_Uint8 *	pg_gcp_read								( void ); // U S E R   F U N C T I O N
+	void		pg_gcp_rx_set_empty						( void );
+	void		pg_gcp_empty_serial						( void );
+*/
+
 

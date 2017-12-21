@@ -56,7 +56,7 @@
 	#endif
 
 	_pg_Uint32	pg_prs_twisted	= 0;
-	_pg_Uint32	pg_prs_seeded	= PG_H32_SEED;		//default value
+	_pg_Uint32	pg_prs_seeded	= PG_PRS_SEED;		//default value
 	_pg_Uint8   pg_prs_rand		= 0; 
 
 	void pg_prs_seed( _pg_Uint32 seed ) {
@@ -83,32 +83,5 @@
 	}
 
 #endif
-
-//Pseudo Random Sequencer
-
-/*
-//Test main.c
-void main( void ) {
-	//--------------------------------------------------------------------------
-	_pg_Uint8 password[ 32 ];
-	_pg_Uint8 arg[] = "corrado";
-	_pg_Uint8 c;
-	
-	pg_initialize();
-	//pg_serial_open( );
-	pg_lcd_hd44780_clear( 0 );
-
-	pg_prs_seed( pg_h32_hash32( arg ) );
-	printf( "chsum  %08X\n" , pg_h32_sum );
-	puts( "Pseudo seq:" );
-	for ( c = 0 ; c < 10 ; c++ ) {
-		printf ( " %3u " , pg_prs_rand8() );
-	}
-	puts( "" );
-	//pg_lcd_hd44780_write_string( 0 , rbuffer );	
-	
-	//pg_serial_close();
-	PG_HALT;
-} */
 
 

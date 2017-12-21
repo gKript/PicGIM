@@ -1,7 +1,7 @@
 /*
 	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	File name :		pgim_h32.h
+	File name :		pgim_gkh32.h
 	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
 	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
@@ -34,10 +34,10 @@
  */
 
  /*!
-		\file		pgim_h32.h
+		\file		pgim_gkh32.h
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		Hash32
+		\brief		GKHash32
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
@@ -47,12 +47,12 @@
 		\attention	This file is defined as public and therefore must be edited for proper configuration of the library.
 */
 
-#ifndef _PGIM_H32_H_
-	#define _PGIM_H32_H_
+#ifndef _PGIM_GKH32_H_
+	#define _PGIM_GKH32_H_
 
-	#if ( PGIM_H32 == PG_ENABLE )
+	#if ( PGIM_GKH32 == PG_ENABLE )
 
-		extern	_pg_Uint32	pg_h32_sum; 
+		extern	_pg_Uint32	pg_gkh32_sum; 
 
 		/*!
 			\brief			What it do. \n
@@ -61,7 +61,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/	
-		_pg_Uint32		pg_h32_hash32						( _pg_Uint8 * pass );
+		_pg_Uint32		pg_gkh32_hash32						( _pg_Uint8 * pass );
 
 	#endif
 #endif

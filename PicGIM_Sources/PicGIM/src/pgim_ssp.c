@@ -94,12 +94,16 @@
 
 	_pg_Uint8	pg_ssp_length;				//Buffer length
 
-	//---[ Init ]---
-	void	pg_ssp_init( void ) {
-		//--------------------------------------------------------------------------
-		while( DataRdyUSART() )
+	// //---[ Init ]---
+	// void	pg_ssp_init( void ) {
+
+	// }
+	
+	void	pg_ssp_empty_serial( void ) {
+		while( DataRdyUSART() ) {
 			ReadUSART();
 		}
+	}
 	
 	//---[ Read Byte Usart ]---
 	_pg_Uint8	pg_ssp_read_byte( void ) {
@@ -123,7 +127,10 @@
 					#if ( PG_SSP_DEBUG == PG_ENABLE )
 						pg_lcd_hd44780_put_char( 0 , 't' );
 					#endif
-					return( PG_SSP_ERROR_RX_TIMEOUT );
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_RX_TIMEOUT , PG_ERROR_ERROR );
+					#endif
+					return( PG_NOK );
 				}
 			}
 		}
@@ -146,7 +153,10 @@
 		_pg_Uint8	tindex;
 	
 		if( !pg_ssp_length ) {
-			return( PG_SSP_ERROR_WRONG_BUFFER_LENGTH );	//non posso inviare 0 byte! Minimo 1!
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_BUFFER_LENGTH , PG_ERROR_ERROR );
+			#endif
+			return( PG_NOK );
 		}
 		pg_ssp_length--;
 		//per una quantita' di 1 byte, invio 0.
@@ -158,7 +168,10 @@
 		//---[ Header ]---
 		pg_ssp_send_byte( PG_SSP_CONTROL_HEADER );
 		if( pg_ssp_read_byte() !=  PG_SSP_CONTROL_HEADER_REPLY ) {				//LENGTH byte ricevuto (senza +1 per usarlo direttamente del for (altrimenti si, per ricostruire la quantita' corretta, vedi tx...))
-			return( PG_SSP_ERROR_WRONG_HEADER );
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_HEADER , PG_ERROR_ERROR );
+			#endif
+			return( PG_NOK );
 		}				
 		
 		//---[ Length ]---
@@ -180,9 +193,11 @@
 		//---[ Footer ]---
 		pg_ssp_send_byte( PG_SSP_CONTROL_FOOTER );	
 		if( pg_ssp_read_byte() != PG_SSP_CONTROL_FOOTER_REPLY ) {
-			return( PG_SSP_ERROR_WRONG_FOOTER );
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_FOOTER , PG_ERROR_ERROR );
+			#endif
+			return( PG_NOK );			
 		}
-		
 		return( PG_OK );
 	}
 	
@@ -195,17 +210,21 @@
 		
 		//---[ Header ]---
 		if( pg_ssp_read_byte() != PG_SSP_CONTROL_HEADER ) {
-			return( PG_SSP_ERROR_WRONG_HEADER );
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_HEADER , PG_ERROR_ERROR );
+			#endif
+			return( PG_NOK );
 		}
+		pg_ssp_empty_serial(); ///????? se stavo facendo altro, ilo tx potrebbe aver fatto diversi tentativi ed avere qui alcuni PG_SSP_CONTROL_HEADER
 		pg_ssp_send_byte( PG_SSP_CONTROL_HEADER_REPLY );
+		return( PG_OK );
 
 		//---[ Length ]---
-		//LENGTH byte ricevuto senza +1 per usarlo direttamente del for.
+		//	LENGTH byte ricevuto senza +1 per usarlo direttamente del for.
 		pg_ssp_length = pg_ssp_read_byte();
 				
 		//---[ PayLoad ]---
-		//??? togliere +1
-		for( rindex = 0; rindex <= pg_ssp_length ; rindex++ ) {				// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' getsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
+		for( rindex = 0; rindex <= pg_ssp_length ; rindex++ ) {	// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' getsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
 			*( rbuffer + rindex ) = pg_ssp_read_byte();	
 			#if ( PG_SSP_CRC_ENABLE == PG_ENABLE )
 				//---[ Hash ]---
@@ -217,10 +236,12 @@
 			
 		//---[ Footer ]---
 		if( pg_ssp_read_byte() != PG_SSP_CONTROL_FOOTER ) {
-			return( PG_SSP_ERROR_WRONG_FOOTER );
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_FOOTER , PG_ERROR_ERROR );
+			#endif
+			return( PG_NOK );
 		}
 		pg_ssp_send_byte( PG_SSP_CONTROL_FOOTER_REPLY );
-		
 		return( PG_OK );
 	}
 

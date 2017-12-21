@@ -1,7 +1,7 @@
 /*
 	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	File name :		pgim_h32.c
+	File name :		pgim_prs_setup_public.h
 	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
 	Author :		Danilo Zannoni (asyntote) - Corrado Tumiati (skymatrix)
 
@@ -34,10 +34,10 @@
  */
 
  /*!
-		\file		pgim_h32.c
+		\file		pgim_prs_setup_public.h
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		Hash32
+		\brief		Pseudo Random Sequencer
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
@@ -47,60 +47,17 @@
 		\attention	This file is defined as public and therefore must be edited for proper configuration of the library.
 */
 
-#include "picgim.h"
+#ifndef _PGIM_PRS_SETUP_PUBLIC_H_
+	#define _PGIM_PRS_SETUP_PUBLIC_H_
 
-#if ( PGIM_H32 == PG_ENABLE )
-
-	#if	( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PicGIM >>> Message >>> This file is compiling.
+	#if ( PGIM_PRS == PG_ENABLE )
+		//-------------------------------------------------------------------------------------------------------------
+		//		S E E D 
+		//-------------------------------------------------------------------------------------------------------------
+		#define PG_PRS_SEED										0xA6A6A6A6	//!< 
+	
 	#endif
-
-	_pg_Uint32	pg_h32_sum	= 0; 
-
-	_pg_Uint32 pg_h32_hash32( _pg_Uint8 * pass ) {
-		_pg_Uint32	tmp	= 0;
-		_pg_Uint8	len	= 0;
-		_pg_Uint8	c;
-		
-		pg_h32_sum = 0;
-		while ( pass[ len ] != '\0' ) {
-			pg_h32_sum += pass[ len ] + ( GKPRS_MASK_XOR_A >> len ) ^ ( GKPRS_MASK_XOR_F << len );
-			len++;
-		}
-		for ( c = 1 ; c <= 32 ; c++ ) {
-			tmp += ( pg_h32_sum << 1 ) ^ c;
-			pg_h32_sum ^= tmp;
-		}
-		return pg_h32_sum;
-	}
-
 #endif
-
-
-
-/*
-//Test main.c
-void main( void ) {
-	//--------------------------------------------------------------------------
-	_pg_Uint8 password[ 32 ];
-	_pg_Uint8 arg[] = "corrado";
-	_pg_Uint8 c;
 	
-	pg_initialize();
-	//pg_serial_open( );
-	pg_lcd_hd44780_clear( 0 );
-
-	pg_prs_seed( pg_h32_hash32( arg ) );
-	printf( "chsum  %08X\n" , pg_h32_sum );
-	puts( "Pseudo seq:" );
-	for ( c = 0 ; c < 10 ; c++ ) {
-		printf ( " %3u " , pg_prs_rand8() );
-	}
-	puts( "" );
-	//pg_lcd_hd44780_write_string( 0 , rbuffer );	
 	
-	//pg_serial_close();
-	PG_HALT;
-} */
-
-
+	

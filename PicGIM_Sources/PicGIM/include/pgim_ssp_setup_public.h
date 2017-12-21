@@ -37,7 +37,7 @@
 		\file		pgim_ssp_setup_public.h
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		
+		\brief		Simple Serial Protocol
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
@@ -46,9 +46,6 @@
 					[ http://www.gnu.org/licenses/gpl-3.0.html ]
 		\attention	This file is defined as public and therefore must be edited for proper configuration of the library.
 */
-
-//SSP -	Simple Serial Protocol
-
 
 #ifndef _PGIM_SSP_SETUP_PUBLIC_H_
 	#define _PGIM_SSP_SETUP_PUBLIC_H_
