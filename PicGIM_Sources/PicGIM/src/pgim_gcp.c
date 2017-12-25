@@ -78,6 +78,9 @@
 //	- Streaming (Blocca la rx() fino a che riceve e ritorna direttamente un byte)
 //	Usage:	Execute gcp_Init(), Engage(), Config(), Data()... tx data... Data_End(), Engage_End()...
 //--------------------------------------------------------------------------
+
+//considerare di clear_buffer quando non c'e' risposta che si accumulano nel buffer
+
 #include "picgim.h"
 
 #if ( PGIM_GCP == PG_ENABLE )
@@ -101,12 +104,11 @@
 	_pg_Uint8 	pg_gcp_rde_index;						//non parte sempre da zero e permette la scansione continua di tutti i buffer
 	
 	//---[ Flag ]---
-	_pg_Uint8	pg_gcp_flag_tx;							//(1 bit flag todo)	E' il master, chi invia control.
-	_pg_Uint8	pg_gcp_flag_engage;						//(1 bit flag todo)
-	//_pg_Uint8	pg_gcp_flag_version;					//(1 bit flag todo)
-	_pg_Uint8	pg_gcp_flag_data_mode;					//(1 bit flag todo)
-	_pg_Uint8	pg_gcp_flag_request;					//(1 bit flag todo)
-	_pg_Uint8	pg_gcp_flag_streaming;					//(1 bit flag todo)
+	_pg_Uint8	pg_gcp_flag_tx;							//(no 1 bit flag, too slow )	E' il master, chi invia control.
+	_pg_Uint8	pg_gcp_flag_engage;						//(no 1 bit flag, too slow)
+	_pg_Uint8	pg_gcp_flag_data_mode;					//(no 1 bit flag, too slow)
+	_pg_Uint8	pg_gcp_flag_request;					//(no 1 bit flag, too slow)
+	_pg_Uint8	pg_gcp_flag_streaming;					//(no 1 bit flag, too slow)
 	
  	//---[ Crc variable ]---
 	#if ( PG_GCP_CRC_ENABLE == PG_ENABLE )
@@ -752,7 +754,7 @@
 				return( PG_OK );
 			}
   			// #if ( PG_GCP_AUTORESET_ENGAGE_ENABLE == PG_ENABLE )
-				// if( pg_gcp_reset( ) == PG_OK ) {
+				// if( pg_gcp_reset() == PG_OK ) {
 					// #if PG_ERROR_IS_ENABLE
 						// pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_ENGAGE_RESETTED , PG_ERROR_WARNING );
 					// #endif
@@ -929,7 +931,8 @@
 				pg_gcp_send_byte_serial( configuration );
 				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 					if( pg_gcp_dbyte == configuration ) {
-						pg_gcp_send_byte_serial( PG_GCP_CONFIG_OK );
+						//pg_gcp_send_byte_serial( PG_GCP_CONFIG_OK );
+						pg_gcp_send_byte_serial( PG_OK );
 						pg_gcp_nconfig = configuration;
 						#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CONFIG_NUMBER == PG_ENABLE ) )
 							pg_lcd_hd44780_put_char( 0 , configuration + PG_GCP_DEBUG_CHAR_ASCII_OFFSET  );
@@ -969,7 +972,8 @@
 			//pg_gcp_send_byte_serial( pg_gcp_nconfig );
 			pg_gcp_send_byte_serial( temp );
 			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
-				if( pg_gcp_dbyte == PG_GCP_CONFIG_OK ) {
+				//if( pg_gcp_dbyte == PG_GCP_CONFIG_OK ) {
+				if( pg_gcp_dbyte == PG_OK ) {
 					pg_gcp_nconfig = temp;
 					#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CONFIG_NUMBER_REPLY == PG_ENABLE ) )
 						pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + PG_GCP_DEBUG_CHAR_ASCII_OFFSET  );
@@ -1090,7 +1094,8 @@
 						if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 							if( pg_gcp_dbyte == value ) {
 								pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = value; //... e io  faccio qua.
-								pg_gcp_send_byte_serial( PG_GCP_STATUS_MOD_OK );	// che vuol dire "ok fai!" (in rx da implementare) //senza reply
+								//pg_gcp_send_byte_serial( PG_GCP_STATUS_MOD_OK );	// che vuol dire "ok fai!" (in rx da implementare) //senza reply
+								pg_gcp_send_byte_serial( PG_OK );	// che vuol dire "ok fai!" (in rx da implementare) //senza reply
 								#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
 									pg_lcd_hd44780_put_char( 0 , '=' );
 								#endif
@@ -1479,7 +1484,7 @@
  					else{
 						//se ritorna un reply diverso da quello atteso
 						// #if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
-							// if( pg_gcp_reset( ) == PG_OK ) {
+							// if( pg_gcp_reset() == PG_OK ) {
 								// #if PG_ERROR_IS_ENABLE
 									// pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESETTED , PG_ERROR_WARNING );
 								// #endif
@@ -1495,7 +1500,7 @@
 			return( PG_NOK );
 		}
   		// #if ( PG_GCP_AUTORESET_CONTROLBYTE_ENABLE == PG_ENABLE )
-			// if( pg_gcp_reset( ) == PG_OK ) {
+			// if( pg_gcp_reset() == PG_OK ) {
 				// #if PG_ERROR_IS_ENABLE
 					// pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CONTROLBYTE_RESETTED , PG_ERROR_WARNING );
 				// #endif
@@ -1583,7 +1588,7 @@
 						//--------------------------------------------------------------------------
 						if( pg_gcp_dbyte == PG_GCP_CONTROL_RESET ) {
 							//---[ Reset  ]---
-							return( pg_gcp_rx_reset( ) );
+							return( pg_gcp_rx_reset() );
 						}
 						if( pg_gcp_dbyte == PG_GCP_CONTROL_VERSION ) {
 							//---[ Version Check ]---
@@ -1594,7 +1599,7 @@
 							//chiamare i puntatori a funzione per eseguire i comandi com feedback verso tx
 							//typedef		void (* pg_Uint8(_cb_ptr)(void);
 							//aggiungere comandi utente (callback )da passare a remoto #16
-							return( pg_gcp_rx_command( ) );
+							return( pg_gcp_rx_command() );
 						}
 						//--------------------------------------------------------------------------
 						//---[ Status NOT Engaged ]---
@@ -1602,7 +1607,7 @@
 						if( pg_gcp_flag_engage == PG_NO ) {
 							//---[ Engage ]---
 							if( pg_gcp_dbyte == PG_GCP_CONTROL_ENGAGE ) {
-								return( pg_gcp_rx_engage( ) );
+								return( pg_gcp_rx_engage() );
 							}
 						}
 						//--------------------------------------------------------------------------
@@ -1611,7 +1616,7 @@
 						else {
 							//---[ Config ]---
 							if( pg_gcp_dbyte == PG_GCP_CONTROL_CONFIG) {
-								return( pg_gcp_rx_config( ) );
+								return( pg_gcp_rx_config() );
 							}
 							//--------------------------------------------------------------------------
 							//---[ Status Engaged && Data-Mode ]---
@@ -1619,11 +1624,11 @@
 							if( pg_gcp_flag_data_mode == PG_YES ) {
 								//---[ Escape-Char ]---
 								if( pg_gcp_dbyte == PG_GCP_CONTROL_ESCAPE ) { //"Escape-char" as valid data.
-									return( pg_gcp_rx_escape( ) );
+									return( pg_gcp_rx_escape() );
 								}
 								//---[ Data End ]---
 								if( pg_gcp_dbyte == PG_GCP_CONTROL_DATA_END ) {
-									return( pg_gcp_rx_data_end( ) );
+									return( pg_gcp_rx_data_end() );
 								}
 							}
 							//--------------------------------------------------------------------------
@@ -1632,22 +1637,22 @@
 							else {
 								//---[ Data ]---
 								if( pg_gcp_dbyte == PG_GCP_CONTROL_DATA ) {
-									return( pg_gcp_rx_data( ) );
+									return( pg_gcp_rx_data() );
 								}
 								//---[ Engage End ]---
 								if( pg_gcp_dbyte == PG_GCP_CONTROL_ENGAGE_END ) {
-									return( pg_gcp_rx_engage_end( ) );
+									return( pg_gcp_rx_engage_end() );
 								}
 								//---[ Status Sync ]---
 								#if ( PG_GCP_STATUS_SYNC_ENABLE ==  PG_ENABLE )
 									if( pg_gcp_dbyte == PG_GCP_CONTROL_STATUS_SYNC ) {
-										return( pg_gcp_rx_status_sync( ) );
+										return( pg_gcp_rx_status_sync() );
 									}
 								#endif
 								//---[ Status Mod ]---		
 								#if ( PG_GCP_STATUS_MOD_ENABLE ==  PG_ENABLE )
 									if( pg_gcp_dbyte == PG_GCP_CONTROL_STATUS_MOD ) {
-										return( pg_gcp_rx_status_mod( ) );
+										return( pg_gcp_rx_status_mod() );
 									}
 								#endif
 								//---[ Request ]---
@@ -1659,7 +1664,7 @@
 								//---[ Crc ]---
 								#if ( PG_GCP_CRC_ENABLE == PG_ENABLE )	
 									if( pg_gcp_dbyte == PG_GCP_CONTROL_CRC ) {
-										return( pg_gcp_rx_crc( ) );
+										return( pg_gcp_rx_crc() );
 									}
 								#endif
 							}
@@ -1740,7 +1745,8 @@
 								}	
 							}
 							if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_CRC ) == PG_OK ) {
-								if( pg_gcp_dbyte == PG_GCP_CRC_OK ) {
+								//if( pg_gcp_dbyte == PG_GCP_CRC_OK ) {
+								if( pg_gcp_dbyte == PG_OK ) {
 									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_CRC_OK == PG_ENABLE ) )
 										pg_lcd_hd44780_put_char( 0 , '=' );
 									#endif
@@ -1763,7 +1769,8 @@
 									
 									
 									//return( PG_OK );
-									return( PG_GCP_CRC_OK ); //??? PG_YES
+									//return( PG_GCP_CRC_OK ); //??? PG_YES
+									return( PG_OK ); //??? PG_YES
 								}
 								else {
 									#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_STATUS_MOD == PG_ENABLE ) )
@@ -1824,7 +1831,8 @@
 					pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 				#endif
 				pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_status = PG_GCP_BUFFER_CRC;
-				pg_gcp_send_byte_serial( PG_GCP_CRC_OK );
+				//pg_gcp_send_byte_serial( PG_GCP_CRC_OK );
+				pg_gcp_send_byte_serial( PG_OK );
 				return( PG_OK );
 			}
 			else {
@@ -1870,8 +1878,6 @@
 	//#######################################################################
 	//		R E Q U E S T
 	//#######################################################################
-	
-	//gestire pg_gcp_flag_tx !!!!!!!!!!!!!
 	
 	#if ( PG_GCP_REQUEST_ENABLE == PG_ENABLE )
 		//---[ RX - Request Set ]---
@@ -1960,7 +1966,8 @@
 				pg_gcp_send_byte_serial( command );
 				if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
 					if( pg_gcp_dbyte == command ) {
-						pg_gcp_send_byte_serial( PG_GCP_COMMAND_OK );
+						//pg_gcp_send_byte_serial( PG_GCP_COMMAND_OK );
+						pg_gcp_send_byte_serial( PG_OK );
 						
 						//utilizzare qua parametro command, se necessario...
 						
@@ -2000,7 +2007,8 @@
 			ctemp = pg_gcp_dbyte;
 			pg_gcp_send_byte_serial( ctemp );
 			if( pg_gcp_read_byte_serial( PG_GCP_TIMEOUT_MS_DIAL ) == PG_OK ) {
-				if( pg_gcp_dbyte == PG_GCP_COMMAND_OK ) {
+				//if( pg_gcp_dbyte == PG_GCP_COMMAND_OK ) {
+				if( pg_gcp_dbyte == PG_OK ) {
 					
 					//utilizzare qua "ctemp" che contiene il parametro command ricevuto...
 					//Asy will work here...
@@ -2029,7 +2037,7 @@
 	//		U S E R   F U N C T I O N
 	//#######################################################################
 	//---[ User Send Buffer/String ]---
-	_pg_Uint8 pg_gcp_send( void * object_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ) {
+	_pg_Uint8 pg_gcp_send( void * buffer_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ) {
 		//--------------------------------------------------------------------------	
 		//	<* user-buffer-ptr>, PG_GCP_CONFIG_xx, PG_CRC_ON/OFF
 		//	User must call only engage() before.
@@ -2038,7 +2046,7 @@
 		if( pg_gcp_flag_engage == PG_YES ) {
 			//data
 			if( pg_gcp_flag_data_mode == PG_NO ) {
-				if( pg_gcp_data( ) != PG_OK ) {
+				if( pg_gcp_data() != PG_OK ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_DATA_FAILED , PG_ERROR_ERROR );
 					#endif
@@ -2054,7 +2062,7 @@
 			}
 			//buffer
 			if( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_mode == PG_GCP_BUFFER ) {
-				if( pg_gcp_tx_buffer( object_pointer ) != PG_OK ) {
+				if( pg_gcp_tx_buffer( buffer_pointer ) != PG_OK ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_TX_BUFFER_FAILED , PG_ERROR_ERROR );
 					#endif
@@ -2063,7 +2071,7 @@
 			}
 			//string
 			if( pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_mode == PG_GCP_STRING ) {
-				if( pg_gcp_tx_string( object_pointer ) != PG_OK ) {
+				if( pg_gcp_tx_string( buffer_pointer ) != PG_OK ) {
 					#if PG_ERROR_IS_ENABLE
 						pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_TX_STRING_FAILED , PG_ERROR_ERROR );
 					#endif
@@ -2071,7 +2079,7 @@
 				}
 			}
 			//data_end
-			if( pg_gcp_data_end( ) != PG_OK ) {
+			if( pg_gcp_data_end() != PG_OK ) {
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_DATA_END_FAILED , PG_ERROR_ERROR );
 				#endif
@@ -2091,7 +2099,8 @@
 			//crc
 			#if ( PG_GCP_CRC_ENABLE == PG_ENABLE )
 				if( crc_flag == PG_YES ) {
-					if( pg_gcp_crc( object_pointer, pg_gcp_v_config[ config ].xbuffer_length ) != PG_OK ) {
+					if( pg_gcp_crc( buffer_pointer, pg_gcp_v_config[ config ].xbuffer_length ) != PG_OK ) {
+						//pg_gcp_v_config[ config ].xbuffer_length per i buffer; gestire per le stringhe
 						#if PG_ERROR_IS_ENABLE
 							pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_CRC_FAILED , PG_ERROR_ERROR );
 						#endif
@@ -2099,6 +2108,7 @@
 					}
 				}
 			#endif
+			//
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 			#endif
@@ -2273,7 +2283,7 @@ void main( void ) {
  	while( 1 ) {
 		pg_gcp_rx();
 		
-		if( pg_gcp_read( ) != PG_NOK ) {
+		if( pg_gcp_read() != PG_NOK ) {
 			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.uconf + 48 ) );
 			pg_lcd_hd44780_write_string( 0 , pg_gcp_udata.uptr );
 			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.ulen + 48 ) );
@@ -2291,16 +2301,16 @@ void main( void ) {
 		//pg_gcp_udata.len = ( p
 					
 					
-		//if( pg_gcp_rx_data_ready( ) != PG_GCP_RX_DATA_READY_NO ) {
+		//if( pg_gcp_rx_data_ready() != PG_GCP_RX_DATA_READY_NO ) {
 			//pg_lcd_hd44780_put_char( 0 , pg_gcp_nconfig + 48 );				//config attuale !!!
 			//pg_lcd_hd44780_put_char( 0 , rdr + 48 );						//config attuale !!!
 			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ 0 ].xbuffer_ptr );	//ok	???
 			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ 1 ].xbuffer_ptr );	//atroie
 			//*(_pg_int16 *)(pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr + 2) = 0;
 			//pg_lcd_hd44780_write_string( 0 , pg_gcp_v_config[ pg_gcp_nconfig ].xbuffer_ptr );
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );	//ok	???
-			//pg_lcd_hd44780_put_char( 0 , *pg_gcp_rx_data_read( ) );
-			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read( ) );
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read() );	//ok	???
+			//pg_lcd_hd44780_put_char( 0 , *pg_gcp_rx_data_read() );
+			//pg_lcd_hd44780_write_string( 0 , pg_gcp_rx_data_read() );
 		//}
 	}
 	PG_HALT;
@@ -2340,7 +2350,7 @@ void main( void ) {
 	
 	while( 1 ) {
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
-		if( pg_gcp_engage( ) != PG_OK ) {	
+		if( pg_gcp_engage() != PG_OK ) {	
 												if( PG_GCP_DEBUG_DELAY ) pg_delay_msec( PG_GCP_DEBUG_DELAY_TIME1 );
 			pg_gcp_reset( );
 		}
@@ -2489,7 +2499,7 @@ void main( void ) {
 				//}
 			}
    			// #if ( PG_GCP_AUTORESET_ENGAGE_ENABLE == PG_ENABLE )
-				// if( pg_gcp_reset( ) == PG_OK ) {
+				// if( pg_gcp_reset() == PG_OK ) {
 					// #if PG_ERROR_IS_ENABLE
 						// pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_ENGAGE_RESETTED , PG_ERROR_WARNING );
 					// #endif

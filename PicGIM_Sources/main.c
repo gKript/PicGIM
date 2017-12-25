@@ -11,13 +11,8 @@
 
 #include "picgim_main.h"
 
-#define	PG_GCP_DEBUG_DELAY				1
-#define	PG_GCP_DEBUG_DELAY_TIME1		500
-#define	PG_GCP_DEBUG_DELAY_TIME2		3000
-
 void main( void ) {
 
-	_pg_Uint8 buffer_to_tx[ 4 ] = "aaa";			//buffer creati dell' utente con stesse dimensioni del pg_gcp_buffer_rx_1[5] del protocollo opposto
 	_pg_Uint8 mys[ 4 ];
 	_pg_Uint16 num = 0;
 	
@@ -30,14 +25,11 @@ void main( void ) {
 	
 	pg_gcp_engage( );
 	while( 1 ) {
-		pg_gcp_send( itoa( num, mys ), PG_GCP_CONFIG_01, PG_GCP_CRC_OFF );
-		num++;																		
-		//pg_gcp_status_sync( );																	
-		//pg_gcp_crc( buffer_to_tx, 3 );
+		pg_gcp_send( itoa( num, mys ), PG_GCP_CONFIG_01, PG_GCP_CRC_ON );
+		num++;		
+		
 		pg_delay_sec( 1 );
-		//pg_gcp_reset( );
 		pg_lcd_hd44780_clear( 0 );
-		//pg_lcd_hd44780_put_char( 0 , '>' );
 	}										
 	pg_gcp_engage_end( );
 	PG_HALT;
@@ -45,7 +37,6 @@ void main( void ) {
 
 
 */
-
 
 //#################################################################################
 //#################################################################################
@@ -61,24 +52,19 @@ void main( void ) {
 #include "picgim_main.h"
 
 void main( void ) {
-	//_pg_Uint8	mystr[ 6 ];
-	_pg_Uint8 rv;
-	
+
 	pg_initialize();
 	pg_gcp_init();
 	pg_serial_open();
+	
 	pg_lcd_hd44780_put_char( 0 , 'R' );
 	pg_delay_sec( 1 );
 	pg_lcd_hd44780_clear( 0 );
 	
  	while( 1 ) {
 		pg_gcp_rx();
-		
-		rv = pg_gcp_read();
-		//pg_lcd_hd44780_put_char( 0 , ( rv + 48 ) );
-		//if( rv != PG_NOK ) {
-		if( rv == PG_OK ) {
-		//if( pg_gcp_read() != PG_NOK ) {
+		if( pg_gcp_read() == PG_OK ) {
+			pg_delay_sec( 2 );
 			pg_lcd_hd44780_clear( 0 );
 			
 			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.uconf + 48 ) );
@@ -86,8 +72,13 @@ void main( void ) {
 			pg_lcd_hd44780_put_char( 0 , ( pg_gcp_udata.ulen + 48 ) );
 			
 			pg_delay_sec( 1 );
-			//pg_lcd_hd44780_put_char( 0 , '>' );
+			//pg_delay_sec( 6 ); //if delay too long, rx 'D' in udata!!!
 		}
+		//errori
+		// else {
+			// pg_lcd_hd44780_put_char( 0 , '!' );
+			// pg_delay_sec( 1 );
+		// }
 	}
 	PG_HALT;
 }

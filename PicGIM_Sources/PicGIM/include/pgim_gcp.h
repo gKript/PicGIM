@@ -89,6 +89,17 @@
 		#define	PG_GCP_CRC_OFF									0
 		#define	PG_GCP_CRC_ON									1
 		//---[ End CRC Flag ]---
+
+		//---[ Flag ]---
+		#define	PG_GCP_FLAG_SET_TX								0b00000001
+		#define	PG_GCP_FLAG_SET_ENGAGE							0b00000010
+		#define	PG_GCP_FLAG_SET_DATA_MODE						0b00000100
+		#define	PG_GCP_FLAG_SET_REQUEST							0b00001000
+		#define	PG_GCP_FLAG_SET_STREAMING						0b00010000
+		#define	PG_GCP_FLAG_SET_CRYPT							0b00100000
+	//	#define	PG_GCP_FLAG_SET_6								0b01000000
+	//	#define	PG_GCP_FLAG_SET_7								0b10000000
+		//---[ And Flag ]---
 		
 		//---[ Buffer Mode ]---
 		#define	PG_GCP_BUFFER									0
@@ -151,17 +162,18 @@
 		//---[ End Control Byte ]---
 		
 		//---[ Return Messages ]---			
+		#define	PG_GCP_RX_DATA_READY_NO							0xFF	//must be > #config					
+
 		enum _pg_gcp_return_code_enum {
 			PG_GCP_DUMMY = 100,
 			PG_GCP_WAITING_DATA,
-			PG_GCP_CRC_OK,
-			PG_GCP_CONFIG_OK,
-			PG_GCP_COMMAND_OK,
+			// PG_GCP_CRC_OK,
+			// PG_GCP_CONFIG_OK,
+			// PG_GCP_COMMAND_OK,
+			// PG_GCP_STATUS_MOD_OK,
 			PG_GCP_STATUS_WAITING,
-			PG_GCP_STATUS_MOD_OK,
 			PG_GCP_STREAMING_ON,
 			PG_GCP_STREAMING_OFF,
-			PG_GCP_RX_DATA_READY_NO,
 			PG_GCP_ERROR_CONTROLBYTE_RESETTED,
 			PG_GCP_ERROR_CONTROLBYTE_RESET_FAIL,
 			PG_GCP_ERROR_ENGAGE_FAILED,
@@ -663,9 +675,9 @@
 							Conditions.
 			\attention		Nothing.
 			\return 		Nothing.
-			\param			Nothing.
-		*/
-		_pg_Uint8	pg_gcp_send								( void * object_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ); // U S E R   F U N C T I O N
+			\param			Nothing.						//config:	PG_GCP_CONFIG_00... PG_GCP_CONFIG_16
+		*/													//crc_flag: PG_GCP_CRC_ON | PG_GCP_CRC_OFF
+		_pg_Uint8	pg_gcp_send								( void * buffer_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ); // U S E R   F U N C T I O N
 		
 		/*!
 			\brief			What it do. \n
@@ -693,7 +705,7 @@
 			\param			Nothing.
 		*/
 		void	pg_gcp_empty_serial							( void );
-		
+	
 		//---[ End Prototype ]---
  	#endif
 #endif /* _PGIM_GCP_H_ */
@@ -736,10 +748,38 @@
 	_pg_Uint8	pg_gcp_rx_status_sync					( void );
 	_pg_Uint8	pg_gcp_rx_status_mod					( void );
 	_pg_Uint8	pg_gcp_rx_command						( void );
-	_pg_Uint8	pg_gcp_send								( void * object_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ); // U S E R   F U N C T I O N
+	_pg_Uint8	pg_gcp_send								( void * buffer_pointer, _pg_Uint8 config, _pg_Uint8 crc_flag ); // U S E R   F U N C T I O N
 	_pg_Uint8 *	pg_gcp_read								( void ); // U S E R   F U N C T I O N
 	void		pg_gcp_rx_set_empty						( void );
 	void		pg_gcp_empty_serial						( void );
 */
 
 
+		// /*!
+			// \brief			What it do. \n
+							// Conditions.
+			// \attention		Nothing.
+			// \return 		Nothing.
+			// \param			Nothing.
+		// // #define	PG_GCP_FLAG_SET_TX								0b00000001
+		// // #define	PG_GCP_FLAG_SET_ENGAGE							0b00000010
+		// // #define	PG_GCP_FLAG_SET_DATA_MODE						0b00000100
+		// // #define	PG_GCP_FLAG_SET_REQUEST							0b00001000
+		// // #define	PG_GCP_FLAG_SET_STREAMING						0b00010000
+		// // #define	PG_GCP_FLAG_SET_CRYPT							0b00100000
+		
+		// //	value: PG_ON | PG_OFF
+		
+		// */		
+		// void	pg_gcp_flag_set( _pg_Uin8 flag , _pg_Uin8 value );
+		
+		// /*!
+			// \brief			What it do. \n
+							// Conditions.	
+			// \attention		Nothing.
+			// \return 		Nothing.
+			// \param			Nothing.
+		// */
+		// _pg_Uin8	pg_gcp_flag_get( _pg_Uin8 flag );
+		
+		

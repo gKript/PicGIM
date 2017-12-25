@@ -27,8 +27,8 @@
 		//		T I M E O U T
 		//-------------------------------------------------------------------------------------------------------------
 		#define	PG_GCP_TIMEOUT_MS_TX							5000		//!< Min. 1ms - Max. 60000ms	//Only in Send-Control()
-		#define	PG_GCP_TIMEOUT_MS_RX							3000		//!< Min. 1ms - Max. 60000ms	//Only in Rx()
-		#define	PG_GCP_TIMEOUT_MS_DIAL							3000		//!< Min. 1ms - Max. 60000ms	//All reply answer
+		#define	PG_GCP_TIMEOUT_MS_RX							5000		//!< Min. 1ms - Max. 60000ms	//Only in Rx()
+		#define	PG_GCP_TIMEOUT_MS_DIAL							1000		//!< Min. 1ms - Max. 60000ms	//All reply answer
 		#define PG_GCP_TIMEOUT_MS_CRC							10000		//!< Min. 1ms - Max. 60000ms	//Onlt in Crc()
 
 		//-------------------------------------------------------------------------------------------------------------		
@@ -48,7 +48,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		//		C R C
 		//-------------------------------------------------------------------------------------------------------------
-		#define PG_GCP_CRC_ENABLE								PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
+		#define PG_GCP_CRC_ENABLE								PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 		
 		//-------------------------------------------------------------------------------------------------------------
 		//		F U N C T I O N S
