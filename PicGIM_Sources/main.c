@@ -55,7 +55,7 @@ void main( void ) {
 
 	pg_initialize();
 	pg_gcp_init();
-	pg_serial_open();
+	pg_serial_open(); 
 	
 	pg_lcd_hd44780_put_char( 0 , 'R' );
 	pg_delay_sec( 1 );

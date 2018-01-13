@@ -57,6 +57,7 @@
 		#define	PG_GCP_BUFFER_INCOMPLETE						'i'
 		#define	PG_GCP_BUFFER_FULL								'f'
 		#define	PG_GCP_BUFFER_CRC								'c'
+//		#define	PG_GCP_BUFFER_DECRYPTED							'd'
 		#define	PG_GCP_BUFFER_READ								'r'
 		#define	PG_GCP_BUFFER_UNKNOWN							'?'
 		//---[ End Buffer Status ]---
@@ -90,16 +91,16 @@
 		#define	PG_GCP_CRC_ON									1
 		//---[ End CRC Flag ]---
 
-		//---[ Flag ]---
-		#define	PG_GCP_FLAG_SET_TX								0b00000001
-		#define	PG_GCP_FLAG_SET_ENGAGE							0b00000010
-		#define	PG_GCP_FLAG_SET_DATA_MODE						0b00000100
-		#define	PG_GCP_FLAG_SET_REQUEST							0b00001000
-		#define	PG_GCP_FLAG_SET_STREAMING						0b00010000
-		#define	PG_GCP_FLAG_SET_CRYPT							0b00100000
-	//	#define	PG_GCP_FLAG_SET_6								0b01000000
-	//	#define	PG_GCP_FLAG_SET_7								0b10000000
-		//---[ And Flag ]---
+		// //---[ Flag ]---
+		// #define	PG_GCP_FLAG_SET_TX								0b00000001
+		// #define	PG_GCP_FLAG_SET_ENGAGE							0b00000010
+		// #define	PG_GCP_FLAG_SET_DATA_MODE						0b00000100
+		// #define	PG_GCP_FLAG_SET_REQUEST							0b00001000
+		// #define	PG_GCP_FLAG_SET_STREAMING						0b00010000
+		// #define	PG_GCP_FLAG_SET_CRYPT							0b00100000
+	// //	#define	PG_GCP_FLAG_SET_6								0b01000000
+	// //	#define	PG_GCP_FLAG_SET_7								0b10000000
+		// //---[ And Flag ]---
 		
 		//---[ Buffer Mode ]---
 		#define	PG_GCP_BUFFER									0

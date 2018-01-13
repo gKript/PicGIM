@@ -316,19 +316,20 @@
 			#endif
 			//
 			pg_delay_msec( PG_GCP_DELAY_RESET_TX );
-			pg_gcp_reset_local();
-			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
-				PG_GCP_LED_RESET_LAT = PG_OFF;
-			#endif
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
-			#endif
-			return( PG_OK );
-		}
-		else {
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_RESET_FAILED , PG_ERROR_CRITICAL );
-			#endif
+			Reset();
+//			pg_gcp_reset_local();
+//			#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+//				PG_GCP_LED_RESET_LAT = PG_OFF;
+//			#endif
+//			#if PG_ERROR_IS_ENABLE
+//				pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+//			#endif
+//			return( PG_OK );
+//		}
+//		else {
+//			#if PG_ERROR_IS_ENABLE
+//				pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_RESET_FAILED , PG_ERROR_CRITICAL );
+//			#endif
 			return( PG_NOK );
 		}
 	}
@@ -345,16 +346,17 @@
 		#endif
 		//
 		pg_delay_msec( PG_GCP_DELAY_RESET_RX );
-		pg_gcp_reset_local();
-		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
-			PG_GCP_LED_RESET_LAT = PG_OFF;
-		#endif
-		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_CLEAR_LCD == PG_ENABLE ) )
-			pg_lcd_hd44780_clear( 0 );
-		#endif
-		#if PG_ERROR_IS_ENABLE
-			pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
-		#endif
+		Reset();
+//		pg_gcp_reset_local();
+//		#if ( ( PG_GCP_LED_GLOBAL_ENABLE == PG_ENABLE ) && ( PG_GCP_LED_RESET_ENABLE == PG_ENABLE ) )
+//			PG_GCP_LED_RESET_LAT = PG_OFF;
+//		#endif
+//		#if ( ( PG_GCP_DEBUG_GLOBAL == PG_ENABLE ) && ( PG_GCP_DEBUG_RESET_CLEAR_LCD == PG_ENABLE ) )
+//			pg_lcd_hd44780_clear( 0 );
+//		#endif
+//		#if PG_ERROR_IS_ENABLE
+//			pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
+//		#endif
 		//return( PG_GCP_OK_RESET_DONE );
 		return( PG_OK );
 	}
@@ -1002,7 +1004,7 @@
 	#if ( PG_GCP_STATUS_SYNC_ENABLE == PG_ENABLE )
 		_pg_Uint8 pg_gcp_status_sync( void ) {		//ritorna lo stato del buffer a remoto; verifica non possibile
 			//--------------------------------------------------------------------------
-			// Query RX about status value, than sync it on TX.
+			// Query receiver (RX) about buffer status value, than sync it on sender (TX).
 			//--------------------------------------------------------------------------
 			if( pg_gcp_flag_engage == PG_YES ) {
 				if( pg_gcp_flag_data_mode == PG_NO ) {
@@ -1020,6 +1022,15 @@
 									break;
 									case PG_GCP_BUFFER_FULL :
 										pg_lcd_hd44780_put_char( 0 , PG_GCP_BUFFER_FULL );
+									break;
+									case PG_GCP_BUFFER_CRC :
+										pg_lcd_hd44780_put_char( 0 , PG_GCP_BUFFER_CRC );
+									break;
+//									case PG_GCP_BUFFER_DECRYPTED :
+//										pg_lcd_hd44780_put_char( 0 , PG_GCP_BUFFER_DECRYPTED );
+//									break;
+									case PG_GCP_BUFFER_READ :
+										pg_lcd_hd44780_put_char( 0 , PG_GCP_BUFFER_READ );
 									break;
 									default :
 										pg_lcd_hd44780_put_char( 0 , PG_GCP_BUFFER_UNKNOWN );
@@ -1389,14 +1400,14 @@
 						#if PG_ERROR_IS_ENABLE
 							pg_error_set( PG_ERROR_GCP , PG_GCP_ERROR_READ_BYTE_SERIAL_TIMEOUT , PG_ERROR_WARNING );
 						#endif
- 						// #if ( PG_GCP_AUTORESET_TIMEOUT == PG_ENABLE )
-							// if( pg_gcp_flag_tx == PG_YES ) {	//TX reset remote ad local
-								// pg_gcp_reset( );
-							// }
-							// if( pg_gcp_flag_tx == PG_NO ) {		//RX reset only local
-								// pg_gcp_reset_local( );
-							// } 
-						// #endif
+ 						 #if ( PG_GCP_AUTORESET_TIMEOUT == PG_ENABLE )
+							 if( pg_gcp_flag_tx == PG_YES ) {	//TX reset remote ad local
+								 pg_gcp_reset( );
+							 }
+							 if( pg_gcp_flag_tx == PG_NO ) {		//RX reset only local
+								 pg_gcp_reset_local( );
+							 } 
+						 #endif
 						return( PG_NOK );
 					}
 				}
@@ -1525,6 +1536,8 @@
 						pg_lcd_hd44780_put_char( 0 , tbuffer[ idx ]  );
 					#endif
 					pg_gcp_send_byte_serial( tbuffer[ idx ] );
+					if  ( tbuffer[idx] == PG_GCP_CONTROL_ESCAPE )
+						pg_gcp_send_byte_serial( tbuffer[ idx ] );
 				}
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
@@ -1548,6 +1561,8 @@
 			if( pg_gcp_flag_data_mode == PG_YES ) {
 				while( tstring[ sidx ] ) {
 					pg_gcp_send_byte_serial( tstring[ sidx ] );
+					if ( tstring[ sidx ] == PG_GCP_CONTROL_ESCAPE )
+						pg_gcp_send_byte_serial( tstring[ sidx ] );
 					sidx++;
 				}
 				pg_gcp_send_byte_serial( 0 );	//add null to terminate string

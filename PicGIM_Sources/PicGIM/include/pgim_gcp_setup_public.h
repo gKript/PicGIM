@@ -8,7 +8,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		//		A P P L I C A T I O N
 		//-------------------------------------------------------------------------------------------------------------
-		#define	PG_GCP_APPLICATION_NAME							"USER"		//!< Max.#4Byte. User's application name as identifier
+		#define	PG_GCP_APPLICATION_NAME							"USER"		//!< Must be length #4 Byte. User's application name as identifier.
 		#define	PG_GCP_APPLICATION_VERSION_MAJOR				0			//!< #1Byte (Min. 0 - Max. 255 )
 		#define	PG_GCP_APPLICATION_VERSION_MINOR				1			//!< #1Byte	(Min. 0 - Max. 255 )
 		
@@ -69,7 +69,7 @@
 		//
 		// 		C O N F I G   01
 		#define PG_GCP_BUFFER_RX_01_ENABLE						PG_ENABLE		//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		#define PG_GCP_BUFFER_RX_01_LENGTH						6				//!< Min. 1 - Max. xxxxxx >
+		#define PG_GCP_BUFFER_RX_01_LENGTH						4				//!< Min. 1 - Max. xxxxxx >
 		#define	PG_GCP_BUFFER_RX_01_MODE						PG_GCP_STRING	//!< Must be: PG_GCP_BUFFER || PG_GCP_STRING
 		
 		// 		C O N F I G   02
