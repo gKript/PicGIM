@@ -47,8 +47,8 @@
 		#warning	PG_HS_PG PG_HS_MSG This file is compiling.
 	#endif
 
-	#if ( PGIM_FONTS == PG_ENABLE )
-		struct sbl_glcd_font fxy;
+	#if ( PGIM_FONT == PG_ENABLE )
+		struct pg_font_config fxy;
 	#endif
 
 	void pg_lcd_pcd8544_reset( void ) {
@@ -79,7 +79,7 @@
 		pg_delay_msec( 2 );
 	}
 
-	#if ( PGIM_FONTS == PG_ENABLE )
+	#if ( PGIM_FONT == PG_ENABLE )
 
 		void pg_lcd_pcd8544_font_select( rom const _pg_Uint8 * font ) {
 			fxy.width	= font[0];
@@ -117,7 +117,7 @@
 	}
 
 	
-	#if ( PGIM_FONTS == PG_ENABLE )
+	#if ( PGIM_FONT == PG_ENABLE )
 
 		#if ( PG_PROJECT_STATE == PG_DEBUG )
 			#warning	PG_HS_PG PG_HS_MSG The font functions is compiling too.

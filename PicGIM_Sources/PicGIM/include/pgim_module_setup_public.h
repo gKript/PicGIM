@@ -53,13 +53,14 @@
 	//================================================================================================================
 	//		S O F T W A R E   G E N E R A L
 	//================================================================================================================
-	#define PGIM_ERROR								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_FTOA								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_GCP								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_GCP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_SSP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GKH32								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_PRS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_FONT								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		S O F T W A R E   D E V I C E
@@ -71,16 +72,17 @@
 	//================================================================================================================
 	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_AD_CONVERTER						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SPI								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SPI								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   E X T E R N A L
 	//================================================================================================================
-	#define PGIM_LCD_HD44780						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_5110							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_RTC_DS1302							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -112,6 +114,31 @@
 		#define	PG_FTOA_PRINT_SIGN_PLUS				PG_NO				//!< Must be: PG_YES || PG_NO
 		#define	PG_FTOA_PRINT_SIGN_MINUS			PG_YES				//!< Must be: PG_YES || PG_NO
 	#endif
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   G C P
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   S S P
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
+		
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   G K H 3 2	
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   P R S
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   F O N T
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   3 W I R E
@@ -189,6 +216,21 @@
 	#endif
 
 	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |	L C D 5 1 1 0
+	//----------------------------------------------------------------------------------------------------------------
+	
+		#define	PG_5110_DATA			    		1
+		#define	PG_5110_COMMAND			    		0
+		
+		#define	PG_5110_CONFIGURATION				0x08
+		#define	PG_5110_FUNCTION					0x20
+		#define	PG_5110_ADDRESS_Y					0x40
+		#define	PG_5110_ADDRESS_X					0x80
+		#define	PG_5110_EXT_TEMP_CONTROL			0x04
+		#define	PG_5110_EXT_BIAS_CONTROL			0x10
+		#define	PG_5110_EXT_SET_VOP		    		0x80
+	
+	//----------------------------------------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R
 	//----------------------------------------------------------------------------------------------------------------
 	#if ( PGIM_BUZZER == PG_ENABLE )
@@ -201,6 +243,11 @@
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   S E N S O R
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
+	
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   R T C _ D S 1 3 0 2
 	//----------------------------------------------------------------------------------------------------------------
 	//Nothing to configure here.
 	

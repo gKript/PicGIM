@@ -100,10 +100,35 @@
 		#define PG_LCD_HD44780_BL_1_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_BL_2_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_BL_3_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		
 		#define PG_LCD_HD44780_DATA_0_PORT			P_D0				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
 		#define PG_LCD_HD44780_DATA_1_PORT			P_D1				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
 		#define PG_LCD_HD44780_DATA_2_PORT			P_D2				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
 		#define PG_LCD_HD44780_DATA_3_PORT			P_D3				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
+	#endif
+
+	//------------------------------------------------------------------------------
+	//		H A R D W A R E   C O N F I G   |	L C D 5 1 1 0
+	//------------------------------------------------------------------------------
+	#if ( PGIM_LCD_5110 == PG_ENABLE )
+		#define	PG_LCD_5110_VIDEO_MEMORY			PG_NO
+
+		#define	PG_LCD_5110_LED						L_B2
+		#define PG_LCD_5110_VDD						L_B3
+		#define PG_LCD_5110_DC						L_C0
+		#define PG_LCD_5110_RST						L_C1
+		#define PG_LCD_5110_CE 						L_C2
+	
+		#define	PG_LCD_5110_LED_TRIS				T_B2
+		#define PG_LCD_5110_VDD_TRIS				T_B3
+		#define PG_LCD_5110_DC_TRIS					T_C0
+		#define PG_LCD_5110_RST_TRIS				T_C1
+		#define PG_LCD_5110_CE_TRIS					T_C2
+
+		// #define	PG_SPI_SDI_TRIS					TRC7
+		// #define	PG_SPI_SDO_TRIS					TRC5
+		// #define	PG_SPI_SCK_TRIS					TRC3
+		// #define	PG_SPI_SS_TRIS					TRA5
 	#endif
 
 	//------------------------------------------------------------------------------

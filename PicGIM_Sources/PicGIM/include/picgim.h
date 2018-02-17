@@ -50,10 +50,12 @@
 #ifndef _PGIM_INCLUDES_H_
 	#define _PGIM_INCLUDES_H_
 
-//    #pragma warning disable 520
+    #pragma warning disable 520
 
-	#if ! defined( __18CXX ) && ! defined( __XC8 )
-		#error	PicGIM can be compiled ONLY under MCHP C18 or XC8 !!!
+//	#if ! defined( __18CXX ) && ! defined( __XC8 )
+	#if ! defined( __18CXX )
+//		#error	PicGIM can be compiled ONLY under MCHP C18 or XC8 !!!
+		#error	PicGIM can be compiled ONLY under MCHP C18 !!!
 	#endif
 
 //    #include <xc.h>
@@ -118,6 +120,7 @@
 			PG_LCD_PCD8544,
 			PG_LCD_9340,
 			PG_LCD_HD44780,
+			PG_LCD_5110,
 			PG_PWM,
 			PG_SERIAL,
 			PG_SPI,
@@ -277,7 +280,8 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_SPI == PG_ENABLE )
-//		#include <plib/spi.h>                //kmod
+		#include <spi.h>	                //kmod 2
+//		#include <plib/spi.h>               //kmod
 		#include "pgim_spi.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PicGIM >>> SPI module >>> Loaded
@@ -502,6 +506,53 @@
 	#endif
 	//---[ END Lcd HD44780 ]---
 	
+
+	//---[ Lcd 5110 ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_LCD_5110
+		#define		PGIM_LCD_5110		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_LCD_5110
+		#define		PGIM_LCD_5110		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_LCD_5110 == PG_ENABLE )
+		#include "pgim_lcd_5110.h"
+		
+		#if defined( PG_5110_VMEM_AMOUNT ) 
+			#undef	PG_5110_VMEM_AMOUNT
+		#endif
+		
+		#define PG_5110_VMEM_AMOUNT		504
+		#if PG_MAX_RAM > ( 2.5 * PG_5110_VMEM_AMOUNT )
+			#if	PG_LCD_5110_VIDEO_MEMORY == PG_YES
+				_pg_Ubuffer vbuff_5110[ PG_5110_VMEM_AMOUNT ];
+				#if defined( _GIM_H )
+					#if ( PG_VERBOSE == PG_ENABLE )
+						#warning	PicGIM: This amount of allocated RAM ( 504 Bytes ) may cause errors during linking. Use the correct file LKR equipped by PicGIM relating to the selected MCU.
+					#endif
+				#endif
+			#else
+				#if defined( _GIM_H )
+					#if PG_VERBOSE == PG_ENABLE && PG_SUGGESTION == PG_ENABLE
+						#warning	PicGIM: This MCU can use the VIDEO BUFFER. Keep on mind.
+					#endif
+				#endif
+			#endif
+		#else
+			#if defined( _GIM_H )
+				#if ( PG_VERBOSE == PG_ENABLE )
+					#warning	PicGIM: Not enough RAM ( PG_MAX_RAM Bytes ) to use VIDEO BUFFER
+				#endif
+			#endif
+		#endif
+		
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> LCD 5110 module >>> Loaded
+		#endif
+	#endif
+	//---[ END Lcd 5110 ]---
+	
 	
 	//---[ Lcd PCD8544 ]---
 //	#if defined( PG_DOXYGEN )
@@ -513,11 +564,11 @@
 //	#endif
 //	//--------------------------------------------------
 //	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
-//		#include "pgim_font_setup.h"
+//		//#include "pgim_font_setup.h"
 //		#include "pgim_lcd_pcd8544.h"
 //		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 //			#warning	PicGIM >>> LCD PCD8544 module >>> Loaded
-//			#if ( PGIM_FONTS == PG_ENABLE )
+//			#if ( PGIM_FONT == PG_ENABLE )
 //				#warning	PicGIM >>> LCD PCD8544 module >>> Fonts enabled and loaded
 //			#endif
 //		#endif
@@ -539,7 +590,7 @@
 //		#include "pgim_lcd_9340.h"
 //		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 //			#warning	PicGIM >>> LCD 9340 module >>> Loaded
-//			#if ( PGIM_FONTS == PG_ENABLE )
+//			#if ( PGIM_FONT == PG_ENABLE )
 //				#warning	PicGIM >>> LCD 9340 module >>> Fonts enabled and loaded
 //			#endif
 //		#endif
@@ -843,7 +894,25 @@
 	#endif
 	//---[ END PRS ]---
 	
-	
+
+	//---[ FONT ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_FONT == PG_ENABLE )
+		#include "pgim_font_setup.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> FONT module >>> Loaded
+		#endif
+	#endif
+	//---[ END FONT ]---
+
+
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T
 	//------------------------------------------------------------------------------

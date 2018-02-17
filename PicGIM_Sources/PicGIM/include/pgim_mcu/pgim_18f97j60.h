@@ -70,11 +70,11 @@
 //		#define	PG_CLOCK 0.031								//!< Re-define new oscillator frequency
 		#define	PG_CLOCK 31									//!< Re-define new oscillator frequency
 		#if	defined( _GIM_H_ ) && PG_VERBOSE == PG_ENABLE
-			#warning	PicGIM >>> Core >>> Using INTERNAL oscillator requested by user ( PG_CLOCK [MHz] )
+			#warning	PicGIM >>> Core >>> Using INTERNAL oscillator requested by user ( PG_CLOCK [Hz] )
 		#endif
 	#else
 		#if	defined( _GIM_H_ ) && PG_VERBOSE == PG_ENABLE
-			#warning	PicGIM >>> Core >>> Using EXTERNAL oscillator configured by user ( PG_CLOCK [MHz] )
+			#warning	PicGIM >>> Core >>> Using EXTERNAL oscillator configured by user ( PG_CLOCK [Hz] )
 		#endif
 	#endif
 	//---[ END Internal Oscillator ]---

@@ -71,7 +71,7 @@
 			#if	defined ( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 				#warning	PicGIM >>> Core >>> Set 18F4620 as current mcu
 			#endif
-			#include ".\pgim_mcu\pgim_18f4620.h"
+			#include "./pgim_mcu/pgim_18f4620.h"
 			#define		PGIM_P18F4620
 		
 		#elif defined( __18F4550 )

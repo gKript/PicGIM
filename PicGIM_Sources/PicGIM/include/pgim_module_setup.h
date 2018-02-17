@@ -93,6 +93,7 @@
 	#include "pgim_gcp_setup_public.h"
 	#include "pgim_ssp_setup_public.h"
 	#include "pgim_prs_setup_public.h"
+    #include "pgim_font_setup_public.h"
 	//
     #include "pgim_hardware_setup.h"
 
@@ -147,8 +148,9 @@
 	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   S P I
 	//------------------------------------------------------------------------------
-	#if ( ( PGIM_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
-		
+//	#if ( ( PGIM_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
+//	#if ( ( PGIM_LCD_5110 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
+	#if ( PGIM_LCD_5110 == PG_ENABLE )
 		#if	( PGIM_SPI == PG_DISABLE )
 			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the SPI module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
@@ -229,8 +231,8 @@
 //	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
 //
 //		#if ( PGIM_SERIAL == PG_ENABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-//			#if ( PGIM_FONTS == PG_DISABLE )
-//				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable FONTS as required by SERIAL debug
+//			#if ( PGIM_FONT == PG_DISABLE )
+//				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable FONT module as required by SERIAL debug
 //				#ifndef		PG_EXIT_ON_ERROR
 //					#define		PG_EXIT_ON_ERROR
 //				#endif

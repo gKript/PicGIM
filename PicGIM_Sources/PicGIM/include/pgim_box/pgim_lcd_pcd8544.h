@@ -63,7 +63,7 @@
 		void	pg_lcd_pcd8544_backlight				( _pg_int8 flag );
 		void	pg_lcd_pcd8544_set_pos					( _pg_Uint8 x , _pg_Uint8 y );
 		
-		#if ( PGIM_FONTS == PG_ENABLE )
+		#if ( PGIM_FONT == PG_ENABLE )
 			void	pg_lcd_pcd8544_send_char			( _pg_Uint8 character );
 			void    pg_lcd_pcd8544_font_select			( rom const _pg_Uint8 * font );
 			void	pg_lcd_pcd8544_send_string_rom		( rom _pg_int8* string );
