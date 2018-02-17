@@ -50,7 +50,7 @@
 #ifndef _PGIM_INCLUDES_H_
 	#define _PGIM_INCLUDES_H_
 
-    #pragma warning disable 520
+//    #pragma warning disable 520
 
 //	#if ! defined( __18CXX ) && ! defined( __XC8 )
 	#if ! defined( __18CXX )

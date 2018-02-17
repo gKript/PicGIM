@@ -62,8 +62,8 @@
 			// extern	rom const _pg_uint8 font_5x6[];
 		// #endif
 		#if	( PGIM_FONT_5X7 == PG_INCLUDE )
-			#include "pgim_font_5x7.h"
-			//extern	rom const _pg_Uint8 font_5x7[];
+			//#include "pgim_font_5x7.h"
+			extern	rom const _pg_Uint8 font_5x7[];
 		#endif
 		// #if	( PGIM_FONT_5X7_D == PG_INCLUDE )
 			// #include "pgim_font_5x7_matrix_6x8_v.h"

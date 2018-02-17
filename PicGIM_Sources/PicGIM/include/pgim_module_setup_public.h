@@ -60,7 +60,7 @@
 	#define	PGIM_SSP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GKH32								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_PRS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_FONT								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_FONT								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		S O F T W A R E   D E V I C E

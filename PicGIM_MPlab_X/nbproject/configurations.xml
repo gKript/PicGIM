@@ -44,8 +44,9 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_3wire.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_rtc_ds1302.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_selective_compiling.h</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_gkh32.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_gcp.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_gkh32.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_prs.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f2" displayName="Core_files" projectFiles="true">
@@ -77,6 +78,7 @@
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_serial_setup_public.h</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_timer_setup_public.h</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_gcp_setup_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_prs_setup_public.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -110,8 +112,6 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_sensor.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_3wire.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_rtc_ds1302.c</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_gkh32.c</itemPath>
-        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_gcp.c</itemPath>
       </logicalFolder>
       <itemPath>../PicGIM_Sources/main.c</itemPath>
     </logicalFolder>
@@ -137,7 +137,7 @@
         <targetDevice>PIC18F4620</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD3PlatformTool</platformTool>
+        <platformTool>PICkit2PlatformTool</platformTool>
         <languageToolchain>C18</languageToolchain>
         <languageToolchainVersion>3.34</languageToolchainVersion>
         <platform>3</platform>
@@ -151,7 +151,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>true</parseOnProdLoad>
+          <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
       </compileType>
@@ -183,7 +183,7 @@
         <property key="enable-ou" value="true"/>
         <property key="enable-ow" value="true"/>
         <property key="extra-include-directories"
-                  value="..\PicGIM_Sources\PicGIM\include;..\PicGIM_Sources\PicGIM\include\pgim_mcu;..\..\..\..\..\MCC18\h"/>
+                  value="..\PicGIM_Sources\PicGIM\include"/>
         <property key="optimization-master" value="Enable all"/>
         <property key="preprocessor-macros" value=""/>
         <property key="procedural-abstraction-passes" value="4"/>
@@ -191,14 +191,6 @@
         <property key="verbose" value="false"/>
         <property key="warning-level" value="2"/>
       </C18>
-      <C18-AS>
-        <property key="cross.reference.file" value=""/>
-        <property key="default.radix" value="HEX"/>
-        <property key="enable.case.sensitivity" value="true"/>
-        <property key="hex.output.format" value="INHX32"/>
-        <property key="preprocessor.macros" value=""/>
-        <property key="warning.level" value="0"/>
-      </C18-AS>
       <C18-LD>
         <property key="cod-file" value="false"/>
         <property key="extra-lib-directories" value=""/>
@@ -214,53 +206,77 @@
         <property key="stack-analysis-mcc18" value="false"/>
         <property key="stack-analysis-mplink" value="false"/>
       </C18LanguageToolchain>
-      <ICD3PlatformTool>
-        <property key="AutoSelectMemRanges" value="auto"/>
-        <property key="Freeze Peripherals" value="true"/>
-        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
-        <property key="ToolFirmwareFilePath"
-                  value="Press to browse for a specific firmware version"/>
-        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="hwtoolclock.frcindebug" value="false"/>
-        <property key="memories.aux" value="false"/>
-        <property key="memories.bootflash" value="false"/>
-        <property key="memories.configurationmemory" value="true"/>
-        <property key="memories.configurationmemory2" value="true"/>
-        <property key="memories.dataflash" value="true"/>
-        <property key="memories.eeprom" value="true"/>
-        <property key="memories.flashdata" value="true"/>
-        <property key="memories.id" value="true"/>
-        <property key="memories.programmemory" value="true"/>
-        <property key="memories.programmemory.end" value="0xffff"/>
-        <property key="memories.programmemory.partition2" value="true"/>
-        <property key="memories.programmemory.partition2.end"
-                  value="${memories.programmemory.partition2.end.value}"/>
-        <property key="memories.programmemory.partition2.start"
-                  value="${memories.programmemory.partition2.start.value}"/>
-        <property key="memories.programmemory.start" value="0x0"/>
-        <property key="poweroptions.powerenable" value="false"/>
-        <property key="programoptions.donoteraseauxmem" value="false"/>
-        <property key="programoptions.eraseb4program" value="true"/>
-        <property key="programoptions.preservedataflash" value="false"/>
-        <property key="programoptions.preserveeeprom" value="false"/>
-        <property key="programoptions.preserveprogramrange" value="false"/>
-        <property key="programoptions.preserveprogramrange.end" value="0xffff"/>
-        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
-        <property key="programoptions.preserveuserid" value="false"/>
-        <property key="programoptions.programcalmem" value="false"/>
-        <property key="programoptions.programuserotp" value="false"/>
-        <property key="programoptions.testmodeentrymethod" value="VPPFirst"/>
-        <property key="programoptions.usehighvoltageonmclr" value="false"/>
-        <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="5.0"/>
-      </ICD3PlatformTool>
+      <HI-TECH-COMP>
+        <property key="asmlist" value="true"/>
+        <property key="define-macros" value=""/>
+        <property key="extra-include-directories"
+                  value="../PicGIM_Sources/PicGIM/include;../PicGIM_Sources/PicGIM/include/pgim_mcu"/>
+        <property key="identifier-length" value="255"/>
+        <property key="operation-mode" value="free"/>
+        <property key="opt-xc8-compiler-strict_ansi" value="false"/>
+        <property key="optimization-assembler" value="true"/>
+        <property key="optimization-assembler-files" value="true"/>
+        <property key="optimization-debug" value="false"/>
+        <property key="optimization-global" value="true"/>
+        <property key="optimization-invariant-enable" value="false"/>
+        <property key="optimization-invariant-value" value="16"/>
+        <property key="optimization-level" value="9"/>
+        <property key="optimization-set" value="default"/>
+        <property key="optimization-speed" value="false"/>
+        <property key="preprocess-assembler" value="true"/>
+        <property key="undefine-macros" value=""/>
+        <property key="use-cci" value="false"/>
+        <property key="use-iar" value="false"/>
+        <property key="verbose" value="false"/>
+        <property key="warning-level" value="-3"/>
+        <property key="what-to-do" value="ignore"/>
+      </HI-TECH-COMP>
+      <HI-TECH-LINK>
+        <property key="additional-options-checksum" value=""/>
+        <property key="additional-options-code-offset" value=""/>
+        <property key="additional-options-command-line" value=""/>
+        <property key="additional-options-errata" value=""/>
+        <property key="additional-options-extend-address" value="false"/>
+        <property key="additional-options-trace-type" value=""/>
+        <property key="additional-options-use-response-files" value="false"/>
+        <property key="backup-reset-condition-flags" value="false"/>
+        <property key="calibrate-oscillator" value="false"/>
+        <property key="calibrate-oscillator-value" value="0x3400"/>
+        <property key="clear-bss" value="true"/>
+        <property key="code-model-external" value="wordwrite"/>
+        <property key="code-model-rom" value=""/>
+        <property key="create-html-files" value="false"/>
+        <property key="data-model-ram" value=""/>
+        <property key="data-model-size-of-double" value="24"/>
+        <property key="data-model-size-of-float" value="24"/>
+        <property key="display-class-usage" value="false"/>
+        <property key="display-hex-usage" value="false"/>
+        <property key="display-overall-usage" value="true"/>
+        <property key="display-psect-usage" value="false"/>
+        <property key="fill-flash-options-addr" value=""/>
+        <property key="fill-flash-options-const" value=""/>
+        <property key="fill-flash-options-how" value="0"/>
+        <property key="fill-flash-options-inc-const" value="1"/>
+        <property key="fill-flash-options-increment" value=""/>
+        <property key="fill-flash-options-seq" value=""/>
+        <property key="fill-flash-options-what" value="0"/>
+        <property key="format-hex-file-for-download" value="false"/>
+        <property key="initialize-data" value="true"/>
+        <property key="keep-generated-startup.as" value="false"/>
+        <property key="link-in-c-library" value="true"/>
+        <property key="link-in-peripheral-library" value="true"/>
+        <property key="managed-stack" value="false"/>
+        <property key="opt-xc8-linker-file" value="false"/>
+        <property key="opt-xc8-linker-link_startup" value="false"/>
+        <property key="opt-xc8-linker-serial" value=""/>
+        <property key="program-the-device-with-default-config-words" value="true"/>
+      </HI-TECH-LINK>
       <PICkit2PlatformTool>
-        <property key="pk2settings.3state" value="false"/>
+        <property key="pk2settings.3state" value="true"/>
         <property key="pk2settings.preserveee" value="false"/>
         <property key="pk2settings.setvddvoltage" value=""/>
         <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.usetargetpower" value="false"/>
+        <property key="pk2settings.usetargetpower" value="true"/>
       </PICkit2PlatformTool>
       <Simulator>
         <property key="codecoverage.enabled" value="Disable"/>
@@ -285,7 +301,9 @@
         <property key="periphComp4.gte" value="gt"/>
         <property key="periphComp5.gte" value="gt"/>
         <property key="periphComp6.gte" value="gt"/>
-        <property key="tracecontrol.include.timestamp" value="false"/>
+        <property key="reset.scl" value="false"/>
+        <property key="reset.type" value="MCLR"/>
+        <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
         <property key="tracecontrol.select" value="0"/>
         <property key="tracecontrol.stallontracebufferfull" value="false"/>
         <property key="tracecontrol.timestamp" value="0"/>
@@ -346,9 +364,13 @@
                   value="report"/>
         <property key="warningmessagebreakoptions.W0013_CORE_STACK_UNDERFLOW_RESET"
                   value="report"/>
-        <property key="warningmessagebreakoptions.W0014_CORE_STACK_OVERFLOW"
+        <property key="warningmessagebreakoptions.W0014_CORE_INVALID_OPCODE"
                   value="report"/>
-        <property key="warningmessagebreakoptions.W0015_CORE_STACK_UNDERFLOW"
+        <property key="warningmessagebreakoptions.W0015_CORE_INVALID_ALT_WREG_SET"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0051_INSTRUCTION_DIV_NOT_ENOUGH_REPEAT"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0052_INSTRUCTION_DIV_TOO_MANY_REPEAT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0101_SIM_UPDATE_FAILED"
                   value="report"/>
@@ -357,6 +379,10 @@
         <property key="warningmessagebreakoptions.W0103_SIM_PERIPH_FAILED"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0104_SIM_FAILED_TO_INIT_TOOL"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0105_SIM_INVALID_FIELD"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0106_SIM_PERIPH_PARTIAL_SUPPORT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0201_ADC_NO_STIMULUS_FILE"
                   value="report"/>
@@ -409,6 +435,25 @@
                   value="report"/>
         <property key="warningmessagebreakoptions.W0227_ADC_INVALID_ADCS"
                   value="report"/>
+        <property key="warningmessagebreakoptions.W0228_ADC_INVALID_ADCS"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0229_ADC_INVALID_ADCS"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0230_ADC_TRIGSEL_NOT_SUPPORTED"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0231_ADC_NOT_WARMED" value="report"/>
+        <property key="warningmessagebreakoptions.W0232_ADC_CALIBRATION_ABORTED"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0233_ADC_CORE_POWERED_EARLY"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0400_PWM_PWM_FASTER_THAN_FOSC"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0700_CLC_GENERAL_WARNING"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0701_CLC_CLCOUT_AS_INPUT"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0702_CLC_CIRCULAR_LOOP"
+                  value="report"/>
         <property key="warningmessagebreakoptions.W1201_DATAFLASH_MEM_OUTSIDE_RANGE"
                   value="report"/>
         <property key="warningmessagebreakoptions.W1202_DATAFLASH_ERASE_WHILE_LOCKED"
@@ -423,9 +468,22 @@
                   value="report"/>
         <property key="warningmessagebreakoptions.W1405_DMA_IRQ_DIR_MISMATCH"
                   value="report"/>
+        <property key="warningmessagebreakoptions.W1600_PPS_INVALID_MAP" value="report"/>
+        <property key="warningmessagebreakoptions.W1601_PPS_INVALID_PIN_DESCRIPTION"
+                  value="report"/>
         <property key="warningmessagebreakoptions.W2001_INPUTCAPTURE_TMR3_UNAVAILABLE"
                   value="report"/>
         <property key="warningmessagebreakoptions.W2002_INPUTCAPTURE_CAPTURE_EMPTY"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W2003_INPUTCAPTURE_SYNCSEL_NOT_AVIALABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W2004_INPUTCAPTURE_BAD_SYNC_SOURCE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W2501_OUTPUTCOMPARE_SYNCSEL_NOT_AVIALABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W2502_OUTPUTCOMPARE_BAD_SYNC_SOURCE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W2503_OUTPUTCOMPARE_BAD_TRIGGER_SOURCE"
                   value="report"/>
         <property key="warningmessagebreakoptions.W9001_TMR_GATE_AND_EXTCLOCK_ENABLED"
                   value="report"/>
@@ -442,6 +500,22 @@
         <property key="warningmessagebreakoptions.W9204_UART_RX_EMPTY_QUEUE"
                   value="report"/>
         <property key="warningmessagebreakoptions.W9205_UART_TX_BADFILE" value="report"/>
+        <property key="warningmessagebreakoptions.W9401_CVREF_INVALIDSOURCESELECTION"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9402_CVREF_INPUT_OUTPUTPINCONFLICT"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9601_COMP_FVR_SOURCE_UNAVAILABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9602_COMP_DAC_SOURCE_UNAVAILABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9603_COMP_CVREF_SOURCE_UNAVAILABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9604_COMP_SLOPE_SOURCE_UNAVAILABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9605_COMP_PRG_SOURCE_UNAVAILABLE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W9801_FVR_INVALID_MODE_SELECTION"
+                  value="report"/>
         <property key="warningmessagebreakoptions.W9801_SCL_BAD_SUBTYPE_INDICATION"
                   value="report"/>
         <property key="warningmessagebreakoptions.W9802_SCL_FILE_NOT_FOUND"
@@ -456,6 +530,14 @@
                   value=""/>
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Simulator>
+      <XC8-config-global>
+        <property key="advanced-elf" value="true"/>
+        <property key="output-file-format" value="-mcof,+elf"/>
+        <property key="stack-size-high" value="auto"/>
+        <property key="stack-size-low" value="auto"/>
+        <property key="stack-size-main" value="auto"/>
+        <property key="stack-type" value="compiled"/>
+      </XC8-config-global>
     </conf>
   </confs>
 </configurationDescriptor>
