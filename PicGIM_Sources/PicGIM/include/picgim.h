@@ -117,10 +117,10 @@
 			PG_EZFUSE,
 			PG_FONT,
 			PG_INTERRUTPS,
-			PG_LCD_PCD8544,
 			PG_LCD_9340,
 			PG_LCD_HD44780,
 			PG_LCD_5110,
+			PG_LCD_PCD8544,
 			PG_PWM,
 			PG_SERIAL,
 			PG_SPI,
@@ -507,72 +507,71 @@
 	//---[ END Lcd HD44780 ]---
 	
 
-	//---[ Lcd 5110 ]---
-	#if defined( PG_DOXYGEN )
-		#undef		PGIM_LCD_5110
-		#define		PGIM_LCD_5110		PG_ENABLE
-	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
-		#undef		PGIM_LCD_5110
-		#define		PGIM_LCD_5110		PG_DISABLE
-	#endif
-	//--------------------------------------------------
-	#if ( PGIM_LCD_5110 == PG_ENABLE )
-		#include "pgim_lcd_5110.h"
-		
-		#if defined( PG_5110_VMEM_AMOUNT ) 
-			#undef	PG_5110_VMEM_AMOUNT
-		#endif
-		
-		#define PG_5110_VMEM_AMOUNT		504
-		#if PG_MAX_RAM > ( 2.5 * PG_5110_VMEM_AMOUNT )
-			#if	PG_LCD_5110_VIDEO_MEMORY == PG_YES
-				_pg_Ubuffer vbuff_5110[ PG_5110_VMEM_AMOUNT ];
-				#if defined( _GIM_H )
-					#if ( PG_VERBOSE == PG_ENABLE )
-						#warning	PicGIM: This amount of allocated RAM ( 504 Bytes ) may cause errors during linking. Use the correct file LKR equipped by PicGIM relating to the selected MCU.
-					#endif
-				#endif
-			#else
-				#if defined( _GIM_H )
-					#if PG_VERBOSE == PG_ENABLE && PG_SUGGESTION == PG_ENABLE
-						#warning	PicGIM: This MCU can use the VIDEO BUFFER. Keep on mind.
-					#endif
-				#endif
-			#endif
-		#else
-			#if defined( _GIM_H )
-				#if ( PG_VERBOSE == PG_ENABLE )
-					#warning	PicGIM: Not enough RAM ( PG_MAX_RAM Bytes ) to use VIDEO BUFFER
-				#endif
-			#endif
-		#endif
-		
-		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-			#warning	PicGIM >>> LCD 5110 module >>> Loaded
-		#endif
-	#endif
-	//---[ END Lcd 5110 ]---
 	
 	
 	//---[ Lcd PCD8544 ]---
-//	#if defined( PG_DOXYGEN )
-//		#undef		PGIM_LCD_PCD8544
-//		#define		PGIM_LCD_PCD8544		PG_ENABLE
-//	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
-//		#undef		PGIM_LCD_PCD8544
-//		#define		PGIM_LCD_PCD8544		PG_DISABLE
-//	#endif
-//	//--------------------------------------------------
-//	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
-//		//#include "pgim_font_setup.h"
-//		#include "pgim_lcd_pcd8544.h"
-//		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-//			#warning	PicGIM >>> LCD PCD8544 module >>> Loaded
-//			#if ( PGIM_FONT == PG_ENABLE )
-//				#warning	PicGIM >>> LCD PCD8544 module >>> Fonts enabled and loaded
-//			#endif
-//		#endif
-//	#endif
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_LCD_PCD8544
+		#define		PGIM_LCD_PCD8544		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_LCD_PCD8544
+		#define		PGIM_LCD_PCD8544		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
+		#include "pgim_lcd_pcd8544.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> LCD PCD8544 module >>> Loaded
+			#if ( PGIM_FONT == PG_ENABLE )
+				#warning	PicGIM >>> LCD PCD8544 module >>> Fonts enabled and loaded
+			#endif
+		#endif
+	#endif
+						// //---[ Lcd 5110 ]---
+						// #if defined( PG_DOXYGEN )
+							// #undef		PGIM_LCD_5110
+							// #define		PGIM_LCD_5110		PG_ENABLE
+						// #elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+							// #undef		PGIM_LCD_5110
+							// #define		PGIM_LCD_5110		PG_DISABLE
+						// #endif
+						// //--------------------------------------------------
+						// #if ( PGIM_LCD_5110 == PG_ENABLE )
+							// #include "pgim_lcd_5110.h"
+							
+							// #if defined( PG_5110_VMEM_AMOUNT ) 
+								// #undef	PG_5110_VMEM_AMOUNT
+							// #endif
+							
+							// #define PG_5110_VMEM_AMOUNT		504
+							// #if PG_MAX_RAM > ( 2.5 * PG_5110_VMEM_AMOUNT )
+								// #if	PG_LCD_5110_VIDEO_MEMORY == PG_YES
+									// _pg_Ubuffer vbuff_5110[ PG_5110_VMEM_AMOUNT ];
+									// #if defined( _GIM_H )
+										// #if ( PG_VERBOSE == PG_ENABLE )
+											// #warning	PicGIM: This amount of allocated RAM ( 504 Bytes ) may cause errors during linking. Use the correct file LKR equipped by PicGIM relating to the selected MCU.
+										// #endif
+									// #endif
+								// #else
+									// #if defined( _GIM_H )
+										// #if PG_VERBOSE == PG_ENABLE && PG_SUGGESTION == PG_ENABLE
+											// #warning	PicGIM: This MCU can use the VIDEO BUFFER. Keep on mind.
+										// #endif
+									// #endif
+								// #endif
+							// #else
+								// #if defined( _GIM_H )
+									// #if ( PG_VERBOSE == PG_ENABLE )
+										// #warning	PicGIM: Not enough RAM ( PG_MAX_RAM Bytes ) to use VIDEO BUFFER
+									// #endif
+								// #endif
+							// #endif
+							
+							// #if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+								// #warning	PicGIM >>> LCD 5110 module >>> Loaded
+							// #endif
+						// #endif
+						// //---[ END Lcd 5110 ]---
 	//---[ END Lcd PCD8544 ]---
 	
 	
@@ -586,7 +585,7 @@
 //	#endif
 //	//--------------------------------------------------
 //	#if ( PGIM_LCD_9340 == PG_ENABLE )
-//		#include "pgim_font_setup.h"
+//		#include "pgim_font.h"
 //		#include "pgim_lcd_9340.h"
 //		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 //			#warning	PicGIM >>> LCD 9340 module >>> Loaded
@@ -905,7 +904,7 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_FONT == PG_ENABLE )
-		#include "pgim_font_setup.h"
+		#include "pgim_font.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PicGIM >>> FONT module >>> Loaded
 		#endif

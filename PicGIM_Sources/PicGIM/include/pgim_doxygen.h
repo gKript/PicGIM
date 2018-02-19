@@ -767,7 +767,7 @@
 					\htmlonly <hr> \endhtmlonly
 					\endhtmlonly
 
-					The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [V]. Accuracy: X.XX
+					The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [mV].
 					\code
  						#define PG_USER_SUPPLY_VOLT					5.00
 					\endcode

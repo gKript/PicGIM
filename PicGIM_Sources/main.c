@@ -1,3 +1,30 @@
+//PCD8544
+
+#include "picgim_main.h"
+
+void main( void ) {
+	pg_initialize();
+	pg_lcd_pcd8544_init();
+
+	pg_lcd_pcd8544_clear( 1 );			//white = 0; black = 1
+	pg_delay_sec( 1 );
+	pg_lcd_pcd8544_clear( 0 );			//white = 0; black = 1
+	pg_delay_sec( 2 );
+	pg_lcd_pcd8544_font_select( font_5x5 );
+	pg_lcd_pcd8544_set_pos( 5 , 1 );
+	pg_lcd_pcd8544_send_string_rom( " [Font 5x5]" );
+	pg_lcd_pcd8544_set_pos( 5 , 2 );
+	pg_lcd_pcd8544_send_string_rom( " Ciao Zanna!" );
+	pg_lcd_pcd8544_font_select( font_5x7 );
+	pg_lcd_pcd8544_set_pos( 5 , 3 );
+	pg_lcd_pcd8544_send_string_rom( " [Font 5x7]" );
+	pg_lcd_pcd8544_set_pos( 5 , 4 );
+	pg_lcd_pcd8544_send_string_rom( " PicGIM   :)" );
+	PG_HALT;
+}
+
+
+
 //#################################################################################
 //#################################################################################
 //#################################################################################
@@ -85,12 +112,6 @@ void main( void ) {
 
 */
 
-#include "picgim_main.h"
-
-void main( void ) {
-	pg_initialize();
-	PG_HALT;
-}
 
 
 

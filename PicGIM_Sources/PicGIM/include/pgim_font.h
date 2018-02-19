@@ -1,5 +1,5 @@
 //
-// pgim_font_setup.h
+// pgim_font.h
 //
 // picGim  -  Generic Information Manager for Pic 18 family uControllers 
 // Version 0.5-x
@@ -28,7 +28,7 @@
 
 #############################################################################*/
 
-/*!	\file		pgim_font_setup.h
+/*!	\file		pgim_font.h
 	\version	1.0-0
 	\brief		Copyright (C) 2001, 2013<BR>
 				Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)<BR>
@@ -40,29 +40,26 @@
 	#define	__PGIM_FONT_SETUP_H__
 	
 	#if ( PGIM_FONT == PG_ENABLE )
-
-		// #if	pgim_font_3x4 == pg_include
+		// #if	pgim_font_3x4 == PG_INCLUDE
 			// #include "pgim_font_3x4.h"
 			// extern	rom const _pg_uint8 font_3x4[];
 		// #endif
-		// #if	pgim_font_3x5 == pg_include
+		// #if	pgim_font_3x5 == PG_INCLUDE
 			// #include "pgim_font_3x5.h"
 			// extern	rom const _pg_uint8 font_3x5[];
 		// #endif
-		// #if	pgim_font_4x6 == pg_include
+		// #if	pgim_font_4x6 == PG_INCLUDE
 			// #include "pgim_font_4x6.h"
 			// extern	rom const _pg_uint8 font_4x6[];
 		// #endif
-		// #if	pgim_font_5x5 == pg_include
-			// #include "pgim_font_5x5.h"
-			// extern	rom const _pg_uint8 font_5x5[];
-		// #endif
-		// #if	pgim_font_5x6 == pg_include
+		#if	( PGIM_FONT_5X5 == PG_INCLUDE )
+			extern	rom const _pg_Uint8 font_5x5[];
+		#endif
+		// #if	pgim_font_5x6 == PG_INCLUDE
 			// #include "pgim_font_5x6.h"
 			// extern	rom const _pg_uint8 font_5x6[];
 		// #endif
 		#if	( PGIM_FONT_5X7 == PG_INCLUDE )
-			//#include "pgim_font_5x7.h"
 			extern	rom const _pg_Uint8 font_5x7[];
 		#endif
 		// #if	( PGIM_FONT_5X7_D == PG_INCLUDE )
@@ -99,7 +96,6 @@
 		// #endif
 	#endif
 	
-//	struct sbl_glcd_font {
 	struct pg_font_config {
 		_pg_Uint8 cur_x;
 		_pg_Uint8 cur_y;

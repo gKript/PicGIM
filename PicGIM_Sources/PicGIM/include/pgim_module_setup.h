@@ -148,9 +148,7 @@
 	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   S P I
 	//------------------------------------------------------------------------------
-//	#if ( ( PGIM_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
-//	#if ( ( PGIM_LCD_5110 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
-	#if ( PGIM_LCD_5110 == PG_ENABLE )
+	#if ( ( PGIM_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) )
 		#if	( PGIM_SPI == PG_DISABLE )
 			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the SPI module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR
@@ -159,18 +157,18 @@
 		#endif
 	#endif
 
-//	//------------------------------------------------------------------------------
-//	//	D e p e n d e n c y   o n   L C D - P C D 8 5 4 4
-//	//------------------------------------------------------------------------------
-//	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
-//
-//		#if ( PGIM_LCD_PCD8544 == PG_DISABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-//			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the LCD-PCD8544 module required by other modules
-//			#ifndef		PG_EXIT_ON_ERROR
-//				#define		PG_EXIT_ON_ERROR
-//			#endif
-//		#endif
-//	#endif
+	//------------------------------------------------------------------------------
+	//	D e p e n d e n c y   o n   L C D - P C D 8 5 4 4
+	//------------------------------------------------------------------------------
+	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
+
+		#if ( PGIM_LCD_PCD8544 == PG_DISABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the LCD-PCD8544 module required by other modules
+			#ifndef		PG_EXIT_ON_ERROR
+				#define		PG_EXIT_ON_ERROR
+			#endif
+		#endif
+	#endif
 	
 	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   L C D - H D 4 4 7 8 0
@@ -225,26 +223,26 @@
 		#endif
 	#endif
 	
-//	//------------------------------------------------------------------------------
-//	//	D e p e n d e n c y   o n   F O N T S
-//	//------------------------------------------------------------------------------
-//	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
-//
-//		#if ( PGIM_SERIAL == PG_ENABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
-//			#if ( PGIM_FONT == PG_DISABLE )
-//				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable FONT module as required by SERIAL debug
-//				#ifndef		PG_EXIT_ON_ERROR
-//					#define		PG_EXIT_ON_ERROR
-//				#endif
-//			#endif
-//			#if ( PGIM_FONT_5X8 == PG_NOT_INCLUDE )
-//				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must include 5X8 font as required by SERIAL debug
-//				#ifndef		PG_EXIT_ON_ERROR
-//					#define		PG_EXIT_ON_ERROR
-//				#endif
-//			#endif
-//		#endif
-//	#endif
+	//------------------------------------------------------------------------------
+	//	D e p e n d e n c y   o n   F O N T S
+	//------------------------------------------------------------------------------
+	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
+
+		#if ( PGIM_SERIAL == PG_ENABLE ) && defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#if ( PGIM_FONT == PG_DISABLE )
+				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable FONT module as required by SERIAL debug
+				#ifndef		PG_EXIT_ON_ERROR
+					#define		PG_EXIT_ON_ERROR
+				#endif
+			#endif
+			#if ( PGIM_FONT_5X8 == PG_NOT_INCLUDE )
+				#warning	PicGIM >>> ERROR !!! >>> Core >>> You must include 5X8 font as required by SERIAL debug
+				#ifndef		PG_EXIT_ON_ERROR
+					#define		PG_EXIT_ON_ERROR
+				#endif
+			#endif
+		#endif
+	#endif
 	
 	//------------------------------------------------------------------------------
 	//		C O N F L I C T   M A N A G E M E N T

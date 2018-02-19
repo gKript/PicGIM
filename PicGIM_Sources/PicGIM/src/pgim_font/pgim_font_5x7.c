@@ -39,7 +39,6 @@
 						[ http://gkript.org/gk_gpl_v2.php ]
 */
 
-
 #include "picgim.h"
 
 #if ( ( PGIM_FONT == PG_ENABLE ) && ( PGIM_FONT_5X7 == PG_INCLUDE ) )

@@ -82,7 +82,7 @@
 	//		H A R D W A R E   E X T E R N A L
 	//================================================================================================================
 	#define PGIM_LCD_HD44780						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_LCD_5110							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_PCD8544						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_RTC_DS1302							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -216,19 +216,19 @@
 	#endif
 
 	//----------------------------------------------------------------------------------------------------------------
-	//		S O F T W A R E   C O N F I G   |	L C D 5 1 1 0
+	//		S O F T W A R E   C O N F I G   |	L C D  - P C D 8 5 4 4 
 	//----------------------------------------------------------------------------------------------------------------
 	
-		#define	PG_5110_DATA			    		1
-		#define	PG_5110_COMMAND			    		0
+		#define	PG_PCD8544_DATA			    		1
+		#define	PG_PCD8544_COMMAND			    	0
 		
-		#define	PG_5110_CONFIGURATION				0x08
-		#define	PG_5110_FUNCTION					0x20
-		#define	PG_5110_ADDRESS_Y					0x40
-		#define	PG_5110_ADDRESS_X					0x80
-		#define	PG_5110_EXT_TEMP_CONTROL			0x04
-		#define	PG_5110_EXT_BIAS_CONTROL			0x10
-		#define	PG_5110_EXT_SET_VOP		    		0x80
+		#define	PG_PCD8544_CONFIGURATION			0x08
+		#define	PG_PCD8544_FUNCTION					0x20
+		#define	PG_PCD8544_ADDRESS_Y				0x40
+		#define	PG_PCD8544_ADDRESS_X				0x80
+		#define	PG_PCD8544_EXT_TEMP_CONTROL			0x04
+		#define	PG_PCD8544_EXT_BIAS_CONTROL			0x10
+		#define	PG_PCD8544_EXT_SET_VOP		    	0x80
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R

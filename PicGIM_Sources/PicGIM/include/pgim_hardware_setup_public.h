@@ -108,27 +108,27 @@
 	#endif
 
 	//------------------------------------------------------------------------------
-	//		H A R D W A R E   C O N F I G   |	L C D 5 1 1 0
+	//		H A R D W A R E   C O N F I G   |	L C D - P C D 8 5 4 4
 	//------------------------------------------------------------------------------
-	#if ( PGIM_LCD_5110 == PG_ENABLE )
-		#define	PG_LCD_5110_VIDEO_MEMORY			PG_NO
+	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
+		#define	PG_LCD_PCD8544_VIDEO_MEMORY			PG_NO
 
-		#define	PG_LCD_5110_LED						L_B2
-		#define PG_LCD_5110_VDD						L_B3
-		#define PG_LCD_5110_DC						L_C0
-		#define PG_LCD_5110_RST						L_C1
-		#define PG_LCD_5110_CE 						L_C2
+		#define	PG_LCD_PCD8544_BACKLIGHT			L_B2
+		#define PG_LCD_PCD8544_VDD					L_B3
+		#define PG_LCD_PCD8544_DC					L_C0
+		#define PG_LCD_PCD8544_RST					L_C1
+		#define PG_LCD_PCD8544_CE 					L_C2
 	
-		#define	PG_LCD_5110_LED_TRIS				T_B2
-		#define PG_LCD_5110_VDD_TRIS				T_B3
-		#define PG_LCD_5110_DC_TRIS					T_C0
-		#define PG_LCD_5110_RST_TRIS				T_C1
-		#define PG_LCD_5110_CE_TRIS					T_C2
+		#define	PG_LCD_PCD8544_BACKLIGHT_TRIS		T_B2
+		#define PG_LCD_PCD8544_VDD_TRIS				T_B3
+		#define PG_LCD_PCD8544_DC_TRIS				T_C0
+		#define PG_LCD_PCD8544_RST_TRIS				T_C1
+		#define PG_LCD_PCD8544_CE_TRIS				T_C2
 
-		// #define	PG_SPI_SDI_TRIS					TRC7
-		// #define	PG_SPI_SDO_TRIS					TRC5
-		// #define	PG_SPI_SCK_TRIS					TRC3
-		// #define	PG_SPI_SS_TRIS					TRA5
+		// #define	PG_SPI_SDI_TRIS					T_C7
+		// #define	PG_SPI_SDO_TRIS					T_C5
+		// #define	PG_SPI_SCK_TRIS					T_C3
+		// #define	PG_SPI_SS_TRIS					T_A5
 	#endif
 
 	//------------------------------------------------------------------------------
