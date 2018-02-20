@@ -39,15 +39,15 @@
 						[ http://gkript.org/gk_gpl_v2.php ]
 */
 
-#ifndef _PG_FONT_5x7_MATRIX_6X8_V_H_
-	#define _PG_FONT_5x7_MATRIX_6X8_V_H_
-	//
-	//	_v = variable width
-	//
-	//	The first column indicates the width of the font
-	//
+#include "picgim.h"
+
+#if ( ( PGIM_FONT == PG_ENABLE ) && ( PGIM_FONT_5X7_D == PG_INCLUDE ) )
+
+	#if ( PG_PROJECT_STATE == PG_DEBUG )
+		#warning	PicGIM >>> Message >>> This file is compiling.
+	#endif
 	
-	rom const _pg_Uint8 pgim_font_5x7_matrix_6x8_v[] = {
+	rom const _pg_Uint8 font_5x7_matrix_6x8_v[] = {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00,      // Code for _pg_int8  
         0x01, 0x5F, 0x00, 0x00, 0x00, 0x00,      // Code for _pg_int8 !
         0x07, 0x07, 0x00, 0x07, 0x00, 0x00,      // Code for _pg_int8 "
@@ -144,8 +144,7 @@
         0x07, 0x41, 0x36, 0x08, 0x00, 0x00,      // Code for _pg_int8 }
         0x1F, 0x08, 0x04, 0x08, 0x10, 0x08       // Code for _pg_int8 ~
         };
-		
-#endif	/* _PG_FONT_5x7_MATRIX_6X8_V_H_ */
+#endif
 		
 		
 		

@@ -50,6 +50,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_ssp.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_font.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_lcd_pcd8544.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f2" displayName="Core_files" projectFiles="true">
@@ -83,6 +84,7 @@
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_gcp_setup_public.h</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_prs_setup_public.h</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_font_setup_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory_setup_public.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -101,6 +103,18 @@
         <logicalFolder name="f1" displayName="Font" projectFiles="true">
           <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x7.c</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x5.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_3x4.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_3x5.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_4x6.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x6.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x7_matrix_6x8_v.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x8.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_6x8.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_8x8.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_3x8.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_6x16.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_6x16_8dw.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_6x16_8up.c</itemPath>
         </logicalFolder>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_adc.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_buzzer.c</itemPath>
@@ -125,6 +139,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_prs.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_ssp.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_lcd_pcd8544.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_external_memory.c</itemPath>
       </logicalFolder>
       <itemPath>../PicGIM_Sources/main.c</itemPath>
     </logicalFolder>

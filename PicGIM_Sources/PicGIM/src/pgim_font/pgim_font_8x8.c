@@ -39,13 +39,14 @@
 						[ http://gkript.org/gk_gpl_v2.php ]
 */
 
-#ifndef _PG_FONT_8X8_H_
-	#define _PG_FONT_8X8_H_
-	//
-	// standard ascii 5x8 font
-	// defines ascii characters 0x20-0x7F (32-127)
-	//
-	//
+#include "picgim.h"
+
+#if ( ( PGIM_FONT == PG_ENABLE ) && ( PGIM_FONT_8X8 == PG_INCLUDE ) )
+
+	#if ( PG_PROJECT_STATE == PG_DEBUG )
+		#warning	PicGIM >>> Message >>> This file is compiling.
+	#endif
+	
 	rom const _pg_Uint8 font_8x8[] = {
 		0x08, 0x08,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // 20  space
@@ -145,7 +146,6 @@
 		0x76, 0xDC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // 7e  tilde
 		0x00, 0x10, 0x38, 0x6C, 0xC6, 0xC6, 0xFE, 0x00,  // 7f  pyramid
 	};
-
-#endif /* _PG_FONT_8X8_H_ */
+#endif
 
 

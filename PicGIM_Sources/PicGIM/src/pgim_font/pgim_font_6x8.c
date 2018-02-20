@@ -39,13 +39,14 @@
 						[ http://gkript.org/gk_gpl_v2.php ]
 */
 
-#ifndef _PG_FONT_6X8_H_
-	#define _PG_FONT_6X8_H_
-	//
-	//
-	//	<Note>
-	//
-	//
+#include "picgim.h"
+
+#if ( ( PGIM_FONT == PG_ENABLE ) && ( PGIM_FONT_6X8 == PG_INCLUDE ) )
+
+	#if ( PG_PROJECT_STATE == PG_DEBUG )
+		#warning	PicGIM >>> Message >>> This file is compiling.
+	#endif
+	
 	rom const _pg_Uint8 font_6x8[] = {
 		0x06, 0x08,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00,      // Code for _pg_int8  
@@ -144,8 +145,6 @@
         0x00, 0x00, 0x41, 0x41, 0x3E, 0x08,      // Code for _pg_int8 }
         0x00, 0x02, 0x01, 0x02, 0x01, 0x00       // Code for _pg_int8 ~
         };
-
-
-#endif /* _PG_FONT_6X8_H_ */
+#endif
 
 

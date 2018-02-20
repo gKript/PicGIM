@@ -66,7 +66,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		#define	PG_SSP_CRYPT_ENABLE								PG_DISABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
 
-
 	#endif
 #endif
 

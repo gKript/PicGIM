@@ -86,6 +86,7 @@
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_RTC_DS1302							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_EXTERNAL_MEMORY					PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   G K R I P T
@@ -248,6 +249,11 @@
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   R T C _ D S 1 3 0 2
+	//----------------------------------------------------------------------------------------------------------------
+	//Nothing to configure here.
+
+	//----------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   E X T E R N A L   M E M O R Y
 	//----------------------------------------------------------------------------------------------------------------
 	//Nothing to configure here.
 	

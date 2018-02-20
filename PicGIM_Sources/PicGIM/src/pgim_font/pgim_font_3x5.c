@@ -39,13 +39,14 @@
 						[ http://gkript.org/gk_gpl_v2.php ]
 */
 
-#ifndef _PG_FONT_3X5_H_
-	#define _PG_FONT_3X5_H_
-	//
-	//
-	//	<Note>
-	//
-	//
+#include "picgim.h"
+
+#if ( ( PGIM_FONT == PG_ENABLE ) && ( PGIM_FONT_3X5 == PG_INCLUDE ) )
+
+	#if ( PG_PROJECT_STATE == PG_DEBUG )
+		#warning	PicGIM >>> Message >>> This file is compiling.
+	#endif
+	
 	rom const _pg_Uint8 font_3x5[] = {
 		0x03, 0x05,
         0x00, 0x00, 0x00,                        // Code for _pg_int8  
@@ -144,7 +145,6 @@
         0x11, 0x1F, 0x04,                        // Code for _pg_int8 }
         0x1F, 0x1F, 0x1F                         // Code for _pg_int8 ~
 	};
-
-#endif /* _PG_FONT_3X5_H_ */
+#endif
 
 

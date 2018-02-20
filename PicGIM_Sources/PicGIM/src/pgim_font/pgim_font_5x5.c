@@ -44,12 +44,8 @@
 #if ( ( PGIM_FONT == PG_ENABLE ) && ( PGIM_FONT_5X5 == PG_INCLUDE ) )
 
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
-		#warning	PicGIM >>> Message5 >>> This file is compiling.
+		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
-
-	//------------------------------------------------------------------------------
-	//	Standard ascii 5x5 font
-	//------------------------------------------------------------------------------
 
 	rom const _pg_Uint8 font_5x5[] = {
 		0x05, 0x05,

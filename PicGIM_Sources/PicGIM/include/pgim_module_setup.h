@@ -83,7 +83,7 @@
 	#define PGIM_BOARD			PG_BOARD_USER_DEFINED		// Only for Milestone 0.5
 	#include "pgim_module_setup_public.h"
 
-//	#include "pgim_font_setup_public.h"
+    #include "pgim_font_setup_public.h"
 	#include "pgim_event_setup_public.h"
 	#include "pgim_timer_setup_public.h"
 	#include "pgim_pwm_setup_public.h"
@@ -93,7 +93,6 @@
 	#include "pgim_gcp_setup_public.h"
 	#include "pgim_ssp_setup_public.h"
 	#include "pgim_prs_setup_public.h"
-    #include "pgim_font_setup_public.h"
 	//
     #include "pgim_hardware_setup.h"
 

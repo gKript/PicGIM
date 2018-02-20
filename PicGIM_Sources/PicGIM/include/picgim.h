@@ -52,9 +52,7 @@
 
 //    #pragma warning disable 520
 
-//	#if ! defined( __18CXX ) && ! defined( __XC8 )
 	#if ! defined( __18CXX )
-//		#error	PicGIM can be compiled ONLY under MCHP C18 or XC8 !!!
 		#error	PicGIM can be compiled ONLY under MCHP C18 !!!
 	#endif
 

@@ -43,23 +43,23 @@
 		//------------------------------------------------------------------------------
 		//		S T A N D A R D   F O N T
 		//------------------------------------------------------------------------------
-		#define		PGIM_FONT_3X4				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_3X5				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_4X6				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_5X5				PG_INCLUDE			//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_5X6				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_5X7				PG_INCLUDE			//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_5X7_D				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_5X8				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_6X8				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_8X8				PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_3X4				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_3X5				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_4X6				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_5X5				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_5X6				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_5X7				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_5X7_D				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_5X8				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_6X8				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_8X8				PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
 		//------------------------------------------------------------------------------
 		//		S G U   S P E C I A L   F O N T
 		//------------------------------------------------------------------------------
-		#define		PGIM_FONT_SGU_3X8			PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_SGU_6X16			PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_SGU_6X16_UP		PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
-		#define		PGIM_FONT_SGU_6X16_DW		PG_NOT_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_SGU_3X8			PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_SGU_6X16			PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_SGU_6X16_UP		PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
+		#define		PGIM_FONT_SGU_6X16_DW		PG_INCLUDE		//!< Must be: PG_INCLUDE || PG_NOT_INCLUDE
 	#endif
 #endif	/*  __PGIM_FONT_SETUP_PUBLIC_H__  */
 

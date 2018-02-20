@@ -47,11 +47,6 @@
 		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
 
-	//------------------------------------------------------------------------------
-	//	Standard ascii 5x7 font
-	//	It defines ascii characters 0x20-0x7F (32-127)
-	//------------------------------------------------------------------------------
-
 	rom const _pg_Uint8 font_5x7[] = {
 		0x05, 0x07,
 		0x00, 0x00, 0x00, 0x00, 0x00,// (space)

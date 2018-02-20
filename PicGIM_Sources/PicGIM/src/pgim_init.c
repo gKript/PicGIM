@@ -66,10 +66,6 @@ void pg_initialize( void ) {
 		pg_internal_osc_init( );
 	#endif
 
-//	#if	( PGIM_LCD_PCD8544 == PG_ENABLE )
-//		pg_lcd_pcd8544_reset();
-//	#endif
-
 	ADCON1 = 0x0f;
 
 	#if	( PGIM_TIMER == PG_ENABLE )
@@ -104,10 +100,10 @@ void pg_initialize( void ) {
 		pg_lcd_hd44780_init( );
 	#endif
 
-//	#if	( PGIM_LCD_PCD8544 == PG_ENABLE )
-//		pg_lcd_pcd8544_init( );
-//	#endif
-//
+	#if	( PGIM_LCD_PCD8544 == PG_ENABLE )
+		pg_lcd_pcd8544_init( );
+        #endif
+
 //	#if	( PGIM_LCD_9340 == PG_ENABLE )
 //		pg_lcd_9340_init( );
 //	#endif
