@@ -101,20 +101,12 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="PicGIM" projectFiles="true">
         <logicalFolder name="f1" displayName="Font" projectFiles="true">
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x7.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x5.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_3x4.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_3x5.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_4x6.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x6.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x7_matrix_6x8_v.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x8.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_6x8.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_8x8.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_3x8.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_6x16.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_6x16_8dw.c</itemPath>
-          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_sgu_6x16_8up.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x6_std.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x6_std_m.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x7_std.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x7_std_m.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x5_std.c</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/src/pgim_font/pgim_font_5x5_std_m.c</itemPath>
         </logicalFolder>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_adc.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_buzzer.c</itemPath>
@@ -211,7 +203,7 @@
         <property key="enable-ou" value="true"/>
         <property key="enable-ow" value="true"/>
         <property key="extra-include-directories"
-                  value="..\PicGIM_Sources\PicGIM\include"/>
+                  value="../PicGIM_Sources/PicGIM/include"/>
         <property key="optimization-master" value="Enable all"/>
         <property key="preprocessor-macros" value=""/>
         <property key="procedural-abstraction-passes" value="4"/>

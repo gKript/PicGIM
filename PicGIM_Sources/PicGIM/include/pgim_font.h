@@ -40,59 +40,36 @@
 	#define	__PGIM_FONT_SETUP_H__
 	
 	#if ( PGIM_FONT == PG_ENABLE )
-		#if	( PGIM_FONT_3X4 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_3x4[];
+		#if	( PGIM_FONT_5X5_STD == PG_INCLUDE )
+			extern	rom const _pg_Uint8 pg_font_5x5_std[];
 		#endif
-		#if	( PGIM_FONT_3X5 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_3x5[];
+		#if	( PGIM_FONT_5X5_STD_M == PG_INCLUDE )
+			extern	rom const _pg_Uint8 pg_font_5x5_std_m[];
 		#endif
-		#if	( PGIM_FONT_4X6 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_4x6[];
+		#if	( PGIM_FONT_5X6_STD == PG_INCLUDE )
+			extern	rom const _pg_Uint8 pg_font_5x6_std[];
 		#endif
-		#if	( PGIM_FONT_5X5 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_5x5[];
+		#if	( PGIM_FONT_5X6_STD_M == PG_INCLUDE )
+			extern	rom const _pg_Uint8 pg_font_5x6_std_m[];
 		#endif
-		#if	( PGIM_FONT_5X6 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_5x6[];
+		#if	( PGIM_FONT_5X7_STD == PG_INCLUDE )
+			extern	rom const _pg_Uint8 pg_font_5x7_std[];
 		#endif
-		#if	( PGIM_FONT_5X7 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_5x7[];
-		#endif
-		#if	( PGIM_FONT_5X7_D == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_5x7_matrix_6x8_v[];
-		#endif
-		#if	( PGIM_FONT_5X8 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_5x8[];
-		#endif
-		#if	( PGIM_FONT_6X8 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_6x8[];
-		#endif
-		#if	( PGIM_FONT_8X8 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_8x8[];
-		#endif
-		#if	( PGIM_FONT_SGU_3X8 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_sgu_3x8[];
-		#endif
-		#if	( PGIM_FONT_SGU_6X16 == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_sgu_6x16[];
-		#endif
-		#if	( PGIM_FONT_SGU_6X16_UP == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_sgu_6x16_8up[];
-		#endif
-		#if	( PGIM_FONT_SGU_6X16_DW == PG_INCLUDE )
-			extern	rom const _pg_Uint8 font_sgu_6x16_8dw[];
+		#if	( PGIM_FONT_5X7_STD_M == PG_INCLUDE )
+			extern	rom const _pg_Uint8 pg_font_5x7_std_m[];
 		#endif
 	#endif
 	
 	struct pg_font_config {
-		_pg_Uint8 cur_x;
-		_pg_Uint8 cur_y;
 		_pg_Uint8 width;
 		_pg_Uint8 height;
-		_pg_Uint8 v_spacing;
-		_pg_Uint8 h_spacing;
-		_pg_Uint8 justify_x;
-		_pg_Uint8 justify_y;
+		_pg_Uint8 mask;
+//		_pg_Uint8 cur_x;
+//		_pg_Uint8 cur_y;
+//		_pg_Uint8 v_spacing;
+//		_pg_Uint8 h_spacing;
+//		_pg_Uint8 justify_x;
+//		_pg_Uint8 justify_y;
 		rom const _pg_Uint8 *font;
 	};
 #endif

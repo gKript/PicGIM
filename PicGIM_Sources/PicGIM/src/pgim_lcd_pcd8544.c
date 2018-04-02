@@ -96,6 +96,7 @@
 		void pg_lcd_pcd8544_font_select( rom const _pg_Uint8 * font ) {
 			fxy.width	= font[ 0 ];
 			fxy.height	= font[ 1 ];
+			fxy.mask	= font[ 2 ];
 			fxy.font	= font;
 		}
 	#endif	
@@ -133,13 +134,49 @@
 		#if ( PG_PROJECT_STATE == PG_DEBUG )
 			#warning	PG_HS_PG PG_HS_MSG The font functions is compiling too.
 		#endif
+		// void pg_lcd_pcd8544_send_char( _pg_Uint8 character ) {
+			// _pg_Uint8 column = 0;
+			// character = character - 0x20; 						// 0x20 is the first element of the array
+			// for( column = 0 ; column < fxy.width ; column++ ) {			// Pass through each column
+				// pg_lcd_pcd8544_send( PG_PCD8544_DATA , fxy.font[ ( _pg_int16 ) character * fxy.width + column + 2 ] );
+			// }
+			// pg_lcd_pcd8544_send( PG_PCD8544_DATA , 0x00 ); 							// Send a colon (1 byte) as space
+		// }
+
+		// void pg_lcd_pcd8544_send_string_rom( rom _pg_int8 * string ) {
+			// while( *string ) {
+				// pg_lcd_pcd8544_send_char( *string );
+				// string++;
+			// }
+		// }		
+		
 		void pg_lcd_pcd8544_send_char( _pg_Uint8 character ) {
 			_pg_Uint8 column = 0;
-			character = character - 0x20; 						// 0x20 is the first element of the array
-			for( column = 0 ; column < fxy.width ; column++ ) {			// Pass through each column
-				pg_lcd_pcd8544_send( PG_PCD8544_DATA , fxy.font[ ( _pg_int16 ) character * fxy.width + column + 2 ] );
+			character = character - 0x20; 											// 0x20 is the first element of the array
+			
+			if( !fxy.mask ) {
+				for( column = 0 ; column < fxy.width  ; column++ ) {				// Pass through each column
+					pg_lcd_pcd8544_send( PG_PCD8544_DATA , fxy.font[ (_pg_int16)character * fxy.width + column + 3 ] );
+				}
 			}
-			pg_lcd_pcd8544_send( PG_PCD8544_DATA , 0x00 ); 							// Send a colon (1 byte) as space
+			if( fxy.mask ) {
+				for( column = 0 ; column < ( fxy.width + 1 ) ; column++ ) {			// Pass through each column
+					if( ( ( 0x01 << column ) & fxy.font[ (_pg_int16)character * ( fxy.width + 1 ) + 3 ] ) ) {
+						pg_lcd_pcd8544_send( PG_PCD8544_DATA , fxy.font[ (_pg_int16)character * ( fxy.width + 1 ) + column + 4 ] );
+					}
+				}
+			}
+			
+			// for( column = 0 ; column < ( fxy.width + 1 ) ; column++ ) {			// Pass through each column
+				// if( fxy.mask && ( ( 0x01 << column ) & fxy.font[ (_pg_int16)character * ( fxy.width + 1 ) + 3 ] ) ) {
+					// pg_lcd_pcd8544_send( PG_PCD8544_DATA , fxy.font[ (_pg_int16)character * ( fxy.width + 1 ) + column + 4 ] );
+				// }
+				// if( !fxy.mask ) {
+					// pg_lcd_pcd8544_send( PG_PCD8544_DATA , fxy.font[ (_pg_int16)character * fxy.width + column + 3 ] );
+				// }
+			// }
+			
+			pg_lcd_pcd8544_send( PG_PCD8544_DATA , 0x00 ); 				// Send a colon (1 byte) as space
 		}
 
 		void pg_lcd_pcd8544_send_string_rom( rom _pg_int8 * string ) {

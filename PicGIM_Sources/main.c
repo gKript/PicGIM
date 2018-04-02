@@ -9,32 +9,59 @@ void main( void ) {
 	pg_delay_sec( 1 );
 	pg_lcd_pcd8544_clear( 0 );			//white = 0; black = 1
 	pg_delay_sec( 2 );
-	
-	pg_lcd_pcd8544_font_select( font_3x4 );
-	pg_lcd_pcd8544_font_select( font_3x5 );
-	pg_lcd_pcd8544_font_select( font_4x6 );
-	pg_lcd_pcd8544_font_select( font_5x5 );
-	pg_lcd_pcd8544_font_select( font_5x6 );
-	pg_lcd_pcd8544_font_select( font_5x7 );
-	pg_lcd_pcd8544_font_select( font_5x7_matrix_6x8_v );
-	pg_lcd_pcd8544_font_select( font_5x8 );
-	pg_lcd_pcd8544_font_select( font_6x8 );
-	pg_lcd_pcd8544_font_select( font_8x8 );
-	pg_lcd_pcd8544_font_select( font_sgu_3x8 );
-	pg_lcd_pcd8544_font_select( font_sgu_6x16 );
-	pg_lcd_pcd8544_font_select( font_sgu_6x16_8up );
-	pg_lcd_pcd8544_font_select( font_sgu_6x16_8dw );
-			
-	pg_lcd_pcd8544_font_select( font_3x4 );
-	pg_lcd_pcd8544_set_pos( 5 , 1 );
-	pg_lcd_pcd8544_send_string_rom( " [Font 3x4]" );
-	pg_lcd_pcd8544_set_pos( 5 , 2 );
-	pg_lcd_pcd8544_send_string_rom( " Ciao Zanna!" );
-	pg_lcd_pcd8544_font_select( font_5x7 );
-	pg_lcd_pcd8544_set_pos( 5 , 3 );
-	pg_lcd_pcd8544_send_string_rom( " [Font 5x7]" );
-	pg_lcd_pcd8544_set_pos( 5 , 4 );
-	pg_lcd_pcd8544_send_string_rom( " PicGIM   :)" );
+
+	pg_lcd_pcd8544_font_select( pg_font_5x5_std_m );
+	pg_lcd_pcd8544_set_pos( 0 , 0 );
+	pg_lcd_pcd8544_send_string_rom( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+    pg_lcd_pcd8544_send_string_rom( "abcdefghijklmopqrstuvwxyz" );
+    pg_lcd_pcd8544_send_string_rom( "0123456789\\/|!\"$%&()=?'^*+[]#@,.;:-_~" );
+
+
+
+//	pg_lcd_pcd8544_font_select( pg_font_5x5_std );
+//	pg_lcd_pcd8544_set_pos( 0 , 0 );
+//	pg_lcd_pcd8544_send_string_rom( "ABCDEFGabcdefg" );
+//	pg_lcd_pcd8544_font_select( pg_font_5x5_std_m );
+//	pg_lcd_pcd8544_set_pos( 0 , 1 );
+//	pg_lcd_pcd8544_send_string_rom( "ABCDEFGabcdefg" );
+//
+//	pg_lcd_pcd8544_font_select( pg_font_5x6_std );
+//	pg_lcd_pcd8544_set_pos( 0 , 2 );
+//	pg_lcd_pcd8544_send_string_rom( "ABCDEFGabcdefg" );
+//	pg_lcd_pcd8544_font_select( pg_font_5x6_std_m );
+//	pg_lcd_pcd8544_set_pos( 0 , 3 );
+//	pg_lcd_pcd8544_send_string_rom( "ABCDEFGabcdefg" );
+//
+//	pg_lcd_pcd8544_font_select( pg_font_5x7_std );
+//	pg_lcd_pcd8544_set_pos( 0 , 4 );
+//	pg_lcd_pcd8544_send_string_rom( "ABCDEFGabcdefg" );
+//	pg_lcd_pcd8544_font_select( pg_font_5x7_std_m );
+//	pg_lcd_pcd8544_set_pos( 0 , 5 );
+//	pg_lcd_pcd8544_send_string_rom( "ABCDEFGabcdefg" );
+
+
+
+//	pg_lcd_pcd8544_font_select( pg_font_5x5_std );
+//	pg_lcd_pcd8544_set_pos( 0 , 0 );
+//	pg_lcd_pcd8544_send_string_rom( "1+2=\"3\"" );
+//	pg_lcd_pcd8544_font_select( pg_font_5x5_std_m );
+//	pg_lcd_pcd8544_set_pos( 0 , 1 );
+//	pg_lcd_pcd8544_send_string_rom( "1+2=\"3\"" );
+//
+//	pg_lcd_pcd8544_font_select( pg_font_5x6_std );
+//	pg_lcd_pcd8544_set_pos( 0 , 2 );
+//	pg_lcd_pcd8544_send_string_rom( "1+2=\"3\"" );
+//	pg_lcd_pcd8544_font_select( pg_font_5x6_std_m );
+//	pg_lcd_pcd8544_set_pos( 0 , 3 );
+//	pg_lcd_pcd8544_send_string_rom( "1+2=\"3\"" );
+//
+//	pg_lcd_pcd8544_font_select( pg_font_5x7_std );
+//	pg_lcd_pcd8544_set_pos( 0 , 4 );
+//	pg_lcd_pcd8544_send_string_rom( "1+2=\"3\"" );
+//	pg_lcd_pcd8544_font_select( pg_font_5x7_std_m );
+//	pg_lcd_pcd8544_set_pos( 0 , 5 );
+//	pg_lcd_pcd8544_send_string_rom( "1+2=\"3\"" );
+
 	PG_HALT;
 }
 
