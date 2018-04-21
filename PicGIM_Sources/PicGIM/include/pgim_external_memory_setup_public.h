@@ -54,14 +54,15 @@
 		#define PGIM_EXTERNAL_MEMORY_TYPE						PG_MX25L			// PG_MX25L 
 		
 		//-------------------------------------------------------------------------------------------------------------
-		//		D E V I C E   P A R A M E T E R S
+		//		D E V I C E   P A R A M E T E R S				MX25L6406
 		//-------------------------------------------------------------------------------------------------------------
-		#define PGIM_EXTERNAL_MEMORY_CHIP_SIZE					67108864			// [ bit ]
-		#define PGIM_EXTERNAL_MEMORY_BLOCK_SIZE					65536				// [ byte ]
-		#define PGIM_EXTERNAL_MEMORY_SECTOR_SIZE				4096				// [ byte ]
+//		#define PGIM_EXTERNAL_MEMORY_CHIP_SIZE					8388608				// [ byte ];		67108864[ bit ]
+//		#define PGIM_EXTERNAL_MEMORY_BLOCK_SIZE					65536				// [ byte ]
+//		#define PGIM_EXTERNAL_MEMORY_SECTOR_SIZE				4096				// [ byte ]
 		#define PGIM_EXTERNAL_MEMORY_PAGE_SIZE					256					// [ byte ]
 
 	#endif
 #endif /* _PGIM_EXTERNAL_MEMORY_SETUP_PUBLIC_H_ */
+
 
 

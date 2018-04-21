@@ -49,9 +49,9 @@
 		#define	PG_TECNOLOGY_SPI									1
 		#define	PG_TECNOLOGY_I2C									2
 
-		#define PG_EXTERNAL_MEMORY_BLOCKS				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_BLOCK_SIZE )	// [ unit ]
-		#define PG_EXTERNAL_MEMORY_SECTORS				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_SECTOR_SIZE )	// [ unit ]
-		#define PG_EXTERNAL_MEMORY_PAGES				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_PAGE_SIZE )		// [ unit ]
+		//#define PG_EXTERNAL_MEMORY_BLOCKS				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_BLOCK_SIZE )	// [ unit ]
+		//#define PG_EXTERNAL_MEMORY_SECTORS			( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_SECTOR_SIZE )	// [ unit ]
+		//#define PG_EXTERNAL_MEMORY_PAGES				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_PAGE_SIZE )		// [ unit ]
 		
 		#define PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY	-10				
 		
@@ -66,22 +66,22 @@
 			#define	PG_EXTERNAL_MEMORY_COMMAND_ERASE_CHIP	 		0x60
 		#endif
 		
-		_pg_int8		pg_external_memory_erase_chip				( void );
-		_pg_int8		pg_external_memory_erase_block				( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L );
-		_pg_int8		pg_external_memory_erase_sector				( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L );
-		_pg_int8		pg_external_memory_write_page				( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L, _pg_Uint8 * bWrite_Page_Data );
-		_pg_int8		pg_external_memory_read_page				( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L, _pg_Uint8 * bRead_Page_Data );
-		_pg_int8		pg_external_memory_write_byte				( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_Offset, _pg_Uint8 bWrite_Byte_Data, _pg_Uint8 wb_verify ); // wb_verify = PG_YES PG_NO	
-		_pg_Uint8		pg_external_memory_read_byte				( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L );
-		_pg_int8		pg_external_memory_wait_busy_check			( _pg_Uint8 blocking_flag ); // blocking_flag = PG_YES PG_NO
-		
+		_pg_Uint8		pg_external_memory_erase_chip				( void );
+		_pg_Uint8		pg_external_memory_erase_block				( _pg_Uint8 Adr_H );
+		_pg_Uint8		pg_external_memory_erase_sector				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M );
+		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 * bWrite_Page_Data );
+		_pg_Uint8		pg_external_memory_read_page				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 * bRead_Page_Data );
+		_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L , _pg_Uint8 Byte_To_Write , _pg_Uint8 wb_verify ); // wb_verify = PG_YES || PG_NO	
+		_pg_Uint8		pg_external_memory_read_byte				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L );
+		_pg_Uint8		pg_external_memory_busy						( _pg_Uint8 blocking_flag ); // blocking_flag = PG_LOCKING || PG_NOT_LOCKING
+
 	#endif
 #endif /* _PGIM_EXTERNAL_MEMORY_H_ */
 
 /*
 	\page 		HWE_ext_mem			Serial memory
-
-
-
 	\attention	Here a link to the file : \ref pgim_external_memory.h \n This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
+
+
+

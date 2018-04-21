@@ -59,205 +59,238 @@
 - Page base (256 bytes)
 > Latch-up protected to 100mA
 */
-
-/* Addressing MX25L64:
-   -----------------
-   128     16   16   256
-   BLK     SEC  PAG  Byte
-   7bit    4bit 4bit 8bit
-   --------------------------
-   0000000.0000.0000.00000000
-   --------------------------
-   6543210 3210 3210 76543210
-   
-   128 * 16 * 16 * 256 * 8   = 67108864
-   BLK   SEC  PAG  Byte  Bit   Bit total
+//----------------------------------------------------------------------------
+/* Addressing MX25L4005:
+   -----------------------------
+   8         16        4096
+   BLK       SEC       ADDR
+   8bit      4bit      12bit
+   -----------------------------	
+   0000.0000|0000|0000.0000.0000
+   -----------------------------
+   8   *      16   *   4096       * 8 bit = 4.194.304	= 4[Mb]		//ok
+   -----------------------------
+   #1BLK =  #16SEC =  #16PAG 	(#1PAG=256[byte])
+*/
+//----------------------------------------------------------------------------
+/* Addressing MX25L6406:
+   -----------------------------
+   128       16        4096
+   BLK       SEC       ADDR
+   8bit      4bit      12bit
+   -----------------------------	
+   0000.0000|0000|0000.0000.0000
+   -----------------------------
+   8   *      16   *   4096       * 8 bit = 67.108.864 = 64[Mb]	//ok
+   -----------------------------
+   #1BLK =  #16SEC =  #16PAG 	(#1PAG=256[byte])   
 */	
-	
+//----------------------------------------------------------------------------
+//	Adr_H = Block  Address;
+//	Adr_M = Sector Address;
+//	Adr_L = Range  Address;
+//----------------------------------------------------------------------------
 
 	#if ( PGIM_EXTERNAL_MEMORY_TECNOLOGY == PG_TECNOLOGY_SPI )
-
-		_pg_Uint8 pg_external_memory_page_buffer[ PGIM_EXTERNAL_MEMORY_PAGE_SIZE ];
-
+		_pg_Uint8 pg_external_memory_page_buffer[ PGIM_EXTERNAL_MEMORY_PAGE_SIZE ];	//internal use
 		
-		//---[ Erase Chip  ]---
-		_pg_int8 pg_external_memory_erase_chip( void ) {
+		//---[ Init ]---
+		void pg_external_memory_init( void ) {
 			//--------------------------------------------------
-			
-			if ( pg_external_memory_wait_busy_check( PG_NO ) == PG_BUSY ) 
-				return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;	
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			
-			//Verificare!	
-			pg_delay( 1 , PG_USEC );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;	
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_ERASE_CHIP );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			return( PG_DONE );
+			PG_EXTERNAL_MEMORY_CS_TRIS		= PG_OUT;
+			PG_SPI_SCK_TRIS					= PG_OUT;
+			PG_SPI_SDO_TRIS					= PG_OUT;
+			PG_SPI_SDI_TRIS					= PG_IN;
+			//PG_SPI_SS_TRIS				= PG_IN;
 		}
-		//---[ END Erase Chip  ]---
-
-		
-		//---[ Erase Block ]---
-		_pg_int8 pg_external_memory_erase_block( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L ) {
-			//--------------------------------------------------
-			
-			if ( pg_external_memory_wait_busy_check( PG_NO ) == PG_BUSY ) 
-				return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			
-			//Verificare!
-			pg_delay( 1 , PG_USEC );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_ERASE_BLOCK );
-			putcSPI( Adr_H );
-			putcSPI( Adr_M );
-			putcSPI( Adr_L );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			return( PG_DONE );
-		}
-		//---[ END Erase Block ]---
-
-		
-		//---[ Erase Sector ]---
-		_pg_int8 pg_external_memory_erase_sector( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L ) {
-			//--------------------------------------------------
-			
-			if ( pg_external_memory_wait_busy_check( PG_NO ) == PG_BUSY ) 
-				return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			
-			//Verificare!
-			pg_delay( 1 , PG_USEC );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_ERASE_SECTOR );
-			putcSPI( Adr_H );
-			putcSPI( Adr_M );
-			putcSPI( Adr_L );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			return( PG_DONE );
-		}
-		//---[ END Erase Sector ]---
+		//---[ End Init ]---
 		
 		
 		//---[ Write Page ]---
-		_pg_int8 pg_external_memory_write_page( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L, _pg_Uint8 * bWrite_Page_Data ){
+		_pg_Uint8 pg_external_memory_write_page( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 * bWrite_Page_Data ){
 			//--------------------------------------------------
-			
-			unsigned int iwp0;
-			
-			if ( pg_external_memory_wait_busy_check( PG_NO ) == PG_BUSY ) 
-				return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
-			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
+			_pg_Uint16 iwp0;
 
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
+			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			
+            PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
 			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_PAGE );
 			putcSPI( Adr_H );
 			putcSPI( Adr_M );
-			putcSPI( Adr_L );						// Set to '0x00' or any value to select page ???
-				
+			putcSPI( 0x00 );
+			
 			for( iwp0 = 0; iwp0 < PGIM_EXTERNAL_MEMORY_PAGE_SIZE; iwp0++ ) {
-				putcSPI( *( bWrite_Page_Data + iwp0 ) );
+				putcSPI( *( bWrite_Page_Data + (_pg_Uint8)iwp0 ) );
 			}
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			pg_external_memory_busy( PG_LOCKING );
+			pg_spi_close( PG_SPI_0 );
 			return( PG_DONE );
 		}
 		//---[ END Write Page ]---
 
 
 		//---[ Read Page ]---
-		_pg_int8 pg_external_memory_read_page( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L, _pg_Uint8 * bRead_Page_Data ){
+		_pg_Uint8 pg_external_memory_read_page( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 * bRead_Page_Data ){
 			//--------------------------------------------------
-			
-			unsigned int irp0;
+			_pg_Uint16 irp0;
 
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
+			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
 			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_READ_DATA );
 			putcSPI( Adr_H );
 			putcSPI( Adr_M );
-			putcSPI( Adr_L );
-				
+			putcSPI( 0x00 );
 			for( irp0 = 0; irp0 < PGIM_EXTERNAL_MEMORY_PAGE_SIZE; irp0++ ) {
-				*( bRead_Page_Data + irp0 ) = ReadSPI();
+				*( bRead_Page_Data + (_pg_Uint8)irp0 ) = ReadSPI();
 			}
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 			
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
+			pg_spi_close( PG_SPI_0 );
 			return( PG_DONE );
 		}
 		//---[ END Read Page ]---
+		
+		
+		//---[ Erase Sector ]---
+ 		_pg_Uint8 pg_external_memory_erase_sector( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M ) {
+			//--------------------------------------------------
+			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_ERASE_SECTOR );
+			putcSPI( Adr_H );
+			putcSPI( Adr_M );
+			putcSPI( 0x00 );
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			pg_external_memory_busy( PG_LOCKING );
+			pg_spi_close( PG_SPI_0 );
+			return( PG_DONE );
+		}
+		//---[ END Erase Sector ]---
+
+
+		//---[ Erase Chip  ]---
+		// _pg_Uint8 pg_external_memory_erase_chip( void ) {
+			// //--------------------------------------------------
+			
+			// if ( pg_external_memory_busy( PG_YES ) == PG_BUSY ) 
+				// return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
+				
+			// pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			// PG_EXTERNAL_MEMORY_CS = PG_LOW;	
+			// putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
+			// PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			// //Verificare!	
+			// pg_delay( 1 , PG_USEC );
+			
+			// PG_EXTERNAL_MEMORY_CS = PG_LOW;	
+			// putcSPI( PG_EXTERNAL_MEMORY_COMMAND_ERASE_CHIP );
+			// PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			// pg_spi_close( PG_SPI_0 );
+			// return( PG_DONE );
+		//}
+		//---[ END Erase Chip  ]---
 
 		
-		//---[ Write Byte ]---	
-		_pg_int8 pg_external_memory_write_byte( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_Offset, _pg_Uint8 bWrite_Byte_Data, _pg_Uint8 wb_verify ){
-			//--------------------------------------------------
-			
-			if ( pg_external_memory_wait_busy_check( PG_NO ) == PG_BUSY ) 
-				return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
-			
-			pg_external_memory_read_page( Adr_H, Adr_M, 0x00, pg_external_memory_page_buffer );
-			pg_external_memory_page_buffer[ Adr_Offset ] = bWrite_Byte_Data;
-			pg_external_memory_write_page( Adr_H, Adr_M, 0x00, pg_external_memory_page_buffer );
 
-			if ( ( wb_verify == PG_YES ) && ( bWrite_Byte_Data == pg_external_memory_read_byte( Adr_H, Adr_M, Adr_Offset ) ) )
+
+		//---[ Erase Block ]---
+		// _pg_Uint8 pg_external_memory_erase_block( _pg_Uint8 Adr_H ) {
+			// //--------------------------------------------------
+			
+			// if ( pg_external_memory_busy( PG_YES ) == PG_BUSY ) 
+				// return( PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY );
+			
+			// pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			// PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			// putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
+			// PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			// //Verificare!
+			// pg_delay( 1 , PG_USEC );
+			
+			// PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			// putcSPI( PG_EXTERNAL_MEMORY_COMMAND_ERASE_BLOCK );
+			// putcSPI( Adr_H );
+			// putcSPI( 0x00 );
+			// putcSPI( 0x00 );
+			// PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			// pg_spi_close( PG_SPI_0 );
+			// return( PG_DONE );
+		// }
+		//---[ END Erase Block ]---
+
+		
+		
+		
+		//---[ Write Byte ]---	
+		_pg_Uint8 pg_external_memory_write_byte( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L , _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify ) {	//PG_VERIFY || PG_NOT_VERIFY
+			//--------------------------------------------------
+			pg_external_memory_read_page( Adr_H , Adr_M , pg_external_memory_page_buffer );
+			pg_external_memory_page_buffer[ Adr_L ] = Byte_To_Write;
+			pg_external_memory_erase_sector( Adr_H , Adr_M );	//NON va bene cancellare tutto il settore e non solo la pagina... solo per test!!!
+			pg_external_memory_write_page( Adr_H , Adr_M , pg_external_memory_page_buffer );
+
+			if ( ( Verify == PG_VERIFY ) && ( Byte_To_Write == pg_external_memory_read_byte( Adr_H, Adr_M, Adr_L ) ) )
 				return( PG_OK );
 			else
-				return( PG_NOK );
+				return( PG_NOK );	//correggere se no verify
 		}
 		//---[ END Write Byte ]---
 		
 		
 		//---[ Read Byte ]---
-		_pg_Uint8 pg_external_memory_read_byte( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 Adr_L ){
+		_pg_Uint8 pg_external_memory_read_byte( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L ) {
 			//--------------------------------------------------
+			_pg_Uint8 Byte_To_Read;
+
+			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
 			
-			_pg_Uint8 bRead_Byte_Data;
-			
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
 			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_READ_DATA );
 			putcSPI( Adr_H );
 			putcSPI( Adr_M );
 			putcSPI( Adr_L );
+			Byte_To_Read = ReadSPI();
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 			
-			bRead_Byte_Data = ReadSPI();
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
-			
-			return( bRead_Byte_Data );
+			pg_spi_close( PG_SPI_0 );
+			return( Byte_To_Read );
 		}
 		//---[ END Read Byte ]---
 
 		
 		//---[ Wait Busy Check ]---
-		_pg_int8 pg_external_memory_wait_busy_check( _pg_Uint8 blocking_flag ) {
+		_pg_Uint8 pg_external_memory_busy( _pg_Uint8 blocking_flag ) {
 			//--------------------------------------------------
-			// Blocking		---> blocking_flag = PG_YES
-			// NON Blocking ---> blocking_flag = PG_NO		( Returns busy status )
-			// Device can be busy only on Program/Read/Write access
-			
+			// Blocking		---> blocking_flag = PG_LOCKING			( Wait until no more busy, and return status PG_BUSY || PG_READY )
+			// NON Blocking ---> blocking_flag = PG_NOT_LOCKING		( No wait and returns busy status PG_BUSY || PG_READY )
+			// Device can be busy only on Program/Erase/Write access
+			//--------------------------------------------------
 			_pg_Uint8 Wip_Temp;
-
-			PG_EXTERNAL_MEMORY_CS = PG_ENABLE;
+			
+			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
 			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_READ_STATUS_REG );
 			
 			do {
 				Wip_Temp = ReadSPI();
 				Wip_Temp &= 0b00000001;				// Waiting and checking for WIP bit of Status-Register: 1 = busy, 0 = idle
-				if ( blocking_flag == PG_NO ) {
-					PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
+				if ( blocking_flag == PG_NOT_LOCKING ) {
+					PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 					if( Wip_Temp == 1 )
 						return( PG_BUSY );			// If busy
 					else
@@ -265,10 +298,22 @@
 				}
 			} while( Wip_Temp );
 			
-			PG_EXTERNAL_MEMORY_CS = PG_DISABLE;
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			pg_spi_close( PG_SPI_0 );
 			return( PG_READY );
 		}
 		//---[ END Wait Busy Check ]---
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

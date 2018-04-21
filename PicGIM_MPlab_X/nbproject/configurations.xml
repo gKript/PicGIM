@@ -91,6 +91,7 @@
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
+      <itemPath>../PicGIM_Sources/PicGIM/lkr/pgim_18f4620_big.lkr</itemPath>
     </logicalFolder>
     <logicalFolder name="f2"
                    displayName="Linker files available"
@@ -190,7 +191,7 @@
         <property key="default-char-unsigned" value="false"/>
         <property key="enable-all-optimizations" value="true"/>
         <property key="enable-int-promotion" value="false"/>
-        <property key="enable-multi-bank-stack-model" value="false"/>
+        <property key="enable-multi-bank-stack-model" value="true"/>
         <property key="enable-ob" value="true"/>
         <property key="enable-od" value="true"/>
         <property key="enable-om" value="true"/>
@@ -213,7 +214,7 @@
       </C18>
       <C18-LD>
         <property key="cod-file" value="false"/>
-        <property key="extra-lib-directories" value=""/>
+        <property key="extra-lib-directories" value="..\PicGIM_Sources\PicGIM\lkr"/>
         <property key="hex-output-format" value="INHX32"/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
       </C18-LD>

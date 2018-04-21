@@ -106,6 +106,12 @@
 	#define	PG_BUSY							1				/*!	An alternative way to say "logic value 1"	*/
 	#define	PG_READY						0				/*!	An alternative way to say "logic value 0"	*/
 
+	#define	PG_LOCKING						1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_NOT_LOCKING					0				/*!	An alternative way to say "logic value 0"	*/
+
+	#define	PG_VERIFY						1				/*!	An alternative way to say "logic value 1"	*/
+	#define	PG_NOT_VERIFY					0				/*!	An alternative way to say "logic value 0"	*/
+
 	#define PG_TRUE							1				/*!	An alternative way to say "logic value 1"	*/
 	#define PG_FALSE						0				/*!	An alternative way to say "logic value 0"	*/
 	

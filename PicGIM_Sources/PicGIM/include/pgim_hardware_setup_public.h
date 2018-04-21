@@ -114,13 +114,13 @@
 		#define	PG_LCD_PCD8544_VIDEO_MEMORY			PG_NO
 
 		#define	PG_LCD_PCD8544_BACKLIGHT			L_B2
-		#define PG_LCD_PCD8544_VDD					L_B3
+//		#define PG_LCD_PCD8544_VDD				L_
 		#define PG_LCD_PCD8544_DC					L_C0
 		#define PG_LCD_PCD8544_RST					L_C1
 		#define PG_LCD_PCD8544_CE 					L_C2
 	
 		#define	PG_LCD_PCD8544_BACKLIGHT_TRIS		T_B2
-		#define PG_LCD_PCD8544_VDD_TRIS				T_B3
+//		#define PG_LCD_PCD8544_VDD_TRIS			T_
 		#define PG_LCD_PCD8544_DC_TRIS				T_C0
 		#define PG_LCD_PCD8544_RST_TRIS				T_C1
 		#define PG_LCD_PCD8544_CE_TRIS				T_C2
@@ -156,8 +156,8 @@
 	//		H A R D W A R E   C O N F I G   |   E X T E R N A L   M E M O R Y
 	//------------------------------------------------------------------------------
 	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
-		#define	PG_EXTERNAL_MEMORY_CS				L_C3				//!< Must be: <pin-lat-name>
-		#define	PG_EXTERNAL_MEMORY_CS_TRIS			T_C3				//!< Must be: <pin-tris-name>
+		#define	PG_EXTERNAL_MEMORY_CS				L_B3				//!< Must be: <pin-lat-name>
+		#define	PG_EXTERNAL_MEMORY_CS_TRIS			T_B3				//!< Must be: <pin-tris-name>
 	#endif
 
 	//------------------------------------------------------------------------------

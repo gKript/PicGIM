@@ -113,7 +113,8 @@ void pg_initialize( void ) {
 	#endif
 	
 	#if	( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
-		pg_delay( 1 , PG_MSEC );				// Delay to wait memory becomes ready; no chip-select allowed
+		pg_delay( 10 , PG_MSEC );				// Delay to wait memory becomes ready; no chip-select allowed
+		pg_external_memory_init( );
 	#endif
 	
 	#if ( PGIM_3WIRE == PG_ENABLE )

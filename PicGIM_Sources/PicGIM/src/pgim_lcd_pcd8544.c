@@ -244,4 +244,6 @@
 #endif
 
 
+//while (!DataRdySPI()); to add???
+
 
