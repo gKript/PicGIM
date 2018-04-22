@@ -49,12 +49,15 @@
 		#define	PG_TECNOLOGY_SPI									1
 		#define	PG_TECNOLOGY_I2C									2
 
-		//#define PG_EXTERNAL_MEMORY_BLOCKS				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_BLOCK_SIZE )	// [ unit ]
-		//#define PG_EXTERNAL_MEMORY_SECTORS			( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_SECTOR_SIZE )	// [ unit ]
-		//#define PG_EXTERNAL_MEMORY_PAGES				( PGIM_EXTERNAL_MEMORY_CHIP_SIZE / 8 / PGIM_EXTERNAL_MEMORY_PAGE_SIZE )		// [ unit ]
+		//---[ Error ]---
+		//#define PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_BLOCK		1
+		#define PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_SECTOR		2
+		#define PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_PAGE			3
+		//#define PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_BYTE		4
+		#define PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_UNDEFINED	99
+		//---[ End Error ]---
 		
-		#define PG_EXTERNAL_MEMORY_ERROR_DEVICE_BUSY	-10				
-		
+		//---[ Command ]---
 		#if ( PGIM_EXTERNAL_MEMORY_TYPE == PG_MX25L )
 			#define	PG_EXTERNAL_MEMORY_COMMAND_WRITE_PAGE	 		0x02
 			#define	PG_EXTERNAL_MEMORY_COMMAND_READ_DATA			0x03
@@ -65,16 +68,31 @@
 			#define PG_EXTERNAL_MEMORY_COMMAND_ERASE_BLOCK			0x52
 			#define	PG_EXTERNAL_MEMORY_COMMAND_ERASE_CHIP	 		0x60
 		#endif
+		//---[ End Command ]---
 		
-		_pg_Uint8		pg_external_memory_erase_chip				( void );
-		_pg_Uint8		pg_external_memory_erase_block				( _pg_Uint8 Adr_H );
-		_pg_Uint8		pg_external_memory_erase_sector				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M );
-		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 * bWrite_Page_Data );
-		_pg_Uint8		pg_external_memory_read_page				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 * bRead_Page_Data );
-		_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L , _pg_Uint8 Byte_To_Write , _pg_Uint8 wb_verify ); // wb_verify = PG_YES || PG_NO	
-		_pg_Uint8		pg_external_memory_read_byte				( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L );
-		_pg_Uint8		pg_external_memory_busy						( _pg_Uint8 blocking_flag ); // blocking_flag = PG_LOCKING || PG_NOT_LOCKING
-
+		//---[ Address Target ]---
+		#define	PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK				1
+		#define	PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR				2
+		#define	PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE					3
+		#define	PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE					4
+		//---[ End Address Target ]---
+		
+		//---[ Prototype ]---
+		extern _pg_Uint8 Adr_H;
+		extern _pg_Uint8 Adr_M;
+		extern _pg_Uint8 Adr_L;
+		
+		_pg_Uint8		pg_external_memory_set_address				( _pg_Uint8 Target , _pg_Uint8 New_Address );
+		_pg_Uint8		pg_external_memory_set_address_full			( _pg_Uint8 N_Block , _pg_Uint8 N_Sector , _pg_Uint8 N_Page , _pg_Uint8 N_Byte );
+		_pg_Uint8		pg_external_memory_erase_chip				( void );											//Need no address.
+		_pg_Uint8		pg_external_memory_erase_block				( void ); 											//Need address of: block.
+		_pg_Uint8		pg_external_memory_erase_sector				( void );											//Need address of: block, sector.
+		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 * Buff_Pag_To_Write );					//Need address of: block, sector, page.
+		_pg_Uint8		pg_external_memory_read_page				( _pg_Uint8 * Buff_Pag_To_Read );					//Need address of: block, sector, page.
+		_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify_W ); 	//Need address of: block, sector, page, byte. Verify_W = PG_YES || PG_NO	
+		_pg_Uint8		pg_external_memory_read_byte				( void );											//Need address of: block, sector, page, byte.
+		_pg_Uint8		pg_external_memory_busy						( _pg_Uint8 Blocking ); // Blocking = PG_BLOCKING || PG_NOT_BLOCKING
+		//---[ End Prototype ]---
 	#endif
 #endif /* _PGIM_EXTERNAL_MEMORY_H_ */
 

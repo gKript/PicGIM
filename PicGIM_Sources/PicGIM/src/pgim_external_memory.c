@@ -60,30 +60,36 @@
 > Latch-up protected to 100mA
 */
 //----------------------------------------------------------------------------
-/* Addressing MX25L4005:
-   -----------------------------
-   8         16        4096
-   BLK       SEC       ADDR
-   8bit      4bit      12bit
+/* =============================
+   Memory Map - MX25L4005:
+   =============================
+      8      16   16     256
+      BLK    SEC  PAG    Byte
+      8bit   4bit 4bit   8bit
    -----------------------------	
-   0000.0000|0000|0000.0000.0000
+   0000.0000|0000|0000|0000.0000
    -----------------------------
-   8   *      16   *   4096       * 8 bit = 4.194.304	= 4[Mb]		//ok
+       8    * 16 * 16 *   256   * 8[bit] = 4.194.304	= 4[Mb]		//ok
    -----------------------------
-   #1BLK =  #16SEC =  #16PAG 	(#1PAG=256[byte])
-*/
+   #1[BLK] = #16[SEC]
+   #1[SEC] = #16[PAG]
+   #1[PAG] = #256[Byte]
+*/	
 //----------------------------------------------------------------------------
-/* Addressing MX25L6406:
-   -----------------------------
-   128       16        4096
-   BLK       SEC       ADDR
-   8bit      4bit      12bit
+/* =============================
+   Memory Map - MX25L6406:
+   =============================
+      128    16   16     256
+      BLK    SEC  PAG    Byte
+      8bit   4bit 4bit   8bit
    -----------------------------	
-   0000.0000|0000|0000.0000.0000
+   0000.0000|0000|0000|0000.0000
    -----------------------------
-   8   *      16   *   4096       * 8 bit = 67.108.864 = 64[Mb]	//ok
+      128   * 16 * 16 *   256   * 8[bit] = 67.108.864 = 64[Mb]	//ok
    -----------------------------
-   #1BLK =  #16SEC =  #16PAG 	(#1PAG=256[byte])   
+   #1[BLK] = #16[SEC]
+   #1[SEC] = #16[PAG]
+   #1[PAG] = #256[Byte]
 */	
 //----------------------------------------------------------------------------
 //	Adr_H = Block  Address;
@@ -91,8 +97,17 @@
 //	Adr_L = Range  Address;
 //----------------------------------------------------------------------------
 
+//WEL (bit 1 in Status Register):	The Write Enable Latch
+//WIP (bit 0 in Status Register):	Write in Progress		
+
 	#if ( PGIM_EXTERNAL_MEMORY_TECNOLOGY == PG_TECNOLOGY_SPI )
+		//---[ Global Declaration ]---
+		_pg_Uint8 Adr_H;
+		_pg_Uint8 Adr_M;
+		_pg_Uint8 Adr_L;
 		_pg_Uint8 pg_external_memory_page_buffer[ PGIM_EXTERNAL_MEMORY_PAGE_SIZE ];	//internal use
+		//---[ End Global Declaration ]---
+		
 		
 		//---[ Init ]---
 		void pg_external_memory_init( void ) {
@@ -102,13 +117,67 @@
 			PG_SPI_SDO_TRIS					= PG_OUT;
 			PG_SPI_SDI_TRIS					= PG_IN;
 			//PG_SPI_SS_TRIS				= PG_IN;
+			
+			Adr_H = 0x00;
+			Adr_M = 0x00;
+			Adr_L = 0x00;
 		}
 		//---[ End Init ]---
 		
 		
-		//---[ Write Page ]---
-		_pg_Uint8 pg_external_memory_write_page( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 * bWrite_Page_Data ){
+		//---[ Set Address ]---
+		_pg_Uint8 pg_external_memory_set_address( _pg_Uint8 Target , _pg_Uint8 New_Address ) {
 			//--------------------------------------------------
+			switch( Target ) {
+				case PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK : {
+					Adr_H = New_Address;
+					return( PG_OK );
+				}
+				case PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR : {
+					if ( New_Address > 0x0F ) {
+						//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_SECTOR
+						return( PG_NOK );
+					}
+					Adr_M = ( ( New_Address << 4 ) + ( Adr_M & 0x0F ) );	//Adr_M = sssspppp ( s = sector; p = page )
+					return( PG_OK );
+				}
+				case PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE : {
+					if ( New_Address > 0x0F ) {
+						//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_PAGE
+						return( PG_NOK );
+					}
+					Adr_M = ( ( Adr_M & 0xF0 ) + New_Address );	//Adr_M = sssspppp
+					return( PG_OK );
+				}
+				case PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE : {
+					Adr_L = New_Address;
+					return( PG_OK );
+				}
+			}
+			//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_UNDEFINED
+			return( PG_NOK );
+		}
+		//---[ End Set Address ]---
+		
+		
+		//---[ Set Address Full ]---
+			_pg_Uint8 pg_external_memory_set_address_full( _pg_Uint8 N_Block , _pg_Uint8 N_Sector , _pg_Uint8 N_Page , _pg_Uint8 N_Byte ) {
+			//--------------------------------------------------
+			if ( ( N_Sector > 0x0F ) | ( N_Page > 0x0F ) ) {
+				//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_SECTOR
+				return( PG_NOK );
+			}
+			Adr_H = N_Block;
+			Adr_M = ( ( N_Sector << 4 ) + N_Page );	//Adr_M = sssspppp ( s = sector; p = page )
+			Adr_L = N_Byte;
+			//todo: set error
+			return( PG_OK );
+		}
+		//---[ End Set Address Full ]---
+		
+		
+		//---[ Write Page ]---
+		_pg_Uint8 pg_external_memory_write_page( _pg_Uint8 * Buff_Pag_To_Write ){
 			_pg_Uint16 iwp0;
 
 			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
@@ -124,11 +193,11 @@
 			putcSPI( 0x00 );
 			
 			for( iwp0 = 0; iwp0 < PGIM_EXTERNAL_MEMORY_PAGE_SIZE; iwp0++ ) {
-				putcSPI( *( bWrite_Page_Data + (_pg_Uint8)iwp0 ) );
+				putcSPI( *( Buff_Pag_To_Write + (_pg_Uint8)iwp0 ) );
 			}
 			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 			
-			pg_external_memory_busy( PG_LOCKING );
+			pg_external_memory_busy( PG_BLOCKING );
 			pg_spi_close( PG_SPI_0 );
 			return( PG_DONE );
 		}
@@ -136,7 +205,7 @@
 
 
 		//---[ Read Page ]---
-		_pg_Uint8 pg_external_memory_read_page( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M, _pg_Uint8 * bRead_Page_Data ){
+		_pg_Uint8 pg_external_memory_read_page( _pg_Uint8 * Buff_Pag_To_Read ){
 			//--------------------------------------------------
 			_pg_Uint16 irp0;
 
@@ -148,7 +217,7 @@
 			putcSPI( Adr_M );
 			putcSPI( 0x00 );
 			for( irp0 = 0; irp0 < PGIM_EXTERNAL_MEMORY_PAGE_SIZE; irp0++ ) {
-				*( bRead_Page_Data + (_pg_Uint8)irp0 ) = ReadSPI();
+				*( Buff_Pag_To_Read + (_pg_Uint8)irp0 ) = ReadSPI();
 			}
 			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 			
@@ -159,7 +228,7 @@
 		
 		
 		//---[ Erase Sector ]---
- 		_pg_Uint8 pg_external_memory_erase_sector( _pg_Uint8 Adr_H, _pg_Uint8 Adr_M ) {
+ 		_pg_Uint8 pg_external_memory_erase_sector( void ) {
 			//--------------------------------------------------
 			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
 			
@@ -174,7 +243,7 @@
 			putcSPI( 0x00 );
 			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 			
-			pg_external_memory_busy( PG_LOCKING );
+			pg_external_memory_busy( PG_BLOCKING );
 			pg_spi_close( PG_SPI_0 );
 			return( PG_DONE );
 		}
@@ -205,10 +274,8 @@
 		//---[ END Erase Chip  ]---
 
 		
-
-
 		//---[ Erase Block ]---
-		// _pg_Uint8 pg_external_memory_erase_block( _pg_Uint8 Adr_H ) {
+		// _pg_Uint8 pg_external_memory_erase_block( void ) {
 			// //--------------------------------------------------
 			
 			// if ( pg_external_memory_busy( PG_YES ) == PG_BUSY ) 
@@ -234,26 +301,31 @@
 		//---[ END Erase Block ]---
 
 		
-		
-		
 		//---[ Write Byte ]---	
-		_pg_Uint8 pg_external_memory_write_byte( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L , _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify ) {	//PG_VERIFY || PG_NOT_VERIFY
+		_pg_Uint8 pg_external_memory_write_byte( _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify_W ) {	//PG_VERIFY || PG_NOT_VERIFY
 			//--------------------------------------------------
-			pg_external_memory_read_page( Adr_H , Adr_M , pg_external_memory_page_buffer );
+			pg_external_memory_read_page( pg_external_memory_page_buffer );
 			pg_external_memory_page_buffer[ Adr_L ] = Byte_To_Write;
-			pg_external_memory_erase_sector( Adr_H , Adr_M );	//NON va bene cancellare tutto il settore e non solo la pagina... solo per test!!!
-			pg_external_memory_write_page( Adr_H , Adr_M , pg_external_memory_page_buffer );
+			//--------------------------------------------------
+			// Before write a page, must erase sector => save sector, no page...
+			//--------------------------------------------------
+			pg_external_memory_erase_sector( );
+			pg_external_memory_write_page( pg_external_memory_page_buffer );
 
-			if ( ( Verify == PG_VERIFY ) && ( Byte_To_Write == pg_external_memory_read_byte( Adr_H, Adr_M, Adr_L ) ) )
+			if ( ( Verify_W == PG_VERIFY ) && ( Byte_To_Write == pg_external_memory_read_byte( ) ) ) {
+				//todo: set error 
 				return( PG_OK );
-			else
+			}
+			else {
+				//todo: set error 
 				return( PG_NOK );	//correggere se no verify
+			}
 		}
 		//---[ END Write Byte ]---
 		
 		
 		//---[ Read Byte ]---
-		_pg_Uint8 pg_external_memory_read_byte( _pg_Uint8 Adr_H , _pg_Uint8 Adr_M , _pg_Uint8 Adr_L ) {
+		_pg_Uint8 pg_external_memory_read_byte( void ) {
 			//--------------------------------------------------
 			_pg_Uint8 Byte_To_Read;
 
@@ -268,16 +340,17 @@
 			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 			
 			pg_spi_close( PG_SPI_0 );
+			//todo: set error 
 			return( Byte_To_Read );
 		}
 		//---[ END Read Byte ]---
 
 		
 		//---[ Wait Busy Check ]---
-		_pg_Uint8 pg_external_memory_busy( _pg_Uint8 blocking_flag ) {
+		_pg_Uint8 pg_external_memory_busy( _pg_Uint8 Blocking ) {
 			//--------------------------------------------------
-			// Blocking		---> blocking_flag = PG_LOCKING			( Wait until no more busy, and return status PG_BUSY || PG_READY )
-			// NON Blocking ---> blocking_flag = PG_NOT_LOCKING		( No wait and returns busy status PG_BUSY || PG_READY )
+			// Blocking		---> Blocking = PG_LOCKING			( Wait until no more busy, and return status PG_BUSY || PG_READY )
+			// NON Blocking ---> Blocking = PG_NOT_LOCKING		( No wait and returns busy status PG_BUSY || PG_READY )
 			// Device can be busy only on Program/Erase/Write access
 			//--------------------------------------------------
 			_pg_Uint8 Wip_Temp;
@@ -289,7 +362,7 @@
 			do {
 				Wip_Temp = ReadSPI();
 				Wip_Temp &= 0b00000001;				// Waiting and checking for WIP bit of Status-Register: 1 = busy, 0 = idle
-				if ( blocking_flag == PG_NOT_LOCKING ) {
+				if ( Blocking == PG_NOT_BLOCKING ) {
 					PG_EXTERNAL_MEMORY_CS = PG_HIGH;
 					if( Wip_Temp == 1 )
 						return( PG_BUSY );			// If busy
@@ -305,40 +378,7 @@
 		//---[ END Wait Busy Check ]---
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-/*
-		_pg_Uint8 pg_external_memory_address_high;
-		_pg_Uint8 pg_external_memory_address_mid;
-		_pg_Uint8 pg_external_memory_address_low;
-		
-		//---[ Select Page ]---
-		_pg_Uint8 pg_external_memory_select_page( _pg_Uint32_ n_page_to_select ){
-			//--------------------------------------------------
-			//
-			
-			
-
-
-		}
-		//---[ END Select Page ]---
-
-
-*/
 	#endif	/* PG_TECNOLOGY_SPI */
-	
 	
 	#if ( PGIM_EXTERNAL_MEMORY_TECNOLOGY == PG_TECNOLOGY_I2C )
 	

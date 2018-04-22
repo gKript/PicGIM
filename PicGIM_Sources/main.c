@@ -23,7 +23,7 @@ void main( void ) {
 	//_pg_Uint8 idx;
 	idx = 0;
 	do {
-		mx_pagefill[ idx ] = 0x18;
+		mx_pagefill[ idx ] = 0xFF;	//0x18;
 		idx++;
 	} while ( idx != 0 );
 	
@@ -33,13 +33,18 @@ void main( void ) {
 			
 	pg_lcd_pcd8544_send_string_rom( "b" );
 	
-	pg_external_memory_erase_sector( 1, 2 );
-	pg_external_memory_write_page( 1, 2, mx_pagefill );
+	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK , 0 );
+	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR , 0 );
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE , 0 );
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 0 );
+	
+	pg_external_memory_erase_sector( );
+	pg_external_memory_write_page( mx_pagefill );
 	pg_lcd_pcd8544_send_string_rom( "w" );
 	
 	pg_delay_sec( 1 );
 	
-	pg_external_memory_read_page( 1, 2, mx_pagebuff );
+	pg_external_memory_read_page( mx_pagebuff );
 	pg_lcd_pcd8544_send_string_rom( "r" );
 	
 	// pg_lcd_pcd8544_set_pos( 0 , 1 );
@@ -68,13 +73,14 @@ void main( void ) {
 		idx++;
 	} while ( idx != 0 );
 	
-	
-	pg_external_memory_write_byte( 1 , 2 , 1 , 0xFF , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
-	pg_external_memory_write_byte( 1 , 2 , 2 , 0xFF , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
-	pg_external_memory_write_byte( 1 , 2 , 3 , 0xFF , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 42 );
+	pg_external_memory_write_byte( 0xAA , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 44 );
+	pg_external_memory_write_byte( 0xAA , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 46 );
+	pg_external_memory_write_byte( 0xAA , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
 	pg_delay_sec( 2 );
-	//pg_external_memory_read_byte( 1 , 2 , 0 );
-	pg_external_memory_read_page( 1 , 2 , mx_pagebuff );
+	pg_external_memory_read_page( mx_pagebuff );
 	
 	//_pg_Uint8 idx;
 	idx = 0;
