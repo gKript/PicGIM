@@ -93,12 +93,16 @@
 */	
 //----------------------------------------------------------------------------
 //	Adr_H = Block  Address;
-//	Adr_M = Sector Address;
-//	Adr_L = Range  Address;
+//	Adr_M = Sector + Page Address;
+//	Adr_L = Byte  Address;
 //----------------------------------------------------------------------------
-
-//WEL (bit 1 in Status Register):	The Write Enable Latch
-//WIP (bit 0 in Status Register):	Write in Progress		
+//	H  M  L
+//	00 00 00
+//	BB SP bb
+//----------------------------------------------------------------------------
+//WEL (bit 1 in Status Register):	Write Enable Latch... to set before erase/write
+//WIP (bit 0 in Status Register):	Write in Progress...  to check after erase/write
+//----------------------------------------------------------------------------
 
 	#if ( PGIM_EXTERNAL_MEMORY_TECNOLOGY == PG_TECNOLOGY_SPI )
 		//---[ Global Declaration ]---
@@ -118,40 +122,46 @@
 			PG_SPI_SDI_TRIS					= PG_IN;
 			//PG_SPI_SS_TRIS				= PG_IN;
 			
-			Adr_H = 0x00;
-			Adr_M = 0x00;
-			Adr_L = 0x00;
+			Adr_H = PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK;	//First available Block
+			Adr_M = 0x00;									//Sector + Page
+			Adr_L = 0x00;									//Byte
 		}
 		//---[ End Init ]---
 		
-		
+		    // BLK     SC   PG    BYTE
+		// |0101.0101|0101|0101|0101.0101|
+				
 		//---[ Set Address ]---
 		_pg_Uint8 pg_external_memory_set_address( _pg_Uint8 Target , _pg_Uint8 New_Address ) {
 			//--------------------------------------------------
 			switch( Target ) {
 				case PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK : {
+					if( New_Address > PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK ) {
+						//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_BLOCK
+						return( PG_NOK );
+					}
 					Adr_H = New_Address;
 					return( PG_OK );
 				}
 				case PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR : {
 					if ( New_Address > 0x0F ) {
 						//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_SECTOR
-						return( PG_NOK );
+						return ( PG_NOK );
 					}
 					Adr_M = ( ( New_Address << 4 ) + ( Adr_M & 0x0F ) );	//Adr_M = sssspppp ( s = sector; p = page )
 					return( PG_OK );
 				}
 				case PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE : {
-					if ( New_Address > 0x0F ) {
+					if( New_Address > 0x0F ) {
 						//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_PAGE
-						return( PG_NOK );
+						return ( PG_NOK );
 					}
 					Adr_M = ( ( Adr_M & 0xF0 ) + New_Address );	//Adr_M = sssspppp
 					return( PG_OK );
 				}
 				case PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE : {
 					Adr_L = New_Address;
-					return( PG_OK );
+					return ( PG_OK );
 				}
 			}
 			//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_UNDEFINED
@@ -163,8 +173,16 @@
 		//---[ Set Address Full ]---
 			_pg_Uint8 pg_external_memory_set_address_full( _pg_Uint8 N_Block , _pg_Uint8 N_Sector , _pg_Uint8 N_Page , _pg_Uint8 N_Byte ) {
 			//--------------------------------------------------
-			if ( ( N_Sector > 0x0F ) | ( N_Page > 0x0F ) ) {
+			if( N_Block > PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK ) {
+				//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_BLOCK
+				return( PG_NOK );
+			}
+			if( N_Sector > 0x0F ) {
 				//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_SECTOR
+				return( PG_NOK );
+			}
+			if( N_Page > 0x0F ) {
+				//todo: set error PG_EXTERNAL_MEMORY_ERROR_WRONG_ADDRESS_PAGE
 				return( PG_NOK );
 			}
 			Adr_H = N_Block;
@@ -178,7 +196,7 @@
 		
 		//---[ Write Page ]---
 		_pg_Uint8 pg_external_memory_write_page( _pg_Uint8 * Buff_Pag_To_Write ){
-			_pg_Uint16 iwp0;
+			_pg_Uint16 iwp0;	//do while _pg_Uint8...
 
 			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
 			
@@ -225,6 +243,60 @@
 			return( PG_DONE );
 		}
 		//---[ END Read Page ]---
+		
+		
+		//---[ Erase Page ]---
+ 		_pg_Uint8 pg_external_memory_erase_page( void ) {
+			//--------------------------------------------------
+			_pg_Uint8 idx_page;
+			
+			_pg_Uint8 save_Adr_H;
+			_pg_Uint8 save_Adr_M;
+			
+			save_Adr_H = Adr_H;						//save original address
+			save_Adr_M = Adr_M;
+			
+			Adr_H = 0x00;							//set to block #0 ( system reserved );
+			Adr_M = 0x00;							//set to sector #0, page #0
+			pg_external_memory_erase_sector( );	
+			
+			// Adr_H = save_Adr_H;					//Restore original address
+			// Adr_M = save_Adr_M;
+			
+			for( idx_page = 0; idx_page < 16; idx_page++ ) {		//copy sector: all #16 page of a actual sector to system sector #0
+				Adr_H = save_Adr_H;					//Restore original address
+				Adr_M = save_Adr_M;
+				Adr_M &= 0xF0;						//reset page address
+				Adr_M += idx_page;					//select idx_page page
+				pg_external_memory_read_page( pg_external_memory_page_buffer );
+				Adr_H = 0x00;						//go to temp system block
+				Adr_M = 0x00;						//reset sector and page address
+				Adr_M += idx_page;					//select idx_page page (only nibble on the right)
+				pg_external_memory_write_page( pg_external_memory_page_buffer );		
+			}
+			
+			Adr_H = save_Adr_H;						//restore original address
+			Adr_M = save_Adr_M;
+			pg_external_memory_erase_sector( );		//erase original sector
+				
+			for( idx_page = 0; idx_page < 16; idx_page++ ) {		//restore #15 (16-1) page original excluded
+				Adr_H = 0x00;						//go to temp system block
+				Adr_M = 0x00;						//reset sector and page address
+				Adr_M += idx_page;					//select idx_page page (only nibble on the right)
+				if( ( Adr_M & 0x0F ) != ( save_Adr_M & 0x0F ) ) {
+					pg_external_memory_read_page( pg_external_memory_page_buffer );
+					Adr_H = save_Adr_H;				//Restore original address
+					Adr_M = save_Adr_M;
+					Adr_M &= 0xF0;					//reset page address
+					Adr_M += idx_page;				//select next page
+					pg_external_memory_write_page( pg_external_memory_page_buffer );		
+				}
+			}
+			Adr_H = save_Adr_H;						//Restore original address before return
+			Adr_M = save_Adr_M;
+			return( PG_DONE );
+		}
+		//---[ END Erase Page ]---		
 		
 		
 		//---[ Erase Sector ]---
@@ -302,24 +374,50 @@
 
 		
 		//---[ Write Byte ]---	
+		
+		
+		
+		
+		//!!! pg_external_memory_page_buffer gia' usato dalla erase page !!!
+		
 		_pg_Uint8 pg_external_memory_write_byte( _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify_W ) {	//PG_VERIFY || PG_NOT_VERIFY
 			//--------------------------------------------------
+			_pg_Uint8 idx_page;
+			
+			_pg_Uint8 save_Adr_H;
+			_pg_Uint8 save_Adr_M;
+			
+			save_Adr_H = Adr_H;						//save original address
+			save_Adr_M = Adr_M;
+			
 			pg_external_memory_read_page( pg_external_memory_page_buffer );
 			pg_external_memory_page_buffer[ Adr_L ] = Byte_To_Write;
-			//--------------------------------------------------
-			// Before write a page, must erase sector => save sector, no page...
-			//--------------------------------------------------
-			pg_external_memory_erase_sector( );
+			//free pg_external_memory_page_buffer saving it in system reserved "00 01 xx" (BB SP bb)
+			Adr_H = 0x00;							//set to block #0 ( system reserved );
+			Adr_M = 0x01;							//set to sector #0, page #1
 			pg_external_memory_write_page( pg_external_memory_page_buffer );
+			Adr_H = save_Adr_H;						//set original address
+			Adr_M = save_Adr_M;
+			pg_external_memory_erase_page( );		//"pg_external_memory_page_buffer" wil be destroied!
+			Adr_H = 0x00;							//set to block #0 ( system reserved );
+			Adr_M = 0x01;							//set to sector #0, page #1
+			pg_external_memory_read_page( pg_external_memory_page_buffer );
+			Adr_H = save_Adr_H;						//set original address
+			Adr_M = save_Adr_M;
+			pg_external_memory_write_page( pg_external_memory_page_buffer );
+			// Adr_H = save_Adr_H;					//Restore original address before return
+			// Adr_M = save_Adr_M;
 
-			if ( ( Verify_W == PG_VERIFY ) && ( Byte_To_Write == pg_external_memory_read_byte( ) ) ) {
+			if( Verify_W == PG_VERIFY ) {
+				if( Byte_To_Write == pg_external_memory_read_byte( ) ) {
 				//todo: set error 
 				return( PG_OK );
-			}
-			else {
-				//todo: set error 
-				return( PG_NOK );	//correggere se no verify
-			}
+				}
+				else {
+					//todo: set error 
+					return( PG_NOK );	//correggere se no verify
+				}
+			}			//eliminare la scelta ed eseguire sempre la verifica
 		}
 		//---[ END Write Byte ]---
 		
@@ -396,3 +494,67 @@
 #endif	
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// _pg_Uint8 pg_external_memory_write_byte( _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify_W ) {	//PG_VERIFY || PG_NOT_VERIFY
+			// //--------------------------------------------------
+			// pg_external_memory_read_page( pg_external_memory_page_buffer );
+			// pg_external_memory_page_buffer[ Adr_L ] = Byte_To_Write;
+			// //--------------------------------------------------
+			// // Before write a page, must erase sector => save sector, no page...
+			// //--------------------------------------------------
+			// pg_external_memory_erase_sector( );
+			// pg_external_memory_write_page( pg_external_memory_page_buffer );
+
+			// if ( ( Verify_W == PG_VERIFY ) && ( Byte_To_Write == pg_external_memory_read_byte( ) ) ) {
+				// //todo: set error 
+				// return( PG_OK );
+			// }
+			// else {
+				// //todo: set error 
+				// return( PG_NOK );	//correggere se no verify
+			// }
+		// }
+		// //---[ END Write Byte ]---
+		
+		
+		// //---[ Read Byte ]---
+		// _pg_Uint8 pg_external_memory_read_byte( void ) {
+			// //--------------------------------------------------
+			// _pg_Uint8 Byte_To_Read;
+
+			// pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			
+			// PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			// putcSPI( PG_EXTERNAL_MEMORY_COMMAND_READ_DATA );
+			// putcSPI( Adr_H );
+			// putcSPI( Adr_M );
+			// putcSPI( Adr_L );
+			// Byte_To_Read = ReadSPI();
+			// PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			// pg_spi_close( PG_SPI_0 );
+			// //todo: set error 
+			// return( Byte_To_Read );
+		// }
+		// //---[ END Read Byte ]---
+		
+		
+		

@@ -2,8 +2,8 @@
 
 #include "picgim_main.h"
 
-_pg_Uint8	mx_pagefill[ 256 ];
-_pg_Uint8	mx_pagebuff[ 256 ];
+_pg_Uint8	buffer_fill[ 256 ];
+_pg_Uint8	buffer_mx[ 256 ];
 
 void main( void ) {
 	//_pg_Uint16 idx;
@@ -20,39 +20,76 @@ void main( void ) {
 	pg_lcd_pcd8544_font_select( pg_font_5x7_std );
 	pg_lcd_pcd8544_send_string_rom( "ok:" );
 
-	//_pg_Uint8 idx;
-	idx = 0;
+	//clear buffer_mx
+	idx = 0;			//_pg_Uint8 idx;
 	do {
-		mx_pagefill[ idx ] = 0xFF;	//0x18;
+		buffer_mx[ idx ] = 0xFF;	//0x18;
 		idx++;
 	} while ( idx != 0 );
+
+	//fill buffer_fill
+	idx = 0;			//_pg_Uint8 idx;
+	do {
+		buffer_fill[ idx ] = 0xAA;	//0x18;
+		idx++;
+	} while ( idx != 0 );
+	pg_lcd_pcd8544_send_string_rom( "w" );
+	pg_delay_sec( 3 );
 	
-	// for( idx = 0; idx < 256; idx++ ) {
-		// mx_pagefill[ (_pg_Uint8)idx ] = 0x08;
-	// }	
-			
-	pg_lcd_pcd8544_send_string_rom( "b" );
-	
-	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK , 0 );
+	//wr page on mx
+	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK , 1 );     //Block #1 is the free first one
 	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR , 0 );
 	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE , 0 );
-	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 0 );
+	pg_external_memory_write_page( buffer_fill );
 	
-	pg_external_memory_erase_sector( );
-	pg_external_memory_write_page( mx_pagefill );
-	pg_lcd_pcd8544_send_string_rom( "w" );
-	
-	pg_delay_sec( 1 );
-	
-	pg_external_memory_read_page( mx_pagebuff );
 	pg_lcd_pcd8544_send_string_rom( "r" );
+	pg_delay_sec( 3 );
+	//rd page from mx
+	pg_external_memory_read_page( buffer_mx );
 	
-	// pg_lcd_pcd8544_set_pos( 0 , 1 );
+	//print buffer_mx
+	idx = 0;			//_pg_Uint8 idx;
+	pg_lcd_pcd8544_set_pos( 0 , 0 );
+	do {
+		pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_mx[ idx ] );
+		idx++;
+	} while ( idx != 0 );
+	pg_lcd_pcd8544_send_string_rom( "m" );
+	pg_delay_sec( 3 );
+	
+	//mod to buffer_mx
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 42 );
+	pg_external_memory_write_byte( 0x18 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 44 );
+	pg_external_memory_write_byte( 0x18 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 46 );
+	pg_external_memory_write_byte( 0x18 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+
+	//rd page
+	pg_external_memory_read_page( buffer_mx );
+
+	//print buffer_mx
+	idx = 0;			//_pg_Uint8 idx;
+	pg_lcd_pcd8544_set_pos( 0 , 0 );
+	do {
+		pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_mx[ idx ] );
+		idx++;
+	} while ( idx != 0 );
+	pg_lcd_pcd8544_send_string_rom( "ooo" );
+	//pg_delay_sec( 2 );
+	
+	
+	
+	
+	
+	
+	
+		// pg_lcd_pcd8544_set_pos( 0 , 1 );
 	// pg_lcd_pcd8544_font_select( pg_font_5x7_std );
 	// pg_lcd_pcd8544_send_string_rom( "f>" );
 	// for( idx = 0; idx < 256; idx++ ) {
-		// pg_lcd_pcd8544_send( PG_PCD8544_DATA , mx_pagefill[ (_pg_Uint8)idx ] );
-		// //pg_lcd_pcd8544_send( PG_PCD8544_DATA , mx_pagebuff[ (_pg_Uint8)idx ] );
+		// pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_fill[ (_pg_Uint8)idx ] );
+		// //pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_mx[ (_pg_Uint8)idx ] );
 		// //pg_lcd_pcd8544_send( PG_PCD8544_DATA , 0xFF ); 
 	// }
 
@@ -60,35 +97,13 @@ void main( void ) {
 	//pg_lcd_pcd8544_font_select( pg_font_5x7_std );
 	//pg_lcd_pcd8544_send_string_rom( "b>" );
 	// for( idx = 0; idx < 255; idx++ ) {
-		// //pg_lcd_pcd8544_send( PG_PCD8544_DATA , mx_pagefill[ (_pg_Uint8)idx ] );
-		// pg_lcd_pcd8544_send( PG_PCD8544_DATA , mx_pagebuff[ (_pg_Uint8)idx ] );
+		// //pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_fill[ (_pg_Uint8)idx ] );
+		// pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_mx[ (_pg_Uint8)idx ] );
 		// //pg_lcd_pcd8544_send( PG_PCD8544_DATA , 0xFF ); 
 	// }
 	
-	//_pg_Uint8 idx;
-	idx = 0;
-	pg_lcd_pcd8544_set_pos( 0 , 0 );
-	do {
-		pg_lcd_pcd8544_send( PG_PCD8544_DATA , mx_pagebuff[ idx ] );
-		idx++;
-	} while ( idx != 0 );
 	
-	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 42 );
-	pg_external_memory_write_byte( 0xAA , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
-	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 44 );
-	pg_external_memory_write_byte( 0xAA , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
-	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 46 );
-	pg_external_memory_write_byte( 0xAA , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
-	pg_delay_sec( 2 );
-	pg_external_memory_read_page( mx_pagebuff );
 	
-	//_pg_Uint8 idx;
-	idx = 0;
-	pg_lcd_pcd8544_set_pos( 0 , 0 );
-	do {
-		pg_lcd_pcd8544_send( PG_PCD8544_DATA , mx_pagebuff[ idx ] );
-		idx++;
-	} while ( idx != 0 );
 	
 	
 	
