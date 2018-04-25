@@ -84,6 +84,12 @@
 //gestire timeout
 //forse bisognerebbe svuotare buffer rx uart  on time out rx
 
+//	idx = 0;	//Just enough only 8bit _pg_Uint8 idx;
+//	do {
+//		buffer_fill[ idx ] = idx;	//0x18;
+//		idx++;
+//	} while ( idx != 0 );
+
 #include "picgim.h"
 
 #if ( PGIM_SSP == PG_ENABLE )

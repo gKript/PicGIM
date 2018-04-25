@@ -40,7 +40,8 @@
 		\attention		This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
-//External memory demo V.2
+
+//External memory demo
 
 #include "picgim_main.h"
 
@@ -52,6 +53,7 @@ void main( void ) {
 
 	_pg_Uint8 idx;
 	_pg_Uint8 xpos = 0;
+	_pg_Uint8 res;
 	
 	pg_initialize();
 
@@ -75,7 +77,7 @@ void main( void ) {
 //	} while ( idx != 0 );
 
 	memset( buffer_fill , ee_val , sizeof(_pg_Uint8) * 256 );	//Check space occupied by memeset regard do-while
-	pg_ee_write( ++ee_val , 0x0010 );
+	res = pg_ee_write( ++ee_val , 0x0010 );
 
 	pg_lcd_pcd8544_font_select( pg_font_5x7_std );
 	pg_lcd_pcd8544_set_pos( xpos , 5 );
@@ -88,7 +90,7 @@ void main( void ) {
 	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK , 1 );     //Block #1 is the free first one
 	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR , 0 );
 	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE , 0 );
-	
+
 	pg_external_memory_read_page( buffer_mx );
 
 	//------------------------------------------------------------------------
@@ -192,5 +194,6 @@ void main( void ) {
 	
 	PG_HALT;
 }
+	
 
-
+	

@@ -87,8 +87,8 @@
 		//---[ End Address Target ]---
 		
 		//---[ System Block Protection ]---
-		// Block #0 reserved for system operation, but more can be reserved
-		#define PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK				0x01	//'0x02' = ( Block locked until #1 included, or rather #0 and #1; First available block #2 )
+		// Block #0 reserved for system operation
+		#define PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK				0x01	//e.i.: '0x03' = ( Block locked until #2 included, or rather #0, #1 and #2; First available block #3 )
 		//---[ End System Block Protection ]---
 		
 		//---[ Prototype ]---
@@ -102,11 +102,19 @@
 		_pg_Uint8		pg_external_memory_erase_block				( void ); 											//Need address of: block.
 		_pg_Uint8		pg_external_memory_erase_sector				( void );											//Need address of: block, sector.
 		_pg_Uint8		pg_external_memory_erase_page				( void );
-		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 * Buff_Pag_To_Write );					//Need address of: block, sector, page.
 		_pg_Uint8		pg_external_memory_read_page				( _pg_Uint8 * Buff_Pag_To_Read );					//Need address of: block, sector, page.
-		_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Byte_To_Write , _pg_Uint8 Verify_W ); 	//Need address of: block, sector, page, byte. Verify_W = PG_YES || PG_NO	
+		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 * Buff_Pag_To_Write );					//Need address of: block, sector, page.
 		_pg_Uint8		pg_external_memory_read_byte				( void );											//Need address of: block, sector, page, byte.
-		_pg_Uint8		pg_external_memory_busy						( _pg_Uint8 Blocking ); // Blocking = PG_BLOCKING || PG_NOT_BLOCKING
+		//_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Byte_To_Write ); 						//Need address of: block, sector, page, byte.	
+		//_pg_Uint8		pg_external_memory_write_byte_auto			( _pg_Uint8 Byte_To_Write ); 						//Need address of: block, sector, page, byte; mem must cleared; auto-increment full address
+		_pg_Uint8		pg_external_memory_overwrite_byte			( _pg_Uint8 Byte_To_Write ); 						//Need address of: block, sector, page, byte. 	
+		//_pg_Uint8		pg_external_memory_read_string				(  );
+		//_pg_Uint8		pg_external_memory_write_string				(  );
+		//_pg_Uint8		pg_external_memory_read_buffer				(  );
+		//_pg_Uint8		pg_external_memory_write_buffer				(  );
+		_pg_Uint8		pg_external_memory_busy						( _pg_Uint8 Blocking ); 							// Blocking = PG_BLOCKING || PG_NOT_BLOCKING
+		//_pg_Uint8		pg_external_memory_get_address				( _pg_Uint8 Target );
+		//_pg_Uint24	pg_external_memory_get_full_address			( void );
 		//---[ End Prototype ]---
 	#endif
 #endif /* _PGIM_EXTERNAL_MEMORY_H_ */
