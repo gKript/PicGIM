@@ -73,7 +73,7 @@
 	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_AD_CONVERTER						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SPI								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EE									PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SERIAL								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE

@@ -4,14 +4,18 @@
 
 _pg_Uint8	buffer_fill[ 256 ];
 _pg_Uint8	buffer_mx[ 256 ];
+_pg_Uint8	ee_val;
 
 void main( void ) {
 	//_pg_Uint16 idx;
 	_pg_Uint8 idx;
+	_pg_Uint8 res;
 	
 	pg_initialize();
 
- 	pg_lcd_pcd8544_clear( 1 );			//white = 0; black = 1
+	ee_val = pg_ee_read( 0x0010 );
+
+	pg_lcd_pcd8544_clear( 1 );			//white = 0; black = 1
 	pg_delay_sec( 1 );
 	pg_lcd_pcd8544_clear( 0 );			//white = 0; black = 1
 	pg_delay_sec( 1 );
@@ -21,29 +25,57 @@ void main( void ) {
 	pg_lcd_pcd8544_send_string_rom( "ok:" );
 
 	//clear buffer_mx
-	idx = 0;			//_pg_Uint8 idx;
-	do {
-		buffer_mx[ idx ] = 0xFF;	//0x18;
-		idx++;
-	} while ( idx != 0 );
+//	idx = 0;			//_pg_Uint8 idx;
+//	do {
+//		buffer_mx[ idx ] = 0xFF;	//0x18;
+//		idx++;
+//	} while ( idx != 0 );
 
-	//fill buffer_fill
-	idx = 0;			//_pg_Uint8 idx;
-	do {
-		buffer_fill[ idx ] = 0xAA;	//0x18;
-		idx++;
-	} while ( idx != 0 );
+//	memset( buffer_mx   , 0xFF , sizeof(_pg_Uint8) * 256 );
+
+//	idx = 0;			//_pg_Uint8 idx;
+//	do {
+//		buffer_fill[ idx ] = idx;	//0x18;
+//		idx++;
+//	} while ( idx != 0 );
+
+	memset( buffer_fill , ee_val , sizeof(_pg_Uint8) * 256 );
+
+	res = pg_ee_write( ++ee_val , 0x0010 );
+//	if (res == PG_NOK)
+//		pg_lcd_pcd8544_send_string_rom( "N" );
+//	else if ( res == PG_OK)
+//		pg_lcd_pcd8544_send_string_rom( "K" );
+//
+//	pg_delay_sec( 1 );
+
+
+
 	pg_lcd_pcd8544_send_string_rom( "w" );
-	pg_delay_sec( 3 );
+	pg_delay_sec( 1 );
 	
 	//wr page on mx
 	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_BLOCK , 1 );     //Block #1 is the free first one
 	pg_external_memory_set_address( PG_EXTERNAL_MEMORY_SET_ADDRESS_SECTOR , 0 );
 	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_PAGE , 0 );
+
+	pg_external_memory_read_page( buffer_mx );
+
+	//print buffer_mx
+	idx = 0;			//_pg_Uint8 idx;
+	pg_lcd_pcd8544_set_pos( 0 , 0 );
+	do {
+		pg_lcd_pcd8544_send( PG_PCD8544_DATA , buffer_mx[ idx ] );
+		idx++;
+	} while ( idx != 0 );
+	pg_lcd_pcd8544_send_string_rom( "S" );
+	pg_delay_sec( 1 );
+
+	pg_external_memory_erase_page();
 	pg_external_memory_write_page( buffer_fill );
 	
 	pg_lcd_pcd8544_send_string_rom( "r" );
-	pg_delay_sec( 3 );
+	pg_delay_sec( 1 );
 	//rd page from mx
 	pg_external_memory_read_page( buffer_mx );
 	
@@ -55,15 +87,16 @@ void main( void ) {
 		idx++;
 	} while ( idx != 0 );
 	pg_lcd_pcd8544_send_string_rom( "m" );
-	pg_delay_sec( 3 );
+	pg_delay_sec( 1 );
 	
 	//mod to buffer_mx
+
 	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 42 );
-	pg_external_memory_write_byte( 0x18 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_write_byte( 0x00 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
 	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 44 );
-	pg_external_memory_write_byte( 0x18 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_write_byte( 0x00 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
 	pg_external_memory_set_address(PG_EXTERNAL_MEMORY_SET_ADDRESS_BYTE , 46 );
-	pg_external_memory_write_byte( 0x18 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
+	pg_external_memory_write_byte( 0x00 , PG_NOT_VERIFY );	//PG_VERIFY || PG_NOT_VERIFY
 
 	//rd page
 	pg_external_memory_read_page( buffer_mx );
@@ -76,10 +109,10 @@ void main( void ) {
 		idx++;
 	} while ( idx != 0 );
 	pg_lcd_pcd8544_send_string_rom( "ooo" );
-	//pg_delay_sec( 2 );
+	pg_delay_sec( 1 );
 	
 	
-	
+	Reset();
 	
 	
 	

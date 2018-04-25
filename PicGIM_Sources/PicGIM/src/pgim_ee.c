@@ -81,13 +81,13 @@
 			EECON2 = 0xAA;
 			EECON1bits.WR = 1;
 			while ( EECON1bits.WR );
-			
+			EECON1bits.WREN = 0;
+
 			#if ( PG_INTERRUPTS == PG_ENABLE )
 				if ( GIE_state )
 					pg_event_set( PG_EVENT_GLOBAL , PG_ENABLE );
 			#endif
-				
-			EECON1bits.WREN = 0;
+
 			if ( pg_ee_read( ee_addy ) == ee_data )
 				return PG_OK;
 			else

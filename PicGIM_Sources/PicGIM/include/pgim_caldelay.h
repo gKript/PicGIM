@@ -70,7 +70,7 @@
 #ifndef _PGIM_CALDELAY_H_
 	#define _PGIM_CALDELAY_H_
 
-//	#include <plib/delays.h>
+	#include <delays.h>
 
 	#if	( PGIM_CAL_DELAY == PG_ENABLE )
 

@@ -198,6 +198,8 @@
 		_pg_Uint8 pg_external_memory_write_page( _pg_Uint8 * Buff_Pag_To_Write ){
 			_pg_Uint16 iwp0;	//do while _pg_Uint8...
 
+//			pg_external_memory_erase_page();
+
 			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
 			
             PG_EXTERNAL_MEMORY_CS = PG_LOW;
@@ -394,13 +396,14 @@
 			pg_external_memory_page_buffer[ Adr_L ] = Byte_To_Write;
 			//free pg_external_memory_page_buffer saving it in system reserved "00 01 xx" (BB SP bb)
 			Adr_H = 0x00;							//set to block #0 ( system reserved );
-			Adr_M = 0x01;							//set to sector #0, page #1
+			Adr_M = 0x10;							//set to sector #0, page #1
+			pg_external_memory_erase_sector();
 			pg_external_memory_write_page( pg_external_memory_page_buffer );
 			Adr_H = save_Adr_H;						//set original address
 			Adr_M = save_Adr_M;
 			pg_external_memory_erase_page( );		//"pg_external_memory_page_buffer" wil be destroied!
 			Adr_H = 0x00;							//set to block #0 ( system reserved );
-			Adr_M = 0x01;							//set to sector #0, page #1
+			Adr_M = 0x10;							//set to sector #0, page #1
 			pg_external_memory_read_page( pg_external_memory_page_buffer );
 			Adr_H = save_Adr_H;						//set original address
 			Adr_M = save_Adr_M;
