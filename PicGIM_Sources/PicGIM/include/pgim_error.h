@@ -66,6 +66,7 @@
 
 		enum _pg_error_modules_enum {
                     PG_ERROR_SPI = 10,
+					PG_ERROR_I2C,
 					PG_ERROR_ADC,
 					PG_ERROR_TIMER,
 					PG_ERROR_PWM,

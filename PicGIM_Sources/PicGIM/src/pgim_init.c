@@ -80,6 +80,10 @@ void pg_initialize( void ) {
 		pg_delay_NinstusCalc( );
 	#endif
 
+	#if ( PGIM_I2C == PG_ENABLE )
+		pg_i2c_init( );
+	#endif
+	
 	#if	( PGIM_PWM == PG_ENABLE )
 		pg_pwm_init( );
 	#endif

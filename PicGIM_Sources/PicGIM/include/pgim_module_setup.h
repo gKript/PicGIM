@@ -157,6 +157,18 @@
 	#endif
 
 	//------------------------------------------------------------------------------
+	//	D e p e n d e n c y   o n   I 2 C
+	//------------------------------------------------------------------------------
+	// #if (  == PG_ENABLE )
+		// #if	( PGIM_I2C == PG_DISABLE )
+			// #warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the I2C module required by other modules
+			// #ifndef		PG_EXIT_ON_ERROR
+				// #define		PG_EXIT_ON_ERROR
+			// #endif
+		// #endif
+	// #endif
+
+	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   L C D - P C D 8 5 4 4
 	//------------------------------------------------------------------------------
 	#if ( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) )
@@ -248,14 +260,22 @@
 	//------------------------------------------------------------------------------
 	#if ( PGIM_BOARD == PG_BOARD_A )
 		#if ( PG_PIN_NUMBER != 28 )
-			#warning	PicGIM >>> ERROR !!! >>> Board A >>> You are using an MCU NOT COMPATIBLE with Board A.
+			#warning	PicGIM >>> ERROR !!! >>> Board A  >>> You are using an MCU NOT COMPATIBLE with Board A.
 			#warning	PicGIM >>> ERROR !!! >>> Continue >>> Board A can only support MCU DIL with 28 Pin.
-			#ifndef		PG_EXIT_ON_ERROR
-				#define		PG_EXIT_ON_ERROR
+			#ifndef	PG_EXIT_ON_ERROR
+				#define	PG_EXIT_ON_ERROR
 			#endif
          #endif
     #endif
 
+	#if ( ( PGIM_SPI == PG_ENABLE ) && ( PGIM_I2C == PG_ENABLE ) )
+		#error	PicGIM >>> ERROR !!! >>> MSSP HW module >>> Hardware conflict.
+		#error	PicGIM >>> ERROR !!! >>> Continue       >>> Currently it is not possible to use both modules at the same time.
+		#ifndef	PG_EXIT_ON_ERROR
+			#define	PG_EXIT_ON_ERROR
+		#endif
+    #endif
+	
 #endif /* _PGIM_MODULE_SETUP_H_ */
  
  

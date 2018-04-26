@@ -1,13 +1,13 @@
 //
-// pgim_mx25.h
+// pgim_external_memory.h
 //
 // PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
+// Version 0.6-x
 // AsYntote - SkyMatrix
 //
 /*#############################################################################
 
-	Copyright (C) 2002 - 2014 
+	Copyright (C) 2002 - 2018 
 	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
 
 	This file is part of PicGim library.
@@ -28,9 +28,9 @@
 
 #############################################################################*/
 
-/*!		\file			pgim_mx25.h
-		\version		0.5-0
-		\date			2002 - 2014
+/*!		\file			pgim_external_memory.h
+		\version		0.6-0
+		\date			2002 - 2018
 		\brief			
 		\details		
 		\author			Danilo Zannoni (AsYntote)
@@ -40,8 +40,8 @@
 		\attention		This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
-#ifndef _PGIM_EXTERNAL_MEMORY_H_
-	#define _PGIM_EXTERNAL_MEMORY_H_
+#ifndef _PGIM_EXTERNAL_MEMORY_SETUP_H_
+	#define _PGIM_EXTERNAL_MEMORY_SETUP_H_
 
 	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
 		#define	PG_MX25L6406										1

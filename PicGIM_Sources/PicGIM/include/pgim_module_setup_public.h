@@ -60,7 +60,7 @@
 	#define	PGIM_SSP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GKH32								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_PRS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_FONT								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_FONT								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		S O F T W A R E   D E V I C E
@@ -72,8 +72,9 @@
 	//================================================================================================================
 	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_AD_CONVERTER						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SPI								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_EE									PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SPI								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_I2C								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SERIAL								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -82,11 +83,11 @@
 	//		H A R D W A R E   E X T E R N A L
 	//================================================================================================================
 	#define PGIM_LCD_HD44780						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_LCD_PCD8544						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_PCD8544						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_RTC_DS1302							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_EXTERNAL_MEMORY					PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_EXTERNAL_MEMORY					PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   G K R I P T

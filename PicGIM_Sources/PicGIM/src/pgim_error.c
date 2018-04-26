@@ -96,6 +96,10 @@
 				strcpy( res , "SPI" );
 				break;
 			}
+			case PG_ERROR_I2C : {
+				strcpy( res , "I2C" );
+				break;
+			}
 			case PG_ERROR_ADC : {
 				strcpy( res , "ADC" );
 				break;

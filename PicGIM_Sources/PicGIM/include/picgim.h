@@ -278,14 +278,32 @@
 	#endif
 	//--------------------------------------------------
 	#if ( PGIM_SPI == PG_ENABLE )
-		#include <spi.h>	                //kmod 2
-//		#include <plib/spi.h>               //kmod
+		#include <spi.h>
 		#include "pgim_spi.h"
 		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
 			#warning	PicGIM >>> SPI module >>> Loaded
 		#endif
 	#endif
 	//---[ END Spi ]---
+	
+	
+	//---[ I2C ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_I2C
+		#define		PGIM_I2C		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_I2C
+		#define		PGIM_I2C		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_I2C == PG_ENABLE )
+		#include <i2c.h>
+		#include "pgim_i2c.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> I2C module >>> Loaded
+		#endif
+	#endif
+	//---[ END I2C ]---
 	
 	
 	//---[ EE ]---
@@ -916,8 +934,8 @@
 	
 	#if defined( PG_EXIT_ON_ERROR ) 
 		#error	PicGIM >>> ERROR !!! >>> Core >>> PicGIM has stopped compiling due to errors in configuration
-	#endif 
+	#endif
 	
-#endif 
+#endif
 
 

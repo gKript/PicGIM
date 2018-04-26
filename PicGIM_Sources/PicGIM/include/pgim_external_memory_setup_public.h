@@ -2,12 +2,12 @@
 // pgim_external_memory_setup_public.h
 //
 // PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
-// Version 0.5-x
+// Version 0.6-x
 // AsYntote - SkyMatrix
 //
 /*#############################################################################
 
-	Copyright (C) 2002 - 2014 
+	Copyright (C) 2002 - 2018 
 	Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
 
 	This file is part of PicGim library.
@@ -29,8 +29,8 @@
 #############################################################################*/
 
 /*!		\file			pgim_external_memory_setup_public.h
-		\version		0.5-0
-		\date			2002 - 2014
+		\version		0.6-0
+		\date			2002 - 2018
 		\brief			
 		\details		
 		\author			Danilo Zannoni (AsYntote)
@@ -67,7 +67,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		#define PGIM_EXTERNAL_MEMORY_ADDRESSING_PROTECTED		PG_YES				//!< Must be: PG_YES || PG_NO	( default = PG_YES )
 		
-
 	#endif
 #endif /* _PGIM_EXTERNAL_MEMORY_SETUP_PUBLIC_H_ */
 

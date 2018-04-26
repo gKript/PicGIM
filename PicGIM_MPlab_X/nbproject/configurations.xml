@@ -51,6 +51,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_font.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_lcd_pcd8544.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_i2c.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f2" displayName="Core_files" projectFiles="true">
@@ -85,6 +86,7 @@
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_prs_setup_public.h</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_font_setup_public.h</itemPath>
           <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory_setup_public.h</itemPath>
+          <itemPath>../PicGIM_Sources/PicGIM/include/pgim_i2c_setup_public.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -133,6 +135,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_ssp.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_lcd_pcd8544.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_external_memory.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_i2c.c</itemPath>
       </logicalFolder>
       <itemPath>../PicGIM_Sources/main.c</itemPath>
     </logicalFolder>
