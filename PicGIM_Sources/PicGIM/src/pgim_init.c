@@ -128,6 +128,10 @@ void pg_initialize( void ) {
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
 		pg_rtc_ds1302_init( );
 	#endif
+	
+	#if ( PGIM_AMG88XX == PG_ENABLE )
+		pg_amg88xx_init( );
+	#endif
 }
 
 

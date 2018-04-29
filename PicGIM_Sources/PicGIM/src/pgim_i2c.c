@@ -46,7 +46,7 @@
 	#if ( PG_PROJECT_STATE == PG_DEBUG )
 		#warning	PicGIM >>> External memory module >>> This file is compiling.
 	#endif
-	
+
 	//---[ Init ]---
 	void pg_i2c_init( void ) {
 		//--------------------------------------------------
@@ -55,61 +55,185 @@
 	}
 	//---[ End Init ]---
 	
+
+	//---[ Write ]---
+	_pg_Uint8 pg_write_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity ) {
+		//--------------------------------------------------
+		// MASTER:	| Start | [A7-A1]=Address + [A0]=0(Write)] |     | [A7-A1]=Reg-Address |     |[D7-D0]=WriteData |     | ... | [D7-D0]=WriteData |     | Stop |
+		// SLAVE :	|       |                                  | Ack |                     | Ack |                  | Ack | ... |                   | Ack |
+		//--------------------------------------------------
+		// WriteI2C returns 0 if the write was successful
+		//--------------------------------------------------
+		_pg_Uint8	idx;
+		
+		IdleI2C();                        					//Waiting for free bus
+		StartI2C();                        					//Send START signal
+		IdleI2C();                         					//Waiting for end operation
+		if ( WriteI2C( ( DeviceAddress << 1 ) & 0xfe ) ) {  	//Send MSB-7-Bit device-address and LSB-1-Bit set to '0' for write command; 
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_WR , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		IdleI2C();                         					//Waiting for end operation
+		if ( WriteI2C( RegisterAddress ) ) { 	 				//Send register address; 
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_REGISTER_ADDRESS , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		for ( idx = 0; idx < Quantity; idx++ ) {
+			IdleI2C();                         				//Waiting for end operation
+			if ( WriteI2C( *( WriteData + idx ) ) ) {			//Send "quantity" byte; 
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DATA , PG_ERROR_ERROR );
+				#endif
+				return ( PG_NOK );
+			}
+		}
+		IdleI2C();                         					//Waiting for end operation
+		StopI2C();                        					//Send STOP signal
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+		#endif
+		return ( PG_OK );
+	}
+	//---[ Write End ]---
+	
+	
+	//---[ Read ]---
+	_pg_Uint8 pg_read_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity ) {
+		//--------------------------------------------------
+		// MASTER:	| Start | [A7-A1]=Dev-Address + [A0]=0(Write)] |     | [A7-A1]=Reg-Address |     | Re-Start | [A7-A1]=Dev-Address + [A0]=1(Read)] |                       | Nack | Stop |
+		// SLAVE :	|       |                                      | Ack |                     | Ack |          |                                     | Ack |[D7-D0]=ReadData |
+		//--------------------------------------------------
+		// WriteI2C returns 0 if the write was successful
+		//--------------------------------------------------
+		_pg_Uint8	idx;
+		
+		IdleI2C();                        					//Waiting for free bus
+		StartI2C();                       					//Send START signal
+		IdleI2C();                         					//Waiting for end operation
+		if ( WriteI2C( ( DeviceAddress << 1 ) & 0xfe ) ) {	//Send MSB-7-Bit device-address and LSB-1-Bit set to '0' for write command; 
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_WR , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		IdleI2C();                         					//Waiting for end operation
+		if ( WriteI2C( RegisterAddress ) ) { 	 				//Send register address; 
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_REGISTER_ADDRESS , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		IdleI2C();                         					//Waiting for end operation
+		RestartI2C( );									//Send ReStart signal
+		if ( WriteI2C( ( DeviceAddress << 1 ) | 0x01 ) ) { 	//Send MSB-7-Bit device-address and LSB-1-Bit set to '0' for write command;
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_RD , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		for ( idx = 0; idx < Quantity; idx++ ) {
+			if ( DataRdyI2C() ) {							//1 if there is data in the SSP buffer
+				*( ReadData + idx ) = ReadI2C( );   	 		//Read byte from device
+				if ( Quantity - idx++ ) {
+					AckI2C();								//Send ACK signal to device	
+				}
+			}
+		}
+		NotAckI2C();                      					//Send NACK signal
+		StopI2C();                         					//Send STOP signal
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+		#endif
+		return ( PG_OK );
+	}
+	//---[ Read End ]---
+	
 	
 	//---[ Open ]---
-	void pg_i2c_open( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed ) {
+	_pg_Uint8 pg_i2c_open( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed ) {
 		//--------------------------------------------------
 		switch( Port_Number ) {
 			#ifndef	PGIM_P18F97J60
 				case PG_I2C_0: {
 					if ( ! SSPCON1bits.SSPEN ) {
 						OpenI2C( Mode, Speed );	//OpenI2C( unsigned char Mode, unsigned char slew );
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-						#endif
+						if ( ! SSPCON1bits.SSPEN ) {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_FAILED , PG_ERROR_OK );
+							#endif
+							return ( PG_NOK );
+						}
+						else {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+							#endif
+							return ( PG_OK );
+						}
 					}
 					else {
-						Nop();
 						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_ALREADY_OPEN , PG_ERROR_WARNING );
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_ALREADY , PG_ERROR_WARNING );
 						#endif
+						return ( PG_NOK );
 					}
 				}
 			#else
 				case PG_I2C_0:  {
 					if ( ! SSP1CON1bits.SSPEN ) {
 						OpenI2C1( Mode, Speed );
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-						#endif
+						if ( ! SSP1CON1bits.SSPEN ) {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_FAILED , PG_ERROR_OK );
+							#endif
+							return ( PG_NOK );
+						}
+						else {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+							#endif
+							return ( PG_OK );
+						}
 					}
 					else {
-						Nop();
 						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_I2C_ALREADY_OPEN , PG_ERROR_WARNING );
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_ALREADY , PG_ERROR_WARNING );
 						#endif
+						return ( PG_NOK );
 					}
 				}
 				case PG_I2C_1: {
 					if ( ! SSP2CON1bits.SSPEN ) {
 						OpenI2C2( Mode, Speed );
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-						#endif
+						if ( ! SSP2CON1bits.SSPEN ) {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_FAILED , PG_ERROR_OK );
+							#endif
+							return ( PG_NOK );
+						}
+						else {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+							#endif
+							return ( PG_OK );
+						}
 					}
 					else {
-						Nop();
 						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_I2C_ALREADY_OPEN , PG_ERROR_WARNING );
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_ALREADY , PG_ERROR_WARNING );
 						#endif
+						return ( PG_NOK );
 					}
 				}
 			#endif
 			default: {
-				Nop();
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR , PG_ERROR_ERROR );
 				#endif
+				return ( PG_NOK );
 			}
 		}
 	}
@@ -117,35 +241,62 @@
 
 
 	//---[ Re-Open ]---
-	void pg_i2c_reopen( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed ) {
+	_pg_Uint8 pg_i2c_reopen( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed ) {
 		pg_i2c_close( Port_Number );
 		switch( Port_Number ) {
 			#ifndef	PGIM_P18F97J60
 				case PG_I2C_0: {
 					OpenI2C( Mode, Speed );	//OpenI2C( unsigned char Mode, unsigned char slew );
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-					#endif
+					if ( ! SSPCON1bits.SSPEN ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_FAILED , PG_ERROR_OK );
+						#endif
+						return ( PG_NOK );
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+						#endif
+						return ( PG_OK );
+					}
 				}
 			#else
 				case PG_I2C_0: {
 					OpenI2C1( Mode, Speed );
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-					#endif
+					if ( ! SSP1CON1bits.SSPEN ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_FAILED , PG_ERROR_OK );
+						#endif
+						return ( PG_NOK );
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+						#endif
+						return ( PG_OK );
+					}
 				}
 				case PG_I2C_1: {
 					OpenI2C2( Mode, Speed );
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-					#endif
+					if ( ! SSP2CON1bits.SSPEN ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_OPEN_FAILED , PG_ERROR_OK );
+						#endif
+						return ( PG_NOK );
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+						#endif
+						return ( PG_OK );
+					}
 				}
 			#endif
 			default: {
-				Nop();
 				#if PG_ERROR_IS_ENABLE
 					pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR , PG_ERROR_ERROR );
 				#endif
+				return ( PG_NOK );
 			}
 		}
 	}
@@ -153,60 +304,85 @@
 
 
 	//---[ Close ]---
-	void	pg_i2c_close( _pg_Uint8 Port_Number ) {
+	_pg_Uint8	pg_i2c_close( _pg_Uint8 Port_Number ) {
 		switch( Port_Number ) {
 			#ifndef	PGIM_P18F97J60
 				case PG_I2C_0: {
 					if ( SSPCON1bits.SSPEN ) {
 						CloseI2C( );
-						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-						#endif
+						if ( SSPCON1bits.SSPEN ) {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_CLOSE_FAILED , PG_ERROR_OK );
+							#endif
+							return ( PG_NOK );
+						}
+						else {
+							#if PG_ERROR_IS_ENABLE
+								pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+							#endif
+							return ( PG_OK );
+						}
 					}
 					else {
-						Nop();
 						#if PG_ERROR_IS_ENABLE
-							pg_error_set( PG_ERROR_I2C , PG_I2C_ALREADY_CLOSE , PG_ERROR_WARNING );
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_CLOSE_ALREADY , PG_ERROR_WARNING );
 						#endif
+						return ( PG_NOK );
 					}
 				}
 			#else	
 			case PG_I2C_0: {
 				if ( SSP1CON1bits.SSPEN ) {
 					CloseI2C( );
-					Nop();
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-					#endif
+					if ( SSP1CON1bits.SSPEN ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_CLOSE_FAILED , PG_ERROR_OK );
+						#endif
+						return ( PG_NOK );
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+						#endif
+						return ( PG_OK );
+					}
 				}
 				else {
-					Nop();
 					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_I2C_ALREADY_CLOSE , PG_ERROR_WARNING );
+						pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_CLOSE_ALREADY , PG_ERROR_WARNING );
 					#endif
+					return ( PG_NOK );
 				}
 			}
 			case PG_I2C_1: {
 				if ( SSP2CON1bits.SSPEN ) {
 					CloseI2C1( );
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-					#endif
+					if ( SSP2CON1bits.SSPEN ) {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_CLOSE_FAILED , PG_ERROR_OK );
+						#endif
+						return ( PG_NOK );
+					}
+					else {
+						#if PG_ERROR_IS_ENABLE
+							pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+						#endif
+						return ( PG_OK );
+					}
 				}
 				else {
-					return PG_I2C_ALREADY_CLOSE;
-					Nop();
 					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_I2C , PG_I2C_ALREADY_CLOSE , PG_ERROR_WARNING );
+						pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_CLOSE_ALREADY , PG_ERROR_WARNING );
 					#endif
+					return PG_I2C_ALREADY_CLOSE;
 				}
 			}
 			#endif
 			default: {
-				Nop();
 				#if PG_ERROR_IS_ENABLE
 				    pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR , PG_ERROR_ERROR );
 				#endif
+				return ( PG_NOK );
 			}
 		}
 	}

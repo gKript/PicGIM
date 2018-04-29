@@ -89,6 +89,7 @@
 	#include "pgim_pwm_setup_public.h"
 	#include "pgim_serial_setup_public.h"
 	#include "pgim_external_memory_setup_public.h"
+	#include "pgim_amg88xx_setup_public.h"
 	#include "pgim_sensor_setup_public.h"
 	#include "pgim_gcp_setup_public.h"
 	#include "pgim_ssp_setup_public.h"
@@ -159,14 +160,14 @@
 	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   I 2 C
 	//------------------------------------------------------------------------------
-	// #if (  == PG_ENABLE )
-		// #if	( PGIM_I2C == PG_DISABLE )
-			// #warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the I2C module required by other modules
-			// #ifndef		PG_EXIT_ON_ERROR
-				// #define		PG_EXIT_ON_ERROR
-			// #endif
-		// #endif
-	// #endif
+	#if ( PGIM_AMG88XX == PG_ENABLE )
+		#if	( PGIM_I2C == PG_DISABLE )
+			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the I2C module required by other modules
+			#ifndef		PG_EXIT_ON_ERROR
+				#define		PG_EXIT_ON_ERROR
+			#endif
+		#endif
+	#endif
 
 	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   L C D - P C D 8 5 4 4

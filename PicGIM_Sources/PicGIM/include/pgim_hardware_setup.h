@@ -69,7 +69,7 @@
 			#endif
 		#endif
 	#endif
-#endif /* _PGIM_HARDWARE_SETUP_H_ */
+#endif
 
 
 //-------------------------------------------------------------------------------
@@ -96,6 +96,6 @@
 			#endif
 		#endif
 	#endif
-#endif
+#endif	/* _PGIM_HARDWARE_SETUP_H_ */
 
 

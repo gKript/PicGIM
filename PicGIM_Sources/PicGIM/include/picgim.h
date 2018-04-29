@@ -927,7 +927,25 @@
 	#endif
 	//---[ END FONT ]---
 
-
+	
+	//---[ AMG88XX ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_AMG88XX
+		#define		PGIM_AMG88XX		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_AMG88XX
+		#define		PGIM_AMG88XX		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_AMG88XX == PG_ENABLE )
+		#include "pgim_amg88xx.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> AMG88XX module >>> Loaded
+		#endif
+	#endif
+	//---[ END AMG88XX ]---
+	
+	
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T
 	//------------------------------------------------------------------------------

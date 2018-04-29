@@ -54,7 +54,9 @@
 	//		H A R D W A R E   C O N F I G   |   L E D - E R R O R
 	//------------------------------------------------------------------------------
 	#if ( ( PGIM_ERROR == PG_ENABLE ) && ( PG_ERROR_LED_PRESENT == PG_YES ) )
+		// LAT
 		#define	PG_ERROR_LED						L_B0				//!< Must be: <pin-lat-name>
+		// TRIS
 		#define	PG_ERROR_LED_TRIS					T_B0				//!< Must be: <pin-tris-name>
 	#endif
 
@@ -62,6 +64,7 @@
 	//		H A R D W A R E   C O N F I G   |   L C D - H D 4 4 7 8 0
 	//------------------------------------------------------------------------------
 	#if ( PGIM_LCD_HD44780 == PG_ENABLE )
+		// LAT
 		#define PG_LCD_HD44780_RS					L_D4				//!< Must be: <pin-lat-name>
 		#define PG_LCD_HD44780_RW_PRESENT			PG_YES				//!< Must be: PG_YES || PG_NO
 		#define PG_LCD_HD44780_RW					L_D5				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
@@ -85,7 +88,7 @@
 		#define PG_LCD_HD44780_BL_2					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_BL_3_PRESENT			PG_NO				//!< Must be: PG_YES || PG_NO
 		#define PG_LCD_HD44780_BL_3					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used.
-		
+		// TRIS		
 		#define PG_LCD_HD44780_RS_TRIS				T_D4				//!< Must be: <pin-tris-name>
 		#define PG_LCD_HD44780_RW_TRIS				T_D5				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_EN_0_TRIS			T_D6				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
@@ -100,7 +103,7 @@
 		#define PG_LCD_HD44780_BL_1_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_BL_2_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		#define PG_LCD_HD44780_BL_3_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
-		
+		// PORT
 		#define PG_LCD_HD44780_DATA_0_PORT			P_D0				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
 		#define PG_LCD_HD44780_DATA_1_PORT			P_D1				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
 		#define PG_LCD_HD44780_DATA_2_PORT			P_D2				//!< Must be: <pin-port-name> || PG_MISSING if not used. (lcd DB4)
@@ -112,30 +115,27 @@
 	//------------------------------------------------------------------------------
 	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
 		#define	PG_LCD_PCD8544_VIDEO_MEMORY			PG_NO
-
+		// LAT
 		#define	PG_LCD_PCD8544_BACKLIGHT			L_B2
-//		#define PG_LCD_PCD8544_VDD				L_
+		#define PG_LCD_PCD8544_VDD					PG_MISSING			//!< Must be: <pin-lat-name> || PG_MISSING if not used
 		#define PG_LCD_PCD8544_DC					L_C0
 		#define PG_LCD_PCD8544_RST					L_C1
 		#define PG_LCD_PCD8544_CE 					L_C2
-	
+		// TRIS
 		#define	PG_LCD_PCD8544_BACKLIGHT_TRIS		T_B2
-//		#define PG_LCD_PCD8544_VDD_TRIS			T_
+		#define PG_LCD_PCD8544_VDD_TRIS				PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used
 		#define PG_LCD_PCD8544_DC_TRIS				T_C0
 		#define PG_LCD_PCD8544_RST_TRIS				T_C1
 		#define PG_LCD_PCD8544_CE_TRIS				T_C2
-
-		// #define	PG_SPI_SDI_TRIS					T_C7
-		// #define	PG_SPI_SDO_TRIS					T_C5
-		// #define	PG_SPI_SCK_TRIS					T_C3
-		// #define	PG_SPI_SS_TRIS					T_A5
 	#endif
 
 	//------------------------------------------------------------------------------
 	//		H A R D W A R E   C O N F I G   |   B U Z Z E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_BUZZER == PG_ENABLE )
+		// LAT
 		#define	PG_BUZZER_PIN						L_C2				//!< Must be: <pin-lat-name>
+		//TRIS
 		#define	PG_BUZZER_PIN_TRIS					T_C2				//!< Must be: <pin-tris-name>
 	#endif
 	
@@ -143,10 +143,11 @@
 	//		H A R D W A R E   C O N F I G   |   E N C O D E R
 	//------------------------------------------------------------------------------
 	#if ( PGIM_ENCODER == PG_ENABLE )
+		// PORT
 		#define	PG_ENCODER_STEP						P_B0				//!< Must be: <pin-port-name>
 		#define	PG_ENCODER_DIR						P_B5				//!< Must be: <pin-port-name>
 		#define	PG_ENCODER_SW						P_B6				//!< Must be: <pin-port-name>
-
+		// TRIS
 		#define	PG_ENCODER_STEP_TRIS				T_B0				//!< Must be: <pin-tris-name>
 		#define	PG_ENCODER_DIR_TRIS					T_B5				//!< Must be: <pin-tris-name>
 		#define	PG_ENCODER_SW_TRIS					T_B6				//!< Must be: <pin-tris-name>
@@ -156,7 +157,9 @@
 	//		H A R D W A R E   C O N F I G   |   E X T E R N A L   M E M O R Y
 	//------------------------------------------------------------------------------
 	#if ( PGIM_EXTERNAL_MEMORY == PG_ENABLE )
+		// LAT
 		#define	PG_EXTERNAL_MEMORY_CS				L_B3				//!< Must be: <pin-lat-name>
+		// TRIS
 		#define	PG_EXTERNAL_MEMORY_CS_TRIS			T_B3				//!< Must be: <pin-tris-name>
 	#endif
 
@@ -164,21 +167,37 @@
 	//		H A R D W A R E   C O N F I G   |   R T C   D S 1 3 0 2
 	//------------------------------------------------------------------------------
 	#if ( PGIM_RTC_DS1302 == PG_ENABLE )
-		#define	PG_RTC_DS1302_CS 					L_B0
-		#define PG_RTC_DS1302_CS_TRIS				T_B0
+		// LAT
+		#define	PG_RTC_DS1302_CS 					L_B0				//!< Must be: <pin-lat-name>
+		// TRIS
+		#define PG_RTC_DS1302_CS_TRIS				T_B0				//!< Must be: <pin-tris-name>
 	#endif
 
 	//------------------------------------------------------------------------------
 	//		H A R D W A R E   C O N F I G   |   3 W I R E
 	//------------------------------------------------------------------------------
 	#if ( PGIM_3WIRE == PG_ENABLE )
-		#define PG_3WIRE_IO							L_B1
-		#define PG_3WIRE_CK 						L_B2
-		
-		#define PG_3WIRE_IO_TRIS					T_B1
-		#define PG_3WIRE_CK_TRIS					T_B2
-		
-		#define PG_3WIRE_IO_PORT					P_B1
+		// LAT
+		#define PG_3WIRE_IO							L_B1				//!< Must be: <pin-lat-name>
+		#define PG_3WIRE_CK 						L_B2				//!< Must be: <pin-lat-name>
+		// TRIS		
+		#define PG_3WIRE_IO_TRIS					T_B1				//!< Must be: <pin-tris-name>
+		#define PG_3WIRE_CK_TRIS					T_B2				//!< Must be: <pin-tris-name>
+		// PORT
+		#define PG_3WIRE_IO_PORT					P_B1				//!< Must be: <pin-port-name>
+	#endif
+	
+	//------------------------------------------------------------------------------
+	//		H A R D W A R E   C O N F I G   |   A M G 8 8 X X
+	//------------------------------------------------------------------------------
+	#if ( PGIM_AMG88XX == PG_ENABLE )
+		// LAT
+		#define PG_AMG88XX_ADDRESS					L_B4				//!< Must be: <pin-lat-name>
+		// TRIS
+		#define PG_AMG88XX_ADDRESS_TRIS				T_B4				//!< Must be: <pin-tris-name>
+		#define PG_AMG88XX_INTERRUPT_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		// PORT
+		#define PG_AMG88XX_INTERRUPT				PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
 	#endif
 	
 #endif /* _PGIM_HARDWARE_SETUP_PUBLIC_H_ */

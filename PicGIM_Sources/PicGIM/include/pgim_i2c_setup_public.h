@@ -53,14 +53,14 @@
 		//-------------------------------------------------------------------------------------------------------------
 		//		D E V I C E S      A D D R E S S E S
 		//-------------------------------------------------------------------------------------------------------------
-		#define PGIM_I2C_ADDRESS_DEVICE_00						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_01						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_02						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_03						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_04						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_05						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_06						0x00				//!< Device byte address
-		#define PGIM_I2C_ADDRESS_DEVICE_07						0x00				//!< Device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_00						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_01						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_02						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_03						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_04						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_05						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_06						0x00				//!< User's device byte address
+		#define PGIM_I2C_ADDRESS_DEVICE_07						0x00				//!< User's device byte address
 
 	#endif
 #endif /* _PGIM_I2C_SETUP_PUBLIC_H_ */

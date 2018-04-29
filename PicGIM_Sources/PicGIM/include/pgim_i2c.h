@@ -46,32 +46,42 @@
 	#if ( PGIM_I2C == PG_ENABLE )
 	
 		//---[ Error ]---
-		#define	PG_I2C_ERROR_ALREADY_OPEN		10					//!< The return value indicates that the I2C port is already open.
-		#define	PG_I2C_ERROR_ALREADY_CLOSE		11					//!< The return value indicates that the I2C port is already closed.
-		#define	PG_I2C_ERROR					-1					//!< The return value indicates a general ERROR.
+		#define	PG_I2C_ERROR							-1			//!< The return value indicates a general ERROR.
+		#define	PG_I2C_ERROR_OPEN_FAILED				10			//!< The return value indicates a failure on opening i2c port.
+		#define	PG_I2C_ERROR_OPEN_ALREADY				11			//!< The return value indicates that the I2C port is already open.
+		#define	PG_I2C_ERROR_CLOSE_FAILED				12			//!< The return value indicates a failure on closing i2c port.
+		#define	PG_I2C_ERROR_CLOSE_ALREADY				13			//!< The return value indicates that the I2C port is already closed.
+		#define	PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_WR	21			//!< The return value indicates a failure on sending device address in write mode to the device
+		#define	PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_RD	22			//!< The return value indicates a failure on sending device address in read mode to the device
+		#define	PG_I2C_ERROR_WRITE_REGISTER_ADDRESS		23			//!< The return value indicates a failure on sending register address to the device
+		#define	PG_I2C_ERROR_WRITE_DATA					24			//!< The return value indicates a failure on sending data byte to the device
 		//---[ End Error ]---
 
 		//---[ Port ]---
-		#define	PG_I2C_0						0					//!< Port I2C 0 selection
-//		#define	PG_I2C_1						1					//!< Port I2C 1 selection
+		#define	PG_I2C_0								0			//!< Port I2C 0 selection
+		#define	PG_I2C_1								1			//!< Port I2C 1 selection
 		//---[ End Port ]---
 		
 		//---[ Mode ]---
-		#define	PG_I2C_MODE_MASTER				MASTER				//!< Operating mode as master.
-//		#define	PG_I2C_MODE_SLAVE_7				SLAVE_7				//!< Operating mode as slave with #7bit device addressing.
-//		#define	PG_I2C_MODE_SLAVE_10			SLAVE_10			//!< Operating mode as slave with #10bit device addressing.
+		#define	PG_I2C_MODE_MASTER						MASTER		//!< Operating mode as master.
+//		#define	PG_I2C_MODE_SLAVE_7						SLAVE_7		//!< Operating mode as slave with #7bit device addressing.
+//		#define	PG_I2C_MODE_SLAVE_10					SLAVE_10	//!< Operating mode as slave with #10bit device addressing.
 		//---[ End Mode ]---
 		
 		//---[ Speed ]---
-		#define	PG_I2C_SPEED_100K				SLEW_OFF			//!< Slew rate disabled for 100 kHz mode.
-		#define	PG_I2C_SPEED_400K				SLEW_ON				//!< Slew rate enabled for 400 kHz mode.
+		#define	PG_I2C_SPEED_100K						SLEW_OFF	//!< Slew rate disabled for 100 kHz mode.
+		#define	PG_I2C_SPEED_400K						SLEW_ON		//!< Slew rate enabled for 400 kHz mode.
 		//---[ End Speed ]---
 		
 		//---[ Prototype ]---
-		void	pg_i2c_open						( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
-		void	pg_i2c_reopen					( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
-		void	pg_i2c_close					( _pg_Uint8 Port_Number );
+		void		pg_i2c_init							( void );
+		_pg_Uint8	pg_i2c_open							( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
+		_pg_Uint8	pg_i2c_reopen						( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
+		_pg_Uint8	pg_i2c_close						( _pg_Uint8 Port_Number );
+		_pg_Uint8	pg_read_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity );
+		_pg_Uint8	pg_write_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity );
 		//---[ End Prototype ]---
+
 	#endif
 #endif /* _PGIM_I2C_H_ */
 	

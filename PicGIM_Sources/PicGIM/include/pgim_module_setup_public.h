@@ -88,6 +88,7 @@
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_RTC_DS1302							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_EXTERNAL_MEMORY					PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_AMG88XX							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   G K R I P T
