@@ -57,7 +57,7 @@
 	
 
 	//---[ Write ]---
-	_pg_Uint8 pg_write_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity ) {
+	_pg_Uint8 pg_i2c_write_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity ) {
 		//--------------------------------------------------
 		// MASTER:	| Start | [A7-A1]=Address + [A0]=0(Write)] |     | [A7-A1]=Reg-Address |     |[D7-D0]=WriteData |     | ... | [D7-D0]=WriteData |     | Stop |
 		// SLAVE :	|       |                                  | Ack |                     | Ack |                  | Ack | ... |                   | Ack |
@@ -102,7 +102,7 @@
 	
 	
 	//---[ Read ]---
-	_pg_Uint8 pg_read_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity ) {
+	_pg_Uint8 pg_i2c_read_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity ) {
 		//--------------------------------------------------
 		// MASTER:	| Start | [A7-A1]=Dev-Address + [A0]=0(Write)] |     | [A7-A1]=Reg-Address |     | Re-Start | [A7-A1]=Dev-Address + [A0]=1(Read)] |                       | Nack | Stop |
 		// SLAVE :	|       |                                      | Ack |                     | Ack |          |                                     | Ack |[D7-D0]=ReadData |

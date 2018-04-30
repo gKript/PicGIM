@@ -46,13 +46,20 @@
 	#if ( PGIM_AMG88XX == PG_ENABLE )
 	
 		//-------------------------------------------------------------------------------------------------------------
-		//		D E V I C E      A D D R E S S
+		//		D E V I C E      E N A B L E
+		//-------------------------------------------------------------------------------------------------------------
+		#define	PGIM_AMG88XX_DEVICE_01_ENABLE					PG_YES		//!< Must be: PG_YES || PG_NO
+		#define	PGIM_AMG88XX_DEVICE_02_ENABLE					PG_YES		//!< Must be: PG_YES || PG_NO
+
+		//-------------------------------------------------------------------------------------------------------------
+		//		D E V I C E      A D D R E S S E S
 		//-------------------------------------------------------------------------------------------------------------
 		// Warning!		These addresses are assigned by the device manufacturer and should not be changed,
 		//				but they remain available if needed.
 		//-------------------------------------------------------------------------------------------------------------
 		#define	PGIM_AMG88XX_ADDRESS_01							0x68		//!< Must be: 1101000 ( 0x68 ) || 1101001 ( 0x69 )
 		#define	PGIM_AMG88XX_ADDRESS_02							0x69		//!< Must be: 1101000 ( 0x68 ) || 1101001 ( 0x69 )
+		
 		
 	#endif
 #endif /* _PGIM_AMG88XX_SETUP_PUBLIC_H_ */

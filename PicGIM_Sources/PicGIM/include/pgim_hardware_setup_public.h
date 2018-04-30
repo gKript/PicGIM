@@ -191,13 +191,12 @@
 	//		H A R D W A R E   C O N F I G   |   A M G 8 8 X X
 	//------------------------------------------------------------------------------
 	#if ( PGIM_AMG88XX == PG_ENABLE )
-		// LAT
-		#define PG_AMG88XX_ADDRESS					L_B4				//!< Must be: <pin-lat-name>
 		// TRIS
-		#define PG_AMG88XX_ADDRESS_TRIS				T_B4				//!< Must be: <pin-tris-name>
-		#define PG_AMG88XX_INTERRUPT_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_AMG88XX_IRQ_DEVICE1_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_AMG88XX_IRQ_DEVICE2_TRIS			PG_MISSING			//!< Must be: <pin-tris-name> || PG_MISSING if not used.
 		// PORT
-		#define PG_AMG88XX_INTERRUPT				PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
+		#define PG_AMG88XX_IRQ_DEVICE1				PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
+		#define PG_AMG88XX_IRQ_DEVICE2				PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
 	#endif
 	
 #endif /* _PGIM_HARDWARE_SETUP_PUBLIC_H_ */

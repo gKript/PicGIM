@@ -78,8 +78,8 @@
 		_pg_Uint8	pg_i2c_open							( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
 		_pg_Uint8	pg_i2c_reopen						( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
 		_pg_Uint8	pg_i2c_close						( _pg_Uint8 Port_Number );
-		_pg_Uint8	pg_read_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity );
-		_pg_Uint8	pg_write_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity );
+		_pg_Uint8	pg_i2c_read_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity );
+		_pg_Uint8	pg_i2c_write_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity );
 		//---[ End Prototype ]---
 
 	#endif
