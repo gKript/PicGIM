@@ -138,7 +138,7 @@
 	//---[ Reset ]---
 	_pg_Uint8	pg_amg88xx_reset( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
-		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_RESET_ADDRESS , RegisterValue , 1 ) == PG_NOK ) {
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_RESET_ADDRESS , RegisterValue , NULL , PG_NONE ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_GENERAL_REGISTER_RESET , PG_ERROR_ERROR );
 			#endif
@@ -155,7 +155,7 @@
 	//---[ Mode ]---
 	_pg_Uint8	pg_amg88xx_mode( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
-		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_POWER_CONTROL_ADDRESS , RegisterValue , 1 ) == PG_NOK ) {
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_POWER_CONTROL_ADDRESS , RegisterValue , NULL , PG_NONE ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_GENERAL_REGISTER_MODE , PG_ERROR_ERROR );
 			#endif
@@ -172,7 +172,7 @@
 	//---[ FrameRate ]---
 	_pg_Uint8	pg_amg88xx_framerate( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
-		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_FRAMERATE_ADDRESS , RegisterValue , 1 ) == PG_NOK ) {
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_FRAMERATE_ADDRESS , RegisterValue , NULL , PG_NONE ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_GENERAL_REGISTER_FRAMERATE , PG_ERROR_ERROR );
 			#endif
@@ -189,7 +189,7 @@
 	//---[ Interrupt ]---
 	_pg_Uint8	pg_amg88xx_interrupt_mode( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
-		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_INTERRUPT_ADDRESS , RegisterValue , 1 ) == PG_NOK ) {
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_INTERRUPT_ADDRESS , RegisterValue , NULL , PG_NONE ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_GENERAL_REGISTER_INTERRUPT_MODE , PG_ERROR_ERROR );
 			#endif
@@ -203,7 +203,7 @@
 	
 	_pg_Uint8	pg_amg88xx_interrupt_enable( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
-		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_INTERRUPT_ADDRESS , RegisterValue , 1 ) == PG_NOK ) {
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_INTERRUPT_ADDRESS , RegisterValue , NULL , PG_NONE ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_GENERAL_REGISTER_INTERRUPT_ENABLE , PG_ERROR_ERROR );
 			#endif
@@ -240,9 +240,10 @@
 	
 	
 	//---[ Status Check ]---
-	_pg_Uint8	pg_amg88xx_status_check( _pg_Uint8 DeviceAddress , _pg_Uint8 Flag ) {
+	_pg_Uint8	pg_amg88xx_status_check( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
 		_pg_Uint8	status_check;
+		
 		if ( pg_i2c_read_register( DeviceAddress , PG_AMG88XX_REGISTER_STATUS_ADDRESS , &status_check , 1 ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_STATUS_READ , PG_ERROR_ERROR );
@@ -250,7 +251,7 @@
 			return ( PG_NOK );
 		}
 		else {
-			switch ( Flag ) {
+			switch ( RegisterValue ) {
 				case PG_AMG88XX_REGISTER_STATUS_GLOBAL : {
 					if ( status_check & PG_AMG88XX_REGISTER_STATUS_GLOBAL )
 						return ( PG_AMG88XX_REGISTER_STATUS_GLOBAL );
@@ -278,10 +279,12 @@
 	}
 	//---[ End Status Check ]---
 	
+	
 	//---[ Status Clear ]---
-	_pg_Uint8	pg_amg88xx_status_clear( _pg_Uint8 DeviceAddress , _pg_Uint8 Flag ) {
+	_pg_Uint8	pg_amg88xx_status_clear( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterValue ) {
 		//--------------------------------------------------
 		_pg_Uint8	status_clear;
+		
 		if ( pg_i2c_read_register( DeviceAddress , PG_AMG88XX_REGISTER_STATUS_ADDRESS , &status_clear , 1 ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_STATUS_READ , PG_ERROR_ERROR );
@@ -289,7 +292,7 @@
 			return ( PG_NOK );
 		}
 		else {
-			switch ( Flag ) {
+			switch ( RegisterValue ) {
 				case PG_AMG88XX_REGISTER_STATUS_GLOBAL : {
 					status_clear = PG_AMG88XX_REGISTER_STATUS_GLOBAL;
 				}
@@ -310,7 +313,7 @@
 				}
 			}
 		}
-		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_STATUS_ADDRESS , &status_clear , 1 ) == PG_NOK ) {
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_STATUS_ADDRESS , status_clear , NULL , PG_NONE ) == PG_NOK ) {
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_STATUS_WRITE , PG_ERROR_ERROR );
 			#endif
@@ -322,6 +325,140 @@
 		return ( PG_OK );
 	}
 	//---[ End Status Clear ]---
+	
+	
+	//---[ Average ]---
+	_pg_Uint8	pg_amg88xx_average( _pg_Uint8 DeviceAddress , _pg_Uint8 Flag ) {
+		//--------------------------------------------------
+		_pg_Uint8	t_value;
+		
+		if ( Flag == PG_ON ) {
+			t_value = PG_AMG88XX_REGISTER_AVERAGE_ENABLE;
+		}
+		else {
+			t_value = PG_AMG88XX_REGISTER_AVERAGE_DISABLE;
+		}
+		if ( pg_i2c_write_register( DeviceAddress , PG_AMG88XX_REGISTER_AVERAGE_ADDRESS , t_value , NULL , PG_NONE ) == PG_NOK ) {
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_AVERAGE_SET , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+		#endif
+		return ( PG_OK );
+	}
+	//---[ End Average ]---
+	
+	
+	//---[ Interrupt Level ]---
+	_pg_Uint8	pg_amg88xx_interrupt_level( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterSelect , _pg_Uint16 RegisterValue ) {
+		//--------------------------------------------------
+		//	RegisterValue = 12[bit] Upper:[----0000] Lower[0000.0000]
+		//--------------------------------------------------
+		_pg_Uint8	t_register_low;
+		_pg_Uint8	t_register_high;
+		_pg_Uint8	t_value_low;
+		_pg_Uint8	t_value_high;
+		
+		switch ( RegisterSelect ) {
+			case PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_SELECT_LIMIT_LOWER : {
+				t_register_low = PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_ADDRESS_LOWER_L;
+				t_register_high = PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_ADDRESS_LOWER_H;
+			}
+			case PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_SELECT_LIMIT_UPPER : {
+				t_register_low = PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_ADDRESS_UPPER_L;
+				t_register_high = PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_ADDRESS_UPPER_H;
+			}
+			case PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_SELECT_LIMIT_HYSTERESIS : {
+				t_register_low = PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_ADDRESS_HYSTERESIS_L;
+				t_register_high = PG_AMG88XX_REGISTER_INTERRUPT_LEVEL_ADDRESS_HYSTERESIS_H;
+			}
+			default : {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_I2C , PG_AMG88XX_ERROR_INTERRUPT_LEVEL_REGISTER_WRONG , PG_ERROR_OK );
+				#endif
+				return ( PG_NOK );
+			}
+		}	
+		t_value_low = (_pg_Uint8)( RegisterValue & 0x00FF );
+		t_value_high = ( (_pg_Uint8)( RegisterValue & 0x0F00 ) >> 8 );
+		if ( pg_i2c_write_register( DeviceAddress , t_register_low , t_value_low , NULL , PG_NONE ) == PG_NOK ) {
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_INTERRUPT_LEVEL_SET_LOW , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		if ( pg_i2c_write_register( DeviceAddress , t_register_high , t_value_high , NULL , PG_NONE ) == PG_NOK ) {
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_INTERRUPT_LEVEL_SET_HIGH , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+		#endif
+		return ( PG_OK );
+	}
+	//---[ End yInterrupt Level ]---
+	
+	
+	//---[ Interrupt Table ]---
+	_pg_Uint8	pg_amg88xx_interrupt_pixel_set( _pg_Uint8 DeviceAddress , _pg_Uint8 Position_X , _pg_Uint8 Position_Y ) {
+		//--------------------------------------------------
+		_pg_Uint8	t_register;
+		_pg_Uint8	t_value;
+		
+		t_value = 0x01;
+		t_value = t_register << Position_X;
+		t_register = PG_AMG88XX_REGISTER_INTERRUPT_TABLE_ADDRESS_INT0 + Position_Y;
+		
+		if ( pg_i2c_write_register( DeviceAddress , t_register , t_value , NULL , PG_NONE ) == PG_NOK ) {
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_INTERRUPT_PIXEL_SET_FAILED , PG_ERROR_ERROR );
+			#endif
+			return ( PG_NOK );
+		}
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+		#endif
+		return ( PG_OK );
+	}
+	//---[ End Interrupt Table ]---
+	
+	
+	//---[ Pixel Map ]---
+	_pg_Uint8	pg_amg88xx_pixel_map_read( _pg_Uint8 DeviceAddress , _pg_Uint16 * PixelMap ) {
+		//--------------------------------------------------
+		_pg_Uint8	idx;
+		_pg_Uint8	value_8;
+		_pg_Uint16	value_16;
+		
+		for ( idx = 0; idx < PG_AMG88XX_MAP_SIZE; ) {	//First byte read: pixel #0, byte L
+			if ( pg_i2c_read_register( DeviceAddress , ( PG_AMG88XX_REGISTER_MAP_ADDRESS_T01L + idx ) , &value_8 , PG_AMG88XX_MAP_SIZE ) == PG_NOK ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_MAP_READ_LOW_BYTE_FAILED , PG_ERROR_ERROR );
+				#endif
+				return ( PG_NOK );
+			}
+			idx++;
+			value_16 = (_pg_Uint16)value_8;
+			if ( pg_i2c_read_register( DeviceAddress , ( PG_AMG88XX_REGISTER_MAP_ADDRESS_T01L + idx ) , &value_8 , PG_AMG88XX_MAP_SIZE ) == PG_NOK ) {
+				#if PG_ERROR_IS_ENABLE
+					pg_error_set( PG_ERROR_AMG88XX , PG_AMG88XX_ERROR_MAP_READ_HIGH_BYTE_FAILED , PG_ERROR_ERROR );
+				#endif
+				return ( PG_NOK );
+			}
+			*( PixelMap + ( idx / 2 ) ) = value_16 + ( ( (_pg_Uint16)value_8 ) << 8 );
+			idx++;
+		}
+		#if PG_ERROR_IS_ENABLE
+			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+		#endif
+		return ( PG_OK );
+	}
+	//---[ End Pixel Map ]---
 #endif
 
 

@@ -57,7 +57,7 @@
 	
 
 	//---[ Write ]---
-	_pg_Uint8 pg_i2c_write_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity ) {
+	_pg_Uint8 pg_i2c_write_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 WriteByte , _pg_Uint8 * WriteData , _pg_Uint8 Length ) {
 		//--------------------------------------------------
 		// MASTER:	| Start | [A7-A1]=Address + [A0]=0(Write)] |     | [A7-A1]=Reg-Address |     |[D7-D0]=WriteData |     | ... | [D7-D0]=WriteData |     | Stop |
 		// SLAVE :	|       |                                  | Ack |                     | Ack |                  | Ack | ... |                   | Ack |
@@ -69,26 +69,37 @@
 		IdleI2C();                        					//Waiting for free bus
 		StartI2C();                        					//Send START signal
 		IdleI2C();                         					//Waiting for end operation
-		if ( WriteI2C( ( DeviceAddress << 1 ) & 0xfe ) ) {  	//Send MSB-7-Bit device-address and LSB-1-Bit set to '0' for write command; 
+		if ( WriteI2C( ( DeviceAddress << 1 ) & 0xfe ) ) {  //Send MSB-7-Bit device-address and LSB-1-Bit set to '0' for write command; 
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_WR , PG_ERROR_ERROR );
 			#endif
 			return ( PG_NOK );
 		}
 		IdleI2C();                         					//Waiting for end operation
-		if ( WriteI2C( RegisterAddress ) ) { 	 				//Send register address; 
+		if ( WriteI2C( RegisterAddress ) ) { 	 			//Send register address; 
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_REGISTER_ADDRESS , PG_ERROR_ERROR );
 			#endif
 			return ( PG_NOK );
 		}
-		for ( idx = 0; idx < Quantity; idx++ ) {
-			IdleI2C();                         				//Waiting for end operation
-			if ( WriteI2C( *( WriteData + idx ) ) ) {			//Send "quantity" byte; 
+		if ( WriteData == NULL ) {
+			IdleI2C();
+			if ( WriteI2C( WriteByte ) ) {		//Send "Length" byte; 
 				#if PG_ERROR_IS_ENABLE
-					pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DATA , PG_ERROR_ERROR );
+					pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DATA_BYTE , PG_ERROR_ERROR );
 				#endif
 				return ( PG_NOK );
+			 }
+		}
+		else {
+			for ( idx = 0; idx < Length; idx++ ) {
+				IdleI2C();                         				//Waiting for end operation
+				if ( WriteI2C( *( WriteData + idx ) ) ) {		//Send "Length" byte; 
+					#if PG_ERROR_IS_ENABLE
+						pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DATA_BUFFER , PG_ERROR_ERROR );
+					#endif
+					return ( PG_NOK );
+				}
 			}
 		}
 		IdleI2C();                         					//Waiting for end operation
@@ -102,7 +113,7 @@
 	
 	
 	//---[ Read ]---
-	_pg_Uint8 pg_i2c_read_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity ) {
+	_pg_Uint8 pg_i2c_read_register( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Length ) {
 		//--------------------------------------------------
 		// MASTER:	| Start | [A7-A1]=Dev-Address + [A0]=0(Write)] |     | [A7-A1]=Reg-Address |     | Re-Start | [A7-A1]=Dev-Address + [A0]=1(Read)] |                       | Nack | Stop |
 		// SLAVE :	|       |                                      | Ack |                     | Ack |          |                                     | Ack |[D7-D0]=ReadData |
@@ -110,6 +121,7 @@
 		// WriteI2C returns 0 if the write was successful
 		//--------------------------------------------------
 		_pg_Uint8	idx;
+		_pg_Uint8	t_data;
 		
 		IdleI2C();                        					//Waiting for free bus
 		StartI2C();                       					//Send START signal
@@ -121,34 +133,46 @@
 			return ( PG_NOK );
 		}
 		IdleI2C();                         					//Waiting for end operation
-		if ( WriteI2C( RegisterAddress ) ) { 	 				//Send register address; 
+		if ( WriteI2C( RegisterAddress ) ) { 	 			//Send register address; 
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_REGISTER_ADDRESS , PG_ERROR_ERROR );
 			#endif
 			return ( PG_NOK );
 		}
 		IdleI2C();                         					//Waiting for end operation
-		RestartI2C( );									//Send ReStart signal
+		RestartI2C( );										//Send ReStart signal
 		if ( WriteI2C( ( DeviceAddress << 1 ) | 0x01 ) ) { 	//Send MSB-7-Bit device-address and LSB-1-Bit set to '0' for write command;
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_I2C , PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_RD , PG_ERROR_ERROR );
 			#endif
 			return ( PG_NOK );
 		}
-		for ( idx = 0; idx < Quantity; idx++ ) {
-			if ( DataRdyI2C() ) {							//1 if there is data in the SSP buffer
-				*( ReadData + idx ) = ReadI2C( );   	 		//Read byte from device
-				if ( Quantity - idx++ ) {
-					AckI2C();								//Send ACK signal to device	
+		if ( ReadData == NULL ) {
+			if ( DataRdyI2C() ) {
+				t_data = ReadI2C( );
+			}
+			StopI2C();                         					//Send STOP signal
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+			#endif
+			return ( t_data );
+		} 
+		else {
+			for ( idx = 0; idx < Length; idx++ ) {
+				if ( DataRdyI2C() ) {							//1 if there is data in the SSP buffer
+					*( ReadData + idx ) = ReadI2C( );   	 	//Read byte from device
+					if ( Length - idx++ ) {
+						AckI2C();								//Send ACK signal to device	
+					}
 				}
 			}
+			NotAckI2C();                      					//Send NACK signal
+			StopI2C();                         					//Send STOP signal
+			#if PG_ERROR_IS_ENABLE
+				pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
+			#endif
+			return ( PG_OK );
 		}
-		NotAckI2C();                      					//Send NACK signal
-		StopI2C();                         					//Send STOP signal
-		#if PG_ERROR_IS_ENABLE
-			pg_error_set( PG_ERROR_I2C , PG_OK , PG_ERROR_OK );
-		#endif
-		return ( PG_OK );
 	}
 	//---[ Read End ]---
 	

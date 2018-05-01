@@ -54,7 +54,8 @@
 		#define	PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_WR	21			//!< The return value indicates a failure on sending device address in write mode to the device
 		#define	PG_I2C_ERROR_WRITE_DEVICE_ADDRESS_RD	22			//!< The return value indicates a failure on sending device address in read mode to the device
 		#define	PG_I2C_ERROR_WRITE_REGISTER_ADDRESS		23			//!< The return value indicates a failure on sending register address to the device
-		#define	PG_I2C_ERROR_WRITE_DATA					24			//!< The return value indicates a failure on sending data byte to the device
+		#define	PG_I2C_ERROR_WRITE_DATA_BYTE			24			//!< The return value indicates a failure on sending data byte to the device
+		#define	PG_I2C_ERROR_WRITE_DATA_BUFFER			25			//!< The return value indicates a failure on sending data buffer to the device
 		//---[ End Error ]---
 
 		//---[ Port ]---
@@ -78,10 +79,21 @@
 		_pg_Uint8	pg_i2c_open							( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
 		_pg_Uint8	pg_i2c_reopen						( _pg_Uint8 Port_Number , _pg_Uint8 Mode , _pg_Uint8 Speed );
 		_pg_Uint8	pg_i2c_close						( _pg_Uint8 Port_Number );
-		_pg_Uint8	pg_i2c_read_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Quantity );
-		_pg_Uint8	pg_i2c_write_register					( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * WriteData , _pg_Uint8 Quantity );
-		//---[ End Prototype ]---
+		
+		/*!
+		 *  \brief This Function returns register value if ReadData pointer is set to NULL,
+		 *  \brief otherwise, fills pointed buffer and return PG_OK.
+		 */
+		_pg_Uint8	pg_i2c_read_register				( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 * ReadData , _pg_Uint8 Length );
 
+		/*!
+		 *  \brief This Function, if WriteData pointer is set to NULL, writes WriteByte into register and returns PG_OK,
+		 *  \brief otherwise, fills registers sequentially with Length bytes pointed by WriteData and return PG_OK.
+		 *	\brief If buffer pointer is used, the value of WriteByte is not taken into account.
+		 */
+		_pg_Uint8	pg_i2c_write_register				( _pg_Uint8 DeviceAddress , _pg_Uint8 RegisterAddress , _pg_Uint8 WriteByte , _pg_Uint8 * WriteData , _pg_Uint8 Length );
+		//---[ End Prototype ]---
+	
 	#endif
 #endif /* _PGIM_I2C_H_ */
 	
