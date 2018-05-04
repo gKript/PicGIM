@@ -63,7 +63,7 @@
 			#define PGIM_EXTERNAL_MEMORY_CHIP_SIZE					8388608				// [ Byte ]; 67108864[ bit ]
 			#define PGIM_EXTERNAL_MEMORY_BLOCK_SIZE					65536				// [ Byte ]
 			#define PGIM_EXTERNAL_MEMORY_SECTOR_SIZE				4096				// [ Byte ]
-			#define PGIM_EXTERNAL_MEMORY_PAGE_SIZE					256					// [ Byte ]
+			#define PGIM_EXTERNAL_MEMORY_PAGE_SIZE					256					// [ Byte ]	//!< Currently. this value can not change.
 			//---[ End Device Parameter ]---
 
 			//---[ Command ]---
@@ -103,11 +103,11 @@
 		_pg_Uint8		pg_external_memory_erase_sector				( void );											//Need address of: block, sector.
 		_pg_Uint8		pg_external_memory_erase_page				( void );
 		_pg_Uint8		pg_external_memory_read_page				( _pg_Uint8 * Buff_Pag_To_Read );					//Need address of: block, sector, page.
-		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 * Buff_Pag_To_Write );					//Need address of: block, sector, page.
+		_pg_Uint8		pg_external_memory_write_page				( _pg_Uint8 * Buff_Pag_To_Write );	//AUTOERASE_NO	//Need address of: block, sector, page.
 		_pg_Uint8		pg_external_memory_read_byte				( void );											//Need address of: block, sector, page, byte.
-		//_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Byte_To_Write ); 						//Need address of: block, sector, page, byte.	
+		_pg_Uint8		pg_external_memory_write_byte				( _pg_Uint8 Byte_To_Write ); 		//AUTOERASE_NO	//Need address of: block, sector, page, byte.	
 		//_pg_Uint8		pg_external_memory_write_byte_auto			( _pg_Uint8 Byte_To_Write ); 						//Need address of: block, sector, page, byte; mem must cleared; auto-increment full address
-		_pg_Uint8		pg_external_memory_overwrite_byte			( _pg_Uint8 Byte_To_Write ); 						//Need address of: block, sector, page, byte. 	
+		_pg_Uint8		pg_external_memory_overwrite_byte			( _pg_Uint8 Byte_To_Write ); 		//AUTOERASE_YES	//Need address of: block, sector, page, byte. 	
 		//_pg_Uint8		pg_external_memory_read_string				(  );
 		//_pg_Uint8		pg_external_memory_write_string				(  );
 		//_pg_Uint8		pg_external_memory_read_buffer				(  );

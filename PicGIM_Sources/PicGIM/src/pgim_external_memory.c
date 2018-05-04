@@ -1,4 +1,4 @@
-//
+		//
 // pgim_external_memory.c
 //
 // PicGim  -  Generic Information Manager for Pic 18 / 24 family uControllers 
@@ -48,37 +48,60 @@
 	#endif
 
 	//----------------------------------------------------------------------------
-	/* =============================
-	   Memory Map - MX25L4005:
-	   =============================
-		  8      16   16     256
-		  BLK    SEC  PAG    Byte
-		  8bit   4bit 4bit   8bit
-	   -----------------------------	
-	   0000.0000|0000|0000|0000.0000
-	   -----------------------------
-		   8    * 16 * 16 *   256   * 8[bit] = 4.194.304	= 4[Mb]		//ok
-	   -----------------------------
-	   #1[BLK] = #16[SEC]
-	   #1[SEC] = #16[PAG]
-	   #1[PAG] = #256[Byte]
-	*/	
+	//	WARNING!	Block '0' is reserved by the system for internal operations.
+	//				However, it is possible to have access to all the complete
+	//				memory, but some features will no longer be available.
+	//				See define PGIM_EXTERNAL_MEMORY_ADDRESSING_PROTECTED in
+	//				"pgim_external_memory_setup_public.h" file.
 	//----------------------------------------------------------------------------
-	/* =============================
-	   Memory Map - MX25L6406:
-	   =============================
-		  128    16   16     256
-		  BLK    SEC  PAG    Byte
-		  8bit   4bit 4bit   8bit
-	   -----------------------------	
-	   0000.0000|0000|0000|0000.0000
-	   -----------------------------
-		  128   * 16 * 16 *   256   * 8[bit] = 67.108.864 = 64[Mb]	//ok
-	   -----------------------------
-	   #1[BLK] = #16[SEC]
-	   #1[SEC] = #16[PAG]
-	   #1[PAG] = #256[Byte]
-	*/	
+	// All operations are performed at the current address;
+	// it is initialized as follows:
+	// Block	= 0x01		( as PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK define in
+	//						  pgim_external_memory.h file, but it must be modified
+	//						  only if one knows what one is doing )
+	// Sector	= 0x00
+	// Page		= 0x00
+	// Byte		= 0x00
+	// It is possible to modify it using the dedicated functions.
+	//----------------------------------------------------------------------------
+	// Before any write operation, memory must be erased;
+	// those functions are tagged with AUTOERASE_NO.
+	// Some functions do not need, because erase is internally executed;
+	// yhose functions are tagged with AUTOERASE-YES.
+	//----------------------------------------------------------------------------
+	//
+	// =============================
+	// Memory Map - MX25L4005:
+	// =============================
+	//    8      16   16     256
+	//    BLK    SEC  PAG    Byte
+	//    8bit   4bit 4bit   8bit
+	// -----------------------------	
+	// 0000.0000|0000|0000|0000.0000
+	// -----------------------------
+	//     8    * 16 * 16 *   256   * 8[bit] = 4.194.304	= 4[Mb]		//ok
+	// -----------------------------
+	// #1[BLK] = #16[SEC]
+	// #1[SEC] = #16[PAG]
+	// #1[PAG] = #256[Byte]
+	//
+	//----------------------------------------------------------------------------
+	//
+	// =============================
+	// Memory Map - MX25L6406:
+	// =============================
+	//    128    16   16     256
+	//    BLK    SEC  PAG    Byte
+	//    8bit   4bit 4bit   8bit
+	// -----------------------------	
+	// 0000.0000|0000|0000|0000.0000
+	// -----------------------------
+	//    128   * 16 * 16 *   256   * 8[bit] = 67.108.864 = 64[Mb]	//ok
+	// -----------------------------
+	// #1[BLK] = #16[SEC]
+	// #1[SEC] = #16[PAG]
+	// #1[PAG] = #256[Byte]
+	//
 	//----------------------------------------------------------------------------
 	//	Adr_H = Block  Address;
 	//	Adr_M = Sector + Page Address;
@@ -110,7 +133,7 @@
 			PG_SPI_SDI_TRIS					= PG_IN;
 			//PG_SPI_SS_TRIS				= PG_IN;
 			
-			Adr_H = PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK;	//First available Block
+			Adr_H = PGIM_EXTERNAL_MEMORY_FIRST_FREE_BLOCK;	//First available block for user's operations
 			Adr_M = 0x00;									//Sector + Page
 			Adr_L = 0x00;									//Byte
 		}
@@ -193,6 +216,8 @@
 		
 		//---[ Write Page ]---
 		_pg_Uint8 pg_external_memory_write_page( _pg_Uint8 * Buff_Pag_To_Write ) {
+			//--------------------------------------------------
+			//	AUTOERASE_NO
 			//--------------------------------------------------
 			//	Before write, page must be erased by:
 			//	pg_external_memory_erase_page, or
@@ -372,9 +397,42 @@
 		//---[ END Erase Chip  ]---
 
 		
+		//---[ Write Page ]---
+		_pg_Uint8 pg_external_memory_write_byte( _pg_Uint8 Byte_To_Write ) {
+			//--------------------------------------------------
+			//	AUTOERASE_NO
+			//--------------------------------------------------
+			//	Before write, memory must be erased by:
+			//	pg_external_memory_erase_page, or
+			//	pg_external_memory_erase_sector, or
+			//	pg_external_memory_erase_chip !
+			//--------------------------------------------------
+			pg_spi_open( PG_SPI_0, PG_SPI_MASTER_FOSC_64, MODE_00, SMPEND );
+			
+            PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_ENABLE );
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			PG_EXTERNAL_MEMORY_CS = PG_LOW;
+			putcSPI( PG_EXTERNAL_MEMORY_COMMAND_WRITE_PAGE );
+			putcSPI( Adr_H );
+			putcSPI( Adr_M );
+			putcSPI( Adr_L );
+			putcSPI( Byte_To_Write );
+			PG_EXTERNAL_MEMORY_CS = PG_HIGH;
+			
+			pg_external_memory_busy( PG_BLOCKING );
+			pg_spi_close( PG_SPI_0 );
+			return( PG_DONE );
+		}
+		//---[ END Write Page ]---
+
+
 		//---[ Write Byte ]---	
 		#if ( PGIM_EXTERNAL_MEMORY_ADDRESSING_PROTECTED == PG_YES )
 			_pg_Uint8 pg_external_memory_overwrite_byte( _pg_Uint8 Byte_To_Write ) {
+				//--------------------------------------------------
+				//	AUTOERASE_YES
 				//--------------------------------------------------
 				//	pg_external_memory_page_buffer is shared,
 				//	then it must be released free before return

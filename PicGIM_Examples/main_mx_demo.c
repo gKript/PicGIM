@@ -43,6 +43,12 @@
 
 //External memory demo
 
+// This demonstrative example fills the buffer buffer_fill with a value read
+// from the eeprom of the pic, writes it to mx memory, reads it from mx memory,
+// modifies it and rewrites it. Finally it rewrites the incremented value in the
+// eeprom and starts the cycle again. The buffer resulting from each operation
+// is printed on the PCD8544 display.
+
 #include "picgim_main.h"
 
 _pg_Uint8	buffer_fill[ 256 ];
