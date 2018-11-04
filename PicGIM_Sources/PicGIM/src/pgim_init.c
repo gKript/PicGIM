@@ -49,7 +49,6 @@
 		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
-
 #include "picgim.h"
 
 #if PG_PROJECT_STATE == PG_DEBUG
@@ -57,7 +56,12 @@
 #endif
 
 void pg_initialize( void ) {
-
+	
+	#if ( PG_POWER_GOOD_DELAY > 0 )
+		#warning	PicGIM >>> Message >>> Power good delay set to PG_POWER_GOOD_DELAY [ms].
+		pg_delay_msec( PG_POWER_GOOD_DELAY );
+	#endif
+	
 	#if ( PGIM_BOARD == PG_BOARD_A )
 		pg_board_a_init();
 	#endif
@@ -131,6 +135,10 @@ void pg_initialize( void ) {
 	
 	#if ( PGIM_AMG88XX == PG_ENABLE )
 		pg_amg88xx_init( );
+	#endif
+	
+	#if ( PGIM_DDS_AD9851 == PG_ENABLE )
+		pg_dds_ad9851_init( );
 	#endif
 }
 

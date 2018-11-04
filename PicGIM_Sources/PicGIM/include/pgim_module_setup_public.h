@@ -60,7 +60,7 @@
 	#define	PGIM_SSP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GKH32								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_PRS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_FONT								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_FONT								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		S O F T W A R E   D E V I C E
@@ -72,7 +72,7 @@
 	//================================================================================================================
 	#define PGIM_EVENTS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_AD_CONVERTER						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SPI								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SPI								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_I2C								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -83,12 +83,13 @@
 	//		H A R D W A R E   E X T E R N A L
 	//================================================================================================================
 	#define PGIM_LCD_HD44780						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_LCD_PCD8544						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_PCD8544						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_RTC_DS1302							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_EXTERNAL_MEMORY					PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_EXTERNAL_MEMORY					PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_AMG88XX							PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_DDS_AD9851							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   G K R I P T
@@ -219,9 +220,9 @@
 	#endif
 
 	//----------------------------------------------------------------------------------------------------------------
-	//		S O F T W A R E   C O N F I G   |	L C D  - P C D 8 5 4 4 
+	//		S O F T W A R E   C O N F I G   |	L C D _ P C D 8 5 4 4 
 	//----------------------------------------------------------------------------------------------------------------
-	
+	#if ( PGIM_LCD_PCD8544 == PG_ENABLE )
 		#define	PG_PCD8544_DATA			    		1
 		#define	PG_PCD8544_COMMAND			    	0
 		
@@ -232,6 +233,7 @@
 		#define	PG_PCD8544_EXT_TEMP_CONTROL			0x04
 		#define	PG_PCD8544_EXT_BIAS_CONTROL			0x10
 		#define	PG_PCD8544_EXT_SET_VOP		    	0x80
+	#endif
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//		S O F T W A R E   C O N F I G   |   B U Z Z E R
@@ -263,6 +265,17 @@
 	//		S O F T W A R E   C O N F I G   |   E N C O D E R
 	//----------------------------------------------------------------------------------------------------------------
 	//Nothing to configure here.
+
+	//-------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   D D S _ A D 9 8 5 1 
+	//-------------------------------------------------------------------------------------------------------------
+	#if ( PGIM_DDS_AD9851 == PG_ENABLE )
+		#define	PG_DDS_AD9851_DATA_MODE			PG_SERIAL			//!< Must be: PG_SERIAL || PG_PARALLEL
+		#define PG_DDS_AD9851_CLOCK_REF			29999989.0			//!< External oscillator value [Hz] (without multiplier)
+		#define PG_DDS_AD9851_MULTIPLIER		PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE (Internal 6X PLL)
+		#define PG_DDS_AD9851_INIT_FREQ			0.0					//!< Init frequency [Hz] (default is '0.0')
+		//#define PG_DDS_AD9851_INIT_PHASE		0					//!< Init phase (default is '0')
+	#endif
 
 #endif 
 

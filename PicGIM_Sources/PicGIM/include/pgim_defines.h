@@ -121,6 +121,9 @@
 
 	#define PG_READ							1				/*!	An alternative way to say "logic value 1"	*/
 	#define PG_WRITE						0				/*!	An alternative way to say "logic value 0"	*/
+	
+	#define PG_FORWARD						0				/*!	An alternative way to say "logic value 0"	*/
+	#define PG_REVERSE						1				/*!	An alternative way to say "logic value 1"	*/
 
 	#define PG_INCLUDE						1				/*!	It indicates that an object is included		*/
 	#define PG_EXCLUDE						0				/*!	It indicates that an object is removed		*/
@@ -182,8 +185,11 @@
 	#define	PG_DEGREES_CELSIUS				1				/*!	Indicates the use of Celsius scale */		//(generic define, not dedicated to the sensor module)
 	#define	PG_DEGREES_FAHRENHEIT			2				/*!	Indicates the use of Fahrenheit scale */	//(generic define, not dedicated to the sensor module)
 	
-	#define	PG_MSB_FIRST					1				/*! It indicates whether the byte is read or written starting from the most significant bit MSB */
 	#define	PG_LSB_FIRST					0				/*! It indicates whether the byte is read or written starting from the least significant bit LSB */
+	#define	PG_MSB_FIRST					1				/*! It indicates whether the byte is read or written starting from the most significant bit MSB */
+
+	#define	PG_PARALLEL						0				/*! It indicates whether the item is parallel */
+	#define	PG_SERIAL						1				/*! It indicates whether the item is serial */
 
 	//------------------------------------------------------------------------------
 	//      B O A R D   D E F I N E S

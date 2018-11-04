@@ -53,6 +53,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_external_memory.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_i2c.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_amg88xx.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_dds_ad9851.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f2" displayName="Core_files" projectFiles="true">
@@ -139,6 +140,7 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_external_memory.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_i2c.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_amg88xx.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_dds_ad9851.c</itemPath>
       </logicalFolder>
       <itemPath>../PicGIM_Sources/main.c</itemPath>
     </logicalFolder>

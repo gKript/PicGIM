@@ -130,7 +130,8 @@
 			PG_GCP,
 			PG_SSP,
 			PG_GKH32,
-			PG_PRS
+			PG_PRS,
+			PG_AD9851
 		};
 */
 		#include "pgim_error.h"
@@ -946,6 +947,34 @@
 	//---[ END AMG88XX ]---
 	
 	
+	//---[ DDS AD9851 ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_DDS_AD9851
+		#define		PGIM_DDS_AD9851		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_DDS_AD9851
+		#define		PGIM_DDS_AD9851		PG_DISABLE
+	#endif
+	#if ( PGIM_DDS_AD9851 == PG_ENABLE )
+		#include "pgim_dds_ad9851.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> DDS AD9851 module >>> Loaded
+		#endif
+		//PG_MISSING cannot be compared by .bits
+		// #if ( PG_DDS_AD9851_DATA_MODE	== PG_PARALLEL )
+			// #if ( PG_DDS_AD9851_DATABUS_TRIS == PG_MISSING ) || ( PG_DDS_AD9851_DATABUS == PG_MISSING ) 
+				// #warning PicGIM >>> DDS AD9851 module >>> Wrong configuration in parallel mode.
+			// #endif
+		// #endif
+		// #if ( PG_DDS_AD9851_DATA_MODE == PG_SERIAL ) 
+			// #if ( PG_DDS_AD9851_SERIAL_DATA_TRIS == PG_MISSING )  ||  ( PG_DDS_AD9851_SERIAL_DATA == PG_MISSING )
+				// #warning PicGIM >>> DDS AD9851 module >>> Wrong configuration in serial mode.
+			// #endif
+		// #endif
+	#endif
+	//---[ END DDS AD9851 ]---
+
+
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T
 	//------------------------------------------------------------------------------

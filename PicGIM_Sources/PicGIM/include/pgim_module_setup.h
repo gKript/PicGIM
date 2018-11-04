@@ -94,6 +94,7 @@
 	#include "pgim_gcp_setup_public.h"
 	#include "pgim_ssp_setup_public.h"
 	#include "pgim_prs_setup_public.h"
+	//#include "pgim_dds_ad9851_setup_public.h"
 	//
     #include "pgim_hardware_setup.h"
 
@@ -116,14 +117,17 @@
 	//------------------------------------------------------------------------------
 	//	D e p e n d e n c y   o n   D E L A Y
 	//------------------------------------------------------------------------------
-	#if ( PGIM_LCD_HD44780 == PG_ENABLE ) || ( PGIM_LCD_PCD8544 == PG_ENABLE ) || \
-		( PGIM_LCD_9340 == PG_ENABLE ) || ( PGIM_BUZZER == PG_ENABLE ) || \
-		( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( ( PGIM_SERIAL_DEBUG_TO_PIN == PG_ENABLE ) || \
-		( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_HD44780 == PG_ENABLE ) ) ) || \
-		( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) || ( ( PGIM_ERROR == PG_ENABLE ) && ( PG_ERROR_LED_PRESENT == PG_YES ) ) || \
+	#if ( PGIM_LCD_HD44780 == PG_ENABLE ) || \
+		( PGIM_LCD_PCD8544 == PG_ENABLE ) || \
+		( PGIM_LCD_9340 == PG_ENABLE ) || \
+		( PGIM_BUZZER == PG_ENABLE ) || \
+		( ( PGIM_SERIAL == PG_ENABLE ) && ( PGIM_SERIAL_BAUDRATE_MODE != PG_MANUAL ) && ( ( PGIM_SERIAL_DEBUG_TO_PIN == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_PCD8544 == PG_ENABLE ) || ( PGIM_SERIAL_DEBUG_TO_LCD_HD44780 == PG_ENABLE ) ) ) || \
+		( PGIM_EXTERNAL_MEMORY == PG_ENABLE ) || \
+		( ( PGIM_ERROR == PG_ENABLE ) && ( PG_ERROR_LED_PRESENT == PG_YES ) ) || \
 		( PGIM_TIMER == PG_ENABLE ) || \
-		( PGIM_ENCODER == PG_ENABLE )
-
+		( PGIM_ENCODER == PG_ENABLE ) || \
+		( PGIM_DDS_AD9851 == PG_ENABLE )
+	
 		#if ( PGIM_CAL_DELAY == PG_DISABLE )
 			#warning	PicGIM >>> ERROR !!! >>> Core >>> You must enable the DELAY module required by other modules
 			#ifndef		PG_EXIT_ON_ERROR

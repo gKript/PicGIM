@@ -198,6 +198,24 @@
 		#define PG_AMG88XX_IRQ_DEVICE1				PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
 		#define PG_AMG88XX_IRQ_DEVICE2				PG_MISSING			//!< Must be: <pin-port-name> || PG_MISSING if not used.
 	#endif
+
+	//------------------------------------------------------------------------------
+	//		H A R D W A R E   C O N F I G   |   A D 9 8 5 1
+	//------------------------------------------------------------------------------
+	#if ( PGIM_DDS_AD9851 == PG_ENABLE )
+		// TRIS
+		#define PG_DDS_AD9851_SERIAL_DATA_TRIS		T_D7				//!< Must be: <pin-tris-name> || PG_MISSING if not used.	//Used in serial data mode to control AD9851 pin#25 "D7"
+		#define PG_DDS_AD9851_WORD_CLOCK_TRIS		T_B1				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_DDS_AD9851_FREQ_UPDATE_TRIS		T_B2				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_DDS_AD9851_RESET_TRIS			T_B3				//!< Must be: <pin-tris-name> || PG_MISSING if not used.
+		#define PG_DDS_AD9851_DATABUS_TRIS			PG_MISSING			//!< Must be: <port-tris-name> || PG_MISSING if not used.	//Used in parallel data mode.
+		// LAT
+		#define PG_DDS_AD9851_SERIAL_DATA			L_D7				//!< Must be: <pin-lat-name> || PG_MISSING if not used.		//Used in serial data mode to control AD9851 pin#25 "D7"
+		#define PG_DDS_AD9851_WORD_CLOCK			L_B1				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_DDS_AD9851_FREQ_UPDATE			L_B2				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_DDS_AD9851_RESET					L_B3				//!< Must be: <pin-lat-name> || PG_MISSING if not used.
+		#define PG_DDS_AD9851_DATABUS				PG_MISSING			//!< Must be: <port-lat-name> || PG_MISSING if not used.	//Used in parallel data mode.
+	#endif
 	
 #endif /* _PGIM_HARDWARE_SETUP_PUBLIC_H_ */
 

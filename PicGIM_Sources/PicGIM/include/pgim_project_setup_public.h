@@ -64,6 +64,9 @@
 	#define PG_USER_SUPPLY_VOLT					5000					//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [mV].
 	#define PG_USER_SUPPLY_BATTERY				PG_NO					//!< Must be: PG_YES  ||  PG_NO
 	#define PG_USE_INTERNAL_OSC					PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
+
+	//	S O F T W A R E   C O N F I G   M A I N   S Y S T E M
+	#define PG_POWER_GOOD_DELAY					500						//!< Time delay [ms](16bit), waiting power supply is good, before initialize() PicGIM; Default is '500'.
 		
 	//	P I C G I M   B E H A V I O U R
 	#define PG_VERBOSE							PG_ENABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
