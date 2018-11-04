@@ -130,10 +130,10 @@
 #include "picgim_main.h"
 
 //	A PIN definition ( LATBbits.LATB3 = L_B3 ) for a LED 
-#define MY_LED          L_B3
+#define MY_LED          L_B4
 
 //	A TRIS definition for the PIN ( TRISBbits.TRISB3 = T_B3 )
-#define MY_LED_TRIS     T_B3
+#define MY_LED_TRIS     T_B4
 
 
 void main( void ) {
