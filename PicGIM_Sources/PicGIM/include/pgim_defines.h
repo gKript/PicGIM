@@ -205,6 +205,7 @@
 	//		M A T H E M A T I C A L   C O N S T A N T S
 	//------------------------------------------------------------------------------
 	#define	PG_CONSTANTS_PI							3.1415926535897						//!< Pi-Greek
+	#define	PG_CONSTANTS_2PI						6.2831853071795						//!< 2 * Pi-Greek
 	#define	PG_CONSTANTS_EULER						2.7182818284590						//!< Euler's number. Base of the natural logarithm
 
 	//------------------------------------------------------------------------------

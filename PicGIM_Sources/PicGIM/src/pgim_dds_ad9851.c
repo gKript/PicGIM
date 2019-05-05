@@ -92,11 +92,11 @@
 			// sw || hw pull-up on AD9851 pin#4 "D0=6xRefClock" by 10[Kohm] (needed and readen only at init sequence; at next word write, it will be sent in serial mode)
 			// to disable power-down:
 			// sw || hw pull-down on AD9851 pin#2 "D2" (needed and readen only at init sequence; at next word write, it will be sent in serial mode)
-			pg_dds_ad9851_word_clock( );	//load in default parallel mode only the first byte 'xxxxx011' to: (1)disable power-down; (2)enable serial mode; (3) enable multiplier;
+			pg_dds_ad9851_word_clock( );				//load in default parallel mode only the first byte 'xxxxx011' to: (1)disable power-down; (2)enable serial mode; (3) enable multiplier;
 			pg_dds_ad9851_freq_update( );
 		#endif
 		
-		pg_dds_ad9851_set_freq( 0.0 );		//send a valid frequency word (undefined at startup)
+		pg_dds_ad9851_set_freq( 0.0 );					//send a valid frequency word (undefined at startup)
 		#if ( PG_DDS_AD9851_INIT_FREQ != 0.0 )
 			pg_dds_ad9851_set_freq( PG_DDS_AD9851_INIT_FREQ );
 		#endif
@@ -107,9 +107,9 @@
 		_pg_Uint8 	c;
 		_pg_Uint8 	word[ 5 ];
 		float 		dds_clock		= PG_DDS_AD9851_CLOCK_REF;
-		float 		dds_res			= 4294967296.0;	//2^32 = 0xFFFFFFFF = 0b11111111111111111111111111111111
-		float 		dds_coef		= 0.0;			//multiplication coefficient ( word = dds_coef * dds_out )
-		_pg_Uint32 	dds_fword		= 0x00000000;	//#4 byte, only data frequency						
+		float 		dds_fres		= 4294967296.0;		//2^32 = 0xFFFFFFFF = 0b11111111111111111111111111111111
+		float 		dds_fcoef		= 0.0;				//multiplication coefficient ( word = dds_fcoef * dds_out )
+		_pg_Uint32 	dds_fword		= 0x00000000;		//#4 byte, only data frequency						
 		_pg_Uint32 	dds_fword_temp	= 0x00000000;
 		
 		//multiplier
@@ -118,8 +118,8 @@
 		#endif
 		
 		//frequency word computation
-		dds_coef = dds_res / dds_clock;					//dds_coef needs high resolution!
-		dds_fword = (_pg_Uint32)dds_fout * dds_coef;	//now, dds_fword contains 32bit frequency data
+		dds_fcoef = dds_fres / dds_clock;				//dds_fcoef needs high resolution!
+		dds_fword = (_pg_Uint32)dds_fout * dds_fcoef;	//now, dds_fword contains 32bit frequency data
 		
 		word[ 0 ] = 0b00000001;							//bit<0>(1=multiplier enabled); bit<1>=0(always); bit<2>(1=powerdown enabled); bit<3-7>(phase)
 		dds_fword_temp = dds_fword;
