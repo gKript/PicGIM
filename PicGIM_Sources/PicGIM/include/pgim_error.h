@@ -74,7 +74,8 @@
 					PG_ERROR_SENSOR,
 					PG_ERROR_RTC_DS1302,
 					PG_ERROR_GCP,
-					PG_ERROR_AMG88XX
+					PG_ERROR_AMG88XX,
+					PG_ERROR_SSP
                 };
 
 		extern _pg_Uint32_VAL			pg_error_state;					//!<	The ERROR registry

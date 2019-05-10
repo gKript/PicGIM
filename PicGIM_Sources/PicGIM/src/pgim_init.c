@@ -140,6 +140,10 @@ void pg_initialize( void ) {
 	#if ( PGIM_DDS_AD9851 == PG_ENABLE )
 		pg_dds_ad9851_init( );
 	#endif
+
+	#if ( PGIM_SSP == PG_ENABLE )
+		pg_ssp_init( );
+	#endif
 }
 
 

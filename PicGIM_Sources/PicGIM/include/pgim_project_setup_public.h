@@ -60,8 +60,8 @@
 	#define PG_PROJECT_DATE						01/01/2017				//!< Date of the project
 	
 	//	H A R D W A R E   C O N F I G   M A I N   S Y S T E M
-	#define PG_CLOCK							40000000				//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [Hz].  \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
-	#define PG_USER_SUPPLY_VOLT					5000					//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [mV].
+	#define PG_CLOCK							40.000					//!< The CORE FREQUENCY of the CPU in your project. Unit of measure is expressed in [Hz].  \note The working frequency is the \b CORE \b FREQUENCY of the \b MCU in your project. To set it correctly, you need to consider the value of the \b oscillator/crystal and eventually of the \b PLL.						\attention		4MHz is the minimum clock frequency managed by \b PicGIM. \n If you set a lower frequency 4MHz functions of delay will definitely inaccurate.
+	#define PG_USER_SUPPLY_VOLT					5.00						//!< The power supply VOLTAGE of the MCU in your project. Unit of measure is expressed in [mV].
 	#define PG_USER_SUPPLY_BATTERY				PG_NO					//!< Must be: PG_YES  ||  PG_NO
 	#define PG_USE_INTERNAL_OSC					PG_DISABLE				//!< Must be: PG_ENABLE  ||  PG_DISABLE
 

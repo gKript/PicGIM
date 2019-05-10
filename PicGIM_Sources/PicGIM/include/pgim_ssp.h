@@ -53,32 +53,35 @@
 #ifndef _PGIM_SSP_H_
 	#define _PGIM_SSP_H_
 
-	#if ( PGIM_SSP == PG_ENABLE )
-		#define		PG_SSP_DEBUG				 		PG_ENABLE	//!< Must be: PG_ENABLE  ||  PG_DISABLE
-		
-		#define		PG_SSP_CONTROL_HEADER				'K'
-		#define		PG_SSP_CONTROL_HEADER_REPLY			'k'
-		#define		PG_SSP_CONTROL_FOOTER				'X'
-		#define		PG_SSP_CONTROL_FOOTER_REPLY			'x'
+	#if ( PGIM_SSP == PG_ENABLE )		
+		#define		PG_SSP_CONTROL_HEADER				'K'			//!< Start byte
+		#define		PG_SSP_CONTROL_HEADER_REPLY			'k'			//!< Start byte reply 
+		#define		PG_SSP_CONTROL_FOOTER				'X'			//!< End byte
+		#define		PG_SSP_CONTROL_FOOTER_REPLY			'x'			//!< End byte reply
 			
 		enum pg_ssp_error {
-			PG_SSP_ERROR_WRONG_HEADER = 48,
+			PG_SSP_NO_ERROR = 48,
+			PG_SSP_ERROR_WRONG_HEADER,
 			PG_SSP_ERROR_WRONG_FOOTER,
+			PG_SSP_ERROR_WRONG_HEADER_REPLY,
+			PG_SSP_ERROR_WRONG_FOOTER_REPLY,
 			PG_SSP_ERROR_RX_TIMEOUT,
-			PG_SSP_ERROR_WRONG_BUFFER_LENGTH
+			PG_SSP_ERROR_CRC,
+			PG_SSP_OK_CRC
 		};
 
-		extern _pg_Uint16	pg_ssp_waiting;				//Waiting time max on rx byte [ms]
-		extern _pg_Uint8	pg_ssp_length;				//Buffer length
-
-		// /*!
-			// \brief			What it do. \n
-							// Conditions.
-			// \attention		Nothing.
-			// \return 		Nothing.
-			// \param			Nothing.
-		// */			
-		// void		pg_ssp_init							( void );
+		extern	_pg_Uint8	pg_ssp_error;				//Reports errors (global)
+		
+		_pg_Uint8 	pg_crc_8							( _pg_Uint8 * pg_crc8_data, _pg_Uint16 pg_crc8_length);
+		
+		/*!
+			\brief			What it do. \n
+							Conditions.
+			\attention		Nothing.
+			\return 		Nothing.
+			\param			Nothing.
+		*/			
+		void		pg_ssp_init							( void );
 		
 		/*!
 			\brief			What it do. \n
@@ -96,7 +99,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/		
-		void		pg_ssp_send_byte					( _pg_Uint8 sbyte );
+		void		pg_ssp_send_byte					( _pg_Uint8 pg_ssp_sbyte );
 		
 		/*!
 			\brief			What it do. \n
@@ -114,7 +117,7 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_ssp_tx							( _pg_Uint8 * tbuffer , _pg_Uint8 length );
+		_pg_Uint8	pg_ssp_tx							( _pg_Uint8 * pg_ssp_tx_buffer , _pg_Uint16 pg_ssp_tx_length );
 
 		/*!
 			\brief			What it do. \n
@@ -123,9 +126,8 @@
 			\return 		Nothing.
 			\param			Nothing.
 		*/
-		_pg_Uint8	pg_ssp_rx							( _pg_Uint8 * container );
+		_pg_Uint8	pg_ssp_rx							( _pg_Uint8 * pg_ssp_rx_buffer );
 
-		
 	#endif
 #endif
 

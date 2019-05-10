@@ -37,7 +37,7 @@
 		\file		pgim_ssp.c
 		\version	0.5-0
 		\date		2002 - 2017
-		\brief		
+		\brief		A simple serial protocol
 		\author		Danilo Zannoni (asyntote)
 		\author		Corrado Tumiati (skymatrix)
 		\copyright	PicGIM is part of the We.PIC project. \n
@@ -48,47 +48,18 @@
 */
 
 //--------------------------------------------------------------------------
-//k, 23-10-2017
+// SSP - (S)imple (S)erial (P)rotocol
 //--------------------------------------------------------------------------
-//gkssp simple serial protocol
+// TX send: 'K'(1[B]) + #Byte(2[B]) + Data('#Byte'[B]) + Crc(1[B]) + 'X'(1[B])
+// RX send: 'k'(1[B])                                                'x'(1[B])
 //--------------------------------------------------------------------------
-//transports variable lenght data, min. 1 - max. 256 byte at time
-//simple integrity error check (!100%, di primo livello, non sicura)
-//It works on rollover of 8bit usigned char data to avoid int use.
+// 'K'		= Header
+// 'k'		= Header Reply
+// Data		= Data bytes to send
+// #Byte	= # of data byte to send
+// 'X'		= Footer
+// 'x'		= Footer Reply
 //--------------------------------------------------------------------------
-// TX send: 'K'(1B) + Lenght(1B) + PayLoad(#B) + IC(1B) + 'X'(1B)
-// RX send: 'k'(1B)                                       'x'(1B) 
-//--------------------------------------------------------------------------
-//'K' = Header
-//PayLoad = carico utile
-//Length = lunghezza payload (contiene la lunghezza reale - 1, Max:255 [256-1]) (Min:0 [1-1])
-//IC = simple 8bit xor Integrity Check (option)
-//'X' = Footer
-//'k' = Header Reply
-//'x' = Footer Reply
-//------------------------------------------------------------------------
-//	UART
-//------------------------------------------------------------------------
-//while(BusyUSART());				//Ret "1" if busy.
-//if( DataRdyUSART() )				//Ret "1" if data is present.
-//getsUSART ( rbuffer, length );	//PAYLOAD ricevuto	//void getsUSART ( char * buffer, unsigned char length ); There is no time out when pg_ssp_waiting for characters to arrive.	
-//putsUSART( Temp_Panel_Str );		//WriteUSART(  char data ); This function writes a string of data to the USART including the null character.
-//putrsUSART( Temp_Panel_Str );		//WriteUSART(  char data ); This function writes a rom string of data to the USART including the null charac.
-//WriteUSART( 'P' );				//WriteUSART(  char data ); This function writes a byte to the USART transmit buffer.
-//------------------------------------------------------------------------
-
-//todo:
-//togliere +1 dal for
-//test 256° byte
-//init nel .h
-//gestire timeout
-//forse bisognerebbe svuotare buffer rx uart  on time out rx
-
-//	idx = 0;	//Just enough only 8bit _pg_Uint8 idx;
-//	do {
-//		buffer_fill[ idx ] = idx;	//0x18;
-//		idx++;
-//	} while ( idx != 0 );
 
 #include "picgim.h"
 
@@ -97,158 +68,181 @@
 	#if	( PG_PROJECT_STATE == PG_DEBUG )
 		#warning	PicGIM >>> Message >>> This file is compiling.
 	#endif
-
-	_pg_Uint8	pg_ssp_length;				//Buffer length
-
-	// //---[ Init ]---
-	// void	pg_ssp_init( void ) {
-
-	// }
 	
+	_pg_Uint8	pg_ssp_error;
+
+	//---[ Init ]---
+	void	pg_ssp_init( void ) {
+		pg_ssp_error = PG_SSP_NO_ERROR;
+		pg_ssp_empty_serial( );
+	}
+	
+	//---[ Empty ]---
 	void	pg_ssp_empty_serial( void ) {
+		//--------------------------------------------------------------------------
 		while( DataRdyUSART() ) {
 			ReadUSART();
 		}
 	}
+
+	//---[ Send Byte ]---
+	void	pg_ssp_send_byte( _pg_Uint8 pg_ssp_sbyte ) {
+		//--------------------------------------------------------------------------
+		while( BusyUSART() );
+		WriteUSART( pg_ssp_sbyte );
+	}
 	
-	//---[ Read Byte Usart ]---
+	//---[ Read Byte ]---
 	_pg_Uint8	pg_ssp_read_byte( void ) {
 		//--------------------------------------------------------------------------
-		_pg_Uint16	pg_ssp_waiting;			//Waiting max on rx byte [ms]
-		_pg_Uint8	rbyte;
-		
-		pg_ssp_waiting = PG_SSP_BYTEDELAY;
+		//	Returns read byte || ( PG_NOK && set error )
+		//--------------------------------------------------------------------------
+		#if ( PG_SSP_RX_MODE == PG_NOT_BLOCKING )
+			_pg_Uint16	pg_ssp_timeout;
+			pg_ssp_timeout = PG_SSP_RXTIMEOUT;
+		#endif
+		pg_delay( PG_SSP_RXDELAY , PG_MSEC );
 		while( 1 ) {
-			if( DataRdyUSART() ) {
-				rbyte = ReadUSART( );				
-				#if ( PG_SSP_DEBUG == PG_ENABLE )
-					pg_lcd_hd44780_put_char( 0 , rbyte );
-				#endif
-				return( rbyte );
+			if( DataRdyUSART() ) {				
+				pg_ssp_error = PG_SSP_NO_ERROR;
+				return( ReadUSART( ) );
 			}
 			else {
-				pg_delay( 1 , PG_MSEC );
-				pg_ssp_waiting--;
-				if( !pg_ssp_waiting ) {
-					#if ( PG_SSP_DEBUG == PG_ENABLE )
-						pg_lcd_hd44780_put_char( 0 , 't' );
-					#endif
-					#if PG_ERROR_IS_ENABLE
-						pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_RX_TIMEOUT , PG_ERROR_ERROR );
-					#endif
-					return( PG_NOK );
-				}
+				#if ( PG_SSP_RX_MODE == PG_BLOCKING )
+					continue;
+				#endif
+				#if ( PG_SSP_RX_MODE == PG_NOT_BLOCKING )
+					if( pg_ssp_timeout ) {
+						pg_delay( 1 , PG_MSEC );
+						pg_ssp_timeout--;
+					}
+					else {
+						pg_ssp_error = PG_SSP_ERROR_RX_TIMEOUT;
+						return( PG_NOK );
+					}
+				#endif
 			}
 		}
 	}
 
-	//---[ Send Byte Usart ]---
-		void	pg_ssp_send_byte( _pg_Uint8 sbyte ) {
+	//---[ Tx Data ]---
+	_pg_Uint8	pg_ssp_tx( _pg_Uint8 * pg_ssp_tx_buffer , _pg_Uint16 pg_ssp_tx_length ) {
 		//--------------------------------------------------------------------------
-		while( BusyUSART() );
-		WriteUSART( sbyte );
-		#if ( PG_SSP_DEBUG == PG_ENABLE )
-			pg_lcd_hd44780_put_char( 0 , sbyte );
-		#endif
-	}
-	
-	_pg_Uint8	pg_ssp_tx( _pg_Uint8 * tbuffer , _pg_Uint8 pg_ssp_length ) {
+		//	pg_ssp_tx_length: Min = 1, Max = 65535 ( = 2^16 - 1)
+		//	Returns PG_OK || ( PG_NOK && set error )
 		//--------------------------------------------------------------------------
-		// tbuffer max length = 256 byte
-		//--------------------------------------------------------------------------
-		_pg_Uint8	tindex;
-	
-		if( !pg_ssp_length ) {
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_BUFFER_LENGTH , PG_ERROR_ERROR );
-			#endif
-			return( PG_NOK );
-		}
-		pg_ssp_length--;
-		//per una quantita' di 1 byte, invio 0.
-		//si contera' da 0 fino a 255 per 256B di dati
-		//se passo la quantita' 256, pg_ssp_length fara' rollover a tutti 0 e con -1 andra' a tutti 1
-		//in ricezione devo fare +1 per riottenenere la quantita' corretta se richiesta,
-		//ma lo lasceremo decrementato per permettere di contare da 0 a 255 per quantita' da 1 a 256.
+		_pg_Uint8		tindex = 0;
+		_pg_Uint16_VAL	tx_length;
+		_pg_Uint8		tx_crc;
+		
+		tx_length.Val = pg_ssp_tx_length;
 		
 		//---[ Header ]---
 		pg_ssp_send_byte( PG_SSP_CONTROL_HEADER );
-		if( pg_ssp_read_byte() !=  PG_SSP_CONTROL_HEADER_REPLY ) {				//LENGTH byte ricevuto (senza +1 per usarlo direttamente del for (altrimenti si, per ricostruire la quantita' corretta, vedi tx...))
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_HEADER , PG_ERROR_ERROR );
-			#endif
+		if( pg_ssp_read_byte() !=  PG_SSP_CONTROL_HEADER_REPLY ) {
+			pg_ssp_error = PG_SSP_ERROR_WRONG_HEADER_REPLY;
 			return( PG_NOK );
 		}				
 		
 		//---[ Length ]---
-		//LENGTH byte inviato senza +1 per usarlo direttamente del for.
-		pg_ssp_send_byte( pg_ssp_length );
+		pg_ssp_send_byte( tx_length.byte.HB );
+		pg_ssp_send_byte( tx_length.byte.LB );
 		
-		//---[ PayLoad ]---
-		//??? togliere +1
-		for( tindex = 0; tindex <= pg_ssp_length ; tindex++ ) {		// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' putsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
-			pg_ssp_send_byte( *( tbuffer + tindex ) );
-			#if ( PG_SSP_CRYPT_ENABLE == PG_ENABLE )
-				//---[ Crypt ]---
-			#endif
-			#if ( PG_SSP_CRC_ENABLE == PG_ENABLE )
-				//---[ Hash ]---
-			#endif
+		//---[ Data ]---
+		for( tindex = 0; tindex < pg_ssp_tx_length ; tindex++ ) {
+			pg_ssp_send_byte( *( pg_ssp_tx_buffer + tindex ) );
 		}
+		
+		//---[ Crc ]---
+		#if( PG_SSP_CRC_ENABLE == PG_ENABLE )
+			tx_crc = pg_crc_8( pg_ssp_tx_buffer, pg_ssp_tx_length );
+			pg_ssp_send_byte( tx_crc );
+			pg_lcd_hd44780_put_char( 0 , tx_crc );
+		
+			if( pg_ssp_read_byte() !=  PG_SSP_OK_CRC ) {
+				pg_ssp_error = PG_SSP_ERROR_CRC;
+				return( PG_NOK );
+			}
+		#endif
 		
 		//---[ Footer ]---
 		pg_ssp_send_byte( PG_SSP_CONTROL_FOOTER );	
 		if( pg_ssp_read_byte() != PG_SSP_CONTROL_FOOTER_REPLY ) {
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_FOOTER , PG_ERROR_ERROR );
-			#endif
+			pg_ssp_error = PG_SSP_ERROR_WRONG_FOOTER_REPLY;
 			return( PG_NOK );			
 		}
+		pg_ssp_error = PG_SSP_NO_ERROR;
 		return( PG_OK );
 	}
 	
-	//---[ Rx ]---
-	_pg_Uint8	pg_ssp_rx( _pg_Uint8 * rbuffer ) { //non bloccante! se qlc va male aspetta un pochino (PG_SSP_BYTEDELAY)...
+	//---[ Rx Data ]---
+	_pg_Uint8	pg_ssp_rx( _pg_Uint8 * pg_ssp_rx_buffer ) {
 		//--------------------------------------------------------------------------
-		// rbuffer max length = 256 byte
+		//	Returns PG_OK || ( PG_NOK && set error )
 		//--------------------------------------------------------------------------
-		_pg_Uint8	rindex;
+		_pg_Uint8		rindex;
+		_pg_Uint16_VAL	rx_length;
+		_pg_Uint8		rx_crc;
 		
 		//---[ Header ]---
 		if( pg_ssp_read_byte() != PG_SSP_CONTROL_HEADER ) {
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_HEADER , PG_ERROR_ERROR );
-			#endif
+			pg_ssp_error = PG_SSP_ERROR_WRONG_HEADER;
 			return( PG_NOK );
 		}
-		pg_ssp_empty_serial(); ///????? se stavo facendo altro, ilo tx potrebbe aver fatto diversi tentativi ed avere qui alcuni PG_SSP_CONTROL_HEADER
 		pg_ssp_send_byte( PG_SSP_CONTROL_HEADER_REPLY );
-		return( PG_OK );
 
 		//---[ Length ]---
-		//	LENGTH byte ricevuto senza +1 per usarlo direttamente del for.
-		pg_ssp_length = pg_ssp_read_byte();
-				
-		//---[ PayLoad ]---
-		for( rindex = 0; rindex <= pg_ssp_length ; rindex++ ) {	// <= per raggiungere 255 senza rollover; byte a byte e non a stringa, perche' getsUSART e' bloccante e senza possibilita' di controllare ogni byte ricevuto in tempo reale
-			*( rbuffer + rindex ) = pg_ssp_read_byte();	
-			#if ( PG_SSP_CRC_ENABLE == PG_ENABLE )
-				//---[ Hash ]---
-			#endif
-			#if ( PG_SSP_CRYPT_ENABLE == PG_ENABLE )
-				//---[ DeCrypt ]---
-			#endif
+		rx_length.byte.HB = pg_ssp_read_byte( );
+		rx_length.byte.LB = pg_ssp_read_byte( );		
+		
+		//---[ Data ]---
+		for( rindex = 0; rindex < rx_length.Val ; rindex++ ) {
+			*( pg_ssp_rx_buffer + rindex ) = pg_ssp_read_byte();	
 		}
-			
+		
+		//---[ Crc ]---
+		#if( PG_SSP_CRC_ENABLE == PG_ENABLE )
+			rx_crc = pg_crc_8( pg_ssp_rx_buffer, rx_length.Val );
+			if( pg_ssp_read_byte() != rx_crc ) {
+				pg_ssp_error = PG_SSP_ERROR_CRC;
+				pg_ssp_send_byte( PG_SSP_ERROR_CRC );
+				return( PG_NOK );
+			}
+			pg_ssp_send_byte( PG_SSP_OK_CRC );
+		#endif
+		
 		//---[ Footer ]---
 		if( pg_ssp_read_byte() != PG_SSP_CONTROL_FOOTER ) {
-			#if PG_ERROR_IS_ENABLE
-				pg_error_set( PG_ERROR_GCP , PG_SSP_ERROR_WRONG_FOOTER , PG_ERROR_ERROR );
-			#endif
+			pg_ssp_error = PG_SSP_ERROR_WRONG_FOOTER;
 			return( PG_NOK );
 		}
 		pg_ssp_send_byte( PG_SSP_CONTROL_FOOTER_REPLY );
+		pg_ssp_error = PG_SSP_NO_ERROR;
 		return( PG_OK );
+	}
+	
+	//---[ Crc_8 ]---
+	_pg_Uint8 pg_crc_8( _pg_Uint8 * pg_crc8_data, _pg_Uint16 pg_crc8_length) {
+		//--------------------------------------------------------------------------
+		_pg_Uint8	crc = 0x00;
+		_pg_Uint8	amount;
+		_pg_Uint8	data;
+		_pg_Uint8	sdx;
+		_pg_Uint16	idx;
+		
+		for( idx = 0 ; idx < pg_crc8_length ; idx++ ) {
+			data = *pg_crc8_data;
+			for( sdx = 8 ; sdx ; sdx-- ) {
+				amount = ( crc ^ data ) & 0x01;
+				crc >>= 1;
+				if ( amount ) {
+					crc ^= 0x8C;
+				}
+				data >>= 1;
+			}
+			pg_crc8_data++;
+		}
+		return( crc );
 	}
 
 #endif

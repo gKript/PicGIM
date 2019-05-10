@@ -484,8 +484,8 @@
 			#if ( ( PGIM_PWM_1 == PG_ENABLE ) && ( PG_PWM_1_ENHANCED == PG_ENABLE ) && ( PG_PWM_1_MODE == PG_ENHANCED ) && ( PG_PWM_1_OUT_CONF == HALF_OUT ) ) || \
 				( ( PGIM_PWM_2 == PG_ENABLE ) && ( PG_PWM_2_ENHANCED == PG_ENABLE ) && ( PG_PWM_2_MODE == PG_ENHANCED ) && ( PG_PWM_2_OUT_CONF == HALF_OUT ) )			
 
-//				#if ( PG_PWM_DEAD_TIME > ( ( 1 / PG_CLOCK ) * PG_TCYCLEPERI * 0x7F ) )
-				#if ( PG_PWM_DEAD_TIME > ( PG_TCYCLEPERI * 0x7F / ( PG_CLOCK / 1000000 ) ) )
+				#if ( PG_PWM_DEAD_TIME > ( ( 1 / PG_CLOCK ) * PG_TCYCLEPERI * 0x7F ) )
+//				#if ( PG_PWM_DEAD_TIME > ( PG_TCYCLEPERI * 0x7F / ( PG_CLOCK / 1000000 ) ) )
 					#warning	PicGIM >>> ERROR !!! >>> Core >>> Dead-time is too long. Please decrease the value in "pgim_pwm_setup_public.h"
 					#ifndef		PG_EXIT_ON_ERROR
 						#define		PG_EXIT_ON_ERROR
