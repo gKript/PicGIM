@@ -1,7 +1,7 @@
 /*
 	Editor set :	Fixed width fonts - Expandtab OFF - Tabstop 4
 
-	File name :		pgim_18f4620.h
+	File name :		pgim_18f14k22.h
 	Project :		PicGim - Generic Information Manager for Microchip (C) PIC18F (R) family uControllers
 	Author :		Danilo Zannoni (AsYntote) - Corrado Tumiati (SkyMatrix)
 
@@ -10,7 +10,7 @@
 	Since version :			0.1-0
 	Deprecated version :	This file is not deprecated.
 
-	See also related :		pgim_18f4620_public.h
+	See also related :		pgim_18f14k22_public.h
 
 	START LICENSE	GPL	V3.0
 
@@ -36,7 +36,7 @@
  */
 
 /*!
-		\file		pgim_18f4620.h
+		\file		pgim_18f14k22.h
 		\version	0.5-0
 		\date		2002 - 2015
 		\brief		The private configuration file for the 18F4620 uController.
@@ -49,8 +49,8 @@
 		\attention	This is not a file defined as public and therefore would not be edited. \n We suggest that you edit this file only if necessary and only if you know what you are doing. \n
 */
 
-#ifndef _PGIM_18F4620_PRIVATE_H_
-	#define _PGIM_18F4620_PRIVATE_H_
+#ifndef _PGIM_18F14K22_PRIVATE_H_
+	#define _PGIM_18F14K22_PRIVATE_H_
 
 	//---[ Internal Oscillator ]---
 	#if defined( PG_DOXYGEN )
@@ -65,10 +65,10 @@
 	#if ( PG_USE_INTERNAL_OSC == PG_ENABLE )
 		#include "pgim_int_osc.h"
 		#ifdef _GIM_H_
-			#pragma	config OSC = INTIO67					//!< Internal oscillator, port function OSC2 as RA6, OSC1 as RA7
+			#pragma	config OSC = INTIO2						//!< Internal oscillator, port function OSC2 as RA6, OSC1 as RA7
 		#endif
 		#undef	PG_CLOCK
-		#define	PG_CLOCK 8000000							// Re-define new oscillator frequency with PLL enabled ( 8MHz x 4 = 32 MHz )
+		#define	PG_CLOCK 64000000							// Re-define new oscillator frequency with PLL enabled ( 16MHz x 4 = 64 MHz )
 		#if	defined( _GIM_H_ ) && PG_VERBOSE == PG_ENABLE
 			#warning	PicGIM >>> Core >>> Using INTERNAL oscillator ( PG_CLOCK [Hz] )
 		#endif
@@ -81,7 +81,7 @@
 	
 	
 	//---[ Public ]---
-	#include "./pgim_mcu/pgim_18f4620_public.h"
+	#include "./pgim_mcu/pgim_18f14k22_public.h"
 	//---[ END Public ]---
 					
 					
@@ -103,19 +103,19 @@
 	
 	
 	//---[ Hardware Resources ]---
-	#define		PG_PIN_NUMBER				40					//!<	The number of pins
+	#define		PG_PIN_NUMBER				80					//!<	The number of pins
 
 	#define		PG_TCYCLEPERI				4					//!<	The number of cycles required for an instruction for the family PIC18
-	#define		PG_MAX_OSC_FREQ				40.000				//!<	The maximum working frequency [Hz] for this specific processor
+	#define		PG_MAX_OSC_FREQ				64.000				//!<	The maximum working frequency [Hz] for this specific processor
 	
-	#define		PG_MAX_RAM					3986				//!<	The maximum amount of RAM				
+	#define		PG_MAX_RAM					4096				//!<	The maximum amount of RAM				
 	#define		PG_MAX_EEPROM				1024				//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory
 	
 	#define		PG_MCU_SUPPLY_VOLT_MAX		5.50				//!<	The maximum power supply voltage [V]
-	#define		PG_MCU_SUPPLY_VOLT_MIN		2.00				//!<	The minimum power supply voltage [V]
+	#define		PG_MCU_SUPPLY_VOLT_MIN		1.80				//!<	The minimum power supply voltage [V]
 	
-	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
-	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.
+	#define		PG_ADC_RES_BITS				12					//!<	ADC resolution bits
+	#define		PG_ADC_RES_STEPS			4096				//!<	ADC resolution steps.
 	
 	#define		PG_PWM_1_MODE				PG_ENHANCED			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
 	#define		PG_PWM_2_MODE				PG_STANDARD			//!<	Available mode: PG_NONE, PG_STANDARD or PG_ENHANCED
@@ -124,96 +124,24 @@
 	#define		PG_SERIAL_TX_TRIS			TRISCbits.TRISC6	//!<	Tx pin of USART port
 	#define		PG_SERIAL_RX_TRIS			TRISCbits.TRISC7	//!<	Rx pin of USART port
 	
+	#define		PG_SERIAL_TX2_TRIS			TRISCbits.TRISG1	//!<	Tx2 pin of USART2 port
+	#define		PG_SERIAL_RX2_TRIS			TRISCbits.TRISG2	//!<	Rx2 pin of USART2 port
+	
 	#define		PG_SPI_SDO_TRIS				TRISCbits.TRISC5	//!<	SPI output; Set tris to '0' as output
 	#define		PG_SPI_SDI_TRIS				TRISCbits.TRISC4	//!<	SPI input; Tris is automatically controlled by the SPI module
 	#define		PG_SPI_SCK_TRIS				TRISCbits.TRISC3	//!<	SPI clock; Master mode: set tris to '0' as output; Slave mode: set tris to '1' as input;; Slave mode: set tris to '1' as input;
-	#define		PG_SPI_SS_TRIS				TRISAbits.TRISA5	//!<	SPI slave-select
+	#define		PG_SPI_SS_TRIS				TRISAbits.TRISF7	//!<	SPI slave-select
 	
+	#define		PG_SPI_SDO2_TRIS			TRISCbits.TRISD4	//!<	SPI2 output; Set tris to '0' as output
+	#define		PG_SPI_SDI2_TRIS			TRISCbits.TRISD5	//!<	SPI2 input; Tris is automatically controlled by the SPI module
+	#define		PG_SPI_SCK2_TRIS			TRISCbits.TRISD6	//!<	SPI2 clock; Master mode: set tris to '0' as output; Slave mode: set tris to '1' as input;; Slave mode: set tris to '1' as input;
+	#define		PG_SPI_SS2_TRIS				TRISAbits.TRISD7	//!<	SPI2 slave-select
+
 	#define		PG_I2C_SDA_TRIS				TRISCbits.TRISC4	//!<	I2C data I/O
 	#define		PG_I2C_SCL_TRIS				TRISCbits.TRISC3	//!<	I2C clock
 	
-	// #define		PG_HW_PIN_PGD_TRIS			TRISBbits.TRISB7	//!<	ICSP data
-	// #define		PG_HW_PIN_PGC_TRIS			TRISBbits.TRISB6	//!<	ICSP clock
-	// #define		PG_HW_PIN_PGM_TRIS			TRISBbits.TRISB5	//!<	ICSP lvp
-	// #define		PG_HW_PIN_MCLR_TRIS			TRISEbits.TRISE3	//!<	Master-Clear (Reset)
-
-	// #define		PG_HW_PIN_PGD_PORT			PORTBbits.RB7		//!<	ICSP data
-	// #define		PG_HW_PIN_PGC_PORT			PORTBbits.RB6		//!<	ICSP clock
-	// #define		PG_HW_PIN_PGM_PORT			PORTBbits.RB5		//!<	ICSP lvp
-	// #define		PG_HW_PIN_VPP_PORT			PORTEbits.RE3		//!<	Master-Clear/Vpp (Reset)
-	
-	// #define		PG_HW_PIN_PGD_LAT			LATBbits.LATB7		//!<	ICSP data
-	// #define		PG_HW_PIN_PGC_LAT			LATBbits.LATB6		//!<	ICSP clock
-	// #define		PG_HW_PIN_PGM_LAT			LATBbits.LATB5		//!<	ICSP lvp
-	// #define		PG_HW_PIN_MCLR_LAT			LATEbits.LATE3		//!<	Master-Clear (Reset)
-
-	#define		PG_HW_PIN_SERIAL_TX			25					//!<	Serial(Uart)transmission hardware pin number
-	#define		PG_HW_PIN_SERIAL_TX_N		RC6					//!<	Serial(Uart)transmission hardware pin name
-	#define		PG_HW_PIN_SERIAL_RX			26					//!<	Serial(Uart)reception hardware pin number
-	#define		PG_HW_PIN_SERIAL_RX_N		RC7					//!<	Serial(Uart)reception hardware pin name
-	#define		PG_HW_PIN_SPI_SDI			23					//!<	SPI Input hardware pin number
-	#define		PG_HW_PIN_SPI_SDI_N			RC4					//!<	SPI Input hardware pin name
-	#define		PG_HW_PIN_SPI_SDO			24					//!<	SPI Output hardware pin number
-	#define		PG_HW_PIN_SPI_SDO_N			RC5					//!<	SPI Output hardware pin name
-	#define		PG_HW_PIN_SPI_SCK			18					//!<	SPI Clock hardware pin number
-	#define		PG_HW_PIN_SPI_SCK_N			RC3					//!<	SPI Clock hardware pin name
-	#define		PG_HW_PIN_SPI_SS			7					//!<	SPI Slave Select hardware pin number
-	#define		PG_HW_PIN_SPI_SS_N			RA5					//!<	SPI Slave Select hardware pin name
-	#define		PG_HW_PIN_IRQ_INT0			33					//!<	Event (IRQ) Int0 hardware pin number
-	#define		PG_HW_PIN_IRQ_INT0_N		RB0					//!<	Event (IRQ) Int0 hardware pin name
-	#define		PG_HW_PIN_IRQ_INT1			34					//!<	Event (IRQ) Int1 hardware pin number
-	#define		PG_HW_PIN_IRQ_INT1_N		RB1					//!<	Event (IRQ) Int1 hardware pin name
-	#define		PG_HW_PIN_IRQ_INT2			35					//!<	Event (IRQ) Int2 hardware pin number
-	#define		PG_HW_PIN_IRQ_INT2_N		RB2					//!<	Event (IRQ) Int2 hardware pin name
-	#define		PG_HW_PIN_PWM1				17					//!<	PWM1 output hardware pin number
-	#define		PG_HW_PIN_PWM1_N			RC2					//!<	PWM1 output hardware pin name	
-	#define		PG_HW_PIN_PWM2				16					//!<	PWM2 output hardware pin number
-	#define		PG_HW_PIN_PWM2_N			RC1					//!<	PWM2 output hardware pin name
-	
-	#define		PG_RESET_POR				0b11110000			//!<	Power-On reset
-	#define		PG_RESET_POR_MASK			0b11111111			//!<	Power-On reset mask
-	#define		PG_RESET_RI					0b00000000			//!<	Reset instruction
-	#define		PG_RESET_RI_MASK			0b01000000			//!<	Reset instruction mask
-	#define		PG_RESET_BOR				0b01110000			//!<	Brown-out reset
-	#define		PG_RESET_BOR_MASK			0b01110100			//!<	Brown-out reset mask
-	#define		PG_RESET_MCLR_PMRM			0b00100000			//!<	MCLR during power-managed Run Modes
-	#define		PG_RESET_MCLR_PMRM_MASK		0b00100000			//!<	MCLR during power-managed Run Modes mask
-	#define		PG_RESET_MCLR_PMISM			0b00100000			//!<	MCLR during power-managed Idle modes and Sleep mode
-	#define		PG_RESET_MCLR_PMISM_MASK	0b00110000			//!<	MCLR during power-managed Idle modes and Sleep mode mask
-	#define		PG_RESET_WDT_FP_PMRM		0b00000000			//!<	WDT time-out during full power or power-managed Run mode
-	#define		PG_RESET_WDT_FP_PMRM_MASK	0b00100000			//!<	WDT time-out during full power or power-managed Run mode mask
-	#define		PG_RESET_MCLR_FPM			0b00000000			//!<	MCLR during full-power execution
-	#define		PG_RESET_MCLR_FPM_MASK		0b00000000			//!<	MCLR during full-power execution mask
-	#define		PG_RESET_SFR				0b00000010			//!<	Stack Full Reset (STVREN = 1)
-	#define		PG_RESET_SFR_MASK			0b00000010			//!<	Stack Full Reset mask (STVREN = 1)
-	#define		PG_RESET_SUR				0b00000001			//!<	Stack Underflow Reset (STVREN = 1)
-	#define		PG_RESET_SUR_MASK			0b00000001			//!<	Stack Underflow Reset mask (STVREN = 1)
-	#define		PG_RESET_WDT_PMISM			0b00000000			//!<	WDT time-out during power-managed Idle or Sleep modes
-	#define		PG_RESET_WDT_PMISM_MASK		0b00110000			//!<	WDT time-out during power-managed Idle or Sleep modes mask
-	#define		PG_RESET_INT_EXIT_PMM		0b00000000			//!<	Interrupt exit from power-managed modes
-	#define		PG_RESET_INT_EXIT_PMM_MASK	0b00010000			//!<	Interrupt exit from power-managed modes mask
-	#define		PG_RESET_POR				0b11110000			//!<	Power-On reset 
-	#define		PG_RESET_POR_MASK			0b11111111			//!<	Power-On reset mask 
-	#define		PG_RESET_RI					0b00000000			//!<	Reset instruction 
-	#define		PG_RESET_RI_MASK			0b01000000			//!<	Reset instruction mask 
-	#define		PG_RESET_BOR				0b01110000			//!<	Brown-out reset 
-	#define		PG_RESET_BOR_MASK			0b01110100			//!<	Brown-out reset mask 
-	#define		PG_RESET_MCLR_PMRM			0b00100000			//!<	MCLR during power-managed Run Modes 
-	#define		PG_RESET_MCLR_PMRM_MASK		0b00100000			//!<	MCLR during power-managed Run Modes mask 
-	#define		PG_RESET_MCLR_PMISM			0b00100000			//!<	MCLR during power-managed Idle modes and Sleep mode 
-	#define		PG_RESET_MCLR_PMISM_MASK	0b00110000			//!<	MCLR during power-managed Idle modes and Sleep mode mask 
-	#define		PG_RESET_WDT_FP_PMRM		0b00000000			//!<	WDT time-out during full power or power-managed Run mode 
-	#define		PG_RESET_WDT_FP_PMRM_MASK	0b00100000			//!<	WDT time-out during full power or power-managed Run mode mask 
-	#define		PG_RESET_MCLR_FPM			0b00000000			//!<	MCLR during full-power execution 
-	#define		PG_RESET_MCLR_FPM_MASK		0b00000000			//!<	MCLR during full-power execution mask
-	#define		PG_RESET_SFR				0b00000010			//!<	Stack Full Reset (STVREN = 1) 
-	#define		PG_RESET_SFR_MASK			0b00000010			//!<	Stack Full Reset mask (STVREN = 1) 
-	#define		PG_RESET_SUR				0b00000001			//!<	Stack Underflow Reset (STVREN = 1) 
-	#define		PG_RESET_SUR_MASK			0b00000001			//!<	Stack Underflow Reset mask (STVREN = 1) 
-	#define		PG_RESET_WDT_PMISM			0b00000000			//!<	WDT time-out during power-managed Idle or Sleep modes 
-	#define		PG_RESET_WDT_PMISM_MASK		0b00110000			//!<	WDT time-out during power-managed Idle or Sleep modes mask 
-	#define		PG_RESET_INT_EXIT_PMM		0b00000000			//!<	Interrupt exit from power-managed modes 
-	#define		PG_RESET_INT_EXIT_PMM_MASK	0b00010000			//!<	Interrupt exit from power-managed modes mask 
+	#define		PG_I2C_SDA2_TRIS			TRISCbits.TRISD5	//!<	I2C2 data I/O
+	#define		PG_I2C_SCL2_TRIS			TRISCbits.TRISD6	//!<	I2C2 clock
 	//---[ END Hardware Resources ]---
 
 #endif /* _PGIM_18F4620_PRIVATE_H_ */

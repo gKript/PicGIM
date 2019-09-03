@@ -975,6 +975,60 @@
 	//---[ END DDS AD9851 ]---
 
 
+	//---[ FLASH ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_FLASH == PG_ENABLE )
+		#include "pgim_flash.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> FLASH module >>> Loaded
+		#endif
+	#endif
+	//---[ END FLASH ]---
+
+
+	//---[ ENDIAN ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_ENDIAN == PG_ENABLE )
+		#include "pgim_endian.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> ENDIAN module >>> Loaded
+		#endif
+	#endif
+	//---[ END ENDIAN ]---
+
+
+	//---[ FLASH LVP ]---
+	#if defined( PG_DOXYGEN )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_ENABLE
+	#elif ( PGIM_ALL_MODULES_DISABLED == PG_ENABLE ) && ( PG_PROJECT_STATE == PG_DEBUG )
+		#undef		PGIM_FONT
+		#define		PGIM_FONT		PG_DISABLE
+	#endif
+	//--------------------------------------------------
+	#if ( PGIM_FLASH_LVP == PG_ENABLE )
+		#include "pgim_flash_lvp.h"
+		#if defined( _GIM_H_ ) && ( PG_VERBOSE == PG_ENABLE )
+			#warning	PicGIM >>> FLASH LVP module >>> Loaded
+		#endif
+	#endif
+	//---[ END FLASH LVP ]---
+
+
 	//------------------------------------------------------------------------------
 	//		E R R O R   M A N A G E M A N T
 	//------------------------------------------------------------------------------

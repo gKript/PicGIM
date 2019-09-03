@@ -146,6 +146,30 @@
 		//---[ END 18F4620 ]---
 		
 		
+		//---[ 18F87K22 ]---
+		#ifdef	PGIM_P18F87K22
+			OSCTUNEbits.PLLEN	=	1;							//!< Enable PLL with internal oscillator ( 16MHz x 4 = 64 MHz )
+			OSCCONbits.IRCF2	=	1;							//!< IRCF<2-0> set frequency
+			OSCCONbits.IRCF1	=	1;							//!< IRCF<2-0> set frequency
+			OSCCONbits.IRCF0	=	1;							//!< IRCF<2-0> set frequency
+			OSCCONbits.SCS1		=	1;							//!< Select internal oscillator
+			#define	PG_INTERNAL_OSC_CONFIGURED
+		#endif
+		//---[ END 18F87K22 ]---
+
+
+		//---[ 18F14K22 ]---
+		#ifdef	PGIM_P18F14K22
+			OSCTUNEbits.PLLEN	=	1;							//!< Enable PLL with internal oscillator ( 16MHz x 4 = 64 MHz )
+			OSCCONbits.IRCF2	=	1;							//!< IRCF<2-0> set frequency
+			OSCCONbits.IRCF1	=	1;							//!< IRCF<2-0> set frequency
+			OSCCONbits.IRCF0	=	1;							//!< IRCF<2-0> set frequency
+			OSCCONbits.SCS1		=	1;							//!< Select internal oscillator
+			#define	PG_INTERNAL_OSC_CONFIGURED
+		#endif
+		//---[ END 18F14K22 ]---
+
+
 		//---[ 18F97J60 ]---
 		#ifdef	PGIM_P18F97J60
 			OSCCONbits.SCS1		=	1;							//!< Select internal oscillator

@@ -78,9 +78,9 @@
 //	typedef unsigned long long					_pg_Uint64;
 	typedef	char *								_pg_buffer;
 	typedef	unsigned char *						_pg_Ubuffer;
+	
     typedef union _BYTE_VAL {
-        //BYTE Val;
-        unsigned char Val;      //kmod
+        unsigned char Val;
         struct {
             unsigned char b0:1;
             unsigned char b1:1;
@@ -97,14 +97,10 @@
 	typedef BYTE_BITS						_pg_Uint8_BITS;
 
     typedef union _WORD_VAL {
-        // WORD Val;
         unsigned int Val;
-        // BYTE v[2];
         unsigned char v[ 2 ];
         struct {
-            //BYTE LB;
             unsigned char LB;
-            //BYTE HB;
             unsigned char HB;
         } byte;
         struct {
@@ -131,26 +127,17 @@
 	typedef WORD_BITS						_pg_Uint16_BITS;
 
     typedef union _DWORD_VAL {
-        //DWORD Val;
         unsigned long int Val;
-        //WORD w[2];
         unsigned int W[ 2 ];
-        //BYTE v[4];
         unsigned char v[ 4 ];
         struct {
-            //WORD LW;
             unsigned int LW;
-            //WORD HW;
             unsigned int HW;
         } word;
         struct {
-            //BYTE LB;
             unsigned char LB;
-            //BYTE HB;
             unsigned char HB;
-            //BYTE UB;
             unsigned char UB;
-            //BYTE MB;
             unsigned char MB;
         } byte;
         struct {

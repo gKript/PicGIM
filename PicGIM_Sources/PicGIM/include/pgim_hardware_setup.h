@@ -80,7 +80,7 @@
 	//-------------------------------------------------
 	#if ( PG_USER_SUPPLY_VOLT > PG_MCU_SUPPLY_VOLT_MAX )
 	
-		#warning	PicGIM >>> ERROR !!! >>> Core >>> The MCU power supply ( PG_USER_SUPPLY_VOLT [mV] ) is greater than its maximum specification ( PG_MCU_SUPPLY_VOLT_MAX [mV] ).
+		#warning	PicGIM >>> ERROR !!! >>> Core >>> The MCU power supply ( PG_USER_SUPPLY_VOLT [V] ) is greater than its maximum specification ( PG_MCU_SUPPLY_VOLT_MAX [V] ).
 		#ifndef		PG_EXIT_ON_ERROR
 			#define		PG_EXIT_ON_ERROR
 		#endif
@@ -89,10 +89,10 @@
 			//-------------------------------------------------
 			#if ( PG_USER_SUPPLY_VOLT < PG_MCU_SUPPLY_VOLT_MIN )
 			
-				#warning PicGIM >>> Core >>> The requested MCU power supply ( PG_USER_SUPPLY_VOLT [mV] ) is lower than the correct specification ( PG_MCU_SUPPLY_VOLT_MIN [mV] ).
+				#warning PicGIM >>> Core >>> The requested MCU power supply ( PG_USER_SUPPLY_VOLT [V] ) is lower than the correct specification ( PG_MCU_SUPPLY_VOLT_MIN [V] ).
 			#else
-				#warning PicGIM >>> Core >>> Set MCU POWER SUPPLY to PG_USER_SUPPLY_VOLT [mV]
-				#warning PicGIM >>> Core >>> Make sure that the PG_USER_SUPPLY_VOLT [mV] voltage is enough for the clock frequency chosen.
+				#warning PicGIM >>> Core >>> Set MCU POWER SUPPLY to PG_USER_SUPPLY_VOLT [V]
+				#warning PicGIM >>> Core >>> Make sure that the PG_USER_SUPPLY_VOLT [V] voltage is enough for the clock frequency chosen.
 			#endif
 		#endif
 	#endif

@@ -54,6 +54,9 @@
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_i2c.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_amg88xx.h</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/include/pgim_dds_ad9851.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_flash.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_endian.h</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/include/pgim_flash_lvp.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="PicGIM_Public" projectFiles="true">
         <logicalFolder name="f2" displayName="Core_files" projectFiles="true">
@@ -141,6 +144,9 @@
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_i2c.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_amg88xx.c</itemPath>
         <itemPath>../PicGIM_Sources/PicGIM/src/pgim_dds_ad9851.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_flash.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_endian.c</itemPath>
+        <itemPath>../PicGIM_Sources/PicGIM/src/pgim_flash_lvp.c</itemPath>
       </logicalFolder>
       <itemPath>../PicGIM_Sources/main.c</itemPath>
     </logicalFolder>
@@ -157,6 +163,8 @@
     <Elem>picgim/lkr</Elem>
     <Elem>../PicGIM_Sources</Elem>
     <Elem>../PicGIM_Documentation</Elem>
+    <Elem>C:/MCC18/src/pmc_common/Flash</Elem>
+    <Elem>C:/MCC18/h</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -250,6 +258,48 @@
         <property key="pk2settings.userpgmexec" value="true"/>
         <property key="pk2settings.usetargetpower" value="true"/>
       </PICkit2PlatformTool>
+      <PICkit3PlatformTool>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="Freeze Peripherals" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.configurationmemory2" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.end" value="0xffff"/>
+        <property key="memories.programmemory.partition2" value="true"/>
+        <property key="memories.programmemory.partition2.end"
+                  value="${memories.programmemory.partition2.end.value}"/>
+        <property key="memories.programmemory.partition2.start"
+                  value="${memories.programmemory.partition2.start.value}"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmertogo.imagename" value=""/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.pgmspeed" value="2"/>
+        <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange.end" value="0xffff"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.programcalmem" value="false"/>
+        <property key="programoptions.programuserotp" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VPPFirst"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="5.0"/>
+      </PICkit3PlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>

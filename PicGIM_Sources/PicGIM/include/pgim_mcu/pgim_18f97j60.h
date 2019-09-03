@@ -103,13 +103,13 @@
 	#define		PG_PIN_NUMBER				100					//!<	The number of pins
 
 	#define		PG_TCYCLEPERI				4					//!<	The number of cycles required for an instruction for the family PIC18
-	#define		PG_MAX_OSC_FREQ				41667000			//!<	The maximum working frequency [HZ] for this specific processor
+	#define		PG_MAX_OSC_FREQ				41.667				//!<	The maximum working frequency [HZ] for this specific processor
 	
 	#define		PG_MAX_RAM					3808				//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				0					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory. The 18F97J60 does NOT have eeprom.
 	
-	#define		PG_MCU_SUPPLY_VOLT_MAX		3600				//!<	The maximum power supply voltage [mV] with regulator enabled (ENVREG tied to VDD)
-	#define		PG_MCU_SUPPLY_VOLT_MIN		2700				//!<	The minimum power supply voltage [mV] with regulator enabled (ENVREG tied to VDD)
+	#define		PG_MCU_SUPPLY_VOLT_MAX		3.60				//!<	The maximum power supply voltage [V] with regulator enabled (ENVREG tied to VDD)
+	#define		PG_MCU_SUPPLY_VOLT_MIN		2.70				//!<	The minimum power supply voltage [V] with regulator enabled (ENVREG tied to VDD)
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
 	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.

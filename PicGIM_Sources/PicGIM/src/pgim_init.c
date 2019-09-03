@@ -144,6 +144,10 @@ void pg_initialize( void ) {
 	#if ( PGIM_SSP == PG_ENABLE )
 		pg_ssp_init( );
 	#endif
+
+	#if ( PGIM_FLASH_LVP == PG_ENABLE )
+		pg_flash_lvp_init( );
+	#endif
 }
 
 

@@ -101,13 +101,13 @@
 	#define		PG_PIN_NUMBER				40					//!<	The number of pins
 
 	#define		PG_TCYCLEPERI				4					//!<	The number of cycles required for an instruction for the family PIC18
-	#define		PG_MAX_OSC_FREQ				40000000				//!<	The maximum working frequency [HZ] for this specific processor
+	#define		PG_MAX_OSC_FREQ				40.000				//!<	The maximum working frequency [HZ] for this specific processor
 	
 	#define		PG_MAX_RAM					1536				//!<	The maximum amount of RAM
 	#define		PG_MAX_EEPROM				256					//!<	If ( PG_MAX_EEPROM == 0 ) there is no EEPROM memory
 	
-	#define		PG_MCU_SUPPLY_VOLT_MAX		5500				//!<	The maximum power supply voltage [mV]
-	#define		PG_MCU_SUPPLY_VOLT_MIN		2000				//!<	The minimum power supply voltage [mV]
+	#define		PG_MCU_SUPPLY_VOLT_MAX		5.50				//!<	The maximum power supply voltage [V]
+	#define		PG_MCU_SUPPLY_VOLT_MIN		2.00				//!<	The minimum power supply voltage [V]
 	
 	#define		PG_ADC_RES_BITS				10					//!<	ADC resolution bits
 	#define		PG_ADC_RES_STEPS			1024				//!<	ADC resolution steps.

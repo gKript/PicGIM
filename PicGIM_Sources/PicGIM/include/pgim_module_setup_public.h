@@ -53,19 +53,27 @@
 	//================================================================================================================
 	//		S O F T W A R E   G E N E R A L
 	//================================================================================================================
-	#define PGIM_ERROR								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_ERROR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_CAL_DELAY							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_FTOA								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GCP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define	PGIM_SSP								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_SSP								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_GKH32								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_PRS								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define	PGIM_FONT								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define	PGIM_ENDIAN								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		S O F T W A R E   D E V I C E
 	//================================================================================================================
 	#define PGIM_3WIRE								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	
+	//================================================================================================================
+	//		S O F T W A R E   P R O G R A M M I N G
+	//================================================================================================================
+	#define	PGIM_FLASH								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_FLASH_LVP							PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   I N T E R N A L
@@ -74,15 +82,14 @@
 	#define PGIM_AD_CONVERTER						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SPI								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_I2C								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_EE									PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_TIMER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_PWM								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
-	#define PGIM_SERIAL								PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_SERIAL								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	
 	//================================================================================================================
 	//		H A R D W A R E   E X T E R N A L
 	//================================================================================================================
-	#define PGIM_LCD_HD44780						PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE
+	#define PGIM_LCD_HD44780						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_LCD_PCD8544						PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_BUZZER								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
 	#define PGIM_SENSOR								PG_DISABLE			//!< Must be: PG_ENABLE || PG_DISABLE
@@ -270,15 +277,43 @@
 	//		S O F T W A R E   C O N F I G   |   D D S _ A D 9 8 5 1 
 	//-------------------------------------------------------------------------------------------------------------
 	#if ( PGIM_DDS_AD9851 == PG_ENABLE )
-		#define	PG_DDS_AD9851_DATA_MODE			PG_SERIAL			//!< Must be: PG_SERIAL || PG_PARALLEL
-		#define PG_DDS_AD9851_CLOCK_REF			29999989.0			//!< External oscillator value [Hz] (without multiplier)
-		#define PG_DDS_AD9851_MULTIPLIER		PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE (Internal 6X PLL)
-		#define PG_DDS_AD9851_INIT_FREQ			0.0					//!< Init frequency [Hz] (default is '0.0')
-		//#define PG_DDS_AD9851_INIT_PHASE		0					//!< Init phase (default is '0')
+		#define	PG_DDS_AD9851_DATA_MODE				PG_SERIAL			//!< Must be: PG_SERIAL || PG_PARALLEL
+		#define PG_DDS_AD9851_CLOCK_REF				29999989.0			//!< External oscillator value [Hz] (without multiplier)
+		#define PG_DDS_AD9851_MULTIPLIER			PG_ENABLE			//!< Must be: PG_ENABLE || PG_DISABLE (Internal 6X PLL)
+		#define PG_DDS_AD9851_INIT_FREQ				0.0					//!< Init frequency [Hz] (default is '0.0')
+		//#define PG_DDS_AD9851_INIT_PHASE			0					//!< Init phase (default is '0')
 	#endif
 
-#endif 
+	//-------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   F L A S H   ( Self-Programming )
+	//-------------------------------------------------------------------------------------------------------------
+	#if ( PGIM_FLASH == PG_ENABLE )
+		#define	PG_FLASH_SIZE_WRITE_BLOCK			64					//!< Programming block byte size ( = #Holding Register).	
+		#define	PG_FLASH_SIZE_ERASE_BLOCK			64					//!< Erasing block byte size.	
+	#endif
 
+	//-------------------------------------------------------------------------------------------------------------
+	//		S O F T W A R E   C O N F I G   |   F L A S H   L V P   ( ICSP-LVP-Programmer )
+	//-------------------------------------------------------------------------------------------------------------
+	#if ( PGIM_FLASH_LVP == PG_ENABLE )
+		#define	PG_FLASH_LVP_PGD_TRIS				T_B0				//!< ICSP Data I/O forward target PGD pin
+		#define	PG_FLASH_LVP_PGC_TRIS				T_B1				//!< ICSP Clock forward target PGC pin
+		#define	PG_FLASH_LVP_PGM_TRIS				T_B2				//!< ICSP PGM forward target PGM pin
+		#define	PG_FLASH_LVP_RST_TRIS				T_B3				//!< ICSP MLCR forward target MCLR pin
+
+		#define	PG_FLASH_LVP_PGD_LAT				L_B0				//!< ICSP Data I/O forward target PGD pin
+		#define	PG_FLASH_LVP_PGC_LAT				L_B1				//!< ICSP Clock forward target PGC pin
+		#define	PG_FLASH_LVP_PGM_LAT				L_B2				//!< ICSP PGM forward target PGM pin
+		#define	PG_FLASH_LVP_RST_LAT				L_B3				//!< ICSP MLCR forward target MCLR pin
+
+		#define	PG_FLASH_LVP_PGD_PORT				P_B0				//!< ICSP Data I/O forward target PGD pin
+		#define	PG_FLASH_LVP_PGC_PORT				P_B1				//!< ICSP Clock forward target PGC pin
+		#define	PG_FLASH_LVP_PGM_PORT				P_B2				//!< ICSP PGM forward target PGM pin
+		#define	PG_FLASH_LVP_RST_PORT				P_B3				//!< ICSP MLCR forward target MCLR pin
+
+		#endif
+
+#endif 
 
 
 
