@@ -1856,15 +1856,23 @@
 				#endif
 				return( PG_NOK );
 			}
-			pg_gcp_crc32_local.Val = 0;
+			//CRC-32 IEEE 802.3 (zlib): poly 0xEDB88320 reflected, init/xorout 0xFFFFFFFF.
+			//Bitwise (no lookup table, saves program memory). Same algorithm as Gim. See SYNC/COMM_CONTRACT.md 2.4.
+			//Test vector: "123456789" -> 0xCBF43926.
+			pg_gcp_crc32_local.Val = 0xFFFFFFFF;
 			for( m = 0; m < cbuffer_length ; m++ ) {
-				if( m % 1 ) {
-					pg_gcp_crc32_local.Val -= *( cbuffer + m );
-				}
-				else {
-					pg_gcp_crc32_local.Val *= *( cbuffer + m );
+				_pg_Uint8 bit;
+				pg_gcp_crc32_local.Val ^= *( cbuffer + m );
+				for( bit = 0; bit < 8; bit++ ) {
+					if( pg_gcp_crc32_local.Val & 1 ) {
+						pg_gcp_crc32_local.Val = ( pg_gcp_crc32_local.Val >> 1 ) ^ 0xEDB88320;
+					}
+					else {
+						pg_gcp_crc32_local.Val >>= 1;
+					}
 				}
 			}
+			pg_gcp_crc32_local.Val ^= 0xFFFFFFFF;
 			#if PG_ERROR_IS_ENABLE
 				pg_error_set( PG_ERROR_GCP , PG_OK , PG_ERROR_OK );
 			#endif
