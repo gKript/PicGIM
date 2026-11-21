@@ -1,8 +1,11 @@
 # Confronta SYNC/ di PicGIM e Gim e verifica che le costanti SSP del codice PicGIM
 # corrispondano al contratto. Uso: powershell -File SYNC/check_sync.ps1
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$pic = if (Test-Path "$here\..\PicGIM_Sources") { Resolve-Path "$here\.." } else { "E:\GitHub Asy\PicGim" }
-$gim = if (Test-Path "$here\..\gim_picgim_dummy") { "" } else { "E:\GitHub Asy\Gim" }
+# PicGim e Gim sono cartelle sorelle: li trova a partire da questo script, su qualsiasi unita'.
+$root = Split-Path -Parent $here
+$base = Split-Path -Parent $root
+$pic = Join-Path $base 'PicGim'
+$gim = Join-Path $base 'Gim'
 $rc = 0
 foreach ($f in 'COMM_CONTRACT.md','SYNC_LOG.md','check_sync.ps1') {
   $a = Get-FileHash "$pic\SYNC\$f" -ErrorAction SilentlyContinue
