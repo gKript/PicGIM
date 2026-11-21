@@ -28,6 +28,8 @@ Obiettivi: (a) far comunicare Gim con PicGIM via seriale; (b) generare il modell
 3. I comandi S, M, Q, G, R, A sono marcati "da verificare" nel contratto: leggi il codice PicGIM indicato (numeri di riga nel contratto) e **completa il contratto** prima di implementarli.
 4. Test con vettori noti (CRC-8, CRC-32, un frame SSP completo con byte attesi). Se possibile prova su loopback o su un PIC reale.
 
+Aggiornamento 2026-11-21 (AI): il dataset di riferimento esiste (`SYNC\ai_dataset\pgim_ai_dataset_v1.csv`, sez. 4.7) e il test end-to-end su PIC18F4620 simulato passa (16/16, scritto da PicGIM). Il generatore emette solo `static const`. Resta aperto: la sostituzione di `pgim_ai_model.h` in PicGIM, in attesa di conferma dell'utente.
+
 ### B. Addestramento e modello AI
 > Stato 2026-11-21: il generatore e' in C++ (`src\gim_ai_train.cc`, tool `gimaitrain`), compilato con MinGW GCC 16 + CMake/Ninja. Verificato: gli header generati, riletti dal simulatore Python (verificato sul prototipo PicGim, 13/13), danno 0 discrepanze. Lo script `scripts\gim_ai_train.py` resta come riferimento. Mancano: un dataset reale, e lo smoke test della CI (richiede bash).
 5. Implementa i passi 1-7 della sezione 4.4 del contratto: statistiche per canale, scale e shift (regola sez. 4.2), normalizzazione intera del dataset, addestramento in float, quantizzazione int8/int16 per layer, simulatore intero bit per bit, vettori di test.
